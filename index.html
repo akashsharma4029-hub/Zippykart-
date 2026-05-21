@@ -3,109 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Premium Streetwear</title>
+    <title>Zippykart.co.in | Premium Streetwear & Culture</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+        #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 90px; }
+        header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Montserrat', sans-serif; 
-        }
-        
-        body { 
-            background-color: #fcfcfc; 
-            color: #111; 
-            overflow-x: hidden; 
-            padding-bottom: 90px; 
-        }
-        
-        header { 
-            background-color: #111; 
-            color: #fff; 
-            padding: 15px 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-        }
-        
-        /* 🔥 LOGO STYLE */
-        .logo { 
-            font-size: 24px; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            letter-spacing: -0.5px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-        }
+        /* 🔥 PREMIUM GRADIENT LOGO */
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
         .logo .zippy { color: #fff; }
-        .logo .kart { 
-            background: linear-gradient(135deg, #ff3e3e, #ff7e40); 
-            color: #111; 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-            margin-left: 2px; 
-            transform: skewX(-10deg); 
-            display: inline-block; 
-        }
+        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
-        #google-btn-wrapper { 
-            display: inline-block; 
-            vertical-align: middle; 
-        }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 15px; }
+        nav ul li a { color: #fff; text-decoration: none; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .cart-btn { border: 1px solid #ff3e3e; background: rgba(255, 62, 62, 0.1); color: #ff3e3e !important; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer; }
         
-        .user-profile-badge { 
-            display: none; 
-            color: #fff; 
-            font-size: 11px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            background: rgba(255, 62, 62, 0.1); 
-            border: 1px solid #ff3e3e; 
-            padding: 6px 12px; 
-            border-radius: 4px; 
-        }
-        
-        /* 📋 PROFILE MODAL */
-        .profile-modal { 
-            display: none; 
-            position: fixed; 
-            top: 65px; 
-            right: 5%; 
-            width: 280px; 
-            background: #fff; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            border-radius: 8px; 
-            border: 1px solid #eee; 
-            z-index: 1001; 
-            padding: 20px; 
-        }
+        .user-profile-badge { display: none; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; background: rgba(255, 62, 62, 0.1); border: 1px solid #ff3e3e; padding: 6px 12px; border-radius: 4px; }
+        .profile-modal { display: none; position: fixed; top: 65px; right: 5%; width: 280px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #eee; z-index: 1001; padding: 20px; }
         .profile-modal h3 { font-size: 14px; margin-bottom: 5px; color: #111; text-align: left; }
         .profile-modal p { font-size: 11px; color: #666; margin-bottom: 15px; text-align: left; }
         .setting-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: 600; color: #444; text-align: left; }
+        .setting-item:hover { color: #ff3e3e; }
         .logout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
 
-        /* 📂 CATEGORIES */
         .categories-bar { background: #fff; padding: 12px 5%; display: flex; gap: 12px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         .cat-item.active { background: #111; color: #fff; }
 
-        /* 🖼️ HERO SECTION */
         .hero { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000') no-repeat center center/cover; height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; }
         .hero h1 { font-size: 38px; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px; }
         .hero p { font-size: 13px; max-width: 500px; line-height: 1.6; }
         
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .section-title { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 35px; }
+        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ff3e3e; margin: 10px auto 0 auto; }
         
-        /* 🛍️ PRODUCT GRID */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
         .card img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
@@ -113,10 +50,10 @@
         .card p { font-size: 14px; font-weight: 600; margin-bottom: 15px; }
 
         .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
-        .size-box { border: 1px solid #ccc; padding: 4px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; cursor: pointer; }
-        .size-box.selected { border-color: #ff3e3e; color: #ff3e3e; background: rgba(255,62,62,0.05); }
+        .size-box { border: 1px solid #ccc; padding: 4px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; cursor: pointer; color: #333; background: #fff; }
+        .size-box.selected { border-color: #ff3e3e !important; color: #ff3e3e !important; background: rgba(255,62,62,0.08) !important; font-weight: 900; }
 
-        /* 🛒 CART DRAWER PANEL */
+        /* 🛒 Slide-out Cart Panel Styling */
         .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1000; transition: right 0.4s ease; display: flex; flex-direction: column; }
         .cart-panel.open { right: 0; }
         .cart-header { background: #111; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -130,12 +67,11 @@
         .checkout-container { display: none; padding: 15px; background: #fdfdfd; border-radius: 6px; border: 1px dashed #ccc; margin-top: 10px; text-align: left; }
         .form-group { margin-bottom: 10px; }
         .form-group input { width: 100%; padding: 8px 10px; font-size: 12px; border: 1px solid #ddd; border-radius: 4px; }
-        .pay-option { display: flex; align-items: center; gap: 8px; font-size: 12px; background: #f5f5f5; padding: 8px; border-radius: 4px; margin-top: 5px; }
+        .pay-option { display: flex; align-items: center; gap: 8px; font-size: 12px; background: #f5f5f5; padding: 8px; border-radius: 4px; margin-top: 5px; cursor: pointer; }
         
         .cart-summary-footer { background: #f9f9f9; padding: 20px; border-top: 1px solid #eee; }
         .summary-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
         .summary-row.total-bill { font-size: 15px; font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px; }
-        
         .buy-btn, .checkout-btn, .place-order-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
         .buy-btn:hover { background: #ff3e3e; }
         .checkout-btn { background: #ff3e3e; padding: 12px; font-size: 12px; margin-top: 15px; }
@@ -146,7 +82,7 @@
         .empty-cart-text { text-align: center; color: #999; margin-top: 40px; font-size: 13px; }
         footer { background-color: #111; color: #fff; text-align: center; padding: 20px; font-size: 11px; margin-top: 40px; }
 
-        /* 📱 BOTTOM TABS */
+        /* 📱 Bottom Navigation Tabs Bar */
         .bottom-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 10px; font-weight: 600; gap: 4px; cursor: pointer; }
         .tab-item.active { color: #ff3e3e; }
@@ -161,11 +97,18 @@
         <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <span class="zippy">Zippy</span><span class="kart">Kart</span>
         </div>
-        <div id="google-btn-wrapper">
-            <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
-            <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
-        </div>
-        <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
+        <nav>
+            <ul>
+                <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
+                <li>
+                    <div id="google-btn-wrapper">
+                        <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+                        <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
+                    </div>
+                    <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <div class="profile-modal" id="profileModal">
@@ -225,7 +168,11 @@
                 <div>
                     <h3>Oversized Maroon T-Shirt</h3>
                     <p>₹799</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">S</span><span class="size-box selected" onclick="selectSize(this)">M</span><span class="size-box" onclick="selectSize(this)">L</span></div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">S</span>
+                        <span class="size-box selected" onclick="selectSize(this)">M</span>
+                        <span class="size-box" onclick="selectSize(this)">L</span>
+                    </div>
                     <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'img-1')">Add to Cart</button>
                 </div>
             </div>
@@ -234,7 +181,11 @@
                 <div>
                     <h3>Urban Baggy Cargo Pants</h3>
                     <p>₹1,299</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">30</span><span class="size-box selected" onclick="selectSize(this)">32</span><span class="size-box" onclick="selectSize(this)">34</span></div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">30</span>
+                        <span class="size-box selected" onclick="selectSize(this)">32</span>
+                        <span class="size-box" onclick="selectSize(this)">34</span>
+                    </div>
                     <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'img-2')">Add to Cart</button>
                 </div>
             </div>
@@ -243,7 +194,10 @@
                 <div>
                     <h3>Luxury White Sneakers</h3>
                     <p>₹1,999</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">UK 8</span><span class="size-box selected" onclick="selectSize(this)">UK 9</span></div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">UK 8</span>
+                        <span class="size-box selected" onclick="selectSize(this)">UK 9</span>
+                    </div>
                     <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'img-3')">Add to Cart</button>
                 </div>
             </div>
@@ -272,17 +226,16 @@
       
       function toggleProfileModal() {
           const modal = document.getElementById('profileModal');
-          if (modal.style.display === "block") {
-              modal.style.display = "none";
-          } else {
-              modal.style.display = "block";
-          }
+          modal.style.display = (modal.style.display === "block") ? "none" : "block";
       }
 
       function addRealItemToCart(name, price, imgId) {
-          const cardElement = document.getElementById(imgId).parentElement;
-          const selectedSize = cardElement.querySelector('.size-box.selected').innerText;
-          const imgSrc = document.getElementById(imgId).src;
+          const imgElement = document.getElementById(imgId);
+          const cardElement = imgElement.closest('.card');
+          const selectedSizeElement = cardElement.querySelector('.size-box.selected');
+          const selectedSize = selectedSizeElement ? selectedSizeElement.innerText : "M";
+          const imgSrc = imgElement.src;
+          
           cartMemory.push({ name: name, price: price, size: selectedSize, img: imgSrc });
           updateCartUI();
           toggleCartPanel(); 
@@ -294,6 +247,7 @@
       }
       
       function updateCartUI() {
+          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
           document.getElementById('bottom-cart-hook').innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`;
           const container = document.getElementById('cartItemsContainer');
           
@@ -336,21 +290,12 @@
       }
       
       function selectSize(element) {
-          const parent = element.parentElement;
-          parent.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
+          const container = element.parentElement;
+          container.querySelectorAll('.size-box').forEach(box => {
+              box.classList.remove('selected');
+          });
           element.classList.add('selected');
       }
       
       function filterCategory(categoryName, targetBtn) {
-          document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
-          if (targetBtn) { targetBtn.classList.add('active'); }
-          document.querySelectorAll('.product-card').forEach(card => {
-              if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
-                  card.style.display = 'flex';
-              } else { card.style.display = 'none'; }
-          });
-      }
-      
-      function handleCredentialResponse(response) {
-        const responsePayload = parseJwt(response.credential);
-        document.getElementById('google-btn-wr
+          document.query
