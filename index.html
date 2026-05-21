@@ -3,90 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Premium Streetwear & Culture</title>
+    <title>Zippykart.co.in | Premium Streetwear</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
-        #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 90px; }
+        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 120px; }
         header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         
-        /* 🔥 PREMIUM GRADIENT LOGO */
+        /* 🔥 GRADIENT LOGO */
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
         .logo .zippy { color: #fff; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 15px; }
-        nav ul li a { color: #fff; text-decoration: none; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .cart-btn { border: 1px solid #ff3e3e; background: rgba(255, 62, 62, 0.1); color: #ff3e3e !important; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer; }
-        
+        #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
         .user-profile-badge { display: none; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; background: rgba(255, 62, 62, 0.1); border: 1px solid #ff3e3e; padding: 6px 12px; border-radius: 4px; }
+        
         .profile-modal { display: none; position: fixed; top: 65px; right: 5%; width: 280px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #eee; z-index: 1001; padding: 20px; }
-        .profile-modal h3 { font-size: 14px; margin-bottom: 5px; color: #111; text-align: left; }
-        .profile-modal p { font-size: 11px; color: #666; margin-bottom: 15px; text-align: left; }
-        .setting-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: 600; color: #444; text-align: left; }
-        .setting-item:hover { color: #ff3e3e; }
-        .logout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
+        .profile-modal h3 { font-size: 14px; margin-bottom: 5px; color: #111; }
+        .profile-modal p { font-size: 11px; color: #666; margin-bottom: 15px; }
+        .setting-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: 600; color: #444; }
+        .logout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; margin-top: 15px; }
 
         .categories-bar { background: #fff; padding: 12px 5%; display: flex; gap: 12px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
         .cat-item.active { background: #111; color: #fff; }
 
         .hero { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000') no-repeat center center/cover; height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; }
-        .hero h1 { font-size: 38px; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px; }
-        .hero p { font-size: 13px; max-width: 500px; line-height: 1.6; }
+        .hero h1 { font-size: 38px; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+        .hero p { font-size: 13px; max-width: 500px; }
         
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .section-title { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 35px; }
-        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ff3e3e; margin: 10px auto 0 auto; }
+        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ff3e3e; margin: 10px auto 0; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .card { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin-bottom: 15px; }
         .card img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
-        .card h3 { font-size: 13px; text-transform: uppercase; margin-bottom: 6px; }
-        .card p { font-size: 14px; font-weight: 600; margin-bottom: 15px; }
+        .card h3 { font-size: 14px; text-transform: uppercase; margin-bottom: 6px; }
+        .card p { font-size: 15px; font-weight: 600; margin-bottom: 15px; }
 
-        .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
-        .size-box { border: 1px solid #ccc; padding: 4px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; cursor: pointer; color: #333; background: #fff; }
-        .size-box.selected { border-color: #ff3e3e !important; color: #ff3e3e !important; background: rgba(255,62,62,0.08) !important; font-weight: 900; }
+        .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; position: relative; z-index: 10; }
+        .size-box { border: 1px solid #ccc; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; color: #333; background: #fff; }
+        .size-box.selected { border-color: #ff3e3e !important; color: #ff3e3e !important; background: rgba(255,62,62,0.08) !important; }
 
-        /* 🛒 Slide-out Cart Panel Styling */
-        .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1000; transition: right 0.4s ease; display: flex; flex-direction: column; }
+        .buy-btn { background: #111; color: #fff; font-size: 12px; font-weight: bold; padding: 12px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; position: relative; z-index: 10; }
+        .buy-btn:hover { background: #ff3e3e; }
+
+        /* 🛒 Slide-out Cart Panel Container */
+        .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1050; transition: right 0.4s ease; display: flex; flex-direction: column; }
         .cart-panel.open { right: 0; }
         .cart-header { background: #111; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .close-cart { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
+        .close-cart { background: none; border: none; color: #fff; font-size: 25px; cursor: pointer; }
         .cart-items-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
-        .cart-item-row { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid #eee; }
-        .cart-item-row img { width: 60px; height: 70px; object-fit: cover; border-radius: 4px; }
-        .cart-item-info { flex-grow: 1; text-align: left; }
-        .remove-item-btn { background: none; border: none; color: #ff3e3e; font-size: 10px; font-weight: bold; cursor: pointer; margin-top: 5px; }
         
-        .checkout-container { display: none; padding: 15px; background: #fdfdfd; border-radius: 6px; border: 1px dashed #ccc; margin-top: 10px; text-align: left; }
-        .form-group { margin-bottom: 10px; }
-        .form-group input { width: 100%; padding: 8px 10px; font-size: 12px; border: 1px solid #ddd; border-radius: 4px; }
-        .pay-option { display: flex; align-items: center; gap: 8px; font-size: 12px; background: #f5f5f5; padding: 8px; border-radius: 4px; margin-top: 5px; cursor: pointer; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1040; display: none; }
+        .cart-overlay.open { display: block; }
         
         .cart-summary-footer { background: #f9f9f9; padding: 20px; border-top: 1px solid #eee; }
         .summary-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
         .summary-row.total-bill { font-size: 15px; font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px; }
-        .buy-btn, .checkout-btn, .place-order-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
-        .buy-btn:hover { background: #ff3e3e; }
-        .checkout-btn { background: #ff3e3e; padding: 12px; font-size: 12px; margin-top: 15px; }
-        .place-order-btn { background: #111; margin-top: 10px; padding: 12px; font-size: 12px; }
-        
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 999; display: none; }
-        .cart-overlay.open { display: block; }
-        .empty-cart-text { text-align: center; color: #999; margin-top: 40px; font-size: 13px; }
-        footer { background-color: #111; color: #fff; text-align: center; padding: 20px; font-size: 11px; margin-top: 40px; }
+        .checkout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 4px; margin-top: 15px; cursor: pointer; text-transform: uppercase; }
+        .empty-cart-text { text-align: center; color: #999; margin-top: 40px; }
 
-        /* 📱 Bottom Navigation Tabs Bar */
-        .bottom-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 10px; font-weight: 600; gap: 4px; cursor: pointer; }
+        /* 📱 Fixed Floating Tab Bar */
+        .bottom-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid #eee; }
+        .tab-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 11px; font-weight: 600; gap: 4px; cursor: pointer; }
         .tab-item.active { color: #ff3e3e; }
-        .tab-icon { font-size: 18px; }
+        .tab-icon { font-size: 20px; }
     </style>
 </head>
 <body>
@@ -97,27 +82,19 @@
         <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <span class="zippy">Zippy</span><span class="kart">Kart</span>
         </div>
-        <nav>
-            <ul>
-                <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
-                <li>
-                    <div id="google-btn-wrapper">
-                        <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
-                        <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
-                    </div>
-                    <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
-                </li>
-            </ul>
-        </nav>
+        <div id="google-btn-wrapper">
+            <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+            <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
+        </div>
+        <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
     </header>
 
     <div class="profile-modal" id="profileModal">
         <h3 id="modalName">Sushil Sharma</h3>
         <p id="modalEmail">user@gmail.com</p>
         <hr style="border:0; border-top:1px solid #eee; margin-bottom:10px;">
-        <div class="setting-item" onclick="alert('💎 VIP Perks Active')"><span>💎</span> Flipkart Plus</div>
-        <div class="setting-item" onclick="alert('👤 Edit Profile Panel Enabled')"><span>👤</span> Edit Profile</div>
-        <div class="setting-item" onclick="alert('📍 Delivery Addresses Active')"><span>📍</span> Saved Addresses</div>
+        <div class="setting-item" onclick="alert('💎 VIP Status Active')"><span>💎</span> Flipkart Plus</div>
+        <div class="setting-item" onclick="alert('👤 Profiles Setup Enabled')"><span>👤</span> Edit Profile</div>
         <button class="logout-btn" onclick="logoutUser()">Log Out Account</button>
     </div>
 
@@ -127,44 +104,33 @@
             <button class="close-cart" onclick="toggleCartPanel()">&times;</button>
         </div>
         <div class="cart-items-body" id="cartItemsContainer">
-            <p class="empty-cart-text">Your cart is empty. Add drops now!</p>
-        </div>
-        <div class="checkout-container" id="checkoutFormBlock">
-            <h3 style="font-size:12px; margin-bottom:10px; text-transform:uppercase; color:#ff3e3e;">Delivery Address</h3>
-            <div class="form-group"><input type="text" id="custName" placeholder="Full Name"></div>
-            <div class="form-group"><input type="tel" id="custPhone" placeholder="Mobile Number"></div>
-            <div class="form-group"><input type="text" id="custAddress" placeholder="Full Address"></div>
-            <div class="form-group"><input type="text" id="custPincode" placeholder="Pincode"></div>
-            <label class="pay-option"><input type="radio" name="payment" value="UPI" checked> 📱 UPI (GPay/PhonePe)</label>
-            <label class="pay-option"><input type="radio" name="payment" value="COD"> 💵 Cash on Delivery</label>
-            <button class="place-order-btn" onclick="executeFinalOrder()">Place Order</button>
+            <p class="empty-cart-text">Your cart is empty.</p>
         </div>
         <div class="cart-summary-footer">
             <div class="summary-row"><span>Subtotal:</span><span id="bill-subtotal">₹0</span></div>
-            <div class="summary-row"><span>Discount:</span><span style="color:#ff3e3e;" id="bill-discount">-₹100</span></div>
-            <div class="summary-row"><span>Shipping:</span><span id="bill-shipping">₹49</span></div>
-            <div class="summary-row total-bill"><span>Total:</span><span id="bill-total">₹0</span></div>
-            <button class="checkout-btn" id="proceedCheckoutMainBtn" onclick="openCheckoutView()">Proceed to Checkout</button>
+            <div class="summary-row"><span>Total:</span><span id="bill-total" style="font-weight: bold;">₹0</span></div>
+            <button class="checkout-btn" onclick="alert('Order Feature Active!')">Proceed to Checkout</button>
         </div>
     </div>
 
     <div class="categories-bar" id="categoriesSliderElement">
         <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
-        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized Fit</div>
-        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Baggy & Cargos</div>
-        <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Luxury Sneakers</div>
+        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
+        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
+        <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
     </div>
 
     <div class="hero">
         <h1>Redefine Your Vibe</h1>
-        <p>Premium Urban Streetwear, Oversized Fits, and Trend-Setting Styles.</p>
+        <p>Premium Urban Streetwear fits custom configured for you.</p>
     </div>
 
     <div class="container">
         <h2 class="section-title">Trending Drops</h2>
         <div class="grid">
+            
             <div class="card product-card" data-category="tshirt">
-                <img id="img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000">
+                <img id="p-img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000">
                 <div>
                     <h3>Oversized Maroon T-Shirt</h3>
                     <p>₹799</p>
@@ -173,11 +139,12 @@
                         <span class="size-box selected" onclick="selectSize(this)">M</span>
                         <span class="size-box" onclick="selectSize(this)">L</span>
                     </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'img-1')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'p-img-1')">Add to Cart</button>
                 </div>
             </div>
+
             <div class="card product-card" data-category="cargo">
-                <img id="img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
+                <img id="p-img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
                 <div>
                     <h3>Urban Baggy Cargo Pants</h3>
                     <p>₹1,299</p>
@@ -186,11 +153,12 @@
                         <span class="size-box selected" onclick="selectSize(this)">32</span>
                         <span class="size-box" onclick="selectSize(this)">34</span>
                     </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'img-2')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'p-img-2')">Add to Cart</button>
                 </div>
             </div>
+
             <div class="card product-card" data-category="sneaker">
-                <img id="img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
+                <img id="p-img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
                 <div>
                     <h3>Luxury White Sneakers</h3>
                     <p>₹1,999</p>
@@ -198,21 +166,20 @@
                         <span class="size-box" onclick="selectSize(this)">UK 8</span>
                         <span class="size-box selected" onclick="selectSize(this)">UK 9</span>
                     </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'img-3')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'p-img-3')">Add to Cart</button>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="bottom-tabs">
         <div class="tab-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="tab-icon">🏠</span> Home</div>
-        <div class="tab-item" onclick="alert('📺 Zippy TV Coming Soon!')"><span class="tab-icon">▶️</span> Play</div>
+        <div class="tab-item" onclick="alert('📺 Zippy TV Studio Space launching soon!')"><span class="tab-icon">▶️</span> Play</div>
         <div class="tab-item" onclick="document.getElementById('categoriesSliderElement').scrollIntoView({behavior:'smooth'})"><span class="tab-icon">📂</span> Categories</div>
         <div class="tab-item" onclick="toggleProfileModal()"><span class="tab-icon">👤</span> Account</div>
         <div class="tab-item" id="bottom-cart-hook" onclick="toggleCartPanel()"><span class="tab-icon">🛒</span> Cart (0)</div>
     </div>
-
-    <footer><p>&copy; 2026 ZippyKart. All Rights Reserved.</p></footer>
 
     <script>
       let cartMemory = [];
@@ -220,8 +187,13 @@
       function toggleCartPanel() {
           const panel = document.getElementById('cartPanel');
           const overlay = document.getElementById('cartOverlay');
-          panel.classList.toggle('open');
-          overlay.classList.toggle('open');
+          if(panel.classList.contains('open')) {
+              panel.classList.remove('open');
+              overlay.classList.remove('open');
+          } else {
+              panel.classList.add('open');
+              overlay.classList.add('open');
+          }
       }
       
       function toggleProfileModal() {
@@ -229,25 +201,26 @@
           modal.style.display = (modal.style.display === "block") ? "none" : "block";
       }
 
+      function selectSize(element) {
+          const container = element.parentElement;
+          container.querySelectorAll('.size-box').forEach(box => {
+              box.classList.remove('selected');
+          });
+          element.classList.add('selected');
+      }
+
       function addRealItemToCart(name, price, imgId) {
           const imgElement = document.getElementById(imgId);
-          const cardElement = imgElement.closest('.card');
+          const cardElement = imgElement.parentElement;
           const selectedSizeElement = cardElement.querySelector('.size-box.selected');
           const selectedSize = selectedSizeElement ? selectedSizeElement.innerText : "M";
-          const imgSrc = imgElement.src;
           
-          cartMemory.push({ name: name, price: price, size: selectedSize, img: imgSrc });
+          cartMemory.push({ name: name, price: price, size: selectedSize, img: imgElement.src });
           updateCartUI();
           toggleCartPanel(); 
       }
       
-      function removeCartItem(index) {
-          cartMemory.splice(index, 1);
-          updateCartUI();
-      }
-      
       function updateCartUI() {
-          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
           document.getElementById('bottom-cart-hook').innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`;
           const container = document.getElementById('cartItemsContainer');
           
@@ -260,42 +233,50 @@
           
           container.innerHTML = "";
           let subtotal = 0;
-          cartMemory.forEach((item, index) => {
+          cartMemory.forEach((item) => {
               subtotal += item.price;
-              container.innerHTML += `<div class="cart-item-row"><img src="${item.img}"><div class="cart-item-info"><h4>${item.name}</h4><p>Size: ${item.size}</p><p style="font-weight:600;">₹${item.price}</p><button class="remove-item-btn" onclick="removeCartItem(${index})">Remove</button></div></div>`;
+              container.innerHTML += `<div style="display:flex; align-items:center; gap:15px; margin-bottom:15px;"><img src="${item.img}" style="width:50px; height:60px; object-fit:cover; border-radius:4px;"><div><h4>${item.name}</h4><p style="font-size:11px; color:#666;">Size: ${item.size}</p><p style="font-weight:600;">₹${item.price}</p></div></div>`;
           });
           
-          let finalPayable = (subtotal - 100) + 49;
           document.getElementById('bill-subtotal').innerText = `₹${subtotal}`;
-          document.getElementById('bill-discount').innerText = `-₹100`;
-          document.getElementById('bill-shipping').innerText = `₹49`;
-          document.getElementById('bill-total').innerText = `₹${finalPayable}`;
-      }
-      
-      function openCheckoutView() {
-          if(cartMemory.length === 0) { alert("Your cart is empty!"); return; }
-          document.getElementById('cartItemsContainer').style.display = "none";
-          document.getElementById('proceedCheckoutMainBtn').style.display = "none";
-          document.getElementById('checkoutFormBlock').style.display = "block";
-      }
-      
-      function executeFinalOrder() {
-          const name = document.getElementById('custName').value;
-          const phone = document.getElementById('custPhone').value;
-          if(!name || !phone) { alert("Please fill details."); return; }
-          alert(`🎉 Order Confirmed! Thank you, ${name}.`);
-          cartMemory = []; 
-          updateCartUI(); 
-          toggleCartPanel();
-      }
-      
-      function selectSize(element) {
-          const container = element.parentElement;
-          container.querySelectorAll('.size-box').forEach(box => {
-              box.classList.remove('selected');
-          });
-          element.classList.add('selected');
+          document.getElementById('bill-total').innerText = `₹${subtotal}`;
       }
       
       function filterCategory(categoryName, targetBtn) {
-          document.query
+          document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+          if (targetBtn) { targetBtn.classList.add('active'); }
+          document.querySelectorAll('.product-card').forEach(card => {
+              if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
+                  card.style.display = 'flex';
+              } else { card.style.display = 'none'; }
+          });
+      }
+      
+      function handleCredentialResponse(response) {
+        const responsePayload = parseJwt(response.credential);
+        document.getElementById('google-btn-wrapper').style.display = "none";
+        const shortName = responsePayload.name.split(' ')[0];
+        const badge = document.getElementById('userBadge');
+        badge.innerText = `Hi, ${shortName} 👋`;
+        badge.style.display = "inline-block";
+        document.getElementById('modalName').innerText = responsePayload.name;
+        document.getElementById('modalEmail').innerText = responsePayload.email;
+      }
+      
+      function logoutUser() {
+          document.getElementById('userBadge').style.display = "none";
+          document.getElementById('profileModal').style.display = "none";
+          document.getElementById('google-btn-wrapper').style.display = "inline-block";
+      }
+      
+      function parseJwt (token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+      }
+    </script>
+</body>
+</html>
