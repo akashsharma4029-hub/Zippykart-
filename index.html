@@ -27,6 +27,7 @@
         body {
             background-color: #fcfcfc;
             color: #111;
+            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -91,7 +92,7 @@
             color: #fff !important;
         }
 
-        /* Flipkart-style Premium Category Horizontal Bar */
+        /* Categories Bar */
         .categories-bar {
             background: #fff;
             padding: 12px 5%;
@@ -101,11 +102,10 @@
             overflow-x: auto;
             white-space: nowrap;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            scroll-behavior: smooth;
         }
 
         .categories-bar::-webkit-scrollbar {
-            display: none; /* Mobile par scrollbar hide karne ke liye */
+            display: none;
         }
 
         .cat-item {
@@ -154,7 +154,6 @@
             margin-bottom: 25px;
             max-width: 500px;
             line-height: 1.6;
-            font-weight: 400;
         }
 
         .cta-btn {
@@ -167,14 +166,9 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             border-radius: 4px;
-            transition: background 0.3s;
         }
 
-        .cta-btn:hover {
-            background-color: #e23232;
-        }
-
-        /* Main Content / Products */
+        /* Products Grid */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -187,7 +181,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 35px;
-            position: relative;
         }
 
         .section-title::after {
@@ -210,7 +203,7 @@
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
             text-align: center;
             border: 1px solid #eee;
             display: flex;
@@ -220,7 +213,6 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         .card img {
@@ -236,17 +228,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 6px;
-            color: #222;
         }
 
         .card p {
             font-size: 14px;
-            color: #111;
             font-weight: 600;
             margin-bottom: 15px;
         }
 
-        /* Size Selector Styling */
         .size-selector {
             display: flex;
             justify-content: center;
@@ -261,27 +250,23 @@
             font-weight: bold;
             border-radius: 3px;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .size-box:hover, .size-box.selected {
+        .size-box.selected {
             border-color: #ff3e3e;
             color: #ff3e3e;
             background: rgba(255,62,62,0.05);
         }
 
         .buy-btn {
-            display: block;
             background: #111;
             color: #fff;
-            text-decoration: none;
             font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
             padding: 10px;
             border-radius: 4px;
             letter-spacing: 1px;
-            transition: background 0.2s;
             cursor: pointer;
             border: none;
             width: 100%;
@@ -291,6 +276,165 @@
             background: #ff3e3e;
         }
 
+        /* 🛒 FLIPKART-STYLE SLIDE-OUT CART PANEL */
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -400px; /* Shuru me screen ke bahar rahega */
+            width: 380px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: right 0.4s ease; /* Smooth slide-in transition */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Jab class active hogi toh cart screen par slide ho jayega */
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: #111;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Cart items container with scrolling */
+        .cart-items-body {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-row img {
+            width: 60px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-info p {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: #ff3e3e;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Summary Bill Sheet */
+        .cart-summary-footer {
+            background: #f9f9f9;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .summary-row.total-bill {
+            font-size: 15px;
+            font-weight: bold;
+            color: #111;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            background: #ff3e3e;
+            color: #fff;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background: #e23232;
+        }
+
+        /* Background overlay screen blur effect */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        /* Empty Cart State Style */
+        .empty-cart-text {
+            text-align: center;
+            color: #999;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+
         /* Footer */
         footer {
             background-color: #111;
@@ -298,13 +442,14 @@
             text-align: center;
             padding: 40px 20px;
             font-size: 11px;
-            letter-spacing: 1px;
             margin-top: 60px;
             line-height: 1.8;
         }
     </style>
 </head>
 <body>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartPanel()"></div>
 
     <header>
         <div class="logo">ZippyKart</div>
@@ -313,7 +458,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Shop Now</a></li>
                 <li><a href="#">Track Order</a></li>
-                <li><button class="cart-btn" id="cart-counter" onclick="alert('Opening Cart Panel soon!')">Cart (0)</button></li>
+                <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
                 <li>
                     <div id="google-btn-wrapper">
                         <div id="g_id_onload"
@@ -335,12 +480,42 @@
         </nav>
     </header>
 
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>Your Cart Shopping Bags</h2>
+            <button class="close-cart" onclick="toggleCartPanel()">&times;</button>
+        </div>
+        
+        <div class="cart-items-body" id="cartItemsContainer">
+            <p class="empty-cart-text">Your shopping cart is completely empty. Add drops now!</p>
+        </div>
+
+        <div class="cart-summary-footer">
+            <div class="summary-row">
+                <span>Items Subtotal:</span>
+                <span id="bill-subtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Streetwear Discount (Coupon):</span>
+                <span style="color: #ff3e3e;" id="bill-discount">-₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Shipping Charges:</span>
+                <span id="bill-shipping">₹0</span>
+            </div>
+            <div class="summary-row total-bill">
+                <span>Total Payable Amount:</span>
+                <span id="bill-total">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Proceeding to Address & Secure Payment Options!')">Proceed to Checkout</button>
+        </div>
+    </div>
+
     <div class="categories-bar">
         <div class="cat-item active" onclick="filterCategory('all')">⚡ All Drops</div>
         <div class="cat-item" onclick="filterCategory('tshirt')">👕 Oversized Fit</div>
         <div class="cat-item" onclick="filterCategory('cargo')">👖 Baggy & Cargos</div>
         <div class="cat-item" onclick="filterCategory('sneaker')">👟 Luxury Sneakers</div>
-        <div class="cat-item" onclick="filterCategory('caps')">🧢 Urban Caps</div>
     </div>
 
     <div class="hero">
@@ -353,45 +528,45 @@
         <h2 class="section-title">Trending Drops</h2>
         <div class="grid">
             <div class="card product-card" data-category="tshirt">
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000" alt="Oversized T-Shirt">
+                <img id="img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000" alt="Oversized T-Shirt">
                 <div>
                     <h3>Oversized Maroon T-Shirt</h3>
                     <p>₹799</p>
-                    <div class="size-selector">
+                    <div class="size-selector" data-prod-id="1">
                         <span class="size-box" onclick="selectSize(this)">S</span>
                         <span class="size-box selected" onclick="selectSize(this)">M</span>
                         <span class="size-box" onclick="selectSize(this)">L</span>
                         <span class="size-box" onclick="selectSize(this)">XL</span>
                     </div>
-                    <button class="buy-btn" onclick="addToCart('Oversized Maroon T-Shirt')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'img-1')">Add to Cart</button>
                 </div>
             </div>
             
             <div class="card product-card" data-category="cargo">
-                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000" alt="Baggy Cargo">
+                <img id="img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000" alt="Baggy Cargo">
                 <div>
                     <h3>Urban Baggy Cargo Pants</h3>
                     <p>₹1,299</p>
-                    <div class="size-selector">
+                    <div class="size-selector" data-prod-id="2">
                         <span class="size-box" onclick="selectSize(this)">30</span>
                         <span class="size-box selected" onclick="selectSize(this)">32</span>
                         <span class="size-box" onclick="selectSize(this)">34</span>
                     </div>
-                    <button class="buy-btn" onclick="addToCart('Urban Baggy Cargo Pants')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'img-2')">Add to Cart</button>
                 </div>
             </div>
             
             <div class="card product-card" data-category="sneaker">
-                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000" alt="White Sneakers">
+                <img id="img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000" alt="White Sneakers">
                 <div>
                     <h3>Luxury White Sneakers</h3>
                     <p>₹1,999</p>
-                    <div class="size-selector">
+                    <div class="size-selector" data-prod-id="3">
                         <span class="size-box" onclick="selectSize(this)">UK 7</span>
                         <span class="size-box selected" onclick="selectSize(this)">UK 8</span>
                         <span class="size-box" onclick="selectSize(this)">UK 9</span>
                     </div>
-                    <button class="buy-btn" onclick="addToCart('Luxury White Sneakers')">Add to Cart</button>
+                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'img-3')">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -403,30 +578,103 @@
     </footer>
 
     <script>
-      // 🛒 Smart Cart Count Logic
-      let cartCount = 0;
-      function addToCart(itemName) {
-          cartCount++;
-          document.getElementById('cart-counter').innerText = `Cart (${cartCount})`;
-          alert(`🔥 Great choice! "${itemName}" added to your cart.`);
+      // 🛠️ Array structure to store items live memory
+      let cartMemory = [];
+
+      // Open/Close Cart Panel Slide animation
+      function toggleCartPanel() {
+          const panel = document.getElementById('cartPanel');
+          const overlay = document.getElementById('cartOverlay');
+          panel.classList.toggle('open');
+          overlay.classList.toggle('open');
       }
 
-      // 👕 Size Selector Style Toggler
+      // Add actual detailed product in list
+      function addRealItemToCart(name, price, imgId) {
+          // Find selected size box value inside card layout
+          const cardElement = document.getElementById(imgId).parentElement;
+          const selectedSize = cardElement.querySelector('.size-box.selected').innerText;
+          const imgSrc = document.getElementById(imgId).src;
+
+          // Push into live runtime data object
+          cartMemory.push({
+              name: name,
+              price: price,
+              size: selectedSize,
+              img: imgSrc
+          });
+
+          // Refresh UI View
+          updateCartUI();
+          
+          // Micro-interaction trigger open panel automatic
+          toggleCartPanel();
+      }
+
+      // Delete specific item array object row
+      function removeCartItem(index) {
+          cartMemory.splice(index, 1);
+          updateCartUI();
+      }
+
+      // Heavy calculations engine updates
+      function updateCartUI() {
+          // Counter update navbar
+          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
+
+          const container = document.getElementById('cartItemsContainer');
+          
+          if (cartMemory.length === 0) {
+              container.innerHTML = `<p class="empty-cart-text">Your shopping cart is completely empty. Add drops now!</p>`;
+              document.getElementById('bill-subtotal').innerText = "₹0";
+              document.getElementById('bill-discount').innerText = "-₹0";
+              document.getElementById('bill-shipping').innerText = "₹0";
+              document.getElementById('bill-total').innerText = "₹0";
+              return;
+          }
+
+          // Injecting elements list dynamically strings loop
+          container.innerHTML = "";
+          let subtotal = 0;
+
+          cartMemory.forEach((item, index) => {
+              subtotal += item.price;
+              container.innerHTML += `
+                  <div class="cart-item-row">
+                      <img src="${item.img}" alt="product">
+                      <div class="cart-item-info">
+                          <h4>${item.name}</h4>
+                          <p>Size Chosen: <strong>${item.size}</strong></p>
+                          <p style="font-weight:600; color:#111;">₹${item.price}</p>
+                          <button class="remove-item-btn" onclick="removeCartItem(${index})">Remove</button>
+                      </div>
+                  </div>
+              `;
+          });
+
+          // Bill Sheet logics applied
+          let discount = 100; // Flat discount
+          let shipping = 49;  // Standard shipping
+          let finalPayable = (subtotal - discount) + shipping;
+
+          document.getElementById('bill-subtotal').innerText = `₹${subtotal}`;
+          document.getElementById('bill-discount').innerText = `-₹${discount}`;
+          document.getElementById('bill-shipping').innerText = `₹${shipping}`;
+          document.getElementById('bill-total').innerText = `₹${finalPayable}`;
+      }
+
+      // Size box switcher selector logic toggle
       function selectSize(element) {
-          // Apne group ke baki selected boxes ko unselect karein
           const parent = element.parentElement;
           parent.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
-          // Is waale ko select karein
           element.classList.add('selected');
       }
 
-      // 🔍 Dynamic Categories Filtering Logic (Flipkart-Style)
+      // Categories Filtering Logic
       function filterCategory(categoryName) {
-          // Active state toggle for buttons
           document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
           event.target.classList.add('active');
 
-          // Filter products view
           document.querySelectorAll('.product-card').forEach(card => {
               if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
                   card.style.display = 'flex';
@@ -436,11 +684,11 @@
           });
       }
 
-      // 🔐 Google Sign-In Callback Handler
+      // Google Identity token callback handler
       function handleCredentialResponse(response) {
         const responsePayload = parseJwt(response.credential);
         alert("Welcome to ZippyKart, " + responsePayload.name + "!");
-        console.log("Logged In User Email: " + responsePayload.email);
+        console.log("User Account Email: " + responsePayload.email);
       }
 
       function parseJwt (token) {
@@ -454,5 +702,4 @@
     </script>
 
 </body>
-            </html>
-    
+</html>
