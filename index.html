@@ -9,45 +9,20 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 70px; }
+        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 75px; }
         header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         
-        /* 🔥 PREMIUM STREETWEAR LOGO DESIGN */
-        .logo { 
-            font-size: 24px; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            letter-spacing: -0.5px; 
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .logo .zippy {
-            color: #fff;
-            transition: color 0.3s;
-        }
-        .logo .kart {
-            background: linear-gradient(135deg, #ff3e3e, #ff7e40);
-            color: #111;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 2px;
-            transform: skewX(-10deg); /* Sharp urban slant */
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(255, 62, 62, 0.4);
-        }
-        .logo:hover .zippy {
-            color: #ff3e3e;
-        }
+        /* 🔥 PREMIUM GRADIENT LOGO STYLE */
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
+        .logo .zippy { color: #fff; }
+        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
         nav ul { display: flex; list-style: none; align-items: center; }
         nav ul li { margin-left: 15px; }
         nav ul li a { color: #fff; text-decoration: none; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         
         .cart-btn { border: 1px solid #ff3e3e; background: rgba(255, 62, 62, 0.1); color: #ff3e3e !important; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer; }
-        .cart-btn:hover { background: #ff3e3e; color: #fff !important; }
-
-        /* User Profile Badge & Dropdown Overlay */
+        
         .user-profile-badge { display: none; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; background: rgba(255, 62, 62, 0.1); border: 1px solid #ff3e3e; padding: 6px 12px; border-radius: 4px; }
         .profile-modal { display: none; position: fixed; top: 65px; right: 5%; width: 280px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #eee; z-index: 1001; padding: 20px; }
         .profile-modal h3 { font-size: 14px; margin-bottom: 5px; color: #111; text-align: left; }
@@ -81,7 +56,6 @@
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 🛒 Slide-out Cart Panel Container */
         .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1000; transition: right 0.4s ease; display: flex; flex-direction: column; }
         .cart-panel.open { right: 0; }
         .cart-header { background: #111; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -109,7 +83,7 @@
         
         footer { background-color: #111; color: #fff; text-align: center; padding: 30px 20px; font-size: 11px; margin-top: 60px; }
 
-        /* 📱 Flipkart-Style Bottom Tab Bar */
+        /* 📱 Flipkart Bottom Menu Tab Style Bars */
         .bottom-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
         .tab-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 10px; font-weight: 600; gap: 4px; cursor: pointer; }
         .tab-item.active { color: #ff3e3e; }
@@ -126,8 +100,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Shop Now</a></li>
+                <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Home</a></li>
                 <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
                 <li>
                     <div id="google-btn-wrapper">
@@ -144,11 +117,11 @@
         <h3 id="modalName">Sushil Sharma</h3>
         <p id="modalEmail">user@gmail.com</p>
         <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 10px;">
-        <div class="setting-item" onclick="alert('💎 Flipkart Plus Status Tier: VIP Active')"><span>💎</span> Flipkart Plus</div>
-        <div class="setting-item" onclick="alert('📱 Active Sessions and Registered Mobile Devices Secure')"><span>📱</span> Manage Devices</div>
-        <div class="setting-item" onclick="alert('👤 Edit Username, Contact Info, and Personalization settings')"><span>👤</span> Edit Profile</div>
-        <div class="setting-item" onclick="alert('📍 Delivery Hub Addresses configured safely')"><span>📍</span> Saved Addresses</div>
-        <div class="setting-item" onclick="alert('🛡️ Encryption and Data Privacy Clearance Center')"><span>🛡️</span> Privacy Center</div>
+        <div class="setting-item" onclick="alert('💎 Flipkart Plus Tier Status Verified Secure')"><span>💎</span> Flipkart Plus</div>
+        <div class="setting-item" onclick="alert('📱 Active Devices Encryption Active')"><span>📱</span> Manage Devices</div>
+        <div class="setting-item" onclick="alert('👤 Edit Profiles Setup Access Granted')"><span>👤</span> Edit Profile</div>
+        <div class="setting-item" onclick="alert('📍 Delivery Addresses Configured Safe')"><span>📍</span> Saved Addresses</div>
+        <div class="setting-item" onclick="alert('🛡️ Secure System Privacy Clearance Center')"><span>🛡️</span> Privacy Center</div>
         <button class="logout-btn" onclick="logoutUser()">Log Out Account</button>
     </div>
 
@@ -179,11 +152,11 @@
         </div>
     </div>
 
-    <div class="categories-bar" id="categories-section">
-        <div class="cat-item active" onclick="filterCategory('all')">⚡ All Drops</div>
-        <div class="cat-item" onclick="filterCategory('tshirt')">👕 Oversized Fit</div>
-        <div class="cat-item" onclick="filterCategory('cargo')">👖 Baggy & Cargos</div>
-        <div class="cat-item" onclick="filterCategory('sneaker')">👟 Luxury Sneakers</div>
+    <div class="categories-bar" id="categoriesSliderElement">
+        <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
+        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized Fit</div>
+        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Baggy & Cargos</div>
+        <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Luxury Sneakers</div>
     </div>
 
     <div class="hero">
@@ -226,10 +199,10 @@
 
     <div class="bottom-tabs">
         <div class="tab-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><span class="tab-icon">🏠</span> Home</div>
-        <div class="tab-item" onclick="alert('📺 Zippy TV Play Studio launching soon with premium creator drops!')"><span class="tab-icon">▶️</span> Play</div>
-        <div class="tab-item" onclick="document.getElementById('categories-section').scrollIntoView({behavior: 'smooth'})"><span class="tab-icon">📂</span> Categories</div>
+        <div class="tab-item" onclick="alert('📺 Zippy TV Play space is opening very soon!')"><span class="tab-icon">▶️</span> Play</div>
+        <div class="tab-item" onclick="document.getElementById('categoriesSliderElement').scrollIntoView({behavior: 'smooth'})"><span class="tab-icon">📂</span> Categories</div>
         <div class="tab-item" onclick="toggleProfileModal()"><span class="tab-icon">👤</span> Account</div>
-        <div class="tab-item" onclick="toggleCartPanel()"><span class="tab-icon">🛒</span> Cart</div>
+        <div class="tab-item" id="bottom-cart-hook" onclick="toggleCartPanel()"><span class="tab-icon">🛒</span> Cart (0)</div>
     </div>
 
     <footer><p>&copy; 2026 ZippyKart. Tailored to your unique culture and style.</p></footer>
@@ -261,8 +234,7 @@
       }
       function updateCartUI() {
           document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
-          const bottomTabs = document.querySelectorAll('.tab-item');
-          if(bottomTabs[4]) { bottomTabs[4].innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`; }
+          document.getElementById('bottom-cart-hook').innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`;
 
           const container = document.getElementById('cartItemsContainer');
           if (cartMemory.length === 0) {
@@ -288,4 +260,13 @@
           document.getElementById('bill-total').innerText = `₹${finalPayable}`;
       }
       function openCheckoutView() {
-          if(cartMemory.length === 0) { alert("Your cart is empt
+          if(cartMemory.length === 0) { alert("Your cart is empty!"); return; }
+          document.getElementById('cartItemsContainer').style.display = "none";
+          document.getElementById('proceedCheckoutMainBtn').style.display = "none";
+          document.getElementById('checkoutFormBlock').style.display = "block";
+      }
+      function executeFinalOrder() {
+          const name = document.getElementById('custName').value;
+          const phone = document.getElementById('custPhone').value;
+          const address = document.getElementById('custAddress').value;
+          const pin = document.getElementById('custPincode').value;
