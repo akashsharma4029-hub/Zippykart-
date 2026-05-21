@@ -9,9 +9,8 @@
 
     <style>
         /* CSS Styling */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-        /* Google Button Alignment Specially for Navbar */
         #google-btn-wrapper {
             display: inline-block;
             vertical-align: middle;
@@ -26,7 +25,7 @@
         }
 
         body {
-            background-color: #f8f8f8;
+            background-color: #fcfcfc;
             color: #111;
         }
 
@@ -34,21 +33,22 @@
         header {
             background-color: #111;
             color: #fff;
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 700;
             color: #ff3e3e;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         nav ul {
@@ -58,7 +58,7 @@
         }
 
         nav ul li {
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         nav ul li a {
@@ -76,15 +76,62 @@
         }
 
         .cart-btn {
-            border: 1px solid #fff;
-            padding: 5px 10px;
-            font-size: 10px;
+            border: 1px solid #ff3e3e;
+            background: rgba(255, 62, 62, 0.1);
+            color: #ff3e3e !important;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: #ff3e3e;
+            color: #fff !important;
+        }
+
+        /* Flipkart-style Premium Category Horizontal Bar */
+        .categories-bar {
+            background: #fff;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            overflow-x: auto;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            scroll-behavior: smooth;
+        }
+
+        .categories-bar::-webkit-scrollbar {
+            display: none; /* Mobile par scrollbar hide karne ke liye */
+        }
+
+        .cat-item {
+            background: #f3f3f3;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .cat-item:hover, .cat-item.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000') no-repeat center center/cover;
-            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000') no-repeat center center/cover;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -95,17 +142,19 @@
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 40px;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 25px;
             max-width: 500px;
             line-height: 1.6;
+            font-weight: 400;
         }
 
         .cta-btn {
@@ -117,6 +166,7 @@
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
 
@@ -133,10 +183,20 @@
 
         .section-title {
             text-align: center;
-            font-size: 20px;
+            font-size: 22px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #ff3e3e;
+            margin: 10px auto 0 auto;
         }
 
         .grid {
@@ -149,42 +209,86 @@
             background: #fff;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         .card img {
             width: 100%;
-            height: 350px;
+            height: 360px;
             object-fit: cover;
+            border-radius: 4px;
             margin-bottom: 15px;
         }
 
         .card h3 {
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            color: #222;
         }
 
         .card p {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
+            font-size: 14px;
+            color: #111;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Size Selector Styling */
+        .size-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .size-box {
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .size-box:hover, .size-box.selected {
+            border-color: #ff3e3e;
+            color: #ff3e3e;
+            background: rgba(255,62,62,0.05);
         }
 
         .buy-btn {
-            display: inline-block;
-            color: #111;
-            text-decoration: underline;
+            display: block;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
             font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
+            padding: 10px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            background: #ff3e3e;
         }
 
         /* Footer */
@@ -192,10 +296,11 @@
             background-color: #111;
             color: #fff;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             font-size: 11px;
             letter-spacing: 1px;
             margin-top: 60px;
+            line-height: 1.8;
         }
     </style>
 </head>
@@ -208,7 +313,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Shop Now</a></li>
                 <li><a href="#">Track Order</a></li>
-                <li><a href="#" class="cart-btn">Cart (0)</a></li>
+                <li><button class="cart-btn" id="cart-counter" onclick="alert('Opening Cart Panel soon!')">Cart (0)</button></li>
                 <li>
                     <div id="google-btn-wrapper">
                         <div id="g_id_onload"
@@ -230,6 +335,14 @@
         </nav>
     </header>
 
+    <div class="categories-bar">
+        <div class="cat-item active" onclick="filterCategory('all')">⚡ All Drops</div>
+        <div class="cat-item" onclick="filterCategory('tshirt')">👕 Oversized Fit</div>
+        <div class="cat-item" onclick="filterCategory('cargo')">👖 Baggy & Cargos</div>
+        <div class="cat-item" onclick="filterCategory('sneaker')">👟 Luxury Sneakers</div>
+        <div class="cat-item" onclick="filterCategory('caps')">🧢 Urban Caps</div>
+    </div>
+
     <div class="hero">
         <h1>Redefine Your Vibe</h1>
         <p>Premium Urban Streetwear, Oversized Fits, and Trend-Setting Styles delivered super fast to your doorstep.</p>
@@ -239,43 +352,97 @@
     <div class="container">
         <h2 class="section-title">Trending Drops</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card product-card" data-category="tshirt">
                 <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000" alt="Oversized T-Shirt">
-                <h3>Oversized Maroon T-Shirt</h3>
-                <p>₹799</p>
-                <a href="#" class="buy-btn">Buy Now</a>
+                <div>
+                    <h3>Oversized Maroon T-Shirt</h3>
+                    <p>₹799</p>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">S</span>
+                        <span class="size-box selected" onclick="selectSize(this)">M</span>
+                        <span class="size-box" onclick="selectSize(this)">L</span>
+                        <span class="size-box" onclick="selectSize(this)">XL</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Oversized Maroon T-Shirt')">Add to Cart</button>
+                </div>
             </div>
-            <div class="card">
+            
+            <div class="card product-card" data-category="cargo">
                 <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000" alt="Baggy Cargo">
-                <h3>Urban Baggy Cargo Pants</h3>
-                <p>₹1,299</p>
-                <a href="#" class="buy-btn">Buy Now</a>
+                <div>
+                    <h3>Urban Baggy Cargo Pants</h3>
+                    <p>₹1,299</p>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">30</span>
+                        <span class="size-box selected" onclick="selectSize(this)">32</span>
+                        <span class="size-box" onclick="selectSize(this)">34</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Urban Baggy Cargo Pants')">Add to Cart</button>
+                </div>
             </div>
-            <div class="card">
+            
+            <div class="card product-card" data-category="sneaker">
                 <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000" alt="White Sneakers">
-                <h3>Luxury White Sneakers</h3>
-                <p>₹1,999</p>
-                <a href="#" class="buy-btn">Buy Now</a>
+                <div>
+                    <h3>Luxury White Sneakers</h3>
+                    <p>₹1,999</p>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">UK 7</span>
+                        <span class="size-box selected" onclick="selectSize(this)">UK 8</span>
+                        <span class="size-box" onclick="selectSize(this)">UK 9</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Luxury White Sneakers')">Add to Cart</button>
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>zippykart.co.in</p>
-        <p style="color: #666; margin-top: 10px; font-size: 10px;">&copy; 2026 ZippyKart. All Rights Reserved. Clothing tailored to your style.</p>
+        <p><strong>zippykart.co.in</strong></p>
+        <p style="color: #666; margin-top: 10px; font-size: 10px;">&copy; 2026 ZippyKart. All Rights Reserved. Clothing tailored to your unique culture and style.</p>
     </footer>
 
     <script>
+      // 🛒 Smart Cart Count Logic
+      let cartCount = 0;
+      function addToCart(itemName) {
+          cartCount++;
+          document.getElementById('cart-counter').innerText = `Cart (${cartCount})`;
+          alert(`🔥 Great choice! "${itemName}" added to your cart.`);
+      }
+
+      // 👕 Size Selector Style Toggler
+      function selectSize(element) {
+          // Apne group ke baki selected boxes ko unselect karein
+          const parent = element.parentElement;
+          parent.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
+          // Is waale ko select karein
+          element.classList.add('selected');
+      }
+
+      // 🔍 Dynamic Categories Filtering Logic (Flipkart-Style)
+      function filterCategory(categoryName) {
+          // Active state toggle for buttons
+          document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+          event.target.classList.add('active');
+
+          // Filter products view
+          document.querySelectorAll('.product-card').forEach(card => {
+              if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
+                  card.style.display = 'flex';
+              } else {
+                  card.style.display = 'none';
+              }
+          });
+      }
+
+      // 🔐 Google Sign-In Callback Handler
       function handleCredentialResponse(response) {
-        // Decode Token to read user data
         const responsePayload = parseJwt(response.credential);
-        
-        // Pop-up Welcome Notification
         alert("Welcome to ZippyKart, " + responsePayload.name + "!");
         console.log("Logged In User Email: " + responsePayload.email);
       }
 
-      // Helper function to decode Google Token JWT
       function parseJwt (token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -287,4 +454,5 @@
     </script>
 
 </body>
-</html>
+            </html>
+    
