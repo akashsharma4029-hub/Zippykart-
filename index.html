@@ -195,7 +195,7 @@
 
     <div class="bottom-tabs">
         <div class="tab-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="tab-icon">🏠</span> Home</div>
-        <div class="tab-item" onclick="alert('📺 Zippy TV Coming Soon!')"><span class="tab-icon">▶️</span> Play</div>
+        <div class="tab-item" onclick="alert('📺 Zippy TV Space Active Very Soon!')"><span class="tab-icon">▶️</span> Play</div>
         <div class="tab-item" onclick="document.getElementById('categoriesSliderElement').scrollIntoView({behavior:'smooth'})"><span class="tab-icon">📂</span> Categories</div>
         <div class="tab-item" onclick="toggleProfileModal()"><span class="tab-icon">👤</span> Account</div>
         <div class="tab-item" id="bottom-cart-hook" onclick="toggleCartPanel()"><span class="tab-icon">🛒</span> Cart (0)</div>
@@ -206,11 +206,13 @@
     <script>
       let cartMemory = [];
       
+      // Fixed Cart Animation Action Hooks
       function toggleCartPanel() {
           const panel = document.getElementById('cartPanel');
           const overlay = document.getElementById('cartOverlay');
           panel.classList.toggle('open');
           overlay.classList.toggle('open');
+          
           if(!panel.classList.contains('open')) {
               document.getElementById('checkoutFormBlock').style.display = "none";
               document.getElementById('cartItemsContainer').style.display = "block";
@@ -229,7 +231,7 @@
           const imgSrc = document.getElementById(imgId).src;
           cartMemory.push({ name: name, price: price, size: selectedSize, img: imgSrc });
           updateCartUI();
-          toggleCartPanel();
+          toggleCartPanel(); // Automatically slides open when added!
       }
       
       function removeCartItem(index) {
@@ -287,7 +289,4 @@
       
       function selectSize(element) {
           const parent = element.parentElement;
-          parent.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
-          element.classList.add('selected');
-      }
-      
+          parent.querySelectorAll('.size-box').for
