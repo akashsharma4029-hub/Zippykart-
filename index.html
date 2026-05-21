@@ -4,282 +4,360 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zippykart.co.in | Premium Streetwear & Culture</title>
+    
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-        #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; }
-        header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 22px; font-weight: 700; color: #ff3e3e; text-transform: uppercase; }
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 15px; }
-        nav ul li a { color: #fff; text-decoration: none; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .cart-btn { border: 1px solid #ff3e3e; background: rgba(255, 62, 62, 0.1); color: #ff3e3e !important; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer; }
-        
-        /* User Profile Dropdown Style */
-        .user-profile-badge { color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; background: #222; padding: 6px 12px; border-radius: 4px; border: 1px solid #333; display: none; }
-        .user-profile-badge:hover { border-color: #ff3e3e; }
-        .profile-modal { display: none; position: fixed; top: 70px; right: 5%; width: 280px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #eee; z-index: 1001; padding: 20px; text-align: left; }
-        .profile-modal h3 { font-size: 14px; margin-bottom: 5px; color: #111; }
-        .profile-modal p { font-size: 11px; color: #666; margin-bottom: 15px; }
-        .logout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        .categories-bar { background: #fff; padding: 12px 5%; display: flex; gap: 12px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+    <style>
+        /* CSS Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fcfcfc;
+            color: #111;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar & Top Header Layout (Mobile First) */
+        header {
+            background-color: #111;
+            color: #fff;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff3e3e;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            cursor: pointer;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: none; /* Hide on mobile by default */
+        }
+
+        @media (min-width: 600px) {
+            .top-nav a { display: inline; }
+        }
+
+        #google-btn-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* 📋 USER PROFILE & ACCOUNT OVERLAY (Flipkart-style) */
+        .user-profile-badge {
+            display: none;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            background: rgba(255, 62, 62, 0.1);
+            border: 1px solid #ff3e3e;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .user-profile-badge:hover {
+            background: #ff3e3e;
+        }
+
+        .account-overlay {
+            position: fixed;
+            top: 60px; /* Under navbar */
+            right: 5%;
+            width: 280px;
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            z-index: 1001;
+            border-radius: 8px;
+            display: none; /* Initial hidden */
+            padding: 20px;
+            text-align: left;
+            border: 1px solid #eee;
+        }
+
+        .account-overlay h3 { font-size: 14px; margin-bottom: 5px; color: #111; }
+        .account-overlay p { font-size: 11px; color: #666; margin-bottom: 15px; }
+        
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+            transition: color 0.2s;
+        }
+
+        .setting-item:hover { color: #ff3e3e; }
+        .setting-item span { width: 15px; text-align: center; } /* For icon spacing */
+
+        .logout-btn {
+            background: #111;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            margin-top: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .logout-btn:hover { background: #ff3e3e; }
+
+        /* Cart & Categories Structure */
+        .categories-bar {
+            background: #fff;
+            padding: 12px 5%;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .categories-bar::-webkit-scrollbar { display: none; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .cat-item.active { background: #111; color: #fff; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000') no-repeat center center/cover; height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; }
-        .hero h1 { font-size: 35px; text-transform: uppercase; margin-bottom: 10px; }
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 35px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
+
+        /* Main Sections Layout */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 { font-size: 13px; text-transform: uppercase; margin-bottom: 6px; }
+        .card p { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+
         .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
         .size-box { border: 1px solid #ccc; padding: 4px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; cursor: pointer; }
         .size-box.selected { border-color: #ff3e3e; color: #ff3e3e; background: rgba(255,62,62,0.05); }
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; cursor: pointer; border: none; width: 100%; }
-        .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1000; transition: right 0.4s ease; display: flex; flex-direction: column; }
-        .cart-panel.open { right: 0; }
-        .cart-header { background: #111; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .close-cart { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
-        .cart-items-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
-        .cart-item-row { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid #eee; }
-        .cart-item-row img { width: 60px; height: 70px; object-fit: cover; border-radius: 4px; }
-        .cart-item-info { flex-grow: 1; text-align: left; }
-        .remove-item-btn { background: none; border: none; color: #ff3e3e; font-size: 10px; font-weight: bold; cursor: pointer; margin-top: 5px; }
-        .checkout-container { display: none; padding: 15px; background: #fdfdfd; border-radius: 6px; border: 1px dashed #ccc; margin-top: 10px; }
-        .form-group { margin-bottom: 10px; }
-        .form-group input { width: 100%; padding: 8px 10px; font-size: 12px; border: 1px solid #ddd; border-radius: 4px; }
-        .pay-option { display: flex; align-items: center; gap: 8px; font-size: 12px; background: #f5f5f5; padding: 8px; border-radius: 4px; margin-top: 5px; }
-        .cart-summary-footer { background: #f9f9f9; padding: 20px; border-top: 1px solid #eee; }
-        .summary-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
-        .summary-row.total-bill { font-size: 15px; font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px; }
-        .checkout-btn, .place-order-btn { background: #ff3e3e; color: #fff; width: 100%; padding: 12px; border: none; font-weight: bold; font-size: 12px; border-radius: 4px; margin-top: 15px; cursor: pointer; text-transform: uppercase; }
-        .place-order-btn { background: #111; margin-top: 10px; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 999; display: none; }
-        .cart-overlay.open { display: block; }
-        .empty-cart-text { text-align: center; color: #999; margin-top: 40px; font-size: 13px; }
-        footer { background-color: #111; color: #fff; text-align: center; padding: 30px 20px; font-size: 11px; margin-top: 60px; }
+
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; border: none; width: 100%; cursor: pointer; transition: 0.2s; }
+        .buy-btn:hover { background: #ff3e3e; }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 10px;
+            margin-top: 50px;
+            line-height: 1.8;
+        }
+
+        /* Bottom Tab Bar (Snapdragon Screenshot Icons) */
+        .bottom-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #777;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 600;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .tab-item.active { color: #ff3e3e; }
+        .tab-icon { font-size: 18px; } /* Temporary replacement for image icons */
+
     </style>
 </head>
 <body>
 
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartPanel()"></div>
-
     <header>
         <div class="logo">ZippyKart</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Shop Now</a></li>
-                <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
-                <li>
-                    <div id="google-btn-wrapper">
-                        <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
-                        <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
-                    </div>
-                    <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
-                </li>
-            </ul>
-        </nav>
+        <div class="top-nav">
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Track Order</a>
+        }
+            <div id="google-btn-wrapper">
+                <div id="g_id_onload"
+                     data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com"
+                     data-callback="handleCredentialResponse"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-size="medium"
+                     data-theme="dark"
+                     data-text="signin"
+                     data-shape="rectangular"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+            <div id="userBadge" class="user-profile-badge" onclick="toggleAccountOverlay()">Hi, User 👋</div>
+        </div>
     </header>
 
-    <div class="profile-modal" id="profileModal">
+    <div class="account-overlay" id="accountOverlay">
         <h3 id="modalName">Sushil Sharma</h3>
-        <p id="modalEmail">user@gmail.com</p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 12px;">
+        <p id="modalEmail">sushil@gmail.com</p>
+        <hr style="border:0; border-top: 1px solid #eee; margin-bottom: 10px;">
+        
+        <div class="setting-item" onclick="alert('Flipkart Plus (Static)')"><span>💎</span> Flipkart Plus</div>
+        <div class="setting-item" onclick="alert('Manage Devices (Static)')"><span>📱</span> Manage Devices</div>
+        <div class="setting-item" onclick="alert('Edit Profile (Static)')"><span>👤</span> Edit Profile</div>
+        <div class="setting-item" onclick="alert('Saved Cards (Static)')"><span>💳</span> Saved Cards</div>
+        <div class="setting-item" onclick="alert('Saved Addresses (Static)')"><span>📍</span> Saved Addresses</div>
+        <div class="setting-item" onclick="alert('Select Language (Static)')"><span>🌐</span> Select Language</div>
+        <div class="setting-item" onclick="alert('Privacy Center (Static)')"><span>🛡️</span> Privacy Center</div>
+        
         <button class="logout-btn" onclick="logoutUser()">Log Out Account</button>
     </div>
 
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h2>Your Cart</h2>
-            <button class="close-cart" onclick="toggleCartPanel()">&times;</button>
-        </div>
-        <div class="cart-items-body" id="cartItemsContainer">
-            <p class="empty-cart-text">Your cart is empty. Add drops now!</p>
-        </div>
-        <div class="checkout-container" id="checkoutFormBlock">
-            <h3 style="font-size:12px; margin-bottom:10px;">Delivery Address</h3>
-            <div class="form-group"><input type="text" id="custName" placeholder="Full Name"></div>
-            <div class="form-group"><input type="tel" id="custPhone" placeholder="Mobile Number"></div>
-            <div class="form-group"><input type="text" id="custAddress" placeholder="Full Address"></div>
-            <div class="form-group"><input type="text" id="custPincode" placeholder="Pincode"></div>
-            <label class="pay-option"><input type="radio" name="payment" value="UPI" checked> 📱 UPI (GPay/PhonePe)</label>
-            <label class="pay-option"><input type="radio" name="payment" value="COD"> 💵 Cash on Delivery</label>
-            <button class="place-order-btn" onclick="executeFinalOrder()">Place Order</button>
-        </div>
-        <div class="cart-summary-footer">
-            <div class="summary-row"><span>Subtotal:</span><span id="bill-subtotal">₹0</span></div>
-            <div class="summary-row"><span>Discount:</span><span style="color:#ff3e3e;" id="bill-discount">-₹0</span></div>
-            <div class="summary-row"><span>Shipping:</span><span id="bill-shipping">₹0</span></div>
-            <div class="summary-row total-bill"><span>Total:</span><span id="bill-total">₹0</span></div>
-            <button class="checkout-btn" id="proceedCheckoutMainBtn" onclick="openCheckoutView()">Proceed to Checkout</button>
-        </div>
-    </div>
-
     <div class="categories-bar">
-        <div class="cat-item active" onclick="filterCategory('all')">⚡ All Drops</div>
-        <div class="cat-item" onclick="filterCategory('tshirt')">👕 Oversized Fit</div>
-        <div class="cat-item" onclick="filterCategory('cargo')">👖 Baggy & Cargos</div>
-        <div class="cat-item" onclick="filterCategory('sneaker')">👟 Luxury Sneakers</div>
-    </div>
-
-    <div class="hero">
-        <h1>Redefine Your Vibe</h1>
-        <p>Premium Urban Streetwear, Oversized Fits, and Trend-Setting Styles.</p>
+        <div class="cat-item active" onclick="alert('All Drops Filter')">⚡ All Drops</div>
+        <div class="cat-item" onclick="alert('Oversized Filter')">👕 Oversized Fit</div>
+        <div class="cat-item" onclick="alert('Cargo Filter')">👖 Baggy & Cargos</div>
+        <div class="cat-item" onclick="alert('Sneaker Filter')">👟 Luxury Sneakers</div>
     </div>
 
     <div class="container">
-        <h2 class="section-title">Trending Drops</h2>
         <div class="grid">
-            <div class="card product-card" data-category="tshirt">
+            <div class="card">
                 <img id="img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000">
                 <div>
                     <h3>Oversized Maroon T-Shirt</h3>
                     <p>₹799</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">S</span><span class="size-box selected" onclick="selectSize(this)">M</span><span class="size-box" onclick="selectSize(this)">L</span></div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'img-1')">Add to Cart</button>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">S</span>
+                        <span class="size-box selected" onclick="selectSize(this)">M</span>
+                        <span class="size-box" onclick="selectSize(this)">L</span>
+                    </div>
+                    <button class="buy-btn" onclick="alert('Opening Cart Panel soon!')">Add to Cart</button>
                 </div>
             </div>
-            <div class="card product-card" data-category="cargo">
-                <img id="img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
-                <div>
-                    <h3>Urban Baggy Cargo Pants</h3>
-                    <p>₹1,299</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">30</span><span class="size-box selected" onclick="selectSize(this)">32</span><span class="size-box" onclick="selectSize(this)">34</span></div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'img-2')">Add to Cart</button>
-                </div>
             </div>
-            <div class="card product-card" data-category="sneaker">
-                <img id="img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
-                <div>
-                    <h3>Luxury White Sneakers</h3>
-                    <p>₹1,999</p>
-                    <div class="size-selector"><span class="size-box" onclick="selectSize(this)">UK 8</span><span class="size-box selected" onclick="selectSize(this)">UK 9</span></div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'img-3')">Add to Cart</button>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <footer><p>&copy; 2026 ZippyKart. Tailored to your style.</p></footer>
+    <div class="bottom-tabs">
+        <div class="tab-item active" onclick="alert('Home Static')"><span class="tab-icon">🏠</span> Home</div>
+        <div class="tab-item" onclick="alert('Play Static')"><span class="tab-icon">▶️</span> Play</div>
+        <div class="tab-item" onclick="alert('Categories Static')"><span class="tab-icon">📂</span> Categories</div>
+        <div class="tab-item" onclick="alert('Account Static')"><span class="tab-icon">👤</span> Account</div>
+        <div class="tab-item" onclick="alert('Cart Static')"><span class="tab-icon">🛒</span> Cart (0)</div>
+    </div>
+
+    <footer>
+        <p><strong>zippykart.co.in</strong></p>
+        <p style="color: #666; margin-top: 5px;">&copy; 2026 ZippyKart. Tailored Streetwear Culture.</p>
+    </footer>
 
     <script>
-      let cartMemory = [];
-      function toggleCartPanel() {
-          const panel = document.getElementById('cartPanel');
-          const overlay = document.getElementById('cartOverlay');
-          panel.classList.toggle('open');
-          overlay.classList.toggle('open');
-          if(!panel.classList.contains('open')) {
-              document.getElementById('checkoutFormBlock').style.display = "none";
-              document.getElementById('cartItemsContainer').style.display = "block";
-              document.getElementById('proceedCheckoutMainBtn').style.display = "block";
-          }
-      }
-      function addRealItemToCart(name, price, imgId) {
-          const cardElement = document.getElementById(imgId).parentElement;
-          const selectedSize = cardElement.querySelector('.size-box.selected').innerText;
-          const imgSrc = document.getElementById(imgId).src;
-          cartMemory.push({ name: name, price: price, size: selectedSize, img: imgSrc });
-          updateCartUI();
-          toggleCartPanel();
-      }
-      function removeCartItem(index) {
-          cartMemory.splice(index, 1);
-          updateCartUI();
-      }
-      function updateCartUI() {
-          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
-          const container = document.getElementById('cartItemsContainer');
-          if (cartMemory.length === 0) {
-              container.innerHTML = `<p class="empty-cart-text">Your cart is empty. Add drops now!</p>`;
-              document.getElementById('bill-subtotal').innerText = "₹0";
-              document.getElementById('bill-discount').innerText = "-₹0";
-              document.getElementById('bill-shipping').innerText = "₹0";
-              document.getElementById('bill-total').innerText = "₹0";
-              return;
-          }
-          container.innerHTML = "";
-          let subtotal = 0;
-          cartMemory.forEach((item, index) => {
-              subtotal += item.price;
-              container.innerHTML += `<div class="cart-item-row"><img src="${item.img}"><div class="cart-item-info"><h4>${item.name}</h4><p>Size: <strong>${item.size}</strong></p><p style="font-weight:600;">₹${item.price}</p><button class="remove-item-btn" onclick="removeCartItem(${index})">Remove</button></div></div>`;
-          });
-          let discount = cartMemory.length > 0 ? 100 : 0; 
-          let shipping = cartMemory.length > 0 ? 49 : 0;  
-          let finalPayable = (subtotal - discount) + shipping;
-          document.getElementById('bill-subtotal').innerText = `₹${subtotal}`;
-          document.getElementById('bill-discount').innerText = `-₹${discount}`;
-          document.getElementById('bill-shipping').innerText = `₹${shipping}`;
-          document.getElementById('bill-total').innerText = `₹${finalPayable}`;
-      }
-      function openCheckoutView() {
-          if(cartMemory.length === 0) { alert("Your cart is empty!"); return; }
-          document.getElementById('cartItemsContainer').style.display = "none";
-          document.getElementById('proceedCheckoutMainBtn').style.display = "none";
-          document.getElementById('checkoutFormBlock').style.display = "block";
-      }
-      function executeFinalOrder() {
-          const name = document.getElementById('custName').value;
-          const phone = document.getElementById('custPhone').value;
-          const address = document.getElementById('custAddress').value;
-          const pin = document.getElementById('custPincode').value;
-          if(!name || !phone || !address || !pin) { alert("Please fill all details."); return; }
-          const method = document.querySelector('input[name="payment"]:checked').value;
-          alert(`🎉 Order Confirmed!\n\nThank you, ${name}.\nItems will be shipped to: ${address}.\nMethod: ${method}`);
-          cartMemory = []; updateCartUI(); toggleCartPanel();
-      }
+      // size selector style toggle
       function selectSize(element) {
           const parent = element.parentElement;
           parent.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
           element.classList.add('selected');
       }
-      function filterCategory(categoryName) {
-          document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
-          event.currentTarget.classList.add('active');
-          document.querySelectorAll('.product-card').forEach(card => {
-              if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
-                  card.style.display = 'flex';
-              } else { card.style.display = 'none'; }
-          });
+
+      // Open/Close Account Overlay
+      function toggleAccountOverlay() {
+          const overlay = document.getElementById('accountOverlay');
+          overlay.style.display = (overlay.style.display === "block") ? "none" : "block";
       }
 
-      // 🔐 Google Sign-In & Flipkart Toggle Logic
+      // 🔐 Google Sign-In Callback (Mocking Backend ID login)
       function handleCredentialResponse(response) {
         const responsePayload = parseJwt(response.credential);
         
-        // Hide Google Login Button Box
+        // Hide Login, Show Name Header
         document.getElementById('google-btn-wrapper').style.display = "none";
         
-        // Setup & Show Name Badge Header
+        // Dynamic Header Update (Hi, Sushil!)
         const shortName = responsePayload.name.split(' ')[0];
-        const badge = document.getElementById('userBadge');
-        badge.innerText = `Hi, ${shortName} 👋`;
-        badge.style.display = "inline-block";
+        document.getElementById('userBadge').innerText = `Hi, ${shortName} 👋`;
+        document.getElementById('userBadge').style.display = "block";
 
-        // Fill modal values inside info drawer
+        // Setup Account Modal Details
         document.getElementById('modalName').innerText = responsePayload.name;
         document.getElementById('modalEmail').innerText = responsePayload.email;
 
-        alert("Welcome to ZippyKart, " + responsePayload.name + "!");
+        alert(`Welcome back to ZippyKart, ${responsePayload.name}!`);
       }
 
-      function toggleProfileModal() {
-          const modal = document.getElementById('profileModal');
-          modal.style.display = modal.style.display === "block" ? "none" : "block";
-      }
-
-      function logoutUser() {
-          // Hide profile widgets, reveal Google button back
-          document.getElementById('userBadge').style.display = "none";
-          document.getElementById('profileModal').style.display = "none";
-          document.getElementById('google-btn-wrapper').style.display = "inline-block";
-          alert("Account logged out successfully.");
-      }
-
+      // Google Token JWT Decoding
       function parseJwt (token) {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -288,7 +366,15 @@
         }).join(''));
         return JSON.parse(jsonPayload);
       }
+
+      // Logout Functionality (Mocked)
+      function logoutUser() {
+          document.getElementById('userBadge').style.display = "none";
+          document.getElementById('google-btn-wrapper').style.display = "inline-block";
+          document.getElementById('accountOverlay').style.display = "none";
+          alert("Account logged out successfully!");
+      }
     </script>
+
 </body>
-    </html>
-        
+</html>
