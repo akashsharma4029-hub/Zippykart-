@@ -7,7 +7,12 @@
     <style>
         /* CSS Styling */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
-
+#google-btn-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+        
         * {
             margin: 0;
             padding: 0;
@@ -149,21 +154,22 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
-      <div id="g_id_onload"
-     data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com"
-     data-callback="handleCredentialResponse"
-     data-auto_prompt="false">
+<div id="google-btn-wrapper">
+  <div id="g_id_onload"
+       data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="medium"
+       data-theme="dark"
+       data-text="signin"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
 </div>
-<div class="g_id_signin"
-     data-type="standard"
-     data-size="large"
-     data-theme="dark"
-     data-text="signin_with"
-     data-shape="rectangular"
-     data-logo_alignment="left">
-</div>
-
-<script>
+            <script>
   function handleCredentialResponse(response) {
     const responsePayload = parseJwt(response.credential);
     alert("Welcome to ZippyKart, " + responsePayload.name + "!");
