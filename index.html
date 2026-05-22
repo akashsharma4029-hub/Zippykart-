@@ -21,7 +21,7 @@
         
         #google-btn-wrapper { display: inline-block; vertical-align: middle; }
         
-        /* 📍 ADDRESS STRIP AT TOP */
+        /* 📍 ADDRESS STRIP */
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; }
         .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .addr-left i { color: #ff3e3e; }
@@ -37,20 +37,26 @@
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active { background: #111; color: #fff; }
 
-        /* 🖼️ AUTOMATIC HERO BANNER INTERFACE */
-        .slider-wrapper { position: relative; width: 100vw; height: 35vh; overflow: hidden; background: #000; }
+        /* 🖼️ FIX: AUTOMATIC HERO BANNER SLIDER - ASPECT RATIO FIXES */
+        .slider-wrapper { position: relative; width: 100vw; height: 260px; overflow: hidden; background: #000; margin-bottom: 5px; }
         .slide-container { display: flex; width: 400vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide-frame { width: 100vw; height: 100%; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; position: relative; }
-        .slide-frame::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.35); }
+        .slide-frame { width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        
+        /* Object fit set to contain/cover hybrid mode so image fits correctly */
+        .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
         /* 🛍️ PRODUCT CARD GRID */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; color: #666; letter-spacing: 0.5px; }
+        .container { max-width: 1200px; margin: 15px auto; padding: 0 15px; min-height: 400px; } /* Min-height ensures structure stays stable during filters */
+        .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; color: #333; letter-spacing: 0.5px; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
-        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .discount-badge { position: absolute; top: 18px; left: 18px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 4px; z-index: 5; }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+        
+        /* Product Img scale fix */
+        .card .img-container { width: 100%; height: 160px; overflow: hidden; border-radius: 4px; margin-bottom: 8px; }
+        .card .img-container img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        
         .card h3 { font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         .price-box { margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; }
@@ -61,7 +67,7 @@
         .buy-btn { background: #111; color: #fff; font-size: 10px; font-weight: bold; padding: 8px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 👤 ACCOUNT DESIGN SYSTEM MATCHING SCREENSHOT */
+        /* 👤 ACCOUNT DESIGN SYSTEM */
         .profile-card-hub { background: #fff; padding: 20px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .profile-card-hub h3 { font-size: 16px; font-weight: 700; color: #212121; }
         .profile-card-hub p { font-size: 12px; color: #878787; margin-top: 2px; }
@@ -83,7 +89,7 @@
         .logout-container-box { padding: 15px; background: transparent; display: flex; justify-content: center; margin-top: 10px; }
         .app-logout-btn { background: #fff; color: #212121; border: 1px solid #d4d5d9; width: 100%; max-width: 400px; padding: 12px; font-weight: 700; border-radius: 4px; font-size: 14px; text-align: center; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
 
-        /* 📋 EDIT PROFILE PANEL MODAL (FLIPKART LAYOUT BASED) */
+        /* 📋 EDIT PROFILE PANEL MODAL */
         .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 2000; display: none; flex-direction: column; }
         .modal-top-bar { background: #111; color: #fff; padding: 15px; display: flex; align-items: center; gap: 15px; font-weight: 700; }
         .modal-top-bar i { cursor: pointer; font-size: 18px; }
@@ -138,12 +144,13 @@
 
 
     <div id="panel-home" class="app-tab-panel active-view">
+        
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600');"></div>
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600');"></div>
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=600');"></div>
-                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=600');"></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000"></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000"></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000"></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1000"></div>
             </div>
         </div>
 
@@ -159,31 +166,44 @@
         <div class="container">
             <h3 class="section-title">Trending Culture Drops</h3>
             <div class="grid">
+                
                 <div class="card product-card" data-category="tshirt">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500">
+                    </div>
                     <h3>Oversized Maroon T-Shirt</h3>
                     <div class="price-box"><span class="now">₹799</span><span class="old">₹1,499</span><span class="off">46% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Oversized Maroon T-Shirt', 799)">Add to Cart</button>
                 </div>
+
                 <div class="card product-card" data-category="cargo">
-                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500">
+                    </div>
                     <h3>Urban Baggy Cargo Pants</h3>
                     <div class="price-box"><span class="now">₹1,299</span><span class="old">₹2,499</span><span class="off">48% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Urban Baggy Cargo Pants', 1299)">Add to Cart</button>
                 </div>
+
                 <div class="card product-card" data-category="sneaker">
-                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500">
+                    </div>
                     <h3>Luxury White Sneakers</h3>
                     <div class="price-box"><span class="now">₹1,999</span><span class="old">₹4,999</span><span class="off">60% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Luxury White Sneakers', 1999)">Add to Cart</button>
                 </div>
+
                 <div class="card product-card" data-category="bags">
                     <div class="discount-badge">60% OFF</div>
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500">
+                    </div>
                     <h3>Classic Pastel Hand Tote Bag</h3>
                     <div class="price-box"><span class="now">₹599</span><span class="old">₹1,499</span><span class="off">60% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Classic Pastel Hand Tote Bag', 599)">Add to Cart</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -366,7 +386,7 @@
         let userRawFullName = "Guest User";
         let userRawEmail = "";
 
-        // Auto banner slider engine logic
+        // Auto sliding carousel frame loops
         let currentSlide = 0;
         setInterval(() => {
             currentSlide = (currentSlide + 1) % 4;
@@ -459,14 +479,12 @@
             document.getElementById('panelEmailNode').innerText = userRawEmail;
             activeUserKeyNode = userRawEmail.replace(/[^a-zA-Z0-9]/g, "_");
 
-            // Prefill inputs
             const nameParts = userRawFullName.split(' ');
             document.getElementById('inputFirstName').value = nameParts[0] || "";
             document.getElementById('inputLastName').value = nameParts.slice(1).join(' ') || "";
             document.getElementById('inputEmailId').value = userRawEmail;
         }
 
-        /* 📝 OPEN / CLOSE EDIT PROFILE LAYER PAGE */
         function openEditProfileModal() {
             document.getElementById('editProfileModalPanel').style.display = "flex";
         }
@@ -474,7 +492,6 @@
             document.getElementById('editProfileModalPanel').style.display = "none";
         }
 
-        /* 👤 WRITE PROFILE VALUES DIRECTLY INTO FIREBASE ROOT */
         function submitProfileDataToFirebase() {
             if(!window.firebaseDb) { alert("Firebase offline."); return; }
             const fName = document.getElementById('inputFirstName').value;
@@ -529,7 +546,6 @@
             }).catch(err => console.error(err));
         }
 
-        /* 🚪 REAL WORKING APP LOG OUT HANDLER */
         function executeAppLogoutSession() {
             alert("Logging out session terminal safety logs...");
             window.location.reload();
@@ -545,4 +561,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
