@@ -287,7 +287,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // ✅ SCREEN CONFIRMED FRESH LIVE CONFIG zippykart-pro
         const firebaseConfig = {
             apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo",
             authDomain: "zippykart-production.firebaseapp.com",
@@ -301,7 +300,6 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
         
-        // Expose hooks global variables safely for click functions
         window.dbRef = ref; window.dbSet = set; window.dbPush = push; window.firebaseDb = database;
     </script>
 
@@ -372,12 +370,16 @@
           });
       }
       
+      /* ✅ FIXING LIVE FULL-NAME PROFILE DROPDOWN DATA BIND */
       function handleCredentialResponse(response) {
         const responsePayload = parseJwt(response.credential);
         document.getElementById('google-btn-wrapper').style.display = "none";
+        
         const shortName = responsePayload.name.split(' ')[0];
         document.getElementById('userBadge').innerText = `Hi, ${shortName} 👋`;
         document.getElementById('userBadge').style.display = "inline-block";
+        
+        // Dynamic state updates for the user dashboard elements
         document.getElementById('modalName').innerText = responsePayload.name;
         document.getElementById('modalEmail').innerText = responsePayload.email;
         activeUserEmail = responsePayload.email.replace(/[^a-zA-Z0-9]/g, "_");
@@ -433,4 +435,4 @@
       }
     </script>
 </body>
-</html>-pro
+</html>
