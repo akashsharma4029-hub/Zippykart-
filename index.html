@@ -20,7 +20,7 @@
         .logo .zippy { color: #fff; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
-        /* SEARCH WITH INTEGRATED LENS & CAMERA */
+        /* SEARCH WITH INTEGRATED LENS */
         .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 10px 15px; width: 45%; max-width: 500px; position: relative; border: 1px solid #333; }
         .search-web-wrapper input { border: none; outline: none; width: 85%; font-size: 13px; font-weight: 500; color: #fff; background: transparent; }
         .search-web-wrapper input::placeholder { color: #666; }
@@ -45,7 +45,7 @@
         .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 15px; width: 20px; text-align: center; }
         .menu-row i.fa-chevron-right { color: #ccc; font-size: 10px; }
         
-        /* 🔔 NOTIFICATION SWITCH SWITCH CHASSIS STYLE FROM VIDEO */
+        /* 🔔 NOTIFICATION TOGGLE SWITCH CONFIGURATION */
         .notification-toggle-box { display: flex; flex-direction: column; gap: 8px; padding: 15px 20px; background: #fdfdfd; border-top: 1px solid #eee; text-transform: none; }
         .toggle-header-row { display: flex; justify-content: space-between; align-items: center; }
         .toggle-header-row span { font-size: 13px; font-weight: 700; color: #111; }
@@ -60,7 +60,7 @@
 
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         
-        /* 📍 ADDRESS STRIP AT TOP */
+        /* 📍 DELIVERY ADDRESS STRIP */
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; width: 100vw; }
         .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; max-width: 75%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .addr-left i { color: #ff3e3e; }
@@ -71,17 +71,17 @@
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* 🖼️ BRAND MATCH EXCLUSIVE WIDE BANNER CAROUSEL */
-        .slider-wrapper { position: relative; width: 100vw; height: 48vh; min-height: 320px; max-height: 460px; overflow: hidden; background: #000; }
+        /* 🖼️ HIGH-RELIABILITY FULL-WIDTH BANNER CAROUSEL */
+        .slider-wrapper { position: relative; width: 100vw; height: 48vh; min-height: 320px; max-height: 460px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .slide-frame { width: 100vw; height: 100%; position: relative; }
-        .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+        .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         
-        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; }
-        .banner-overlay-text h1 { font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
-        .banner-overlay-text p { font-size: 14px; margin-top: 10px; color: #ccc; font-weight: 500; }
+        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; }
+        .banner-overlay-text h1 { font-size: 40px; font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -0.5px; }
+        .banner-overlay-text p { font-size: 14px; margin-top: 10px; color: #ddd; font-weight: 500; letter-spacing: 0.5px; }
 
-        /* 🛍️ SEAMLESS PRODUCT ENGINE GRID */
+        /* 🛍️ PRODUCT CARD SYSTEM GRID */
         .container { width: 100vw; max-width: 100%; padding: 35px 6%; min-height: 500px; }
         .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; letter-spacing: 0.5px; }
         .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
@@ -95,7 +95,7 @@
         .card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .discount-badge { position: absolute; top: 24px; left: 24px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 4px 8px; border-radius: 4px; z-index: 5; }
         
-        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fdfdfd; }
+        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; }
         @media (max-width: 650px) { .card .img-container { height: 170px; } }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -108,7 +108,7 @@
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 📋 ANIMATED DIALOGUE MODALS (Mitao Website Links Display) */
+        /* 📋 CLIENT-SIDE CUSTOM ANIMATED MODALS (No Browser Url Strings) */
         .custom-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 4000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .popup-modal-card { background: #fff; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: zoomReveal 0.25s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
         @keyframes zoomReveal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -116,7 +116,7 @@
         .popup-modal-header i { cursor: pointer; font-size: 18px; }
         .popup-modal-body { padding: 25px 20px; font-size: 13px; color: #444; line-height: 1.5; font-weight: 500; }
         
-        /* PROFILE EDIT PANEL CHASSIS */
+        /* PROFILE FIELD WRAPPER */
         .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 3000; display: none; flex-direction: column; }
         .modal-top-bar { background: #111; color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; font-weight: 700; }
         .modal-top-bar i { cursor: pointer; font-size: 18px; }
@@ -126,7 +126,7 @@
         .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; font-weight: 600; }
         .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* SLIDE CART SHEET */
+        /* SLIDE DRAWER BASKET SHEET */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -141,11 +141,11 @@
     <div class="custom-popup-overlay" id="masterAppPopupModal">
         <div class="popup-modal-card">
             <div class="popup-modal-header">
-                <span id="popupModalTitleNode">ZippyKart Console</span>
+                <span id="popupModalTitleNode">ZippyKart Hub</span>
                 <i class="fa-solid fa-xmark" onclick="closeAppCustomPopup()"></i>
             </div>
             <div class="popup-modal-body" id="popupModalBodyNode">
-                ZippyKart secure terminal pipeline processing...
+                ZippyKart secure terminal pipeline data processing...
             </div>
         </div>
     </div>
@@ -161,7 +161,7 @@
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" placeholder="Search for premium products, brands and home decor...">
-                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 ZippyKart Visual Search Terminal Online: Please scan your apparel snapshot for instant catalog mapping!')"></i>
+                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 ZippyKart Visual Search Terminal Online: Please scan your apparel snapshot loop for instant category matching!')"></i>
             </div>
         </div>
 
@@ -173,9 +173,9 @@
                         <h4 id="dropFullnameNode" style="font-size: 14px; font-weight: 700;">Guest Profile</h4>
                         <p id="dropEmailNode" style="color: #bbb; margin-top: 2px;">Sync Cloud Session Node</p>
                     </div>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('ZippyKart Plus Tier', '💎 Status Active! Welcome to ZippyKart Plus VIP membership. Enjoy 5% extra SC rewards and 24hr early lane access to premium drops.')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('My Order Logs', '📦 Syncing live tracker... All your dynamic streetwear shipments have been successfully updated in Firebase backend.')"><div class="left-side-cap"><i class="fa-solid fa-box row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Wishlist Storage', '❤️ Your private wishlist block is secure. 0 items currently pending.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('ZippyKart Plus Tier', '💎 Status Active! Welcome to ZippyKart Plus elite membership frame. Enjoy unlimited free priority delivery and 24 hours early track access to mega drops.')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('My Order Logs', '📦 Fetching real-time updates... All your dynamic streetwear items and delivery dispatches have been successfully logged in Firebase sync.')"><div class="left-side-cap"><i class="fa-solid fa-box row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Wishlist Storage', '❤️ Private item tray verified safe. 0 products currently pending checkout routing.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="openEditProfileModal()"><div class="left-side-cap"><i class="fa-solid fa-user-gear row-lead-ico"></i>Edit Profile Fields</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="autoFetchGPSAddress()"><div class="left-side-cap"><i class="fa-solid fa-map-location-dot row-lead-ico"></i>Saved Addresses (GPS)</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="window.location.reload();" style="background:#fafafa; border-top:1px solid #eee; font-weight:700; color:#ff3e3e;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Account</div></a>
@@ -185,9 +185,9 @@
             <div class="nav-dropdown-item">
                 <span>More <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></span>
                 <div class="floating-menu-pane">
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Select Language', '🌐 Primary layout set to English. Regional dialect modules are optimizing shortly.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Privacy Center', '🛡️ Encryption Active. Your credentials, position configurations, and database tokens are sandbox secured.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Help Center', '🎧 Initializing Help Desk... Real-time 24/7 client assistant terminal is ready to verify your data logs.')"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>Help Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Select Language', '🌐 Primary language localized to English. Multi-dialect region packs are initializing background buffering.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Privacy Center', '🛡️ Encryption Active. Your secure user specification tokens and checkout paths are fully protected.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Help Center', '🎧 Connecting Zippy Help Desk Core... Real-time 24/7 client assistance network is active to verify database parameters.')"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>Help Center</div><i class="fa-solid fa-chevron-right"></i></a>
                     
                     <div class="notification-toggle-box">
                         <div class="toggle-header-row">
@@ -234,31 +234,32 @@
     </div>
 
     <div id="panel-home" class="app-tab-panel active-view">
+        
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
                 <div class="slide-frame">
-                    <img src="https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=1600">
+                    <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Redefine Your Vibe</h1>
-                        <p>Premium Oversized Apparel & Modern Culture Drops.</p>
+                        <p>Authentic oversized fits & street culture drops.</p>
                     </div>
                 </div>
                 <div class="slide-frame">
-                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1600">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Aesthetic Living Space</h1>
-                        <p>Minimalist Artifacts & Contemporary Room Configurations.</p>
+                        <p>Minimalist artifacts & contemporary room layouts.</p>
                     </div>
                 </div>
                 <div class="slide-frame">
-                    <img src="https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=1600">
+                    <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200">
                     <div class="banner-overlay-text">
-                        <h1>Luxury Kicks Drops</h1>
+                        <h1>Luxury Kick Drops</h1>
                         <p>Step up your rotation lineup with verified statements.</p>
                     </div>
                 </div>
                 <div class="slide-frame">
-                    <img src="https://images.unsplash.com/photo-1396265787459-fdf2d0be45df?q=80&w=1600">
+                    <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Artisanal Workspaces</h1>
                         <p>Crafting sleek geometry setups for modern work hubs.</p>
@@ -293,14 +294,14 @@
                 </div>
 
                 <div class="card product-card" data-category="decor">
-                    <div class="img-container"><img src="https://images.unsplash.com/photo-1563861826100-9cb868fdcd1c?q=80&w=500"></div>
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=500"></div>
                     <h3>Aesthetic Minimalist Table Clock</h3>
                     <div class="price-box"><span class="now">₹499</span><span class="old">₹1,299</span><span class="off">61% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Aesthetic Table Clock', 499)">Add to Cart</button>
                 </div>
 
                 <div class="card product-card" data-category="decor">
-                    <div class="img-container"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=500"></div>
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=500"></div>
                     <h3>Modular Walnut Storage Shelves</h3>
                     <div class="price-box"><span class="now">₹2,499</span><span class="old">₹5,999</span><span class="off">58% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Walnut Storage Shelves', 2499)">Add to Cart</button>
@@ -363,7 +364,7 @@
         let activeUserKeyNode = "guest_session";
         let userRawEmail = "";
 
-        // Auto slider loop for responsive wide banner engine
+        // Automatic slider loop configuration
         let currentSlide = 0;
         setInterval(() => {
             currentSlide = (currentSlide + 1) % 4;
@@ -371,7 +372,7 @@
             if (engine) engine.style.transform = `translateX(-${currentSlide * 100}vw)`;
         }, 3500);
 
-        /* 🎬 CUSTOM INTERNAL POPUP SYSTEMS (No Website Links) */
+        /* 🎬 CUSTOM DIALOGUE POPUPS EXTENSION */
         function triggerCustomModalPopup(titleText, bodyText) {
             document.getElementById('popupModalTitleNode').innerText = titleText;
             document.getElementById('popupModalBodyNode').innerText = bodyText;
@@ -382,13 +383,13 @@
             document.getElementById('masterAppPopupModal').style.display = "none";
         }
 
-        /* 🔔 SLIDER TOGGLE HANDLER ACTION */
+        /* 🔔 SLIDER TOGGLE ACTION CORE HANDLER */
         function handleToggleSwitchMotion(checkboxEl) {
             const labelNode = document.getElementById('toggleStatusLabel');
             if(checkboxEl.checked) {
                 labelNode.innerText = "Enabled";
                 labelNode.style.color = "#ff3e3e";
-                triggerCustomModalPopup('Notifications Stream', '💡 Notification system activated! Realtime culture gear drops will be transmitted instantly.');
+                triggerCustomModalPopup('Notifications Stream', '💡 Notification system activated! New culture gear drop notifications will be transmitted instantly.');
             } else {
                 labelNode.innerText = "Disabled";
                 labelNode.style.color = "#888";
@@ -396,11 +397,11 @@
             }
         }
 
-        /* 📍 GPS GEOLOCATION INTERFACE */
+        /* 📍 AUTOMATIC GPS POSITION ENGINE */
         function autoFetchGPSAddress() {
             const displayHook = document.getElementById('addressBarHook');
             if (!navigator.geolocation) {
-                triggerCustomModalPopup('GPS Error', 'GPS Geolocation engine not configured in browser data branch.');
+                triggerCustomModalPopup('GPS Error', 'GPS Geolocation engine not configured in browser settings.');
                 return;
             }
             displayHook.innerText = "Connecting GPS Satellites...";
@@ -491,6 +492,7 @@
             document.getElementById('inputEmailId').value = userRawEmail;
         }
 
+        // Modal triggers
         function openEditProfileModal() { document.getElementById('editProfileModalPanel').style.display = "flex"; }
         function closeEditProfileModal() { document.getElementById('editProfileModalPanel').style.display = "none"; }
 
