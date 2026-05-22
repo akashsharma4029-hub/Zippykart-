@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear & Culture</title>
+    <title>Zippykart.co.in | Elite Streetwear & Bags</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -64,7 +64,7 @@
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 12px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 👤 ACCOUNT INTERFACE FROM VIDEO (100% ZIPPYKART BRANDED) */
+        /* 👤 ACCOUNT INTERFACE FROM VIDEO */
         .profile-card-hub { background: #fff; padding: 25px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .profile-card-hub h3 { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
         .profile-card-hub p { font-size: 12px; color: #666; margin-top: 2px; }
@@ -143,6 +143,7 @@
             <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
             <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
             <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Accessories</div>
+            <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
         </div>
 
         <div class="container">
@@ -175,6 +176,14 @@
                     <h3>Zippy Wireless Pro Pods</h3>
                     <div class="price-box"><span class="now">₹1,499</span><span class="old">₹2,999</span><span class="off">(50% OFF)</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Zippy Wireless Pro Pods', 1499)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="bags">
+                    <div class="discount-badge">60% OFF</div>
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500">
+                    <h3>Classic Pastel Hand Tote Bag</h3>
+                    <div class="price-box"><span class="now">₹599</span><span class="old">₹1,499</span><span class="off">(60% OFF)</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Classic Pastel Hand Tote Bag', 599)">Add to Cart</button>
                 </div>
 
             </div>
@@ -421,7 +430,7 @@
                 amountPaid: document.getElementById('sheetTotalBillHook').innerText,
                 timestamp: Date.now()
             }).then(() => {
-                alert("📦 Dispatch Successful! Your real-time logistics tracking block has been initialized inside Firebase.");
+                alert("📦 Order dispatched successfully! Live logistics stream updated in Firebase Realtime Database.");
                 appCartMemory = [];
                 syncBasketUI();
                 closeCartPanelSheet();
@@ -439,3 +448,4 @@
     </script>
 </body>
 </html>
+            
