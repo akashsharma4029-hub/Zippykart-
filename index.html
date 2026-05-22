@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear & Bags</title>
+    <title>Zippykart.co.in | Ultimate Streetwear App Hub</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 90px; }
+        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 90px; }
         
-        /* 🖤 PREMIUM CORE HEADER RESTORED */
+        /* 🖤 PREMIUM CORE HEADER */
         header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
@@ -23,7 +23,7 @@
         
         /* 📍 ADDRESS STRIP AT TOP */
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; }
-        .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; }
+        .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .addr-left i { color: #ff3e3e; }
         .supercoins-panel { display: flex; align-items: center; gap: 6px; background: rgba(255,229,0,0.1); border: 1px solid #ffe500; color: #ffe500; padding: 2px 8px; border-radius: 12px; }
 
@@ -38,68 +38,78 @@
         .cat-item.active { background: #111; color: #fff; }
 
         /* 🖼️ AUTOMATIC HERO BANNER INTERFACE */
-        .slider-wrapper { position: relative; width: 100vw; height: 50vh; overflow: hidden; background: #000; }
+        .slider-wrapper { position: relative; width: 100vw; height: 35vh; overflow: hidden; background: #000; }
         .slide-container { display: flex; width: 400vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .slide-frame { width: 100vw; height: 100%; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; position: relative; }
         .slide-frame::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.35); }
-        .slide-content { position: relative; z-index: 2; }
-        .slide-content h1 { font-size: 32px; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; }
 
         /* 🛍️ PRODUCT CARD GRID */
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 20px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
-        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin: 8px auto 0; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+        .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; color: #666; letter-spacing: 0.5px; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; }
-        .discount-badge { position: absolute; top: 25px; left: 25px; background: #ff3e3e; color: #fff; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; z-index: 5; }
-        .card img { width: 100%; height: 320px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
-        .card h3 { font-size: 13px; text-transform: uppercase; margin-bottom: 6px; color: #222; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .discount-badge { position: absolute; top: 18px; left: 18px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 4px; z-index: 5; }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+        .card h3 { font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .price-box { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .price-box .now { font-size: 15px; font-weight: 700; color: #111; }
-        .price-box .old { font-size: 12px; text-decoration: line-through; color: #999; }
-        .price-box .off { font-size: 11px; color: #ff3e3e; font-weight: bold; }
+        .price-box { margin-bottom: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; }
+        .price-box .now { font-weight: 700; color: #111; }
+        .price-box .old { text-decoration: line-through; color: #878787; font-size: 10px; }
+        .price-box .off { color: #ff3e3e; font-weight: bold; font-size: 10px; }
 
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 12px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
+        .buy-btn { background: #111; color: #fff; font-size: 10px; font-weight: bold; padding: 8px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 👤 ACCOUNT INTERFACE FROM VIDEO */
-        .profile-card-hub { background: #fff; padding: 25px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .profile-card-hub h3 { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
-        .profile-card-hub p { font-size: 12px; color: #666; margin-top: 2px; }
+        /* 👤 ACCOUNT DESIGN SYSTEM MATCHING SCREENSHOT */
+        .profile-card-hub { background: #fff; padding: 20px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .profile-card-hub h3 { font-size: 16px; font-weight: 700; color: #212121; }
+        .profile-card-hub p { font-size: 12px; color: #878787; margin-top: 2px; }
 
-        /* VIDEO ACTION GRID */
-        .video-action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px; background: #fdfdfd; }
-        .action-cell { background: #fff; border: 1px solid #eee; padding: 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.01); }
-        .action-cell i { font-size: 18px; color: #ff3e3e; width: 24px; text-align: center; }
-        .action-cell span { font-size: 13px; font-weight: 600; color: #333; }
+        .video-action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px; background: #fff; margin-bottom: 8px; }
+        .action-cell { background: #fff; border: 1px solid #e0e0e0; padding: 14px; border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .action-cell i { font-size: 16px; color: #ff3e3e; width: 20px; text-align: center; }
+        .action-cell span { font-size: 13px; font-weight: 600; color: #212121; }
 
-        /* LIST MANAGEMENT SYSTEM */
-        .list-group-headline { padding: 15px 20px 5px 20px; font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
-        .custom-list-container { background: #fff; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
-        .custom-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f9f9f9; cursor: pointer; }
+        .list-group-headline { padding: 12px 15px 6px 15px; font-size: 12px; font-weight: 700; color: #878787; text-transform: uppercase; }
+        .custom-list-container { background: #fff; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; margin-bottom: 8px; }
+        .custom-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
         .custom-row:last-child { border-bottom: none; }
-        .row-left { display: flex; align-items: center; gap: 15px; font-size: 13px; font-weight: 600; color: #222; }
+        .row-left { display: flex; align-items: center; gap: 15px; font-size: 13px; font-weight: 600; color: #212121; }
         .row-left i { color: #ff3e3e; font-size: 15px; width: 20px; text-align: center; }
-        .custom-row i.fa-chevron-right { color: #ccc; font-size: 11px; }
+        .custom-row i.fa-chevron-right { color: #bcbcbc; font-size: 11px; }
 
-        /* 🛒 SLIDE-UP CART BOTTOM PANEL */
+        /* 🚪 LOG OUT BUTTON FROM SCREENSHOT */
+        .logout-container-box { padding: 15px; background: transparent; display: flex; justify-content: center; margin-top: 10px; }
+        .app-logout-btn { background: #fff; color: #212121; border: 1px solid #d4d5d9; width: 100%; max-width: 400px; padding: 12px; font-weight: 700; border-radius: 4px; font-size: 14px; text-align: center; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+        /* 📋 EDIT PROFILE PANEL MODAL (FLIPKART LAYOUT BASED) */
+        .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 2000; display: none; flex-direction: column; }
+        .modal-top-bar { background: #111; color: #fff; padding: 15px; display: flex; align-items: center; gap: 15px; font-weight: 700; }
+        .modal-top-bar i { cursor: pointer; font-size: 18px; }
+        .edit-fields-body { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .input-group-field { display: flex; flex-direction: column; gap: 5px; }
+        .input-group-field label { font-size: 12px; font-weight: 700; color: #878787; text-transform: uppercase; }
+        .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; font-weight: 500; }
+        .input-group-field input:focus { border-color: #ff3e3e; }
+        .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 10px; cursor: pointer; width: 100%; }
+
+        /* 🛒 SLIDE-UP CART SHEET */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 70vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 1100; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .sheet-header h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; }
+        .sheet-header h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; }
         .sheet-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #111; color: #fff; border: none; padding: 12px 28px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
-        .final-pay-btn:hover { background: #ff3e3e; }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 1050; display: none; }
+        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 28px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
+        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 1040; display: none; }
 
-        /* 📱 TABS CONFIGURATION BAR */
-        .bottom-nav-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #777; font-size: 10px; font-weight: 600; cursor: pointer; width: 20%; text-decoration: none; }
+        /* 📱 BOTTOM NAVIGATION TABS ENGINE WITH LIVE COUNTER BADGE */
+        .bottom-nav-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #666; font-size: 10px; font-weight: 600; cursor: pointer; width: 20%; text-decoration: none; position: relative; }
         .nav-tab i { font-size: 18px; }
         .nav-tab.active-tab { color: #ff3e3e; }
+        .nav-cart-badge { position: absolute; top: -4px; right: 12px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 10px; display: none; border: 1px solid #fff; }
     </style>
 </head>
 <body>
@@ -142,50 +152,38 @@
             <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
             <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
             <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
-            <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Accessories</div>
+            <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
             <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
         </div>
 
         <div class="container">
-            <h2 class="section-title">Trending Culture Drops</h2>
+            <h3 class="section-title">Trending Culture Drops</h3>
             <div class="grid">
-                
                 <div class="card product-card" data-category="tshirt">
                     <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500">
                     <h3>Oversized Maroon T-Shirt</h3>
-                    <div class="price-box"><span class="now">₹799</span><span class="old">₹1,499</span><span class="off">(46% OFF)</span></div>
+                    <div class="price-box"><span class="now">₹799</span><span class="old">₹1,499</span><span class="off">46% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Oversized Maroon T-Shirt', 799)">Add to Cart</button>
                 </div>
-
                 <div class="card product-card" data-category="cargo">
                     <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500">
                     <h3>Urban Baggy Cargo Pants</h3>
-                    <div class="price-box"><span class="now">₹1,299</span><span class="old">₹2,499</span><span class="off">(48% OFF)</span></div>
+                    <div class="price-box"><span class="now">₹1,299</span><span class="old">₹2,499</span><span class="off">48% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Urban Baggy Cargo Pants', 1299)">Add to Cart</button>
                 </div>
-
                 <div class="card product-card" data-category="sneaker">
                     <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500">
                     <h3>Luxury White Sneakers</h3>
-                    <div class="price-box"><span class="now">₹1,999</span><span class="old">₹4,999</span><span class="off">(60% OFF)</span></div>
+                    <div class="price-box"><span class="now">₹1,999</span><span class="old">₹4,999</span><span class="off">60% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Luxury White Sneakers', 1999)">Add to Cart</button>
                 </div>
-
-                <div class="card product-card" data-category="accessories">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500">
-                    <h3>Zippy Wireless Pro Pods</h3>
-                    <div class="price-box"><span class="now">₹1,499</span><span class="old">₹2,999</span><span class="off">(50% OFF)</span></div>
-                    <button class="buy-btn" onclick="pushToBasket('Zippy Wireless Pro Pods', 1499)">Add to Cart</button>
-                </div>
-
                 <div class="card product-card" data-category="bags">
                     <div class="discount-badge">60% OFF</div>
                     <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500">
                     <h3>Classic Pastel Hand Tote Bag</h3>
-                    <div class="price-box"><span class="now">₹599</span><span class="old">₹1,499</span><span class="off">(60% OFF)</span></div>
+                    <div class="price-box"><span class="now">₹599</span><span class="old">₹1,499</span><span class="off">60% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Classic Pastel Hand Tote Bag', 599)">Add to Cart</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -195,45 +193,57 @@
         <div class="profile-card-hub">
             <div>
                 <h3 id="panelNameNode">Guest User</h3>
-                <p id="panelEmailNode">Sync cloud configuration profile logs</p>
+                <p id="panelEmailNode">Sign in with Google to sync cloud info</p>
             </div>
-            <i class="fa-solid fa-circle-user" style="font-size: 42px; color: #111;"></i>
+            <i class="fa-solid fa-circle-user" style="font-size: 42px; color: #ccc;"></i>
         </div>
 
         <div class="video-action-grid">
-            <div class="action-cell" onclick="alert('📦 Orders Module: Transmitting package nodes...')">
+            <div class="action-cell" onclick="alert('📦 Orders Hub: Fetching logistics nodes...')">
                 <i class="fa-solid fa-box"></i><span>Orders</span>
             </div>
-            <div class="action-cell" onclick="alert('❤️ Added directly to your Wishlist stream.')">
+            <div class="action-cell" onclick="alert('❤️ Loading Saved Wishlist items...')">
                 <i class="fa-solid fa-heart"></i><span>Wishlist</span>
             </div>
-            <div class="action-cell" onclick="alert('🎟️ Promo Coupons Active: ZIPPY100')">
+            <div class="action-cell" onclick="alert('🎟️ Active Coupons: ZIPPY100')">
                 <i class="fa-solid fa-ticket"></i><span>Coupons</span>
             </div>
-            <div class="action-cell" onclick="alert('Support engine channel connected.')">
+            <div class="action-cell" onclick="alert('🎧 Connecting Live Help Support Chatline...')">
                 <i class="fa-solid fa-headset"></i><span>Help Center</span>
             </div>
         </div>
 
         <div class="list-group-headline">Account Settings</div>
         <div class="custom-list-container">
-            <div class="custom-row" onclick="alert('💎 ZippyKart Plus membership active.')">
+            <div class="custom-row" onclick="alert('💎 ZippyKart Plus VIP status active.')">
                 <div class="row-left"><i class="fa-solid fa-crown"></i><span>ZippyKart Plus</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
-            <div class="custom-row" onclick="alert('🔒 Browser terminal session verified safe.')">
+            <div class="custom-row" onclick="alert('🔒 Hardware browser login key verified safe.')">
                 <div class="row-left"><i class="fa-solid fa-mobile-screen"></i><span>Manage Devices</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
-            <div class="custom-row" onclick="saveProfileData()">
-                <div class="row-left"><i class="fa-solid fa-user-pen"></i><span>Edit Profile</span></div>
+            <div class="custom-row" onclick="openEditProfileModal()">
+                <div class="row-left"><i class="fa-solid fa-user-gear"></i><span>Edit Profile</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="custom-row" onclick="alert('💳 Credit/Debit & Gift Card Node Encrypted.')">
+                <div class="row-left"><i class="fa-solid fa-credit-card"></i><span>Saved Credit / Debit & Gift Cards</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
             <div class="custom-row" onclick="saveAddressToFirebase()">
                 <div class="row-left"><i class="fa-solid fa-map-location-dot"></i><span>Saved Addresses</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
-            <div class="custom-row" onclick="alert('Privacy configuration locks verified.')">
+            <div class="custom-row" onclick="alert('🌐 App primary language localized: English')">
+                <div class="row-left"><i class="fa-solid fa-language"></i><span>Select Language</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="custom-row" onclick="alert('🔔 Push Notifications stream channel: Enabled')">
+                <div class="row-left"><i class="fa-solid fa-bell"></i><span>Notification Settings</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="custom-row" onclick="alert('🛡️ Secure Data Protection rules active.')">
                 <div class="row-left"><i class="fa-solid fa-shield-halved"></i><span>Privacy Center</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
@@ -241,17 +251,60 @@
 
         <div class="list-group-headline">My Activity</div>
         <div class="custom-list-container">
-            <div class="custom-row" onclick="alert('✍️ Loading logged item reviews...')">
-                <div class="row-left"><i class="fa-solid fa-star"></i><span>Reviews</span></div>
+            <div class="custom-row" onclick="alert('✍️ Opening logged reviews history...')">
+                <div class="row-left"><i class="fa-solid fa-pen-to-square"></i><span>Reviews</span></div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
+            <div class="custom-row" onclick="alert('❓ No active FAQs threads found.')">
+                <div class="row-left"><i class="fa-solid fa-comments"></i><span>Questions & Answers</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="list-group-headline">Earn with ZippyKart</div>
+        <div class="custom-list-container">
+            <div class="custom-row" onclick="window.open('https://seller.flipkart.com','_blank')">
+                <div class="row-left"><i class="fa-solid fa-shop"></i><span>Sell on ZippyKart</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="logout-container-box">
+            <div class="app-logout-btn" onclick="executeAppLogoutSession()">Log Out</div>
+        </div>
+    </div>
+
+
+    <div class="edit-profile-modal" id="editProfileModalPanel">
+        <div class="modal-top-bar">
+            <i class="fa-solid fa-arrow-left" onclick="closeEditProfileModal()"></i>
+            <span>Edit Profile Data</span>
+        </div>
+        <div class="edit-fields-body">
+            <div class="input-group-field">
+                <label>First Name</label>
+                <input type="text" id="inputFirstName" placeholder="Enter your first name">
+            </div>
+            <div class="input-group-field">
+                <label>Last Name</label>
+                <input type="text" id="inputLastName" placeholder="Enter your last name">
+            </div>
+            <div class="input-group-field">
+                <label>Mobile Number</label>
+                <input type="tel" id="inputMobileNumber" placeholder="Enter 10-digit number">
+            </div>
+            <div class="input-group-field">
+                <label>Email ID</label>
+                <input type="email" id="inputEmailId" readonly style="background: #f5f5f5; color: #878787;">
+            </div>
+            <button class="profile-submit-btn" onclick="submitProfileDataToFirebase()">Save Changes</button>
         </div>
     </div>
 
 
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header">
-            <h2>Your Basket</h2>
+            <h2>Shopping Cart Basket</h2>
             <i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i>
         </div>
         <div class="sheet-body" id="cartSheetBodyContainer">
@@ -271,11 +324,15 @@
         <div class="nav-tab active-tab" onclick="switchAppTab('home', this)">
             <i class="fa-solid fa-house"></i><span>Home</span>
         </div>
-        <div class="nav-tab" onclick="alert('📺 Play Space shorts rolling shortly!')">
+        <div class="nav-tab" onclick="alert('📺 Play Space Shorts launching shortly!')">
             <i class="fa-solid fa-circle-play"></i><span>Play</span>
         </div>
+        <div class="nav-tab" onclick="alert('📂 Main category node tree opening...')">
+            <i class="fa-solid fa-table-cells-large"></i><span>Categories</span>
+        </div>
         <div class="nav-tab" onclick="openCartPanelSheet()">
-            <i class="fa-solid fa-cart-shopping"></i><span id="cartHookCounterText">Cart (0)</span>
+            <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+            <span class="nav-cart-badge" id="cartBadgeCounterElement">0</span>
         </div>
         <div class="nav-tab" onclick="switchAppTab('account', this)">
             <i class="fa-solid fa-user"></i><span>Account</span>
@@ -306,12 +363,15 @@
     <script>
         let appCartMemory = [];
         let activeUserKeyNode = "guest_session";
+        let userRawFullName = "Guest User";
+        let userRawEmail = "";
 
-        // Auto sliding carousel frame loops
+        // Auto banner slider engine logic
         let currentSlide = 0;
         setInterval(() => {
             currentSlide = (currentSlide + 1) % 4;
-            document.getElementById('heroSliderEngine').style.transform = `translateX(-${currentSlide * 100}vw)`;
+            const engine = document.getElementById('heroSliderEngine');
+            if (engine) engine.style.transform = `translateX(-${currentSlide * 100}vw)`;
         }, 3200);
 
         function switchAppTab(viewPanelId, targetTabEl) {
@@ -356,9 +416,11 @@
         }
 
         function syncBasketUI() {
-            document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`;
+            const badge = document.getElementById('cartBadgeCounterElement');
+            badge.innerText = appCartMemory.length;
+            badge.style.display = appCartMemory.length > 0 ? "block" : "none";
+
             const container = document.getElementById('cartSheetBodyContainer');
-            
             if(appCartMemory.length === 0) {
                 container.innerHTML = `<p style="text-align: center; color: #999; margin-top: 40px;">Your cart is empty.</p>`;
                 document.getElementById('sheetTotalBillHook').innerText = "₹0";
@@ -390,13 +452,53 @@
             const tokenDecoded = parseJwt(response.credential);
             document.getElementById('google-btn-wrapper').style.display = "none";
             
-            document.getElementById('panelNameNode').innerText = tokenDecoded.name;
-            document.getElementById('panelEmailNode').innerText = tokenDecoded.email;
-            activeUserKeyNode = tokenDecoded.email.replace(/[^a-zA-Z0-9]/g, "_");
+            userRawFullName = tokenDecoded.name;
+            userRawEmail = tokenDecoded.email;
+
+            document.getElementById('panelNameNode').innerText = userRawFullName;
+            document.getElementById('panelEmailNode').innerText = userRawEmail;
+            activeUserKeyNode = userRawEmail.replace(/[^a-zA-Z0-9]/g, "_");
+
+            // Prefill inputs
+            const nameParts = userRawFullName.split(' ');
+            document.getElementById('inputFirstName').value = nameParts[0] || "";
+            document.getElementById('inputLastName').value = nameParts.slice(1).join(' ') || "";
+            document.getElementById('inputEmailId').value = userRawEmail;
+        }
+
+        /* 📝 OPEN / CLOSE EDIT PROFILE LAYER PAGE */
+        function openEditProfileModal() {
+            document.getElementById('editProfileModalPanel').style.display = "flex";
+        }
+        function closeEditProfileModal() {
+            document.getElementById('editProfileModalPanel').style.display = "none";
+        }
+
+        /* 👤 WRITE PROFILE VALUES DIRECTLY INTO FIREBASE ROOT */
+        function submitProfileDataToFirebase() {
+            if(!window.firebaseDb) { alert("Firebase offline."); return; }
+            const fName = document.getElementById('inputFirstName').value;
+            const lName = document.getElementById('inputLastName').value;
+            const pNumber = document.getElementById('inputMobileNumber').value;
+
+            if(!fName || !pNumber) { alert("First Name & Mobile Number are compulsory!"); return; }
+
+            const targetRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/profile');
+            window.dbSet(targetRef, {
+                firstName: fName,
+                lastName: lName,
+                phoneHandle: pNumber,
+                email: userRawEmail,
+                updatedOn: Date.now()
+            }).then(() => {
+                document.getElementById('panelNameNode').innerText = fName + " " + lName;
+                alert("👤 Profile details updated securely inside Firebase Data Tree!");
+                closeEditProfileModal();
+            }).catch(err => console.error(err));
         }
 
         function saveAddressToFirebase() {
-            if(!window.firebaseDb) { alert("Firebase sync loading..."); return; }
+            if(!window.firebaseDb) { alert("Firebase loading..."); return; }
             const userAddr = prompt("Enter your Full Delivery Lane Destination & Pincode:");
             if(userAddr) {
                 const nodeRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/address');
@@ -408,19 +510,9 @@
             }
         }
 
-        function saveProfileData() {
-            if(!window.firebaseDb) { alert("Connecting Cloud Parameters..."); return; }
-            const userPhone = prompt("Enter your personal 10-digit customer mobile data handle:");
-            if(userPhone) {
-                const nodeRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/profile');
-                window.dbSet(nodeRef, { phone: userPhone, loggedAt: Date.now() })
-                .then(() => alert("👤 Profile specifications initialized securely on ZippyKart master console tree!"));
-            }
-        }
-
         function executeCloudCheckout() {
-            if(appCartMemory.length === 0) { alert("Shopping cart block stream is empty."); return; }
-            if(!window.firebaseDb) { alert("Cloud transaction network offline."); return; }
+            if(appCartMemory.length === 0) { alert("Shopping basket stream is empty."); return; }
+            if(!window.firebaseDb) { alert("Cloud database channel offline."); return; }
 
             const orderRefNode = window.dbRef(window.firebaseDb, 'orders/' + activeUserKeyNode);
             const generatedPushNode = window.dbPush(orderRefNode);
@@ -430,11 +522,17 @@
                 amountPaid: document.getElementById('sheetTotalBillHook').innerText,
                 timestamp: Date.now()
             }).then(() => {
-                alert("📦 Order dispatched successfully! Live logistics stream updated in Firebase Realtime Database.");
+                alert("📦 Dispatch Successful! Logged tracking block initialized inside Firebase.");
                 appCartMemory = [];
                 syncBasketUI();
                 closeCartPanelSheet();
             }).catch(err => console.error(err));
+        }
+
+        /* 🚪 REAL WORKING APP LOG OUT HANDLER */
+        function executeAppLogoutSession() {
+            alert("Logging out session terminal safety logs...");
+            window.location.reload();
         }
 
         function parseJwt(token) {
@@ -448,4 +546,3 @@
     </script>
 </body>
 </html>
-            
