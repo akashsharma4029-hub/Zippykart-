@@ -3,285 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Premium Streetwear & Culture</title>
+    <title>Zippykart.co.in | Premium Flipkart Layout</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 120px; }
-        header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        
-        /* 🔥 PREMIUM GRADIENT LOGO */
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
-        .logo .zippy { color: #fff; }
-        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
-        
-        header nav ul { list-style: none; display: flex; align-items: center; gap: 20px; }
-        .cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        
-        #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
-        .user-profile-badge { display: none; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; background: rgba(255, 62, 62, 0.1); border: 1px solid #ff3e3e; padding: 6px 12px; border-radius: 4px; }
-        
-        /* 📋 FLIPKART STYLE PROFILE DROPDOWN MODAL */
-        .profile-modal { display: none; position: fixed; top: 65px; right: 5%; width: 300px; background: #fff; box-shadow: 0 12px 30px rgba(0,0,0,0.15); border-radius: 12px; border: 1px solid #eee; z-index: 1001; padding: 0; overflow: hidden; animation: slideDown 0.2s ease; }
-        @keyframes slideDown { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .modal-user-header { background: #111; color: #fff; padding: 15px 20px; text-align: left; }
-        .modal-user-header h3 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
-        .modal-user-header p { font-size: 11px; color: #ccc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #f1f2f4; color: #212121; padding-bottom: 70px; }
 
-        .modal-menu-section { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .setting-item { display: flex; align-items: center; gap: 14px; padding: 12px 20px; cursor: pointer; font-size: 12px; font-weight: 600; color: #444; text-align: left; transition: all 0.2s; }
-        .setting-item:hover { color: #ff3e3e; background: #fdf2f2; }
-        .setting-item .menu-icon { font-size: 16px; width: 20px; text-align: center; }
-        
-        .logout-box { padding: 12px 20px; background: #fafafa; }
-        .logout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
+        /* 📍 TOP FLIPKART STYLE SUB-HEADER */
+        .top-location-bar { background-color: #047bd5; color: #fff; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+        .location-left { display: flex; align-items: center; gap: 8px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 75%; }
+        .location-left i { color: #fff; font-size: 15px; }
+        .supercoins-badge { background-color: #ffe500; color: #000; font-weight: 700; padding: 2px 8px; border-radius: 12px; font-size: 11px; display: flex; align-items: center; gap: 4px; }
 
-        /* 📂 CATEGORIES SLIDER BAR */
-        .categories-bar { background: #fff; padding: 12px 5%; display: flex; gap: 12px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
-        .cat-item.active { background: #111; color: #fff; }
+        /* 🔍 SEARCH BAR CONFIG */
+        .search-container { background-color: #047bd5; padding: 0 15px 12px 15px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 100; }
+        .search-wrapper { background: #fff; display: flex; align-items: center; width: 100%; padding: 10px 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .search-wrapper i { color: #777; margin-right: 10px; font-size: 16px; }
+        .search-wrapper input { border: none; outline: none; width: 100%; font-size: 14px; color: #212121; }
 
-        /* 🖼️ AUTOMATIC HERO SLIDER CONTAINER */
-        .slider-wrapper { position: relative; width: 100vw; height: 60vh; overflow: hidden; background: #000; }
-        .slide-container { display: flex; width: 400vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide-frame { width: 100vw; height: 100%; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; position: relative; }
-        .slide-frame::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index: 1; }
-        .slide-content { position: relative; z-index: 2; max-width: 600px; }
-        .slide-content h1 { font-size: 38px; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px; }
-        .slide-content p { font-size: 14px; opacity: 0.95; }
-        
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 35px; }
-        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ff3e3e; margin: 10px auto 0; }
-        
-        /* 🛍️ CORE PRODUCTS LAYOUT GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative; }
-        
-        .discount-tag { position: absolute; top: 30px; left: 30px; background: #ff3e3e; color: #fff; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; z-index: 5; box-shadow: 0 4px 8px rgba(255, 62, 62, 0.3); }
-        
-        .card img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
-        .card h3 { font-size: 14px; text-transform: uppercase; margin-bottom: 6px; }
-        
-        .price-box-wrapper { margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        .current-price { font-size: 16px; font-weight: 700; color: #111; }
-        .original-price { font-size: 13px; text-decoration: line-through; color: #999; }
-        .discount-percent { font-size: 12px; color: #ff3e3e; font-weight: bold; }
+        /* 📄 TAB VIEWS ENGINE */
+        .tab-content-panel { display: none; }
+        .tab-content-panel.active-view { display: block; }
 
-        .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; position: relative; z-index: 10; }
-        .size-box { border: 1px solid #ccc; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; color: #333; background: #fff; }
-        .size-box.selected { border-color: #ff3e3e !important; color: #ff3e3e !important; background: rgba(255,62,62,0.08) !important; }
+        /* 🖼️ HERO BANNER AUTO SLIDER */
+        .slider-wrapper { position: relative; width: 100%; height: 190px; overflow: hidden; background: #fff; margin-bottom: 8px; }
+        .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slide-frame { width: 100vw; height: 100%; background-size: cover; background-position: center; }
 
-        .buy-btn { background: #111; color: #fff; font-size: 12px; font-weight: bold; padding: 12px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; position: relative; z-index: 10; }
-        .buy-btn:hover { background: #ff3e3e; }
+        /* 📂 HORIZONTAL CATEGORIES BAR */
+        .categories-scroller { background: #fff; padding: 15px 10px; display: flex; gap: 20px; overflow-x: auto; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; }
+        .categories-scroller::-webkit-scrollbar { display: none; }
+        .cat-box { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 65px; cursor: pointer; }
+        .cat-icon-circle { width: 48px; height: 48px; background: #f0f7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #047bd5; }
+        .cat-box span { font-size: 11px; font-weight: 500; text-align: center; color: #444; }
 
-        /* 🛒 Slide Drawer Cart Layout */
-        .cart-panel { position: fixed; top: 0; right: -400px; width: 380px; height: 100vh; background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.2); z-index: 1050; transition: right 0.4s ease; display: flex; flex-direction: column; }
-        .cart-panel.open { right: 0; }
-        .cart-header { background: #111; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .close-cart { background: none; border: none; color: #fff; font-size: 25px; cursor: pointer; }
-        .cart-items-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
-        .cart-summary-footer { background: #f9f9f9; padding: 20px; border-top: 1px solid #eee; }
-        .summary-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
-        .summary-row.total-bill { font-size: 15px; font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px; }
-        .checkout-btn { background: #ff3e3e; color: #fff; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 4px; margin-top: 15px; cursor: pointer; text-transform: uppercase; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1040; display: none; }
-        .cart-overlay.open { display: block; }
-        .empty-cart-text { text-align: center; color: #999; margin-top: 40px; }
+        /* 🛍️ PRODUCT CARDS GRID */
+        .grid-container { background: #fff; padding: 15px; margin-bottom: 15px; }
+        .section-headline { font-size: 16px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .product-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
+        .product-card h4 { font-size: 13px; font-weight: 500; color: #333; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .price-row { display: flex; align-items: center; gap: 6px; font-size: 13px; margin-bottom: 8px; }
+        .price-now { font-weight: 700; color: #212121; }
+        .price-old { text-decoration: line-through; color: #878787; font-size: 11px; }
+        .price-off { color: #388e3c; font-weight: 700; font-size: 11px; }
+        .add-cart-btn { background: #ff9f00; color: #fff; border: none; padding: 6px; border-radius: 4px; font-size: 11px; font-weight: 500; width: 100%; cursor: pointer; }
 
-        /* 📱 Bottom Navigation Tabs */
-        .bottom-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top: 1px solid #eee; }
-        .tab-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 11px; font-weight: 600; gap: 4px; cursor: pointer; }
-        .tab-item.active { color: #ff3e3e; }
-        .tab-icon { font-size: 20px; }
+        /* 👤 FLIPKART STYLE PROFILE PAGE (EXACT VIDEO MATCH) */
+        .profile-hero-card { background: #fff; padding: 20px 15px; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
+        .profile-info h3 { font-size: 18px; font-weight: 700; color: #212121; margin-bottom: 4px; }
+        .profile-info p { font-size: 13px; color: #878787; }
+        
+        /* 4 BUTTONS QUICK BOX GRID */
+        .quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px; background: #fff; margin-bottom: 8px; }
+        .action-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .action-box i { font-size: 18px; color: #047bd5; width: 24px; text-align: center; }
+        .action-box span { font-size: 13px; font-weight: 500; color: #212121; }
+
+        /* LIST SETTINGS GROUP */
+        .settings-group-title { padding: 12px 15px 6px 15px; font-size: 12px; font-weight: 700; color: #878787; text-transform: uppercase; }
+        .settings-list { background: #fff; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
+        .list-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+        .list-row:last-child { border-bottom: none; }
+        .list-left { display: flex; align-items: center; gap: 15px; font-size: 14px; color: #212121; font-weight: 500; }
+        .list-left i { font-size: 16px; color: #047bd5; width: 20px; text-align: center; }
+        .list-row i.fa-chevron-right { color: #bcbcbc; font-size: 12px; }
+
+        /* 🛒 CART DRAWER MODAL SHEET */
+        .cart-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); z-index: 1100; transition: bottom 0.4s ease; display: flex; flex-direction: column; }
+        .cart-sheet.sheet-open { bottom: 0; }
+        .cart-sheet-header { padding: 15px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
+        .cart-sheet-header h2 { font-size: 16px; font-weight: 700; }
+        .cart-sheet-body { padding: 15px; flex-grow: 1; overflow-y: auto; }
+        .cart-sheet-footer { padding: 15px; border-top: 1px solid #e0e0e0; background: #fff; display: flex; justify-content: space-between; align-items: center; }
+        .checkout-final-btn { background: #fb641b; color: #fff; border: none; padding: 12px 24px; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer; }
+        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 1050; display: none; }
+        
+        /* 📱 EXACT VIDEO MATCH BOTTOM NAVIGATION BAR */
+        .bottom-nav-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #e0e0e0; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; }
+        .nav-tab-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #666; font-size: 10px; font-weight: 500; cursor: pointer; text-decoration: none; width: 20%; }
+        .nav-tab-item i { font-size: 20px; }
+        .nav-tab-item.tab-active { color: #047bd5; }
     </style>
 </head>
 <body>
 
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartPanel()"></div>
+    <div class="sheet-overlay" id="sheetOverlay" onclick="closeCartSheet()"></div>
 
-    <header>
-        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            <span class="zippy">Zippy</span><span class="kart">Kart</span>
+    <div class="top-location-bar">
+        <div class="location-left" onclick="saveAddressToFirebase()">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="currentAddressHook">Deliver to Hub: Tap to add address</span>
         </div>
-        <nav>
-            <ul>
-                <li><button class="cart-btn" id="cart-counter" onclick="toggleCartPanel()">Cart (0)</button></li>
-                <li>
-                    <div id="google-btn-wrapper">
-                        <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
-                        <div class="g_id_signin" data-type="standard" data-size="medium" data-theme="dark" data-text="signin" data-shape="rectangular"></div>
-                    </div>
-                    <div id="userBadge" class="user-profile-badge" onclick="toggleProfileModal()">Hi, User 👋</div>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="profile-modal" id="profileModal">
-        <div class="modal-user-header">
-            <h3 id="modalName">Guest User</h3>
-            <p id="modalEmail">user@zippykart.co.in</p>
-        </div>
-        <div class="modal-menu-section">
-            <div class="setting-item" onclick="alert('💎 ZippyKart Plus VIP Membership Tier Status Active!')">
-                <span class="menu-icon">💎</span> ZippyKart Plus
-            </div>
-            <div class="setting-item" onclick="alert('📦 Orders Hub: Fetching past delivery status...')">
-                <span class="menu-icon">📦</span> My Orders
-            </div>
-        </div>
-        <div class="modal-menu-section">
-            <div class="setting-item" onclick="saveProfileData()">
-                <span class="menu-icon">👤</span> Profile Information
-            </div>
-            <div class="setting-item" onclick="saveAddressToFirebase()">
-                <span class="menu-icon">📍</span> Manage Addresses
-            </div>
-        </div>
-        <div class="logout-box">
-            <button class="logout-btn" onclick="logoutUser()">Log Out Account</button>
+        <div class="supercoins-badge">
+            <i class="fa-solid fa-coins"></i> <span id="coinCount">0</span>
         </div>
     </div>
 
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h2>Your Cart</h2>
-            <button class="close-cart" onclick="toggleCartPanel()">&times;</button>
+    <div class="search-container">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search for products, brands and more">
         </div>
-        <div class="cart-items-body" id="cartItemsContainer">
-            <p class="empty-cart-text">Your cart is empty.</p>
-        </div>
-        <div class="cart-summary-footer">
-            <div class="summary-row"><span>Subtotal:</span><span id="bill-subtotal">₹0</span></div>
-            <div class="summary-row"><span>Total:</span><span id="bill-total" style="font-weight: bold;">₹0</span></div>
-            <button class="checkout-btn" onclick="checkoutOrderHub()">Proceed to Checkout</button>
+        <div id="google-btn-wrapper">
+            <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+            <div class="g_id_signin" data-type="icon" data-shape="circle" data-theme="dark"></div>
         </div>
     </div>
 
-    <div class="categories-bar" id="categoriesSliderElement">
-        <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
-        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
-        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
-        <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
-        <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
-        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
-    </div>
 
-    <div class="slider-wrapper">
-        <div class="slide-container" id="mainHeroSlider">
-            <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000');">
-                <div class="slide-content">
-                    <h1>Redefine Your Vibe</h1>
-                    <p>Premium Urban Streetwear culture fits configured custom for you.</p>
-                </div>
+    <div id="view-home" class="tab-content-panel active-view">
+        <div class="slider-wrapper">
+            <div class="slide-container" id="heroSliderEngine">
+                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600');"></div>
+                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600');"></div>
+                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=600');"></div>
+                <div class="slide-frame" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=600');"></div>
             </div>
-            <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000');">
-                <div class="slide-content">
-                    <h1>Aesthetic Bags Collection</h1>
-                    <p>Steal luxury minimalist styles at insane price drops up to 60% off.</p>
+        </div>
+
+        <div class="categories-scroller">
+            <div class="cat-box" onclick="filterCategory('all')"><div class="cat-icon-circle"><i class="fa-solid fa-bolt"></i></div><span>All Drops</span></div>
+            <div class="cat-box" onclick="filterCategory('tshirt')"><div class="cat-icon-circle"><i class="fa-solid fa-shirt"></i></div><span>Oversized</span></div>
+            <div class="cat-box" onclick="filterCategory('cargo')"><div class="cat-icon-circle"><i class="fa-solid fa-person-bootcounting"></i></div><span>Cargos</span></div>
+            <div class="cat-box" onclick="filterCategory('sneaker')"><div class="cat-icon-circle"><i class="fa-solid fa-shoe-prints"></i></div><span>Sneakers</span></div>
+            <div class="cat-box" onclick="filterCategory('acc')"><div class="cat-icon-circle"><i class="fa-solid fa-headphones"></i></div><span>Tech Accs</span></div>
+        </div>
+
+        <div class="grid-container">
+            <h3 class="section-headline">Trending Culture Drops</h3>
+            <div class="products-grid" id="mainProductsContainer">
+                
+                <div class="product-card" data-cat="tshirt">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500">
+                    <h4>Oversized Maroon T-Shirt</h4>
+                    <div class="price-row"><span class="price-now">₹799</span><span class="price-old">₹1,499</span><span class="price-off">46% Off</span></div>
+                    <button class="add-cart-btn" onclick="addItemToCart('Oversized Maroon T-Shirt', 799)">Add to Cart</button>
                 </div>
-            </div>
-            <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000');">
-                <div class="slide-content">
-                    <h1>Next-Gen Tech Accs</h1>
-                    <p>Sleek active protection armor and elite gadget drops live now.</p>
+
+                <div class="product-card" data-cat="cargo">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500">
+                    <h4>Urban Baggy Cargo Pants</h4>
+                    <div class="price-row"><span class="price-now">₹1,299</span><span class="price-old">₹2,499</span><span class="price-off">48% Off</span></div>
+                    <button class="add-cart-btn" onclick="addItemToCart('Urban Baggy Cargo Pants', 1299)">Add to Cart</button>
                 </div>
-            </div>
-            <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1000');">
-                <div class="slide-content">
-                    <h1>Luxury Kick Drops</h1>
-                    <p>Step up your lineup with authenticated heavy statement sneakers.</p>
+
+                <div class="product-card" data-cat="sneaker">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500">
+                    <h4>Luxury White Sneakers</h4>
+                    <div class="price-row"><span class="price-now">₹1,999</span><span class="price-old">₹4,999</span><span class="price-off">60% Off</span></div>
+                    <button class="add-cart-btn" onclick="addItemToCart('Luxury White Sneakers', 1999)">Add to Cart</button>
                 </div>
+
+                <div class="product-card" data-cat="acc">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500">
+                    <h4>Zippy Wireless Pro Pods</h4>
+                    <div class="price-row"><span class="price-now">₹1,499</span><span class="price-old">₹2,999</span><span class="price-off">50% Off</span></div>
+                    <button class="add-cart-btn" onclick="addItemToCart('Zippy Wireless Pro Pods', 1499)">Add to Cart</button>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <h2 class="section-title">Trending Culture Drops</h2>
-        <div class="grid">
-            
-            <div class="card product-card" data-category="tshirt">
-                <img id="p-img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000">
-                <div>
-                    <h3>Oversized Maroon T-Shirt</h3>
-                    <div class="price-box-wrapper"><span class="current-price">₹799</span></div>
-                    <div class="size-selector">
-                        <span class="size-box" onclick="selectSize(this)">S</span>
-                        <span class="size-box selected" onclick="selectSize(this)">M</span>
-                        <span class="size-box" onclick="selectSize(this)">L</span>
-                    </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'p-img-1')">Add to Cart</button>
-                </div>
-            </div>
 
-            <div class="card product-card" data-category="cargo">
-                <img id="p-img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
-                <div>
-                    <h3>Urban Baggy Cargo Pants</h3>
-                    <div class="price-box-wrapper"><span class="current-price">₹1,299</span></div>
-                    <div class="size-selector">
-                        <span class="size-box" onclick="selectSize(this)">30</span>
-                        <span class="size-box selected" onclick="selectSize(this)">32</span>
-                        <span class="size-box" onclick="selectSize(this)">34</span>
-                    </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'p-img-2')">Add to Cart</button>
-                </div>
+    <div id="view-account" class="tab-content-panel">
+        <div class="profile-hero-card">
+            <div class="profile-info">
+                <h3 id="profileNameHandle">Guest User</h3>
+                <p id="profileEmailHandle">Sign in with Google to sync cloud info</p>
             </div>
+            <i class="fa-solid fa-circle-user" style="font-size: 45px; color: #ccc;"></i>
+        </div>
 
-            <div class="card product-card" data-category="sneaker">
-                <img id="p-img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
-                <div>
-                    <h3>Luxury White Sneakers</h3>
-                    <div class="price-box-wrapper"><span class="current-price">₹1,999</span></div>
-                    <div class="size-selector">
-                        <span class="size-box" onclick="selectSize(this)">UK 8</span>
-                        <span class="size-box selected" onclick="selectSize(this)">UK 9</span>
-                    </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'p-img-3')">Add to Cart</button>
-                </div>
+        <div class="quick-actions-grid">
+            <div class="action-box" onclick="alert('📦 Fetching your active order sync node...')">
+                <i class="fa-solid fa-box"></i>
+                <span>Orders</span>
             </div>
-
-            <div class="card product-card" data-category="accessories">
-                <img id="p-img-4" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000">
-                <div>
-                    <h3>Zippy Wireless Pro Pods</h3>
-                    <div class="price-box-wrapper"><span class="current-price">₹1,499</span></div>
-                    <div class="size-selector"><span class="size-box selected" onclick="selectSize(this)">ON TRACK</span></div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Zippy Wireless Pro Pods', 1499, 'p-img-4')">Add to Cart</button>
-                </div>
+            <div class="action-box" onclick="alert('❤️ Item added to wishlist node!')">
+                <i class="fa-solid fa-heart"></i>
+                <span>Wishlist</span>
             </div>
-
-            <div class="card product-card" data-category="bags">
-                <div class="discount-tag">60% OFF</div>
-                <img id="p-img-6" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000">
-                <div>
-                    <h3>Classic Pastel Hand Tote Bag</h3>
-                    <div class="price-box-wrapper">
-                        <span class="current-price">₹599</span>
-                        <span class="original-price">₹1,499</span>
-                    </div>
-                    <div class="size-selector"><span class="size-box selected" onclick="selectSize(this)">ONESIZE</span></div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Classic Pastel Hand Tote Bag', 599, 'p-img-6')">Add to Cart</button>
-                </div>
+            <div class="action-box" onclick="alert('🎟️ No active promo coupons found.')">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Coupons</span>
             </div>
+            <div class="action-box" onclick="alert('🎧 Connecting live Support Desk Chat Line...')">
+                <i class="fa-solid fa-headset"></i>
+                <span>Help Center</span>
+            </div>
+        </div>
 
+        <div class="settings-group-title">Account Settings</div>
+        <div class="settings-list">
+            <div class="list-row" onclick="alert('💎 ZippyKart Plus Premium VIP Active!')">
+                <div class="list-left"><i class="fa-solid fa-crown"></i> <span>Flipkart Plus</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="list-row" onclick="alert('📱 Securing browser device terminal logs...')">
+                <div class="list-left"><i class="fa-solid fa-mobile-screen"></i> <span>Manage Devices</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="list-row" onclick="saveProfileData()">
+                <div class="list-left"><i class="fa-solid fa-user-pen"></i> <span>Edit Profile</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="list-row" onclick="saveAddressToFirebase()">
+                <div class="list-left"><i class="fa-solid fa-map-location-dot"></i> <span>Saved Addresses</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="list-row" onclick="alert('🔒 Encryption Hub Status: Encrypted')">
+                <div class="list-left"><i class="fa-solid fa-shield-halved"></i> <span>Privacy Center</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="settings-group-title">My Activity</div>
+        <div class="settings-list">
+            <div class="list-row" onclick="alert('✍️ Loading your past customer reviews...')">
+                <div class="list-left"><i class="fa-solid fa-star"></i> <span>Reviews</span></div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
         </div>
     </div>
 
-    <div class="bottom-tabs">
-        <div class="tab-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="tab-icon">🏠</span> Home</div>
-        <div class="tab-item" onclick="alert('📺 Zippy TV Space Launcher is opening shortly!')"><span class="tab-icon">▶️</span> Play</div>
-        <div class="tab-item" onclick="document.getElementById('categoriesSliderElement').scrollIntoView({behavior:'smooth'})"><span class="tab-icon">📂</span> Categories</div>
-        <div class="tab-item" onclick="toggleProfileModal()"><span class="tab-icon">👤</span> Account</div>
-        <div class="tab-item" id="bottom-cart-hook" onclick="toggleCartPanel()"><span class="tab-icon">🛒</span> Cart (0)</div>
+
+    <div class="cart-sheet" id="cartSheetElement">
+        <div class="cart-sheet-header">
+            <h2>Shopping Cart Basket</h2>
+            <i class="fa-solid fa-xmark" style="font-size: 20px; cursor: pointer;" onclick="closeCartSheet()"></i>
+        </div>
+        <div class="cart-sheet-body" id="cartSheetItemsBody">
+            <p style="text-align: center; color: #878787; margin-top: 30px;">Your shopping cart is currently empty.</p>
+        </div>
+        <div class="cart-sheet-footer">
+            <div>
+                <p style="font-size: 12px; color: #878787;">Total Bill</p>
+                <h3 id="cartTotalPriceHook" style="font-size: 18px; font-weight: 700; color: #212121;">₹0</h3>
+            </div>
+            <button class="checkout-final-btn" onclick="executeCheckoutOrder()">Proceed to Checkout</button>
+        </div>
     </div>
 
-    <footer><p>&copy; 2026 ZippyKart. All Rights Reserved.</p></footer>
+
+    <div class="bottom-nav-bar">
+        <div class="nav-tab-item tab-active" onclick="switchMainTab('home', this)">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-tab-item" onclick="alert('▶️ Launching Zippy Video Shorts Space...')">
+            <i class="fa-solid fa-circle-play"></i>
+            <span>Play</span>
+        </div>
+        <div class="nav-tab-item" onclick="openCartSheet()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="bottomCartCounterText">Cart (0)</span>
+        </div>
+        <div class="nav-tab-item" onclick="switchMainTab('account', this)">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </div>
+    </div>
+
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -304,135 +292,143 @@
     </script>
 
     <script>
-      let cartMemory = [];
-      let activeUserEmail = "guest_session";
-      
-      // Auto Banner loop
-      let currentSlideIndex = 0;
-      setInterval(() => {
-          currentSlideIndex = (currentSlideIndex + 1) % 4;
-          document.getElementById('mainHeroSlider').style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
-      }, 3500); 
-      
-      function toggleCartPanel() {
-          document.getElementById('cartPanel').classList.toggle('open');
-          document.getElementById('cartOverlay').classList.toggle('open');
-      }
-      
-      function toggleProfileModal() {
-          const modal = document.getElementById('profileModal');
-          modal.style.display = (modal.style.display === "block") ? "none" : "block";
-      }
+        let cartArray = [];
+        let globalUserSafeKey = "guest_session";
 
-      function selectSize(element) {
-          const container = element.parentElement;
-          container.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
-          element.classList.add('selected');
-      }
+        // Auto Ads Slider Engine Loop
+        let activeSlide = 0;
+        setInterval(() => {
+            activeSlide = (activeSlide + 1) % 4;
+            document.getElementById('heroSliderEngine').style.transform = `translateX(-${activeSlide * 100}vw)`;
+        }, 3000);
 
-      function addRealItemToCart(name, price, imgId) {
-          const imgElement = document.getElementById(imgId);
-          const cardElement = imgElement.parentElement;
-          const selectedSizeElement = cardElement.querySelector('.size-box.selected');
-          const selectedSize = selectedSizeElement ? selectedSizeElement.innerText : "Standard";
-          cartMemory.push({ name: name, price: price, size: selectedSize, img: imgElement.src });
-          updateCartUI();
-          toggleCartPanel(); 
-      }
-      
-      function updateCartUI() {
-          document.getElementById('bottom-cart-hook').innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`;
-          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
-          const container = document.getElementById('cartItemsContainer');
-          if (cartMemory.length === 0) {
-              container.innerHTML = `<p class="empty-cart-text">Your cart is empty.</p>`;
-              document.getElementById('bill-subtotal').innerText = "₹0";
-              document.getElementById('bill-total').innerText = "₹0";
-              return;
-          }
-          container.innerHTML = "";
-          let subtotal = 0;
-          cartMemory.forEach((item) => {
-              subtotal += item.price;
-              container.innerHTML += `<div style="display:flex; align-items:center; gap:15px; margin-bottom:15px;"><img src="${item.img}" style="width:50px; height:60px; object-fit:cover; border-radius:4px;"><div><h4>${item.name}</h4><p style="font-size:11px; color:#666;">Size: ${item.size}</p><p style="font-weight:600;">₹${item.price}</p></div></div>`;
-          });
-          document.getElementById('bill-subtotal').innerText = `₹${subtotal}`;
-          document.getElementById('bill-total').innerText = `₹${subtotal}`;
-      }
-      
-      function filterCategory(categoryName, targetBtn) {
-          document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
-          if (targetBtn) { targetBtn.classList.add('active'); }
-          document.querySelectorAll('.product-card').forEach(card => {
-              if (categoryName === 'all' || card.getAttribute('data-category') === categoryName) {
-                  card.style.display = 'flex';
-              } else { card.style.display = 'none'; }
-          });
-      }
-      
-      /* ✅ FIXING LIVE FULL-NAME PROFILE DROPDOWN DATA BIND */
-      function handleCredentialResponse(response) {
-        const responsePayload = parseJwt(response.credential);
-        document.getElementById('google-btn-wrapper').style.display = "none";
-        
-        const shortName = responsePayload.name.split(' ')[0];
-        document.getElementById('userBadge').innerText = `Hi, ${shortName} 👋`;
-        document.getElementById('userBadge').style.display = "inline-block";
-        
-        // Dynamic state updates for the user dashboard elements
-        document.getElementById('modalName').innerText = responsePayload.name;
-        document.getElementById('modalEmail').innerText = responsePayload.email;
-        activeUserEmail = responsePayload.email.replace(/[^a-zA-Z0-9]/g, "_");
-      }
+        function switchMainTab(targetTabId, element) {
+            document.querySelectorAll('.nav-tab-item').forEach(item => item.classList.remove('tab-active'));
+            element.classList.add('tab-active');
 
-      function saveAddressToFirebase() {
-          if(!window.firebaseDb) { alert("Firebase initialization parameters missing!"); return; }
-          const addressInput = prompt("Enter your Delivery Hub Shipping Lane Location & Zip Code:");
-          if (addressInput) {
-              const addressRef = window.dbRef(window.firebaseDb, 'users/' + activeUserEmail + '/address');
-              window.dbSet(addressRef, { addressDetails: addressInput, timestamp: Date.now() })
-              .then(() => alert("📍 Delivery Hub Address synced securely with Firebase!"))
-              .catch((err) => console.error("Firebase Error:", err));
-          }
-      }
+            document.querySelectorAll('.tab-content-panel').forEach(panel => panel.classList.remove('active-view'));
+            if (targetTabId === 'home') {
+                document.getElementById('view-home').classList.add('active-view');
+            } else if (targetTabId === 'account') {
+                document.getElementById('view-account').classList.add('active-view');
+            }
+        }
 
-      function saveProfileData() {
-          if(!window.firebaseDb) { alert("Firebase parameters missing!"); return; }
-          const contactInput = prompt("Enter your Official Contact Mobile Handle Number:");
-          if (contactInput) {
-              const profileRef = window.dbRef(window.firebaseDb, 'users/' + activeUserEmail + '/profile');
-              window.dbSet(profileRef, { contactNumber: contactInput, timestamp: Date.now() })
-              .then(() => alert("👤 Profile Contact Handle saved to Realtime Cloud Dashboard!"))
-              .catch((err) => console.error("Firebase Error:", err));
-          }
-      }
+        function filterCategory(categoryValue) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                if (categoryValue === 'all' || card.getAttribute('data-cat') === categoryValue) {
+                    card.style.display = "none";
+                }
+            });
+        }
 
-      function checkoutOrderHub() {
-          if (cartMemory.length === 0) { alert("Your Shopping Basket is empty!"); return; }
-          if(!window.firebaseDb) { alert("Checkout Sync Offline. Check Database Console Rules."); return; }
-          
-          const orderRef = window.dbRef(window.firebaseDb, 'orders/' + activeUserEmail);
-          const newOrderRef = window.dbPush(orderRef);
-          
-          window.dbSet(newOrderRef, { items: cartMemory, orderTime: Date.now(), totalBill: document.getElementById('bill-total').innerText })
-          .then(() => {
-              alert("📦 Order dispatched successfully! Live tracking logged into Firebase Realtime Node.");
-              cartMemory = [];
-              updateCartUI();
-              toggleCartPanel();
-          }).catch((err) => console.error("Checkout Failure:", err));
-      }
-      
-      function logoutUser() { window.location.reload(); }
-      
-      function parseJwt (token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        return JSON.parse(jsonPayload);
-      }
+        function openCartSheet() {
+            document.getElementById('cartSheetElement').classList.add('sheet-open');
+            document.getElementById('sheetOverlay').style.display = "block";
+        }
+
+        function closeCartSheet() {
+            document.getElementById('cartSheetElement').classList.remove('sheet-open');
+            document.getElementById('sheetOverlay').style.display = "none";
+        }
+
+        function addItemToCart(name, price) {
+            cartArray.push({ productName: name, productPrice: price });
+            updateCartInternalUI();
+            openCartSheet();
+            
+            // Increment live rewards supercoins count inside app state simulation
+            let runningCoins = parseInt(document.getElementById('coinCount').innerText);
+            document.getElementById('coinCount').innerText = runningCoins + 5;
+        }
+
+        function updateCartInternalUI() {
+            document.getElementById('bottomCartCounterText').innerText = `Cart (${cartArray.length})`;
+            const container = document.getElementById('cartSheetItemsBody');
+            
+            if (cartArray.length === 0) {
+                container.innerHTML = `<p style="text-align: center; color: #878787; margin-top: 30px;">Your shopping cart is currently empty.</p>`;
+                document.getElementById('cartTotalPriceHook').innerText = "₹0";
+                return;
+            }
+
+            container.innerHTML = "";
+            let sumTotal = 0;
+            cartArray.forEach((item) => {
+                sumTotal += item.productPrice;
+                container.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                        <div>
+                            <h4 style="font-size:14px; font-weight:500;">${item.productName}</h4>
+                            <p style="font-size:13px; font-weight:700; color:#212121; margin-top:2px;">₹${item.productPrice}</p>
+                        </div>
+                        <i class="fa-solid fa-trash-can" style="color:#d32f2f; cursor:pointer;" onclick="removeItemFromCart('${item.productName}')"></i>
+                    </div>`;
+            });
+            document.getElementById('cartTotalPriceHook').innerText = `₹${sumTotal}`;
+        }
+
+        function handleCredentialResponse(response) {
+            const payload = parseJwt(response.credential);
+            document.getElementById('google-btn-wrapper').style.display = "none";
+            
+            document.getElementById('profileNameHandle').innerText = payload.name;
+            document.getElementById('profileEmailHandle').innerText = payload.email;
+            
+            globalUserSafeKey = payload.email.replace(/[^a-zA-Z0-9]/g, "_");
+        }
+
+        function saveAddressToFirebase() {
+            if(!window.firebaseDb) { alert("Database initialization in progress..."); return; }
+            const userAddress = prompt("Enter your absolute Shipping Address Lane & Pincode Details:");
+            if(userAddress) {
+                const nodeRef = window.dbRef(window.firebaseDb, 'users/' + globalUserSafeKey + '/address');
+                window.dbSet(nodeRef, { dataValue: userAddress, updatedOn: Date.now() })
+                .then(() => {
+                    document.getElementById('currentAddressHook').innerText = userAddress;
+                    alert("📍 Shipping Terminal Node synchronized with Realtime Console DB!");
+                }).catch(err => console.error(err));
+            }
+        }
+
+        function saveProfileData() {
+            if(!window.firebaseDb) { alert("Connecting Cloud Parameters..."); return; }
+            const mobileNumber = prompt("Enter your personal 10-digit Customer Phone Contact Handle:");
+            if(mobileNumber) {
+                const nodeRef = window.dbRef(window.firebaseDb, 'users/' + globalUserSafeKey + '/profile');
+                window.dbSet(nodeRef, { phoneHandle: mobileNumber, updatedOn: Date.now() })
+                .then(() => alert("👤 Profile Contact details uploaded to master data console tree!"))
+                .catch(err => console.error(err));
+            }
+        }
+
+        function executeCheckoutOrder() {
+            if(cartArray.length === 0) { alert("Your checkout bucket loop is empty!"); return; }
+            if(!window.firebaseDb) { alert("Cloud checkout stream offline."); return; }
+
+            const masterNode = window.dbRef(window.firebaseDb, 'orders/' + globalUserSafeKey);
+            const newNodePush = window.dbPush(masterNode);
+
+            window.dbSet(newNodePush, {
+                orderedProducts: cartArray,
+                billingTotal: document.getElementById('cartTotalPriceHook').innerText,
+                timestamp: Date.now()
+            }).then(() => {
+                alert("📦 Dispatch Successful! Your real-time logistics tracking block has been initialized inside Firebase.");
+                cartArray = [];
+                updateCartInternalUI();
+                closeCartSheet();
+            }).catch(err => console.error(err));
+        }
+
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
     </script>
 </body>
 </html>
