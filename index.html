@@ -17,6 +17,9 @@
         .logo .zippy { color: #fff; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
+        header nav ul { list-style: none; display: flex; align-items: center; gap: 20px; }
+        .cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        
         #google-btn-wrapper { display: inline-block; vertical-align: middle; margin-left: 10px; }
         .user-profile-badge { display: none; color: #fff; font-size: 11px; font-weight: 600; cursor: pointer; background: rgba(255, 62, 62, 0.1); border: 1px solid #ff3e3e; padding: 6px 12px; border-radius: 4px; }
         
@@ -39,12 +42,12 @@
         /* 📂 CATEGORIES SLIDER BAR */
         .categories-bar { background: #fff; padding: 12px 5%; display: flex; gap: 12px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active { background: #111; color: #fff; }
 
-        /* 🖼️ AUTOMATIC HERO SLIDER CONTAINER */
+        /* 🖼️ AUTOMATIC HERO SLIDER CONTAINER (SUPPORT 4 SLIDES) */
         .slider-wrapper { position: relative; width: 100vw; height: 60vh; overflow: hidden; background: #000; }
-        .slide-container { display: flex; width: 300vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slide-container { display: flex; width: 400vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .slide-frame { width: 100vw; height: 100%; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 0 20px; position: relative; }
         .slide-frame::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index: 1; }
         .slide-content { position: relative; z-index: 2; max-width: 600px; }
@@ -55,12 +58,21 @@
         .section-title { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 35px; }
         .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ff3e3e; margin: 10px auto 0; }
         
-        /* 🛍️ CORE PRODUCTS LAYOUT GRID */
+        /* 🛍️ CORE PRODUCTS LAYOUT GRID WITH DISCOUNT BADGES */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
+        .card { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative; }
+        
+        /* 🏷️ DISCOUNT BADGE STYLE */
+        .discount-tag { position: absolute; top: 30px; left: 30px; background: #ff3e3e; color: #fff; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; z-index: 5; box-shadow: 0 4px 8px rgba(255, 62, 62, 0.3); }
+        
         .card img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; }
         .card h3 { font-size: 14px; text-transform: uppercase; margin-bottom: 6px; }
-        .card p { font-size: 15px; font-weight: 600; margin-bottom: 15px; }
+        
+        /* 💰 PRICE BREAKDOWN CONFIGURATION */
+        .price-box-wrapper { margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .current-price { font-size: 16px; font-weight: 700; color: #111; }
+        .original-price { font-size: 13px; text-decoration: line-through; color: #999; }
+        .discount-percent { font-size: 12px; color: #ff3e3e; font-weight: bold; }
 
         .size-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; position: relative; z-index: 10; }
         .size-box { border: 1px solid #ccc; padding: 6px 12px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; color: #333; background: #fff; }
@@ -158,7 +170,8 @@
         <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
         <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
         <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
-        <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Accessories</div>
+        <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
+        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
     </div>
 
     <div class="slider-wrapper">
@@ -167,6 +180,12 @@
                 <div class="slide-content">
                     <h1>Redefine Your Vibe</h1>
                     <p>Premium Urban Streetwear culture fits configured custom for you.</p>
+                </div>
+            </div>
+            <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000');">
+                <div class="slide-content">
+                    <h1>Aesthetic Bags Collection</h1>
+                    <p>Steal luxury minimalist styles at insane price drops up to 60% off.</p>
                 </div>
             </div>
             <div class="slide-frame" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000');">
@@ -192,7 +211,9 @@
                 <img id="p-img-1" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000">
                 <div>
                     <h3>Oversized Maroon T-Shirt</h3>
-                    <p>₹799</p>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹799</span>
+                    </div>
                     <div class="size-selector">
                         <span class="size-box" onclick="selectSize(this)">S</span>
                         <span class="size-box selected" onclick="selectSize(this)">M</span>
@@ -206,7 +227,9 @@
                 <img id="p-img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
                 <div>
                     <h3>Urban Baggy Cargo Pants</h3>
-                    <p>₹1,299</p>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,299</span>
+                    </div>
                     <div class="size-selector">
                         <span class="size-box" onclick="selectSize(this)">30</span>
                         <span class="size-box selected" onclick="selectSize(this)">32</span>
@@ -220,7 +243,9 @@
                 <img id="p-img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
                 <div>
                     <h3>Luxury White Sneakers</h3>
-                    <p>₹1,999</p>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,999</span>
+                    </div>
                     <div class="size-selector">
                         <span class="size-box" onclick="selectSize(this)">UK 8</span>
                         <span class="size-box selected" onclick="selectSize(this)">UK 9</span>
@@ -233,7 +258,9 @@
                 <img id="p-img-4" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000">
                 <div>
                     <h3>Zippy Wireless Pro Pods</h3>
-                    <p>₹1,499</p>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,499</span>
+                    </div>
                     <div class="size-selector">
                         <span class="size-box selected" onclick="selectSize(this)">ON TRACK</span>
                     </div>
@@ -241,15 +268,135 @@
                 </div>
             </div>
 
-            <div class="card product-card" data-category="accessories">
-                <img id="p-img-5" src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=1000">
+            <div class="card product-card" data-category="bags">
+                <div class="discount-tag">60% OFF</div>
+                <img id="p-img-6" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000">
                 <div>
-                    <h3>Amoled Matte Sports Fit-Watch</h3>
-                    <p>₹2,499</p>
-                    <div class="size-selector">
-                        <span class="size-box selected" onclick="selectSize(this)">44MM</span>
+                    <h3>Classic Pastel Hand Tote Bag</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹599</span>
+                        <span class="original-price">₹1,499</span>
+                        <span class="discount-percent">(60% OFF)</span>
                     </div>
-                    <button class="buy-btn" onclick="addRealItemToCart('Amoled Matte Sports Fit-Watch', 2499, 'p-img-5')">Add to Cart</button>
+                    <div class="size-selector">
+                        <span class="size-box selected" onclick="selectSize(this)">ONESIZE</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Classic Pastel Hand Tote Bag', 599, 'p-img-6')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="bags">
+                <div class="discount-tag">50% OFF</div>
+                <img id="p-img-7" src="https://images.unsplash.com/photo-1566150905458-1bf1fd15dcb4?q=80&w=1000">
+                <div>
+                    <h3>Aesthetic Leather Sling Bag</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹499</span>
+                        <span class="original-price">₹999</span>
+                        <span class="discount-percent">(50% OFF)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">S</span>
+                        <span class="size-box selected" onclick="selectSize(this)">M</span>
+                        <span class="size-box" onclick="selectSize(this)">L</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Oversized Maroon T-Shirt', 799, 'p-img-1')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="cargo">
+                <img id="p-img-2" src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000">
+                <div>
+                    <h3>Urban Baggy Cargo Pants</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,299</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">30</span>
+                        <span class="size-box selected" onclick="selectSize(this)">32</span>
+                        <span class="size-box" onclick="selectSize(this)">34</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Urban Baggy Cargo Pants', 1299, 'p-img-2')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="sneaker">
+                <img id="p-img-3" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000">
+                <div>
+                    <h3>Luxury White Sneakers</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,999</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box" onclick="selectSize(this)">UK 8</span>
+                        <span class="size-box selected" onclick="selectSize(this)">UK 9</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Luxury White Sneakers', 1999, 'p-img-3')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="accessories">
+                <img id="p-img-4" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000">
+                <div>
+                    <h3>Zippy Wireless Pro Pods</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹1,499</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box selected" onclick="selectSize(this)">ON TRACK</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Zippy Wireless Pro Pods', 1499, 'p-img-4')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="bags">
+                <div class="discount-tag">60% OFF</div>
+                <img id="p-img-6" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000">
+                <div>
+                    <h3>Classic Pastel Hand Tote Bag</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹599</span>
+                        <span class="original-price">₹1,499</span>
+                        <span class="discount-percent">(60% OFF)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box selected" onclick="selectSize(this)">ONESIZE</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Classic Pastel Hand Tote Bag', 599, 'p-img-6')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="bags">
+                <div class="discount-tag">50% OFF</div>
+                <img id="p-img-7" src="https://images.unsplash.com/photo-1566150905458-1bf1fd15dcb4?q=80&w=1000">
+                <div>
+                    <h3>Aesthetic Leather Sling Bag</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹499</span>
+                        <span class="original-price">₹999</span>
+                        <span class="discount-percent">(50% OFF)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box selected" onclick="selectSize(this)">ONESIZE</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Aesthetic Leather Sling Bag', 499, 'p-img-7')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="card product-card" data-category="bags">
+                <div class="discount-tag">55% OFF</div>
+                <img id="p-img-8" src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=1000">
+                <div>
+                    <h3>Urban Mini Street Backpack</h3>
+                    <div class="price-box-wrapper">
+                        <span class="current-price">₹679</span>
+                        <span class="original-price">₹1,499</span>
+                        <span class="discount-percent">(55% OFF)</span>
+                    </div>
+                    <div class="size-selector">
+                        <span class="size-box selected" onclick="selectSize(this)">12L FIT</span>
+                    </div>
+                    <button class="buy-btn" onclick="addRealItemToCart('Urban Mini Street Backpack', 679, 'p-img-8')">Add to Cart</button>
                 </div>
             </div>
 
@@ -269,14 +416,14 @@
     <script>
       let cartMemory = [];
       
-      // 🔄 AUTOMATIC BANNER CAROUSEL LOGIC LOOP
+      // 🔄 AUTOMATIC BANNER CAROUSEL LOGIC LOOP (4 SLIDES)
       let currentSlideIndex = 0;
       const sliderFrameEl = document.getElementById('mainHeroSlider');
       
       setInterval(() => {
-          currentSlideIndex = (currentSlideIndex + 1) % 3; // Loop dynamically across 3 banners
+          currentSlideIndex = (currentSlideIndex + 1) % 4; // Loops 0, 1, 2, 3
           sliderFrameEl.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
-      }, 3500); // Transitions smoothly every 3.5 seconds
+      }, 3500); 
       
       function toggleCartPanel() {
           const panel = document.getElementById('cartPanel');
@@ -309,6 +456,7 @@
       
       function updateCartUI() {
           document.getElementById('bottom-cart-hook').innerHTML = `<span class="tab-icon">🛒</span> Cart (${cartMemory.length})`;
+          document.getElementById('cart-counter').innerText = `Cart (${cartMemory.length})`;
           const container = document.getElementById('cartItemsContainer');
           
           if (cartMemory.length === 0) {
