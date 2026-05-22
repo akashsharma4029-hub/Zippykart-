@@ -3,121 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear Dashboard</title>
+    <title>Zippykart.co.in | Elite Streetwear & Home Decor Hub</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #fcfcfc; color: #111; overflow-x: hidden; padding-bottom: 90px; }
+        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; }
         
-        /* 🖤 PREMIUM CORE WIDE HEADER */
-        header { background-color: #111; color: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; width: 100vw; }
+        /* 🖤 WEB HEADER SYSTEM WITH DROPDOWNS */
+        header { background-color: #111; color: #fff; padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100vw; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         
+        .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
         .logo .zippy { color: #fff; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
-        #google-btn-wrapper { display: inline-block; vertical-align: middle; }
+        /* 🔍 INTUITIVE WEB SEARCH CONTAINER WITH CAMERA */
+        .search-web-wrapper { display: flex; align-items: center; background: #fff; border-radius: 6px; padding: 8px 15px; width: 40%; max-width: 500px; position: relative; margin-left: 10px; }
+        .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; font-weight: 500; color: #222; }
+        .search-web-wrapper i.fa-magnifying-glass { color: #777; margin-right: 10px; }
+        .search-web-wrapper i.fa-camera { color: #555; cursor: pointer; font-size: 16px; transition: color 0.2s; position: absolute; right: 15px; }
+        .search-web-wrapper i.fa-camera:hover { color: #ff3e3e; }
+
+        .header-right-menu { display: flex; align-items: center; gap: 25px; }
         
-        /* 📍 ADDRESS INTERFACE STRIP */
-        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; width: 100vw; }
+        /* DYNAMIC WEB NAVIGATION FLOATING MENUS */
+        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; padding: 10px 0; }
+        .nav-dropdown-item:hover { color: #ff3e3e; }
+        
+        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 250px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 5px; }
+        .nav-dropdown-item:hover .floating-menu-pane { display: block; }
+        
+        .menu-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; color: #333; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f9f9f9; transition: background 0.2s; text-transform: none; letter-spacing: 0; }
+        .menu-row:hover { background: #fdf2f2; color: #ff3e3e; }
+        .menu-row i { color: #ff3e3e; font-size: 15px; width: 20px; text-align: center; }
+        
+        .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; }
+        
+        /* 📍 RUNNING POSITION DETECTOR STRIP */
+        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; width: 100vw; }
         .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; max-width: 75%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .addr-left i { color: #ff3e3e; }
-        .supercoins-panel { display: flex; align-items: center; gap: 6px; background: rgba(255,229,0,0.1); border: 1px solid #ffe500; color: #ffe500; padding: 3px 10px; border-radius: 12px; }
+        .supercoins-panel { display: flex; align-items: center; gap: 6px; background: rgba(255,229,0,0.1); border: 1px solid #ffe500; color: #ffe500; padding: 3px 12px; border-radius: 12px; }
 
-        .app-tab-panel { display: none; }
-        .app-tab-panel.active-view { display: block; }
-
-        .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 14px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); width: 100vw; }
+        .categories-bar { background: #fff; padding: 15px 6%; display: flex; gap: 15px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.02); width: 100vw; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* 🖼️ HYBRID ASPECT-RATIO CAROUSEL SLIDER */
-        .slider-wrapper { position: relative; width: 100vw; height: 45vh; min-height: 250px; max-height: 450px; overflow: hidden; background: #000; }
-        .slide-container { display: flex; width: 400vw; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide-frame { width: 100vw; height: 100%; }
+        /* 🖼️ HIGH-END EXPANDED HERO SLIDER FOR LAPTOP (Image nahi kategi) */
+        .slider-wrapper { position: relative; width: 100vw; height: 50vh; min-height: 320px; max-height: 500px; overflow: hidden; background: #111; }
+        .slide-container { display: flex; width: 600%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slide-frame { width: 100vw; height: 100%; position: relative; }
         .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
-        /* 🛍️ FULL SCREEN DESKTOP RESPONSIVE GRID ENGINE */
-        .container { width: 100vw; max-width: 100%; padding: 30px 5%; min-height: 500px; }
-        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; letter-spacing: 0.5px; }
-        .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
+        /* 🛍️ FULL WIDTH SEAMLESS PRODUCT CONTENT GRID */
+        .container { width: 100vw; max-width: 100%; padding: 35px 6%; min-height: 500px; }
+        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px; color: #111; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ''; display: inline-block; flex-grow: 1; height: 2px; background: #eee; margin-left: 10px; }
         
-        /* Grid spans multiple columns on desktop to remove empty space side boxes */
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-        
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .container { padding: 15px; } }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 650px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
 
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #e8e8e8; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-3px); }
-        .discount-badge { position: absolute; top: 22px; left: 22px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 4px; z-index: 5; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .discount-badge { position: absolute; top: 24px; left: 24px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 4px 8px; border-radius: 4px; z-index: 5; text-transform: uppercase; }
         
-        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 4px; margin-bottom: 12px; background: #f7f7f7; }
-        @media (max-width: 600px) { .card .img-container { height: 160px; } }
+        .card .img-container { width: 100%; height: 280px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fdfdfd; }
+        @media (max-width: 650px) { .card .img-container { height: 170px; } }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
         
-        .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .price-box { margin-bottom: 10px; display: flex; align-items: center; gap: 6px; font-size: 13px; }
-        .price-box .now { font-weight: 700; color: #111; }
-        .price-box .old { text-decoration: line-through; color: #878787; font-size: 11px; }
-        .price-box .off { color: #ff3e3e; font-weight: bold; font-size: 11px; }
+        .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; }
+        .price-box { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+        .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
+        .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
+        .price-box .off { color: #ff3e3e; font-weight: bold; font-size: 12px; }
 
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 10px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 👤 ACCOUNT PAGE COMPONENT GRID */
-        .account-wrapper-box { max-width: 800px; margin: 30px auto; padding: 0 15px; }
-        .profile-card-hub { background: #fff; padding: 25px 20px; border: 1px solid #e0e0e0; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .profile-card-hub h3 { font-size: 18px; font-weight: 700; color: #212121; }
-        .profile-card-hub p { font-size: 13px; color: #878787; margin-top: 2px; }
-
-        .video-action-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 15px; }
-        .action-cell { background: #fff; border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .action-cell i { font-size: 18px; color: #ff3e3e; width: 24px; text-align: center; }
-        .action-cell span { font-size: 13px; font-weight: 600; color: #212121; }
-
-        .list-group-headline { padding: 15px 5px 6px 5px; font-size: 12px; font-weight: 700; color: #878787; text-transform: uppercase; }
-        .custom-list-container { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
-        .custom-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
-        .custom-row:last-child { border-bottom: none; }
-        .row-left { display: flex; align-items: center; gap: 15px; font-size: 13px; font-weight: 600; color: #212121; }
-        .row-left i { color: #ff3e3e; font-size: 16px; width: 20px; text-align: center; }
-        .custom-row i.fa-chevron-right { color: #bcbcbc; font-size: 11px; }
-
-        .logout-container-box { display: flex; justify-content: center; margin-top: 20px; }
-        .app-logout-btn { background: #fff; color: #212121; border: 1px solid #d4d5d9; width: 100%; padding: 12px; font-weight: 700; border-radius: 4px; font-size: 14px; text-align: center; cursor: pointer; transition: background 0.2s; }
-        .app-logout-btn:hover { background: #f5f5f5; }
-
-        /* 📋 PROFILE EDIT SHEET OVERLAY */
-        .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 2000; display: none; flex-direction: column; }
-        .modal-top-bar { background: #111; color: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; font-weight: 700; }
-        .modal-top-bar i { cursor: pointer; font-size: 18px; }
-        .edit-fields-body { padding: 30px; max-width: 500px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+        /* 📋 PROFILE SPECIFICATIONS OVERLAY MODAL SHEET */
+        .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 3000; display: none; flex-direction: column; }
+        .modal-top-bar { background: #111; color: #fff; padding: 20px 6%; display: flex; align-items: center; gap: 15px; font-weight: 700; }
+        .modal-top-bar i { cursor: pointer; font-size: 20px; }
+        .edit-fields-body { padding: 40px; max-width: 550px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; }
         .input-group-field { display: flex; flex-direction: column; gap: 6px; }
         .input-group-field label { font-size: 11px; font-weight: 700; color: #878787; text-transform: uppercase; }
-        .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; }
-        .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+        .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; font-weight: 600; }
+        .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
 
-        /* 🛒 SLIDE-UP BASKET CONTAINER SHEET */
-        .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 1100; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
+        /* 🛒 SLIDE DRAWER BASKET SHEET LAYOUT */
+        .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
-        .sheet-header { padding: 20px 5%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .sheet-body { padding: 20px 5%; flex-grow: 1; overflow-y: auto; }
-        .sheet-footer { padding: 20px 5%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 35px; border-radius: 4px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 1040; display: none; }
-
-        /* 📱 BOTTOM NAV TABS SYSTEMS */
-        .bottom-nav-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .nav-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #666; font-size: 11px; font-weight: 600; cursor: pointer; width: 20%; text-decoration: none; position: relative; }
-        .nav-tab i { font-size: 18px; }
-        .nav-tab.active-tab { color: #ff3e3e; }
-        .nav-cart-badge { position: absolute; top: -4px; right: 22%; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 10px; display: none; border: 1px solid #fff; }
+        .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
+        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
+        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2200; display: none; }
     </style>
 </head>
 <body>
@@ -125,47 +111,89 @@
     <div class="sheet-overlay" id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
     <header>
-        <div class="logo" onclick="switchAppTab('home', document.querySelector('.nav-tab'))">
-            <span class="zippy">Zippy</span><span class="kart">Kart</span>
+        <div class="header-left-block">
+            <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <span class="zippy">Zippy</span><span class="kart">Kart</span>
+            </div>
+            
+            <div class="search-web-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search for premium products, brands and home decor...">
+                <i class="fa-solid fa-camera" onclick="alert('📸 Visual Search Engine Terminal Online: Camera module ready!')"></i>
+            </div>
         </div>
-        <div id="google-btn-wrapper">
-            <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
-            <div class="g_id_signin" data-type="icon" data-shape="circle" data-theme="dark"></div>
+
+        <div class="header-right-menu">
+            <div class="nav-dropdown-item">
+                <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
+                <div class="floating-menu-pane">
+                    <div style="background: #111; color: #fff; padding: 15px 20px; font-size: 11px; text-transform: none;">
+                        <h4 id="dropFullnameNode" style="font-size: 14px; font-weight: 700;">Guest Profile</h4>
+                        <p id="dropEmailNode" style="color: #bbb; margin-top: 2px;">Sync Cloud Session Node</p>
+                    </div>
+                    <a href="#" class="menu-row" onclick="alert('💎 ZippyKart Plus VIP active.')"><i class="fa-solid fa-crown"></i> ZippyKart Plus Tier</a>
+                    <a href="#" class="menu-row" onclick="alert('📦 Orders Node Stream: Transmitting...')"><i class="fa-solid fa-box"></i> My Order Logs</a>
+                    <a href="#" class="menu-row" onclick="alert('❤️ Loading wishlist collection nodes...')"><i class="fa-solid fa-heart"></i> Wishlist Storage</a>
+                    <a href="#" class="menu-row" onclick="openEditProfileModal()"><i class="fa-solid fa-user-gear"></i> Edit Profile Fields</a>
+                    <a href="#" class="menu-row" onclick="autoFetchGPSAddress()"><i class="fa-solid fa-map-location-dot"></i> Saved Addresses (GPS)</a>
+                    <a href="#" class="menu-row" onclick="window.location.reload();" style="background:#fafafa; border-top:1px solid #eee; font-weight:700; color:#ff3e3e;"><i class="fa-solid fa-power-off"></i> Log Out Account</a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown-item">
+                <span>More <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></span>
+                <div class="floating-menu-pane">
+                    <a href="#" class="menu-row" onclick="alert('🌐 Language Context: English Active')"><i class="fa-solid fa-language"></i> Select Language</a>
+                    <a href="#" class="menu-row" onclick="alert('bell Push Alert channels: Active')"><i class="fa-solid fa-bell"></i> Notification Settings</a>
+                    <a href="#" class="menu-row" onclick="alert('🛡️ Sandbox Privacy Center Active')"><i class="fa-solid fa-shield-halved"></i> Privacy Center</a>
+                    <a href="#" class="menu-row" onclick="alert('🎧 Support Helpdesk initialising...')"><i class="fa-solid fa-headset"></i> Help Center</a>
+                </div>
+            </div>
+
+            <button class="web-cart-btn" onclick="openCartPanelSheet()">
+                <i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span>
+            </button>
+            
+            <div id="google-btn-wrapper">
+                <div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
+                <div class="g_id_signin" data-type="icon" data-shape="circle" data-theme="dark"></div>
+            </div>
         </div>
     </header>
 
     <div class="top-delivery-strip">
         <div class="addr-left" onclick="autoFetchGPSAddress()">
             <i class="fa-solid fa-location-crosshairs"></i>
-            <span id="addressBarHook">Detecting Live Location Nodes... Tap to check GPS</span>
+            <span id="addressBarHook">Detecting Live Location Nodes... Tap to link real-time GPS</span>
         </div>
         <div class="supercoins-panel">
-            <i class="fa-solid fa-coins"></i> SC: <span id="coinsCounterNode">20</span>
+            <i class="fa-solid fa-coins"></i> SC Reward System: <span id="coinsCounterNode">20</span>
         </div>
     </div>
 
+    <div class="categories-bar">
+        <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
+        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
+        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
+        <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
+        <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
+        <div class="cat-item" onclick="filterCategory('decor', this)">🏺 Home Decor</div>
+        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
+    </div>
 
     <div id="panel-home" class="app-tab-panel active-view">
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200"></div>
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200"></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1396265787459-fdf2d0be45df?q=80&w=1200"></div>
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200"></div>
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1200"></div>
             </div>
         </div>
 
-        <div class="categories-bar">
-            <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
-            <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
-            <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
-            <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
-            <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
-            <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
-        </div>
-
         <div class="container">
-            <h3 class="section-title">Trending Culture Drops</h3>
+            <h2 class="section-title">Trending Culture Drops</h2>
             <div class="grid">
                 
                 <div class="card product-card" data-category="tshirt">
@@ -189,6 +217,20 @@
                     <button class="buy-btn" onclick="pushToBasket('Luxury White Sneakers', 1999)">Add to Cart</button>
                 </div>
 
+                <div class="card product-card" data-category="decor">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1563861826100-9cb868fdcd1c?q=80&w=500"></div>
+                    <h3>Aesthetic Minimalist Table Clock</h3>
+                    <div class="price-box"><span class="now">₹499</span><span class="old">₹1,299</span><span class="off">61% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Aesthetic Table Clock', 499)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="decor">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=500"></div>
+                    <h3>Modular Walnut Storage Shelves</h3>
+                    <div class="price-box"><span class="now">₹2,499</span><span class="old">₹5,999</span><span class="off">58% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Walnut Storage Shelves', 2499)">Add to Cart</button>
+                </div>
+
                 <div class="card product-card" data-category="bags">
                     <div class="discount-badge">60% OFF</div>
                     <div class="img-container"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500"></div>
@@ -201,71 +243,24 @@
         </div>
     </div>
 
-
-    <div id="panel-account" class="app-tab-panel">
-        <div class="account-wrapper-box">
-            <div class="profile-card-hub">
-                <div>
-                    <h3 id="panelNameNode">Guest User</h3>
-                    <p id="panelEmailNode">Sign in with Google to sync cloud info</p>
-                </div>
-                <i class="fa-solid fa-circle-user" style="font-size: 42px; color: #ccc;"></i>
-            </div>
-
-            <div class="video-action-grid">
-                <div class="action-cell" onclick="alert('📦 Orders Hub: Transmitting logs...')"><i class="fa-solid fa-box"></i><span>Orders</span></div>
-                <div class="action-cell" onclick="alert('❤️ Syncing Saved Wishlist items...')"><i class="fa-solid fa-heart"></i><span>Wishlist</span></div>
-                <div class="action-cell" onclick="alert('🎟️ Coupon Token Verified: ZIPPY100')"><i class="fa-solid fa-ticket"></i><span>Coupons</span></div>
-                <div class="action-cell" onclick="alert('🎧 Live Customer Support stream active.')"><i class="fa-solid fa-headset"></i><span>Help Center</span></div>
-            </div>
-
-            <div class="list-group-headline">Account Settings</div>
-            <div class="custom-list-container">
-                <div class="custom-row" onclick="alert('💎 ZippyKart Plus VIP framework active.')"><div class="row-left"><i class="fa-solid fa-crown"></i><span>ZippyKart Plus</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="alert('🔒 Device encryption active.')"><div class="row-left"><i class="fa-solid fa-mobile-screen"></i><span>Manage Devices</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="openEditProfileModal()"><div class="row-left"><i class="fa-solid fa-user-gear"></i><span>Edit Profile</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="alert('💳 Gift Card & Card node encrypted.')"><div class="row-left"><i class="fa-solid fa-credit-card"></i><span>Saved Credit / Debit & Gift Cards</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="autoFetchGPSAddress()"><div class="row-left"><i class="fa-solid fa-map-location-dot"></i><span>Saved Addresses (Auto GPS)</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="alert('🌐 Language: English')"><div class="row-left"><i class="fa-solid fa-language"></i><span>Select Language</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="alert('🔔 Notifications active.')"><div class="row-left"><i class="fa-solid fa-bell"></i><span>Notification Settings</span></div><i class="fa-solid fa-chevron-right"></i></div>
-                <div class="custom-row" onclick="alert('🛡️ Shield locks verified.')"><div class="row-left"><i class="fa-solid fa-shield-halved"></i><span>Privacy Center</span></div><i class="fa-solid fa-chevron-right"></i></div>
-            </div>
-
-            <div class="logout-container-box">
-                <div class="app-logout-btn" onclick="window.location.reload();">Log Out</div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="edit-profile-modal" id="editProfileModalPanel">
-        <div class="modal-top-bar"><i class="fa-solid fa-arrow-left" onclick="closeEditProfileModal()"></i><span>Edit Profile Data</span></div>
+        <div class="modal-top-bar"><i class="fa-solid fa-arrow-left" onclick="closeEditProfileModal()"></i><span>Edit Profile Data Fields</span></div>
         <div class="edit-fields-body">
             <div class="input-group-field"><label>First Name</label><input type="text" id="inputFirstName"></div>
             <div class="input-group-field"><label>Last Name</label><input type="text" id="inputLastName"></div>
             <div class="input-group-field"><label>Mobile Number</label><input type="tel" id="inputMobileNumber"></div>
-            <div class="input-group-field"><label>Email ID</label><input type="email" id="inputEmailId" readonly style="background:#fafafa; color:#999;"></div>
+            <div class="input-group-field"><label>Email ID</label><input type="email" id="inputEmailId" readonly style="background:#f5f5f5;"></div>
             <button class="profile-submit-btn" onclick="submitProfileDataToFirebase()">Save Changes</button>
         </div>
     </div>
 
-
     <div class="cart-up-sheet" id="cartPanelSheet">
-        <div class="sheet-header"><h2>Your Basket</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
-        <div class="sheet-body" id="cartSheetBodyContainer"><p style="text-align: center; color: #999; margin-top: 40px;">Your cart is empty.</p></div>
+        <div class="sheet-header"><h2>Shopping Basket Stream</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
+        <div class="sheet-body" id="cartSheetBodyContainer"><p style="text-align: center; color: #999; margin-top: 40px;">Your basket is empty.</p></div>
         <div class="sheet-footer">
-            <div><p style="font-size: 11px; color: #666;">Total Payable</p><h3 id="sheetTotalBillHook" style="font-size: 18px; font-weight: 900;">₹0</h3></div>
+            <div><p style="font-size: 11px; color: #666; text-transform: uppercase;">Total Bill</p><h3 id="sheetTotalBillHook" style="font-size: 18px; font-weight: 900;">₹0</h3></div>
             <button class="final-pay-btn" onclick="executeCloudCheckout()">Place Order</button>
         </div>
-    </div>
-
-
-    <div class="bottom-nav-tabs">
-        <div class="nav-tab active-tab" onclick="switchAppTab('home', this)"><i class="fa-solid fa-house"></i><span>Home</span></div>
-        <div class="nav-tab" onclick="alert('📺 Play Shorts streaming shortly!')"><i class="fa-solid fa-circle-play"></i><span>Play</span></div>
-        <div class="nav-tab" onclick="alert('📂 Master categories panel tree loaded.')"><i class="fa-solid fa-table-cells-large"></i><span>Categories</span></div>
-        <div class="nav-tab" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><span class="nav-cart-badge" id="cartBadgeCounterElement">0</span></div>
-        <div class="nav-tab" onclick="switchAppTab('account', this)"><i class="fa-solid fa-user"></i><span>Account</span></div>
     </div>
 
 
@@ -293,22 +288,22 @@
         let activeUserKeyNode = "guest_session";
         let userRawEmail = "";
 
-        // Auto banner slider animation engine loop
+        // Automatic banner layout cycle loop 
         let currentSlide = 0;
         setInterval(() => {
-            currentSlide = (currentSlide + 1) % 4;
+            currentSlide = (currentSlide + 1) % 5;
             const engine = document.getElementById('heroSliderEngine');
             if (engine) engine.style.transform = `translateX(-${currentSlide * 100}vw)`;
         }, 3200);
 
-        /* 📍 GPS AUTO LOCATION EXTRACTION REVERSE ENGINE */
+        /* 📍 FULL GEOLOCATION TRACKING ALGORITHM NODES */
         function autoFetchGPSAddress() {
             const displayHook = document.getElementById('addressBarHook');
             if (!navigator.geolocation) {
-                alert("GPS not supported on your current browser engine framework.");
+                alert("GPS Geolocation engine not configured in browser data branch.");
                 return;
             }
-            displayHook.innerText = "Connecting GPS Satellites...";
+            displayHook.innerText = "Accessing GPS Coordinates...";
             
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
@@ -323,23 +318,11 @@
                     if (window.firebaseDb) {
                         const nodeRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/address');
                         window.dbSet(nodeRef, { addressDetails: parsedAddressText, timestamp: Date.now() })
-                        .then(() => alert("📍 Position metrics updated inside Firebase server logs!"))
+                        .then(() => alert("📍 Position synced securely inside Firebase master server node!"))
                         .catch(err => console.error(err));
                     }
-                }).catch(err => {
-                    displayHook.innerText = `Lat: ${lat}, Lon: ${lon}`;
-                });
-            }, () => {
-                displayHook.innerText = "Location permission blocked. Click to retry.";
-            }, { enableHighAccuracy: true, timeout: 8000 });
-        }
-
-        function switchAppTab(viewPanelId, targetTabEl) {
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active-tab'));
-            targetTabEl.classList.add('active-tab');
-            document.querySelectorAll('.app-tab-panel').forEach(p => p.classList.remove('active-view'));
-            if(viewPanelId === 'home') document.getElementById('panel-home').classList.add('active-view');
-            if(viewPanelId === 'account') document.getElementById('panel-account').classList.add('active-view');
+                }).catch(err => { displayHook.innerText = `Lat: ${lat}, Lon: ${lon}`; });
+            }, () => { displayHook.innerText = "Location tracking blocked. Tap to try."; }, { enableHighAccuracy: true, timeout: 8000 });
         }
 
         function filterCategory(categoryTag, btnEl) {
@@ -369,9 +352,7 @@
         }
 
         function syncBasketUI() {
-            const badge = document.getElementById('cartBadgeCounterElement');
-            badge.innerText = appCartMemory.length;
-            badge.style.display = appCartMemory.length > 0 ? "block" : "none";
+            document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`;
             const container = document.getElementById('cartSheetBodyContainer');
             if(appCartMemory.length === 0) {
                 container.innerHTML = `<p style="text-align: center; color: #999; margin-top: 40px;">Your cart is empty.</p>`;
@@ -396,8 +377,13 @@
             const tokenDecoded = parseJwt(response.credential);
             document.getElementById('google-btn-wrapper').style.display = "none";
             userRawEmail = tokenDecoded.email;
-            document.getElementById('panelNameNode').innerText = tokenDecoded.name;
-            document.getElementById('panelEmailNode').innerText = userRawEmail;
+            
+            const shortName = tokenDecoded.name.split(' ')[0];
+            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${shortName} 👋`;
+            
+            document.getElementById('dropFullnameNode').innerText = tokenDecoded.name;
+            document.getElementById('dropEmailNode').innerText = userRawEmail;
+            
             activeUserKeyNode = userRawEmail.replace(/[^a-zA-Z0-9]/g, "_");
             const nameParts = tokenDecoded.name.split(' ');
             document.getElementById('inputFirstName').value = nameParts[0] || "";
@@ -414,7 +400,12 @@
             const lName = document.getElementById('inputLastName').value;
             const targetRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/profile');
             window.dbSet(targetRef, { firstName: fName, lastName: lName, phoneHandle: document.getElementById('inputMobileNumber').value, email: userRawEmail, updatedOn: Date.now() })
-            .then(() => { document.getElementById('panelNameNode').innerText = fName + " " + lName; alert("👤 Profile specifications updated inside Firebase!"); closeEditProfileModal(); });
+            .then(() => { 
+                document.getElementById('dropFullnameNode').innerText = fName + " " + lName; 
+                document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${fName} 👋`;
+                alert("👤 Profile specification nodes locked securely inside Firebase database!"); 
+                closeEditProfileModal(); 
+            });
         }
 
         function executeCloudCheckout() {
@@ -422,7 +413,7 @@
             const orderRefNode = window.dbRef(window.firebaseDb, 'orders/' + activeUserKeyNode);
             const generatedPushNode = window.dbPush(orderRefNode);
             window.dbSet(generatedPushNode, { basketItems: appCartMemory, amountPaid: document.getElementById('sheetTotalBillHook').innerText, timestamp: Date.now() })
-            .then(() => { alert("📦 Order placed successfully inside cloud tracking matrix!"); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
+            .then(() => { alert("📦 Order logged inside central logistics matrix node!"); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
         }
 
         function parseJwt(token) {
@@ -434,4 +425,3 @@
     </script>
 </body>
 </html>
- 
