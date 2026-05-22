@@ -3,46 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear & Home Decor Hub</title>
+    <title>Zippykart.co.in | Premium Streetwear & Lifestyle Dashboard</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; }
+        body { background-color: #f8f9fa; color: #111; overflow-x: hidden; padding-bottom: 40px; }
         
-        /* 🖤 WEB HEADER SYSTEM WITH DROPDOWNS */
-        header { background-color: #111; color: #fff; padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100vw; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        /* 🖤 MASTER ZIPPYKART LUXURY HEADER */
+        header { background-color: #111; color: #fff; padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100vw; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         
         .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
+        .logo { font-size: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; display: flex; align-items: center; }
         .logo .zippy { color: #fff; }
-        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 8px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
+        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; box-shadow: 0 0 10px rgba(255, 62, 62, 0.4); }
         
-        /* 🔍 INTUITIVE WEB SEARCH CONTAINER WITH CAMERA */
-        .search-web-wrapper { display: flex; align-items: center; background: #fff; border-radius: 6px; padding: 8px 15px; width: 40%; max-width: 500px; position: relative; margin-left: 10px; }
-        .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; font-weight: 500; color: #222; }
-        .search-web-wrapper i.fa-magnifying-glass { color: #777; margin-right: 10px; }
-        .search-web-wrapper i.fa-camera { color: #555; cursor: pointer; font-size: 16px; transition: color 0.2s; position: absolute; right: 15px; }
+        /* SEARCH WITH INTEGRATED LENS */
+        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 10px 15px; width: 45%; max-width: 500px; position: relative; border: 1px solid #333; }
+        .search-web-wrapper input { border: none; outline: none; width: 85%; font-size: 13px; font-weight: 500; color: #fff; background: transparent; }
+        .search-web-wrapper input::placeholder { color: #666; }
+        .search-web-wrapper i.fa-magnifying-glass { color: #666; margin-right: 12px; }
+        .search-web-wrapper i.fa-camera { color: #aaa; cursor: pointer; font-size: 16px; position: absolute; right: 15px; transition: color 0.2s; }
         .search-web-wrapper i.fa-camera:hover { color: #ff3e3e; }
 
-        .header-right-menu { display: flex; align-items: center; gap: 25px; }
+        .header-right-menu { display: flex; align-items: center; gap: 20px; }
         
-        /* DYNAMIC WEB NAVIGATION FLOATING MENUS */
-        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; padding: 10px 0; }
-        .nav-dropdown-item:hover { color: #ff3e3e; }
+        /* ⚡ ANIMATED FLOATING NAVIGATION DROPDOWNS */
+        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; padding: 10px 12px; border-radius: 4px; border: 1px solid transparent; }
+        .nav-dropdown-item:hover { background: #222; border-color: #333; }
         
-        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 250px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 5px; }
+        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 265px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; animation: smoothPopupReveal 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
-        .menu-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; color: #333; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f9f9f9; transition: background 0.2s; text-transform: none; letter-spacing: 0; }
-        .menu-row:hover { background: #fdf2f2; color: #ff3e3e; }
-        .menu-row i { color: #ff3e3e; font-size: 15px; width: 20px; text-align: center; }
+        @keyframes smoothPopupReveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         
-        .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; }
+        .menu-row { display: flex; align-items: justify; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; transition: all 0.2s; text-transform: none; letter-spacing: 0; }
+        .menu-row:hover { background: #fff5f5; color: #ff3e3e; padding-left: 24px; }
+        .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
+        .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 15px; width: 20px; text-align: center; }
+        .menu-row i.fa-chevron-right { color: #ccc; font-size: 10px; }
         
-        /* 📍 RUNNING POSITION DETECTOR STRIP */
+        /* 🔔 LIVE NOTIFICATION SLIDER SWITCH STYLE FROM VIDEO */
+        .notification-toggle-box { display: flex; flex-direction: column; gap: 8px; padding: 15px 20px; background: #fdfdfd; border-top: 1px solid #eee; text-transform: none; }
+        .toggle-header-row { display: flex; justify-content: space-between; align-items: center; }
+        .toggle-header-row span { font-size: 13px; font-weight: 700; color: #111; }
+        .notification-toggle-box p { font-size: 11px; color: #888; margin-top: -2px; }
+        
+        .switch-engine-chassis { position: relative; display: inline-block; width: 42px; height: 24px; }
+        .switch-engine-chassis input { opacity: 0; width: 0; height: 0; }
+        .slider-knob-fluid { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 24px; }
+        .slider-knob-fluid:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .slider-knob-fluid { background-color: #ff3e3e; }
+        input:checked + .slider-knob-fluid:before { transform: translateX(18px); }
+
+        .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
+        
+        /* 📍 ADDRESS INTERFACE STRIP */
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; border-bottom: 1px solid #222; width: 100vw; }
         .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; max-width: 75%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .addr-left i { color: #ff3e3e; }
@@ -53,60 +71,77 @@
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* 🖼️ HIGH-END EXPANDED HERO SLIDER FOR LAPTOP (Image nahi kategi) */
-        .slider-wrapper { position: relative; width: 100vw; height: 50vh; min-height: 320px; max-height: 500px; overflow: hidden; background: #111; }
-        .slide-container { display: flex; width: 600%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide-frame { width: 100vw; height: 100%; position: relative; }
-        .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        /* 🖼️ PERFECT 100% BRAND MATCH SCREENSHOT BANNER */
+        .slider-wrapper { position: relative; width: 100vw; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #000; }
+        .slide-frame-showcase { width: 100vw; height: 100%; background-image: url('https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=1600'); background-size: cover; background-position: center 25%; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; position: relative; }
+        .slide-frame-showcase::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%); }
+        .showcase-content { position: relative; z-index: 5; max-width: 550px; }
+        .showcase-content h1 { font-size: 42px; font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -1px; }
+        .showcase-content p { font-size: 14px; margin-top: 10px; color: #ccc; font-weight: 500; }
 
-        /* 🛍️ FULL WIDTH SEAMLESS PRODUCT CONTENT GRID */
+        /* 🛍️ FULL WIDTH SEAMLESS PRODUCT ENGINE GRID */
         .container { width: 100vw; max-width: 100%; padding: 35px 6%; min-height: 500px; }
-        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px; color: #111; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
-        .section-title::after { content: ''; display: inline-block; flex-grow: 1; height: 2px; background: #eee; margin-left: 10px; }
+        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; letter-spacing: 0.5px; }
+        .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
         
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
         @media (max-width: 1400px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 650px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
 
-        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
-        .discount-badge { position: absolute; top: 24px; left: 24px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 4px 8px; border-radius: 4px; z-index: 5; text-transform: uppercase; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .discount-badge { position: absolute; top: 24px; left: 24px; background: #ff3e3e; color: #fff; font-size: 9px; font-weight: bold; padding: 4px 8px; border-radius: 4px; z-index: 5; }
         
-        .card .img-container { width: 100%; height: 280px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fdfdfd; }
+        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fdfdfd; }
         @media (max-width: 650px) { .card .img-container { height: 170px; } }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
         
-        .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; }
+        .card h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .price-box .off { color: #ff3e3e; font-weight: bold; font-size: 12px; }
 
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; transition: background 0.2s; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 📋 PROFILE SPECIFICATIONS OVERLAY MODAL SHEET */
+        /* 📋 ANIMATED SCREEN MODALS FOR DIALOGUE POPS (No Alert Links) */
+        .custom-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 4000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .popup-modal-card { background: #fff; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: zoomReveal 0.25s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
+        @keyframes zoomReveal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .popup-modal-header { background: #111; color: #fff; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; }
+        .popup-modal-header i { cursor: pointer; font-size: 18px; }
+        .popup-modal-body { padding: 25px 20px; font-size: 13px; color: #444; line-height: 1.5; font-weight: 500; }
+        
+        /* EDIT PROFILE DATA CHASSIS */
         .edit-profile-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 3000; display: none; flex-direction: column; }
-        .modal-top-bar { background: #111; color: #fff; padding: 20px 6%; display: flex; align-items: center; gap: 15px; font-weight: 700; }
-        .modal-top-bar i { cursor: pointer; font-size: 20px; }
-        .edit-fields-body { padding: 40px; max-width: 550px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+        .edit-fields-body { padding: 40px; max-width: 500px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; }
         .input-group-field { display: flex; flex-direction: column; gap: 6px; }
         .input-group-field label { font-size: 11px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; font-weight: 600; }
-        .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 10px; }
+        .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* 🛒 SLIDE DRAWER BASKET SHEET LAYOUT */
+        /* CART PANELS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
-        .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
         .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2200; display: none; }
     </style>
 </head>
 <body>
+
+    <div class="custom-popup-overlay" id="masterAppPopupModal">
+        <div class="popup-modal-card">
+            <div class="popup-modal-header">
+                <span id="popupModalTitleNode">Console Hub Notification</span>
+                <i class="fa-solid fa-xmark" onclick="closeAppCustomPopup()"></i>
+            </div>
+            <div class="popup-modal-body" id="popupModalBodyNode">
+                ZippyKart secure terminal transmission pipeline processing...
+            </div>
+        </div>
+    </div>
 
     <div class="sheet-overlay" id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
@@ -119,7 +154,7 @@
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" placeholder="Search for premium products, brands and home decor...">
-                <i class="fa-solid fa-camera" onclick="alert('📸 Visual Search Engine Terminal Online: Camera module ready!')"></i>
+                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 ZippyKart Visual Search Terminal Online: Please scan your apparel bar or product image node for instant match mapping!')"></i>
             </div>
         </div>
 
@@ -131,22 +166,32 @@
                         <h4 id="dropFullnameNode" style="font-size: 14px; font-weight: 700;">Guest Profile</h4>
                         <p id="dropEmailNode" style="color: #bbb; margin-top: 2px;">Sync Cloud Session Node</p>
                     </div>
-                    <a href="#" class="menu-row" onclick="alert('💎 ZippyKart Plus VIP active.')"><i class="fa-solid fa-crown"></i> ZippyKart Plus Tier</a>
-                    <a href="#" class="menu-row" onclick="alert('📦 Orders Node Stream: Transmitting...')"><i class="fa-solid fa-box"></i> My Order Logs</a>
-                    <a href="#" class="menu-row" onclick="alert('❤️ Loading wishlist collection nodes...')"><i class="fa-solid fa-heart"></i> Wishlist Storage</a>
-                    <a href="#" class="menu-row" onclick="openEditProfileModal()"><i class="fa-solid fa-user-gear"></i> Edit Profile Fields</a>
-                    <a href="#" class="menu-row" onclick="autoFetchGPSAddress()"><i class="fa-solid fa-map-location-dot"></i> Saved Addresses (GPS)</a>
-                    <a href="#" class="menu-row" onclick="window.location.reload();" style="background:#fafafa; border-top:1px solid #eee; font-weight:700; color:#ff3e3e;"><i class="fa-solid fa-power-off"></i> Log Out Account</a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('ZippyKart Plus Tier', '💎 Status Active! Welcome to ZippyKart Plus elite tier. Enjoy 5% extra cashbacks and 24 hours early access to mega cultural drops.')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('My Order Logs', '📦 Fetching live tracker stream... All your past shipments and current culture drops have been securely synchronized via Firebase node tree.')"><div class="left-side-cap"><i class="fa-solid fa-box row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Wishlist Storage', '❤️ Your private wishlist sandbox is safe. 0 items currently pending checkout loops.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="openEditProfileModal()"><div class="left-side-cap"><i class="fa-solid fa-user-gear row-lead-ico"></i>Edit Profile Fields</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="autoFetchGPSAddress()"><div class="left-side-cap"><i class="fa-solid fa-map-location-dot row-lead-ico"></i>Saved Addresses (GPS)</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="window.location.reload();" style="background:#fafafa; border-top:1px solid #eee; font-weight:700; color:#ff3e3e;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Account</div></a>
                 </div>
             </div>
 
             <div class="nav-dropdown-item">
                 <span>More <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></span>
                 <div class="floating-menu-pane">
-                    <a href="#" class="menu-row" onclick="alert('🌐 Language Context: English Active')"><i class="fa-solid fa-language"></i> Select Language</a>
-                    <a href="#" class="menu-row" onclick="alert('bell Push Alert channels: Active')"><i class="fa-solid fa-bell"></i> Notification Settings</a>
-                    <a href="#" class="menu-row" onclick="alert('🛡️ Sandbox Privacy Center Active')"><i class="fa-solid fa-shield-halved"></i> Privacy Center</a>
-                    <a href="#" class="menu-row" onclick="alert('🎧 Support Helpdesk initialising...')"><i class="fa-solid fa-headset"></i> Help Center</a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Select Language', '🌐 Primary localization set to English. Multi-lingual regional scripts loading dynamically shortly.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Privacy Center', '🛡️ Sandbox data protocols active. Your personal specification credentials and Firebase logs are fully encrypted.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Help Center', '🎧 Connecting Zippy Support Desk... Real-time 24/7 client assistance stream is active to verify your logistics nodes.')"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>Help Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    
+                    <div class="notification-toggle-box">
+                        <div class="toggle-header-row">
+                            <span>Notifications</span>
+                            <label class="switch-engine-chassis">
+                                <input type="checkbox" id="appNotificationToggleSwitch" onchange="handleToggleSwitchMotion(this)">
+                                <span class="slider-knob-fluid"></span>
+                            </label>
+                        </div>
+                        <p id="toggleStatusLabel">Unable or Desable</p>
+                    </div>
                 </div>
             </div>
 
@@ -183,12 +228,11 @@
 
     <div id="panel-home" class="app-tab-panel active-view">
         <div class="slider-wrapper">
-            <div class="slide-container" id="heroSliderEngine">
-                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200"></div>
-                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200"></div>
-                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1396265787459-fdf2d0be45df?q=80&w=1200"></div>
-                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200"></div>
-                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1200"></div>
+            <div class="slide-frame-showcase">
+                <div class="showcase-content">
+                    <h1>Redefine Your Vibe</h1>
+                    <p>Authentic oversized fits & luxury minimalism lifestyle artifacts engineered custom for you.</p>
+                </div>
             </div>
         </div>
 
@@ -288,19 +332,36 @@
         let activeUserKeyNode = "guest_session";
         let userRawEmail = "";
 
-        // Automatic banner layout cycle loop 
-        let currentSlide = 0;
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % 5;
-            const engine = document.getElementById('heroSliderEngine');
-            if (engine) engine.style.transform = `translateX(-${currentSlide * 100}vw)`;
-        }, 3200);
+        /* 🎬 REAL DYNAMIC CUSTOM MODAL REVEAL SYSTEM (Mitaye Alert Links) */
+        function triggerCustomModalPopup(titleText, bodyText) {
+            document.getElementById('popupModalTitleNode').innerText = titleText;
+            document.getElementById('popupModalBodyNode').innerText = bodyText;
+            document.getElementById('masterAppPopupModal').style.display = "flex";
+        }
+        
+        function closeAppCustomPopup() {
+            document.getElementById('masterAppPopupModal').style.display = "none";
+        }
 
-        /* 📍 FULL GEOLOCATION TRACKING ALGORITHM NODES */
+        /* 🔔 TOGGLE SWITCH MOTION HANDLER FUNCTION */
+        function handleToggleSwitchMotion(checkboxEl) {
+            const labelNode = document.getElementById('toggleStatusLabel');
+            if(checkboxEl.checked) {
+                labelNode.innerText = "Enabled";
+                labelNode.style.color = "#ff3e3e";
+                triggerCustomModalPopup('Notifications Stream', '🔔 Alert system activated! Live culture drop specifications will be transmitted instantly.');
+            } else {
+                labelNode.innerText = "Disabled";
+                labelNode.style.color = "#888";
+                triggerCustomModalPopup('Notifications Stream', '🔕 Alert channels disconnected terminal logs.');
+            }
+        }
+
+        /* 📍 FULL GEOLOCATION REVERSE COORDS ENGINE */
         function autoFetchGPSAddress() {
             const displayHook = document.getElementById('addressBarHook');
             if (!navigator.geolocation) {
-                alert("GPS Geolocation engine not configured in browser data branch.");
+                triggerCustomModalPopup('GPS Error', 'GPS Geolocation engine not configured in browser data branch.');
                 return;
             }
             displayHook.innerText = "Accessing GPS Coordinates...";
@@ -318,11 +379,11 @@
                     if (window.firebaseDb) {
                         const nodeRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/address');
                         window.dbSet(nodeRef, { addressDetails: parsedAddressText, timestamp: Date.now() })
-                        .then(() => alert("📍 Position synced securely inside Firebase master server node!"))
+                        .then(() => triggerCustomModalPopup('GPS Synced', '📍 Position metrics logged securely inside Firebase node structure!'))
                         .catch(err => console.error(err));
                     }
                 }).catch(err => { displayHook.innerText = `Lat: ${lat}, Lon: ${lon}`; });
-            }, () => { displayHook.innerText = "Location tracking blocked. Tap to try."; }, { enableHighAccuracy: true, timeout: 8000 });
+            }, () => { displayHook.innerText = "Location tracking blocked. Click to retry."; }, { enableHighAccuracy: true, timeout: 8000 });
         }
 
         function filterCategory(categoryTag, btnEl) {
@@ -403,7 +464,7 @@
             .then(() => { 
                 document.getElementById('dropFullnameNode').innerText = fName + " " + lName; 
                 document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${fName} 👋`;
-                alert("👤 Profile specification nodes locked securely inside Firebase database!"); 
+                triggerCustomModalPopup('Profile Update', '👤 Your profile logs have been updated safely inside Firebase root.');
                 closeEditProfileModal(); 
             });
         }
@@ -413,7 +474,7 @@
             const orderRefNode = window.dbRef(window.firebaseDb, 'orders/' + activeUserKeyNode);
             const generatedPushNode = window.dbPush(orderRefNode);
             window.dbSet(generatedPushNode, { basketItems: appCartMemory, amountPaid: document.getElementById('sheetTotalBillHook').innerText, timestamp: Date.now() })
-            .then(() => { alert("📦 Order logged inside central logistics matrix node!"); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
+            .then(() => { triggerCustomModalPopup('Checkout Success', '📦 Order dispatched successfully! Live tracking node logged inside Firebase Realtime server dashboard.'); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
         }
 
         function parseJwt(token) {
@@ -424,4 +485,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
