@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear & Lifestyle Dashboard</title>
+    <title>Zippykart.co.in | Elite Streetwear, Cosmetics & Kids</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -73,7 +73,7 @@
 
         /* 🖼️ HIGH-RELIABILITY FULL-WIDTH BANNER CAROUSEL */
         .slider-wrapper { position: relative; width: 100vw; height: 48vh; min-height: 320px; max-height: 460px; overflow: hidden; background: #111; }
-        .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .slide-container { display: flex; width: 700%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .slide-frame { width: 100vw; height: 100%; position: relative; }
         .slide-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         
@@ -108,7 +108,7 @@
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.5px; }
         .buy-btn:hover { background: #ff3e3e; }
 
-        /* 📋 CLIENT-SIDE CUSTOM ANIMATED MODALS (No Browser Url Strings) */
+        /* 📋 CLIENT-SIDE CUSTOM ANIMATED MODALS */
         .custom-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 4000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .popup-modal-card { background: #fff; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: zoomReveal 0.25s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
         @keyframes zoomReveal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -126,7 +126,7 @@
         .input-group-field input { padding: 12px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 14px; outline: none; font-weight: 600; }
         .profile-submit-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* SLIDE DRAWER BASKET SHEET */
+        /* SLIDE CART SHEET */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -141,11 +141,11 @@
     <div class="custom-popup-overlay" id="masterAppPopupModal">
         <div class="popup-modal-card">
             <div class="popup-modal-header">
-                <span id="popupModalTitleNode">ZippyKart Hub</span>
+                <span id="popupModalTitleNode">ZippyKart Console</span>
                 <i class="fa-solid fa-xmark" onclick="closeAppCustomPopup()"></i>
             </div>
             <div class="popup-modal-body" id="popupModalBodyNode">
-                ZippyKart secure terminal pipeline data processing...
+                ZippyKart secure terminal pipeline processing...
             </div>
         </div>
     </div>
@@ -160,8 +160,8 @@
             
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search for premium products, brands and home decor...">
-                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 ZippyKart Visual Search Terminal Online: Please scan your apparel snapshot loop for instant category matching!')"></i>
+                <input type="text" placeholder="Search for apparel, cosmetics, gadgets and toys...">
+                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 ZippyKart Visual Search Terminal Online: Please scan your apparel snapshot loop for instant catalog mapping!')"></i>
             </div>
         </div>
 
@@ -173,9 +173,9 @@
                         <h4 id="dropFullnameNode" style="font-size: 14px; font-weight: 700;">Guest Profile</h4>
                         <p id="dropEmailNode" style="color: #bbb; margin-top: 2px;">Sync Cloud Session Node</p>
                     </div>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('ZippyKart Plus Tier', '💎 Status Active! Welcome to ZippyKart Plus elite membership frame. Enjoy unlimited free priority delivery and 24 hours early track access to mega drops.')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('My Order Logs', '📦 Fetching real-time updates... All your dynamic streetwear items and delivery dispatches have been successfully logged in Firebase sync.')"><div class="left-side-cap"><i class="fa-solid fa-box row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Wishlist Storage', '❤️ Private item tray verified safe. 0 products currently pending checkout routing.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('ZippyKart Plus Tier', '💎 Status Active! Welcome to ZippyKart Plus elite membership frame. Enjoy unlimited free priority delivery.')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('My Order Logs', '📦 Syncing live tracker... All your shipments have been updated in Firebase backend.')"><div class="left-side-cap"><i class="fa-solid fa-box row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Wishlist Storage', '❤️ Private item tray verified safe.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="openEditProfileModal()"><div class="left-side-cap"><i class="fa-solid fa-user-gear row-lead-ico"></i>Edit Profile Fields</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="autoFetchGPSAddress()"><div class="left-side-cap"><i class="fa-solid fa-map-location-dot row-lead-ico"></i>Saved Addresses (GPS)</div><i class="fa-solid fa-chevron-right"></i></a>
                     <a href="#" class="menu-row" onclick="window.location.reload();" style="background:#fafafa; border-top:1px solid #eee; font-weight:700; color:#ff3e3e;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Account</div></a>
@@ -185,9 +185,9 @@
             <div class="nav-dropdown-item">
                 <span>More <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></span>
                 <div class="floating-menu-pane">
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Select Language', '🌐 Primary language localized to English. Multi-dialect region packs are initializing background buffering.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Privacy Center', '🛡️ Encryption Active. Your secure user specification tokens and checkout paths are fully protected.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Help Center', '🎧 Connecting Zippy Help Desk Core... Real-time 24/7 client assistance network is active to verify database parameters.')"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>Help Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Select Language', '🌐 Layout pack initialized.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Privacy Center', '🛡️ Encryption Active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-chevron-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Help Center', '🎧 Connecting customer care core network...')"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>Help Center</div><i class="fa-solid fa-chevron-right"></i></a>
                     
                     <div class="notification-toggle-box">
                         <div class="toggle-header-row">
@@ -229,40 +229,61 @@
         <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
         <div class="cat-item" onclick="filterCategory('sneaker', this)">👟 Sneakers</div>
         <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
+        <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
+        <div class="cat-item" onclick="filterCategory('toys', this)">🧸 Baby Toys</div>
         <div class="cat-item" onclick="filterCategory('decor', this)">🏺 Home Decor</div>
-        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
     </div>
 
     <div id="panel-home" class="app-tab-panel active-view">
-        
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
-                <div class="slide-frame">
+                <div class="slide-frame" onclick="filterCategoryBySlider('all')">
                     <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Redefine Your Vibe</h1>
-                        <p>Authentic oversized fits & street culture drops.</p>
+                        <p>Premium Oversized Apparel & Modern Culture Drops.</p>
                     </div>
                 </div>
-                <div class="slide-frame">
+                <div class="slide-frame" onclick="filterCategoryBySlider('accessories')">
+                    <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=1200">
+                    <div class="banner-overlay-text">
+                        <h1>Next-Gen Tech Armour</h1>
+                        <p>Elite audio pods & fast smart charging units live.</p>
+                    </div>
+                </div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('cosmetic')">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200">
+                    <div class="banner-overlay-text">
+                        <h1>Luxury Glamour & Glow</h1>
+                        <p>Premium skin formulations & elite matte cosmetics line.</p>
+                    </div>
+                </div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('toys')">
+                    <img src="https://images.unsplash.com/photo-1532330380757-59b5be3002cd?q=80&w=1200">
+                    <div class="banner-overlay-text">
+                        <h1>Creative Toys Land</h1>
+                        <p>Safe learning sets, wooden builds & plush companions.</p>
+                    </div>
+                </div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('decor')">
                     <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Aesthetic Living Space</h1>
-                        <p>Minimalist artifacts & contemporary room layouts.</p>
+                        <p>Minimalist artifacts & room configurations.</p>
                     </div>
                 </div>
-                <div class="slide-frame">
+                <div class="slide-frame" onclick="filterCategoryBySlider('sneaker')">
                     <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Luxury Kick Drops</h1>
                         <p>Step up your rotation lineup with verified statements.</p>
                     </div>
                 </div>
-                <div class="slide-frame">
+                <div class="slide-frame" onclick="filterCategoryBySlider('all')">
                     <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1200">
                     <div class="banner-overlay-text">
                         <h1>Artisanal Workspaces</h1>
-                        <p>Crafting sleek geometry setups for modern work hubs.</p>
+                        <p>Sleek geometry setups for modern work hubs.</p>
                     </div>
                 </div>
             </div>
@@ -293,6 +314,69 @@
                     <button class="buy-btn" onclick="pushToBasket('Luxury White Sneakers', 1999)">Add to Cart</button>
                 </div>
 
+                <div class="card product-card" data-category="accessories">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=500"></div>
+                    <h3>Zippy Wireless Pro Pods</h3>
+                    <div class="price-box"><span class="now">₹1,499</span><span class="old">₹2,999</span><span class="off">50% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Zippy Wireless Pro Pods', 1499)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="accessories">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500"></div>
+                    <h3>Elite Noise-Cancelling Headphones</h3>
+                    <div class="price-box"><span class="now">₹2,999</span><span class="old">₹6,999</span><span class="off">57% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Elite ANC Headphones', 2999)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="accessories">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500"></div>
+                    <h3>SuperFast 65W GaN Dual Charger</h3>
+                    <div class="price-box"><span class="now">₹999</span><span class="old">₹1,999</span><span class="off">50% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('65W GaN Dual Charger', 999)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="cosmetic">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500"></div>
+                    <h3>Velvet Matte Liquid Lipstick</h3>
+                    <div class="price-box"><span class="now">₹499</span><span class="old">₹999</span><span class="off">50% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Velvet Matte Lipstick', 499)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="cosmetic">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=500"></div>
+                    <h3>Glow Booster Vitamin C Serum</h3>
+                    <div class="price-box"><span class="now">₹699</span><span class="old">₹1,299</span><span class="off">46% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Vitamin C Serum', 699)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="cosmetic">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1631730359577-38e4755a772b?q=80&w=500"></div>
+                    <h3>HD Flawless Liquid Foundation</h3>
+                    <div class="price-box"><span class="now">₹899</span><span class="old">₹1,799</span><span class="off">50% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('HD Liquid Foundation', 899)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="toys">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1559251606-c623743a6d76?q=80&w=500"></div>
+                    <h3>Ultra Soft Plush Teddy Bear</h3>
+                    <div class="price-box"><span class="now">₹599</span><span class="old">₹1,199</span><span class="off">50% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Ultra Soft Teddy Bear', 599)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="toys">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500"></div>
+                    <h3>Organic Alphabet Wooden Blocks</h3>
+                    <div class="price-box"><span class="now">₹799</span><span class="old">₹1,499</span><span class="off">46% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('Alphabet Wooden Blocks', 799)">Add to Cart</button>
+                </div>
+
+                <div class="card product-card" data-category="toys">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=500"></div>
+                    <h3>High-Speed Remote Control Stunt Car</h3>
+                    <div class="price-box"><span class="now">₹1,199</span><span class="old">₹2,499</span><span class="off">52% off</span></div>
+                    <button class="buy-btn" onclick="pushToBasket('RC Stunt Car', 1199)">Add to Cart</button>
+                </div>
+
                 <div class="card product-card" data-category="decor">
                     <div class="img-container"><img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=500"></div>
                     <h3>Aesthetic Minimalist Table Clock</h3>
@@ -305,14 +389,6 @@
                     <h3>Modular Walnut Storage Shelves</h3>
                     <div class="price-box"><span class="now">₹2,499</span><span class="old">₹5,999</span><span class="off">58% off</span></div>
                     <button class="buy-btn" onclick="pushToBasket('Walnut Storage Shelves', 2499)">Add to Cart</button>
-                </div>
-
-                <div class="card product-card" data-category="bags">
-                    <div class="discount-badge">60% OFF</div>
-                    <div class="img-container"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500"></div>
-                    <h3>Classic Pastel Hand Tote Bag</h3>
-                    <div class="price-box"><span class="now">₹599</span><span class="old">₹1,499</span><span class="off">60% off</span></div>
-                    <button class="buy-btn" onclick="pushToBasket('Classic Pastel Hand Tote Bag', 599)">Add to Cart</button>
                 </div>
 
             </div>
@@ -339,7 +415,6 @@
         </div>
     </div>
 
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -364,10 +439,10 @@
         let activeUserKeyNode = "guest_session";
         let userRawEmail = "";
 
-        // Automatic slider loop configuration
+        // Auto slider animation system loop updated for 7 slides
         let currentSlide = 0;
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % 4;
+        let sliderInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % 7;
             const engine = document.getElementById('heroSliderEngine');
             if (engine) engine.style.transform = `translateX(-${currentSlide * 100}vw)`;
         }, 3500);
@@ -389,51 +464,59 @@
             if(checkboxEl.checked) {
                 labelNode.innerText = "Enabled";
                 labelNode.style.color = "#ff3e3e";
-                triggerCustomModalPopup('Notifications Stream', '💡 Notification system activated! New culture gear drop notifications will be transmitted instantly.');
+                triggerCustomModalPopup('Notifications Stream', '💡 Notification system activated!');
             } else {
                 labelNode.innerText = "Disabled";
                 labelNode.style.color = "#888";
-                triggerCustomModalPopup('Notifications Stream', '🔕 Alert channels disconnected terminal session.');
             }
         }
 
         /* 📍 AUTOMATIC GPS POSITION ENGINE */
         function autoFetchGPSAddress() {
             const displayHook = document.getElementById('addressBarHook');
-            if (!navigator.geolocation) {
-                triggerCustomModalPopup('GPS Error', 'GPS Geolocation engine not configured in browser settings.');
-                return;
-            }
+            if (!navigator.geolocation) return;
             displayHook.innerText = "Connecting GPS Satellites...";
             
             navigator.geolocation.getCurrentPosition((position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-                
                 fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
                 .then(res => res.json())
                 .then(data => {
                     const parsedAddressText = data.display_name || `Lat: ${lat}, Lon: ${lon}`;
                     displayHook.innerText = parsedAddressText;
-                    
                     if (window.firebaseDb) {
                         const nodeRef = window.dbRef(window.firebaseDb, 'users/' + activeUserKeyNode + '/address');
-                        window.dbSet(nodeRef, { addressDetails: parsedAddressText, timestamp: Date.now() })
-                        .then(() => triggerCustomModalPopup('GPS Synced', '📍 Position metrics logged securely inside Firebase database!'))
-                        .catch(err => console.error(err));
+                        window.dbSet(nodeRef, { addressDetails: parsedAddressText, timestamp: Date.now() });
                     }
-                }).catch(err => { displayHook.innerText = `Lat: ${lat}, Lon: ${lon}`; });
-            }, () => { displayHook.innerText = "Location tracking blocked. Click to retry."; }, { enableHighAccuracy: true, timeout: 8000 });
+                });
+            });
         }
 
+        /* 📁 CATEGORY FILTER WITH SLIDER CONTROL INTEGRATION */
         function filterCategory(categoryTag, btnEl) {
-            document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
-            btnEl.classList.add('active');
+            if(btnEl) {
+                document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+                btnEl.classList.add('active');
+            } else {
+                document.querySelectorAll('.cat-item').forEach(item => {
+                    if(item.getAttribute('onclick').includes(`'${categoryTag}'`)) {
+                        item.classList.add('active');
+                    } else { item.classList.remove('active'); }
+                });
+            }
+            
             document.querySelectorAll('.product-card').forEach(card => {
                 if(categoryTag === 'all' || card.getAttribute('data-category') === categoryTag) {
                     card.style.display = "flex";
                 } else { card.style.display = "none"; }
             });
+        }
+
+        // ✅ ICON CLICK BANNER LINKING FUNCTION
+        function filterCategoryBySlider(categoryTag) {
+            filterCategory(categoryTag, null);
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
         }
 
         function openCartPanelSheet() {
@@ -478,21 +561,13 @@
             const tokenDecoded = parseJwt(response.credential);
             document.getElementById('google-btn-wrapper').style.display = "none";
             userRawEmail = tokenDecoded.email;
-            
             const shortName = tokenDecoded.name.split(' ')[0];
             document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${shortName} 👋`;
-            
             document.getElementById('dropFullnameNode').innerText = tokenDecoded.name;
             document.getElementById('dropEmailNode').innerText = userRawEmail;
-            
             activeUserKeyNode = userRawEmail.replace(/[^a-zA-Z0-9]/g, "_");
-            const nameParts = tokenDecoded.name.split(' ');
-            document.getElementById('inputFirstName').value = nameParts[0] || "";
-            document.getElementById('inputLastName').value = nameParts.slice(1).join(' ') || "";
-            document.getElementById('inputEmailId').value = userRawEmail;
         }
 
-        // Modal triggers
         function openEditProfileModal() { document.getElementById('editProfileModalPanel').style.display = "flex"; }
         function closeEditProfileModal() { document.getElementById('editProfileModalPanel').style.display = "none"; }
 
@@ -504,8 +579,7 @@
             window.dbSet(targetRef, { firstName: fName, lastName: lName, phoneHandle: document.getElementById('inputMobileNumber').value, email: userRawEmail, updatedOn: Date.now() })
             .then(() => { 
                 document.getElementById('dropFullnameNode').innerText = fName + " " + lName; 
-                document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${fName} 👋`;
-                triggerCustomModalPopup('Profile Update', '👤 Your core identity parameters have been synchronized into Firebase layout.');
+                triggerCustomModalPopup('Profile Update', '👤 Linked successfully!');
                 closeEditProfileModal(); 
             });
         }
@@ -515,7 +589,7 @@
             const orderRefNode = window.dbRef(window.firebaseDb, 'orders/' + activeUserKeyNode);
             const generatedPushNode = window.dbPush(orderRefNode);
             window.dbSet(generatedPushNode, { basketItems: appCartMemory, amountPaid: document.getElementById('sheetTotalBillHook').innerText, timestamp: Date.now() })
-            .then(() => { triggerCustomModalPopup('Checkout Success', '📦 Dispatch Successful! Live tracking node logged inside central database node.'); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
+            .then(() => { triggerCustomModalPopup('Checkout Success', '📦 Order logged safely!'); appCartMemory = []; syncBasketUI(); closeCartPanelSheet(); });
         }
 
         function parseJwt(token) {
@@ -526,4 +600,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
