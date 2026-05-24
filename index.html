@@ -3,59 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Elite Streetwear & Footwear Portal</title>
+    <title>Zippykart.co.in | Premium Store Dashboard</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; }
+        
+        /* HEADER CORES */
         header { background-color: #111; color: #fff; padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
         .logo { font-size: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; }
+        
         .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 10px 15px; width: 45%; max-width: 500px; position: relative; border: 1px solid #333; }
         .search-web-wrapper input { border: none; outline: none; width: 85%; font-size: 13px; color: #fff; background: transparent; }
         .search-web-wrapper i { color: #666; margin-right: 12px; }
-        .search-web-wrapper i.fa-camera { color: #aaa; cursor: pointer; position: absolute; right: 15px; }
+
         .header-right-menu { display: flex; align-items: center; gap: 20px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
         .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 265px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
-        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; }
+        
+        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
         .menu-row:hover { background: #fff5f5; color: #ff3e3e; }
         .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
         .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 15px; width: 20px; }
-        .notification-toggle-box { display: flex; flex-direction: column; gap: 8px; padding: 15px 20px; background: #fdfdfd; border-top: 1px solid #eee; }
-        .toggle-header-row { display: flex; justify-content: space-between; align-items: center; }
-        .toggle-header-row span { font-size: 13px; font-weight: 700; color: #111; }
-        .switch-engine-chassis { position: relative; display: inline-block; width: 42px; height: 24px; }
-        .switch-engine-chassis input { opacity: 0; width: 0; height: 0; }
-        .slider-knob-fluid { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 24px; }
-        .slider-knob-fluid:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-        input:checked + .slider-knob-fluid { background-color: #ff3e3e; }
-        input:checked + .slider-knob-fluid:before { transform: translateX(18px); }
+        
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
-        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100vw; }
-        .addr-left { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #fff; }
-        .addr-left i { color: #ff3e3e; }
-        .supercoins-panel { display: flex; align-items: center; gap: 6px; background: rgba(255,229,0,0.1); border: 1px solid #ffe500; color: #ffe500; padding: 3px 12px; border-radius: 12px; }
+        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
+        
         .categories-bar { background: #fff; padding: 15px 6%; display: flex; gap: 15px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
-        .slider-wrapper { position: relative; width: 100vw; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
+
+        /* HERO SLIDER FULL VIEW RESIZE FIX */
+        .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s ease; }
         .slide-frame { width: 100vw; height: 100%; position: relative; cursor: pointer; }
         .slide-frame img { width: 100vw; height: 100%; object-fit: cover; display: block; }
-        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; z-index: 5; }
+        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 40px; font-weight: 900; text-transform: uppercase; }
+
+        /* GRID PLATFORM */
         .container { width: 100%; padding: 35px 6%; }
         .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
         @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 950px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
         .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; }
         .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
@@ -63,13 +63,9 @@
         .price-box { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
-        .price-box .off { color: #ff3e3e; font-weight: bold; font-size: 12px; }
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; cursor: pointer; }
-        .custom-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 4000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .popup-modal-card { background: #fff; border-radius: 12px; width: 90%; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: zoomReveal 0.25s ease; overflow: hidden; }
-        @keyframes zoomReveal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .popup-modal-header { background: #111; color: #fff; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
-        .popup-modal-body { padding: 25px 20px; font-size: 13px; color: #444; line-height: 1.5; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
+
+        /* AUTH FORMS */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 78vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -86,6 +82,8 @@
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 15px 0; text-transform: uppercase; }
         .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; }
+
+        /* SPEC MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 3000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .detail-modal-box { background: #fff; width: 92%; max-width: 850px; height: 82vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; }
         .detail-left { width: 45%; background: #fafafa; display: flex; align-items: center; justify-content: center; padding: 20px; border-right: 1px solid #eee; }
@@ -103,6 +101,8 @@
         .single-review-card { background: #fafafa; padding: 14px; border-radius: 6px; border: 1px solid #eee; font-size: 12px; }
         .review-stars-active { color: #ffb400; margin-bottom: 5px; }
         .review-attached-img { max-width: 90px; max-height: 90px; object-fit: cover; border-radius: 4px; margin-top: 8px; display: block; border: 1px solid #ddd; }
+
+        /* CART UP SHEET */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -113,17 +113,12 @@
     </style>
 </head>
 <body>
-    <div class="custom-popup-overlay" id="masterAppPopupModal">
-        <div class="popup-modal-card">
-            <div class="popup-modal-header"><span id="popupModalTitleNode">ZippyKart Hub</span><i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAppCustomPopup()"></i></div>
-            <div class="popup-modal-body" id="popupModalBodyNode">Processing gateway logs...</div>
-        </div>
-    </div>
+
     <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2>Login</h2><p>Get access to your Orders, Wishlist collection and customized tracking data logs tree seamlessly.</p></div>
+                <div><h2>Login</h2><p id="authModalLeftSubheading">Get access to your Orders, Wishlist collection and customized tracking data logs tree seamlessly.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
@@ -139,6 +134,7 @@
             </div>
         </div>
     </div>
+
     <div class="detail-modal-overlay" id="productDetailMasterModal">
         <div class="detail-modal-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
@@ -169,14 +165,15 @@
             </div>
         </div>
     </div>
+
     <div class="sheet-overlay" id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
+
     <header>
         <div class="header-left-block">
             <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" placeholder="Search apparel, footwear, cosmetics, toys and bags...">
-                <i class="fa-solid fa-camera" onclick="triggerCustomModalPopup('Visual Search Engine', '📸 Scan Active!')"></i>
             </div>
         </div>
         <div class="header-right-menu">
@@ -187,23 +184,15 @@
                     <a href="#" class="menu-row" onclick="executeLogoutSession()" style="color:#ff3e3e;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out</div></a>
                 </div>
             </div>
-            <div class="nav-dropdown-item">
-                <span>More <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></span>
-                <div class="floating-menu-pane">
-                    <a href="#" class="menu-row" onclick="triggerCustomModalPopup('Language', '🌐 English Connected.')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Language</div></a>
-                    <div class="notification-toggle-box">
-                        <div class="toggle-header-row"><span>Notifications</span><label class="switch-engine-chassis"><input type="checkbox" onchange="handleToggleSwitchMotion(this)"><span class="slider-knob-fluid"></span></label></div>
-                        <p id="toggleStatusLabel">Unable or Desable</p>
-                    </div>
-                </div>
-            </div>
             <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
         </div>
     </header>
+
     <div class="top-delivery-strip">
-        <div class="addr-left" onclick="autoFetchGPSAddress()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Detecting Location... Tap to link GPS</span></div>
+        <div class="addr-left"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Terminal Active: New Delhi Hub Node</span></div>
         <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span id="coinsCounterNode">35</span></div>
     </div>
+
     <div class="categories-bar">
         <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
         <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
@@ -214,6 +203,7 @@
         <div class="cat-item" onclick="filterCategory('toys', this)">🧸 Baby Toys</div>
         <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
     </div>
+
     <div class="slider-wrapper">
         <div class="slide-container" id="heroSliderEngine">
             <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
@@ -223,30 +213,27 @@
             <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
         </div>
     </div>
+
     <div class="container"><h2 class="section-title">Trending Culture Drops</h2><div class="grid" id="catalogProductsGrid"></div></div>
+
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer"><div><p>Total Payable</p><h3 id="sheetTotalBillHook">₹0</h3></div><button class="final-pay-btn" onclick="executeCloudCheckout()">Place Order</button></div>
     </div>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        const firebaseConfig = { apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", authDomain: "zippykart-production.firebaseapp.com", databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", projectId: "zippykart-production" };
-        const app = initializeApp(firebaseConfig); window.firebaseDb = getDatabase(app); window.dbRef = ref; window.dbSet = set; window.dbPush = push;
-    </script>
+
     <script>
         let appCartMemory = [], selectedReviewRating = 5, currentActiveProductId = null, reviewPhotoBase64 = "", authCurrentModalState = "login", sessionActiveLoggedInUser = null;
         const databaseProducts = [
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, off: "60%", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High-grade leather framework. Shockproof responsive sole architecture." },
-            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, off: "60%", img: "https://images.unsplash.com/photo-1603487742131-4160ec99930a?q=80&w=500", specs: "Lightweight premium EVA foam array cushion textures." },
-            { id: "fw_loafer_1", category: "footwear", title: "Suede Tan Classic Loafers", price: 1499, oldPrice: 2999, off: "50%", img: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=500", specs: "Italian soft tan suede outer layer setup." },
-            { id: "fw_lowprice_1", category: "footwear", title: "Daily Run Budget Active Shoes", price: 699, oldPrice: 1499, off: "53%", img: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=500", specs: "High flexibility mesh web fabric configurations." },
-            { id: "cl_tshirt_1", category: "tshirt", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, off: "46%", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organicコットン features." },
-            { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, off: "48%", img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy layout system fabrics." },
-            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, off: "50%", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluid base layers." },
-            { id: "toy_blocks_1", category: "toys", title: "Organic Alphabet Wooden Blocks Set", price: 799, oldPrice: 1499, off: "46%", img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural chemical-free pinewood pieces." },
-            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, off: "60%", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Luxury pastel surface overlay mapping." }
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High-grade leather framework. Shockproof responsive sole architecture." },
+            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1603487742131-4160ec99930a?q=80&w=500", specs: "Lightweight premium EVA foam array cushion textures." },
+            { id: "fw_loafer_1", category: "footwear", title: "Suede Tan Classic Loafers", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=500", specs: "Italian soft tan suede outer layer setup." },
+            { id: "fw_lowprice_1", category: "footwear", title: "Daily Run Budget Active Shoes", price: 699, oldPrice: 1499, img: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=500", specs: "High flexibility mesh web fabric configurations." },
+            { id: "cl_tshirt_1", category: "tshirt", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton fabric." },
+            { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy layout system fabrics." },
+            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluid base layers." },
+            { id: "toy_blocks_1", category: "toys", title: "Organic Alphabet Wooden Blocks Set", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural chemical-free pinewood pieces." },
+            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Luxury pastel surface overlay mapping." }
         ];
         let simulatedDatabaseReviews = { "fw_sneaker_1": [{ stars: 5, msg: "Insane comfort sole block! Fits perfectly.", photo: "" }] };
 
@@ -274,9 +261,6 @@
             document.querySelectorAll('.product-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-category') === tag) ? "flex" : "none"; });
         }
         function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
-        function triggerCustomModalPopup(title, body) { document.getElementById('popupModalTitleNode').innerText = title; document.getElementById('popupModalBodyNode').innerText = body; document.getElementById('masterAppPopupModal').style.display = "flex"; }
-        function closeAppCustomPopup() { document.getElementById('masterAppPopupModal').style.display = "none"; }
-        function handleToggleSwitchMotion(cb) { const lbl = document.getElementById('toggleStatusLabel'); lbl.innerText = cb.checked ? "Enabled" : "Disabled"; lbl.style.color = cb.checked ? "#ff3e3e" : "#888"; }
         function openAuthGatewayModal() { if(sessionActiveLoggedInUser) return; document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('login'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
@@ -298,7 +282,6 @@
                 const mail = document.getElementById('authEmailNodeField').value.trim(); if(!mail) return; executeCustomUserLoginInjection(mail.split('@')[0], mail);
             } else {
                 const fName = document.getElementById('regFirstNameField').value.trim(), mail = document.getElementById('regEmailAddressField').value.trim(); if(!fName || !mail) return;
-                if(window.firebaseDb) { const cleanKey = mail.replace(/[^a-zA-Z0-9]/g, "_"); window.dbSet(window.dbRef(window.firebaseDb, 'users/' + cleanKey + '/profile'), { firstName: fName, emailAddress: mail, timestamp: Date.now() }); }
                 executeCustomUserLoginInjection(fName, mail);
             }
         }
@@ -319,7 +302,6 @@
         function submitProductReview() {
             const msg = document.getElementById('reviewTextMessage').value.trim(); if(!msg) return;
             let newReview = { stars: selectedReviewRating, msg: msg, photo: reviewPhotoBase64 }; if(!simulatedDatabaseReviews[currentActiveProductId]) simulatedDatabaseReviews[currentActiveProductId] = []; simulatedDatabaseReviews[currentActiveProductId].unshift(newReview);
-            if(window.firebaseDb) { const cleanUserKey = sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_") : "anonymous_user"; window.dbSet(window.dbRef(window.firebaseDb, 'reviews/' + currentActiveProductId + '/' + cleanUserKey), { ...newReview, time: Date.now() }); }
             renderReviews(currentActiveProductId); document.getElementById('reviewTextMessage').value = ""; document.getElementById('reviewPhotoPreview').style.display = "none"; reviewPhotoBase64 = "";
         }
         function renderReviews(id) {
@@ -337,7 +319,6 @@
             document.getElementById('sheetTotalBillHook').innerText = `₹${total}`;
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
-        function autoFetchGPSAddress() { alert("📍 GPS Updated!"); }
         function executeCloudCheckout() { alert("📦 Order placed successfully!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
         function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
     </script>
