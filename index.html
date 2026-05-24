@@ -2,82 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Ultimate Desktop & Mobile Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zippykart.co.in | Premium Desktop & Mobile Hub</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
+        /* 🔥 THE ULTIMATE DESKTOP & MOBILE SCALE CORRECTION SYSTEM */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; width: 100%; display: block; }
+        html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 HEADERS */
+        /* 🖤 MASTER ZIPPYKART NAVBAR - FULL SCREEN STRETCH */
         header { background-color: #111; color: #fff; padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
+        .header-left-block { display: flex; align-items: center; gap: 25px; flex-grow: 1; }
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; }
-        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 12px 15px; width: 45%; max-width: 500px; border: 1px solid #333; }
+        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 12px 15px; width: 50%; max-width: 550px; border: 1px solid #333; }
         .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; color: #fff; background: transparent; }
+        .search-web-wrapper i { color: #666; margin-right: 12px; }
 
         .header-right-menu { display: flex; align-items: center; gap: 15px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
         
+        /* MENU INTERFACES DROPDOWNS */
         .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
         .menu-header-badge { background: #111; color: #fff; padding: 12px 20px; font-size: 10px; border-bottom: 1px solid #222; }
         .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
-        .menu-row:hover { background: #fff5f5; color: #ff3e3e; }
+        .menu-row:hover { background: #fff5f5; color: #ff3e3e; padding-left: 25px; transition: all 0.2s; }
         .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
         .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 14px; width: 20px; text-align: center; }
-        .dropdown-signup-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; text-align: center; padding: 13px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; }
+        .dropdown-signup-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; text-align: center; padding: 13px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; border-top: 1px solid #eee; }
 
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
 
-        .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 15px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
+        /* CATEGORIES BAR NAVIGATION STRIP */
+        .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* SLIDER wrapper */
-        .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 360px; max-height: 500px; overflow: hidden; background: #111; }
+        /* WIDE-VIEW HERO BANNER AUTOMATED SLIDER */
+        .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
         .slide-frame img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block; }
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* PRODUCT GRIDS */
-        .container { width: 100%; padding: 35px 5%; background-color: #f1f2f4; }
-        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; }
-        .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; width: 100%; }
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 950px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+        /* 🛍️ FULL WIDTH SYSTEM CATALOG CONTROLLER GRID - COMPRESSION BYPASS */
+        .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
+        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
+        
+        /* MULTI-GRID PATTERN FOR REAL DESKTOP HARDWARE STRETCH */
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; width: 100%; }
+        @media (max-width: 1350px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 1050px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
 
-        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
-        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; }
-        .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: all 0.2s ease; }
+        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+        .card .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        
         .card h3 { font-size: 13.5px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; }
+        .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .price-box .now { font-weight: 700; color: #111; font-size: 16px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* 🖼️ FIX: STABLE CENTERED INTERACTIVE DETAILS VIEW MODAL CHASSIS */
+        /* FIXED PRODUCT DETAILS CENTER MODAL FRAME */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
-        .detail-modal-box { background: #fff; width: 100%; max-width: 480px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
         .detail-modal-box .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* SIZE OPTIONS GROUP GRAPHICS */
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
-        .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .size-box-cell:hover, .size-box-cell.active { border-color: #111; background: #111; color: #fff; }
+        .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
+        .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* AUTH & ADDRESS MASTER FORMS OVERLAYS */
+        /* AUTH SECTIONS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 76vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -86,31 +94,30 @@
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; }
+        .auth-action-submit-btn { background: #fb641b; color: #fff; border: none; padding: 13px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; width: 100%; cursor: pointer; margin-top: 12px; }
 
-        /* 📍 ADDRESS SPECIFIC CAPTURE WINDOW CONFIG */
+        /* 📍 ADDRESS SPECIFIC CAPTURE REGISTRY SHEET */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* BASKET DRAW SHEET */
+        /* SHOPPING CONTAINER CART SHEETS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2200; display: none; }
 
-        /* 🤖 AUTOMATIC SYSTEM INTEGRATED AI CUSTOMER CHAT BOT WINDOW OVERLAY */
-        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 370px; height: 480px; background: #fff; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
-        @keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
+        /* 💬 DYNAMIC AUTOMATED ACTIVE AI ASSISTANT LAYOUT PORTAL CHASSIS */
+        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
+        @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
         .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
         .ai-chat-header h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66; }
         .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8f9fa; }
         .ai-msg { padding: 11px 15px; border-radius: 8px; font-size: 12.5px; max-width: 82%; line-height: 1.5; font-weight: 500; }
         .ai-msg.system { background: #fff; color: #222; align-self: flex-start; border: 1px solid #eee; }
         .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; }
-        .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; }
+        .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
     </style>
@@ -120,12 +127,12 @@
     <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
         <div class="address-window-chassis">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:20px; cursor:pointer;" onclick="closeAddressesOverlayForm()"></i>
-            <h3 style="font-size:15px; font-weight:900; text-transform:uppercase; margin-bottom:18px; letter-spacing:0.5px;">Shipping Address Profile</h3>
+            <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px; letter-spacing:0.5px;">Shipping Address Form</h3>
             <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
-            <div class="auth-input-cell"><label>Flat / House / Suite No</label><input type="text" id="adrHouseNoField" placeholder="House/Flat Coordinates"></div>
-            <div class="auth-input-cell"><label>Colony / Landmark Street</label><input type="text" id="adrColonyField" placeholder="Nearby Mapped Node Info"></div>
-            <div class="auth-input-cell"><label>City Name</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
-            <div class="auth-input-cell"><label>Region Pincode</label><input type="number" id="adrPincodeField" placeholder="6-Digit Area Code"></div>
+            <div class="auth-input-cell"><label>Flat / House / Suite No</label><input type="text" id="adrHouseNoField" placeholder="House/Flat Address Info"></div>
+            <div class="auth-input-cell"><label>Colony / Street Landmark</label><input type="text" id="adrColonyField" placeholder="Nearby Area Node"></div>
+            <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
+            <div class="auth-input-cell"><label>6-Digit Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
             <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Delivery Location</button>
         </div>
     </div>
@@ -134,7 +141,7 @@
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2>Login</h2><p>Access your central tracking parameter loops securely.</p></div>
+                <div><h2>Login</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
@@ -151,7 +158,7 @@
         <div class="detail-modal-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
             <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
-            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111;">Product Title</h2>
+            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111; margin-top:5px;">Product Title</h2>
             <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
             
             <div>
@@ -168,7 +175,7 @@
                 <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:4px;">Product Summary & Details</h4>
                 <p id="modalProductSpecs" style="font-size:12.5px; line-height:1.5; color:#444; font-weight:500;"></p>
             </div>
-            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px; margin-top:5px;">Add To Cart</button>
+            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px;">Add To Cart</button>
         </div>
     </div>
 
@@ -179,14 +186,14 @@
             <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search apparel, footwear, cosmetics, cargos and accessories drops...">
+                <input type="text" placeholder="Search apparel, footwear, cosmetics, toys and premium bags drops...">
             </div>
         </div>
         <div class="header-right-menu">
             <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
                 <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
                 <div class="floating-menu-pane">
-                    <div class="menu-header-badge">ACCOUNT PARAMETERS</div>
+                    <div class="menu-header-badge">ACCOUNT INTERFACES</div>
                     <a href="#" class="menu-row" onclick="triggerImmediateIconAction('My Order Logs')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
                     <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Wishlist Storage')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                     <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
@@ -197,8 +204,9 @@
                 <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
                 <div class="floating-menu-pane">
                     <div class="menu-header-badge">UTILITY CHANNELS</div>
+                    <div class="menu-header-badge">UTILITY CHANNELS</div>
                     <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy Center Protocols')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy protection mapping')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                 </div>
             </div>
             <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
@@ -239,7 +247,7 @@
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
         <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
         <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! I am your 24x7 Automated AI Support Assistant. Main website layouts scaling node or size adjustments monitor karne mein help karunga. Type any query or code text node message below!</div>
+            <div class="ai-msg system">Hello Akash! I am your 24x7 Automated AI Support Assistant. Aapko website zoom scaling resolution issue ho, size group toggle karna ho ya billing tracking loop manage karna ho, bas batayein!</div>
         </div>
         <div class="ai-chat-input-row">
             <input type="text" id="aiUserTextInputMsg" placeholder="Ask about sizes adjustment, billing paths or order tracking logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
@@ -251,12 +259,14 @@
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         
         const databaseProducts = [
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling tailored custom for streetwear parameters loops." },
-            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1543330303-43f59d256ee2?q=80&w=500", specs: "100% Cotton dyed vintage wash texture blueprint with multi pocket layout grids." },
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton fabric framework. Drop shoulder styling tailored custom for streetwear parameters loops." },
+            /* 🔥 FIX: FIXED STABLE RE-LINK IMAGE FOR DENIM CASUAL SHIRT DROP */
+            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
             { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
             { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist grey tone layout alignment matrix offering loose dynamic comfort features." },
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade dynamic leather compilation canvas nodes with responsive traction sole configurations." },
-            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes." },
+            /* 🔥 FIX: FIXED STABLE RE-LINK IMAGE FOR HOME SLEEPERS */
+            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
             { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy structural layout fabrics." },
             { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
@@ -291,11 +301,11 @@
 
         function toggleAuthModalState(state) {
             authCurrentModalState = state;
-            const headingNode = document.getElementById('authModalLeftHeading'), subheadingNode = document.getElementById('authModalLeftSubheading'), promptRow = document.getElementById('authSwitchPromptMessageRow'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement');
+            const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement');
             fieldsContainer.innerHTML = "";
             if(state === 'login') {
                 headingNode.innerText = "Login Matrix"; submitBtn.innerText = "Log In Account";
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID / Username</label><input type="email" id="authEmailNodeField"></div><div class="auth-input-cell"><label>Password</label><input type="password" id="authPasswordNodeField"></div>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID</label><input type="email" id="authEmailNodeField"></div><div class="auth-input-cell"><label>Password</label><input type="password" id="authPasswordNodeField"></div>`;
             } else {
                 headingNode.innerText = "Registration"; submitBtn.innerText = "Create Account Node";
                 fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Number</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail ID</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Password</label><input type="password" id="regCreatePasswordField"></div>`;
@@ -324,35 +334,35 @@
         function syncBasketUI() {
             document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`; const body = document.getElementById('cartSheetBodyContainer'); if(!body) return;
             if(appCartMemory.length === 0) { body.innerHTML = "<p style='text-align:center;color:#999;margin-top:35px;'>Basket empty.</p>"; document.getElementById('sheetTotalBillHook').innerText="₹0"; return; }
-            body.innerHTML = ""; let total = 0; appCartMemory.forEach((item, idx) => { total += item.price; body.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; align-items:center;"><div><h4>${item.name}</h4><b>₹${item.price}</b></div><i class="fa-solid fa-trash" style="color:#ff3e3e; cursor:pointer;" onclick="dropItem(${idx})"></i></div>`; });
+            body.innerHTML = ""; let total = 0; appCartMemory.forEach((item, idx) => { total += item.price; body.innerHTML += `<div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #eee; align-items:center;"><div><h4>${item.name}</h4><b>₹${item.price}</b></div><i class="fa-solid fa-trash" style="color:#ff3e3e; cursor:pointer;" onclick="dropItem(${idx})"></i></div>`; });
             document.getElementById('sheetTotalBillHook').innerText = `₹${total}`;
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
-        function executeCloudCheckout() { alert("📦 Central data pipeline synced successfully!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
+        function executeCloudCheckout() { alert("📦 Central checkout order parameters synced to Firebase!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
         
-        function triggerImmediateIconAction(name) { alert(`🎯 Event Trigger Activated: [${name}] operational layer active.`); }
+        function triggerImmediateIconAction(name) { alert(`🎯 Event Action: [${name}] operation layer active.`); }
 
-        /* 📍 ADDRESS CONTROLLER FUNCTIONS */
+        /* 📍 ADDRESS CONTROLLER CORES */
         function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
         function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
         function saveAddressProfileDetails() {
             const name = document.getElementById('adrFullNameField').value.trim();
             const house = document.getElementById('adrHouseNoField').value.trim();
             const city = document.getElementById('adrCityField').value.trim();
-            if(!name || !house || !city) { alert("Please complete full address parameter coordinates!"); return; }
-            document.getElementById('addressBarHook').innerText = `📍 Delivers to: ${name}, ${house}, ${city}`;
+            if(!name || !house || !city) { alert("Please complete full address parameters!"); return; }
+            document.getElementById('addressBarHook').innerText = `📍 Address: ${name}, ${house}, ${city}`;
             closeAddressesOverlayForm();
         }
 
-        /* 🤖 AI CHAT PANEL FUNCTIONS */
+        /* 🤖 AUTOMATED AI AGENT INTERACTION ENGINE */
         function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
         function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
         function dispatchAiChatMessage() {
             const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
             const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
             setTimeout(() => {
-                let aiReply = "System mapped your profile requirements. Main layout dimensions aur custom sizing metrics update ho chuke hain.";
-                if(msg.toLowerCase().includes("size")) { aiReply = "Product preview modal ke andar ab absolute centered stack lag gaya hai. Aap S, M, L, ya XL size metrics automatic toggle kar sakte hain!"; }
+                let aiReply = "Aapki requirement logs system grid node par check ho gayi hain. Everything is auto scaling perfectly right now.";
+                if(msg.toLowerCase().includes("size")) { aiReply = "Product centered layer box update ho gaya hai. Ab aap S, M, L, XL size choices dynamically trace kar sakte hain!"; }
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
             }, 750);
         }
