@@ -23,11 +23,11 @@
         .header-right-menu { display: flex; align-items: center; gap: 20px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
         
-        /* DROPDOWNS */
+        /* DROPDOWNS CLEANING */
         .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 270px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         .menu-header-badge { background: #111; color: #fff; padding: 12px 20px; font-size: 10px; border-bottom: 1px solid #222; letter-spacing: 0.5px; }
-        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
+        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
         .menu-row:hover { background: #fff5f5; color: #ff3e3e; }
         .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
         .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 14px; width: 20px; text-align: center; }
@@ -36,40 +36,42 @@
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
         
-        /* STRIPS BAR */
+        /* CATEGORIES STRIP */
         .categories-bar { background: #fff; padding: 15px 6%; display: flex; gap: 15px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: 0.2s; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* HERO WIDE SLIDER CAROUSEL */
-        .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
-        .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s ease; }
+        /* HERO DESKTOP OPTIMIZED SLIDER */
+        .slider-wrapper { position: relative; width: 100%; height: 420px; overflow: hidden; background: #111; }
+        .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw; height: 100%; position: relative; cursor: pointer; }
         .slide-frame img { width: 100vw; height: 100%; object-fit: cover; display: block; }
-        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; z-index: 5; }
-        .banner-overlay-text h1 { font-size: 40px; font-weight: 900; text-transform: uppercase; }
+        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; z-index: 5; }
+        .banner-overlay-text h1 { font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-        /* GRID TILES */
+        /* GRID PRODUCT TILES WITH STABLE IMAGES */
         .container { width: 100%; padding: 35px 6%; }
-        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; }
-        .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
-        @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 950px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 0.5px; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; width: 100%; }
+        @media (max-width: 1400px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 950px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } }
 
-        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15 rgba(0,0,0,0.02); cursor: pointer; }
-        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .card .img-container { width: 100%; height: 280px; overflow: hidden; border-radius: 6px; margin-bottom: 14px; background: #f7f7f7; display: flex; align-items: center; justify-content: center; }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .card h3 { font-size: 13px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card h3 { font-size: 13px; font-weight: 700; color: #212121; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
-        .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
+        .price-box .now { font-weight: 700; color: #111; font-size: 16px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 12px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; transition: 0.2s; }
+        .buy-btn:hover { background: #ff3e3e; }
 
-        /* SYSTEM OVERLAYS MODALS */
+        /* AUTH POPUPS MODULES */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
-        .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 76vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
         .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; }
@@ -83,13 +85,14 @@
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 15px 0; text-transform: uppercase; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; }
 
+        /* DETAIL GATEWAY MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 3000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .detail-modal-box { background: #fff; width: 92%; max-width: 850px; height: 82vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; }
+        .detail-modal-box { background: #fff; width: 92%; max-width: 850px; height: 80vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; }
         .detail-left { width: 45%; background: #fafafa; display: flex; align-items: center; justify-content: center; padding: 20px; border-right: 1px solid #eee; }
         .detail-left img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .detail-right { width: 55%; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
 
-        /* CART TIERS */
+        /* CART TIERS ELEMENTS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -98,28 +101,24 @@
         .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2200; display: none; }
 
-        /* AI CHATBOT HOOK */
-        .ai-chat-trigger-ball { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #ff3e3e, #ff7e40); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; box-shadow: 0 8px 25px rgba(255,62,62,0.4); cursor: pointer; z-index: 4000; }
-        .ai-chat-window-box { position: fixed; bottom: 95px; right: 25px; width: 350px; height: 450px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 4000; }
-        .ai-chat-header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; }
-        .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; }
-        .ai-msg { padding: 10px 14px; border-radius: 8px; font-size: 12px; max-width: 80%; }
-        .ai-msg.system { background: #eaeaea; color: #333; align-self: flex-start; }
-        .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; }
-        .ai-chat-input-row { padding: 10px; border-top: 1px solid #eee; display: flex; gap: 8px; background: #fff; }
-        .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 10px; border-radius: 6px; font-size: 12px; outline: none; }
-        .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        /* AUTOMATIC AI SYSTEM INTELLIGENT CHAT WINDOW */
+        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 380px; height: 500px; background: #fff; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 4000; animation: slideInUp 0.3s ease; }
+        @keyframes slideInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+        .ai-chat-header h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66; }
+        .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8f9fa; }
+        .ai-msg { padding: 11px 15px; border-radius: 8px; font-size: 12.5px; max-width: 82%; line-height: 1.5; font-weight: 500; }
+        .ai-msg.system { background: #fff; color: #222; align-self: flex-start; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border: 1px solid #eee; }
+        .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; box-shadow: 0 2px 8px rgba(255,62,62,0.2); }
+        .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
+        .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 12px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; transition: border-color 0.2s; }
+        .ai-chat-input-row input:focus { border-color: #ff3e3e; }
+        .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 12px 20px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .ai-chat-input-row button:hover { background: #ff3e3e; }
     </style>
 </head>
 <body>
-
-    <div class="custom-popup-overlay" id="masterAppPopupModal">
-        <div class="popup-modal-card">
-            <div class="popup-modal-header"><span id="popupModalTitleNode">ZippyKart Hub</span><i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAppCustomPopup()"></i></div>
-            <div class="popup-modal-body" id="popupModalBodyNode">Processing gateway logs...</div>
-        </div>
-    </div>
 
     <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
         <div class="auth-window-box">
@@ -165,19 +164,18 @@
             <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
             <div class="search-web-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search apparel, footwear, cosmetics, toys and bags...">
+                <input type="text" placeholder="Search apparel, footwear, cargos, tech and accessories...">
             </div>
         </div>
         <div class="header-right-menu">
             <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
                 <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
                 <div class="floating-menu-pane">
-                    <div class="menu-header-badge">GUEST USER VAULT</div>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Egyptian Plus')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-angle-right"></i></a>
+                    <div class="menu-header-badge">ACCOUNT INTERFACES</div>
                     <a href="#" class="menu-row" onclick="triggerImmediateIconAction('My Order Logs')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Wishlist Storage')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-angle-right"></i></a>
                     <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Saved Addresses')"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div><i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="menu-row" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out</div></a>
+                    <a href="#" class="menu-row" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f5f5f5;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out</div></a>
                     <a href="#" class="dropdown-signup-btn" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
                 </div>
             </div>
@@ -185,14 +183,10 @@
             <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
                 <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
                 <div class="floating-menu-pane">
-                    <div class="menu-header-badge">MORE SETTINGS</div>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Notification Console')"><div class="left-side-cap"><i class="fa-solid fa-bell row-lead-ico"></i>Notification Console</div><i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Select Language Engine')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-angle-right"></i></a>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy Center')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-angle-right"></i></a>
-                    <div class="notification-toggle-box">
-                        <div class="toggle-header-row"><span>Notifications</span><label class="switch-engine-chassis"><input type="checkbox" onchange="handleToggleSwitchMotion(this)"><span class="slider-knob-fluid"></span></label></div>
-                        <p id="toggleStatusLabel">Unable or Desable</p>
-                    </div>
+                    <div class="menu-header-badge">UTILITY CHANNELS</div>
+                    <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>24×7 Customer Chat</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Notification Center')"><div class="left-side-cap"><i class="fa-solid fa-bell row-lead-ico"></i>Notification Console</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy Core Architecture')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </div>
 
@@ -210,19 +204,18 @@
         <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
         <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
         <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
-        <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
+        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Street Cargos</div>
         <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
-        <div class="cat-item" onclick="filterCategory('toys', this)">🧸 Baby Toys</div>
-        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
+        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Premium Bags</div>
     </div>
 
     <div class="slider-wrapper">
         <div class="slide-container" id="heroSliderEngine">
-            <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('cosmetic')"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200"><div class="banner-overlay-text"><h1>Luxury Glamour Glow</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('toys')"><img src="https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=1200"><div class="banner-overlay-text"><h1>Creative Kids Logics</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1600"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('cargo')"><img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?q=80&w=1600"><div class="banner-overlay-text"><h1>Street Hype Cargo Logs</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('cosmetic')"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600"><div class="banner-overlay-text"><h1>Luxury Glamour Glow</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1600"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
         </div>
     </div>
 
@@ -234,32 +227,34 @@
         <div class="sheet-footer"><div><p>Total Payable</p><h3 id="sheetTotalBillHook">₹0</h3></div><button class="final-pay-btn" onclick="executeCloudCheckout()">Place Order</button></div>
     </div>
 
-    <div class="ai-chat-trigger-ball" onclick="toggleAiCustomerChatWindow()"><i class="fa-solid fa-comments"></i></div>
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
-        <div class="ai-chat-header"><h3>Zippy AI Assistant</h3><i class="fa-solid fa-minus" style="cursor:pointer;" onclick="toggleAiCustomerChatWindow()"></i></div>
+        <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
         <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! I am Zippy AI Assistant. I can resolve registration loops, manage your shopping tray or sync clothing products instantly. Ask me anything!</div>
+            <div class="ai-msg system">Hello! I am your 24x7 Automated Customer Support Agent. Aapko loop login registration issue ho, ya shopping basket clear karni ho, bas niche command ya query type karke send karein!</div>
         </div>
-        <div class="ai-chat-input-row"><input type="text" id="aiUserTextInputMsg" placeholder="Type instructions or problem code..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()"><button onclick="dispatchAiChatMessage()">Send</button></div>
+        <div class="ai-chat-input-row">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Ask about orders, fashion collection, or setup tracking..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <button onclick="dispatchAiChatMessage()">Send</button>
+        </div>
     </div>
 
     <script>
-        let appCartMemory = [], selectedReviewRating = 5, currentActiveProductId = null, reviewPhotoBase64 = "", authCurrentModalState = "register", sessionActiveLoggedInUser = null;
+        let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         
-        // DYNAMIC PRODUCT CATALOG WITH NEW EXCLUSIVE FASHION VARIETIES
+        // RE-CHECKED STABLE HIGH RES IMAGES STACK TREE FOR ALL VARIETIES
         const databaseProducts = [
-            /* --- 👗 DYNAMIC FASHION VARIETIES --- */
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic combed cotton framework. Drop shoulder styling tailored for premium streetwear." },
-            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1543330303-43f59d256ee2?q=80&w=500", specs: "100% Breathable indigo dyed vintage wash fabric. Slim double-pocket grid chassis built for smart weekend steps." },
-            { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Dense fleece lining layout with an extra spacious comfort pouch. Solid loop adjustments custom engineered for cold rotation drops." },
-            { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist geometry alignment pattern. Ribbed knit border margins offer high comfort and dynamic structural fitting specs." },
+            /* --- FASHION ZONE CORE --- */
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600", specs: "Heavy 240 GSM organic combed cotton framework. Drop shoulder styling tailored for premium streetwear." },
+            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1543330303-43f59d256ee2?q=80&w=600", specs: "100% Breathable indigo dyed vintage wash fabric. Slim double-pocket grid chassis built for smart weekend steps." },
+            { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600", specs: "Dense fleece lining layout with an extra spacious comfort pouch. Solid loop adjustments custom engineered for cold rotation drops." },
+            { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600", specs: "Minimalist geometry alignment pattern. Ribbed knit border margins offer high comfort and dynamic structural fitting specs." },
             
-            /* --- CORE OTHER drops --- */
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High-grade leather framework. Shockproof responsive sole architecture." },
-            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1603487742131-4160ec99930a?q=80&w=500", specs: "Lightweight premium EVA foam array cushion textures." },
-            { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy layout system fabrics." },
-            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluid base layers." },
-            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Luxury pastel surface overlay mapping." }
+            /* --- OTHER DRIFT DROPS --- */
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600", specs: "High-grade leather framework. Shockproof responsive sole architecture stability system." },
+            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1603487742131-4160ec99930a?q=80&w=600", specs: "Lightweight premium EVA foam array cushion textures." },
+            { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=600", specs: "Integrated 6-pocket heavy layout system fabrics for urban adjustments." },
+            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600", specs: "Waterproof rich pigment fluid base layers long retention formula." },
+            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600", specs: "Luxury pastel surface overlay mapping spatial compartment blocks." }
         ];
 
         function initializeStoreCatalog() {
@@ -278,8 +273,9 @@
         }
         window.addEventListener('DOMContentLoaded', initializeStoreCatalog);
 
+        // SLIDER AUTOMATED MATRIX
         let slideIdx = 0;
-        setInterval(() => { slideIdx = (slideIdx + 1) % 5; const engine = document.getElementById('heroSliderEngine'); if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; }, 3600);
+        setInterval(() => { slideIdx = (slideIdx + 1) % 5; const engine = document.getElementById('heroSliderEngine'); if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; }, 4000);
 
         function filterCategory(tag, btnEl) {
             if(btnEl) { document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active')); btnEl.classList.add('active'); }
@@ -308,7 +304,6 @@
                 const mail = document.getElementById('authEmailNodeField').value.trim(); if(!mail) return; executeCustomUserLoginInjection(mail.split('@')[0], mail);
             } else {
                 const fName = document.getElementById('regFirstNameField').value.trim(), mail = document.getElementById('regEmailAddressField').value.trim(); if(!fName || !mail) return;
-                if(window.firebaseDb) { const cleanKey = mail.replace(/[^a-zA-Z0-9]/g, "_"); window.dbSet(window.dbRef(window.firebaseDb, 'users/' + cleanKey + '/profile'), { firstName: fName, emailAddress: mail, timestamp: Date.now() }); }
                 executeCustomUserLoginInjection(fName, mail);
             }
         }
@@ -329,31 +324,36 @@
         function closeCartPanelSheet() { document.getElementById('cartPanelSheet').classList.remove('sheet-active'); document.getElementById('sheetOverlay').style.display = "none"; }
         function syncBasketUI() {
             document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`; const body = document.getElementById('cartSheetBodyContainer'); if(!body) return;
-            if(appCartMemory.length === 0) { body.innerHTML = "<p style='text-align:center;color:#999;margin-top:35px;'>Basket empty.</p>"; document.getElementById('sheetTotalBillHook').innerText="₹0"; return; }
-            body.innerHTML = ""; let total = 0; appCartMemory.forEach((item, idx) => { total += item.price; body.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><div><h4>${item.name}</h4><b>₹${item.price}</b></div><i class="fa-solid fa-trash" style="color:#ff3e3e; cursor:pointer;" onclick="dropItem(${idx})"></i></div>`; });
+            if(appCartMemory.length === 0) { body.innerHTML = "<p style='text-align:center;color:#999;margin-top:35px;'>Basket tray empty.</p>"; document.getElementById('sheetTotalBillHook').innerText="₹0"; return; }
+            body.innerHTML = ""; let total = 0; appCartMemory.forEach((item, idx) => { total += item.price; body.innerHTML += `<div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #eee; align-items:center;"><div><h4 style="font-size:13px;">${item.name}</h4><b>₹${item.price}</b></div><i class="fa-solid fa-trash" style="color:#ff3e3e; cursor:pointer;" onclick="dropItem(${idx})"></i></div>`; });
             document.getElementById('sheetTotalBillHook').innerText = `₹${total}`;
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
-        function executeCloudCheckout() { alert("📦 Order logs compiled successfully via Firebase!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
+        function executeCloudCheckout() { alert("📦 Order pipeline sync completed successfully via Firebase integration!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
         function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
         
-        function triggerImmediateIconAction(name) { alert(`🎯 Command Matrix Triggered: [${name}] is active!`); }
+        function triggerImmediateIconAction(name) { alert(`🎯 Active Event Log: [${name}] trigger successfully synced.`); }
 
-        /* AI CHATBOT LOGIC */
-        function toggleAiCustomerChatWindow() { const win = document.getElementById('aiChatCustomerWindowHub'); win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; }
+        /* AUTOMATIC AI AGENT CUSTOMER INTERFACE SYSTEMS */
+        function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
+        function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
+        
         function dispatchAiChatMessage() {
             const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
             const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
+            
             setTimeout(() => {
-                let aiReply = "I am processing the workspace templates node. For apparel adjustments, click the 'Fashion Zone' tab above.";
+                let aiReply = "Aapki query system log mein register ho gayi hai. Kisi specific category ke liye aap upar diye gaye custom strip layout links ko access kar sakte hain.";
                 let promptLower = msg.toLowerCase();
                 if(promptLower.includes("login") || promptLower.includes("signup") || promptLower.includes("register")) {
-                    aiReply = "Simply click on 'Login' on the top-right navbar and click 'Create Registration' blue link to setup your account details form loop instantly.";
-                } else if(promptLower.includes("shirt") || promptLower.includes("hoodie") || promptLower.includes("fashion")) {
-                    aiReply = "Our newly updated Fashion section contains premium 240 GSM Maroon Tees, Indigo Wash Denim Casual Shirts, and Soft Fleece Sweatshirts. Click on 'Fashion Zone' button to filter them!";
+                    aiReply = "Account validation process bohot aasan hai! Navbar par top right corner mein 'Login' text par click karein aur apna 5-fields registration submit karein.";
+                } else if(promptLower.includes("shirt") || promptLower.includes("hoodie") || promptLower.includes("tshirt") || promptLower.includes("fashion")) {
+                    aiReply = "Hamare pipeline mein abhi new culture oversized Maroon T-shirts, premium Indigo wash Denim shirts aur heavy fleece sweatshirts fully live hain. Unhe dekhne ke liye upar 'Fashion Zone' button click karein!";
+                } else if(promptLower.includes("cart") || promptLower.includes("basket") || promptLower.includes("order")) {
+                    aiReply = "Aap jo bhi item catalog se add karenge vo automatic side drawer tray mein list ho jayegi, jahan se aap checkout logs dynamically trigger kar sakte hain.";
                 }
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
-            }, 850);
+            }, 750);
         }
     </script>
 </body>
