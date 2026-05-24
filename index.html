@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Premium Desktop & Mobile Hub</title>
+    <title>Zippykart.co.in | Premium Full-Scale Production Hub</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
-        /* 🔥 THE ULTIMATE DESKTOP & MOBILE SCALE CORRECTION SYSTEM */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 MASTER ZIPPYKART NAVBAR - FULL SCREEN STRETCH */
+        /* 🖤 MASTER ZIPPYKART NAVBAR */
         header { background-color: #111; color: #fff; padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .header-left-block { display: flex; align-items: center; gap: 25px; flex-grow: 1; }
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
@@ -25,7 +24,7 @@
         .header-right-menu { display: flex; align-items: center; gap: 15px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
         
-        /* MENU INTERFACES DROPDOWNS */
+        /* DROPDOWNS MANAGEMENT CHASSIS */
         .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
@@ -45,7 +44,7 @@
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* WIDE-VIEW HERO BANNER AUTOMATED SLIDER */
+        /* WIDE BANNER SLIDER BUILD */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
@@ -53,12 +52,11 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* 🛍️ FULL WIDTH SYSTEM CATALOG CONTROLLER GRID - COMPRESSION BYPASS */
+        /* PRODUCTION CATALOG CONTROLLER GRID */
         .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
         .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
         
-        /* MULTI-GRID PATTERN FOR REAL DESKTOP HARDWARE STRETCH */
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; width: 100%; }
         @media (max-width: 1350px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 1050px) { .grid { grid-template-columns: repeat(3, 1fr); } }
@@ -71,7 +69,7 @@
         
         .card h3 { font-size: 13.5px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
-        .price-box .now { font-weight: 700; color: #111; font-size: 16px; }
+        .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
@@ -85,18 +83,28 @@
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* AUTH SECTIONS SETUP */
+        /* 📑 SYSTEM STATUS OVERLAY BOX (REPLACES BROWSER ALERT POPUPS) */
+        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
+        .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; }
+        .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
+        .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+
+        /* AUTH FORMS LAYOUTS WITH FIXED DYNAMIC SWITCH LINK TRIGGER */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
-        .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 76vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
         .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; }
-        .auth-input-cell { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+        .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 15px; }
+        .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; }
+        .auth-form-fields-container { display: flex; flex-direction: column; gap: 12px; margin-top: 5px; }
+        .auth-input-cell { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; }
-        .auth-action-submit-btn { background: #fb641b; color: #fff; border: none; padding: 13px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; width: 100%; cursor: pointer; margin-top: 12px; }
+        .auth-action-submit-btn { background: #fb641b; color: #fff; border: none; padding: 13px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; width: 100%; cursor: pointer; margin-top: 10px; }
 
-        /* 📍 ADDRESS SPECIFIC CAPTURE REGISTRY SHEET */
+        /* 📍 ADDRESS INTERFACES */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
@@ -107,8 +115,8 @@
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
 
-        /* 💬 DYNAMIC AUTOMATED ACTIVE AI ASSISTANT LAYOUT PORTAL CHASSIS */
-        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
+        /* 💬 AI SUPPORT CHAT WINDOW OVERLAY */
+        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s cubic-bezier(0.25, 1, 0.5, 1); }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
         .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
@@ -123,6 +131,14 @@
     </style>
 </head>
 <body>
+
+    <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
+        <div class="status-popup-card">
+            <h3 id="statusPopupHeading">Status Log</h3>
+            <p id="statusPopupDescription">Data node synchronization processing completed successfully.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Log</button>
+        </div>
+    </div>
 
     <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
         <div class="address-window-chassis">
@@ -141,12 +157,14 @@
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2>Login</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
+                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
                 <div>
-                    <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span></div>
+                    <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">
+                        New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span>
+                    </div>
                     <div class="auth-form-fields-container" id="authFormDynamicFieldsContainer"></div>
                     <button class="auth-action-submit-btn" id="authActionSubmitButtonElement" onclick="handleAuthFormSubmission()">Proceed Terminal</button>
                 </div>
@@ -162,7 +180,7 @@
             <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
             
             <div>
-                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Garment Size</h4>
+                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Size</h4>
                 <div class="size-selector-row">
                     <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
                     <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
@@ -193,22 +211,24 @@
             <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
                 <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
                 <div class="floating-menu-pane">
-                    <div class="menu-header-badge">ACCOUNT INTERFACES</div>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('My Order Logs')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Wishlist Storage')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                    <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('My Order Logs', '📋 Verification Log: 0 items dispatched inside current pipeline data.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Private Storage Active. Your locked items will be saved here.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                     <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
-                    <a href="#" class="dropdown-signup-btn" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
+                    <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
+                    <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
                 </div>
             </div>
+
             <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
                 <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
                 <div class="floating-menu-pane">
                     <div class="menu-header-badge">UTILITY CHANNELS</div>
-                    <div class="menu-header-badge">UTILITY CHANNELS</div>
                     <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy protection mapping')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ Absolute Layer Encryption Node active inside secure V2.6 protocol.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                 </div>
             </div>
+
             <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
         </div>
     </header>
@@ -222,7 +242,7 @@
         <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
         <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
         <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
-        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
+        <div class="cat-item" onclick="filterCategory('tech', this)">🔌 Tech Accs</div>
         <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
         <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
     </div>
@@ -231,7 +251,7 @@
         <div class="slide-container" id="heroSliderEngine">
             <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('cosmetic')"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200"><div class="banner-overlay-text"><h1>Luxury Glamour Glow</h1></div></div>
+            <div class="slide-frame" onclick="filterCategoryBySlider('tech')"><img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=1400"><div class="banner-overlay-text"><h1>Next Gen Tech Accs</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
         </div>
     </div>
@@ -247,10 +267,10 @@
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
         <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
         <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! I am your 24x7 Automated AI Support Assistant. Aapko website zoom scaling resolution issue ho, size group toggle karna ho ya billing tracking loop manage karna ho, bas batayein!</div>
+            <div class="ai-msg system">Hello Akash! I am your 24x7 Automated AI Support Assistant. Main website rendering grids, size selection nodes, custom forms aur electronics inventory monitor karne mein help karunga. Type any query or command below!</div>
         </div>
         <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Ask about sizes adjustment, billing paths or order tracking logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Ask about sizes, tech drop list or order metrics..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
             <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
@@ -258,16 +278,22 @@
     <script>
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         
+        // 🔋 STABLE INVENTORY MATRIX DATA STREAM (FASHION + TECH CHANNELS LIVE LINK SETUP)
         const databaseProducts = [
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton fabric framework. Drop shoulder styling tailored custom for streetwear parameters loops." },
-            /* 🔥 FIX: FIXED STABLE RE-LINK IMAGE FOR DENIM CASUAL SHIRT DROP */
+            /* --- FASHION ZONE CORE --- */
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling tailored custom for streetwear parameters loops." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
             { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
             { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist grey tone layout alignment matrix offering loose dynamic comfort features." },
+            
+            /* --- 🔌 NEW ELECTRONIC ACCESSORIES ZONE VARIETIES --- */
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit. Short-circuit defense layers for quick smartphone data refills." },
+            { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling with crystal gold gold-plated 3.5mm acoustic node ports." },
+            { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Pure Active Noise Cancellation system with 40-hour deep bass continuous lithium battery lifespan configurations." },
+            
+            /* --- CORE LIFESTYLE ITEMS --- */
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade dynamic leather compilation canvas nodes with responsive traction sole configurations." },
-            /* 🔥 FIX: FIXED STABLE RE-LINK IMAGE FOR HOME SLEEPERS */
             { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
-            { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy structural layout fabrics." },
             { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
@@ -299,25 +325,51 @@
         function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
+        /* 📋 THE FIXED REGISTRATION MATRIX WITH AUTOMATIC IDENTITY TOGGLE FORM */
         function toggleAuthModalState(state) {
             authCurrentModalState = state;
-            const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement');
+            const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement'), switchPrompt = document.getElementById('authSwitchPromptMessageRow');
             fieldsContainer.innerHTML = "";
             if(state === 'login') {
-                headingNode.innerText = "Login Matrix"; submitBtn.innerText = "Log In Account";
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID</label><input type="email" id="authEmailNodeField"></div><div class="auth-input-cell"><label>Password</label><input type="password" id="authPasswordNodeField"></div>`;
+                headingNode.innerText = "Login Matrix"; submitBtn.innerText = "Execute Session LogIn";
+                switchPrompt.innerHTML = `New to ZippyKart? <span class="blue-link-trigger" style="color: #0076e4; cursor: pointer; font-weight: 700; text-decoration: underline;" onclick="toggleAuthModalState('register')">Create Registration</span>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID / Identifier</label><input type="email" id="authEmailNodeField" placeholder="Enter email address"></div><div class="auth-input-cell"><label>Secret Key / Password</label><input type="password" id="authPasswordNodeField" placeholder="••••••••"></div>`;
             } else {
-                headingNode.innerText = "Registration"; submitBtn.innerText = "Create Account Node";
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Number</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail ID</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Password</label><input type="password" id="regCreatePasswordField"></div>`;
+                headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
+                switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" style="color: #0076e4; cursor: pointer; font-weight: 700; text-decoration: underline;" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField" placeholder="e.g. Kumar"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField" placeholder="10-Digit Coordinate"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField" placeholder="username@gmail.com"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField" placeholder="Set password key"></div>`;
             }
         }
 
         function handleAuthFormSubmission() {
-            const mail = document.getElementById('authEmailNodeField')?.value || "user@gmail.com";
-            sessionActiveLoggedInUser = { name: mail.split('@')[0], email: mail };
-            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${sessionActiveLoggedInUser.name} 👋`;
+            let displayName = "Akash";
+            let emailNodeVal = "user@gmail.com";
+            
+            if(authCurrentModalState === 'login') {
+                const fMail = document.getElementById('authEmailNodeField')?.value.trim();
+                if(fMail) { emailNodeVal = fMail; displayName = fMail.split('@')[0]; }
+            } else {
+                const fName = document.getElementById('regFirstNameField')?.value.trim();
+                const fMail = document.getElementById('regEmailAddressField')?.value.trim();
+                if(fName) displayName = fName;
+                if(fMail) emailNodeVal = fMail;
+            }
+            
+            sessionActiveLoggedInUser = { name: displayName, email: emailNodeVal };
+            
+            // Inject dynamic user status badge logs tree into navbar header dropdowns
+            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`;
+            document.getElementById('dropdownProfileVaultLabel').innerText = `USER SYSTEM VAULT: ${emailNodeVal.toUpperCase()}`;
+            
+            // Display logout row terminal option and hide registration links
+            document.getElementById('logoutRowTerminalButton').style.display = "flex";
+            document.getElementById('dropdownMainRegisterTriggerLink').style.display = "none";
+            
             closeAuthGatewayModal();
+            launchStatusPopupDialog('Secure Entry Success', `🎉 Welcome back ${displayName}! Your data logging terminal session is authenticated safely.`);
         }
+
+        function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
 
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
@@ -338,31 +390,41 @@
             document.getElementById('sheetTotalBillHook').innerText = `₹${total}`;
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
-        function executeCloudCheckout() { alert("📦 Central checkout order parameters synced to Firebase!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
         
-        function triggerImmediateIconAction(name) { alert(`🎯 Event Action: [${name}] operation layer active.`); }
+        /* 📑 INLINE LOG OVERLAY DIALOG CONTROLLERS (FIXED BROWSER ALERT POPUP BUGS) */
+        function launchStatusPopupDialog(heading, desc) {
+            document.getElementById('statusPopupHeading').innerText = heading;
+            document.getElementById('statusPopupDescription').innerText = desc;
+            document.getElementById('statusPopupMasterMessageNode').style.display = "flex";
+        }
+        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; }
+        function executeCloudCheckout() { launchStatusPopupDialog('Order Dispatched', '📦 Central order checkout logs successfully compiled via Firebase storage data clusters nodes!'); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
 
-        /* 📍 ADDRESS CONTROLLER CORES */
+        /* 📍 ADDRESS PROFILE FORM OPERATIONAL LOGICS */
         function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
         function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
         function saveAddressProfileDetails() {
             const name = document.getElementById('adrFullNameField').value.trim();
             const house = document.getElementById('adrHouseNoField').value.trim();
             const city = document.getElementById('adrCityField').value.trim();
-            if(!name || !house || !city) { alert("Please complete full address parameters!"); return; }
-            document.getElementById('addressBarHook').innerText = `📍 Address: ${name}, ${house}, ${city}`;
+            if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all full address parameters values fields!'); return; }
+            document.getElementById('addressBarHook').innerText = `📍 Delivery Coordinates Node: ${name}, ${house}, ${city}`;
             closeAddressesOverlayForm();
+            launchStatusPopupDialog('Location Saved', '🎉 Custom delivery matrix address saved inside user storage array container node.');
         }
 
-        /* 🤖 AUTOMATED AI AGENT INTERACTION ENGINE */
+        /* 🤖 AI CORE AUTOMATED ASSISTANT DRIVER */
         function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
         function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
         function dispatchAiChatMessage() {
             const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
             const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
             setTimeout(() => {
-                let aiReply = "Aapki requirement logs system grid node par check ho gayi hain. Everything is auto scaling perfectly right now.";
-                if(msg.toLowerCase().includes("size")) { aiReply = "Product centered layer box update ho gaya hai. Ab aap S, M, L, XL size choices dynamically trace kar sakte hain!"; }
+                let aiReply = "Your data query handles compiled. For technical components updates, feel free to filter our newly added 'Tech Accs' section layer above.";
+                let pLower = msg.toLowerCase();
+                if(pLower.includes("size")) { aiReply = "The preview modal contains dynamicCentered stacks node rules. You can toggle size specs S, M, L, XL smoothly!"; }
+                else if(pLower.includes("login") || pLower.includes("signup") || pLower.includes("register")) { aiReply = "Registration link bug fixed! Tap 'Login' on top right header, click blue trigger link to access the full details signup terminal block forms."; }
+                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("headphone") || pLower.includes("electronic")) { aiReply = "I have updated the core inventory stack parameters tree! 65W fast warp chargers, metallic heavy bass earphones and wireless over-ear ANC premium headphones are now live under 'Tech Accs' category strip block."; }
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
             }, 750);
         }
