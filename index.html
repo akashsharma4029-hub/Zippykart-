@@ -3,44 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Premium Store Dashboard</title>
+    <title>Zippykart.co.in | Ultimate Desktop Lifestyle Store</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
-        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; }
+        body { background-color: #f1f2f4; color: #111; overflow-x: hidden; padding-bottom: 40px; width: 100%; }
         
-        /* HEADER CORES */
-        header { background-color: #111; color: #fff; padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
+        /* HEADER WIDE BANNER LAYOUT */
+        header { background-color: #111; color: #fff; padding: 16px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-left-block { display: flex; align-items: center; gap: 35px; flex-grow: 1; }
         .logo { font-size: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
         .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; }
-        
-        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 10px 15px; width: 45%; max-width: 500px; position: relative; border: 1px solid #333; }
-        .search-web-wrapper input { border: none; outline: none; width: 85%; font-size: 13px; color: #fff; background: transparent; }
+        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 12px 15px; width: 48%; max-width: 550px; border: 1px solid #333; }
+        .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; color: #fff; background: transparent; }
         .search-web-wrapper i { color: #666; margin-right: 12px; }
 
         .header-right-menu { display: flex; align-items: center; gap: 20px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
-        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 265px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
-        .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
-        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
+        /* DROPDOWNS */
+        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 270px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
+        .nav-dropdown-item:hover .floating-menu-pane { display: block; }
+        .menu-header-badge { background: #111; color: #fff; padding: 12px 20px; font-size: 10px; border-bottom: 1px solid #222; letter-spacing: 0.5px; }
+        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
         .menu-row:hover { background: #fff5f5; color: #ff3e3e; }
         .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
-        .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 15px; width: 20px; }
-        
+        .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 14px; width: 20px; text-align: center; }
+        .dropdown-signup-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; text-align: center; padding: 12px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; }
+
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
         
+        /* STRIPS BAR */
         .categories-bar { background: #fff; padding: 15px 6%; display: flex; gap: 15px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* HERO SLIDER FULL VIEW RESIZE FIX */
+        /* HERO WIDE SLIDER CAROUSEL */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s ease; }
         .slide-frame { width: 100vw; height: 100%; position: relative; cursor: pointer; }
@@ -48,15 +50,15 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 8%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 40px; font-weight: 900; text-transform: uppercase; }
 
-        /* GRID PLATFORM */
+        /* GRID TILES */
         .container { width: 100%; padding: 35px 6%; }
-        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
+        .section-title { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; }
         .section-title::after { content: ''; display: block; width: 35px; height: 3px; background: #ff3e3e; margin-top: 6px; }
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
         @media (max-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 950px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
 
-        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15 rgba(0,0,0,0.02); cursor: pointer; }
         .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; }
         .card h3 { font-size: 13px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -65,12 +67,11 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* AUTH FORMS */
+        /* SYSTEM OVERLAYS MODALS */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
-        .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 78vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        .auth-window-box { background: #fff; width: 92%; max-width: 800px; height: 76vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
-        .auth-left-banner p { font-size: 13px; color: #aaa; line-height: 1.5; margin-top: 10px; }
         .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; }
         .auth-switch-link-row span.blue-link-trigger { color: #0076e4; cursor: pointer; font-weight: 700; text-decoration: underline; margin-left: 4px; }
@@ -80,45 +81,51 @@
         .auth-input-cell input { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; }
         .auth-action-submit-btn { background: #fb641b; color: #fff; border: none; padding: 13px; border-radius: 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; width: 100%; cursor: pointer; margin-top: 12px; }
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 15px 0; text-transform: uppercase; }
-        .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; }
 
-        /* SPEC MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 3000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .detail-modal-box { background: #fff; width: 92%; max-width: 850px; height: 82vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; }
         .detail-left { width: 45%; background: #fafafa; display: flex; align-items: center; justify-content: center; padding: 20px; border-right: 1px solid #eee; }
         .detail-left img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .detail-right { width: 55%; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
-        .review-section { border-top: 1px solid #eee; padding-top: 20px; }
-        .star-rating-input { display: flex; gap: 6px; margin: 10px 0; }
-        .star-rating-input i { font-size: 22px; color: #ccc; cursor: pointer; }
-        .star-rating-input i.active { color: #ffb400; }
-        .review-input-box { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 12px; resize: none; outline: none; }
-        .upload-photo-btn { background: #f5f5f5; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin: 10px 0; }
-        .upload-photo-btn input { display: none; }
-        .review-submit-btn { background: #111; color: #fff; padding: 9px 24px; border: none; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .live-reviews-display { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-        .single-review-card { background: #fafafa; padding: 14px; border-radius: 6px; border: 1px solid #eee; font-size: 12px; }
-        .review-stars-active { color: #ffb400; margin-bottom: 5px; }
-        .review-attached-img { max-width: 90px; max-height: 90px; object-fit: cover; border-radius: 4px; margin-top: 8px; display: block; border: 1px solid #ddd; }
 
-        /* CART UP SHEET */
+        /* CART TIERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
+        .final-pay-btn { background: #ff5722; color: #fff; border: none; padding: 12px 40px; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2200; display: none; }
+
+        /* AI CHATBOT HOOK */
+        .ai-chat-trigger-ball { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: linear-gradient(135deg, #ff3e3e, #ff7e40); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; box-shadow: 0 8px 25px rgba(255,62,62,0.4); cursor: pointer; z-index: 4000; }
+        .ai-chat-window-box { position: fixed; bottom: 95px; right: 25px; width: 350px; height: 450px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 4000; }
+        .ai-chat-header { background: #111; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; }
+        .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; }
+        .ai-msg { padding: 10px 14px; border-radius: 8px; font-size: 12px; max-width: 80%; }
+        .ai-msg.system { background: #eaeaea; color: #333; align-self: flex-start; }
+        .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; }
+        .ai-chat-input-row { padding: 10px; border-top: 1px solid #eee; display: flex; gap: 8px; background: #fff; }
+        .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 10px; border-radius: 6px; font-size: 12px; outline: none; }
+        .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
+
+    <div class="custom-popup-overlay" id="masterAppPopupModal">
+        <div class="popup-modal-card">
+            <div class="popup-modal-header"><span id="popupModalTitleNode">ZippyKart Hub</span><i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAppCustomPopup()"></i></div>
+            <div class="popup-modal-body" id="popupModalBodyNode">Processing gateway logs...</div>
+        </div>
+    </div>
 
     <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2>Login</h2><p id="authModalLeftSubheading">Get access to your Orders, Wishlist collection and customized tracking data logs tree seamlessly.</p></div>
+                <div><h2 id="authModalLeftHeading">Login</h2><p id="authModalLeftSubheading">Get access to your Orders, Wishlist collection and customized tracking data logs tree seamlessly.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
@@ -147,21 +154,6 @@
                     <p id="modalProductSpecs" style="font-size:13px; line-height:1.6; color:#444; font-weight:500;"></p>
                 </div>
                 <button class="buy-btn" id="modalAddToCartBtn" style="padding:15px; font-size:13px;">Add To Cart</button>
-                <div class="review-section">
-                    <h3>Customer Reviews</h3>
-                    <div class="star-rating-input" id="starInputRow">
-                        <i class="fa-solid fa-star" data-rating="1" onclick="setReviewStars(1)"></i>
-                        <i class="fa-solid fa-star" data-rating="2" onclick="setReviewStars(2)"></i>
-                        <i class="fa-solid fa-star" data-rating="3" onclick="setReviewStars(3)"></i>
-                        <i class="fa-solid fa-star" data-rating="4" onclick="setReviewStars(4)"></i>
-                        <i class="fa-solid fa-star" data-rating="5" onclick="setReviewStars(5)"></i>
-                    </div>
-                    <textarea class="review-input-box" id="reviewTextMessage" rows="2" placeholder="Share your experience..."></textarea>
-                    <label class="upload-photo-btn"><i class="fa-solid fa-camera"></i> Capture Photo<input type="file" accept="image/*" id="reviewPhotoAttachment" onchange="previewReviewImage(this)"></label>
-                    <img id="reviewPhotoPreview" style="max-width:75px; display:none; border-radius:4px; margin-bottom:10px; border:1px solid #ddd;"><br>
-                    <button class="review-submit-btn" onclick="submitProductReview()">Post Review</button>
-                    <div class="live-reviews-display" id="productLiveReviewsContainer"></div>
-                </div>
             </div>
         </div>
     </div>
@@ -178,26 +170,46 @@
         </div>
         <div class="header-right-menu">
             <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
-                <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
-                <div class="floating-menu-pane" id="navAccountMenuPanelDropdown">
-                    <div style="background: #111; color: #fff; padding: 15px 20px; font-size: 11px;"><h4 id="dropFullnameNode" style="font-size:13px; font-weight:700;">Guest User</h4></div>
-                    <a href="#" class="menu-row" onclick="executeLogoutSession()" style="color:#ff3e3e;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out</div></a>
+                <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
+                <div class="floating-menu-pane">
+                    <div class="menu-header-badge">GUEST USER VAULT</div>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Egyptian Plus')"><div class="left-side-cap"><i class="fa-solid fa-crown row-lead-ico"></i>ZippyKart Plus</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('My Order Logs')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Wishlist Storage')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Saved Addresses')"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out</div></a>
+                    <a href="#" class="dropdown-signup-btn" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
                 </div>
             </div>
+
+            <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
+                <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
+                <div class="floating-menu-pane">
+                    <div class="menu-header-badge">MORE SETTINGS</div>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Notification Console')"><div class="left-side-cap"><i class="fa-solid fa-bell row-lead-ico"></i>Notification Console</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Select Language Engine')"><div class="left-side-cap"><i class="fa-solid fa-language row-lead-ico"></i>Select Language</div><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="#" class="menu-row" onclick="triggerImmediateIconAction('Privacy Center')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div><i class="fa-solid fa-angle-right"></i></a>
+                    <div class="notification-toggle-box">
+                        <div class="toggle-header-row"><span>Notifications</span><label class="switch-engine-chassis"><input type="checkbox" onchange="handleToggleSwitchMotion(this)"><span class="slider-knob-fluid"></span></label></div>
+                        <p id="toggleStatusLabel">Unable or Desable</p>
+                    </div>
+                </div>
+            </div>
+
             <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
+            <div id="google-btn-wrapper" style="display:none;"><div id="g_id_onload" data-client_id="1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div></div>
         </div>
     </header>
 
     <div class="top-delivery-strip">
-        <div class="addr-left"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Terminal Active: New Delhi Hub Node</span></div>
+        <div class="addr-left"><i class="fa-solid fa-location-crosshairs"></i><span>Terminal Active: New Delhi Hub Node</span></div>
         <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span id="coinsCounterNode">35</span></div>
     </div>
 
     <div class="categories-bar">
         <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
+        <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
         <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
-        <div class="cat-item" onclick="filterCategory('tshirt', this)">👕 Oversized</div>
-        <div class="cat-item" onclick="filterCategory('cargo', this)">👖 Cargos</div>
         <div class="cat-item" onclick="filterCategory('accessories', this)">📱 Tech Accs</div>
         <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
         <div class="cat-item" onclick="filterCategory('toys', this)">🧸 Baby Toys</div>
@@ -206,8 +218,8 @@
 
     <div class="slider-wrapper">
         <div class="slide-container" id="heroSliderEngine">
+            <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('tshirt')"><img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1200"><div class="banner-overlay-text"><h1>Redefine Your Vibe</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('cosmetic')"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200"><div class="banner-overlay-text"><h1>Luxury Glamour Glow</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('toys')"><img src="https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=1200"><div class="banner-overlay-text"><h1>Creative Kids Logics</h1></div></div>
             <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
@@ -222,20 +234,33 @@
         <div class="sheet-footer"><div><p>Total Payable</p><h3 id="sheetTotalBillHook">₹0</h3></div><button class="final-pay-btn" onclick="executeCloudCheckout()">Place Order</button></div>
     </div>
 
+    <div class="ai-chat-trigger-ball" onclick="toggleAiCustomerChatWindow()"><i class="fa-solid fa-comments"></i></div>
+    <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
+        <div class="ai-chat-header"><h3>Zippy AI Assistant</h3><i class="fa-solid fa-minus" style="cursor:pointer;" onclick="toggleAiCustomerChatWindow()"></i></div>
+        <div class="ai-chat-logs" id="aiChatLogsWrapper">
+            <div class="ai-msg system">Hello Akash! I am Zippy AI Assistant. I can resolve registration loops, manage your shopping tray or sync clothing products instantly. Ask me anything!</div>
+        </div>
+        <div class="ai-chat-input-row"><input type="text" id="aiUserTextInputMsg" placeholder="Type instructions or problem code..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()"><button onclick="dispatchAiChatMessage()">Send</button></div>
+    </div>
+
     <script>
-        let appCartMemory = [], selectedReviewRating = 5, currentActiveProductId = null, reviewPhotoBase64 = "", authCurrentModalState = "login", sessionActiveLoggedInUser = null;
+        let appCartMemory = [], selectedReviewRating = 5, currentActiveProductId = null, reviewPhotoBase64 = "", authCurrentModalState = "register", sessionActiveLoggedInUser = null;
+        
+        // DYNAMIC PRODUCT CATALOG WITH NEW EXCLUSIVE FASHION VARIETIES
         const databaseProducts = [
+            /* --- 👗 DYNAMIC FASHION VARIETIES --- */
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic combed cotton framework. Drop shoulder styling tailored for premium streetwear." },
+            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1543330303-43f59d256ee2?q=80&w=500", specs: "100% Breathable indigo dyed vintage wash fabric. Slim double-pocket grid chassis built for smart weekend steps." },
+            { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Dense fleece lining layout with an extra spacious comfort pouch. Solid loop adjustments custom engineered for cold rotation drops." },
+            { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist geometry alignment pattern. Ribbed knit border margins offer high comfort and dynamic structural fitting specs." },
+            
+            /* --- CORE OTHER drops --- */
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High-grade leather framework. Shockproof responsive sole architecture." },
             { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1603487742131-4160ec99930a?q=80&w=500", specs: "Lightweight premium EVA foam array cushion textures." },
-            { id: "fw_loafer_1", category: "footwear", title: "Suede Tan Classic Loafers", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=500", specs: "Italian soft tan suede outer layer setup." },
-            { id: "fw_lowprice_1", category: "footwear", title: "Daily Run Budget Active Shoes", price: 699, oldPrice: 1499, img: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=500", specs: "High flexibility mesh web fabric configurations." },
-            { id: "cl_tshirt_1", category: "tshirt", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton fabric." },
             { id: "cl_cargo_1", category: "cargo", title: "Baggy Multi-Pocket Utility Cargos", price: 1299, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500", specs: "Integrated 6-pocket heavy layout system fabrics." },
             { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluid base layers." },
-            { id: "toy_blocks_1", category: "toys", title: "Organic Alphabet Wooden Blocks Set", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural chemical-free pinewood pieces." },
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Luxury pastel surface overlay mapping." }
         ];
-        let simulatedDatabaseReviews = { "fw_sneaker_1": [{ stars: 5, msg: "Insane comfort sole block! Fits perfectly.", photo: "" }] };
 
         function initializeStoreCatalog() {
             const container = document.getElementById('catalogProductsGrid');
@@ -261,7 +286,8 @@
             document.querySelectorAll('.product-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-category') === tag) ? "flex" : "none"; });
         }
         function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
-        function openAuthGatewayModal() { if(sessionActiveLoggedInUser) return; document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('login'); }
+        
+        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
         function toggleAuthModalState(state) {
@@ -269,11 +295,11 @@
             const headingNode = document.getElementById('authModalLeftHeading'), subheadingNode = document.getElementById('authModalLeftSubheading'), promptRow = document.getElementById('authSwitchPromptMessageRow'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement');
             fieldsContainer.innerHTML = "";
             if(state === 'login') {
-                headingNode.innerText = "Login"; subheadingNode.innerText = "Get access to your Orders, Wishlist."; promptRow.innerHTML = `New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span>`; submitBtn.innerText = "Log In Account";
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID</label><input type="email" id="authEmailNodeField"></div><div class="auth-input-cell"><label>Password</label><input type="password" id="authPasswordNodeField"></div>`;
+                headingNode.innerText = "Login Entry"; subheadingNode.innerText = "Access your core account node logs instantly."; promptRow.innerHTML = `New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span>`; submitBtn.innerText = "Execute LogIn";
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID / Identifier</label><input type="email" id="authEmailNodeField"></div><div class="auth-input-cell"><label>Secret Key / Password</label><input type="password" id="authPasswordNodeField"></div>`;
             } else {
-                headingNode.innerText = "Register"; subheadingNode.innerText = "Sign up with your parameters."; promptRow.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In</span>`; submitBtn.innerText = "Create Account";
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail ID</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Password</label><input type="password" id="regCreatePasswordField"></div>`;
+                headingNode.innerText = "Registration"; subheadingNode.innerText = "Sign up with your custom system logs to initialize pipeline."; promptRow.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`; submitBtn.innerText = "Initialize System Account";
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Network Code</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Set Account Password</label><input type="password" id="regCreatePasswordField"></div>`;
             }
         }
 
@@ -282,10 +308,11 @@
                 const mail = document.getElementById('authEmailNodeField').value.trim(); if(!mail) return; executeCustomUserLoginInjection(mail.split('@')[0], mail);
             } else {
                 const fName = document.getElementById('regFirstNameField').value.trim(), mail = document.getElementById('regEmailAddressField').value.trim(); if(!fName || !mail) return;
+                if(window.firebaseDb) { const cleanKey = mail.replace(/[^a-zA-Z0-9]/g, "_"); window.dbSet(window.dbRef(window.firebaseDb, 'users/' + cleanKey + '/profile'), { firstName: fName, emailAddress: mail, timestamp: Date.now() }); }
                 executeCustomUserLoginInjection(fName, mail);
             }
         }
-        function executeCustomUserLoginInjection(displayName, email) { sessionActiveLoggedInUser = { name: displayName, email: email }; document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`; document.getElementById('dropFullnameNode').innerText = displayName; closeAuthGatewayModal(); }
+        function executeCustomUserLoginInjection(displayName, email) { sessionActiveLoggedInUser = { name: displayName, email: email }; document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`; closeAuthGatewayModal(); }
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
         function renderGoogleGsiEmbeddedButton() { setTimeout(() => { if(window.google) { google.accounts.id.initialize({ client_id: "1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com", callback: handleCredentialResponse }); google.accounts.id.renderButton(document.getElementById("embed-google-signin-btn-hook"), { theme: "dark", size: "medium", type: "standard", shape: "pill" }); } }, 1000); }
         function handleCredentialResponse(res) { const token = parseJwt(res.credential); executeCustomUserLoginInjection(token.name.split(' ')[0], token.email); }
@@ -293,21 +320,9 @@
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
             document.getElementById('modalProductImage').src = item.img; document.getElementById('modalProductTitle').innerText = item.title; document.getElementById('modalProductPrice').innerText = `₹${item.price}`; document.getElementById('modalProductSpecs').innerText = item.specs;
-            document.getElementById('modalAddToCartBtn').setAttribute('onclick', `pushToBasket('${item.title}', ${item.price})`); setReviewStars(5); renderReviews(id); document.getElementById('productDetailMasterModal').style.display = "flex";
+            document.getElementById('modalAddToCartBtn').setAttribute('onclick', `pushToBasket('${item.title}', ${item.price})`); document.getElementById('productDetailMasterModal').style.display = "flex";
         }
         function closeProductDetailModal() { document.getElementById('productDetailMasterModal').style.display = "none"; }
-        function setReviewStars(v) { selectedReviewRating = v; document.querySelectorAll('#starInputRow i').forEach(s => { let rating = parseInt(s.getAttribute('data-rating')); s.className = rating <= v ? "fa-solid fa-star active" : "fa-solid fa-star"; }); }
-        function previewReviewImage(input) { const file = input.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = function(e) { reviewPhotoBase64 = e.target.result; const node = document.getElementById('reviewPhotoPreview'); node.src = reviewPhotoBase64; node.style.display = "block"; }; reader.readAsDataURL(file); }
-        
-        function submitProductReview() {
-            const msg = document.getElementById('reviewTextMessage').value.trim(); if(!msg) return;
-            let newReview = { stars: selectedReviewRating, msg: msg, photo: reviewPhotoBase64 }; if(!simulatedDatabaseReviews[currentActiveProductId]) simulatedDatabaseReviews[currentActiveProductId] = []; simulatedDatabaseReviews[currentActiveProductId].unshift(newReview);
-            renderReviews(currentActiveProductId); document.getElementById('reviewTextMessage').value = ""; document.getElementById('reviewPhotoPreview').style.display = "none"; reviewPhotoBase64 = "";
-        }
-        function renderReviews(id) {
-            const container = document.getElementById('productLiveReviewsContainer'); if(!container) return; container.innerHTML = ""; let list = simulatedDatabaseReviews[id] || [];
-            list.forEach(r => { let stars = ""; for(let i=1; i<=5; i++) stars += i <= r.stars ? `★` : `☆`; let img = r.photo ? `<img class="review-attached-img" src="${r.photo}">` : ""; container.innerHTML += `<div class="single-review-card"><div class="review-stars-active">${stars}</div><p>${r.msg}</p>${img}</div>`; });
-        }
 
         function pushToBasket(name, price) { appCartMemory.push({ name: name, price: price }); syncBasketUI(); openCartPanelSheet(); }
         function openCartPanelSheet() { document.getElementById('cartPanelSheet').classList.add('sheet-active'); document.getElementById('sheetOverlay').style.display = "block"; }
@@ -319,8 +334,27 @@
             document.getElementById('sheetTotalBillHook').innerText = `₹${total}`;
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
-        function executeCloudCheckout() { alert("📦 Order placed successfully!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
+        function executeCloudCheckout() { alert("📦 Order logs compiled successfully via Firebase!"); appCartMemory=[]; syncBasketUI(); closeCartPanelSheet(); }
         function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
+        
+        function triggerImmediateIconAction(name) { alert(`🎯 Command Matrix Triggered: [${name}] is active!`); }
+
+        /* AI CHATBOT LOGIC */
+        function toggleAiCustomerChatWindow() { const win = document.getElementById('aiChatCustomerWindowHub'); win.style.display = (win.style.display === 'flex') ? 'none' : 'flex'; }
+        function dispatchAiChatMessage() {
+            const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
+            const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
+            setTimeout(() => {
+                let aiReply = "I am processing the workspace templates node. For apparel adjustments, click the 'Fashion Zone' tab above.";
+                let promptLower = msg.toLowerCase();
+                if(promptLower.includes("login") || promptLower.includes("signup") || promptLower.includes("register")) {
+                    aiReply = "Simply click on 'Login' on the top-right navbar and click 'Create Registration' blue link to setup your account details form loop instantly.";
+                } else if(promptLower.includes("shirt") || promptLower.includes("hoodie") || promptLower.includes("fashion")) {
+                    aiReply = "Our newly updated Fashion section contains premium 240 GSM Maroon Tees, Indigo Wash Denim Casual Shirts, and Soft Fleece Sweatshirts. Click on 'Fashion Zone' button to filter them!";
+                }
+                logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
+            }, 850);
+        }
     </script>
 </body>
 </html>
