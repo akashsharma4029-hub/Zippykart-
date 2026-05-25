@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Premium Full-Scale Production Hub</title>
+    <title>Zippykart.co.in | Firebase Dynamic Production Hub</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -104,6 +104,7 @@
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; }
+        .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 10px; }
 
         /* 🔗 GOOGLE SIGN IN CONTAINER ELEMENTS GRID */
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 12px 0; text-transform: uppercase; width: 100%; }
@@ -122,6 +123,7 @@
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
+        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; }
 
         /* 💬 AI SUPPORT CHAT WINDOW OVERLAY */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
@@ -136,9 +138,37 @@
         .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
     </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // ✅ AUTO-LOCKED INJECTED KEY PARAMETERS 
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
+            authDomain: "zippykart-production.firebaseapp.com", 
+            databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", 
+            projectId: "zippykart-production" 
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.firebaseDB = db;
+        window.dbRef = ref;
+        window.dbSet = set;
+        window.dbPush = push;
+        window.dbOnValue = onValue;
+
+        console.log("Firebase Live System Pipeline Active.");
+        window.syncProductsFromFirebase();
+    </script>
 </head>
 <body>
+
+    <div id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
@@ -223,8 +253,8 @@
                 <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
                 <div class="floating-menu-pane">
                     <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('My Order Logs', '📦 Verification Log: Mapped packaging pipeline active via Firebase database trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Wishlist Vault Active. Your creative selections are preserved.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('My Order Logs', '📋 Orders mapped successfully inside real-time storage loops.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Wishlist Vault Active. Your choices are preserved.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                     <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                     <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
                     <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
@@ -236,7 +266,7 @@
                 <div class="floating-menu-pane">
                     <div class="menu-header-badge">UTILITY CHANNELS</div>
                     <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ Absolute Encryption safe node linked inside v2.6 framework logs.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ Absolute Encryption safe node live.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                 </div>
             </div>
 
@@ -278,7 +308,7 @@
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
         <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
         <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! I am your 24x7 Automated AI Support Assistant. Main website rendering grids, size selection nodes, custom forms, Google Sign-In options aur electronics inventory monitor karne mein help karunga. Type any query below!</div>
+            <div class="ai-msg system">Hello Akash! Website completely Firebase clusters se real-time linked hai. Boliyey kya help chahiye?</div>
         </div>
         <div class="ai-chat-input-row">
             <input type="text" id="aiUserTextInputMsg" placeholder="Ask about sizes, tech drop list or order metrics..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
@@ -288,9 +318,10 @@
 
     <script>
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
-        
-        const databaseProducts = [
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling tailored custom for streetwear parameters loops." },
+        let databaseProducts = []; 
+
+        const defaultBackupProducts = [
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
             { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
             { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist grey tone layout alignment matrix offering loose dynamic comfort features." },
@@ -303,10 +334,30 @@
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
-        function initializeStoreCatalog() {
+        window.syncProductsFromFirebase = function() {
+            setTimeout(() => {
+                if(!window.firebaseDB) {
+                    renderCatalogUI(defaultBackupProducts);
+                    return;
+                }
+                const productsNodeRef = window.dbRef(window.firebaseDB, "products");
+                window.dbOnValue(productsNodeRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if(!data) {
+                        window.dbSet(productsNodeRef, defaultBackupProducts);
+                        databaseProducts = defaultBackupProducts;
+                    } else {
+                        databaseProducts = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+                    }
+                    renderCatalogUI(databaseProducts);
+                });
+            }, 800);
+        };
+
+        function renderCatalogUI(itemsList) {
             const container = document.getElementById('catalogProductsGrid');
             if(!container) return; container.innerHTML = "";
-            databaseProducts.forEach(item => {
+            itemsList.forEach(item => {
                 container.innerHTML += `
                     <div class="card product-card" data-category="${item.category}" onclick="openProductDetailModal('${item.id}')">
                         <div class="img-container"><img src="${item.img}"></div>
@@ -317,7 +368,6 @@
             });
             toggleAuthModalState('register'); 
         }
-        window.addEventListener('DOMContentLoaded', initializeStoreCatalog);
 
         let slideIdx = 0;
         setInterval(() => { slideIdx = (slideIdx + 1) % 4; const engine = document.getElementById('heroSliderEngine'); if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; }, 3600);
@@ -334,8 +384,7 @@
         function toggleAuthModalState(state) {
             authCurrentModalState = state;
             const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement'), switchPrompt = document.getElementById('authSwitchPromptMessageRow');
-            if(!fieldsContainer) return;
-            fieldsContainer.innerHTML = "";
+            if(!fieldsContainer) return; fieldsContainer.innerHTML = "";
             
             if(state === 'login') {
                 headingNode.innerText = "Login Matrix"; submitBtn.innerText = "Execute Session LogIn";
@@ -356,19 +405,16 @@
             } else {
                 const fName = document.getElementById('regFirstNameField')?.value.trim(), fMail = document.getElementById('regEmailAddressField')?.value.trim();
                 if(fName) displayName = fName; if(fMail) emailNodeVal = fMail;
+                if(window.firebaseDB) {
+                    const userLogId = emailNodeVal.replace(/[^a-zA-Z0-9]/g, "_");
+                    window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: displayName, email: emailNodeVal, timestamp: Date.now() });
+                }
             }
-            sessionActiveLoggedInUser = { name: displayName, email: emailNodeVal };
-            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`;
-            document.getElementById('dropdownProfileVaultLabel').innerText = `USER VAULT: ${emailNodeVal.toUpperCase()}`;
-            document.getElementById('logoutRowTerminalButton').style.display = "flex";
-            document.getElementById('dropdownMainRegisterTriggerLink').style.display = "none";
-            closeAuthGatewayModal();
-            launchStatusPopupDialog('Secure Entry Success', `🎉 Welcome back ${displayName}! Terminal session is authenticated safely.`);
+            executeCustomUserLoginInjection(displayName, emailNodeVal);
         }
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
 
-        /* Google Sign-In client interface execution rendering hooks loop */
         function renderGoogleGsiEmbeddedButton() {
             setTimeout(() => {
                 const targetHook = document.getElementById("embed-google-signin-btn-hook");
@@ -381,8 +427,13 @@
 
         function handleCredentialResponse(res) {
             const token = parseJwt(res.credential);
+            if(window.firebaseDB) {
+                const userLogId = token.email.replace(/[^a-zA-Z0-9]/g, "_");
+                window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: token.name, email: token.email, provider: "google", lastLogin: Date.now() });
+            }
             executeCustomUserLoginInjection(token.name.split(' ')[0], token.email);
         }
+
         function executeCustomUserLoginInjection(displayName, email) {
             sessionActiveLoggedInUser = { name: displayName, email: email };
             document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`;
@@ -390,7 +441,7 @@
             document.getElementById('logoutRowTerminalButton').style.display = "flex";
             document.getElementById('dropdownMainRegisterTriggerLink').style.display = "none";
             closeAuthGatewayModal();
-            launchStatusPopupDialog('Google Authorization Success', `🎉 Welcome back ${displayName}! OAuth2 stream validated successfully.`);
+            launchStatusPopupDialog('Authorization Success', `🎉 Welcome back ${displayName}! Sync node validated inside Firebase.`);
         }
 
         function openProductDetailModal(id) {
@@ -405,6 +456,7 @@
         function pushToBasket(name, price) { appCartMemory.push({ name: name, price: price }); syncBasketUI(); openCartPanelSheet(); }
         function openCartPanelSheet() { document.getElementById('cartPanelSheet').classList.add('sheet-active'); document.getElementById('sheetOverlay').style.display = "block"; }
         function closeCartPanelSheet() { document.getElementById('cartPanelSheet').classList.remove('sheet-active'); document.getElementById('sheetOverlay').style.display = "none"; }
+        
         function syncBasketUI() {
             document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`; const body = document.getElementById('cartSheetBodyContainer'); if(!body) return;
             if(appCartMemory.length === 0) { body.innerHTML = "<p style='text-align:center;color:#999;margin-top:35px;'>Basket empty.</p>"; document.getElementById('sheetTotalBillHook').innerText="₹0"; return; }
@@ -419,8 +471,17 @@
             document.getElementById('statusPopupMasterMessageNode').style.display = "flex";
         }
         function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; }
+        
+        function executeCloudCheckout() {
+            if(appCartMemory.length === 0) return;
+            if(window.firebaseDB && sessionActiveLoggedInUser) {
+                const userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
+                window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), { items: appCartMemory, timestamp: Date.now(), status: "Pending" });
+            }
+            appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
+            launchStatusPopupDialog('Order Dispatched', '🚀 Order logs submitted successfully! Firebase live pipeline updated.');
+        }
 
-        /* 📍 ADDRESS CONTROLLERS */
         function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
         function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
         function saveAddressProfileDetails() {
@@ -430,10 +491,9 @@
             if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all full address fields!'); return; }
             document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`;
             closeAddressesOverlayForm();
-            launchStatusPopupDialog('Location Saved', '🎉 Custom delivery address saved successfully inside container node.');
+            launchStatusPopupDialog('Location Saved', '🎉 Custom delivery address saved successfully.');
         }
 
-        /* 🤖 AI CORE CHAT LOGIC */
         function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
         function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
         function dispatchAiChatMessage() {
@@ -442,9 +502,9 @@
             setTimeout(() => {
                 let aiReply = "Your request parameters processed inside core database cluster loops.";
                 let pLower = msg.toLowerCase();
-                if(pLower.includes("size")) { aiReply = "The size preview matrix contains dynamic choices toggles. You can tap S, M, L, XL smoothly inside product cards!"; }
-                else if(pLower.includes("login") || pLower.includes("signup") || pLower.includes("register") || pLower.includes("google")) { aiReply = "Google Google Identity Services (GSI) OAuth stream container added! You can now log in using standard Google API pill parameters."; }
-                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("headphone") || pLower.includes("electronic")) { aiReply = "65W high-density warp chargers, metallic heavy bass earphones and wireless ANC headphones are now live under 'Tech Accs' strip category blocks."; }
+                if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
+                else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active! Google login logs and manual registers are verified live."; }
+                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
             }, 750);
         }
