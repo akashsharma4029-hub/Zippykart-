@@ -71,7 +71,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* FIXED PRODUCT DETAILS WINDOW MODAL */
+        /* FIXED PRODUCT DETAILS CENTER MODAL FRAME */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
@@ -80,7 +80,7 @@
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* STATUS POPUPS OVERLAYS */
+        /* STATUS POPUPS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; }
@@ -92,23 +92,25 @@
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
-        .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 10px; }
+        .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; }
         .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; padding-bottom: 5px; }
         .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
-        .auth-form-fields-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+        
+        .auth-form-fields-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
-        .auth-input-cell input, .auth-input-cell select { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
-        .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 10px; }
-        .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 12px 0; text-transform: uppercase; width: 100%; }
+        .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
+        .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
+        
+        .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
         .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
-        .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
+        .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 5px; }
 
         /* ADDRESS PANELS */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART UP LAYOUTS SHEET */
+        /* CART UP SHEET DRAWERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -117,7 +119,7 @@
         .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; }
         #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
 
-        /* AI CUSTOMER HELP HUD */
+        /* AI CHAT */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -131,7 +133,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* 🛠️ PREMIUM HIDDEN ADMIN PANEL CONTAINER LAYOUT */
+        /* ADMIN DASHBOARD LAYOUT */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -163,7 +165,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Global Connection Active.");
+        console.log("Firebase Engine Successfully Validated.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -203,9 +205,9 @@
             </div>
             <div class="header-right-menu">
                 <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
-                    <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
+                    <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
-                        <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT PARAMETERS</div>
+                        <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging system active via Firebase data clusters.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
@@ -279,16 +281,46 @@
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
+                <div><h2 id="authModalLeftHeading">Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e; margin-top: 15px;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
                 <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span></div>
+                
                 <div class="auth-form-fields-container" id="authFormDynamicFieldsContainer"></div>
+                
                 <button class="auth-action-submit-btn" id="authActionSubmitButtonElement" onclick="handleAuthFormSubmission()">Proceed Terminal</button>
+                
                 <div class="auth-google-divider-block">OR Sign In via</div>
-                <div class="google-btn-flex-chassis"><div id="embed-google-signin-btn-hook"></div></div>
+                <div class="google-btn-flex-chassis">
+                    <div id="embed-google-signin-btn-hook"></div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <div class="detail-modal-overlay" id="productDetailMasterModal">
+        <div class="detail-modal-box">
+            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
+            <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
+            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111; margin-top:5px;">Product Title</h2>
+            <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
+            
+            <div>
+                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Size</h4>
+                <div class="size-selector-row">
+                    <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:4px;">Product Summary & Details</h4>
+                <p id="modalProductSpecs" style="font-size:12.5px; line-height:1.5; color:#444; font-weight:500;"></p>
+            </div>
+            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px;">Add To Cart</button>
         </div>
     </div>
 
@@ -317,6 +349,7 @@
             { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
             { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
+            { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist grey tone layout alignment matrix offering loose dynamic comfort features." },
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit. Short-circuit defense layers for quick smartphone data refills." },
             { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling with crystal gold gold-plated 3.5mm acoustic node ports." },
             { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Wireless ANC over-ear headphones setup dynamic features." },
@@ -325,7 +358,6 @@
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
-        // 🔄 ROUTE PARSER INTERFACE (CHECKS "?admin=true" PARAMETERS TRACE)
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
@@ -365,10 +397,8 @@
                         <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title}', ${item.price})">Add To Cart</button>
                     </div>`;
             });
-            toggleAuthModalState('register'); 
         }
 
-        /* 🛠️ CORE ADMIN DATABASE HANDLERS ACTIONS ENGINE */
         function renderAdminCatalogTable() {
             const tbody = document.getElementById('adminLiveCatalogTableBody'); if(!tbody) return;
             tbody.innerHTML = "";
@@ -381,27 +411,24 @@
             const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), oldPrice = parseInt(document.getElementById('admOldPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
             if(!id || !title || !price || !img) { alert("Please compile missing input fields values node!"); return; }
             
-            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality e-commerce stock node drop." };
+            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality stock drop." };
             
             if(window.firebaseDB) {
-                // Find matching index node pointer or insert brand new elements row inside realtime reference data loop
                 let matchIndex = databaseProducts.findIndex(p => p.id === id);
                 if(matchIndex !== -1) databaseProducts[matchIndex] = newItemObject;
                 else databaseProducts.push(newItemObject);
                 window.dbSet(window.dbRef(window.firebaseDB, "products"), databaseProducts);
                 
-                // Clear input form loops 
                 document.getElementById('admIdField').value = ""; document.getElementById('admTitleField').value = ""; document.getElementById('admPriceField').value = ""; document.getElementById('admOldPriceField').value = ""; document.getElementById('admImgField').value = ""; document.getElementById('admSpecsField').value = "";
-                alert("🎉 Product successfully synced live to Firebase Database logs tree!");
+                alert("🎉 Injected live to Firebase Catalog Matrix!");
             }
         }
 
         function executeAdminDatabaseDelete(prodId, arrayIdx) {
-            if(!confirm(`Are you absolute sure to remove [${prodId}] from cloud data node grids?`)) return;
+            if(!confirm(`Remove [${prodId}] from cloud data grids?`)) return;
             if(window.firebaseDB) {
                 databaseProducts.splice(arrayIdx, 1);
                 window.dbSet(window.dbRef(window.firebaseDB, "products"), databaseProducts);
-                alert("🗑️ Item pruned successfully.");
             }
         }
 
@@ -414,9 +441,10 @@
         }
         function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
         
-        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; }
+        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
+        /* ✅ RE-SYNCHRONIZED METHOD LOOP FOR DYNAMIC REGISTRATION INJECTORS */
         function toggleAuthModalState(state) {
             authCurrentModalState = state;
             const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement'), switchPrompt = document.getElementById('authSwitchPromptMessageRow');
@@ -429,7 +457,7 @@
             } else {
                 headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
                 switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField" placeholder="e.g. Kumar"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField" placeholder="10-Digit Coordinate"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField" placeholder="username@gmail.com"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField" placeholder="Set password key"></div>`;
             }
             renderGoogleGsiEmbeddedButton();
         }
@@ -547,4 +575,4 @@
         function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
     </script>
 </body>
-</html>
+</html>  
