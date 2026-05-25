@@ -1,4 +1,212 @@
-<div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zippykart.co.in | Premium Full-Scale Production Hub</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
+        
+        /* 🖤 MASTER ZIPPYKART NAVBAR */
+        header { background-color: #111; color: #fff; padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-left-block { display: flex; align-items: center; gap: 25px; flex-grow: 1; }
+        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
+        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; }
+        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 12px 15px; width: 50%; max-width: 550px; border: 1px solid #333; }
+        .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; color: #fff; background: transparent; }
+        .search-web-wrapper i { color: #666; margin-right: 12px; }
+
+        .header-right-menu { display: flex; align-items: center; gap: 15px; }
+        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
+        
+        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
+        .nav-dropdown-item:hover .floating-menu-pane { display: block; }
+        
+        .menu-header-badge { background: #111; color: #fff; padding: 12px 20px; font-size: 10px; border-bottom: 1px solid #222; }
+        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
+        .menu-row:hover { background: #fff5f5; color: #ff3e3e; padding-left: 25px; transition: all 0.2s; }
+        .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
+        .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 14px; width: 20px; text-align: center; }
+        .dropdown-signup-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; text-align: center; padding: 13px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; border-top: 1px solid #eee; cursor: pointer; }
+
+        .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
+        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
+
+        /* STRIPS BAR */
+        .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
+        .categories-bar::-webkit-scrollbar { display: none; }
+        .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+        .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
+
+        /* HERO SLIDER */
+        .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
+        .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
+        .slide-frame img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block; }
+        .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
+        .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
+
+        /* CATALOG GRIDS */
+        .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
+        .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; width: 100%; }
+        @media (max-width: 1350px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 1050px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+        .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: all 0.2s ease; }
+        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+        .card .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .card h3 { font-size: 13.5px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+        .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
+        .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
+
+        /* FIXED PRODUCT DETAILS WINDOW MODAL */
+        .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
+        .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+        .detail-modal-box .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+        .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
+        .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
+        .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
+
+        /* STATUS POPUPS */
+        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
+        .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; letter-spacing: 0.5px; }
+        .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
+        .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+
+        /* AUTH SECTIONS SETUP */
+        .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
+        .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+        .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
+        .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; }
+        .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; padding-bottom: 5px; }
+        .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
+        .auth-form-fields-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
+        .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
+        .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
+        .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
+        .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
+        .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
+        .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
+
+        /* ADDRESS PANELS */
+        .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
+        .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
+
+        /* CART UP SHEET DRAWERS */
+        .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
+        .cart-up-sheet.sheet-active { bottom: 0; }
+        .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
+        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; }
+        #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
+
+        /* AI CHATBOX HOOK */
+        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
+        @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .ai-chat-header h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66; }
+        .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8f9fa; }
+        .ai-msg { padding: 11px 15px; border-radius: 8px; font-size: 12.5px; max-width: 82%; line-height: 1.5; font-weight: 500; }
+        .ai-msg.system { background: #fff; color: #222; align-self: flex-start; border: 1px solid #eee; }
+        .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; }
+        .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
+        .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
+        .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+        /* ADMIN HOOK PANELS */
+        #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
+        .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+        .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
+        .admin-table-card { flex-grow: 1; min-width: 350px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; overflow-x: auto; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+        .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        .admin-table th { background: #111; color: #fff; text-transform: uppercase; font-size: 11px; }
+        .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
+            authDomain: "zippykart-production.firebaseapp.com", 
+            databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", 
+            projectId: "zippykart-production" 
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.firebaseDB = db;
+        window.dbRef = ref;
+        window.dbSet = set;
+        window.dbPush = push;
+        window.dbOnValue = onValue;
+        window.dbRemove = remove;
+
+        console.log("Firebase Global Sync Initialized.");
+        window.syncProductsFromFirebase();
+    </script>
+</head>
+<body>
+
+    <div id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
+
+    <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
+        <div class="status-popup-card">
+            <h3 id="statusPopupHeading">Status Log</h3>
+            <p id="statusPopupDescription">Sync completed.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Log</button>
+        </div>
+    </div>
+
+    <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
+        <div class="address-window-chassis">
+            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:20px; cursor:pointer;" onclick="closeAddressesOverlayForm()"></i>
+            <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px;">Shipping Address Form</h3>
+            <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
+            <div class="auth-input-cell"><label>Flat / House No</label><input type="text" id="adrHouseNoField" placeholder="House Details"></div>
+            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Mapped Node"></div>
+            <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
+            <div class="auth-input-cell"><label>Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
+            <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Address</button>
+        </div>
+    </div>
+
+    <div id="zippyMainStoreFrontClientViewBlock">
+        <header>
+            <div class="header-left-block">
+                <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
+                <div class="search-web-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search apparel, footwear, cosmetics, bags drops...">
+                </div>
+            </div>
+            <div class="header-right-menu">
+                <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
+                    <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
+                    <div class="floating-menu-pane">
+                        <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging system active via Firebase data clusters.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
@@ -72,7 +280,7 @@
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2 id="authModalLeftHeading">Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
+                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e; margin-top: 15px;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
@@ -134,7 +342,12 @@
         const defaultBackupProducts = [
             { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture." },
-            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." }
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
+            { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade dynamic leather compilation canvas nodes with responsive traction sole configurations." },
+            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
+            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
+            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -336,7 +549,6 @@
                 },
                 "modal": {
                     "ondismiss": function() {
-                        /* 🔥 FIXED: Close all freezing sheets and dimmed overlay immediately when user cuts checkout */
                         closeCartPanelSheet(); 
                         launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed by the user terminal node.');
                     }
