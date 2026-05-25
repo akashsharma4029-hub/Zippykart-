@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zippykart.co.in | Full-Scale Razorpay Integrated Hub</title>
-    <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -88,7 +88,7 @@
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
-        /* AUTH PREPARATION SECTIONS */
+        /* AUTH SECTIONS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -164,7 +164,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Master Connection Validated.");
+        console.log("Firebase Connected Successfully.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -176,7 +176,7 @@
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">Status Log</h3>
             <p id="statusPopupDescription">Sync completed.</p>
-            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close</button>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Log</button>
         </div>
     </div>
 
@@ -293,6 +293,31 @@
         </div>
     </div>
 
+    <div class="detail-modal-overlay" id="productDetailMasterModal">
+        <div class="detail-modal-box">
+            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
+            <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
+            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111; margin-top:5px;">Product Title</h2>
+            <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
+            
+            <div>
+                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Size</h4>
+                <div class="size-selector-row">
+                    <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
+                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:4px;">Product Summary & Details</h4>
+                <p id="modalProductSpecs" style="font-size:12.5px; line-height:1.5; color:#444; font-weight:500;"></p>
+            </div>
+            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px;">Add To Cart</button>
+        </div>
+    </div>
+
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
@@ -315,9 +340,9 @@
         let databaseProducts = []; 
 
         const defaultBackupProducts = [
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
-            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
-            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit. Short-circuit defense layers for quick smartphone data refills." }
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM cotton setup layout parameters." },
+            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton vintage wash texture matrix framework." },
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit configurations." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -403,7 +428,7 @@
         }
         function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
         
-        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; }
+        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
         function toggleAuthModalState(state) {
@@ -418,8 +443,9 @@
             } else {
                 headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
                 switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField" placeholder="e.g. Kumar"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField" placeholder="10-Digit Coordinate"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField" placeholder="username@gmail.com"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField" placeholder="Set password key"></div>`;
             }
+            renderGoogleGsiEmbeddedButton();
         }
 
         function handleAuthFormSubmission() {
@@ -489,22 +515,20 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
-        /* 💳 🔥 MASTER DYNAMIC INTERACTIVE RAZORPAY CHECKOUT INTERFACES */
+        /* 💳 🔥 MASTER HIGH-SPEED RAZORPAY DISPATCH GATEWAY EXECUTION LOGIC */
         function executeRazorpayWideCheckoutGateway() {
             if(appCartMemory.length === 0) return;
             let currentPayableBillTotal = 0;
             appCartMemory.forEach(item => currentPayableBillTotal += item.price);
 
-            // 🛑 RAZORPAY FRONTEND CLIENT LOGIC OVERLAYS:
             const gatewayOptionsTree = {
-                "key": "rzp_test_QDmSvtFXnMyKmu", // Standard Public Testing Key Node Channel
-                "amount": currentPayableBillTotal * 100, // Conversion multiplier into Paisa bits
+                "key": "rzp_test_QDmSvtFXnMyKmu", 
+                "amount": currentPayableBillTotal * 100, 
                 "currency": "INR",
                 "name": "ZippyKart Elite",
                 "description": "Premium Lifestyle & Tech Accessories Portal",
                 "image": "https://cdn-icons-png.flaticon.com/512/3081/3081986.png",
                 "handler": function (response) {
-                    // Sync order log data to Firebase after success status
                     if(window.firebaseDB && sessionActiveLoggedInUser) {
                         const userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
                         window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), {
@@ -516,7 +540,7 @@
                         });
                     }
                     appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
-                    launchStatusPopupDialog('Payment Authorized', `🎉 Payment Successfully Received! Txn ID: ${response.razorpay_payment_id}. Your drops are synced inside packing logs node.`);
+                    launchStatusPopupDialog('Payment Authorized', `🎉 Payment Successfully Received! Txn ID: ${response.razorpay_payment_id}. Your drops are compiled safely.`);
                 },
                 "prefill": {
                     "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar",
@@ -525,11 +549,16 @@
                 "theme": { "color": "#111" }
             };
 
-            if(window.Razorpay) {
-                const rzpPortalInstance = new Razorpay(gatewayOptionsTree);
-                rzpPortalInstance.open();
-            } else {
-                launchStatusPopupDialog('Gateway Latency', '⚠️ Razorpay system scripts loading. Please tap once again inside 2 seconds.');
+            // Dynamic safe initiation wrapper to prevent scripts compile latency bugs
+            try {
+                if (window.Razorpay) {
+                    const rzpPortalInstance = new Razorpay(gatewayOptionsTree);
+                    rzpPortalInstance.open();
+                } else {
+                    launchStatusPopupDialog('Gateway Latency', '⚠️ Razorpay system scripts loading. Please tap once again inside 2 seconds.');
+                }
+            } catch (err) {
+                launchStatusPopupDialog('Checkout Error', 'Oops! Something went wrong. Payment Failed');
             }
         }
 
@@ -562,7 +591,7 @@
                 let pLower = msg.toLowerCase();
                 if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
                 else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active! Google login logs and manual registers are verified live."; }
-                else if(pLower.includes("payment") || pLower.includes("buy") || pLower.includes("razorpay")) { aiReply = "Razorpay Standard secure network channel integrated! Click 'Place Order' inside shopping basket tray to activate real payment methods."; }
+                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
             }, 750);
         }
