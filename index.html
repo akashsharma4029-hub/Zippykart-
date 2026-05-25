@@ -84,7 +84,7 @@
         /* STATUS POPUPS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
-        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
@@ -106,7 +106,7 @@
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
         /* ADDRESS PANELS */
-        .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
         /* CART UP LAYOUTS SHEET */
@@ -164,7 +164,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Connected Successfully.");
+        console.log("Firebase Engine Stack Online.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -204,7 +204,7 @@
             </div>
             <div class="header-right-menu">
                 <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
-                    <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
+                    <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging system active via Firebase data clusters.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
@@ -340,9 +340,9 @@
         let databaseProducts = []; 
 
         const defaultBackupProducts = [
-            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM cotton setup layout parameters." },
-            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton vintage wash texture matrix framework." },
-            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit configurations." }
+            { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure." },
+            { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture." },
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -428,7 +428,7 @@
         }
         function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
         
-        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
+        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
 
         function toggleAuthModalState(state) {
@@ -443,7 +443,7 @@
             } else {
                 headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
                 switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField" placeholder="e.g. Kumar"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField" placeholder="10-Digit Coordinate"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField" placeholder="username@gmail.com"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField" placeholder="Set password key"></div>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
             }
             renderGoogleGsiEmbeddedButton();
         }
@@ -515,11 +515,16 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
-        /* 💳 🔥 MASTER HIGH-SPEED RAZORPAY DISPATCH GATEWAY EXECUTION LOGIC */
+        /* 💳 🔥 UN-BLOCKED RAZORPAY STANDARD GATEWAY LOGIC ENGINE */
         function executeRazorpayWideCheckoutGateway() {
             if(appCartMemory.length === 0) return;
             let currentPayableBillTotal = 0;
             appCartMemory.forEach(item => currentPayableBillTotal += item.price);
+
+            if (!window.Razorpay) {
+                launchStatusPopupDialog('Gateway Latency', '⚠️ Razorpay scripts loading... Please try tapping again inside 2 seconds.');
+                return;
+            }
 
             const gatewayOptionsTree = {
                 "key": "rzp_test_QDmSvtFXnMyKmu", 
@@ -542,6 +547,11 @@
                     appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
                     launchStatusPopupDialog('Payment Authorized', `🎉 Payment Successfully Received! Txn ID: ${response.razorpay_payment_id}. Your drops are compiled safely.`);
                 },
+                "modal": {
+                    "ondismiss": function() {
+                        launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed by the user terminal node.');
+                    }
+                },
                 "prefill": {
                     "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar",
                     "email": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email : "customer@zippykart.co.in"
@@ -549,17 +559,8 @@
                 "theme": { "color": "#111" }
             };
 
-            // Dynamic safe initiation wrapper to prevent scripts compile latency bugs
-            try {
-                if (window.Razorpay) {
-                    const rzpPortalInstance = new Razorpay(gatewayOptionsTree);
-                    rzpPortalInstance.open();
-                } else {
-                    launchStatusPopupDialog('Gateway Latency', '⚠️ Razorpay system scripts loading. Please tap once again inside 2 seconds.');
-                }
-            } catch (err) {
-                launchStatusPopupDialog('Checkout Error', 'Oops! Something went wrong. Payment Failed');
-            }
+            const rzpPortalInstance = new Razorpay(gatewayOptionsTree);
+            rzpPortalInstance.open();
         }
 
         function launchStatusPopupDialog(heading, desc) {
