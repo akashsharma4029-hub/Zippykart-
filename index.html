@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Firebase Dynamic Production Hub</title>
+    <title>Zippykart.co.in | Dynamic Firebase Admin Portal</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,7 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 MASTER ZIPPYKART NAVBAR */
+        /* 🖤 MASTER NAVBAR */
         header { background-color: #111; color: #fff; padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
         .header-left-block { display: flex; align-items: center; gap: 25px; flex-grow: 1; }
         .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
@@ -24,7 +24,6 @@
         .header-right-menu { display: flex; align-items: center; gap: 15px; }
         .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
         
-        /* DROPDOWNS MANAGEMENT CHASSIS */
         .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
@@ -38,13 +37,13 @@
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
 
-        /* CATEGORIES BAR NAVIGATION STRIP */
+        /* STRIPS BAR */
         .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* WIDE BANNER SLIDER BUILD */
+        /* HERO SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
@@ -52,7 +51,7 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* PRODUCTION CATALOG CONTROLLER GRID */
+        /* CATALOG GRIDS */
         .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
         .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
@@ -66,66 +65,59 @@
         .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: all 0.2s ease; }
         .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        
         .card h3 { font-size: 13.5px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* FIXED PRODUCT DETAILS CENTER MODAL FRAME */
+        /* FIXED PRODUCT DETAILS WINDOW MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
         .detail-modal-box .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
-        
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* 📑 SYSTEM STATUS OVERLAY BOX */
+        /* STATUS POPUPS OVERLAYS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
-        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; letter-spacing: 0.5px; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
-        /* 🔑 REGISTER FORM ENGINE WITH GOOGLE CHASSIS HOOK */
+        /* AUTH SECTIONS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
         .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
         .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 10px; }
-        
         .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; padding-bottom: 5px; }
         .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
-        
         .auth-form-fields-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
-        .auth-input-cell input { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; }
+        .auth-input-cell input, .auth-input-cell select { padding: 11px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 10px; }
-
-        /* 🔗 GOOGLE SIGN IN CONTAINER ELEMENTS GRID */
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 12px 0; text-transform: uppercase; width: 100%; }
         .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
-        .auth-google-divider-block:not(:empty)::before { margin-right: .5em; }
-        .auth-google-divider-block:not(:empty)::after { margin-left: .5em; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
-        /* 📍 ADDRESS INTERFACES */
+        /* ADDRESS PANELS */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART UP SHEET DRAWERS */
+        /* CART UP LAYOUTS SHEET */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; }
+        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; }
+        #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
 
-        /* 💬 AI SUPPORT CHAT WINDOW OVERLAY */
+        /* AI CUSTOMER HELP HUD */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -138,14 +130,22 @@
         .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
+
+        /* 🛠️ PREMIUM HIDDEN ADMIN PANEL CONTAINER LAYOUT */
+        #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
+        .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+        .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
+        .admin-table-card { flex-grow: 1; min-width: 350px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; overflow-x: auto; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+        .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        .admin-table th { background: #111; color: #fff; text-transform: uppercase; font-size: 11px; }
+        .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // ✅ AUTO-LOCKED INJECTED KEY PARAMETERS 
         const firebaseConfig = { 
             apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
             authDomain: "zippykart-production.firebaseapp.com", 
@@ -161,8 +161,9 @@
         window.dbSet = set;
         window.dbPush = push;
         window.dbOnValue = onValue;
+        window.dbRemove = remove;
 
-        console.log("Firebase Live System Pipeline Active.");
+        console.log("Firebase Global Connection Active.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -173,21 +174,104 @@
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">Status Log</h3>
-            <p id="statusPopupDescription">Data node synchronization processing completed successfully.</p>
-            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Log</button>
+            <p id="statusPopupDescription">Sync completed.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close</button>
         </div>
     </div>
 
     <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
         <div class="address-window-chassis">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:20px; cursor:pointer;" onclick="closeAddressesOverlayForm()"></i>
-            <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px; letter-spacing:0.5px;">Shipping Address Form</h3>
+            <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px;">Shipping Address Form</h3>
             <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
-            <div class="auth-input-cell"><label>Flat / House / Suite No</label><input type="text" id="adrHouseNoField" placeholder="House/Flat Address Info"></div>
-            <div class="auth-input-cell"><label>Colony / Street Landmark</label><input type="text" id="adrColonyField" placeholder="Nearby Area Node"></div>
+            <div class="auth-input-cell"><label>Flat / House No</label><input type="text" id="adrHouseNoField" placeholder="House Details"></div>
+            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Mapped Node"></div>
             <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
-            <div class="auth-input-cell"><label>6-Digit Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
-            <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Delivery Location</button>
+            <div class="auth-input-cell"><label>Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
+            <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Address</button>
+        </div>
+    </div>
+
+    <div id="zippyMainStoreFrontClientViewBlock">
+        <header>
+            <div class="header-left-block">
+                <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
+                <div class="search-web-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search apparel, footwear, cosmetics, bags drops...">
+                </div>
+            </div>
+            <div class="header-right-menu">
+                <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
+                    <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
+                    <div class="floating-menu-pane">
+                        <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT PARAMETERS</div>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging system active via Firebase data clusters.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
+                        <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
+                        <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
+                    <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
+                    <div class="floating-menu-pane">
+                        <div class="menu-header-badge">UTILITY CHANNELS</div>
+                        <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Layer secure validation token active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                    </div>
+                </div>
+                <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
+            </div>
+        </header>
+
+        <div class="top-delivery-strip">
+            <div class="addr-left" onclick="launchAddressesOverlayForm()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Terminal Profile Address Node Config</span></div>
+            <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
+        </div>
+
+        <div class="categories-bar">
+            <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
+            <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
+            <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
+            <div class="cat-item" onclick="filterCategory('tech', this)">🔌 Tech Accs</div>
+            <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
+            <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
+        </div>
+
+        <div class="slider-wrapper">
+            <div class="slide-container" id="heroSliderEngine">
+                <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('tech')"><img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=1400"><div class="banner-overlay-text"><h1>Next Gen Tech Accs</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
+            </div>
+        </div>
+
+        <div class="container"><h2 class="section-title">Trending Culture Drops</h2><div class="grid" id="catalogProductsGrid"></div></div>
+    </div>
+
+    <div id="zippyMainAdminDashboardBlock">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
+            <h1 style="font-weight:900; text-transform:uppercase; font-size:24px; letter-spacing:0.5px;">⚙️ ZippyKart Control Terminal</h1>
+            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 View Client Store</button>
+        </div>
+        <div class="admin-flex-row">
+            <div class="admin-form-card">
+                <h2 style="font-size:15px; font-weight:900; text-transform:uppercase; margin-bottom:15px;">Add New Live Product</h2>
+                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. tech_charger_2"></div>
+                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="fashion">👗 Fashion Zone</option><option value="footwear">👟 Footwear Hub</option><option value="tech">🔌 Tech Electronics Accessories</option><option value="cosmetic">💄 Cosmetics Core</option><option value="bags">👜 Luxury Handbags</option></select></div>
+                <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Real 65W Super Warp Charger"></div>
+                <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="499"></div>
+                <div class="auth-input-cell"><label>Original Strike Price (₹)</label><input type="number" id="admOldPriceField" placeholder="999"></div>
+                <div class="auth-input-cell"><label>Unsplash HD Image URL Link</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
+                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Describe materials, compatibility details tree..."></div>
+                <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload Live To Firebase</button>
+            </div>
+            <div class="admin-table-card">
+                <h2 style="font-size:15px; font-weight:900; text-transform:uppercase;">Live Active Catalog Track</h2>
+                <table class="admin-table"><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Price</th><th>Operation</th></tr></thead><tbody id="adminLiveCatalogTableBody"></tbody></table>
+            </div>
         </div>
     </div>
 
@@ -195,109 +279,18 @@
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
             <div class="auth-left-banner">
-                <div><h2 id="authModalLeftHeading">Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
+                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
                 <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e; margin-top: 15px;">ZippyKart Elite</div>
             </div>
             <div class="auth-right-form-hub">
-                <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">
-                    New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span>
-                </div>
-                
+                <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span></div>
                 <div class="auth-form-fields-container" id="authFormDynamicFieldsContainer"></div>
-                
                 <button class="auth-action-submit-btn" id="authActionSubmitButtonElement" onclick="handleAuthFormSubmission()">Proceed Terminal</button>
-                
                 <div class="auth-google-divider-block">OR Sign In via</div>
-                <div class="google-btn-flex-chassis">
-                    <div id="embed-google-signin-btn-hook"></div>
-                </div>
+                <div class="google-btn-flex-chassis"><div id="embed-google-signin-btn-hook"></div></div>
             </div>
         </div>
     </div>
-
-    <div class="detail-modal-overlay" id="productDetailMasterModal">
-        <div class="detail-modal-box">
-            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
-            <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
-            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111; margin-top:5px;">Product Title</h2>
-            <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
-            
-            <div>
-                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Size</h4>
-                <div class="size-selector-row">
-                    <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
-                </div>
-            </div>
-
-            <div>
-                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:4px;">Product Summary & Details</h4>
-                <p id="modalProductSpecs" style="font-size:12.5px; line-height:1.5; color:#444; font-weight:500;"></p>
-            </div>
-            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px;">Add To Cart</button>
-        </div>
-    </div>
-
-    <header>
-        <div class="header-left-block">
-            <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
-            <div class="search-web-wrapper">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search apparel, footwear, cosmetics, toys and premium bags drops...">
-            </div>
-        </div>
-        <div class="header-right-menu">
-            <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
-                <span id="navUserBadgeName"><i class="fa-solid fa-user-circle"></i> Login</span>
-                <div class="floating-menu-pane">
-                    <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('My Order Logs', '📋 Orders mapped successfully inside real-time storage loops.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Wishlist Vault Active. Your choices are preserved.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
-                    <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
-                    <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
-                    <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
-                </div>
-            </div>
-
-            <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
-                <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
-                <div class="floating-menu-pane">
-                    <div class="menu-header-badge">UTILITY CHANNELS</div>
-                    <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                    <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ Absolute Encryption safe node live.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
-                </div>
-            </div>
-
-            <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
-        </div>
-    </header>
-
-    <div class="top-delivery-strip">
-        <div class="addr-left" onclick="launchAddressesOverlayForm()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Terminal Profile Address Node Config</span></div>
-        <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
-    </div>
-
-    <div class="categories-bar">
-        <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
-        <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
-        <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
-        <div class="cat-item" onclick="filterCategory('tech', this)">🔌 Tech Accs</div>
-        <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
-        <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
-    </div>
-
-    <div class="slider-wrapper">
-        <div class="slide-container" id="heroSliderEngine">
-            <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('tech')"><img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=1400"><div class="banner-overlay-text"><h1>Next Gen Tech Accs</h1></div></div>
-            <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
-        </div>
-    </div>
-
-    <div class="container"><h2 class="section-title">Trending Culture Drops</h2><div class="grid" id="catalogProductsGrid"></div></div>
 
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
@@ -324,17 +317,22 @@
             { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo vintage wash texture blueprint with multi pocket smart layout grids arrangement." },
             { id: "fas_hoodie_1", category: "fashion", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Heavy fleece layer pouch fitting setups custom engineered for extreme lifestyle statements." },
-            { id: "fas_sweat_1", category: "fashion", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=500", specs: "Minimalist grey tone layout alignment matrix offering loose dynamic comfort features." },
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit. Short-circuit defense layers for quick smartphone data refills." },
             { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling with crystal gold gold-plated 3.5mm acoustic node ports." },
-            { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Pure Active Noise Cancellation system with 40-hour deep bass continuous lithium battery lifespan configurations." },
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade dynamic leather compilation canvas nodes with responsive traction sole configurations." },
+            { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Wireless ANC over-ear headphones setup dynamic features." },
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather with traction sole configurations." },
             { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
-            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
+        // 🔄 ROUTE PARSER INTERFACE (CHECKS "?admin=true" PARAMETERS TRACE)
         window.syncProductsFromFirebase = function() {
+            const queryParamsUrl = new URLSearchParams(window.location.search);
+            if(queryParamsUrl.get('admin') === 'true') {
+                document.getElementById('zippyMainStoreFrontClientViewBlock').style.display = "none";
+                document.getElementById('zippyMainAdminDashboardBlock').style.display = "block";
+            }
+            
             setTimeout(() => {
                 if(!window.firebaseDB) {
                     renderCatalogUI(defaultBackupProducts);
@@ -350,6 +348,7 @@
                         databaseProducts = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     }
                     renderCatalogUI(databaseProducts);
+                    renderAdminCatalogTable();
                 });
             }, 800);
         };
@@ -367,6 +366,43 @@
                     </div>`;
             });
             toggleAuthModalState('register'); 
+        }
+
+        /* 🛠️ CORE ADMIN DATABASE HANDLERS ACTIONS ENGINE */
+        function renderAdminCatalogTable() {
+            const tbody = document.getElementById('adminLiveCatalogTableBody'); if(!tbody) return;
+            tbody.innerHTML = "";
+            databaseProducts.forEach((item, index) => {
+                tbody.innerHTML += `<tr><td><b>${item.id}</b></td><td>${item.title}</td><td style='text-transform:uppercase;'>${item.category}</td><td>₹${item.price}</td><td><button class='admin-delete-btn' onclick='executeAdminDatabaseDelete("${item.id}", ${index})'>Delete</button></td></tr>`;
+            });
+        }
+
+        function executeAdminDatabaseUpload() {
+            const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), oldPrice = parseInt(document.getElementById('admOldPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
+            if(!id || !title || !price || !img) { alert("Please compile missing input fields values node!"); return; }
+            
+            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality e-commerce stock node drop." };
+            
+            if(window.firebaseDB) {
+                // Find matching index node pointer or insert brand new elements row inside realtime reference data loop
+                let matchIndex = databaseProducts.findIndex(p => p.id === id);
+                if(matchIndex !== -1) databaseProducts[matchIndex] = newItemObject;
+                else databaseProducts.push(newItemObject);
+                window.dbSet(window.dbRef(window.firebaseDB, "products"), databaseProducts);
+                
+                // Clear input form loops 
+                document.getElementById('admIdField').value = ""; document.getElementById('admTitleField').value = ""; document.getElementById('admPriceField').value = ""; document.getElementById('admOldPriceField').value = ""; document.getElementById('admImgField').value = ""; document.getElementById('admSpecsField').value = "";
+                alert("🎉 Product successfully synced live to Firebase Database logs tree!");
+            }
+        }
+
+        function executeAdminDatabaseDelete(prodId, arrayIdx) {
+            if(!confirm(`Are you absolute sure to remove [${prodId}] from cloud data node grids?`)) return;
+            if(window.firebaseDB) {
+                databaseProducts.splice(arrayIdx, 1);
+                window.dbSet(window.dbRef(window.firebaseDB, "products"), databaseProducts);
+                alert("🗑️ Item pruned successfully.");
+            }
         }
 
         let slideIdx = 0;
@@ -393,7 +429,7 @@
             } else {
                 headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
                 switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
-                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField" placeholder="e.g. Kumar"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField" placeholder="10-Digit Coordinate"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField" placeholder="username@gmail.com"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField" placeholder="Set password key"></div>`;
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
             }
             renderGoogleGsiEmbeddedButton();
         }
