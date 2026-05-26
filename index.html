@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Premium Full-Scale Production Hub</title>
+    <title>Zippykart.co.in | Ultimate E-Commerce Hub</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,13 +38,13 @@
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
 
-        /* STRIPS BAR */
+        /* CATEGORIES STRIP */
         .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* HERO SLIDER */
+        /* BANNER AUTOMATED SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
@@ -52,7 +52,7 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* CATALOG GRIDS */
+        /* ITEM CATALOG LAYOUT GRIDS */
         .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
         .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
@@ -72,21 +72,38 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* FIXED PRODUCT DETAILS WINDOW MODAL */
-        .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
-        .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
-        .detail-modal-box .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+        /* 🛍️ LUXURY FULL SCREEN PRODUCT SPECIFICATION OVERLAY DETAILS MODAL */
+        .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
+        .detail-modal-box { background: #fff; width: 100%; max-width: 950px; height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 35px; display: flex; flex-direction: row; gap: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 95vh; padding: 20px; gap: 20px; } }
+        
+        .modal-left-gallery { width: 45%; display: flex; flex-direction: column; gap: 15px; }
+        @media (max-width: 768px) { .modal-left-gallery { width: 100%; } }
+        .modal-img-holder { width: 100%; height: 420px; overflow: hidden; border-radius: 8px; background: #fafafa; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 768px) { .modal-img-holder { height: 280px; } }
+        .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .modal-right-specs-hub { width: 55%; display: flex; flex-direction: column; gap: 16px; }
+        @media (max-width: 768px) { .modal-right-specs-hub { width: 100%; } }
+        
+        /* AMAZON STYLE EXPANDABLE ACCORDIONS GRID */
+        .spec-accordion-item { border-bottom: 1px solid #eaeaea; padding: 12px 0; }
+        .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 8px; }
+        .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
+        
+        /* RATING LOOK BLOCK */
+        .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #ffa41c; }
+        
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* STATUS POPUPS */
-        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
-        .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
-        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; letter-spacing: 0.5px; }
-        .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
-        .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+        /* CUSTOM STATUS POPUPS DISPLAYS */
+        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; }
+        .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
+        .status-close-btn { background: #111; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; }
 
         /* AUTH SECTIONS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
@@ -96,13 +113,12 @@
         .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; }
         .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; padding-bottom: 5px; }
         .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
-        .auth-form-fields-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+        .auth-form-fields-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
-        .auth-google-divider-block::before, .auth-google-divider-block::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
         /* ADDRESS PANELS */
@@ -114,9 +130,13 @@
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
-        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; }
-        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; }
-        #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
+        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; }
+        
+        /* 💵 DYNAMIC COD OPTION SELECTOR STRIP LAYOUT */
+        .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
+        .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
+        .payment-method-tab.active { background: #111; color: #fff; }
 
         /* AI CHATBOX HOOK */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
@@ -174,9 +194,9 @@
 
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
-            <h3 id="statusPopupHeading">Status Log</h3>
-            <p id="statusPopupDescription">Sync completed.</p>
-            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Log</button>
+            <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
+            <p id="statusPopupDescription">Action execution parameters processed successfully.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
         </div>
     </div>
 
@@ -295,33 +315,66 @@
 
     <div class="detail-modal-overlay" id="productDetailMasterModal">
         <div class="detail-modal-box">
-            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; z-index:15;" onclick="closeProductDetailModal()"></i>
-            <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
-            <h2 id="modalProductTitle" style="font-size:18px; font-weight:900; color:#111; margin-top:5px;">Product Title</h2>
-            <h3 id="modalProductPrice" style="font-size:20px; font-weight:900; color:#ff3e3e; margin-top:-5px;">₹0</h3>
+            <i class="fa-solid fa-xmark" style="position:absolute; top:25px; right:25px; font-size:26px; cursor:pointer; z-index:15; color:#111;" onclick="closeProductDetailModal()"></i>
             
-            <div>
-                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:5px;">Select Size</h4>
-                <div class="size-selector-row">
-                    <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
-                    <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
+            <div class="modal-left-gallery">
+                <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
+                <div class="amazon-rating-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>4.5 out of 5 Stars (840 Reviews)</span></div>
+            </div>
+            
+            <div class="modal-right-specs-hub">
+                <h2 id="modalProductTitle" style="font-size:22px; font-weight:900; color:#111; line-height:1.3;">Product Title</h2>
+                <h3 id="modalProductPrice" style="font-size:26px; font-weight:900; color:#ff3e3e; margin-top:2px;">₹0</h3>
+                
+                <div>
+                    <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:6px; font-weight:700;">Select Size Parameter</h4>
+                    <div class="size-selector-row">
+                        <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
+                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
+                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
+                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:4px;">Product Summary & Details</h4>
-                <p id="modalProductSpecs" style="font-size:12.5px; line-height:1.5; color:#444; font-weight:500;"></p>
+                <div style="margin-top:10px; border-top:1px solid #eee;">
+                    <div class="spec-accordion-item">
+                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">About this item <i class="fa-solid fa-angle-down"></i></div>
+                        <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Premium quality dynamic culture inventory node.</div>
+                    </div>
+                    <div class="spec-accordion-item">
+                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Product Specifications <i class="fa-solid fa-angle-down"></i></div>
+                        <div class="spec-accordion-content">Material: High-Grade Composite Matrix Premium Fabric Core<br>Warranty: 1 Year Elite Structural Warranty Protection<br>Traction Sole Architecture Built.</div>
+                    </div>
+                    <div class="spec-accordion-item">
+                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Customer Reviews & Feedbacks <i class="fa-solid fa-angle-down"></i></div>
+                        <div class="spec-accordion-content">
+                            <b>⭐⭐⭐⭐⭐ Akash Kumar:</b> Ekdum makhhan quality product hai bhai! Superfast shipping loop.<br>
+                            <b>⭐⭐⭐⭐ Amit S.:</b> Great grip on surfaces, highly recommended electronics/apparel node tracker!
+                        </div>
+                    </div>
+                </div>
+
+                <button class="buy-btn" id="modalAddToCartBtn" style="padding:16px; font-size:12px; margin-top:15px; letter-spacing:0.5px;">Add Item To Basket Tray</button>
             </div>
-            <button class="buy-btn" id="modalAddToCartBtn" style="padding:14px; font-size:12px;">Add To Cart</button>
         </div>
     </div>
 
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
-        <div class="sheet-footer"><div><p>Total Payable</p><h3 id="sheetTotalBillHook">₹0</h3></div><button class="final-pay-btn" onclick="executeRazorpayWideCheckoutGateway()">Place Order</button></div>
+        <div class="sheet-footer">
+            
+            <div class="payment-method-selector-strip">
+                <div class="payment-method-tab active" id="payMethodOnlineTab" onclick="switchActivePaymentMethod('online')">💳 Online Payment</div>
+                <div class="payment-method-tab" id="payMethodCodTab" onclick="switchActivePaymentMethod('cod')">📦 Cash On Delivery (COD)</div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
+                <p style="font-size:12px; font-weight:600;">Total Payable</p>
+                <h3 id="sheetTotalBillHook" style="font-size:20px; font-weight:900; color:#ff3e3e;">₹0</h3>
+            </div>
+            <button class="final-pay-btn" id="masterDispatchOrderProcessActionBtn" onclick="dispatchStoreOrderMasterWorkflow()">Place Order Terminal</button>
+        </div>
     </div>
 
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
@@ -337,30 +390,22 @@
 
     <script>
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
-        let databaseProducts = []; 
+        let databaseProducts = []; let selectedPaymentMethodMode = "online";
 
-        // Initial instant UI loading dataset block
         const backupStaticDataList = [
             { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo wash texture matrix." },
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
             { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling with crystal gold gold-plated 3.5mm acoustic node ports." },
-            { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Wireless ANC over-ear headphones setup dynamic features." },
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." },
-            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
-            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
-            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
         ];
 
-        /* 🔥 FIX: INSTANT 0.1s RENDER SYNC METHOD TO PREVENT NARROW SLOW DROPS LOADING EFFECT */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
                 document.getElementById('zippyMainStoreFrontClientViewBlock').style.display = "none";
                 document.getElementById('zippyMainAdminDashboardBlock').style.display = "block";
             }
-            
-            // First render static backup immediately so user doesn't face any lag or slow white patches
             databaseProducts = backupStaticDataList;
             renderCatalogUI(databaseProducts);
 
@@ -513,15 +558,17 @@
         function closeProductDetailModal() { document.getElementById('productDetailMasterModal').style.display = "none"; }
         function highlightSelectedSize(element) { document.querySelectorAll('.size-box-cell').forEach(box => box.classList.remove('active')); element.classList.add('active'); }
 
+        /* 📑 DYNAMIC ACCORDION EXPANSION LOGIC GRID */
+        function toggleAccordionTab(headerEl) {
+            const panel = headerEl.nextElementSibling;
+            const icon = headerEl.querySelector('i');
+            if(panel.style.display === "block") { panel.style.display = "none"; icon.className = "fa-solid fa-angle-down"; }
+            else { panel.style.display = "block"; icon.className = "fa-solid fa-angle-up"; }
+        }
+
         function pushToBasket(name, price) { appCartMemory.push({ name: name, price: price }); syncBasketUI(); openCartPanelSheet(); }
         function openCartPanelSheet() { document.getElementById('cartPanelSheet').classList.add('sheet-active'); document.getElementById('sheetOverlay').style.display = "block"; document.body.style.overflow = "hidden"; }
-        
-        /* ✅ FIX: REMOVED THE BODY OVERFLOW SCROLL FREEZING LOCK GADBAD */
-        function closeCartPanelSheet() { 
-            document.getElementById('cartPanelSheet').classList.remove('sheet-active'); 
-            document.getElementById('sheetOverlay').style.display = "none"; 
-            document.body.style.overflow = "auto"; // Unlock scroll instantly
-        }
+        function closeCartPanelSheet() { document.getElementById('cartPanelSheet').classList.remove('sheet-active'); document.getElementById('sheetOverlay').style.display = "none"; document.body.style.overflow = "auto"; }
         
         function syncBasketUI() {
             document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`; const body = document.getElementById('cartSheetBodyContainer'); if(!body) return;
@@ -531,81 +578,92 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
-        function launchStatusPopupDialog(heading, desc) {
-            document.getElementById('statusPopupHeading').innerText = heading;
-            document.getElementById('statusPopupDescription').innerText = desc;
-            document.getElementById('statusPopupMasterMessageNode').style.display = "flex";
+        /* 💵 TOGGLE ACTIVE PAYMENT METHOD LOGIC */
+        function switchActivePaymentMethod(type) {
+            selectedPaymentMethodMode = type;
+            document.getElementById('payMethodOnlineTab').classList.remove('active');
+            document.getElementById('payMethodCodTab').classList.remove('active');
+            if(type === 'online') {
+                document.getElementById('payMethodOnlineTab').classList.add('active');
+                document.getElementById('masterDispatchOrderProcessActionBtn').innerText = "Place Order via Razorpay";
+            } else {
+                document.getElementById('payMethodCodTab').classList.add('active');
+                document.getElementById('masterDispatchOrderProcessActionBtn').innerText = "Confirm Cash on Delivery (COD) Order";
+            }
         }
-        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; document.body.style.overflow = "auto"; }
 
-        /* 💳 🔥 MASTER UN-FREEZING CHECKOUT GATEWAY INTERFACE DISPATCH RUNTIME */
-        window.executeRazorpayWideCheckoutGateway = function() {
+        /* 🚀 MASTER FUNCTION SWITCHING BETWEEN ONLINE AND COD ROUTING PIPELINES */
+        function dispatchStoreOrderMasterWorkflow() {
             if(appCartMemory.length === 0) return;
-            let currentPayableBillTotal = 0;
-            appCartMemory.forEach(item => currentPayableBillTotal += item.price);
+            if(selectedPaymentMethodMode === 'cod') {
+                // Execute standalone COD flow immediately to Firebase database logs tree
+                let currentPayableBillTotal = 0;
+                appCartMemory.forEach(item => currentPayableBillTotal += item.price);
+                
+                if(window.firebaseDB && sessionActiveLoggedInUser) {
+                    const userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
+                    window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), {
+                        items: appCartMemory,
+                        paymentMethod: "COD (Cash On Delivery)",
+                        billValue: currentPayableBillTotal,
+                        timestamp: Date.now(),
+                        status: "COD Verified & Pending Packing Pipeline"
+                    });
+                }
+                appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
+                launchStatusPopupDialog('COD Order Confirmed', '📦 Your Cash on Delivery (COD) order has been successfully placed! Details have been logged in your dashboard pipeline.');
+            } else {
+                // Route to real Razorpay gateway script trigger directly
+                executeRazorpayWideCheckoutGateway();
+            }
+        }
 
+        window.executeRazorpayWideCheckoutGateway = function() {
+            let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
-                "key": "rzp_test_QDmSvtFXnMyKmu", 
-                "amount": currentPayableBillTotal * 100, 
-                "currency": "INR",
-                "name": "ZippyKart Elite",
-                "description": "Premium Lifestyle Accessories Portal",
+                "key": "rzp_test_QDmSvtFXnMyKmu", "amount": currentPayableBillTotal * 100, "currency": "INR",
+                "name": "ZippyKart Elite", "description": "Premium Lifestyle Accessories Portal",
                 "image": "https://cdn-icons-png.flaticon.com/512/3081/3081986.png",
                 "handler": function (response) {
                     try {
                         if(window.firebaseDB && sessionActiveLoggedInUser) {
                             var userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
                             window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), {
-                                items: appCartMemory,
-                                paymentId: response.razorpay_payment_id,
-                                billPaid: currentPayableBillTotal,
-                                timestamp: Date.now(),
-                                status: "Paid & Pending Pipeline"
+                                items: appCartMemory, paymentId: response.razorpay_payment_id,
+                                billPaid: currentPayableBillTotal, timestamp: Date.now(), status: "Paid & Pending Pipeline"
                             });
                         }
-                    } catch(e) { console.log("Firebase bypass active."); }
-
+                    } catch(e) {}
                     appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
                     launchStatusPopupDialog('Payment Authorized', `🎉 Payment Received! Txn ID: ${response.razorpay_payment_id}.`);
                 },
-                "modal": {
-                    "ondismiss": function() {
-                        /* ✅ FIX: Unlock background layers immediately to prevent page freeze */
-                        closeCartPanelSheet(); 
-                        launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed.');
-                    }
-                },
-                "prefill": {
-                    "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar",
-                    "email": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email : "customer@zippykart.co.in"
-                },
+                "modal": { "ondismiss": function() { closeCartPanelSheet(); launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed.'); } },
+                "prefill": { "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar", "email": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email : "customer@zippykart.co.in" },
                 "theme": { "color": "#111" }
             };
-
-            const rzpPortalInstance = new window.Razorpay(gatewayOptionsTree);
-            rzpPortalInstance.open();
+            const rzpPortalInstance = new window.Razorpay(gatewayOptionsTree); rzpPortalInstance.open();
         }
 
+        function launchStatusPopupDialog(heading, desc) {
+            document.getElementById('statusPopupHeading').innerText = heading; document.getElementById('statusPopupDescription').innerText = desc;
+            document.getElementById('statusPopupMasterMessageNode').style.display = "flex"; document.body.style.overflow = "hidden";
+        }
+        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; document.body.style.overflow = "auto"; }
         function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
         function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
         function saveAddressProfileDetails() {
-            const name = document.getElementById('adrFullNameField').value.trim();
-            const house = document.getElementById('adrHouseNoField').value.trim();
-            const city = document.getElementById('adrCityField').value.trim();
+            const name = document.getElementById('adrFullNameField').value.trim(); const house = document.getElementById('adrHouseNoField').value.trim(); const city = document.getElementById('adrCityField').value.trim();
             if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all fields!'); return; }
-            document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`;
-            closeAddressesOverlayForm();
+            document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`; closeAddressesOverlayForm();
             launchStatusPopupDialog('Location Saved', '🎉 Delivery address saved successfully.');
         }
-
         function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
         function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
         function dispatchAiChatMessage() {
             const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
             const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
             setTimeout(() => {
-                let aiReply = "Your request parameters processed inside core database cluster loops.";
-                let pLower = msg.toLowerCase();
+                let aiReply = "Your request parameters processed inside core database cluster loops."; let pLower = msg.toLowerCase();
                 if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
                 else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active!"; }
                 else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
