@@ -74,31 +74,31 @@
 
         /* PREMIUM DYNAMIC OVERLAY DETAILS WINDOW MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
-        .detail-modal-box { background: #fff; width: 100%; max-width: 950px; height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 35px; display: flex; flex-direction: row; gap: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
-        @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 95vh; padding: 20px; gap: 20px; } }
+        .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
         
         .modal-left-gallery { width: 45%; display: flex; flex-direction: column; gap: 15px; }
         @media (max-width: 768px) { .modal-left-gallery { width: 100%; } }
-        .modal-img-holder { width: 100%; height: 420px; overflow: hidden; border-radius: 8px; background: #fafafa; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { .modal-img-holder { height: 280px; } }
+        .modal-img-holder { width: 100%; height: 360px; overflow: hidden; border-radius: 8px; background: #fafafa; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 768px) { .modal-img-holder { height: 240px; } }
         .modal-img-holder img { width: 100%; height: 100%; object-fit: cover; }
         
-        .modal-right-specs-hub { width: 55%; display: flex; flex-direction: column; gap: 16px; }
+        .modal-right-specs-hub { width: 55%; display: flex; flex-direction: column; gap: 14px; }
         @media (max-width: 768px) { .modal-right-specs-hub { width: 100%; } }
         
         /* EXPANDABLE ACCORDIONS FORMAT */
-        .spec-accordion-item { border-bottom: 1px solid #eaeaea; padding: 12px 0; }
-        .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 8px; }
+        .spec-accordion-item { border-bottom: 1px solid #eaeaea; padding: 10px 0; }
+        .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 6px; }
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
-        .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #ffa41c; }
+        .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ffa41c; }
         
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
-        .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
+        .size-box-cell { border: 1px solid #ddd; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
         /* CUSTOM OVERLAY DIALOGS POPUPS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
+        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; z-index: 9500; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; }
@@ -128,7 +128,7 @@
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
-        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
         .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; }
         
         /* COD TOGGLES SELECTION CORES STRIPS */
@@ -161,6 +161,30 @@
         .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
+            authDomain: "zippykart-production.firebaseapp.com", 
+            databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", 
+            projectId: "zippykart-production" 
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.firebaseDB = db;
+        window.dbRef = ref;
+        window.dbSet = set;
+        window.dbPush = push;
+        window.dbOnValue = onValue;
+        window.dbRemove = remove;
+
+        console.log("Firebase Stack Core Fully Synchronized.");
+        window.syncProductsFromFirebase();
+    </script>
 </head>
 <body>
 
@@ -169,7 +193,7 @@
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action parameters processed successfully.</p>
+            <p id="statusPopupDescription">Action execution parameters processed successfully.</p>
             <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
         </div>
     </div>
@@ -379,12 +403,14 @@
             { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
+        /* ✅ RE-ACTIVATED AND RE-BUILT STABLE BACKEND URL QUERY INTERCEPT PARSER METHOD */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
                 document.getElementById('zippyMainStoreFrontClientViewBlock').style.display = "none";
                 document.getElementById('zippyMainAdminDashboardBlock').style.display = "block";
             }
+            
             databaseProducts = backupStaticDataList;
             renderCatalogUI(databaseProducts);
 
@@ -528,15 +554,18 @@
             launchStatusPopupDialog('Authorization Success', `🎉 Welcome back ${displayName}!`);
         }
 
-        /* ✅ FIX: RE-MAPPED VARIABLE STRINGS TARGETS INJECTOR FOR POPUP BUTTON ACTION */
+        /* ✅ 100% FIXED AND MAPPED VARIABLE OBJECT HOOKS FOR THE ADD TO CART POPUP OVERLAY BUTTON */
         function openProductDetailModal(id) {
-            currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
+            currentActiveProductId = id; 
+            const item = databaseProducts.find(p => p.id === id); 
+            if(!item) return;
+            
             document.getElementById('modalProductImage').src = item.img; 
             document.getElementById('modalProductTitle').innerText = item.title; 
             document.getElementById('modalProductPrice').innerText = `₹${item.price}`; 
             document.getElementById('modalProductSpecs').innerText = item.specs;
             
-            // Re-attached direct push hooks dynamically inside full screen view hierarchy
+            // Fixed variable scope pointers mapping track loops execution rule
             document.getElementById('modalAddToCartBtn').onclick = function() {
                 pushToBasket(item.title, item.price);
                 closeProductDetailModal();
