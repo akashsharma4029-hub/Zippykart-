@@ -38,13 +38,13 @@
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
 
-        /* STRIPS BAR */
+        /* CATEGORIES STRIP */
         .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
         .categories-bar::-webkit-scrollbar { display: none; }
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* HERO SLIDER */
+        /* BANNER AUTOMATED SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
@@ -52,7 +52,7 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* CATALOG GRIDS */
+        /* ITEM CATALOG LAYOUT GRIDS */
         .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
         .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
@@ -72,7 +72,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* FIXED PRODUCT DETAILS WINDOW MODAL */
+        /* PRODUCT VIEW DETAILS INTERACTIVE WINDOW MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .detail-modal-box { background: #fff; width: 100%; max-width: 460px; max-height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 25px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
         .detail-modal-box .modal-img-holder { width: 100%; height: 260px; overflow: hidden; border-radius: 8px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
@@ -81,14 +81,14 @@
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* STATUS POPUPS */
+        /* CUSTOM MODERN STATUS POPUPS DISPLAY BOX */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 7000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .status-popup-card { background: #fff; border-radius: 10px; width: 90%; max-width: 400px; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
-        /* AUTH SECTIONS SETUP */
+        /* AUTH FORMS STRUCTURAL LINKS GRID */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -98,6 +98,7 @@
         .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
         .auth-form-fields-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
         .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
+        .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
@@ -108,7 +109,7 @@
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART UP SHEET DRAWERS */
+        /* CART UP LAYOUTS SHEET DRAWERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -117,7 +118,7 @@
         .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; }
         #sheetOverlay { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:2200; display:none; }
 
-        /* AI CHATBOX HOOK */
+        /* AI CHATBOX INFRASTRUCTURE BUILD HOOKS */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -131,7 +132,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* ADMIN HOOK PANELS */
+        /* ADMIN CONTROL BLOCKS HOOKS SETUP */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -163,7 +164,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Sync System Cloud Active.");
+        console.log("Firebase System Core Online Mapped.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -451,19 +452,35 @@
             renderGoogleGsiEmbeddedButton();
         }
 
+        /* 🔒 FIXED: STRICT BLANK FORM FIELDS SUBMISSION DEFENSE LOOP */
         function handleAuthFormSubmission() {
-            let displayName = "Akash"; let emailNodeVal = "user@gmail.com";
             if(authCurrentModalState === 'login') {
-                const fMail = document.getElementById('authEmailNodeField')?.value.trim(); if(fMail) { emailNodeVal = fMail; displayName = fMail.split('@')[0]; }
-            } else {
-                const fName = document.getElementById('regFirstNameField')?.value.trim(), fMail = document.getElementById('regEmailAddressField')?.value.trim();
-                if(fName) displayName = fName; if(fMail) emailNodeVal = fMail;
-                if(window.firebaseDB) {
-                    const userLogId = emailNodeVal.replace(/[^a-zA-Z0-9]/g, "_");
-                    window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: displayName, email: emailNodeVal, timestamp: Date.now() });
+                const mail = document.getElementById('authEmailNodeField')?.value.trim();
+                const pass = document.getElementById('authPasswordNodeField')?.value.trim();
+                
+                if(!mail || !pass) {
+                    launchStatusPopupDialog('Validation Error', '⚠️ Please fill out Email ID and Password fields before processing terminal!');
+                    return;
                 }
+                executeCustomUserLoginInjection(mail.split('@')[0], mail);
+            } else {
+                const fName = document.getElementById('regFirstNameField')?.value.trim();
+                const lName = document.getElementById('regLastNameField')?.value.trim();
+                const phone = document.getElementById('regMobileNumberField')?.value.trim();
+                const mail = document.getElementById('regEmailAddressField')?.value.trim();
+                const pass = document.getElementById('regCreatePasswordField')?.value.trim();
+                
+                if(!fName || !lName || !phone || !mail || !pass) {
+                    launchStatusPopupDialog('Validation Error', '⚠️ Please complete all Registration Form fields carefully before submitting registry.');
+                    return;
+                }
+                
+                if(window.firebaseDB) {
+                    const userLogId = mail.replace(/[^a-zA-Z0-9]/g, "_");
+                    window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: fName + " " + lName, email: mail, phone: phone, timestamp: Date.now() });
+                }
+                executeCustomUserLoginInjection(fName, mail);
             }
-            executeCustomUserLoginInjection(displayName, emailNodeVal);
         }
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
@@ -525,42 +542,13 @@
         }
         function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; }
 
-        function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
-        function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
-        function saveAddressProfileDetails() {
-            const name = document.getElementById('adrFullNameField').value.trim();
-            const house = document.getElementById('adrHouseNoField').value.trim();
-            const city = document.getElementById('adrCityField').value.trim();
-            if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all fields!'); return; }
-            document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`;
-            closeAddressesOverlayForm();
-            launchStatusPopupDialog('Location Saved', '🎉 Delivery address saved successfully.');
-        }
-
-        function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
-        function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
-        function dispatchAiChatMessage() {
-            const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
-            const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
-            setTimeout(() => {
-                let aiReply = "Your request parameters processed inside core database cluster loops.";
-                let pLower = msg.toLowerCase();
-                if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
-                else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active!"; }
-                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
-                logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
-            }, 750);
-        }
-        function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
-
-        /* 💳 🔥 REMOVED DEFERRED LIFECYCLE BARRIERS FOR RAZORPAY DISPATCH OVERLAY */
+        /* 💳 🔥 UN-BLOCKED FIXED RAZORPAY DISPATCH LAYER */
         window.executeRazorpayWideCheckoutGateway = function() {
             if(appCartMemory.length === 0) return;
             let currentPayableBillTotal = 0;
             appCartMemory.forEach(item => currentPayableBillTotal += item.price);
 
-            // Razorpay runtime integration handler block without async timeout barriers
-            var gatewayOptionsTree = {
+            const gatewayOptionsTree = {
                 "key": "rzp_test_QDmSvtFXnMyKmu", 
                 "amount": currentPayableBillTotal * 100, 
                 "currency": "INR",
@@ -597,10 +585,37 @@
                 "theme": { "color": "#111" }
             };
 
-            // Raw structural loading allocation fix
-            var rzpInstanceNode = new window.Razorpay(gatewayOptionsTree);
-            rzpInstanceNode.open();
+            const rzpPortalInstance = new window.Razorpay(gatewayOptionsTree);
+            rzpPortalInstance.open();
         }
+
+        function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
+        function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
+        function saveAddressProfileDetails() {
+            const name = document.getElementById('adrFullNameField').value.trim();
+            const house = document.getElementById('adrHouseNoField').value.trim();
+            const city = document.getElementById('adrCityField').value.trim();
+            if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all fields!'); return; }
+            document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`;
+            closeAddressesOverlayForm();
+            launchStatusPopupDialog('Location Saved', '🎉 Delivery address saved successfully.');
+        }
+
+        function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
+        function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
+        function dispatchAiChatMessage() {
+            const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
+            const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
+            setTimeout(() => {
+                let aiReply = "Your request parameters processed inside core database cluster loops.";
+                let pLower = msg.toLowerCase();
+                if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
+                else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active!"; }
+                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
+                logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
+            }, 750);
+        }
+        function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
     </script>
 </body>
 </html>
