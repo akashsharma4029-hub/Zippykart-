@@ -44,7 +44,7 @@
         .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
         .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
 
-        /* BANNER AUTOMATED SLIDER */
+        /* HERO BANNER AUTOMATED SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
@@ -52,7 +52,7 @@
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
 
-        /* ITEM CATALOG LAYOUT GRIDS */
+        /* CATALOG DISPLAY GRIDS */
         .container { width: 100%; max-width: 100%; padding: 40px 5%; background-color: #f1f2f4; display: block; }
         .section-title { font-size: 18px; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; color: #111; }
         .section-title::after { content: ''; display: block; width: 40px; height: 3px; background: #ff3e3e; margin-top: 6px; }
@@ -72,7 +72,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* 🛍️ LUXURY FULL SCREEN PRODUCT SPECIFICATION OVERLAY DETAILS MODAL */
+        /* PREMIUM DYNAMIC OVERLAY DETAILS WINDOW MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 100%; max-width: 950px; height: 90vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 35px; display: flex; flex-direction: row; gap: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 95vh; padding: 20px; gap: 20px; } }
@@ -86,26 +86,24 @@
         .modal-right-specs-hub { width: 55%; display: flex; flex-direction: column; gap: 16px; }
         @media (max-width: 768px) { .modal-right-specs-hub { width: 100%; } }
         
-        /* AMAZON STYLE EXPANDABLE ACCORDIONS GRID */
+        /* EXPANDABLE ACCORDIONS FORMAT */
         .spec-accordion-item { border-bottom: 1px solid #eaeaea; padding: 12px 0; }
         .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 8px; }
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
-        
-        /* RATING LOOK BLOCK */
         .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #ffa41c; }
         
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
         .size-box-cell { border: 1px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* CUSTOM STATUS POPUPS DISPLAYS */
+        /* CUSTOM OVERLAY DIALOGS POPUPS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
-        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; }
+        .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; }
 
-        /* AUTH SECTIONS SETUP */
+        /* AUTH FORMS LAYOUTS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -121,11 +119,11 @@
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
-        /* ADDRESS PANELS */
+        /* ADDRESS TRACK TERMINALS */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART UP SHEET DRAWERS */
+        /* CART LAYOUT SHEET DRAWERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -133,12 +131,12 @@
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
         .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; }
         
-        /* 💵 DYNAMIC COD OPTION SELECTOR STRIP LAYOUT */
+        /* COD TOGGLES SELECTION CORES STRIPS */
         .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
         .payment-method-tab.active { background: #111; color: #fff; }
 
-        /* AI CHATBOX HOOK */
+        /* AI SUPPORT PANEL WINDOW HULL */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -152,7 +150,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* ADMIN HOOK PANELS */
+        /* CONTROL TERMINAL GRID SPEC PANELS */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -163,30 +161,6 @@
         .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-        const firebaseConfig = { 
-            apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
-            authDomain: "zippykart-production.firebaseapp.com", 
-            databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", 
-            projectId: "zippykart-production" 
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        window.firebaseDB = db;
-        window.dbRef = ref;
-        window.dbSet = set;
-        window.dbPush = push;
-        window.dbOnValue = onValue;
-        window.dbRemove = remove;
-
-        console.log("Firebase Database Real-time Loop Ready.");
-        window.syncProductsFromFirebase();
-    </script>
 </head>
 <body>
 
@@ -195,7 +169,7 @@
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action execution parameters processed successfully.</p>
+            <p id="statusPopupDescription">Action parameters processed successfully.</p>
             <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
         </div>
     </div>
@@ -227,7 +201,7 @@
                     <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging system active via Firebase data clusters.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
                         <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                         <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
@@ -315,7 +289,7 @@
 
     <div class="detail-modal-overlay" id="productDetailMasterModal">
         <div class="detail-modal-box">
-            <i class="fa-solid fa-xmark" style="position:absolute; top:25px; right:25px; font-size:26px; cursor:pointer; z-index:15; color:#111;" onclick="closeProductDetailModal()"></i>
+            <i class="fa-solid fa-xmark" style="position:absolute; top:25px; right:25px; font-size:26px; cursor:pointer; z-index:150; color:#111;" onclick="closeProductDetailModal()"></i>
             
             <div class="modal-left-gallery">
                 <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
@@ -343,13 +317,13 @@
                     </div>
                     <div class="spec-accordion-item">
                         <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Product Specifications <i class="fa-solid fa-angle-down"></i></div>
-                        <div class="spec-accordion-content">Material: High-Grade Composite Matrix Premium Fabric Core<br>Warranty: 1 Year Elite Structural Warranty Protection<br>Traction Sole Architecture Built.</div>
+                        <div class="spec-accordion-content">Material: High-Grade Composite Matrix Premium Fabric Core Layer<br>Warranty: 1 Year Elite Structural Warranty Protection Node.</div>
                     </div>
                     <div class="spec-accordion-item">
                         <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Customer Reviews & Feedbacks <i class="fa-solid fa-angle-down"></i></div>
                         <div class="spec-accordion-content">
-                            <b>⭐⭐⭐⭐⭐ Akash Kumar:</b> Ekdum makhhan quality product hai bhai! Superfast shipping loop.<br>
-                            <b>⭐⭐⭐⭐ Amit S.:</b> Great grip on surfaces, highly recommended electronics/apparel node tracker!
+                            <b>⭐⭐⭐⭐⭐ Akash Kumar:</b> Quality is premium grade! Superfast instant render.<br>
+                            <b>⭐⭐⭐⭐ Amit S.:</b> Solid grip and stitching configurations, highly durable statement.
                         </div>
                     </div>
                 </div>
@@ -373,7 +347,7 @@
                 <p style="font-size:12px; font-weight:600;">Total Payable</p>
                 <h3 id="sheetTotalBillHook" style="font-size:20px; font-weight:900; color:#ff3e3e;">₹0</h3>
             </div>
-            <button class="final-pay-btn" id="masterDispatchOrderProcessActionBtn" onclick="dispatchStoreOrderMasterWorkflow()">Place Order Terminal</button>
+            <button class="final-pay-btn" id="masterDispatchOrderProcessActionBtn" onclick="dispatchStoreOrderMasterWorkflow()">Place Order via Razorpay</button>
         </div>
     </div>
 
@@ -392,12 +366,17 @@
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
 
+        // Fallback lighting array engine
         const backupStaticDataList = [
             { id: "fas_tshirt_1", category: "fashion", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Heavy 240 GSM organic cotton knit structure. Drop shoulder styling custom engineered." },
             { id: "fas_shirt_1", category: "fashion", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=500", specs: "100% Cotton dyed indigo wash texture matrix." },
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
             { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling with crystal gold gold-plated 3.5mm acoustic node ports." },
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
+            { id: "tech_headphone_1", category: "tech", title: "Wireless ANC Pro Over-Ear Headphones", price: 2499, oldPrice: 4999, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=500", specs: "Wireless ANC over-ear headphones setup dynamic features." },
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." },
+            { id: "fw_sleeper_1", category: "footwear", title: "Comfort Cloud Home Sleepers", price: 399, oldPrice: 999, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500", specs: "Super soft non-slip lightweight EVA layout matrix cushion padding nodes loops." },
+            { id: "cos_lip_1", category: "cosmetic", title: "Velvet Matte Liquid Lipstick", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=500", specs: "Waterproof rich pigment fluids compound node layer." },
+            { id: "bg_tote_1", category: "bags", title: "Classic Pastel Leather Hand Tote Bag", price: 599, oldPrice: 1499, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", specs: "Reinforced steel continuous dual chain lock mechanisms." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -447,7 +426,7 @@
             const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), oldPrice = parseInt(document.getElementById('admOldPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
             if(!id || !title || !price || !img) { alert("Please complete missing form fields!"); return; }
             
-            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium drop." };
+            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality drop item node logs." };
             if(window.firebaseDB) {
                 let matchIndex = databaseProducts.findIndex(p => p.id === id);
                 if(matchIndex !== -1) databaseProducts[matchIndex] = newItemObject;
@@ -549,19 +528,28 @@
             launchStatusPopupDialog('Authorization Success', `🎉 Welcome back ${displayName}!`);
         }
 
+        /* ✅ FIX: RE-MAPPED VARIABLE STRINGS TARGETS INJECTOR FOR POPUP BUTTON ACTION */
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
-            document.getElementById('modalProductImage').src = item.img; document.getElementById('modalProductTitle').innerText = item.title; document.getElementById('modalProductPrice').innerText = `₹${item.price}`; document.getElementById('modalProductSpecs').innerText = item.specs;
-            document.getElementById('modalAddToCartBtn').setAttribute('onclick', `pushToBasket('${item.title}', ${item.price})`); 
+            document.getElementById('modalProductImage').src = item.img; 
+            document.getElementById('modalProductTitle').innerText = item.title; 
+            document.getElementById('modalProductPrice').innerText = `₹${item.price}`; 
+            document.getElementById('modalProductSpecs').innerText = item.specs;
+            
+            // Re-attached direct push hooks dynamically inside full screen view hierarchy
+            document.getElementById('modalAddToCartBtn').onclick = function() {
+                pushToBasket(item.title, item.price);
+                closeProductDetailModal();
+            };
+            
             document.getElementById('productDetailMasterModal').style.display = "flex";
         }
+        
         function closeProductDetailModal() { document.getElementById('productDetailMasterModal').style.display = "none"; }
         function highlightSelectedSize(element) { document.querySelectorAll('.size-box-cell').forEach(box => box.classList.remove('active')); element.classList.add('active'); }
 
-        /* 📑 DYNAMIC ACCORDION EXPANSION LOGIC GRID */
         function toggleAccordionTab(headerEl) {
-            const panel = headerEl.nextElementSibling;
-            const icon = headerEl.querySelector('i');
+            const panel = headerEl.nextElementSibling; const icon = headerEl.querySelector('i');
             if(panel.style.display === "block") { panel.style.display = "none"; icon.className = "fa-solid fa-angle-down"; }
             else { panel.style.display = "block"; icon.className = "fa-solid fa-angle-up"; }
         }
@@ -578,7 +566,12 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
-        /* 💵 TOGGLE ACTIVE PAYMENT METHOD LOGIC */
+        function launchStatusPopupDialog(heading, desc) {
+            document.getElementById('statusPopupHeading').innerText = heading; document.getElementById('statusPopupDescription').innerText = desc;
+            document.getElementById('statusPopupMasterMessageNode').style.display = "flex"; document.body.style.overflow = "hidden";
+        }
+        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; document.body.style.overflow = "auto"; }
+
         function switchActivePaymentMethod(type) {
             selectedPaymentMethodMode = type;
             document.getElementById('payMethodOnlineTab').classList.remove('active');
@@ -592,28 +585,20 @@
             }
         }
 
-        /* 🚀 MASTER FUNCTION SWITCHING BETWEEN ONLINE AND COD ROUTING PIPELINES */
         function dispatchStoreOrderMasterWorkflow() {
             if(appCartMemory.length === 0) return;
+            let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
+            
             if(selectedPaymentMethodMode === 'cod') {
-                // Execute standalone COD flow immediately to Firebase database logs tree
-                let currentPayableBillTotal = 0;
-                appCartMemory.forEach(item => currentPayableBillTotal += item.price);
-                
                 if(window.firebaseDB && sessionActiveLoggedInUser) {
                     const userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
                     window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), {
-                        items: appCartMemory,
-                        paymentMethod: "COD (Cash On Delivery)",
-                        billValue: currentPayableBillTotal,
-                        timestamp: Date.now(),
-                        status: "COD Verified & Pending Packing Pipeline"
+                        items: appCartMemory, paymentMethod: "COD", billValue: currentPayableBillTotal, timestamp: Date.now(), status: "COD Confirmed"
                     });
                 }
                 appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
-                launchStatusPopupDialog('COD Order Confirmed', '📦 Your Cash on Delivery (COD) order has been successfully placed! Details have been logged in your dashboard pipeline.');
+                launchStatusPopupDialog('COD Order Confirmed', '📦 Your Cash on Delivery (COD) order has been successfully placed inside our backend system.');
             } else {
-                // Route to real Razorpay gateway script trigger directly
                 executeRazorpayWideCheckoutGateway();
             }
         }
@@ -644,11 +629,6 @@
             const rzpPortalInstance = new window.Razorpay(gatewayOptionsTree); rzpPortalInstance.open();
         }
 
-        function launchStatusPopupDialog(heading, desc) {
-            document.getElementById('statusPopupHeading').innerText = heading; document.getElementById('statusPopupDescription').innerText = desc;
-            document.getElementById('statusPopupMasterMessageNode').style.display = "flex"; document.body.style.overflow = "hidden";
-        }
-        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; document.body.style.overflow = "auto"; }
         function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
         function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
         function saveAddressProfileDetails() {
