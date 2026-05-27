@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Ultimate E-Commerce Production Hub</title>
+    <title>Zippykart.co.in | Ultimate E-Commerce Hub</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -86,7 +86,6 @@
         .modal-right-specs-hub { width: 55%; display: flex; flex-direction: column; gap: 14px; }
         @media (max-width: 768px) { .modal-right-specs-hub { width: 100%; } }
         
-        /* EXPANDABLE ACCORDIONS FORMAT */
         .spec-accordion-item { border-bottom: 1px solid #eaeaea; padding: 10px 0; }
         .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 6px; }
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
@@ -96,7 +95,7 @@
         .size-box-cell { border: 1px solid #ddd; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* CUSTOM OVERLAY DIALOGS POPUPS */
+        /* CUSTOM MODAL OVERLAY NOTIFICATION CARDS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; z-index: 9500; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
@@ -359,7 +358,7 @@
     </div>
 
     <div class="cart-up-sheet" id="cartPanelSheet">
-        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark; font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
+        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer">
             
@@ -382,7 +381,7 @@
             <div class="ai-msg system">Hello Akash! Portal completely updated with dynamic Firebase nodes & live Razorpay checkout channels system. Ask me any queries node!</div>
         </div>
         <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Ask about sizes, tech drop list or order metrics..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, fast loaders warp chargers, sneakers drops..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
             <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
@@ -395,7 +394,7 @@
         const backupStaticDataList = [
             { id: "men_overshirt_1", category: "fashion", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
             { id: "men_cargo_1", category: "fashion", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
-            { id: "men_linen_1", category: "fashion", title: "Men's Casual Linen Checked Shirt", price: 999, oldPrice: 1899, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=500", specs: "Breathable pure cotton summer comfort weave profile." },
+            { id: "men_linen_1", category: "fashion", title: "Men's Casual Pure Cotton Linen Shirt", price: 999, oldPrice: 1899, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=500", specs: "Breathable pure cotton summer comfort weave profile shirt." },
             { id: "women_coord_1", category: "fashion", title: "Women's Floral Cotton Co-Ord Set", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Breezy tiered luxury top and comfort trousers dynamic twin alignment set." },
             { id: "women_saree_1", category: "fashion", title: "Women's Luxury Organza Tissue Saree", price: 1899, oldPrice: 3999, img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=500", specs: "Sheer texture with elegant crystal embellishments hand-printed blueprint." },
             { id: "women_kurti_1", category: "fashion", title: "Women's Ethnic Indigo Straight Kurti", price: 699, oldPrice: 1399, img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=500", specs: "Handblock print alignment matrix on premium grade cotton layers loops." },
@@ -404,12 +403,15 @@
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
         ];
 
+        /* ✅ AUTOMATIC FIREBASE MERGER FOR DYNAMIC CATALOG PRESERVATION */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
                 document.getElementById('zippyMainStoreFrontClientViewBlock').style.display = "none";
                 document.getElementById('zippyMainAdminDashboardBlock').style.display = "block";
             }
+            
+            // Instantly render fullFallback including Men and Women arrays
             databaseProducts = backupStaticDataList;
             renderCatalogUI(databaseProducts);
 
@@ -417,8 +419,21 @@
             const productsNodeRef = window.dbRef(window.firebaseDB, "products");
             window.dbOnValue(productsNodeRef, (snapshot) => {
                 const data = snapshot.val();
-                if(data) {
-                    databaseProducts = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+                if(!data) {
+                    // Seed initial data if node is completely blank
+                    window.dbSet(productsNodeRef, backupStaticDataList);
+                } else {
+                    // Merge cloud database data loops with local fashion items safely
+                    let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+                    
+                    backupStaticDataList.forEach(staticItem => {
+                        let exists = firebaseParsedList.some(fbItem => fbItem.id === staticItem.id);
+                        if(!exists) {
+                            firebaseParsedList.push(staticItem);
+                        }
+                    });
+                    
+                    databaseProducts = firebaseParsedList;
                     renderCatalogUI(databaseProducts);
                     renderAdminCatalogTable();
                 }
@@ -439,7 +454,7 @@
             });
         }
 
-        /* ✅ REAL-TIME DYNAMIC LIVE SEARCH FILTERS LOOP METHOD WITH ZERO TIMEOUT */
+        /* Dynamic High-Speed input search tags engine mapping tracker loop */
         window.executeInstantCatalogSearchFilter = function(queryText) {
             let cleanQuery = queryText.toLowerCase().trim();
             if(!cleanQuery) {
@@ -511,7 +526,6 @@
                 switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
                 fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
             }
-            renderGoogleGsiEmbeddedButton();
         }
 
         function handleAuthFormSubmission() {
@@ -537,35 +551,6 @@
         }
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
-
-        function renderGoogleGsiEmbeddedButton() {
-            setTimeout(() => {
-                const targetHook = document.getElementById("embed-google-signin-btn-hook");
-                if(window.google && targetHook) {
-                    google.accounts.id.initialize({ client_id: "1072191317628-1dm52tfrccuo7okcmus1rnfa2bg2584i.apps.googleusercontent.com", callback: handleCredentialResponse });
-                    google.accounts.id.renderButton(targetHook, { theme: "dark", size: "medium", type: "standard", shape: "pill" });
-                }
-            }, 200);
-        }
-
-        function handleCredentialResponse(res) {
-            const token = parseJwt(res.credential);
-            if(window.firebaseDB) {
-                const userLogId = token.email.replace(/[^a-zA-Z0-9]/g, "_");
-                window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: token.name, email: token.email, provider: "google", lastLogin: Date.now() });
-            }
-            executeCustomUserLoginInjection(token.name.split(' ')[0], token.email);
-        }
-
-        function executeCustomUserLoginInjection(displayName, email) {
-            sessionActiveLoggedInUser = { name: displayName, email: email };
-            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-user-circle"></i> Hi, ${displayName} 👋`;
-            document.getElementById('dropdownProfileVaultLabel').innerText = `USER VAULT: ${email.toUpperCase()}`;
-            document.getElementById('logoutRowTerminalButton').style.display = "flex";
-            document.getElementById('dropdownMainRegisterTriggerLink').style.display = "none";
-            closeAuthGatewayModal();
-            launchStatusPopupDialog('Authorization Success', `🎉 Welcome back ${displayName}!`);
-        }
 
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
@@ -640,6 +625,7 @@
             }
         }
 
+        /* ✅ TERMINATED ALL EXTERNAL native alert INJECTIONS TO PREVENT OVERLAY BLOCKS FRAMEWORK FREEZING */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
