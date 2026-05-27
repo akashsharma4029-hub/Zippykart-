@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Ultimate E-Commerce Hub</title>
+    <title>Zippykart.co.in | Ultimate E-Commerce Production Hub</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,11 +38,20 @@
         .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
         .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
 
-        /* CATEGORIES STRIP */
-        .categories-bar { background: #fff; padding: 15px 5%; display: flex; gap: 12px; overflow-x: auto; width: 100%; border-bottom: 1px solid #eee; }
-        .categories-bar::-webkit-scrollbar { display: none; }
-        .cat-item { background: #f3f3f3; color: #333; padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
-        .cat-item.active, .cat-item:hover { background: #111; color: #fff; }
+        /* 🧸 BRAND NEW PREMIUM GRIDDED CATEGORIES BAR HUB */
+        .categories-container-panel { background: #fff; width: 100%; border-bottom: 2px solid #ddd; padding: 10px 5%; display: flex; align-items: center; justify-content: center; }
+        .categories-grid-box { display: grid; grid-template-columns: repeat(7, 1fr); width: 100%; max-width: 1200px; border: 1.5px solid #111; background: #fff; }
+        @media (max-width: 900px) { .categories-grid-box { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 600px) { .categories-grid-box { grid-template-columns: repeat(3, 1fr); } }
+        
+        .cat-block-item { border-right: 1.5px solid #111; padding: 12px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; background: #fff; transition: all 0.2s ease; }
+        .cat-block-item:last-child { border-right: none; }
+        @media (max-width: 900px) { .cat-block-item { border-bottom: 1.5px solid #111; } }
+        
+        .cat-circle-ico { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        .cat-block-item span.cat-label-text { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: 0.3px; }
+        .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
+        .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #ff3e3e; }
 
         /* HERO BANNER AUTOMATED SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
@@ -102,7 +111,7 @@
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #111; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; }
 
-        /* AUTH FORMS LAYOUTS SETUP */
+        /* AUTH SECTIONS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -118,11 +127,11 @@
         .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
         .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
-        /* ADDRESS TRACK TERMINALS */
+        /* ADDRESS RECONFI SURFACE */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART LAYOUT SHEET DRAWERS */
+        /* CART UP DRAWERS DRAWER */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.155); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -130,12 +139,12 @@
         .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
         .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; }
         
-        /* COD TOGGLES SELECTION CORES STRIPS */
+        /* COD METHOD CHANNELS */
         .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
         .payment-method-tab.active { background: #111; color: #fff; }
 
-        /* AI SUPPORT PANEL WINDOW HULL */
+        /* AI CONSOLE BOT */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -149,7 +158,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* CONTROL TERMINAL GRID SPEC PANELS */
+        /* ADMIN SETUPS TERMINALS MANAGER BLOCK */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -181,7 +190,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Database Real-time Loop Ready.");
+        console.log("Firebase Stack Core Fully Synchronized.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -249,21 +258,45 @@
             <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
         </div>
 
-        <div class="categories-bar">
-            <div class="cat-item active" onclick="filterCategory('all', this)">⚡ All Drops</div>
-            <div class="cat-item" onclick="filterCategory('fashion', this)">👗 Fashion Zone</div>
-            <div class="cat-item" onclick="filterCategory('footwear', this)">👟 Footwear</div>
-            <div class="cat-item" onclick="filterCategory('tech', this)">🔌 Tech Accs</div>
-            <div class="cat-item" onclick="filterCategory('cosmetic', this)">💄 Cosmetics</div>
-            <div class="cat-item" onclick="filterCategory('bags', this)">👜 Bags</div>
+        <div class="categories-container-panel">
+            <div class="categories-grid-box">
+                <div class="cat-block-item active" onclick="filterCategory('all', this)">
+                    <div class="cat-circle-ico" style="background-color: #0076e4;"><i class="fa-solid fa-bolt"></i></div>
+                    <span class="cat-label-text">All Drops</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('men', this)">
+                    <div class="cat-circle-ico" style="background-color: #388e3c;"><i class="fa-solid fa-person"></i></div>
+                    <span class="cat-label-text">Men</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('women', this)">
+                    <div class="cat-circle-ico" style="background-color: #e91e63;"><i class="fa-solid fa-neutral-vou">👗</i></div>
+                    <span class="cat-label-text">Women</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('footwear', this)">
+                    <div class="cat-circle-ico" style="background-color: #f57c00;"><i class="fa-solid fa-shoe-prints"></i></div>
+                    <span class="cat-label-text">Footwear</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('tech', this)">
+                    <div class="cat-circle-ico" style="background-color: #7b1fa2;"><i class="fa-solid fa-plug"></i></div>
+                    <span class="cat-label-text">Tech Accs</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('cosmetic', this)">
+                    <div class="cat-circle-ico" style="background-color: #ff5722;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <span class="cat-label-text">Cosmetics</span>
+                </div>
+                <div class="cat-block-item" onclick="filterCategory('kids', this)">
+                    <div class="cat-circle-ico" style="background-color: #ff3e3e;"><i class="fa-solid fa-child-reaching">🧸</i></div>
+                    <span class="cat-label-text">Kids</span>
+                </div>
+            </div>
         </div>
 
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
-                <div class="slide-frame" onclick="filterCategoryBySlider('fashion')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Fashion Drops</h1></div></div>
-                <div class="slide-frame" onclick="filterCategoryBySlider('footwear')"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Footwear Core</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('men')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Men Style</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('women')"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Women Wear</h1></div></div>
                 <div class="slide-frame" onclick="filterCategoryBySlider('tech')"><img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=1400"><div class="banner-overlay-text"><h1>Next Gen Tech Accs</h1></div></div>
-                <div class="slide-frame" onclick="filterCategoryBySlider('bags')"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Handbags Vault</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('kids')"><img src="https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=1400"><div class="banner-overlay-text"><h1>Kids Culture Drops</h1></div></div>
             </div>
         </div>
 
@@ -279,7 +312,7 @@
             <div class="admin-form-card">
                 <h2 style="font-size:15px; font-weight:900; text-transform:uppercase; margin-bottom:15px;">Add New Live Product</h2>
                 <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. tech_charger_2"></div>
-                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="fashion">👗 Fashion Zone</option><option value="footwear">👟 Footwear Hub</option><option value="tech">🔌 Tech Electronics Accessories</option><option value="cosmetic">💄 Cosmetics Core</option><option value="bags">👜 Luxury Handbags</option></select></div>
+                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="men">👗 Men Apparel</option><option value="women">👗 Women Clothing</option><option value="kids">🧸 Kids Zone</option><option value="footwear">👟 Footwear Hub</option><option value="tech">🔌 Tech Accessories</option></select></div>
                 <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Real 65W Super Warp Charger"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="499"></div>
                 <div class="auth-input-cell"><label>Original Strike Price (₹)</label><input type="number" id="admOldPriceField" placeholder="999"></div>
@@ -358,7 +391,7 @@
     </div>
 
     <div class="cart-up-sheet" id="cartPanelSheet">
-        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
+        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark; font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer">
             
@@ -390,20 +423,23 @@
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
 
-        // ✅ RE-CONFIGURED 2026 TOP TRENDING APPARELS + ELECTRONICS DROPS (LOAD INSTANTLY)
+        // ✅ INJECTED CORE FALLBACK ITEMS PACKAGES LINKED FOR HIGH SPEED RENDERS (INCLUDES KIDS DROPS)
         const backupStaticDataList = [
-            { id: "men_overshirt_1", category: "fashion", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
-            { id: "men_cargo_1", category: "fashion", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
-            { id: "men_linen_1", category: "fashion", title: "Men's Casual Pure Cotton Linen Shirt", price: 999, oldPrice: 1899, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=500", specs: "Breathable pure cotton summer comfort weave profile shirt." },
-            { id: "women_coord_1", category: "fashion", title: "Women's Floral Cotton Co-Ord Set", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Breezy tiered luxury top and comfort trousers dynamic twin alignment set." },
-            { id: "women_saree_1", category: "fashion", title: "Women's Luxury Organza Tissue Saree", price: 1899, oldPrice: 3999, img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=500", specs: "Sheer texture with elegant crystal embellishments hand-printed blueprint." },
-            { id: "women_kurti_1", category: "fashion", title: "Women's Ethnic Indigo Straight Kurti", price: 699, oldPrice: 1399, img: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=500", specs: "Handblock print alignment matrix on premium grade cotton layers loops." },
+            { id: "men_overshirt_1", category: "men", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
+            { id: "men_cargo_1", category: "men", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
+            { id: "women_coord_1", category: "women", title: "Women's Floral Cotton Co-Ord Set", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Breezy tiered luxury top and comfort trousers dynamic twin alignment set." },
+            { id: "women_saree_1", category: "women", title: "Women's Luxury Organza Tissue Saree", price: 1899, oldPrice: 3999, img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=500", specs: "Sheer texture with elegant crystal embellishments hand-printed blueprint." },
+            
+            // 🧸 TOP HIGH-GRADE DROP SHIPPING KIDS SEGMENT MERCHANDISE ACTIVE PIPELINES
+            { id: "kids_hoodie_1", category: "kids", title: "Kids Marvel Avengers Graphic Hoodie", price: 599, oldPrice: 1199, img: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=500", specs: "100% Breathable organic loop-knit cotton layer built safe for smooth active movements." },
+            { id: "kids_dungaree_1", category: "kids", title: "Kids Premium Denim Velvet Dungaree Set", price: 799, oldPrice: 1599, img: "https://images.unsplash.com/photo-1622290319146-7b63df48a635?q=80&w=500", specs: "Soft double-stitch adjustments matrix with solid colors retention anchors." },
+            { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=500", specs: "Lightweight flexible EVA response soles matrix setup loop configurations." },
+            
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
-            { id: "tech_earphone_1", category: "tech", title: "Bass-Boosted Metallic Earphones", price: 299, oldPrice: 599, img: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?q=80&w=500", specs: "Tangle-free braided fiber cabling." },
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
         ];
 
-        /* ✅ AUTOMATIC FIREBASE MERGER FOR DYNAMIC CATALOG PRESERVATION */
+        /* ✅ RE-BUILT FIREBASE AUTOMATIC CONCIERGE PRESERVED MERGER LOOPS NODES */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
@@ -411,7 +447,6 @@
                 document.getElementById('zippyMainAdminDashboardBlock').style.display = "block";
             }
             
-            // Instantly render fullFallback including Men and Women arrays
             databaseProducts = backupStaticDataList;
             renderCatalogUI(databaseProducts);
 
@@ -420,19 +455,13 @@
             window.dbOnValue(productsNodeRef, (snapshot) => {
                 const data = snapshot.val();
                 if(!data) {
-                    // Seed initial data if node is completely blank
                     window.dbSet(productsNodeRef, backupStaticDataList);
                 } else {
-                    // Merge cloud database data loops with local fashion items safely
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
-                    
                     backupStaticDataList.forEach(staticItem => {
                         let exists = firebaseParsedList.some(fbItem => fbItem.id === staticItem.id);
-                        if(!exists) {
-                            firebaseParsedList.push(staticItem);
-                        }
+                        if(!exists) { firebaseParsedList.push(staticItem); }
                     });
-                    
                     databaseProducts = firebaseParsedList;
                     renderCatalogUI(databaseProducts);
                     renderAdminCatalogTable();
@@ -454,16 +483,11 @@
             });
         }
 
-        /* Dynamic High-Speed input search tags engine mapping tracker loop */
         window.executeInstantCatalogSearchFilter = function(queryText) {
             let cleanQuery = queryText.toLowerCase().trim();
-            if(!cleanQuery) {
-                renderCatalogUI(databaseProducts);
-                return;
-            }
+            if(!cleanQuery) { renderCatalogUI(databaseProducts); return; }
             let matchingResults = databaseProducts.filter(item => {
-                return item.title.toLowerCase().includes(cleanQuery) || 
-                       item.category.toLowerCase().includes(cleanQuery);
+                return item.title.toLowerCase().includes(cleanQuery) || item.category.toLowerCase().includes(cleanQuery);
             });
             renderCatalogUI(matchingResults);
         };
@@ -504,10 +528,10 @@
         setInterval(() => { slideIdx = (slideIdx + 1) % 4; const engine = document.getElementById('heroSliderEngine'); if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; }, 3600);
 
         function filterCategory(tag, btnEl) {
-            if(btnEl) { document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active')); btnEl.classList.add('active'); }
+            if(btnEl) { document.querySelectorAll('.cat-block-item').forEach(i => i.classList.remove('active')); btnEl.classList.add('active'); }
             document.querySelectorAll('.product-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-category') === tag) ? "flex" : "none"; });
         }
-        function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-item active" : "cat-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
+        function filterCategoryBySlider(tag) { filterCategory(tag, null); document.querySelectorAll('.cat-block-item').forEach(i => { i.className = i.getAttribute('onclick').includes(`'${tag}'`) ? "cat-block-item active" : "cat-block-item"; }); document.getElementById('catalogProductsGrid').scrollIntoView({ behavior: 'smooth' }); }
         
         function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
         function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
@@ -625,7 +649,6 @@
             }
         }
 
-        /* ✅ TERMINATED ALL EXTERNAL native alert INJECTIONS TO PREVENT OVERLAY BLOCKS FRAMEWORK FREEZING */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
