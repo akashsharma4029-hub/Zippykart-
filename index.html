@@ -14,7 +14,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 EXACT MATCH NAVBAR LOGO CONTEXT (REFERENCE: 1000106505_2.png) */
+        /* 🖤 NAVBAR CONFIGURATION (REFERENCE LOGO MATCH: 1000106505_2.png) */
         header { background-color: #fff; color: #111; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-bottom: 1px solid #e2e8f0; }
         .header-left-block { display: flex; align-items: center; gap: 20px; flex-grow: 1; }
         
@@ -51,18 +51,18 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 MAPPED ROUNDED TILES CATEGORIES ROW MATRIX (8 SECTIONS WITH WATCH INTEGRATION) */
-        .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 12px 5%; display: flex; align-items: center; justify-content: center; }
-        .categories-grid-box { display: grid; grid-template-columns: repeat(8, 1fr); width: 100%; max-width: 1250px; border: 1.5px solid #111; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-        @media (max-width: 1024px) { .categories-grid-box { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 600px) { .categories-grid-box { grid-template-columns: repeat(3, 1fr); } }
+        /* ✅ FIXED CHOTA SIZE SINGLE PART HORIZONTAL ROW CATEGORY WRAPPER */
+        .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 8px 3%; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .categories-container-panel::-webkit-scrollbar { display: none; } /* Hide track */
         
-        .cat-block-item { border-right: 1.5px solid #111; padding: 14px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; background: #fff; transition: all 0.2s ease; }
+        .categories-grid-box { display: flex; flex-direction: row; flex-wrap: nowrap; border: 1.5px solid #111; background: #fff; min-width: max-content; }
+        
+        .cat-block-item { padding: 8px 14px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; background: #fff; border-right: 1.5px solid #111; transition: all 0.2s ease; }
         .cat-block-item:last-child { border-right: none; }
-        @media (max-width: 1024px) { .cat-block-item { border-bottom: 1.5px solid #111; } }
         
-        .cat-circle-ico { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
-        .cat-block-item span.cat-label-text { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: 0.3px; }
+        /* Compact icons metrics */
+        .cat-circle-ico { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: bold; box-shadow: inset 0 1px 3px rgba(0,0,0,0.15); }
+        .cat-block-item span.cat-label-text { font-size: 10px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: 0.2px; white-space: nowrap; }
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
         .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #e52d2d; }
 
@@ -137,8 +137,6 @@
         .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
-        .auth-google-divider-block { display: flex; align-items: center; text-align: center; color: #878787; font-size: 11px; font-weight: 600; margin: 10px 0; text-transform: uppercase; width: 100%; }
-        .google-btn-flex-chassis { display: flex; justify-content: center; width: 100%; padding-bottom: 10px; }
 
         /* ADDRESS PANELS */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
@@ -181,7 +179,7 @@
         .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
-    <!-- FIREBASE MODULE LOAD ENGINE -->
+    <!-- FIREBASE MODULE SYSTEM -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -203,7 +201,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Global Sync Initialized successfully.");
+        console.log("Firebase Global Sync Connected Successfully.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -211,11 +209,11 @@
 
     <div id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
-    <!-- NOTIFICATION SYSTEM BOX WINDOW POPUP -->
+    <!-- NOTIFICATION DIALOG CORE POPUP -->
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action execution parameters compiled successfully.</p>
+            <p id="statusPopupDescription">Action execution parameters successfully compiled.</p>
             <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
         </div>
     </div>
@@ -234,7 +232,7 @@
         </div>
     </div>
 
-    <!-- MAIN CLIENT FRONT VIEW PORTS PLATFORM HUB -->
+    <!-- CLIENT STORE PLATFORM INTERFACES -->
     <div id="zippyMainStoreFrontClientViewBlock">
         <header>
             <div class="header-left-block">
@@ -284,7 +282,7 @@
             <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
         </div>
 
-        <!-- 🧸 PREMIUM CATEGORIES ROW PANEL GRID BLOCK (INCLUDES ⌚ WATCH ZONE) -->
+        <!-- 🧸 FIXED COMPACT SINGLE PART HORIZONTAL ROW CATEGORIES BAR GRID -->
         <div class="categories-container-panel">
             <div class="categories-grid-box">
                 <div class="cat-block-item active" onclick="filterCategory('all', this)">
@@ -303,7 +301,6 @@
                     <div class="cat-circle-ico" style="background-color: #111;"><i class="fa-solid fa-child"></i></div>
                     <span class="cat-label-text">Kids</span>
                 </div>
-                <!-- ⌚ DYNAMIC ACCURATE WATCH ZONE SEGMENT INTERFACE MODULE -->
                 <div class="cat-block-item" onclick="filterCategory('watch', this)">
                     <div class="cat-circle-ico" style="background-color: #6a1b9a;"><i class="fa-solid fa-stopwatch"></i></div>
                     <span class="cat-label-text">Watch</span>
@@ -457,23 +454,18 @@
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
 
-        // ✅ FIXED IMAGE EXTRACTION LINKS INCLUDING THE PROPER LOW-PRICE TRENDING WATCHES NODES
         const backupStaticDataList = [
             { id: "men_overshirt_1", category: "men", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
             { id: "men_cargo_1", category: "men", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
             { id: "women_coord_1", category: "women", title: "Women's Floral Cotton Co-Ord Set", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Breezy tiered luxury top and comfort trousers dynamic twin alignment set." },
-            
-            // ⌚ LOW-PRICE HIGH DEFINITION POPULAR TIMEPICES MAPPED CHANNELS
             { id: "watch_smart_1", category: "watch", title: "Zippy Minimalist OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500", specs: "Realtime heart-rate configuration tracker matrix. Waterproof high-grade zinc alloy frames." },
             { id: "watch_vintage_1", category: "watch", title: "Vintage Steel Waterproof Digital Watch", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=500", specs: "Classic full steel structural layout framework. EL back-light with alarm matrix loops." },
-            
             { id: "kids_hoodie_1", category: "kids", title: "Kids Marvel Avengers Graphic Hoodie", price: 599, oldPrice: 1199, img: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=500", specs: "100% Breathable organic loop-knit cotton layer built safe for smooth active movements." },
             { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=500", specs: "Lightweight flexible EVA response soles matrix setup loop configurations." },
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
         ];
 
-        /* ✅ AUTOMATIC CONCIERGE INTEGRATION SO CLOUD DATABASE DOES NOT WIPES DYNAMIC IMAGES EXECUTIONS */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
@@ -646,12 +638,6 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
-        function launchStatusPopupDialog(heading, desc) {
-            document.getElementById('statusPopupHeading').innerText = heading; document.getElementById('statusPopupDescription').innerText = desc;
-            document.getElementById('statusPopupMasterMessageNode').style.display = "flex"; document.body.style.overflow = "hidden";
-        }
-        function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; document.body.style.overflow = "auto"; }
-
         function switchActivePaymentMethod(type) {
             selectedPaymentMethodMode = type;
             document.getElementById('payMethodOnlineTab').classList.remove('active');
@@ -683,7 +669,7 @@
             }
         }
 
-        /* 🔒 GLOBAL CHROMES DEFENSE ALERT INTERCEPTED */
+        /* 🔒 NATIVE CHROME FAILURE POPUP INTERCEPT SYSTEM BLOCK (100% FIXED) */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
@@ -731,7 +717,6 @@
                 logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
             }, 750);
         }
-        function parseJwt(token) { var base64Url = token.split('.')[1]; var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(window.atob(base64).split('').map(function(c) { return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2); }).join(''))); }
     </script>
 </body>
 </html>
