@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zippykart.co.in | Ultimate E-Commerce Production Hub</title>
+    
+    <!-- 🔥 ANTI-FREEZE & POPUP BLOCKER SCRIPT (MUST BE ON TOP) -->
+    <script>
+        // Browser ke native alert ko permanently overwrite kar diya taaki freeze popup kabhi na aaye
+        window.alert = function(message) {
+            console.log("Blocked Native Alert: " + message);
+            setTimeout(function() {
+                if (window.launchStatusPopupDialog) {
+                    window.launchStatusPopupDialog('Zippykart System', message);
+                }
+            }, 100);
+            return true;
+        };
+    </script>
+
     <!-- 💳 REAL RAZORPAY MASTER INTEGRATED SDK -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
         
@@ -51,16 +67,14 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* ✅ FIXED CHOTA SIZE SINGLE PART HORIZONTAL ROW CATEGORY WRAPPER */
+        /* 🧸 FIXED COMPACT SINGLE PART HORIZONTAL ROW CATEGORIES BAR GRID */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 8px 3%; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .categories-container-panel::-webkit-scrollbar { display: none; } /* Hide track */
+        .categories-container-panel::-webkit-scrollbar { display: none; }
         
         .categories-grid-box { display: flex; flex-direction: row; flex-wrap: nowrap; border: 1.5px solid #111; background: #fff; min-width: max-content; }
-        
         .cat-block-item { padding: 8px 14px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; background: #fff; border-right: 1.5px solid #111; transition: all 0.2s ease; }
         .cat-block-item:last-child { border-right: none; }
         
-        /* Compact icons metrics */
         .cat-circle-ico { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: bold; box-shadow: inset 0 1px 3px rgba(0,0,0,0.15); }
         .cat-block-item span.cat-label-text { font-size: 10px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: 0.2px; white-space: nowrap; }
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
@@ -94,7 +108,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* PRODUCT SPECIFICATION VIEW WINDOW MODALS */
+        /* PRODUCT VIEW EXTENDED DETAILS WINDOW MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
@@ -117,9 +131,9 @@
         .size-box-cell { border: 1px solid #ddd; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* CUSTOM MODAL POPUP ALERTS */
-        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; z-index: 9500; }
+        /* CUSTOM MODAL NOTIFICATION OVERLAY PORTS */
+        .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9500; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #e52d2d; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
@@ -138,7 +152,7 @@
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
 
-        /* ADDRESS PANELS */
+        /* ADDRESS RECONFI SURFACE */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
@@ -147,7 +161,7 @@
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
-        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
         .final-pay-btn { background: #e52d2d; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         
         .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
@@ -209,12 +223,12 @@
 
     <div id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
-    <!-- NOTIFICATION DIALOG CORE POPUP -->
+    <!-- NOTIFICATION SYSTEM DIALOG WINDOW POPUP -->
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action execution parameters successfully compiled.</p>
-            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
+            <p id="statusPopupDescription">Action parameters processed successfully.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Hub Window</button>
         </div>
     </div>
 
@@ -232,7 +246,7 @@
         </div>
     </div>
 
-    <!-- CLIENT STORE PLATFORM INTERFACES -->
+    <!-- CLIENT STORE PLATFORM PANEL INTERFACES -->
     <div id="zippyMainStoreFrontClientViewBlock">
         <header>
             <div class="header-left-block">
@@ -564,16 +578,12 @@
 
         function toggleAuthModalState(state) {
             authCurrentModalState = state;
-            const headingNode = document.getElementById('authModalLeftHeading'), fieldsContainer = document.getElementById('authFormDynamicFieldsContainer'), submitBtn = document.getElementById('authActionSubmitButtonElement'), switchPrompt = document.getElementById('authSwitchPromptMessageRow');
+            const fieldsContainer = document.getElementById('authFormDynamicFieldsContainer');
             if(!fieldsContainer) return; fieldsContainer.innerHTML = "";
             
             if(state === 'login') {
-                if(headingNode) headingNode.innerText = "Login Matrix"; submitBtn.innerText = "Execute Session LogIn";
-                switchPrompt.innerHTML = `New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span>`;
                 fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID / Username</label><input type="email" id="authEmailNodeField" placeholder="Enter email address"></div><div class="auth-input-cell"><label>Secret Key / Password</label><input type="password" id="authPasswordNodeField" placeholder="••••••••"></div>`;
             } else {
-                if(headingNode) headingNode.innerText = "Registration"; submitBtn.innerText = "Submit Registry Form";
-                switchPrompt.innerHTML = `Already have an account? <span class="blue-link-trigger" onclick="toggleAuthModalState('login')">Log In Matrix</span>`;
                 fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
             }
         }
@@ -628,7 +638,12 @@
 
         function pushToBasket(name, price) { appCartMemory.push({ name: name, price: price }); syncBasketUI(); openCartPanelSheet(); }
         function openCartPanelSheet() { document.getElementById('cartPanelSheet').classList.add('sheet-active'); document.getElementById('sheetOverlay').style.display = "block"; document.body.style.overflow = "hidden"; }
-        function closeCartPanelSheet() { document.getElementById('cartPanelSheet').classList.remove('sheet-active'); document.getElementById('sheetOverlay').style.display = "none"; document.body.style.overflow = "auto"; }
+        
+        function closeCartPanelSheet() { 
+            document.getElementById('cartPanelSheet').classList.remove('sheet-active'); 
+            document.getElementById('sheetOverlay').style.display = "none"; 
+            document.body.style.overflow = "auto"; 
+        }
         
         function syncBasketUI() {
             document.getElementById('cartHookCounterText').innerText = `Cart (${appCartMemory.length})`; const body = document.getElementById('cartSheetBodyContainer'); if(!body) return;
@@ -638,6 +653,16 @@
         }
         function dropItem(idx) { appCartMemory.splice(idx,1); syncBasketUI(); }
         
+        function launchStatusPopupDialog(heading, desc) {
+            document.getElementById('statusPopupHeading').innerText = heading; document.getElementById('statusPopupDescription').innerText = desc;
+            document.getElementById('statusPopupMasterMessageNode').style.display = "flex"; document.body.style.overflow = "hidden";
+        }
+        
+        function closeStatusPopupDialog() { 
+            document.getElementById('statusPopupMasterMessageNode').style.display = "none"; 
+            document.body.style.overflow = "auto"; 
+        }
+
         function switchActivePaymentMethod(type) {
             selectedPaymentMethodMode = type;
             document.getElementById('payMethodOnlineTab').classList.remove('active');
@@ -669,12 +694,15 @@
             }
         }
 
-        /* 🔒 NATIVE CHROME FAILURE POPUP INTERCEPT SYSTEM BLOCK (100% FIXED) */
+        /* 🔒 NATIVE CHROME ALERT DIALOG ENTIRELY OVERWRITTEN FOR PRODUCTION CORES */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
-                "key": "rzp_test_QDmSvtFXnMyKmu", "amount": currentPayableBillTotal * 100, "currency": "INR",
-                "name": "ZippyKart Elite", "description": "Premium Lifestyle Accessories Portal",
+                "key": "rzp_live_SuidRs4KmU9W6w", // 🔥 REAL LIVE KEY INSTANTLY ATTACHED HERE
+                "amount": currentPayableBillTotal * 100, 
+                "currency": "INR",
+                "name": "ZippyKart Elite", 
+                "description": "Premium Lifestyle Accessories Portal",
                 "image": "https://cdn-icons-png.flaticon.com/512/3081/3081986.png",
                 "handler": function (response) {
                     try {
@@ -689,7 +717,13 @@
                     appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
                     launchStatusPopupDialog('Payment Authorized', `🎉 Payment Received! Txn ID: ${response.razorpay_payment_id}.`);
                 },
-                "modal": { "ondismiss": function() { closeCartPanelSheet(); launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed.'); } },
+                "modal": { 
+                    "ondismiss": function() { 
+                        closeCartPanelSheet(); 
+                        document.body.style.overflow = "auto";
+                        launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed.'); 
+                    } 
+                },
                 "prefill": { "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar", "email": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email : "customer@zippykart.co.in" },
                 "theme": { "color": "#111" }
             };
@@ -703,19 +737,6 @@
             if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all fields!'); return; }
             document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`; closeAddressesOverlayForm();
             launchStatusPopupDialog('Location Saved', '🎉 Delivery address saved successfully.');
-        }
-        function launchAutomatedAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "flex"; }
-        function closeAiCustomerChatPanel() { document.getElementById('aiChatCustomerWindowHub').style.display = "none"; }
-        function dispatchAiChatMessage() {
-            const input = document.getElementById('aiUserTextInputMsg'); const msg = input.value.trim(); if(!msg) return;
-            const logBox = document.getElementById('aiChatLogsWrapper'); logBox.innerHTML += `<div class="ai-msg user">${msg}</div>`; input.value = ""; logBox.scrollTop = logBox.scrollHeight;
-            setTimeout(() => {
-                let aiReply = "Your request parameters processed inside core database cluster loops."; let pLower = msg.toLowerCase();
-                if(pLower.includes("size")) { aiReply = "The size preview matrix contains choices toggles. You can tap S, M, L, XL smoothly inside product details!"; }
-                else if(pLower.includes("login") || pLower.includes("google") || pLower.includes("firebase")) { aiReply = "Firebase Engine Realtime synchronization is active!"; }
-                else if(pLower.includes("charger") || pLower.includes("earphone") || pLower.includes("electronic")) { aiReply = "All premium items are pulling directly from your live Firebase dataset array trees seamlessly."; }
-                logBox.innerHTML += `<div class="ai-msg system">${aiReply}</div>`; logBox.scrollTop = logBox.scrollHeight;
-            }, 750);
         }
     </script>
 </body>
