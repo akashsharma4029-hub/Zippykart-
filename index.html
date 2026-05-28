@@ -13,42 +13,51 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 MASTER ZIPPYKART NAVBAR */
-        header { background-color: #111; color: #fff; padding: 16px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .header-left-block { display: flex; align-items: center; gap: 25px; flex-grow: 1; }
-        .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; cursor: pointer; }
-        .logo .kart { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #111; padding: 2px 10px; border-radius: 4px; margin-left: 2px; transform: skewX(-10deg); display: inline-block; }
-        .search-web-wrapper { display: flex; align-items: center; background: #222; border-radius: 6px; padding: 12px 15px; width: 50%; max-width: 550px; border: 1px solid #333; }
-        .search-web-wrapper input { border: none; outline: none; width: 90%; font-size: 13px; color: #fff; background: transparent; }
-        .search-web-wrapper i { color: #666; margin-right: 12px; }
-
-        .header-right-menu { display: flex; align-items: center; gap: 15px; }
-        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #fff; padding: 10px 12px; }
+        /* 🖤 PREMIUM OFFICIAL BRAND LOGO NAVBAR */
+        header { background-color: #fff; color: #111; padding: 14px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border-bottom: 1px solid #e2e8f0; }
+        .header-left-block { display: flex; align-items: center; gap: 30px; flex-grow: 1; }
         
-        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border-radius: 8px; border: 1px solid #e8e8e8; overflow: hidden; z-index: 2000; margin-top: 8px; }
+        /* 🛒 EXACT MATCH LOGO INFRASTRUCTURE (REFERENCE: 1000106505.png) */
+        .brand-logo-chassis { display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; text-decoration: none; }
+        .brand-cart-icon-wrapper { background-color: #ff3e3e; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 4px 10px rgba(255, 62, 62, 0.2); }
+        .brand-cart-icon-wrapper i { color: #fff; font-size: 18px; }
+        .brand-cart-icon-wrapper .z-letter-badge { position: absolute; color: #ff3e3e; font-size: 11px; font-weight: 900; background: #fff; width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; border-radius: 50%; top: 4px; left: 16px; font-family: sans-serif; text-transform: lowercase; }
+        .brand-logo-text { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -0.5px; }
+        .brand-logo-text span.red-text { color: #ff3e3e !important; }
+
+        .search-web-wrapper { display: flex; align-items: center; background: #f8f9fa; border-radius: 8px; padding: 10px 14px; width: 50%; max-width: 550px; border: 1px solid #cbd5e1; transition: border-color 0.2s; }
+        .search-web-wrapper:focus-within { border-color: #ff3e3e; background: #fff; }
+        .search-web-wrapper input { border: none; outline: none; width: 92%; font-size: 13px; color: #333; background: transparent; font-weight: 600; }
+        .search-web-wrapper i { color: #64748b; margin-right: 12px; font-size: 14px; }
+
+        .header-right-menu { display: flex; align-items: center; gap: 20px; }
+        .nav-dropdown-item { position: relative; display: inline-block; cursor: pointer; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #334155; padding: 10px 4px; }
+        .nav-dropdown-item:hover { color: #ff3e3e; }
+        
+        .floating-menu-pane { display: none; position: absolute; top: 100%; right: 0; background: #fff; min-width: 275px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; z-index: 2000; margin-top: 8px; }
         .nav-dropdown-item:hover .floating-menu-pane { display: block; }
         
-        .menu-header-badge { background: #111; color: #fff; padding: 12px 20px; font-size: 10px; border-bottom: 1px solid #222; }
-        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #222; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f6f6f6; text-transform: none; }
+        .menu-header-badge { background: #f8f9fa; color: #64748b; padding: 12px 20px; font-size: 10px; font-weight: bold; border-bottom: 1px solid #e2e8f0; letter-spacing: 0.5px; }
+        .menu-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; color: #1e293b; font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #f1f5f9; text-transform: none; }
         .menu-row:hover { background: #fff5f5; color: #ff3e3e; padding-left: 25px; transition: all 0.2s; }
         .menu-row .left-side-cap { display: flex; align-items: center; gap: 12px; }
         .menu-row i.row-lead-ico { color: #ff3e3e; font-size: 14px; width: 20px; text-align: center; }
-        .dropdown-signup-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; text-align: center; padding: 13px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; border-top: 1px solid #eee; cursor: pointer; }
+        .dropdown-signup-btn { background: #ff3e3e; color: #fff; text-align: center; padding: 13px; font-size: 12px; font-weight: 700; display: block; text-decoration: none; text-transform: uppercase; border-top: 1px solid #e2e8f0; cursor: pointer; }
 
-        .web-cart-btn { background: linear-gradient(135deg, #ff3e3e, #ff7e40); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; }
-        .top-delivery-strip { background: #1a1a1a; color: #aaa; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; }
+        .web-cart-btn { background: #ff3e3e; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(255, 62, 62, 0.2); }
+        .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 BRAND NEW PREMIUM GRIDDED CATEGORIES BAR HUB */
-        .categories-container-panel { background: #fff; width: 100%; border-bottom: 2px solid #ddd; padding: 10px 5%; display: flex; align-items: center; justify-content: center; }
-        .categories-grid-box { display: grid; grid-template-columns: repeat(7, 1fr); width: 100%; max-width: 1200px; border: 1.5px solid #111; background: #fff; }
+        /* 🧸 ROUNDED TILE CATEGORIES BAR (REFERENCE: 1000106502.png) */
+        .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 16px 5%; display: flex; align-items: center; justify-content: center; }
+        .categories-grid-box { display: grid; grid-template-columns: repeat(7, 1fr); width: 100%; max-width: 1200px; border: 1.5px solid #111; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
         @media (max-width: 900px) { .categories-grid-box { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 600px) { .categories-grid-box { grid-template-columns: repeat(3, 1fr); } }
         
-        .cat-block-item { border-right: 1.5px solid #111; padding: 12px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; background: #fff; transition: all 0.2s ease; }
+        .cat-block-item { border-right: 1.5px solid #111; padding: 14px 6px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; background: #fff; transition: all 0.2s ease; }
         .cat-block-item:last-child { border-right: none; }
         @media (max-width: 900px) { .cat-block-item { border-bottom: 1.5px solid #111; } }
         
-        .cat-circle-ico { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        .cat-circle-ico { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
         .cat-block-item span.cat-label-text { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: 0.3px; }
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
         .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #ff3e3e; }
@@ -81,7 +90,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
 
-        /* PREMIUM DYNAMIC OVERLAY DETAILS WINDOW MODAL */
+        /* DYNAMIC OVERLAY DETAILS WINDOW MODAL */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
@@ -104,14 +113,14 @@
         .size-box-cell { border: 1px solid #ddd; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
-        /* CUSTOM MODAL OVERLAY NOTIFICATION CARDS */
+        /* CUSTOM NOTIFICATION CARDS TERMINALS Overlay */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; z-index: 9500; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
-        .status-close-btn { background: #111; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; }
+        .status-close-btn { background: #ff3e3e; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; box-shadow: 0 4px 12px rgba(255, 62, 62, 0.2); }
 
-        /* AUTH SECTIONS SETUP */
+        /* AUTH FORMS SETUP */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -131,18 +140,17 @@
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* CART UP DRAWERS DRAWER */
+        /* CART LAYOUT DRAWER */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.155); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
         .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
-        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .final-pay-btn { background: #111; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
+        .final-pay-btn { background: #ff3e3e; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(255, 62, 62, 0.2); }
         
-        /* COD METHOD CHANNELS */
         .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
-        .payment-method-tab.active { background: #111; color: #fff; }
+        .payment-method-tab.active { background: #ff3e3e; color: #fff; }
 
         /* AI CONSOLE BOT */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
@@ -158,7 +166,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* ADMIN SETUPS TERMINALS MANAGER BLOCK */
+        /* CONTROL TERMINAL PANELS */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -169,30 +177,6 @@
         .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-        const firebaseConfig = { 
-            apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", 
-            authDomain: "zippykart-production.firebaseapp.com", 
-            databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", 
-            projectId: "zippykart-production" 
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        window.firebaseDB = db;
-        window.dbRef = ref;
-        window.dbSet = set;
-        window.dbPush = push;
-        window.dbOnValue = onValue;
-        window.dbRemove = remove;
-
-        console.log("Firebase Stack Core Fully Synchronized.");
-        window.syncProductsFromFirebase();
-    </script>
 </head>
 <body>
 
@@ -201,8 +185,8 @@
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action execution parameters processed successfully.</p>
-            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
+            <p id="statusPopupDescription">Action execution parameters successfully compiled.</p>
+            <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Hub Window</button>
         </div>
     </div>
 
@@ -222,11 +206,17 @@
     <div id="zippyMainStoreFrontClientViewBlock">
         <header>
             <div class="header-left-block">
-                <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="zippy">Zippy</span><span class="kart">Kart</span></div>
+                <div class="brand-logo-chassis" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <div class="brand-cart-icon-wrapper">
+                        <i class="fa-solid fa-shopping-cart"></i>
+                        <div class="z-letter-badge">z</div>
+                    </div>
+                    <div class="brand-logo-text">Zippy<span class="red-text">Kart</span></div>
+                </div>
                 
                 <div class="search-web-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search apparel, baggy clothes, warp chargers drops..." oninput="executeInstantCatalogSearchFilter(this.value)">
+                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search clothes drops, dynamic lightning warp chargers..." oninput="executeInstantCatalogSearchFilter(this.value)">
                 </div>
             </div>
             <div class="header-right-menu">
@@ -234,8 +224,8 @@
                     <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging pipelines synchronized safely inside current database.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Selection storage array preserved live.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                         <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
                         <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
@@ -246,7 +236,7 @@
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge">UTILITY CHANNELS</div>
                         <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Layer secure validation token active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active over current port grids.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                     </div>
                 </div>
                 <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
@@ -269,7 +259,7 @@
                     <span class="cat-label-text">Men</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('women', this)">
-                    <div class="cat-circle-ico" style="background-color: #e91e63;"><i class="fa-solid fa-neutral-vou">👗</i></div>
+                    <div class="cat-circle-ico" style="background-color: #e91e63;"><i class="fa-solid fa-person-dress"></i></div>
                     <span class="cat-label-text">Women</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('footwear', this)">
@@ -277,15 +267,15 @@
                     <span class="cat-label-text">Footwear</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('tech', this)">
-                    <div class="cat-circle-ico" style="background-color: #7b1fa2;"><i class="fa-solid fa-plug"></i></div>
+                    <div class="cat-circle-ico" style="background-color: #7b1fa2;"><i class="fa-solid fa-laptop"></i></div>
                     <span class="cat-label-text">Tech Accs</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('cosmetic', this)">
-                    <div class="cat-circle-ico" style="background-color: #ff5722;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="cat-circle-ico" style="background-color: #ff5722;"><i class="fa-solid fa-eye-dropper"></i></div>
                     <span class="cat-label-text">Cosmetics</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('kids', this)">
-                    <div class="cat-circle-ico" style="background-color: #ff3e3e;"><i class="fa-solid fa-child-reaching">🧸</i></div>
+                    <div class="cat-circle-ico" style="background-color: #ff3e3e;"><i class="fa-solid fa-child"></i></div>
                     <span class="cat-label-text">Kids</span>
                 </div>
             </div>
@@ -293,8 +283,8 @@
 
         <div class="slider-wrapper">
             <div class="slide-container" id="heroSliderEngine">
-                <div class="slide-frame" onclick="filterCategoryBySlider('men')"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Men Style</h1></div></div>
-                <div class="slide-frame" onclick="filterCategoryBySlider('women')"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Women Wear</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('men')"><img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Men Fitted Drops</h1></div></div>
+                <div class="slide-frame" onclick="filterCategoryBySlider('women')"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Women Couture</h1></div></div>
                 <div class="slide-frame" onclick="filterCategoryBySlider('tech')"><img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?q=80&w=1400"><div class="banner-overlay-text"><h1>Next Gen Tech Accs</h1></div></div>
                 <div class="slide-frame" onclick="filterCategoryBySlider('kids')"><img src="https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=1400"><div class="banner-overlay-text"><h1>Kids Culture Drops</h1></div></div>
             </div>
@@ -391,7 +381,7 @@
     </div>
 
     <div class="cart-up-sheet" id="cartPanelSheet">
-        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark; font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
+        <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer">
             
@@ -423,23 +413,20 @@
         let appCartMemory = [], currentActiveProductId = null, authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
 
-        // ✅ INJECTED CORE FALLBACK ITEMS PACKAGES LINKED FOR HIGH SPEED RENDERS (INCLUDES KIDS DROPS)
+        // ✅ RE-CONFIGURED 2026 TOP TRENDING ITEMS PACKAGES (INCLUDES KIDS SEGMENTS)
         const backupStaticDataList = [
             { id: "men_overshirt_1", category: "men", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
             { id: "men_cargo_1", category: "men", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
             { id: "women_coord_1", category: "women", title: "Women's Floral Cotton Co-Ord Set", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Breezy tiered luxury top and comfort trousers dynamic twin alignment set." },
             { id: "women_saree_1", category: "women", title: "Women's Luxury Organza Tissue Saree", price: 1899, oldPrice: 3999, img: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=500", specs: "Sheer texture with elegant crystal embellishments hand-printed blueprint." },
-            
-            // 🧸 TOP HIGH-GRADE DROP SHIPPING KIDS SEGMENT MERCHANDISE ACTIVE PIPELINES
             { id: "kids_hoodie_1", category: "kids", title: "Kids Marvel Avengers Graphic Hoodie", price: 599, oldPrice: 1199, img: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=500", specs: "100% Breathable organic loop-knit cotton layer built safe for smooth active movements." },
             { id: "kids_dungaree_1", category: "kids", title: "Kids Premium Denim Velvet Dungaree Set", price: 799, oldPrice: 1599, img: "https://images.unsplash.com/photo-1622290319146-7b63df48a635?q=80&w=500", specs: "Soft double-stitch adjustments matrix with solid colors retention anchors." },
             { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=500", specs: "Lightweight flexible EVA response soles matrix setup loop configurations." },
-            
             { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
         ];
 
-        /* ✅ RE-BUILT FIREBASE AUTOMATIC CONCIERGE PRESERVED MERGER LOOPS NODES */
+        /* ✅ REAL-TIME CLOUD SYNC AUTOMATED DATABASE INITIALIZER */
         window.syncProductsFromFirebase = function() {
             const queryParamsUrl = new URLSearchParams(window.location.search);
             if(queryParamsUrl.get('admin') === 'true') {
@@ -483,6 +470,7 @@
             });
         }
 
+        /* High speed instantaneous search routing layers */
         window.executeInstantCatalogSearchFilter = function(queryText) {
             let cleanQuery = queryText.toLowerCase().trim();
             if(!cleanQuery) { renderCatalogUI(databaseProducts); return; }
@@ -649,6 +637,7 @@
             }
         }
 
+        /* 🔒 NATIVE CHROME ALERT POPUP FULLY BYPASSED */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
