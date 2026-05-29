@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zippykart.co.in | Ultimate E-Commerce Production Hub</title>
     
-    <!-- 🔥 ANTI-FREEZE & POPUP BLOCKER SCRIPT (MUST BE ON TOP) -->
     <script>
-        // Browser ke native alert ko permanently overwrite kar diya taaki freeze popup kabhi na aaye
         window.alert = function(message) {
             console.log("Blocked Native Alert: " + message);
             setTimeout(function() {
@@ -19,7 +17,6 @@
         };
     </script>
 
-    <!-- 💳 REAL RAZORPAY MASTER INTEGRATED SDK -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -30,7 +27,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         html, body { width: 100%; min-height: 100vh; background-color: #f1f2f4; color: #111; overflow-x: hidden; display: block; }
         
-        /* 🖤 NAVBAR CONFIGURATION (REFERENCE LOGO MATCH: 1000106505_2.png) */
+        /* 🖤 NAVBAR CONFIGURATION */
         header { background-color: #fff; color: #111; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-bottom: 1px solid #e2e8f0; }
         .header-left-block { display: flex; align-items: center; gap: 20px; flex-grow: 1; }
         
@@ -67,11 +64,11 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 FIXED COMPACT SINGLE PART HORIZONTAL ROW CATEGORIES BAR GRID */
-        .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 8px 3%; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        /* 🧸 FIX: CATEGORIES HEADER SPACE CENTER FIXED */
+        .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; padding: 8px 3%; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
-        .categories-grid-box { display: flex; flex-direction: row; flex-wrap: nowrap; border: 1.5px solid #111; background: #fff; min-width: max-content; }
+        .categories-grid-box { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; border: 1.5px solid #111; background: #fff; min-width: max-content; }
         .cat-block-item { padding: 8px 14px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; background: #fff; border-right: 1.5px solid #111; transition: all 0.2s ease; }
         .cat-block-item:last-child { border-right: none; }
         
@@ -106,7 +103,7 @@
         .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
         .price-box .now { font-weight: 700; color: #111; font-size: 15px; }
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
-        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; }
+        .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; cursor: pointer; }
 
         /* PRODUCT VIEW EXTENDED DETAILS WINDOW MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
@@ -126,10 +123,6 @@
         .spec-accordion-header { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 700; text-transform: uppercase; color: #222; cursor: pointer; padding-bottom: 6px; }
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
         .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ffa41c; }
-        
-        .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
-        .size-box-cell { border: 1px solid #ddd; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; }
-        .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
 
         /* CUSTOM MODAL NOTIFICATION OVERLAY PORTS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9500; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
@@ -193,7 +186,6 @@
         .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 
-    <!-- FIREBASE MODULE SYSTEM -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -223,7 +215,6 @@
 
     <div id="sheetOverlay" onclick="closeCartPanelSheet()"></div>
 
-    <!-- NOTIFICATION SYSTEM DIALOG WINDOW POPUP -->
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
@@ -232,7 +223,6 @@
         </div>
     </div>
 
-    <!-- MAPPED SHIPPING REGISTRY FORM TERMINAL OVERLAY -->
     <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
         <div class="address-window-chassis">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:20px; cursor:pointer;" onclick="closeAddressesOverlayForm()"></i>
@@ -246,11 +236,9 @@
         </div>
     </div>
 
-    <!-- CLIENT STORE PLATFORM PANEL INTERFACES -->
     <div id="zippyMainStoreFrontClientViewBlock">
         <header>
             <div class="header-left-block">
-                <!-- 🛒 PREMIUM BRAND REAL VECTOR TYPOGRAPHY LAYOUT MOUNTED -->
                 <div class="brand-logo-chassis" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                     <div class="custom-logo-vector-box">
                         <div class="cart-handle-bar"></div>
@@ -261,7 +249,6 @@
                     <div class="brand-logo-text">Zippy<span class="red-text-node">Kart</span></div>
                 </div>
                 
-                <!-- DYNAMIC INPUT SEARCH BOX ELEMENT -->
                 <div class="search-web-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="masterApparelSearchBoxElement" placeholder="Search apparel drops, smart low price watches, chargers..." oninput="executeInstantCatalogSearchFilter(this.value)">
@@ -296,7 +283,6 @@
             <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
         </div>
 
-        <!-- 🧸 FIXED COMPACT SINGLE PART HORIZONTAL ROW CATEGORIES BAR GRID -->
         <div class="categories-container-panel">
             <div class="categories-grid-box">
                 <div class="cat-block-item active" onclick="filterCategory('all', this)">
@@ -346,7 +332,6 @@
         <div class="container"><h2 class="section-title">Trending Culture Drops</h2><div class="grid" id="catalogProductsGrid"></div></div>
     </div>
 
-    <!-- 🛠️ CONTROL DASHBOARD TERMINAL -->
     <div id="zippyMainAdminDashboardBlock">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
             <h1 style="font-weight:900; text-transform:uppercase; font-size:24px; letter-spacing:0.5px;">⚙️ ZippyKart Control Terminal</h1>
@@ -371,7 +356,6 @@
         </div>
     </div>
 
-    <!-- SECURITY SIGNUP GATE MODALS -->
     <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
         <div class="auth-window-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
@@ -387,7 +371,6 @@
         </div>
     </div>
 
-    <!-- 🛍️ DYNAMIC PROFESSIONAL AMAZON-STYLE PRODUCT VIEW MODAL SPECIFICATION EXTENSIONS -->
     <div class="detail-modal-overlay" id="productDetailMasterModal">
         <div class="detail-modal-box">
             <i class="fa-solid fa-xmark" style="position:absolute; top:25px; right:25px; font-size:26px; cursor:pointer; z-index:150; color:#111;" onclick="closeProductDetailModal()"></i>
@@ -403,12 +386,14 @@
                 
                 <div>
                     <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:6px; font-weight:700;">Select Size Parameter</h4>
-                    <div class="size-selector-row">
-                        <div class="size-box-cell active" onclick="highlightSelectedSize(this)">S</div>
-                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">M</div>
-                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">L</div>
-                        <div class="size-box-cell" onclick="highlightSelectedSize(this)">XL</div>
-                    </div>
+                    <div style="border: 1.5px solid #111; padding: 6px 14px; display: inline-block; font-size: 12px; font-weight: 900; text-transform: uppercase; background: #fff; color: #111; margin-bottom: 5px;">Free Size</div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px; margin: 15px 0;">
+                    <label style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #878787;">Quantity:</label>
+                    <button type="button" onclick="changeModalQty(-1)" style="width: 32px; height: 32px; background: #fff; border: 1.5px solid #111; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center;">-</button>
+                    <span id="modal-qty-val" style="font-weight: 900; font-size: 14px; min-width: 24px; text-align: center;">1</span>
+                    <button type="button" onclick="changeModalQty(1)" style="width: 32px; height: 32px; background: #fff; border: 1.5px solid #111; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center;">+</button>
                 </div>
 
                 <div style="margin-top:10px; border-top:1px solid #eee;">
@@ -434,33 +419,19 @@
         </div>
     </div>
 
-    <!-- SHOPPING BASKET PANEL DRAWER SHEET DRAWER -->
     <div class="cart-up-sheet" id="cartPanelSheet">
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer">
-            
             <div class="payment-method-selector-strip">
                 <div class="payment-method-tab active" id="payMethodOnlineTab" onclick="switchActivePaymentMethod('online')">💳 Online Payment</div>
                 <div class="payment-method-tab" id="payMethodCodTab" onclick="switchActivePaymentMethod('cod')">📦 Cash On Delivery (COD)</div>
             </div>
-
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
                 <p style="font-size:12px; font-weight:600;">Total Payable</p>
                 <h3 id="sheetTotalBillHook" style="font-size:20px; font-weight:900; color:#ff3e3e;">₹0</h3>
             </div>
             <button class="final-pay-btn" id="masterDispatchOrderProcessActionBtn" onclick="dispatchStoreOrderMasterWorkflow()">Place Order via Razorpay</button>
-        </div>
-    </div>
-
-    <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
-        <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
-        <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! Portal completely updated with dynamic Firebase nodes & live Razorpay checkout channels system. Ask me any queries node!</div>
-        </div>
-        <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, fast loaders warp chargers, sneakers drops..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
-            <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
 
@@ -612,15 +583,28 @@
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
 
+        /* 🛠️ MODAL INCREMENT LOGIC MECHANICS DEFINITION */
+        let modalQty = 1;
+        function changeModalQty(val) {
+            modalQty = Math.max(1, modalQty + val);
+            document.getElementById('modal-qty-val').innerText = modalQty;
+        }
+
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
+            
+            modalQty = 1;
+            document.getElementById('modal-qty-val').innerText = modalQty;
+
             document.getElementById('modalProductImage').src = item.img; 
             document.getElementById('modalProductTitle').innerText = item.title; 
             document.getElementById('modalProductPrice').innerText = `₹${item.price}`; 
             document.getElementById('modalProductSpecs').innerText = item.specs;
             
             document.getElementById('modalAddToCartBtn').onclick = function() {
-                pushToBasket(item.title, item.price);
+                for(let i = 0; i < modalQty; i++) {
+                    pushToBasket(item.title, item.price);
+                }
                 closeProductDetailModal();
             };
             
@@ -628,8 +612,6 @@
         }
         
         function closeProductDetailModal() { document.getElementById('productDetailMasterModal').style.display = "none"; }
-        function highlightSelectedSize(element) { document.querySelectorAll('.size-box-cell').forEach(box => box.classList.remove('active')); element.classList.add('active'); }
-
         function toggleAccordionTab(headerEl) {
             const panel = headerEl.nextElementSibling; const icon = headerEl.querySelector('i');
             if(panel.style.display === "block") { panel.style.display = "none"; icon.className = "fa-solid fa-angle-down"; }
@@ -694,11 +676,11 @@
             }
         }
 
-        /* 🔒 NATIVE CHROME ALERT DIALOG ENTIRELY OVERWRITTEN FOR PRODUCTION CORES */
+        /* 💳 RAZORPAY PRODUCTION GATEWAY WITH AUTHENTIC API MASTER KEYS */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
-                "key": "rzp_live_SuidRs4KmU9W6w", // 🔥 REAL LIVE KEY INSTANTLY ATTACHED HERE
+                "key": "rzp_live_SuidRs4KmU9W6w", 
                 "amount": currentPayableBillTotal * 100, 
                 "currency": "INR",
                 "name": "ZippyKart Elite", 
