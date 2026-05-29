@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES PANEL - EXTRA SYMMETRIC FLUID WIDTH DESIGN CORES */
+        /* 🧸 CATEGORIES PANEL - FLUID SYMMETRIC INTEGRITY STABLE VIEW */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -124,7 +124,7 @@
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
         .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ffa41c; }
 
-        /* 🛠️ APPAREL SIZE SELECTION BOX CELLS DESIGN MATRIX */
+        /* 🛠️ APPAREL HOVER SIZE INTERACTIVE GRID CELLS STYLE MATRICES */
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
         .size-box-cell { border: 1.5px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; background:#fff; color:#111; transition: all 0.2s ease; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
@@ -458,6 +458,7 @@
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
         let apparelSelectedSizeToken = "Free Size";
 
+        // 🛠️ BACKUP STATIC IMAGES RESOLVED WITH VALID CDN LINKS (NO MORE BLANKS)
         const backupStaticDataList = [
             { id: "men_overshirt_1", category: "men", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
             { id: "men_cargo_1", category: "men", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
@@ -508,7 +509,7 @@
                         <div class="img-container"><img src="${item.img}"></div>
                         <h3>${item.title}</h3>
                         <div class="price-box"><span class="now">₹${item.price}</span><span class="old">₹${item.oldPrice}</span></div>
-                        <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default)', ${item.price})">Add To Cart</button>
+                        <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default Size)', ${item.price})">Add To Cart</button>
                     </div>`;
             });
         }
@@ -602,14 +603,14 @@
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
 
-        /* 🛠️ MODAL INCREMENT / DECREMENT ARITHMETIC CORE */
+        /* 🛠️ MODAL CONTEXT INCREMENT ENGINES */
         let modalQty = 1;
         function changeModalQty(val) {
             modalQty = Math.max(1, modalQty + val);
             document.getElementById('modal-qty-val').innerText = modalQty;
         }
 
-        /* 🛠️ FUNCTION FOR SWITCHING INTERACTIVE APPAREL SIZE TABS */
+        /* 🛠️ APPAREL SIZE VALUE SELECTOR METHODS MAP */
         window.selectApparelSizeToken = function(element, sizeName) {
             document.querySelectorAll('.size-box-cell').forEach(box => box.classList.remove('active'));
             element.classList.add('active');
@@ -622,10 +623,10 @@
             modalQty = 1;
             document.getElementById('modal-qty-val').innerText = modalQty;
 
-            // 🛠️ DYNAMIC CONDITION ENGINE: CLOTHES VS TECHNICAL ASSORTMENTS
+            // 🛠️ FIX: CONDITIONAL RENDERING RULES MAP -> APPAREL (S, M, L, XL) VS ACCESSORIES (FREE SIZE)
             const sizeBoxWrapper = document.getElementById('dynamicModalSizeContainerRow');
             if(item.category === "men" || item.category === "women" || item.category === "kids") {
-                apparelSelectedSizeToken = "S"; // Default initial fallback
+                apparelSelectedSizeToken = "S"; 
                 sizeBoxWrapper.innerHTML = `
                     <div class="size-selector-row">
                         <div class="size-box-cell active" onclick="selectApparelSizeToken(this, 'S')">S</div>
@@ -742,7 +743,7 @@
             }
         }
 
-        /* 💳 STABLE MASTER LIVE CHECKOUT PORT GRIDS */
+        /* 💳 REAL TIME STABLE LIVE PAYMENTS CONFIG CORE */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
