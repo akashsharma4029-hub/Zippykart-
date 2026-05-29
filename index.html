@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES PANEL - FLUID SYMMETRIC INTEGRITY STABLE VIEW */
+        /* 🧸 CATEGORIES PANEL */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -124,7 +124,7 @@
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
         .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ffa41c; }
 
-        /* 🛠️ APPAREL HOVER SIZE INTERACTIVE GRID CELLS STYLE MATRICES */
+        /* APPAREL HOVER SIZE INTERACTIVE CELLS */
         .size-selector-row { display: flex; gap: 10px; margin: 5px 0; }
         .size-box-cell { border: 1.5px solid #ddd; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; background:#fff; color:#111; transition: all 0.2s ease; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #111; background: #111; color: #fff; }
@@ -347,7 +347,7 @@
             <div class="admin-form-card">
                 <h2 style="font-size:15px; font-weight:900; text-transform:uppercase; margin-bottom:15px;">Add New Live Product</h2>
                 <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. tech_charger_2"></div>
-                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="men">👗 Men Apparel</option><option value="women">👗 Women Clothing</option><option value="kids">🧸 Kids Zone</option><option value="watch">⌚ Precision Watches</option><option value="footwear">👟 Footwear Hub</option><option value="tech">🔌 Tech Accessories</option></select></div>
+                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="men">👗 Men Apparel</option><option value="women">👗 Women Clothing</option><option value="kids">🧸 Kids Zone</option><option value="watch">⌚ Precision Watches</option><option value="footwear">👟 Footwear Hub</option><option value="tech">🔌 Tech Accessories</option><option value="cosmetic">✨ Cosmetics</option></select></div>
                 <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Real 65W Super Warp Charger"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="499"></div>
                 <div class="auth-input-cell"><label>Original Strike Price (₹)</label><input type="number" id="admOldPriceField" placeholder="999"></div>
@@ -392,8 +392,7 @@
                 
                 <div>
                     <h4 style="font-size:10px; text-transform:uppercase; color:#878787; margin-bottom:6px; font-weight:700;">Size Variant</h4>
-                    <div id="dynamicModalSizeContainerRow">
-                        </div>
+                    <div id="dynamicModalSizeContainerRow"></div>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 12px; margin: 15px 0;">
@@ -405,7 +404,7 @@
 
                 <div style="margin-top:10px; border-top:1px solid #eee;">
                     <div class="spec-accordion-item">
-                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">About this item <i class="fa-solid fa-angle-down"></i></div>
+                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">About this item <i class="fa-solid fa-angle-up"></i></div>
                         <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Premium quality dynamic culture inventory node.</div>
                     </div>
                     <div class="spec-accordion-item">
@@ -458,7 +457,7 @@
         let databaseProducts = []; let selectedPaymentMethodMode = "online";
         let apparelSelectedSizeToken = "Free Size";
 
-        // 🛠️ BACKUP STATIC IMAGES RESOLVED WITH VALID CDN LINKS (NO MORE BLANKS)
+        // 🛠️ FIX: REMOVED ALL BLANK IMAGES WITH HIGH RESOLUTION STABLE E-COMMERCE CDN IMAGES
         const backupStaticDataList = [
             { id: "men_overshirt_1", category: "men", title: "Men's Oversized Streetwear Overshirt", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout texture block pattern." },
             { id: "men_cargo_1", category: "men", title: "Men's Baggy Multi-Pocket Cargo Pants", price: 1299, oldPrice: 2799, img: "https://images.unsplash.com/photo-1517423738875-5ce310acd3da?q=80&w=500", specs: "Relaxed vintage utility pocket architecture. Olive green tactical drill cotton fabrics." },
@@ -466,9 +465,10 @@
             { id: "watch_smart_1", category: "watch", title: "Zippy Minimalist OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Realtime heart-rate configuration tracker matrix. Waterproof high-grade zinc alloy frames." },
             { id: "watch_vintage_1", category: "watch", title: "Vintage Steel Waterproof Digital Watch", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=500", specs: "Classic full steel structural layout framework. EL back-light with alarm matrix loops." },
             { id: "kids_hoodie_1", category: "kids", title: "Kids Marvel Avengers Graphic Hoodie", price: 599, oldPrice: 1199, img: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=500", specs: "100% Breathable organic loop-knit cotton layer built safe for smooth active movements." },
-            { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=500", specs: "Lightweight flexible EVA response soles matrix setup loop configurations." },
-            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=500", specs: "65W Smart Vooc power integration unit." },
-            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." }
+            { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "Anti-slip comfortable bottom grid sole matrix with light up flash sensors built safe for kids outdoor plays." },
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W High-speed intelligent Vooc fast charger adapter socket structure. Multi layer thermal cooling defense parameters." },
+            { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade leather structure with responsive traction configurations." },
+            { id: "cosmetic_art_1", category: "cosmetic", title: "Premium Boho Abstract Wall Art", price: 699, oldPrice: 1499, img: "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?q=80&w=500", specs: "Premium high-definition abstract illustration printed on 300 GSM ivory matte cards sheets. Elegant home aesthetic upgrades matrix." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -489,10 +489,19 @@
                     window.dbSet(productsNodeRef, backupStaticDataList);
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+                    
+                    // Enforce proper static assets syncing
                     backupStaticDataList.forEach(staticItem => {
-                        let exists = firebaseParsedList.some(fbItem => fbItem.id === staticItem.id);
-                        if(!exists) { firebaseParsedList.push(staticItem); }
+                        let idx = firebaseParsedList.findIndex(fbItem => fbItem.id === staticItem.id);
+                        if(idx !== -1) {
+                            if(firebaseParsedList[idx].img.includes("placeholder") || !firebaseParsedList[idx].img) {
+                                firebaseParsedList[idx] = staticItem;
+                            }
+                        } else {
+                            firebaseParsedList.push(staticItem);
+                        }
                     });
+                    
                     databaseProducts = firebaseParsedList;
                     renderCatalogUI(databaseProducts);
                     renderAdminCatalogTable();
@@ -509,7 +518,7 @@
                         <div class="img-container"><img src="${item.img}"></div>
                         <h3>${item.title}</h3>
                         <div class="price-box"><span class="now">₹${item.price}</span><span class="old">₹${item.oldPrice}</span></div>
-                        <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default Size)', ${item.price})">Add To Cart</button>
+                        <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default)', ${item.price})">Add To Cart</button>
                     </div>`;
             });
         }
@@ -603,27 +612,25 @@
 
         function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
 
-        /* 🛠️ MODAL CONTEXT INCREMENT ENGINES */
         let modalQty = 1;
         function changeModalQty(val) {
             modalQty = Math.max(1, modalQty + val);
             document.getElementById('modal-qty-val').innerText = modalQty;
         }
 
-        /* 🛠️ APPAREL SIZE VALUE SELECTOR METHODS MAP */
         window.selectApparelSizeToken = function(element, sizeName) {
             document.querySelectorAll('.size-box-cell').forEach(box => box.classList.remove('active'));
             element.classList.add('active');
             apparelSelectedSizeToken = sizeName;
         };
 
+        // 🛠️ FIX: CLICKING THE PRODUCT CARDS RENDERS COMPLETE ACCORDION SPECIFICATIONS
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
             
             modalQty = 1;
             document.getElementById('modal-qty-val').innerText = modalQty;
 
-            // 🛠️ FIX: CONDITIONAL RENDERING RULES MAP -> APPAREL (S, M, L, XL) VS ACCESSORIES (FREE SIZE)
             const sizeBoxWrapper = document.getElementById('dynamicModalSizeContainerRow');
             if(item.category === "men" || item.category === "women" || item.category === "kids") {
                 apparelSelectedSizeToken = "S"; 
@@ -656,6 +663,7 @@
         }
         
         function closeProductDetailModal() { document.getElementById('productDetailMasterModal').style.display = "none"; }
+        
         function toggleAccordionTab(headerEl) {
             const panel = headerEl.nextElementSibling; const icon = headerEl.querySelector('i');
             if(panel.style.display === "block") { panel.style.display = "none"; icon.className = "fa-solid fa-angle-down"; }
@@ -689,7 +697,6 @@
             document.body.style.overflow = "auto"; 
         }
 
-        /* 🛠️ LIVE INTERACTIVE SYSTEM CUSTOMER CHAT BOT METHODS */
         window.launchAutomatedAiCustomerChatPanel = function() {
             document.getElementById('aiChatCustomerWindowHub').style.display = "flex";
         };
@@ -706,7 +713,7 @@
             input.value = "";
             
             setTimeout(() => {
-                logs.innerHTML += `<div class="ai-msg system">Received your parameters, Akash. Your query regarding current nodes is synchronized with elite care agents tier logs tree.</div>`;
+                logs.innerHTML += `<div class="ai-msg system">Received your parameters. Your query is synchronized with care logs tree.</div>`;
                 logs.scrollTop = logs.scrollHeight;
             }, 800);
             logs.scrollTop = logs.scrollHeight;
@@ -743,7 +750,6 @@
             }
         }
 
-        /* 💳 REAL TIME STABLE LIVE PAYMENTS CONFIG CORE */
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             const gatewayOptionsTree = {
