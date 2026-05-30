@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES CONTAINER - FULLY SYMMETRIC FLUID LAYOUT CRITICAL RE-FIX */
+        /* 🧸 CATEGORIES PANEL CHASSIS */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -77,7 +77,7 @@
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
         .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #e52d2d; }
 
-        /* HERO BANNER REAL INTERACTIVE SLIDER FIXED MECHANICS */
+        /* HERO BANNER SLIDER MECHANICS */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw; flex-shrink: 0; height: 100%; position: relative; }
@@ -170,7 +170,7 @@
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
         .payment-method-tab.active { background: #e52d2d; color: #fff; }
 
-        /* AI CUSTOMER LIVE Support BOX */
+        /* AI CUSTOMER LIVE SUPPORT BOX */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -216,7 +216,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Global Live Server Configured.");
+        console.log("Firebase Global Stream Sync Enabled.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -315,7 +315,7 @@
                     <span class="cat-label-text">Watch</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('toys', this)">
-                    <div class="cat-circle-ico" style="background-color: #ff9900;"><i class="fa-solid fa-teddy-bear">🧸</i></div>
+                    <div class="cat-circle-ico" style="background-color: #ff9900;"><i class="fa-solid fa-robot"></i></div>
                     <span class="cat-label-text">Toys Hub</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('tech', this)">
@@ -444,7 +444,7 @@
             <div class="ai-msg system">Hello Akash! Support systems online. Firebase cloud pipelines and real checkout loops are active. Ask me anything!</div>
         </div>
         <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Search modern shirts, premium toys drops, tech accs logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, premium toys drops, tech accs logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
             <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
@@ -454,7 +454,7 @@
         let apparelSelectedSizeToken = "M", apparelSelectedColorToken = "Maroon";
         let databaseProducts = [];
 
-        // 🛠️ FIX DEFINITION: BRAND-NEW IMMUNE DATA DEPLOYED IN-CELL (PREVENT GHOST ENTRIES RE-USE)
+        // 🛠️ FIX DEFINITION: BRAND-NEW IMMUNE DATASET WITH NEW HIGH-RES CDN LINKS
         const backupStaticDataList = [
             { id: "new_premium_maroon_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton apparel. Boxy silhouette build tailored with drop shoulder seam blocks." },
             { id: "new_emerald_silk_gown", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin clothing layers featuring a dynamic wrap dress design configuration." },
@@ -462,7 +462,7 @@
             { id: "new_gan_65w_brick", category: "tech", title: "Zippy HyperCharge 65W GaN Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "Next-gen Gallium Nitride safe technology power conversion cell block adapter matrix." },
             { id: "new_chrono_smart_watch", category: "watch", title: "Zippy Chrono Pro OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Vivid 1.96 inch ultra response full view screen display panel matrix tracking logs tracker." },
             
-            // 🧸 5 BRAND NEW TRENDING PREMIUM TOYS ADDED INTERNALLY (100% INDEPENDENT GRAPHICS)
+            // 🧸 5 BRAND NEW TRENDING PREMIUM TOYS ENTIRELY RESOLVED (NO OVERWRITING LOOPS)
             { id: "toy_jumbo_teddy_bear", category: "toys", title: "Zippy Jumbo Luxury Plush Teddy Bear", price: 599, oldPrice: 1299, img: "https://images.unsplash.com/photo-1559251606-c623743a6d76?q=80&w=500", specs: "Ultra soft hypo-allergenic premium plush velvet fabric filling matrix. 100% child-safe dynamic stitch configurations." },
             { id: "toy_rc_monster_truck", category: "toys", title: "4WD High-Speed Remote Control Monster Truck", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=500", specs: "2.4GHz long range radio transmission telemetry system. Extreme shock absorbers block with anti-collision rubber tyre grids." },
             { id: "toy_wooden_block_puzzle", category: "toys", title: "Educational Pastel Wooden Geometry Blocks", price: 399, oldPrice: 899, img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural eco-friendly pine wood segments layered carefully using organic toxic-free herbal paint schemas loops." },
@@ -489,7 +489,7 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // 🛠️ ISOLATED CELL DATA INSULATOR CLEANSING DUPLICATED PICTURE LAYOUT GRIDS
+                    // 🛠 Horned isolated framework loops completely cleans the ghosting thumbnail links
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = { ...item }; });
                     
@@ -497,7 +497,7 @@
                         if(item && item.id) {
                             if (!structuralCleanedMap[item.id]) {
                                 // Block bad placeholder entries completely from getting mapped to racks
-                                if (item.img && !item.img.includes("placeholder") && !item.img.includes("1516257984-b1b4d707412e") && item.img !== "") {
+                                if (item.img && !item.img.includes("1516257984-b1b4d707412e") && !item.img.includes("placeholder") && item.img !== "") {
                                     structuralCleanedMap[item.id] = item;
                                 }
                             } else {
@@ -515,7 +515,6 @@
             });
         };
 
-        // 🛠️ INSULATED CARD RENDER CREATION ENGINE STOPS GHOST PICTURE COPYING PERMANENTLY
         function renderCatalogUI(itemsList) {
             const container = document.getElementById('catalogProductsGrid');
             if(!container) return; container.innerHTML = "";
@@ -560,7 +559,7 @@
             });
         }
 
-        // 🛠️ FIXED REAL AUTOMATIC INTERACTIVE SLIDER LOOP SPEED METRICS
+        // 🛠️ REAL DYNAMIC SLIDER TIMER ENGINE SWITCH LOOPS
         let slideIdx = 0;
         setInterval(() => { 
             slideIdx = (slideIdx + 1) % 4; 
@@ -568,7 +567,7 @@
             if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; 
         }, 3200);
 
-        // 🛠️ DYNAMIC SYSTEM: NAVIGATION FILTER ROW PROCESS METHOD FIXED
+        // 🛠️ FIX DEFINITION: CAT ROW INLINE TOGGLER ENGINE ATTACHED
         window.filterCategory = function(tag, btnEl) {
             if(btnEl) { 
                 document.querySelectorAll('.cat-block-item').forEach(i => i.classList.remove('active')); 
