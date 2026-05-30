@@ -140,7 +140,7 @@
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #e52d2d; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
 
-        /* AUTH FORMS LAYOUTS */
+        /* AUTH STRUCTS */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -154,11 +154,11 @@
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
 
-        /* ADDRESS STORAGE PANEL LAYER */
+        /* ADDRESS STORAGE LAYER */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* SLIDEOUT CART BASKET PANELS DRAWERS */
+        /* SLIDEOUT BASKET TRAY DRAWERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.155); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -184,15 +184,16 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* CONTROL TERMINAL DATA SHIELDS PANELS */
+        /* ⚙️ PROFESSIONAL FLIPKART STYLE ADMIN TERMINAL INTERFACE PANEL */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
-        .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
-        .admin-table-card { flex-grow: 1; min-width: 350px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; overflow-x: auto; }
+        .admin-form-card { background: #f8f9fa; border: 1.5px solid #111; border-radius: 8px; padding: 30px; width: 100%; max-width: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .admin-table-card { flex-grow: 1; min-width: 350px; background: #fff; border: 1.5px solid #111; border-radius: 8px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
-        .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
-        .admin-table th { background: #111; color: #fff; text-transform: uppercase; font-size: 11px; }
-        .admin-delete-btn { background: #ff3e3e; color: #fff; border: none; padding: 6px 12px; font-size: 11px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1.5px solid #111; }
+        .admin-table th { background: #111; color: #fff; text-transform: uppercase; font-size: 11px; font-weight: 900; }
+        .admin-delete-btn { background: #ff3e3e; color: #fff; border: 1.5px solid #111; padding: 8px 14px; font-size: 11px; cursor: pointer; font-weight: 900; text-transform: uppercase; }
+        .admin-delete-btn:hover { background: #111; color: #fff; }
     </style>
 
     <script type="module">
@@ -216,7 +217,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Master Framework Online.");
+        console.log("Firebase Global Live Server Connected.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -238,7 +239,7 @@
             <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px;">Shipping Address Form</h3>
             <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
             <div class="auth-input-cell"><label>Flat / House No</label><input type="text" id="adrHouseNoField" placeholder="House Details"></div>
-            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Location Node"></div>
+            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Node Mapped"></div>
             <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
             <div class="auth-input-cell"><label>Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
             <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Address</button>
@@ -260,7 +261,7 @@
                 
                 <div class="search-web-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern apparel drops, toys, accessories..." oninput="executeInstantCatalogSearchFilter(this.value)">
+                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern shirts, premium toys drops, tech chargers..." oninput="executeInstantCatalogSearchFilter(this.value)">
                 </div>
             </div>
             <div class="header-right-menu">
@@ -268,8 +269,8 @@
                     <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                         <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
                         <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
@@ -280,7 +281,7 @@
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge">UTILITY CHANNELS</div>
                         <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active over current port grids.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                     </div>
                 </div>
                 <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
@@ -379,7 +380,7 @@
                     </div>
                 </div>
 
-                <button class="buy-btn" id="modalAddToCartBtn" style="padding:16px; font-size:12px; margin-top:15px; letter-spacing:0.5px; background: #e52d2d;">Add Item To Basket Tray</button>
+                <button class="buy-btn" id="modalAddToCartBtn" style="padding:16px; font-size:12px; margin-top:15px; letter-spacing:0.5px; background: #e52d2d;">ADD TO CART</button>
             </div>
         </div>
     </div>
@@ -417,14 +418,14 @@
 
     <div id="zippyMainAdminDashboardBlock">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
-            <h1>⚙️ ZippyKart Control Terminal</h1>
-            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 Store View</button>
+            <h1 style="font-weight: 900; font-size: 20px;">⚙️ ZippyKart Professional Control Terminal</h1>
+            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 View Client Front</button>
         </div>
         <div class="admin-flex-row">
             <div class="admin-form-card">
-                <h2>Add Custom Live Product</h2>
-                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. unique_toy_id"></div>
-                <div class="auth-input-cell"><label>Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option><option value="toys">Toys Store Hub</option></select></div>
+                <h2 style="font-size: 14px; text-transform: uppercase; margin-bottom: 15px;">Add Custom Variety Drop Product</h2>
+                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. specialized_item_1"></div>
+                <div class="auth-input-cell"><label>Select Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option><option value="toys">Toys Hub Store</option></select></div>
                 <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Remote Control Drone v4"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="1299"></div>
                 <div class="auth-input-cell"><label>Base / Maroon Image URL</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
@@ -437,6 +438,7 @@
                 <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload Live To Cloud</button>
             </div>
             <div class="admin-table-card">
+                <h2 style="font-size: 14px; text-transform: uppercase; margin-bottom: 10px;">Live Cloud Active Catalog Track</h2>
                 <table class="admin-table"><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Price</th><th>Operation</th></tr></thead><tbody id="adminLiveCatalogTableBody"></tbody></table>
             </div>
         </div>
@@ -459,7 +461,7 @@
         let databaseProducts = [];
         let counterValue = 1;
 
-        // 🛠️ FAIL-SAFE IMMUNE RAW DATASETS ENCODED - 100% PURE SEPARATED CDN NODES
+        // 🛠️ FAIL-SAFE IMMUNE GROUND BASE ASSETS DEPLOYED
         const backupStaticDataList = [
             { id: "new_premium_maroon_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton clothing. Boxy silhouette build tailored with drop shoulder seam blocks." },
             { id: "new_emerald_silk_gown", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin clothing layout featuring a dynamic flared wrap dress trail configuration." },
@@ -475,7 +477,7 @@
             { id: "toy_barbie_doll_mansion", category: "toys", title: "Premium Royal Fashion Doll Dreamset", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=500", specs: "Custom clothing wardrobe sets with multi-joint realistic model figures adjustments." }
         ];
 
-        // 🛠️ FORCE BYPASS LOGIC: THIS ENFORCES STATIC LINK OVERRIDES REGARDLESS OF CLOUD ENTRIES STATE
+        // 🛠️ STRICT DECONTAMINATION PIPELINE DISCONNECTS COPIED DUPLICATES RENDERING FROM BACKEND
         window.syncProductsFromFirebase = function() {
             databaseProducts = backupStaticDataList.map(item => ({...item}));
             renderCatalogUI(databaseProducts);
@@ -483,13 +485,27 @@
             if(!window.firebaseDB) return;
             const productsNodeRef = window.dbRef(window.firebaseDB, "products");
             window.dbOnValue(productsNodeRef, (snapshot) => {
-                // We keep local verified assets clean and immutable to block ghost pink overrides completely
-                renderCatalogUI(databaseProducts);
+                const data = snapshot.val();
+                if(data) {
+                    let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+                    let localMap = {};
+                    backupStaticDataList.forEach(i => { localMap[i.id] = i; });
+                    
+                    firebaseParsedList.forEach(item => {
+                        if(item && item.id) {
+                            // If the image link matches corrupt test session signatures, drop override
+                            if(!item.img.includes("1516257984-b1b4d707412e") && !item.img.includes("placeholder") && item.img !== "") {
+                                localMap[item.id] = item;
+                            }
+                        }
+                    });
+                    databaseProducts = Object.values(localMap);
+                    renderCatalogUI(databaseProducts);
+                }
                 renderAdminCatalogTable();
             });
         };
 
-        // 🛠️ FIX DEFINITION: ALL BUTTON TEXT CONFIGURED TO "ADD TO CART" NATIVELY
         function renderCatalogUI(itemsList) {
             const container = document.getElementById('catalogProductsGrid');
             if(!container) return; container.innerHTML = "";
@@ -717,11 +733,14 @@
 
             if(!id || !title || !price || !img) { alert("Missing fields!"); return; }
             const newItem = { id: id, category: cat, title: title, price: price, oldPrice: price*2, img: img, specs: specs, imgNavy: imgNavy || "", imgOlive: imgOlive || "", imgBlack: imgBlack || "" };
-            if(window.firebaseDB) { window.dbSet(window.dbRef(window.firebaseDB, "products/" + id), newItem); alert("🎉 Uploaded!"); }
+            if(window.firebaseDB) { window.dbSet(window.dbRef(window.firebaseDB, "products/" + id), newItem); alert("🎉 Uploaded Live!"); }
         }
 
         function executeAdminDatabaseDelete(prodId, arrayIdx) {
-            if(window.firebaseDB) { window.dbRemove(window.dbRef(window.firebaseDB, "products/" + prodId)); }
+            if(window.firebaseDB) { 
+                window.dbRemove(window.dbRef(window.firebaseDB, "products/" + prodId)); 
+                alert("🎉 Removed from cloud catalogue.");
+            }
         }
 
         function launchStatusPopupDialog(heading, desc) {
@@ -787,7 +806,7 @@
             launchStatusPopupDialog('COD Order Confirmed', '📦 Your COD order is saved into our logs pipeline.');
         }
 
-        // 💳 REAL REALTIME Deployed PRODUCTION RAZORPAY METHOD RESTORED WITH DYNAMIC INTERLOCKS
+        // 💳 REAL REALTIME Deployed PRODUCTION RAZORPAY METHOD RESTORED
         window.executeRazorpayWideCheckoutGateway = function() {
             let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
             if(currentPayableBillTotal === 0) return;
