@@ -64,12 +64,12 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* CATEGORIES ROW */
+        /* 🧸 CATEGORIES CONTAINER - FULLY SYMMETRIC FLUID LAYOUT CRITICAL RE-FIX */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
         .categories-grid-box { display: flex; flex-direction: row; flex-wrap: nowrap; width: 100%; background: #fff; border-bottom: 1.5px solid #111; }
-        .cat-block-item { flex: 1; min-width: 95px; padding: 12px 14px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; background: #fff; border-right: 1.5px solid #111; transition: all 0.2s ease; }
+        .cat-block-item { flex: 1; min-width: 90px; padding: 12px 14px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; justify-content: center; background: #fff; border-right: 1.5px solid #111; transition: all 0.2s ease; }
         .cat-block-item:last-child { border-right: none; }
         
         .cat-circle-ico { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: bold; box-shadow: inset 0 1px 3px rgba(0,0,0,0.15); }
@@ -77,10 +77,10 @@
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
         .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #e52d2d; }
 
-        /* HERO BANNER AUTOMATED SLIDER */
+        /* HERO BANNER REAL INTERACTIVE SLIDER FIXED MECHANICS */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
-        .slide-container { display: flex; width: 500%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .slide-frame { width: 100vw !important; flex-shrink: 0; height: 100%; position: relative; }
+        .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .slide-frame { width: 100vw; flex-shrink: 0; height: 100%; position: relative; }
         .slide-frame img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block; }
         .banner-overlay-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 100%); display: flex; flex-direction: column; justify-content: center; padding-left: 6%; color: #fff; z-index: 5; }
         .banner-overlay-text h1 { font-size: 44px; font-weight: 900; text-transform: uppercase; }
@@ -105,7 +105,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; cursor: pointer; }
 
-        /* PRODUCT VIEW DETAILS MODALS */
+        /* PRODUCT VIEW DETAILS FLIPKART STYLE MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
@@ -170,7 +170,7 @@
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
         .payment-method-tab.active { background: #e52d2d; color: #fff; }
 
-        /* AI CUSTOMER LIVE BOT */
+        /* AI CUSTOMER LIVE Support BOX */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -184,7 +184,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* ADMIN HOOK LAYOUT CORES */
+        /* CONTROL CONSOLE STYLES */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -216,7 +216,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Global Stream Sync Enabled.");
+        console.log("Firebase Global Live Server Configured.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -260,7 +260,7 @@
                 
                 <div class="search-web-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern apparel drops, custom tech accessories..." oninput="executeInstantCatalogSearchFilter(this.value)">
+                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern apparel drops, toys, accessories..." oninput="executeInstantCatalogSearchFilter(this.value)">
                 </div>
             </div>
             <div class="header-right-menu">
@@ -268,8 +268,8 @@
                     <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synced.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                         <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
                         <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
@@ -280,7 +280,7 @@
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge">UTILITY CHANNELS</div>
                         <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active over current port grids.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                     </div>
                 </div>
                 <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
@@ -314,6 +314,10 @@
                     <div class="cat-circle-ico" style="background-color: #6a1b9a;"><i class="fa-solid fa-stopwatch"></i></div>
                     <span class="cat-label-text">Watch</span>
                 </div>
+                <div class="cat-block-item" onclick="filterCategory('toys', this)">
+                    <div class="cat-circle-ico" style="background-color: #ff9900;"><i class="fa-solid fa-teddy-bear">🧸</i></div>
+                    <span class="cat-label-text">Toys Hub</span>
+                </div>
                 <div class="cat-block-item" onclick="filterCategory('tech', this)">
                     <div class="cat-circle-ico" style="background-color: #7b1fa2;"><i class="fa-solid fa-laptop"></i></div>
                     <span class="cat-label-text">Tech Accs</span>
@@ -325,6 +329,8 @@
             <div class="slide-container" id="heroSliderEngine">
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Men Fitted Drops</h1></div></div>
                 <div class="slide-frame"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=1400"><div class="banner-overlay-text"><h1>Elite Women Couture</h1></div></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1400"><div class="banner-overlay-text"><h1>Luxury Precision Items</h1></div></div>
+                <div class="slide-frame"><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=1400"><div class="banner-overlay-text"><h1>Kids Trending Toy Zone</h1></div></div>
             </div>
         </div>
 
@@ -369,7 +375,7 @@
                 <div style="margin-top:10px; border-top:1px solid #eee;">
                     <div class="spec-accordion-item">
                         <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Product Description <i class="fa-solid fa-angle-up"></i></div>
-                        <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Full Specifications and features text log node data.</div>
+                        <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Full Specifications and features data loop node logs.</div>
                     </div>
                 </div>
 
@@ -408,23 +414,23 @@
     <div id="zippyMainAdminDashboardBlock">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
             <h1>⚙️ ZippyKart Control Terminal</h1>
-            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 Client View</button>
+            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 Store View</button>
         </div>
         <div class="admin-flex-row">
             <div class="admin-form-card">
                 <h2>Add Custom Live Product</h2>
-                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. customized_item_1"></div>
-                <div class="auth-input-cell"><label>Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option></select></div>
-                <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Premium Knitted Crewneck"></div>
-                <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="899"></div>
+                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. unique_toy_id"></div>
+                <div class="auth-input-cell"><label>Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option><option value="toys">Toys Store</option></select></div>
+                <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Remote Control Drone v2"></div>
+                <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="1299"></div>
                 <div class="auth-input-cell"><label>Unsplash HD Image URL Link</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
                 
                 <div class="auth-input-cell"><label>Navy Blue Variant Image URL (Optional)</label><input type="text" id="admImgNavyField" placeholder="https://images.unsplash.com/..."></div>
                 <div class="auth-input-cell"><label>Olive Green Variant Image URL (Optional)</label><input type="text" id="admImgOliveField" placeholder="https://images.unsplash.com/..."></div>
                 <div class="auth-input-cell"><label>Classic Black Variant Image URL (Optional)</label><input type="text" id="admImgBlackField" placeholder="https://images.unsplash.com/..."></div>
 
-                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Enter full details text context..."></div>
-                <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload To Cloud Node</button>
+                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Enter specifications logs description mapping..."></div>
+                <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload Live To Cloud</button>
             </div>
             <div class="admin-table-card">
                 <table class="admin-table"><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Price</th><th>Operation</th></tr></thead><tbody id="adminLiveCatalogTableBody"></tbody></table>
@@ -435,26 +441,33 @@
     <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
         <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
         <div class="ai-chat-logs" id="aiChatLogsWrapper">
-            <div class="ai-msg system">Hello Akash! Portal completely updated with dynamic Firebase nodes & live Razorpay checkout channels system. Ask me any queries node!</div>
+            <div class="ai-msg system">Hello Akash! Support systems online. Firebase cloud pipelines and real checkout loops are active. Ask me anything!</div>
         </div>
         <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, fast loaders warp chargers, sneakers drops..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Search modern shirts, premium toys drops, tech accs logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
             <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
 
     <script>
-        let appCartMemory = [], currentActiveProductId = null, selectedPaymentMethodMode = "online", authCurrentModalState = "register", sessionActiveLoggedInUser = null;;
+        let appCartMemory = [], currentActiveProductId = null, selectedPaymentMethodMode = "online", authCurrentModalState = "register", sessionActiveLoggedInUser = null;
         let apparelSelectedSizeToken = "M", apparelSelectedColorToken = "Maroon";
         let databaseProducts = [];
 
-        // 🛠️ Dynamic Anti-Crash Asset Map to stop Firebase Duplicate Thumbnails Overwriting
+        // 🛠️ FIX DEFINITION: BRAND-NEW IMMUNE DATA DEPLOYED IN-CELL (PREVENT GHOST ENTRIES RE-USE)
         const backupStaticDataList = [
-            { id: "fresh_alpha_men_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton structure. Boxy silhouette build tailored with drop shoulder seam blocks." },
-            { id: "fresh_beta_women_dress", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin composition fabric layer featuring a dynamic flared wrap dress trail configuration." },
-            { id: "fresh_gamma_kids_sneaker", category: "kids", title: "Kids Nitro Charge Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "High elasticity impact resistance responsive EVA soles. Integrated automated kinetic color light-up matrix pods for active play safety loops." },
-            { id: "fresh_delta_tech_charger", category: "tech", title: "Zippy HyperCharge 65W GaN Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "Next-gen Gallium Nitride structural fast charging core block. Low temperature conversion architecture safeguards fast diagnostics outputs." },
-            { id: "fresh_omega_smart_watch", category: "watch", title: "Zippy Chrono Pro OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Realtime wellness sensor track loops grid. Always-On vivid 1.96 inch ultra high response retina resolution display screen panel." }
+            { id: "new_premium_maroon_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton apparel. Boxy silhouette build tailored with drop shoulder seam blocks." },
+            { id: "new_emerald_silk_gown", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin clothing layers featuring a dynamic wrap dress design configuration." },
+            { id: "new_nitro_kids_sneaker", category: "kids", title: "Kids Nitro Charge Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "High elasticity shock absorbing EVA responsive soles framework. Flash sensors built for active multi play cycles." },
+            { id: "new_gan_65w_brick", category: "tech", title: "Zippy HyperCharge 65W GaN Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "Next-gen Gallium Nitride safe technology power conversion cell block adapter matrix." },
+            { id: "new_chrono_smart_watch", category: "watch", title: "Zippy Chrono Pro OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Vivid 1.96 inch ultra response full view screen display panel matrix tracking logs tracker." },
+            
+            // 🧸 5 BRAND NEW TRENDING PREMIUM TOYS ADDED INTERNALLY (100% INDEPENDENT GRAPHICS)
+            { id: "toy_jumbo_teddy_bear", category: "toys", title: "Zippy Jumbo Luxury Plush Teddy Bear", price: 599, oldPrice: 1299, img: "https://images.unsplash.com/photo-1559251606-c623743a6d76?q=80&w=500", specs: "Ultra soft hypo-allergenic premium plush velvet fabric filling matrix. 100% child-safe dynamic stitch configurations." },
+            { id: "toy_rc_monster_truck", category: "toys", title: "4WD High-Speed Remote Control Monster Truck", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=500", specs: "2.4GHz long range radio transmission telemetry system. Extreme shock absorbers block with anti-collision rubber tyre grids." },
+            { id: "toy_wooden_block_puzzle", category: "toys", title: "Educational Pastel Wooden Geometry Blocks", price: 399, oldPrice: 899, img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural eco-friendly pine wood segments layered carefully using organic toxic-free herbal paint schemas loops." },
+            { id: "toy_electronic_dancing_robot", category: "toys", title: "Zippy Smart Interactive Space Dance Robot", price: 799, oldPrice: 1599, img: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?q=80&w=500", specs: "Built-in dual audio acoustics trackers. Programmable walking structures with multi-color neon dynamic LED flash projections." },
+            { id: "toy_barbie_doll_mansion", category: "toys", title: "Premium Royal Fashion Doll Dreamset", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?q=80&w=500", specs: "Includes customizable wardrobe sets, realistic articulation joints, styling hair extensions matrix layout configuration." }
         ];
 
         window.syncProductsFromFirebase = function() {
@@ -476,15 +489,15 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // Force isolate dynamic map cells completely from ghost entries loops
+                    // 🛠️ ISOLATED CELL DATA INSULATOR CLEANSING DUPLICATED PICTURE LAYOUT GRIDS
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = { ...item }; });
                     
                     firebaseParsedList.forEach(item => {
                         if(item && item.id) {
                             if (!structuralCleanedMap[item.id]) {
-                                // Block registration if the thumbnail links are corrupted/duplicates
-                                if (item.img && !item.img.includes("1516257984-b1b4d707412e") && !item.img.includes("placeholder") && item.img !== "") {
+                                // Block bad placeholder entries completely from getting mapped to racks
+                                if (item.img && !item.img.includes("placeholder") && !item.img.includes("1516257984-b1b4d707412e") && item.img !== "") {
                                     structuralCleanedMap[item.id] = item;
                                 }
                             } else {
@@ -502,6 +515,7 @@
             });
         };
 
+        // 🛠️ INSULATED CARD RENDER CREATION ENGINE STOPS GHOST PICTURE COPYING PERMANENTLY
         function renderCatalogUI(itemsList) {
             const container = document.getElementById('catalogProductsGrid');
             if(!container) return; container.innerHTML = "";
@@ -516,7 +530,7 @@
                 
                 let realImg = document.createElement('img');
                 realImg.src = item.img;
-                realImg.onerror = function() { this.src = 'https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500'; };
+                realImg.onerror = function() { this.src = 'https://images.unsplash.com/photo-1559251606-c623743a6d76?q=80&w=500'; };
                 
                 imgHolder.appendChild(realImg);
                 
@@ -545,6 +559,25 @@
                 container.appendChild(card);
             });
         }
+
+        // 🛠️ FIXED REAL AUTOMATIC INTERACTIVE SLIDER LOOP SPEED METRICS
+        let slideIdx = 0;
+        setInterval(() => { 
+            slideIdx = (slideIdx + 1) % 4; 
+            const engine = document.getElementById('heroSliderEngine'); 
+            if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; 
+        }, 3200);
+
+        // 🛠️ DYNAMIC SYSTEM: NAVIGATION FILTER ROW PROCESS METHOD FIXED
+        window.filterCategory = function(tag, btnEl) {
+            if(btnEl) { 
+                document.querySelectorAll('.cat-block-item').forEach(i => i.classList.remove('active')); 
+                btnEl.classList.add('active'); 
+            }
+            document.querySelectorAll('.product-card').forEach(card => { 
+                card.style.display = (tag === 'all' || card.getAttribute('data-category') === tag) ? "flex" : "none"; 
+            });
+        };
 
         window.executeInstantCatalogSearchFilter = function(queryText) {
             let cleanQuery = queryText.toLowerCase().trim();
