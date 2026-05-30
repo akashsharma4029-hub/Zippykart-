@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* CATEGORIES PANEL */
+        /* 🧸 CATEGORIES PANEL */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -391,7 +391,7 @@
             
             <div class="modal-left-gallery">
                 <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
-                <div class="amazon-rating-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>4.5 out of 5 Stars (840 Reviews)</span></div>
+                <div class="amazon-rating-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>4.5 out of 5 Stars (840 Reviews)</span></div>
             </div>
             
             <div class="modal-right-specs-hub">
@@ -512,7 +512,7 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // 🛠️ PERMANENT FORCE FILTER OVERWRITES BROKEN ENTRIES & PLACEHOLDERS INSTANTLY
+                    // 🛠️ ISOLATED FORCE DATA MAP FILTERING TO ENFORCE STRICT ASSET PAIRING PER ID NODE
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = item; });
                     firebaseParsedList.forEach(item => {
@@ -528,17 +528,28 @@
             });
         };
 
+        // 🛠️ FIX: INSULATED DYNAMIC INNER-HTML ASSIGNMENT CAPABLE OF SHIELDING GHOST RENDERING PASTAGE
         function renderCatalogUI(itemsList) {
             const container = document.getElementById('catalogProductsGrid');
             if(!container) return; container.innerHTML = "";
             itemsList.forEach(item => {
-                container.innerHTML += `
-                    <div class="card product-card" data-category="${item.category}" onclick="openProductDetailModal('${item.id}')">
-                        <div class="img-container"><img src="${item.img}" onerror="this.src='https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500'"></div>
-                        <h3>${item.title}</h3>
-                        <div class="price-box"><span class="now">₹${item.price}</span><span class="old">₹${item.oldPrice}</span></div>
-                        <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default)', ${item.price})">Add To Cart</button>
-                    </div>`;
+                let uniqueCardNode = document.createElement('div');
+                uniqueCardNode.className = "card product-card";
+                uniqueCardNode.setAttribute("data-category", item.category);
+                uniqueCardNode.onclick = () => openProductDetailModal(item.id);
+                
+                uniqueCardNode.innerHTML = `
+                    <div class="img-container">
+                        <img src="${item.img}" onerror="this.src='https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500'">
+                    </div>
+                    <h3>${item.title}</h3>
+                    <div class="price-box">
+                        <span class="now">₹${item.price}</span>
+                        <span class="old">₹${item.oldPrice}</span>
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); openProductDetailModal('${item.id}')">Add To Cart</button>
+                `;
+                container.appendChild(uniqueCardNode);
             });
         }
 
@@ -562,7 +573,6 @@
         function executeAdminDatabaseUpload() {
             const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), oldPrice = parseInt(document.getElementById('admOldPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
             
-            // Fetch optional color fields natively
             const imgNavy = document.getElementById('admImgNavyField').value.trim();
             const imgOlive = document.getElementById('admImgOliveField').value.trim();
             const imgBlack = document.getElementById('admImgBlackField').value.trim();
@@ -653,7 +663,6 @@
             apparelSelectedSizeToken = sizeName;
         };
 
-        // 🛠️ DYNAMIC COLOR ASSETS SWAPPING LOGIC BASED ON LIVE RECONG payload
         window.selectApparelColorToken = function(element, colorName) {
             document.querySelectorAll('.color-circle-variant').forEach(circle => circle.classList.remove('active'));
             element.classList.add('active');
