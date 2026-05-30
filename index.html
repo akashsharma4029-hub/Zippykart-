@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES PANEL */
+        /* CATEGORIES ROW */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -105,7 +105,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; cursor: pointer; }
 
-        /* PRODUCT VIEW DETAILS FLIPKART STYLE MODALS */
+        /* PRODUCT VIEW DETAILS MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
@@ -432,12 +432,23 @@
         </div>
     </div>
 
+    <div class="ai-chat-window-box" id="aiChatCustomerWindowHub">
+        <div class="ai-chat-header"><h3>24x7 Customer Support AI</h3><i class="fa-solid fa-xmark" style="cursor:pointer; font-size:16px;" onclick="closeAiCustomerChatPanel()"></i></div>
+        <div class="ai-chat-logs" id="aiChatLogsWrapper">
+            <div class="ai-msg system">Hello Akash! Portal completely updated with dynamic Firebase nodes & live Razorpay checkout channels system. Ask me any queries node!</div>
+        </div>
+        <div class="ai-chat-input-row">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, fast loaders warp chargers, sneakers drops..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <button onclick="dispatchAiChatMessage()">Send</button>
+        </div>
+    </div>
+
     <script>
         let appCartMemory = [], currentActiveProductId = null, selectedPaymentMethodMode = "online", authCurrentModalState = "register", sessionActiveLoggedInUser = null;;
         let apparelSelectedSizeToken = "M", apparelSelectedColorToken = "Maroon";
         let databaseProducts = [];
 
-        // 🛠️ ISOLATED ANTI-CRASH BALANCED STATIC DIRECTORY NODE DATASETS
+        // 🛠️ Dynamic Anti-Crash Asset Map to stop Firebase Duplicate Thumbnails Overwriting
         const backupStaticDataList = [
             { id: "fresh_alpha_men_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton structure. Boxy silhouette build tailored with drop shoulder seam blocks." },
             { id: "fresh_beta_women_dress", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin composition fabric layer featuring a dynamic flared wrap dress trail configuration." },
@@ -465,14 +476,15 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // 🛠️ ISOLATED MAP INSULATOR: COMPLETELY SHIELDS AND DISCONNECTS BROKEN RE-RENDERING FROM FIREBASE CORES
+                    // Force isolate dynamic map cells completely from ghost entries loops
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = { ...item }; });
                     
                     firebaseParsedList.forEach(item => {
                         if(item && item.id) {
                             if (!structuralCleanedMap[item.id]) {
-                                if (item.img && !item.img.includes("placeholder") && !item.img.includes("1516257984-b1b4d707412e") && item.img !== "") {
+                                // Block registration if the thumbnail links are corrupted/duplicates
+                                if (item.img && !item.img.includes("1516257984-b1b4d707412e") && !item.img.includes("placeholder") && item.img !== "") {
                                     structuralCleanedMap[item.id] = item;
                                 }
                             } else {
@@ -704,6 +716,15 @@
             document.getElementById('statusPopupMasterMessageNode').style.display = "flex";
         }
         function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; }
+
+        function launchAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "flex"; }
+        function closeAddressesOverlayForm() { document.getElementById('addressTerminalOverlayFormNode').style.display = "none"; }
+        function saveAddressProfileDetails() {
+            const name = document.getElementById('adrFullNameField').value.trim(); const house = document.getElementById('adrHouseNoField').value.trim(); const city = document.getElementById('adrCityField').value.trim();
+            if(!name || !house || !city) { launchStatusPopupDialog('Input Error', '⚠️ Please complete all fields!'); return; }
+            document.getElementById('addressBarHook').innerText = `📍 Delivery: ${name}, ${house}, ${city}`; closeAddressesOverlayForm();
+            launchStatusPopupDialog('Location Saved', '🎉 Delivery address saved successfully.');
+        }
 
         window.launchAutomatedAiCustomerChatPanel = function() {
             document.getElementById('aiChatCustomerWindowHub').style.display = "flex";
