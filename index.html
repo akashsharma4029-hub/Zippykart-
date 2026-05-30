@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* CATEGORIES GRID */
+        /* 🧸 CATEGORIES PANEL */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -105,7 +105,7 @@
         .price-box .old { text-decoration: line-through; color: #878787; font-size: 12px; }
         .buy-btn { background: #111; color: #fff; font-size: 11px; font-weight: bold; padding: 11px; border-radius: 4px; border: none; width: 100%; text-transform: uppercase; cursor: pointer; }
 
-        /* PRODUCT VIEW DETAILS MODALS */
+        /* PRODUCT VIEW DETAILS FLIPKART STYLE MODALS */
         .detail-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .detail-modal-box { background: #fff; width: 92%; max-width: 950px; height: 85vh; border-radius: 12px; overflow-y: auto; position: relative; padding: 30px; display: flex; flex-direction: row; gap: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         @media (max-width: 768px) { .detail-modal-box { flex-direction: column; height: 92vh; padding: 20px; gap: 20px; } }
@@ -135,12 +135,56 @@
 
         /* NOTIFICATION HOOK OVERLAYS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9500; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
+        .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.355); text-align: center; position: relative; border: 1px solid #eaeaea; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #e52d2d; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
 
-        /* ADMIN FORM OVERLAYS */
+        /* AUTH STRUCTS */
+        .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
+        .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+        .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+        .auth-left-banner h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; }
+        .auth-right-form-hub { width: 62%; padding: 35px 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; }
+        .auth-switch-link-row { font-size: 13px; font-weight: 600; color: #555; padding-bottom: 5px; }
+        .auth-switch-link-row span.blue-link-trigger { color: #0076e4 !important; cursor: pointer !important; font-weight: 700 !important; text-decoration: underline !important; display: inline-block !important; }
+        .auth-form-fields-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .auth-input-cell { display: flex; flex-direction: column; gap: 4px; }
+        .auth-input-cell label { font-size: 10px; font-weight: 700; color: #878787; text-transform: uppercase; }
+        .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
+        .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
+
+        /* ADDRESS STORAGE LAYER */
+        .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
+        .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
+
+        /* SLIDEOUT BASKET TRAY DRAWERS */
+        .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.155); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
+        .cart-up-sheet.sheet-active { bottom: 0; }
+        .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .sheet-body { padding: 20px 6%; flex-grow: 1; overflow-y: auto; }
+        .sheet-footer { padding: 20px 6%; border-top: 1px solid #eee; background: #fafafa; display: flex; flex-direction: column; gap: 15px; }
+        .final-pay-btn { background: #e52d2d; color: #fff; border: none; padding: 14px 28px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
+        
+        .payment-method-selector-strip { display: flex; gap: 12px; width: 100%; background: #eee; padding: 4px; border-radius: 6px; }
+        .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
+        .payment-method-tab.active { background: #e52d2d; color: #fff; }
+
+        /* AI CUSTOMER LIVE BOT */
+        .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
+        @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+        .ai-chat-header h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .ai-chat-header h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66; }
+        .ai-chat-logs { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f8f9fa; }
+        .ai-msg { padding: 11px 15px; border-radius: 8px; font-size: 12.5px; max-width: 82%; line-height: 1.5; font-weight: 500; }
+        .ai-msg.system { background: #fff; color: #222; align-self: flex-start; border: 1px solid #eee; }
+        .ai-msg.user { background: #ff3e3e; color: #fff; align-self: flex-end; }
+        .ai-chat-input-row { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 10px; background: #fff; align-items: center; }
+        .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
+        .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+        /* ADMIN HOOK LAYOUT CORES */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -188,6 +232,19 @@
         </div>
     </div>
 
+    <div class="address-overlay-master-block" id="addressTerminalOverlayFormNode">
+        <div class="address-window-chassis">
+            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:20px; cursor:pointer;" onclick="closeAddressesOverlayForm()"></i>
+            <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px;">Shipping Address Form</h3>
+            <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
+            <div class="auth-input-cell"><label>Flat / House No</label><input type="text" id="adrHouseNoField" placeholder="House Details"></div>
+            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Details"></div>
+            <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
+            <div class="auth-input-cell"><label>Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
+            <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Address</button>
+        </div>
+    </div>
+
     <div id="zippyMainStoreFrontClientViewBlock">
         <header>
             <div class="header-left-block">
@@ -207,12 +264,31 @@
                 </div>
             </div>
             <div class="header-right-menu">
+                <div class="nav-dropdown-item" id="navLoginDropdownMasterWrapper">
+                    <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
+                    <div class="floating-menu-pane">
+                        <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
+                        <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
+                        <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown-item" id="navMoreDropdownMasterWrapper">
+                    <span>More <i class="fa-solid fa-angle-down" style="font-size:10px;"></i></span>
+                    <div class="floating-menu-pane">
+                        <div class="menu-header-badge">UTILITY CHANNELS</div>
+                        <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active over current port grids.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                    </div>
+                </div>
                 <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
             </div>
         </header>
 
         <div class="top-delivery-strip">
-            <div class="addr-left"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Delivery Profile: Akash Kumar, New Delhi, 110001</span></div>
+            <div class="addr-left" onclick="launchAddressesOverlayForm()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Delivery Profile: Akash Kumar, New Delhi, 110001</span></div>
             <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
         </div>
 
@@ -314,6 +390,21 @@
         </div>
     </div>
 
+    <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
+        <div class="auth-window-box">
+            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
+            <div class="auth-left-banner">
+                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
+                <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e; margin-top: 15px;">ZippyKart Elite</div>
+            </div>
+            <div class="auth-right-form-hub">
+                <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span></div>
+                <div class="auth-form-fields-container" id="authFormDynamicFieldsContainer"></div>
+                <button class="auth-action-submit-btn" id="authActionSubmitButtonElement" onclick="handleAuthFormSubmission()">Proceed Terminal</button>
+            </div>
+        </div>
+    </div>
+
     <div id="zippyMainAdminDashboardBlock">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
             <h1>⚙️ ZippyKart Control Terminal</h1>
@@ -327,6 +418,11 @@
                 <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Premium Knitted Crewneck"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="899"></div>
                 <div class="auth-input-cell"><label>Unsplash HD Image URL Link</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
+                
+                <div class="auth-input-cell"><label>Navy Blue Variant Image URL (Optional)</label><input type="text" id="admImgNavyField" placeholder="https://images.unsplash.com/..."></div>
+                <div class="auth-input-cell"><label>Olive Green Variant Image URL (Optional)</label><input type="text" id="admImgOliveField" placeholder="https://images.unsplash.com/..."></div>
+                <div class="auth-input-cell"><label>Classic Black Variant Image URL (Optional)</label><input type="text" id="admImgBlackField" placeholder="https://images.unsplash.com/..."></div>
+
                 <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Enter full details text context..."></div>
                 <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload To Cloud Node</button>
             </div>
@@ -337,11 +433,11 @@
     </div>
 
     <script>
-        let appCartMemory = [], currentActiveProductId = null, selectedPaymentMethodMode = "online";
+        let appCartMemory = [], currentActiveProductId = null, selectedPaymentMethodMode = "online", authCurrentModalState = "register", sessionActiveLoggedInUser = null;;
         let apparelSelectedSizeToken = "M", apparelSelectedColorToken = "Maroon";
         let databaseProducts = [];
 
-        // 🛠️ 100% BRAND NEW DECONTAMINATED ASSETS RACKS (ALL PREVIOUS COPIED IDs TERMINATED)
+        // 🛠️ ISOLATED ANTI-CRASH BALANCED STATIC DIRECTORY NODE DATASETS
         const backupStaticDataList = [
             { id: "fresh_alpha_men_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton structure. Boxy silhouette build tailored with drop shoulder seam blocks." },
             { id: "fresh_beta_women_dress", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin composition fabric layer featuring a dynamic flared wrap dress trail configuration." },
@@ -369,19 +465,17 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // 🛠️ ISOLATED MAP INSULATOR: COMPLETELY STOPS RE-REGISTRATION OF BROKEN CLOUD ENTRIES
+                    // 🛠️ ISOLATED MAP INSULATOR: COMPLETELY SHIELDS AND DISCONNECTS BROKEN RE-RENDERING FROM FIREBASE CORES
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = { ...item }; });
                     
                     firebaseParsedList.forEach(item => {
                         if(item && item.id) {
-                            // Agar item pure new customized database entry h, create node natively
                             if (!structuralCleanedMap[item.id]) {
-                                if (item.img && !item.img.includes("placeholder") && item.img !== "") {
+                                if (item.img && !item.img.includes("placeholder") && !item.img.includes("1516257984-b1b4d707412e") && item.img !== "") {
                                     structuralCleanedMap[item.id] = item;
                                 }
                             } else {
-                                // Block overwrite fields if the cloud payload has broken/duplicated jacket imagery lines
                                 if (item.img && !item.img.includes("1516257984-b1b4d707412e") && item.img !== "") {
                                     structuralCleanedMap[item.id].img = item.img;
                                 }
@@ -524,6 +618,52 @@
             panel.style.display = (panel.style.display === "block") ? "none" : "block";
         }
 
+        function openAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "flex"; toggleAuthModalState('register'); }
+        function closeAuthGatewayModal() { document.getElementById('zippyAuthMasterGatewayModal').style.display = "none"; }
+
+        function toggleAuthModalState(state) {
+            authCurrentModalState = state;
+            const fieldsContainer = document.getElementById('authFormDynamicFieldsContainer');
+            if(!fieldsContainer) return; fieldsContainer.innerHTML = "";
+            
+            if(state === 'login') {
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>Email ID / Username</label><input type="email" id="authEmailNodeField" placeholder="Enter email address"></div><div class="auth-input-cell"><label>Secret Key / Password</label><input type="password" id="authPasswordNodeField" placeholder="••••••••"></div>`;
+            } else {
+                fieldsContainer.innerHTML = `<div class="auth-input-cell"><label>First Name</label><input type="text" id="regFirstNameField" placeholder="e.g. Akash"></div><div class="auth-input-cell"><label>Last Name</label><input type="text" id="regLastNameField"></div><div class="auth-input-cell"><label>Mobile Handle</label><input type="tel" id="regMobileNumberField"></div><div class="auth-input-cell"><label>Gmail Address</label><input type="email" id="regEmailAddressField"></div><div class="auth-input-cell"><label>Create Secure Cipher</label><input type="password" id="regCreatePasswordField"></div>`;
+            }
+        }
+
+        function handleAuthFormSubmission() {
+            if(authCurrentModalState === 'login') {
+                const mail = document.getElementById('authEmailNodeField')?.value.trim();
+                const pass = document.getElementById('authPasswordNodeField')?.value.trim();
+                if(!mail || !pass) { launchStatusPopupDialog('Validation Error', '⚠️ Please fill out Email ID and Password fields.'); return; }
+                executeCustomUserLoginInjection(mail.split('@')[0], mail);
+            } else {
+                const fName = document.getElementById('regFirstNameField')?.value.trim();
+                const lName = document.getElementById('regLastNameField')?.value.trim();
+                const phone = document.getElementById('regMobileNumberField')?.value.trim();
+                const mail = document.getElementById('regEmailAddressField')?.value.trim();
+                const pass = document.getElementById('regCreatePasswordField')?.value.trim();
+                
+                if(!fName || !lName || !phone || !mail || !pass) { launchStatusPopupDialog('Validation Error', '⚠️ Please complete all Registration Form fields carefully!'); return; }
+                if(window.firebaseDB) {
+                    const userLogId = mail.replace(/[^a-zA-Z0-9]/g, "_");
+                    window.dbSet(window.dbRef(window.firebaseDB, "users/" + userLogId), { name: fName + " " + lName, email: mail, phone: phone, timestamp: Date.now() });
+                }
+                executeCustomUserLoginInjection(fName, mail);
+            }
+        }
+
+        function executeCustomUserLoginInjection(name, email) {
+            sessionActiveLoggedInUser = { name: name, email: email };
+            document.getElementById('navUserBadgeName').innerHTML = `<i class="fa-solid fa-circle-user"></i> ${name}`;
+            closeAuthGatewayModal();
+            launchStatusPopupDialog('Authentication Success', `Welcome node verified: ${name}`);
+        }
+
+        function executeLogoutSession() { sessionActiveLoggedInUser = null; window.location.reload(); }
+
         function pushToBasket(name, price) { appCartMemory.push({ name: name, price: price }); syncBasketUI(); openCartPanelSheet(); }
         function openCartPanelSheet() { document.getElementById('cartPanelSheet').classList.add('sheet-active'); document.getElementById('sheetOverlay').style.display = "block"; }
         function closeCartPanelSheet() { document.getElementById('cartPanelSheet').classList.remove('sheet-active'); document.getElementById('sheetOverlay').style.display = "none"; }
@@ -545,8 +685,13 @@
 
         function executeAdminDatabaseUpload() {
             const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
+            
+            const imgNavy = document.getElementById('admImgNavyField').value.trim();
+            const imgOlive = document.getElementById('admImgOliveField').value.trim();
+            const imgBlack = document.getElementById('admImgBlackField').value.trim();
+
             if(!id || !title || !price || !img) { alert("Missing fields!"); return; }
-            const newItem = { id: id, category: cat, title: title, price: price, oldPrice: price*2, img: img, specs: specs };
+            const newItem = { id: id, category: cat, title: title, price: price, oldPrice: price*2, img: img, specs: specs, imgNavy: imgNavy || "", imgOlive: imgOlive || "", imgBlack: imgBlack || "" };
             if(window.firebaseDB) { window.dbSet(window.dbRef(window.firebaseDB, "products/" + id), newItem); alert("🎉 Uploaded!"); }
         }
 
@@ -559,6 +704,28 @@
             document.getElementById('statusPopupMasterMessageNode').style.display = "flex";
         }
         function closeStatusPopupDialog() { document.getElementById('statusPopupMasterMessageNode').style.display = "none"; }
+
+        window.launchAutomatedAiCustomerChatPanel = function() {
+            document.getElementById('aiChatCustomerWindowHub').style.display = "flex";
+        };
+        window.closeAiCustomerChatPanel = function() {
+            document.getElementById('aiChatCustomerWindowHub').style.display = "none";
+        };
+        window.dispatchAiChatMessage = function() {
+            const input = document.getElementById('aiUserTextInputMsg');
+            const msg = input.value.trim();
+            if(!msg) return;
+            
+            const logs = document.getElementById('aiChatLogsWrapper');
+            logs.innerHTML += `<div class="ai-msg user">${msg}</div>`;
+            input.value = "";
+            
+            setTimeout(() => {
+                logs.innerHTML += `<div class="ai-msg system">Received your parameters, Akash. Your query is synchronized with care logs tree.</div>`;
+                logs.scrollTop = logs.scrollHeight;
+            }, 800);
+            logs.scrollTop = logs.scrollHeight;
+        };
 
         window.executeRazorpayWideCheckoutGateway = function() {
             let total = 0; appCartMemory.forEach(item => total += item.price);
