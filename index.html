@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES PANEL CHASSIS */
+        /* 🧸 CATEGORIES CONTAINER - FULL FLUID STRETCH ALIGNMENT WITH TOYS HUB */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -77,7 +77,7 @@
         .cat-block-item:hover, .cat-block-item.active { background: #fff2f2; }
         .cat-block-item:hover span.cat-label-text, .cat-block-item.active span.cat-label-text { color: #e52d2d; }
 
-        /* HERO BANNER SLIDER MECHANICS */
+        /* HERO BANNER REAL INTERACTIVE AUTOMATED SLIDER */
         .slider-wrapper { position: relative; width: 100%; height: 50vh; min-height: 350px; max-height: 480px; overflow: hidden; background: #111; }
         .slide-container { display: flex; width: 400%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .slide-frame { width: 100vw; flex-shrink: 0; height: 100%; position: relative; }
@@ -133,14 +133,14 @@
         .color-circle-variant { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s ease; position: relative; }
         .color-circle-variant.active { border-color: #111; transform: scale(1.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-        /* NOTIFICATION HOOK OVERLAYS */
+        /* NOTIFICATION OVERLAYS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9500; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.355); text-align: center; position: relative; border: 1px solid #eaeaea; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
         .status-popup-card p { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 22px; font-weight: 600; }
         .status-close-btn { background: #e52d2d; color: #fff; border: none; padding: 12px 30px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 11px; width: 100%; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
 
-        /* AUTH STRUCTS */
+        /* AUTH FORMS LAYOUTS */
         .auth-master-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 5000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(3px); }
         .auth-window-box { background: #fff; width: 92%; max-width: 780px; height: 75vh; border-radius: 12px; display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
         .auth-left-banner { width: 38%; background: linear-gradient(135deg, #111 0%, #222 100%); padding: 40px 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
@@ -154,11 +154,11 @@
         .auth-input-cell input, .auth-input-cell select { padding: 10px 14px; border: 1px solid #d4d5d9; border-radius: 4px; font-size: 13px; font-weight: 600; outline: none; width: 100%; background: #fff; }
         .auth-action-submit-btn { background: #111; color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; margin-top: 5px; }
 
-        /* ADDRESS STORAGE LAYER */
+        /* ADDRESS PANELS LAYOUTS */
         .address-overlay-master-block { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 6000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); padding: 15px; }
         .address-window-chassis { background: #fff; width: 90%; max-width: 440px; border-radius: 12px; padding: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.3); position: relative; }
 
-        /* SLIDEOUT BASKET TRAY DRAWERS */
+        /* SLIDEOUT CART SHEETS DRAWERS */
         .cart-up-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 75vh; background: #fff; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 25px rgba(0,0,0,0.155); z-index: 2500; transition: bottom 0.4s; display: flex; flex-direction: column; }
         .cart-up-sheet.sheet-active { bottom: 0; }
         .sheet-header { padding: 20px 6%; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
@@ -170,7 +170,7 @@
         .payment-method-tab { flex: 1; text-align: center; padding: 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 4px; cursor: pointer; background: transparent; color: #555; }
         .payment-method-tab.active { background: #e52d2d; color: #fff; }
 
-        /* AI CUSTOMER LIVE SUPPORT BOX */
+        /* AI SUPPORT BOT CHAT WINDOW */
         .ai-chat-window-box { position: fixed; bottom: 25px; right: 25px; width: 375px; height: 490px; background: #fff; border-radius: 12px; box-shadow: 0 12px 45px rgba(0,0,0,0.25); border: 1px solid #eaeaea; display: none; flex-direction: column; overflow: hidden; z-index: 6000; animation: slideInUp 0.25s ease; }
         @keyframes slideInUp { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .ai-chat-header { background: #111; color: #fff; padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
@@ -184,7 +184,7 @@
         .ai-chat-input-row input { flex-grow: 1; border: 1px solid #ddd; padding: 11px; border-radius: 6px; font-size: 13px; outline: none; font-weight: 600; }
         .ai-chat-input-row button { background: #111; color: #fff; border: none; padding: 11px 18px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
 
-        /* CONTROL CONSOLE STYLES */
+        /* CONTROL TERMINAL OBJECTIVES PANELS */
         #zippyMainAdminDashboardBlock { width: 100%; padding: 40px 6%; display: none; background: #fff; min-height: 100vh; }
         .admin-flex-row { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
         .admin-form-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; width: 100%; max-width: 450px; }
@@ -216,7 +216,7 @@
         window.dbOnValue = onValue;
         window.dbRemove = remove;
 
-        console.log("Firebase Global Stream Sync Enabled.");
+        console.log("Firebase Global Stream Sync Active.");
         window.syncProductsFromFirebase();
     </script>
 </head>
@@ -227,7 +227,7 @@
     <div class="status-popup-overlay" id="statusPopupMasterMessageNode">
         <div class="status-popup-card">
             <h3 id="statusPopupHeading">ZippyKart Terminal</h3>
-            <p id="statusPopupDescription">Action processed successfully.</p>
+            <p id="statusPopupDescription">Action processed parameters successfully.</p>
             <button class="status-close-btn" onclick="closeStatusPopupDialog()">Close Window</button>
         </div>
     </div>
@@ -238,7 +238,7 @@
             <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; margin-bottom:18px;">Shipping Address Form</h3>
             <div class="auth-input-cell"><label>Receiver Full Name</label><input type="text" id="adrFullNameField" placeholder="e.g. Akash Kumar"></div>
             <div class="auth-input-cell"><label>Flat / House No</label><input type="text" id="adrHouseNoField" placeholder="House Details"></div>
-            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Details"></div>
+            <div class="auth-input-cell"><label>Colony / Landmark</label><input type="text" id="adrColonyField" placeholder="Colony Location Node"></div>
             <div class="auth-input-cell"><label>City</label><input type="text" id="adrCityField" placeholder="New Delhi"></div>
             <div class="auth-input-cell"><label>Area Pincode</label><input type="number" id="adrPincodeField" placeholder="110001"></div>
             <button class="auth-action-submit-btn" onclick="saveAddressProfileDetails()">Save Address</button>
@@ -260,7 +260,7 @@
                 
                 <div class="search-web-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern apparel drops, toys, accessories..." oninput="executeInstantCatalogSearchFilter(this.value)">
+                    <input type="text" id="masterApparelSearchBoxElement" placeholder="Search modern shirts, premium toys drops, tech chargers..." oninput="executeInstantCatalogSearchFilter(this.value)">
                 </div>
             </div>
             <div class="header-right-menu">
@@ -268,8 +268,8 @@
                     <span id="navUserBadgeName" onclick="openAuthGatewayModal()"><i class="fa-solid fa-user-circle"></i> Login</span>
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge" id="dropdownProfileVaultLabel">ACCOUNT INTERFACES</div>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synced.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Order Console', '📦 Packaging tracking loops ready inside sync trees.')"><div class="left-side-cap"><i class="fa-solid fa-box-open row-lead-ico"></i>My Order Logs</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Wishlist Storage', '❤️ Preservation vault synchronized successfully.')"><div class="left-side-cap"><i class="fa-solid fa-heart row-lead-ico"></i>Wishlist Storage</div></a>
                         <a href="#" class="menu-row" onclick="launchAddressesOverlayForm()"><div class="left-side-cap"><i class="fa-solid fa-map-marked-alt row-lead-ico"></i>Saved Addresses</div></a>
                         <a href="#" class="menu-row" id="logoutRowTerminalButton" onclick="executeLogoutSession()" style="color:#ff3e3e; border-top:1px solid #f0f0f0; display:none;"><div class="left-side-cap"><i class="fa-solid fa-power-off row-lead-ico"></i>Log Out Terminal</div></a>
                         <a href="#" class="dropdown-signup-btn" id="dropdownMainRegisterTriggerLink" onclick="openAuthGatewayModal(); toggleAuthModalState('register');">Sign Up / Register</a>
@@ -280,7 +280,7 @@
                     <div class="floating-menu-pane">
                         <div class="menu-header-badge">UTILITY CHANNELS</div>
                         <a href="#" class="menu-row" onclick="launchAutomatedAiCustomerChatPanel()"><div class="left-side-cap"><i class="fa-solid fa-headset row-lead-ico"></i>💬 24×7 Customer Chat</div></a>
-                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
+                        <a href="#" class="menu-row" onclick="launchStatusPopupDialog('Privacy Center', '🛡️ SSL Validation active over current port grids.')"><div class="left-side-cap"><i class="fa-solid fa-shield-halved row-lead-ico"></i>Privacy Center</div></a>
                     </div>
                 </div>
                 <button class="web-cart-btn" onclick="openCartPanelSheet()"><i class="fa-solid fa-cart-shopping"></i> <span id="cartHookCounterText">Cart (0)</span></button>
@@ -288,7 +288,7 @@
         </header>
 
         <div class="top-delivery-strip">
-            <div class="addr-left" onclick="launchAddressesOverlayForm()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Delivery Profile: Akash Kumar, New Delhi, 110001</span></div>
+            <div class="addr-left" onclick="launchAddressesOverlayForm()"><i class="fa-solid fa-location-crosshairs"></i><span id="addressBarHook">Delivery Profile Address: Akash Kumar, New Delhi, 110001</span></div>
             <div class="supercoins-panel"><i class="fa-solid fa-coins"></i> SC Tokens: <span>35</span></div>
         </div>
 
@@ -315,7 +315,7 @@
                     <span class="cat-label-text">Watch</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('toys', this)">
-                    <div class="cat-circle-ico" style="background-color: #ff9900;"><i class="fa-solid fa-robot"></i></div>
+                    <div class="cat-circle-ico" style="background-color: #ff9900;"><i class="fa-solid fa-ghost">🧸</i></div>
                     <span class="cat-label-text">Toys Hub</span>
                 </div>
                 <div class="cat-block-item" onclick="filterCategory('tech', this)">
@@ -375,7 +375,15 @@
                 <div style="margin-top:10px; border-top:1px solid #eee;">
                     <div class="spec-accordion-item">
                         <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Product Description <i class="fa-solid fa-angle-up"></i></div>
-                        <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Full Specifications and features data loop node logs.</div>
+                        <div class="spec-accordion-content" id="modalProductSpecs" style="display:block;">Full Specifications description text block parameters data loops logs.</div>
+                    </div>
+                    <div class="spec-accordion-item">
+                        <div class="spec-accordion-header" onclick="toggleAccordionTab(this)">Product Highlights & Details <i class="fa-solid fa-angle-down"></i></div>
+                        <div class="spec-accordion-content">
+                            • 100% Quality Assurance Structural Fabric Composition Layer Matrix.<br>
+                            • Verified Secure Shipping Protocol Loops Enabled.<br>
+                            • Easy 7 Days Replacement Pipeline System Active.
+                        </div>
                     </div>
                 </div>
 
@@ -388,48 +396,37 @@
         <div class="sheet-header"><h2>Shopping Basket Tray</h2><i class="fa-solid fa-xmark" style="font-size: 22px; cursor: pointer;" onclick="closeCartPanelSheet()"></i></div>
         <div class="sheet-body" id="cartSheetBodyContainer"></div>
         <div class="sheet-footer">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="payment-method-selector-strip">
+                <div class="payment-method-tab active" id="payMethodOnlineTab" onclick="switchActivePaymentMethod('online')">💳 Online Payment</div>
+                <div class="payment-method-tab" id="payMethodCodTab" onclick="switchActivePaymentMethod('cod')">📦 Cash On Delivery (COD)</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 5px;">
                 <p style="font-size:12px; font-weight:600;">Total Payable</p>
                 <h3 id="sheetTotalBillHook" style="font-size:20px; font-weight:900; color:#ff3e3e;">₹0</h3>
             </div>
-            <button class="final-pay-btn" onclick="executeRazorpayWideCheckoutGateway()">Place Instant Order</button>
-        </div>
-    </div>
-
-    <div class="auth-master-overlay" id="zippyAuthMasterGatewayModal">
-        <div class="auth-window-box">
-            <i class="fa-solid fa-xmark" style="position:absolute; top:20px; right:20px; font-size:22px; cursor:pointer; color:#333; z-index:150;" onclick="closeAuthGatewayModal()"></i>
-            <div class="auth-left-banner">
-                <div><h2>Login Portal</h2><p>Access your accounts core profile tracking nodes dynamically.</p></div>
-                <div style="font-size:13px; font-weight:900; text-transform:uppercase; color:#ff3e3e; margin-top: 15px;">ZippyKart Elite</div>
-            </div>
-            <div class="auth-right-form-hub">
-                <div class="auth-switch-link-row" id="authSwitchPromptMessageRow">New to ZippyKart? <span class="blue-link-trigger" onclick="toggleAuthModalState('register')">Create Registration</span></div>
-                <div class="auth-form-fields-container" id="authFormDynamicFieldsContainer"></div>
-                <button class="auth-action-submit-btn" id="authActionSubmitButtonElement" onclick="handleAuthFormSubmission()">Proceed Terminal</button>
-            </div>
+            <button class="final-pay-btn" id="masterDispatchOrderProcessActionBtn" onclick="dispatchStoreOrderMasterWorkflow()">Place Order via Razorpay</button>
         </div>
     </div>
 
     <div id="zippyMainAdminDashboardBlock">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #111; padding-bottom:15px;">
             <h1>⚙️ ZippyKart Control Terminal</h1>
-            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 Store View</button>
+            <button class="status-close-btn" style="background:#0076e4;" onclick="window.location.search=''">🌐 View Store Front</button>
         </div>
         <div class="admin-flex-row">
             <div class="admin-form-card">
                 <h2>Add Custom Live Product</h2>
-                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. unique_toy_id"></div>
-                <div class="auth-input-cell"><label>Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option><option value="toys">Toys Store</option></select></div>
-                <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Remote Control Drone v2"></div>
+                <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. specialized_toy_1"></div>
+                <div class="auth-input-cell"><label>Select Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Watches</option><option value="tech">Tech Accessories</option><option value="toys">Toys Hub Store</option></select></div>
+                <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Remote Control Drone v4"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="1299"></div>
-                <div class="auth-input-cell"><label>Unsplash HD Image URL Link</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
+                <div class="auth-input-cell"><label>Base / Maroon Image URL</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
                 
                 <div class="auth-input-cell"><label>Navy Blue Variant Image URL (Optional)</label><input type="text" id="admImgNavyField" placeholder="https://images.unsplash.com/..."></div>
                 <div class="auth-input-cell"><label>Olive Green Variant Image URL (Optional)</label><input type="text" id="admImgOliveField" placeholder="https://images.unsplash.com/..."></div>
                 <div class="auth-input-cell"><label>Classic Black Variant Image URL (Optional)</label><input type="text" id="admImgBlackField" placeholder="https://images.unsplash.com/..."></div>
 
-                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Enter specifications logs description mapping..."></div>
+                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Enter specifications parameters logs layout..."></div>
                 <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload Live To Cloud</button>
             </div>
             <div class="admin-table-card">
@@ -444,7 +441,7 @@
             <div class="ai-msg system">Hello Akash! Support systems online. Firebase cloud pipelines and real checkout loops are active. Ask me anything!</div>
         </div>
         <div class="ai-chat-input-row">
-            <input type="text" id="aiUserTextInputMsg" placeholder="Search apparel, premium toys drops, tech accs logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
+            <input type="text" id="aiUserTextInputMsg" placeholder="Search modern apparel drops, toys, tech logs..." onkeypress="if(event.key === 'Enter') dispatchAiChatMessage()">
             <button onclick="dispatchAiChatMessage()">Send</button>
         </div>
     </div>
@@ -454,15 +451,15 @@
         let apparelSelectedSizeToken = "M", apparelSelectedColorToken = "Maroon";
         let databaseProducts = [];
 
-        // 🛠️ FIX DEFINITION: BRAND-NEW IMMUNE DATASET WITH NEW HIGH-RES CDN LINKS
+        // 🛠️ FAIL-SAFE IMMUNE RAW DATASETS ENCODED (ALL BROKEN GHOST PATHS MUTED)
         const backupStaticDataList = [
-            { id: "new_premium_maroon_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton apparel. Boxy silhouette build tailored with drop shoulder seam blocks." },
-            { id: "new_emerald_silk_gown", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin clothing layers featuring a dynamic wrap dress design configuration." },
-            { id: "new_nitro_kids_sneaker", category: "kids", title: "Kids Nitro Charge Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "High elasticity shock absorbing EVA responsive soles framework. Flash sensors built for active multi play cycles." },
-            { id: "new_gan_65w_brick", category: "tech", title: "Zippy HyperCharge 65W GaN Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "Next-gen Gallium Nitride safe technology power conversion cell block adapter matrix." },
-            { id: "new_chrono_smart_watch", category: "watch", title: "Zippy Chrono Pro OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Vivid 1.96 inch ultra response full view screen display panel matrix tracking logs tracker." },
+            { id: "new_premium_maroon_hoodie", category: "men", title: "Premium Urban Maroon Oversized Hoodie", price: 899, oldPrice: 1999, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Elite 320 GSM heavy terry loop cotton clothing. Boxy silhouette build tailored with drop shoulder seam blocks." },
+            { id: "new_emerald_silk_gown", category: "women", title: "Emerald Green Satin Maxi Gown", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1609357605129-26f69add5d6e?q=80&w=500", specs: "Luxurious fluid silk-satin clothing layout featuring a dynamic flared wrap dress trail configuration." },
+            { id: "new_nitro_kids_sneaker", category: "kids", title: "Kids Nitro Charge Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "High elasticity shock absorbing EVA responsive soles framework. Flash sensors built for active play cycles." },
+            { id: "new_gan_65w_brick", category: "tech", title: "Zippy HyperCharge 65W GaN Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "Next-gen Gallium Nitride safe technology power conversion cell block adapter matrix structures." },
+            { id: "new_chrono_smart_watch", category: "watch", title: "Zippy Chrono Pro OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Vivid 1.96 inch ultra response full view screen display panel matrix tracking logs tracker matrix." },
             
-            // 🧸 5 BRAND NEW TRENDING PREMIUM TOYS ENTIRELY RESOLVED (NO OVERWRITING LOOPS)
+            // 🧸 5 BRAND NEW TRENDING DECONTAMINATED TOYS
             { id: "toy_jumbo_teddy_bear", category: "toys", title: "Zippy Jumbo Luxury Plush Teddy Bear", price: 599, oldPrice: 1299, img: "https://images.unsplash.com/photo-1559251606-c623743a6d76?q=80&w=500", specs: "Ultra soft hypo-allergenic premium plush velvet fabric filling matrix. 100% child-safe dynamic stitch configurations." },
             { id: "toy_rc_monster_truck", category: "toys", title: "4WD High-Speed Remote Control Monster Truck", price: 1499, oldPrice: 2999, img: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=500", specs: "2.4GHz long range radio transmission telemetry system. Extreme shock absorbers block with anti-collision rubber tyre grids." },
             { id: "toy_wooden_block_puzzle", category: "toys", title: "Educational Pastel Wooden Geometry Blocks", price: 399, oldPrice: 899, img: "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=500", specs: "Natural eco-friendly pine wood segments layered carefully using organic toxic-free herbal paint schemas loops." },
@@ -489,14 +486,13 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // 🛠 Horned isolated framework loops completely cleans the ghosting thumbnail links
+                    // 🛠️ ISOLATED MAP SHIELD ENFORCES ACCURATE ASSETS CORRELATION REJECTING GHOST LINK DATASTREAM
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = { ...item }; });
                     
                     firebaseParsedList.forEach(item => {
                         if(item && item.id) {
                             if (!structuralCleanedMap[item.id]) {
-                                // Block bad placeholder entries completely from getting mapped to racks
                                 if (item.img && !item.img.includes("1516257984-b1b4d707412e") && !item.img.includes("placeholder") && item.img !== "") {
                                     structuralCleanedMap[item.id] = item;
                                 }
@@ -559,7 +555,7 @@
             });
         }
 
-        // 🛠️ REAL DYNAMIC SLIDER TIMER ENGINE SWITCH LOOPS
+        // 🛠️ INTERACTIVE SLIDER LOOP COUNTER ATTACHMENT
         let slideIdx = 0;
         setInterval(() => { 
             slideIdx = (slideIdx + 1) % 4; 
@@ -567,7 +563,7 @@
             if(engine) engine.style.transform = `translateX(-${slideIdx * 100}vw)`; 
         }, 3200);
 
-        // 🛠️ FIX DEFINITION: CAT ROW INLINE TOGGLER ENGINE ATTACHED
+        // 🛠️ DYNAMIC NAVIGATION HUB CATEGORY FILTER TRIGGER
         window.filterCategory = function(tag, btnEl) {
             if(btnEl) { 
                 document.querySelectorAll('.cat-block-item').forEach(i => i.classList.remove('active')); 
@@ -780,10 +776,41 @@
             logs.scrollTop = logs.scrollHeight;
         };
 
+        // 💳 REAL REALTIME Deployed PRODUCTION RAZORPAY METHOD RESTORED EXPLICITLY
         window.executeRazorpayWideCheckoutGateway = function() {
-            let total = 0; appCartMemory.forEach(item => total += item.price);
-            launchStatusPopupDialog('Order Dispatched', `🎉 Order processed successfully for ₹${total}! Master pipelines active.`);
-            appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
+            let currentPayableBillTotal = 0; appCartMemory.forEach(item => currentPayableBillTotal += item.price);
+            if(currentPayableBillTotal === 0) return;
+
+            const gatewayOptionsTree = {
+                "key": "rzp_live_SuidRs4KmU9W6w", 
+                "amount": currentPayableBillTotal * 100, 
+                "currency": "INR",
+                "name": "ZippyKart Elite", 
+                "description": "Premium Lifestyle Accessories Portal",
+                "image": "https://cdn-icons-png.flaticon.com/512/3081/3081986.png",
+                "handler": function (response) {
+                    try {
+                        if(window.firebaseDB && sessionActiveLoggedInUser) {
+                            var userOrderId = sessionActiveLoggedInUser.email.replace(/[^a-zA-Z0-9]/g, "_");
+                            window.dbPush(window.dbRef(window.firebaseDB, "orders/" + userOrderId), {
+                                items: appCartMemory, paymentId: response.razorpay_payment_id,
+                                billPaid: currentPayableBillTotal, timestamp: Date.now(), status: "Paid & Pending Pipeline"
+                            });
+                        }
+                    } catch(e) {}
+                    appCartMemory = []; syncBasketUI(); closeCartPanelSheet();
+                    launchStatusPopupDialog('Payment Authorized', `🎉 Payment Received! Txn ID: ${response.razorpay_payment_id}.`);
+                },
+                "modal": { 
+                    "ondismiss": function() { 
+                        closeCartPanelSheet(); 
+                        launchStatusPopupDialog('Checkout Cancelled', '❌ Payment session closed.'); 
+                    } 
+                },
+                "prefill": { "name": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.name : "Akash Kumar", "email": sessionActiveLoggedInUser ? sessionActiveLoggedInUser.email : "customer@zippykart.co.in" },
+                "theme": { "color": "#111" }
+            };
+            const rzpPortalInstance = new window.Razorpay(gatewayOptionsTree); rzpPortalInstance.open();
         }
     </script>
 </body>
