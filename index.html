@@ -64,7 +64,7 @@
         .web-cart-btn { background: #e52d2d; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(229, 45, 45, 0.2); }
         .top-delivery-strip { background: #111; color: #94a3b8; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 600; width: 100%; border-top: 1px solid #222; }
 
-        /* 🧸 CATEGORIES PANEL BUILDERS */
+        /* CATEGORIES PANEL */
         .categories-container-panel { background: #fff; width: 100%; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .categories-container-panel::-webkit-scrollbar { display: none; }
         
@@ -97,7 +97,7 @@
 
         .card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eaeaea; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; }
         .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: all 0.2s ease; }
-        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+        .card .img-container { width: 100%; height: 260px; overflow: hidden; border-radius: 6px; margin-bottom: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; position: relative; }
         .card .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card h3 { font-size: 13.5px; font-weight: 700; color: #212121; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { margin: 10px 0; display: flex; align-items: center; gap: 8px; font-size: 13px; }
@@ -124,7 +124,7 @@
         .spec-accordion-content { display: none; font-size: 12.5px; color: #555; line-height: 1.6; font-weight: 500; padding: 5px 0 10px 0; }
         .amazon-rating-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ffa41c; }
 
-        /* 🛠️ FLIPKART STYLE DESIGN: SIZE & COLOUR VARIETY PATTERNS GRID */
+        /* SIZE & COLOUR VARIETY PATTERNS GRID */
         .size-selector-row { display: flex; gap: 10px; margin: 6px 0 12px 0; flex-wrap: wrap; }
         .size-box-cell { border: 1.5px solid #111; padding: 8px 16px; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; background:#fff; color:#111; transition: all 0.15s ease; }
         .size-box-cell.active, .size-box-cell:hover { border-color: #e52d2d; background: #e52d2d; color: #fff; }
@@ -133,7 +133,7 @@
         .color-circle-variant { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s ease; position: relative; }
         .color-circle-variant.active { border-color: #111; transform: scale(1.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-        /* CUSTOM NOTIFICATION HOOK OVERLAYS */
+        /* NOTIFICATION HOOK OVERLAYS */
         .status-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 9500; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .status-popup-card { background: #fff; border-radius: 12px; width: 88%; max-width: 380px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); text-align: center; position: relative; border: 1px solid #eaeaea; }
         .status-popup-card h3 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; color: #111; letter-spacing: 0.5px; }
@@ -350,12 +350,17 @@
             <div class="admin-form-card">
                 <h2 style="font-size:15px; font-weight:900; text-transform:uppercase; margin-bottom:15px;">Add New Live Product</h2>
                 <div class="auth-input-cell"><label>Unique Product ID Code</label><input type="text" id="admIdField" placeholder="e.g. tech_charger_2"></div>
-                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="men">👗 Men Apparel</option><option value="women">👗 Women Clothing</option><option value="kids">🧸 Kids Zone</option><option value="watch">⌚ Precision Watches</option><option value="footwear">Sneakers Hub</option><option value="tech">🔌 Tech Accessories</option><option value="cosmetic">✨ Cosmetics & Art</option></select></div>
+                <div class="auth-input-cell"><label>Select Store Category</label><select id="admCategoryField"><option value="men">Men Apparel</option><option value="women">Women Clothing</option><option value="kids">Kids Zone</option><option value="watch">Precision Watches</option><option value="footwear">Sneakers Hub</option><option value="tech">Tech Accessories</option><option value="cosmetic">Cosmetics & Art</option></select></div>
                 <div class="auth-input-cell"><label>Product Display Title</label><input type="text" id="admTitleField" placeholder="e.g. Real 65W Super Warp Charger"></div>
                 <div class="auth-input-cell"><label>Retail Offer Price (₹)</label><input type="number" id="admPriceField" placeholder="499"></div>
                 <div class="auth-input-cell"><label>Original Strike Price (₹)</label><input type="number" id="admOldPriceField" placeholder="999"></div>
-                <div class="auth-input-cell"><label>Unsplash HD Image URL Link</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
-                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Describe materials, sizing parameters, compatibility detail layout logs..."></div>
+                
+                <div class="auth-input-cell"><label>Base / Maroon Image URL</label><input type="text" id="admImgField" placeholder="https://images.unsplash.com/..."></div>
+                <div class="auth-input-cell"><label>Navy Blue Variant Image URL (Optional)</label><input type="text" id="admImgNavyField" placeholder="Leave blank if not apparel"></div>
+                <div class="auth-input-cell"><label>Olive Green Variant Image URL (Optional)</label><input type="text" id="admImgOliveField" placeholder="Leave blank if not apparel"></div>
+                <div class="auth-input-cell"><label>Classic Black Variant Image URL (Optional)</label><input type="text" id="admImgBlackField" placeholder="Leave blank if not apparel"></div>
+                
+                <div class="auth-input-cell"><label>Technical Specifications Summary</label><input type="text" id="admSpecsField" placeholder="Describe materials, sizing layouts..."></div>
                 <button class="auth-action-submit-btn" style="background:#00c853;" onclick="executeAdminDatabaseUpload()">Upload Live To Firebase</button>
             </div>
             <div class="admin-table-card">
@@ -386,7 +391,7 @@
             
             <div class="modal-left-gallery">
                 <div class="modal-img-holder"><img id="modalProductImage" src=""></div>
-                <div class="amazon-rating-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>4.5 out of 5 Stars (840 Reviews)</span></div>
+                <div class="amazon-rating-badge"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>4.5 out of 5 Stars (840 Reviews)</span></div>
             </div>
             
             <div class="modal-right-specs-hub">
@@ -475,15 +480,15 @@
         let apparelSelectedSizeToken = "M";
         let apparelSelectedColorToken = "Maroon";
 
-        // 🛠️ BACKUP MASTER DICTIONARY STABLE LINKS DEPLOYED (NO BROKEN/DUPLICATED ITEMS)
+        // 🛠️ PERMANENT ANTI-CRASH STABLE SOURCE DIRECTORY ASSETS
         const backupStaticDataList = [
-            { id: "men_overshirt_1", category: "men", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout maroon texture pattern block streetwear aesthetic." },
+            { id: "men_overshirt_1", category: "men", title: "Oversized Maroon Culture Tee", price: 799, oldPrice: 1499, img: "https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500", imgNavy: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500", imgOlive: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500", imgBlack: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500", specs: "Premium terry cotton 260 GSM boxy fit layout maroon texture pattern block streetwear aesthetic." },
             { id: "men_cargo_1", category: "men", title: "Denim Premium Casual Shirt", price: 1199, oldPrice: 2499, img: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=500", specs: "Relaxed custom washed indigo denim fabrics structure with double breast utility chest pockets." },
-            { id: "women_coord_1", category: "women", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1514311548104-ae305aac368a?q=80&w=500", specs: "Heavy loop-knit combed organic fleece cotton structure built for cozy premium streetwear fits." },
+            { id: "women_coord_1", category: "women", title: "Streetwear Urban Hype Hoodie", price: 1799, oldPrice: 3499, img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=500", specs: "Heavy loop-knit combed organic fleece cotton structure built for cozy premium streetwear fits." },
             { id: "women_sweatshirt_1", category: "women", title: "Aesthetic Grey Fleece Sweatshirt", price: 999, oldPrice: 2219, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500", specs: "Minimalistic solid light grey dynamic lifestyle lounge drop layer pattern fabric." },
             { id: "watch_smart_1", category: "watch", title: "Zippy Minimalist OLED Smart Watch", price: 999, oldPrice: 2499, img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=500", specs: "Realtime heart-rate configuration tracker matrix. Waterproof high-grade zinc alloy frames." },
             { id: "kids_sneaker_1", category: "kids", title: "Kids Urban Anti-Slip Light-Up Sneakers", price: 999, oldPrice: 1999, img: "https://images.unsplash.com/photo-1514989940723-e8e5163ccbe8?q=80&w=500", specs: "Anti-slip flexible runtime bottom grid sole matrix with light up flash sensors built safe for kids." },
-            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1622445262465-2481c4574875?q=80&w=500", specs: "65W High-speed intelligent warp power adapter socket structure. Complete multi-layer thermal load cooling grids." },
+            { id: "tech_charger_1", category: "tech", title: "Zippy Ultra Fast Warp Charger", price: 499, oldPrice: 999, img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?q=80&w=500", specs: "65W High-speed intelligent warp power adapter socket structure. Complete multi-layer thermal load cooling grids." },
             { id: "fw_sneaker_1", category: "footwear", title: "Luxury White Air Sneakers", price: 1999, oldPrice: 4999, img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=500", specs: "High grade genuine white leather panels framework with flexible high traction rubber soles layout." },
             { id: "cosmetic_art_1", category: "cosmetic", title: "Premium Boho Abstract Wall Art", price: 699, oldPrice: 1499, img: "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?q=80&w=500", specs: "Premium high-definition abstract illustration printed on 300 GSM ivory matte card sheet parameters." }
         ];
@@ -507,11 +512,11 @@
                 } else {
                     let firebaseParsedList = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
                     
-                    // Enforce structural filter cleansing duplicate entries and broken items natively
+                    // 🛠️ PERMANENT FORCE FILTER OVERWRITES BROKEN ENTRIES & PLACEHOLDERS INSTANTLY
                     let structuralCleanedMap = {};
                     backupStaticDataList.forEach(item => { structuralCleanedMap[item.id] = item; });
                     firebaseParsedList.forEach(item => {
-                        if(item && item.id && item.img && !item.img.includes("placeholder")) {
+                        if(item && item.id && item.img && !item.img.includes("placeholder") && item.img !== "") {
                             structuralCleanedMap[item.id] = item;
                         }
                     });
@@ -529,7 +534,7 @@
             itemsList.forEach(item => {
                 container.innerHTML += `
                     <div class="card product-card" data-category="${item.category}" onclick="openProductDetailModal('${item.id}')">
-                        <div class="img-container"><img src="${item.img}"></div>
+                        <div class="img-container"><img src="${item.img}" onerror="this.src='https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=500'"></div>
                         <h3>${item.title}</h3>
                         <div class="price-box"><span class="now">₹${item.price}</span><span class="old">₹${item.oldPrice}</span></div>
                         <button class="buy-btn" onclick="event.stopPropagation(); pushToBasket('${item.title} (Default)', ${item.price})">Add To Cart</button>
@@ -556,17 +561,27 @@
 
         function executeAdminDatabaseUpload() {
             const id = document.getElementById('admIdField').value.trim(), cat = document.getElementById('admCategoryField').value, title = document.getElementById('admTitleField').value.trim(), price = parseInt(document.getElementById('admPriceField').value), oldPrice = parseInt(document.getElementById('admOldPriceField').value), img = document.getElementById('admImgField').value.trim(), specs = document.getElementById('admSpecsField').value.trim();
+            
+            // Fetch optional color fields natively
+            const imgNavy = document.getElementById('admImgNavyField').value.trim();
+            const imgOlive = document.getElementById('admImgOliveField').value.trim();
+            const imgBlack = document.getElementById('admImgBlackField').value.trim();
+
             if(!id || !title || !price || !img) { alert("Please complete missing form fields!"); return; }
             
-            const newItemObject = { id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality drop item node logs." };
+            const newItemObject = { 
+                id: id, category: cat, title: title, price: price, oldPrice: oldPrice || (price*2), img: img, specs: specs || "Premium quality drop item node logs.",
+                imgNavy: imgNavy || "", imgOlive: imgOlive || "", imgBlack: imgBlack || ""
+            };
+
             if(window.firebaseDB) {
                 let matchIndex = databaseProducts.findIndex(p => p.id === id);
                 if(matchIndex !== -1) databaseProducts[matchIndex] = newItemObject;
                 else databaseProducts.push(newItemObject);
                 window.dbSet(window.dbRef(window.firebaseDB, "products"), databaseProducts);
                 
-                document.getElementById('admIdField').value = ""; document.getElementById('admTitleField').value = ""; document.getElementById('admPriceField').value = ""; document.getElementById('admOldPriceField').value = ""; document.getElementById('admImgField').value = ""; document.getElementById('admSpecsField').value = "";
-                alert("🎉 Synchronized to cloud! Automatically rendered live inside frontend racks.");
+                document.getElementById('admIdField').value = ""; document.getElementById('admTitleField').value = ""; document.getElementById('admPriceField').value = ""; document.getElementById('admOldPriceField').value = ""; document.getElementById('admImgField').value = ""; document.getElementById('admImgNavyField').value = ""; document.getElementById('admImgOliveField').value = ""; document.getElementById('admImgBlackField').value = ""; document.getElementById('admSpecsField').value = "";
+                alert("🎉 Synchronized to cloud directly!");
             }
         }
 
@@ -638,14 +653,22 @@
             apparelSelectedSizeToken = sizeName;
         };
 
-        // 🛠️ FUNCTION FOR SELECTING CLOTH COLOR BLOCK NATIVELY
+        // 🛠️ DYNAMIC COLOR ASSETS SWAPPING LOGIC BASED ON LIVE RECONG payload
         window.selectApparelColorToken = function(element, colorName) {
             document.querySelectorAll('.color-circle-variant').forEach(circle => circle.classList.remove('active'));
             element.classList.add('active');
             apparelSelectedColorToken = colorName;
+
+            const item = databaseProducts.find(p => p.id === currentActiveProductId);
+            if(!item) return;
+
+            const imgContainer = document.getElementById('modalProductImage');
+            if(colorName === 'Maroon') imgContainer.src = item.img;
+            else if(colorName === 'Navy Blue' && item.imgNavy) imgContainer.src = item.imgNavy;
+            else if(colorName === 'Olive Green' && item.imgOlive) imgContainer.src = item.imgOlive;
+            else if(colorName === 'Classic Black' && item.imgBlack) imgContainer.src = item.imgBlack;
         };
 
-        // 🛠️ FLIPKART STYLE PRODUCT ACTIVATION MECHANISM MATRIX (DYNAMIC DETAILS + ACCORDIONS)
         function openProductDetailModal(id) {
             currentActiveProductId = id; const item = databaseProducts.find(p => p.id === id); if(!item) return;
             
@@ -655,13 +678,11 @@
             const colorWrapperNode = document.getElementById('modalClothColorSelectorBlockNode');
             const sizeBoxWrapper = document.getElementById('dynamicModalSizeContainerRow');
             
-            // If item belongs to clothing categories, enable Flipkart style Multi-Color & Multi-Size Rows
             if(item.category === "men" || item.category === "women" || item.category === "kids") {
                 apparelSelectedSizeToken = "M"; 
                 apparelSelectedColorToken = "Maroon";
                 colorWrapperNode.style.display = "block";
                 
-                // Initialize default state elements configuration
                 document.querySelectorAll('.color-circle-variant').forEach(c => c.classList.remove('active'));
                 document.querySelectorAll('.color-circle-variant')[0].classList.add('active');
 
@@ -674,7 +695,6 @@
                         <div class="size-box-cell" onclick="selectApparelSizeToken(this, 'XXL')">XXL</div>
                     </div>`;
             } else {
-                // Technical equipment settings layout rules mapping
                 apparelSelectedSizeToken = "Free Size";
                 colorWrapperNode.style.display = "none";
                 sizeBoxWrapper.innerHTML = `<div class="free-size-badge-node">Free Size</div>`;
