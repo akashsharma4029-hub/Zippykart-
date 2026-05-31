@@ -2,78 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zippykart.co.in | Full Master Production Environment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zippykart.co.in | Store</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 🛠️ ORIGINAL UI ARCHITECTURE RESTORED */
-        body { font-family: 'Montserrat', sans-serif; background: #f1f2f4; margin: 0; padding: 0; }
-        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body { font-family: sans-serif; background: #f1f2f4; margin: 0; }
+        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 20px; }
-        .card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: center; cursor: pointer; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
-        .buy-btn { width: 100%; padding: 12px; background: #111; color: #fff; border: none; margin-top: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
-        
-        /* ⚙️ ADMIN TERMINAL */
+        .card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #ddd; }
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
         #adminPanel { display: none; padding: 40px; background: #fff; min-height: 100vh; }
-        .admin-form { display: flex; flex-direction: column; gap: 10px; max-width: 400px; padding: 20px; border: 1px solid #ccc; }
-        
-        /* 💬 CHAT AI MODULE */
-        #chatBox { position: fixed; bottom: 20px; right: 20px; width: 320px; height: 450px; background: #fff; border: 1px solid #000; display: none; flex-direction: column; z-index: 2000; }
-        .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <header>
     <div style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
-    <div style="display:flex; gap:15px; align-items:center;">
+    <div>
         <span onclick="alert('Login Required')"><i class="fa-solid fa-user"></i> Login</span>
-        <span onclick="toggleChat()" style="cursor:pointer;">More <i class="fa-solid fa-chevron-down"></i></span>
-        <button onclick="alert('Cart Opened')" style="padding:10px 15px; background:red; color:#fff; border:none; border-radius:5px;">
-            <i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cartCount">0</span>)
-        </button>
+        <button onclick="openCart()" style="margin-left:15px; padding:8px 12px;">Cart (<span id="cartCount">0</span>)</button>
     </div>
 </header>
 
-<!-- Store Front -->
 <div id="storeView">
-    <div style="padding:20px; text-align:center;">
-        <h2 id="sectionTitle">Trending Culture Drops</h2>
-    </div>
+    <h2 style="padding:20px; text-align:center;">Trending Culture Drops</h2>
     <div class="grid" id="productGrid"></div>
 </div>
 
-<!-- Admin Terminal -->
 <div id="adminPanel">
-    <h1>Professional Terminal</h1>
-    <div class="admin-form">
-        <input type="text" id="admId" placeholder="Product ID"><br>
-        <input type="text" id="admTitle" placeholder="Product Title"><br>
-        <input type="number" id="admPrice" placeholder="Price"><br>
-        <input type="text" id="admImg" placeholder="Image URL"><br>
-        <button onclick="saveProduct()">Upload to Cloud</button>
-    </div>
-    <div id="adminTable"></div>
-</div>
-
-<!-- Chat Interface -->
-<div id="chatBox">
-    <div style="background:#000; color:#fff; padding:10px;">Support AI</div>
-    <div id="chatLogs" style="flex-grow:1; padding:10px;"></div>
-    <input type="text" id="chatInput" style="width:100%; padding:10px;" placeholder="Message...">
+    <h1>Admin Terminal</h1>
+    <input type="text" id="admId" placeholder="Product ID"><br>
+    <input type="text" id="admTitle" placeholder="Title"><br>
+    <input type="number" id="admPrice" placeholder="Price"><br>
+    <input type="text" id="admImg" placeholder="Image URL"><br>
+    <button onclick="saveProduct()">Upload to Cloud</button>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     
-    // Config
-    const firebaseConfig = { apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", projectId: "zippykart-production" };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+    const db = getDatabase(initializeApp({ apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", projectId: "zippykart-production" }));
 
     window.onload = () => {
         if(window.location.search.includes("admin=true")) {
@@ -90,11 +61,11 @@
             grid.innerHTML = "";
             for(let id in data) {
                 let p = data[id];
-                grid.innerHTML += `<div class="card" onclick="triggerCheckout(${p.price})">
+                grid.innerHTML += `<div class="card">
                     <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
                     <p><b>${p.title}</b></p>
                     <p>₹${p.price}</p>
-                    <button class="buy-btn">ADD TO CART</button>
+                    <button class="buy-btn" onclick="triggerRazorpay(${p.price})">ADD TO CART</button>
                 </div>`;
             }
         });
@@ -105,10 +76,9 @@
         set(ref(db, 'products/' + id), { title: document.getElementById('admTitle').value, price: document.getElementById('admPrice').value, img: document.getElementById('admImg').value });
         alert("Product Uploaded Successfully!");
     };
-    
-    window.toggleChat = () => { document.getElementById('chatBox').style.display = 'flex'; };
-    window.triggerCheckout = (price) => {
-        var options = { "key": "rzp_live_SuidRs4KmU9W6w", "amount": price * 100, "currency": "INR", "name": "ZippyKart", "description": "Transaction", "handler": function(res){ alert("Payment Success!"); } };
+
+    window.triggerRazorpay = (price) => {
+        var options = { "key": "rzp_live_SuidRs4KmU9W6w", "amount": price * 100, "currency": "INR", "name": "ZippyKart", "description": "Checkout", "handler": function(res){ alert("Payment Success!"); } };
         new Razorpay(options).open();
     };
 </script>
