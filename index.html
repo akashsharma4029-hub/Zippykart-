@@ -41,18 +41,18 @@
     import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = {
-        apiKey: "AIzaSyBr0cS6jfEOyyl8S2uvhaTgBVb6o8q_Xw4",
+        apiKey: "AIzaSyBr0cS6jfEOyyl8S2uvhaTgVB6-MAAbY0",
         authDomain: "zippykartproduction.firebaseapp.com",
         projectId: "zippykartproduction",
-        storageBucket: "zippykartproduction.firebaseapp.com",
+        storageBucket: "zippykartproduction.appspot.com",
         messagingSenderId: "337115975126",
-        appId: "1:337115975126:web:36bee625cda4094a69622d"
+        appId: "1:337115975126:web:36bee625cda409fcdfe877"
     };
     
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Products List
+    // Products
     const products = [
         { title: "Men's Oversized Streetwear Overshirt", price: 899, img: "https://images.unsplash.com/photo-1602810318386-749160533385?w=500" },
         { title: "Men's Baggy Multi-Pocket Cargo", price: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500" }
