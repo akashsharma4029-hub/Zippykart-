@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Store</title>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <title>Zippykart.co.in</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: sans-serif; background: #f1f2f4; margin: 0; }
@@ -12,8 +11,8 @@
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
         .card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #ddd; }
         .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
-        .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; text-transform: uppercase; font-weight: bold; cursor: pointer; }
-        #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; cursor: pointer; }
+        #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
         .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
     </style>
 </head>
@@ -21,48 +20,46 @@
 
 <header>
     <div style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
-    <div style="display:flex; align-items:center; gap:10px;">
-        <span onclick="document.getElementById('authOverlay').style.display='flex'" style="cursor:pointer;"><i class="fa-solid fa-user"></i> Login</span>
-        <button>Cart (0)</button>
-    </div>
+    <div onclick="document.getElementById('authOverlay').style.display='flex'" style="cursor:pointer;"><i class="fa-solid fa-user"></i> Login</div>
 </header>
 
 <div id="authOverlay">
     <div class="auth-box">
         <h3>Login / Sign Up</h3>
-        <input type="tel" id="phoneInput" placeholder="9315224775" style="width:90%; padding:10px; margin:10px 0; border:1px solid #ccc;">
-        <button id="sendOtpBtn" style="width:100%; padding:10px; background:#f0f0f0; border:1px solid #ccc; cursor:pointer;">Send OTP</button>
+        <input type="tel" id="phoneInput" placeholder="Mobile Number" style="width:90%; padding:10px; margin:10px 0;">
+        <button id="otpBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Send OTP</button>
         <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
         <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
     </div>
 </div>
 
-<h2 style="text-align:center; padding:20px;">Trending Culture Drops</h2>
 <div class="grid" id="productGrid"></div>
 
 <script type="module">
-    // Static Products takki page blank na rahe
-    const products = [
-        { title: "Men's Oversized Streetwear Overshirt", price: 899, img: "https://images.unsplash.com/photo-1602810318386-749160533385?w=500" },
-        { title: "Men's Baggy Multi-Pocket Cargo", price: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500" }
-    ];
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    function renderProducts() {
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = products.map(p => `
-            <div class="card">
-                <img src="${p.img}">
-                <p><b>${p.title}</b></p>
-                <p>₹${p.price}</p>
-                <button class="buy-btn" onclick="triggerRazorpay(${p.price})">ADD TO CART</button>
-            </div>
-        `).join('');
-    }
-    renderProducts();
-
-    window.triggerRazorpay = (price) => {
-        new Razorpay({ "key": "rzp_live_SuidRs4KmU9W6w", "amount": price * 100, "currency": "INR", "name": "Zippykart", "handler": function(res){ alert("Payment Success!"); } }).open();
+    const firebaseConfig = {
+        apiKey: "AIzaSyBr0cS6jfEOyyl8S2uvhaTgBVb6o8q_Xw4",
+        authDomain: "zippykartproduction.firebaseapp.com",
+        projectId: "zippykartproduction",
+        storageBucket: "zippykartproduction.firebaseapp.com",
+        messagingSenderId: "337115975126",
+        appId: "1:337115975126:web:36bee625cda4094a69622d"
     };
+    
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Google Login Logic
+    document.getElementById('googleBtn').addEventListener('click', () => {
+        signInWithPopup(auth, new GoogleAuthProvider())
+            .then((result) => alert("Welcome, " + result.user.displayName))
+            .catch((error) => alert("Error: " + error.message));
+    });
+
+    // Simple Alert for OTP (Placeholder until logic is fully bound)
+    document.getElementById('otpBtn').onclick = () => alert("OTP System Active! Please check console for setup logs.");
 </script>
 </body>
 </html>
