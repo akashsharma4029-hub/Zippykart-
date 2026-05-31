@@ -26,7 +26,7 @@
 <div id="authOverlay">
     <div class="auth-box">
         <h3>Login / Sign Up</h3>
-        <input type="tel" id="phoneInput" placeholder="+91..." style="width:90%; padding:10px; margin:10px 0;">
+        <input type="tel" id="phoneInput" placeholder="Enter 10 digit number" style="width:90%; padding:10px; margin:10px 0;">
         <button id="otpBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Send OTP</button>
         <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
         <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
@@ -52,7 +52,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Products
     const products = [
         { title: "Men's Oversized Streetwear Overshirt", price: 899, img: "https://images.unsplash.com/photo-1602810318386-749160533385?w=500" },
         { title: "Men's Baggy Multi-Pocket Cargo", price: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500" }
@@ -65,18 +64,20 @@
             <button class="buy-btn">ADD TO CART</button>
         </div>`).join('');
 
-    // Google Auth
     document.getElementById('googleBtn').onclick = () => {
         signInWithPopup(auth, new GoogleAuthProvider()).then(() => alert("Login Success!")).catch(e => alert(e.message));
     };
 
-    // Phone Auth
     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'otpBtn', { 'size': 'invisible' });
+
     document.getElementById('otpBtn').onclick = () => {
-        const number = document.getElementById('phoneInput').value;
+        let number = document.getElementById('phoneInput').value.trim();
+        if (!number.startsWith('+')) {
+            number = '+91' + number;
+        }
         signInWithPhoneNumber(auth, number, window.recaptchaVerifier)
-            .then(res => { window.confirmationResult = res; alert("OTP Sent!"); })
-            .catch(e => alert(e.message));
+            .then(res => { window.confirmationResult = res; alert("OTP Sent to " + number); })
+            .catch(e => alert("Error: " + e.message));
     };
 </script>
 </body>
