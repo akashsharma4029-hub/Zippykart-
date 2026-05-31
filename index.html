@@ -8,12 +8,12 @@
         .logo { font-weight: 900; font-size: 24px; margin-right: auto; }
         .nav-group { display: flex; align-items: center; gap: 20px; }
         .nav-item { cursor: pointer; position: relative; padding: 10px; }
-        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 180px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 4px; z-index: 1000; }
+        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 4px; z-index: 1000; }
         .dropdown div { padding: 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; }
         .dropdown div:hover { background: #f5f5f5; color: #2874f0; }
         
-        #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
-        .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
+        /* Chat Box Style */
+        #chatBox { display: none; position: fixed; bottom: 20px; right: 20px; width: 250px; height: 300px; background: #fff; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999; padding: 10px; }
     </style>
 </head>
 <body>
@@ -21,71 +21,71 @@
 <header>
     <div class="logo">Zippy<span style="color:red;">Kart</span></div>
     <div class="nav-group">
-        <div class="nav-item" onclick="document.getElementById('loginDrop').classList.toggle('active')">
+        <div class="nav-item" onclick="toggleDrop('loginDrop')">
             Login <i class="fa-solid fa-chevron-down"></i>
-            <div id="loginDrop" class="dropdown" style="display:none;">
-                <div onclick="document.getElementById('authOverlay').style.display='flex'">My Profile</div>
-                <div>Orders</div>
-                <div>Wishlist</div>
+            <div id="loginDrop" class="dropdown">
+                <div onclick="showAuth()"><i class="fa-regular fa-user"></i> My Profile</div>
+                <div><i class="fa-solid fa-box"></i> Orders</div>
+                <div><i class="fa-regular fa-heart"></i> Wishlist</div>
             </div>
         </div>
-        <div class="nav-item" onclick="document.getElementById('moreDrop').classList.toggle('active')">
+        <div class="nav-item" onclick="toggleDrop('moreDrop')">
             More <i class="fa-solid fa-chevron-down"></i>
-            <div id="moreDrop" class="dropdown" style="display:none;">
-                <div>Notification Settings</div>
-                <div>24x7 Customer Care</div>
-                <div>Advertise</div>
+            <div id="moreDrop" class="dropdown">
+                <div><i class="fa-solid fa-bell"></i> Notification Settings</div>
+                <div onclick="openChat()"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
+                <div><i class="fa-solid fa-chart-line"></i> Advertise</div>
             </div>
         </div>
     </div>
 </header>
 
-<div id="authOverlay">
-    <div class="auth-box">
+<!-- AI Chat Box -->
+<div id="chatBox">
+    <div style="background:#000; color:#fff; padding:5px;">AI Support <button onclick="this.parentElement.parentElement.style.display='none'" style="float:right;">X</button></div>
+    <div id="chatArea" style="height:200px; overflow-y:scroll; font-size:12px;">Hello! How can I help you today?</div>
+    <input type="text" id="msg" placeholder="Type..." style="width:80%;">
+    <button onclick="sendMsg()">Send</button>
+</div>
+
+<!-- Login Popup remains same -->
+<div id="authOverlay" style="display:none; position:fixed; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:25px; border-radius:10px; width:280px; text-align:center;">
         <h3>Login / Sign Up</h3>
         <input type="email" id="emailInput" placeholder="Email" style="width:90%; padding:10px;">
         <input type="password" id="passInput" placeholder="Password" style="width:90%; padding:10px; margin:10px 0;">
-        <button id="emailLoginBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Login / Sign Up</button>
-        <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
+        <button id="emailLoginBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Login</button>
         <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
     </div>
 </div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-    const app = initializeApp({
-        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-        authDomain: "zippykart-production-157e1.firebaseapp.com",
-        projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.firebasestorage.app",
-        messagingSenderId: "803651431969",
-        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
-    });
-    const auth = getAuth(app);
-
-    // Dropdown toggle logic
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.onclick = function(e) {
-            e.stopPropagation();
-            const drop = this.querySelector('.dropdown');
-            document.querySelectorAll('.dropdown').forEach(d => { if(d !== drop) d.style.display = 'none'; });
-            drop.style.display = (drop.style.display === 'block') ? 'none' : 'block';
-        }
-    });
-
-    // Close when clicking outside
-    window.onclick = () => document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-
-    // Auth logic
-    document.getElementById('googleBtn').onclick = () => {
-        signInWithPopup(auth, new GoogleAuthProvider()).then(() => alert("Login Success!")).catch(e => alert(e.message));
+    // Logic for Dropdowns
+    window.toggleDrop = (id) => {
+        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     };
 
-    document.getElementById('emailLoginBtn').onclick = () => {
-        const e = document.getElementById('emailInput').value, p = document.getElementById('passInput').value;
-        signInWithEmailAndPassword(auth, e, p).catch(() => createUserWithEmailAndPassword(auth, e, p)).then(() => alert("Logged In!")).catch(e => alert(e.message));
+    // Open Chat
+    window.openChat = () => {
+        document.getElementById('chatBox').style.display = 'block';
+        document.getElementById('moreDrop').style.display = 'none';
+    };
+
+    // Simple AI Response Logic
+    window.sendMsg = () => {
+        const msg = document.getElementById('msg').value;
+        const area = document.getElementById('chatArea');
+        area.innerHTML += `<br>You: ${msg}`;
+        if(msg.toLowerCase().includes('order')) area.innerHTML += `<br>AI: Check your 'Orders' tab for status.`;
+        else area.innerHTML += `<br>AI: I'll connect you to an agent soon.`;
+        document.getElementById('msg').value = '';
+    };
+
+    window.showAuth = () => {
+        document.getElementById('authOverlay').style.display = 'flex';
+        document.getElementById('loginDrop').style.display = 'none';
     };
 </script>
 </body>
