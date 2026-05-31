@@ -2,66 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zippykart.co.in | Store</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: sans-serif; background: #f1f2f4; margin: 0; }
         header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .menu-dropdown { position: relative; display: inline-block; }
-        .dropdown-content { display: none; position: absolute; right: 0; background: #fff; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1000; padding: 10px; border-radius: 5px; }
-        .dropdown-content a { display: block; padding: 12px; text-decoration: none; color: #333; cursor: pointer; border-bottom: 1px solid #eee; }
-        .dropdown-content a i { margin-right: 10px; width: 20px; color: #555; }
-        /* Grid setup - AS IT IS */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
         .card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #ddd; }
         .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
-        .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
-        /* Auth Overlay */
+        .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; text-transform: uppercase; font-weight: bold; cursor: pointer; }
         #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
-        .auth-box { background: #fff; padding: 30px; border-radius: 8px; width: 300px; text-align: center; }
+        .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
     </style>
 </head>
 <body>
 
 <header>
     <div style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
-    <div>
-        <div class="menu-dropdown" onmouseover="this.querySelector('.dropdown-content').style.display='block'" onmouseout="this.querySelector('.dropdown-content').style.display='none'">
-            <span style="cursor:pointer;"><i class="fa-solid fa-user"></i> Login <i class="fa-solid fa-chevron-down"></i></span>
-            <div class="dropdown-content">
-                <a onclick="document.getElementById('authOverlay').style.display='flex'"><i class="fa-solid fa-user-circle"></i> My Profile</a>
-                <a href="#"><i class="fa-solid fa-shield-halved"></i> Zippykart Plus Zone</a>
-                <a href="#"><i class="fa-solid fa-box"></i> Orders</a>
-                <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
-            </div>
-        </div>
-        <button style="margin-left:15px; padding:8px 12px; cursor:pointer;">Cart (<span id="cartCount">0</span>)</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+        <span onclick="document.getElementById('authOverlay').style.display='flex'" style="cursor:pointer;"><i class="fa-solid fa-user"></i> Login</span>
+        <button>Cart (0)</button>
     </div>
 </header>
 
-<!-- Auth Modal -->
 <div id="authOverlay">
     <div class="auth-box">
         <h3>Login / Sign Up</h3>
-        <input type="tel" id="phoneInput" placeholder="Mobile Number (+91...)" style="width:100%; padding:10px; margin:10px 0;">
-        <button onclick="alert('OTP Sent to your mobile!')" style="width:100%; padding:10px; cursor:pointer;">Send OTP</button>
-        <button id="googleBtn" style="background:#4285F4; color:#fff; border:none; padding:10px; margin-top:10px; width:100%; cursor:pointer;">Sign in with Google</button>
-        <button onclick="document.getElementById('authOverlay').style.display='none'" style="background:#ccc; margin-top:10px; border:none; padding:10px; width:100%; cursor:pointer;">Close</button>
+        <input type="tel" id="phoneInput" placeholder="Mobile Number (+91...)" style="width:90%; padding:10px; margin:10px 0;">
+        <button id="sendOtpBtn" style="width:100%; padding:10px; background:#f0f0f0; border:1px solid #ccc; cursor:pointer;">Send OTP</button>
+        <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
+        <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
     </div>
 </div>
 
-<div id="storeView">
-    <h2 style="padding:20px; text-align:center;">Trending Culture Drops</h2>
-    <div class="grid" id="productGrid"></div>
-</div>
+<h2 style="text-align:center; padding:20px;">Trending Culture Drops</h2>
+<div class="grid" id="productGrid"></div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBr0cS6jfEOyyl8S2uvhaTgBVb6o8q_Xw4",
+        authDomain: "zippykartproduction.firebaseapp.com",
+        projectId: "zippykartproduction",
+        storageBucket: "zippykartproduction.firebaseapp.com",
+        messagingSenderId: "337115975126",
+        appId: "1:337115975126:web:36bee625cda4094a69622d"
+    };
     
-    const db = getDatabase(initializeApp({ apiKey: "AIzaSyAAZ2tUtGTxSVCM8YkYCu4n4e5-vHq-mMo", databaseURL: "https://zippykart-production-default-rtdb.firebaseio.com", projectId: "zippykart-production" }));
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    document.getElementById('googleBtn').onclick = () => {
+        signInWithPopup(auth, new GoogleAuthProvider())
+            .then(() => alert("Login Successful!"))
+            .catch((err) => alert(err.message));
+    };
 
     onValue(ref(db, 'products'), (snapshot) => {
         const data = snapshot.val();
