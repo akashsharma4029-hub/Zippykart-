@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zippykart.co.in | Login Portal</title>
+    <title>Zippykart.co.in | Official Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #f1f2f4; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .auth-box { background: #fff; padding: 30px; border-radius: 12px; width: 300px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h3 { margin-bottom: 20px; }
+        body { font-family: sans-serif; background: #f1f2f4; margin: 0; }
+        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
+        #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
+        .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
+        input { width: 90%; padding: 10px; margin: 5px 0; }
     </style>
 </head>
 <body>
 
-<div class="auth-box">
-    <h3>ZippyKart Login</h3>
-    <input type="tel" id="phoneInput" placeholder="Enter 10 digit number" style="width:90%; padding:10px; margin-bottom:10px;">
-    <button id="otpBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Send OTP</button>
-    <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
+<header>
+    <div style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
+    <div onclick="document.getElementById('authOverlay').style.display='flex'" style="cursor:pointer;"><i class="fa-solid fa-user"></i> Login</div>
+</header>
+
+<div id="authOverlay">
+    <div class="auth-box">
+        <h3>Login / Sign Up</h3>
+        <input type="email" id="emailInput" placeholder="Email">
+        <input type="password" id="passInput" placeholder="Password">
+        <button id="emailLoginBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none; cursor:pointer;">Login / Sign Up</button>
+        <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
+        <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
+    </div>
 </div>
+
+<h2 style="text-align:center; padding:20px;">Store Ready</h2>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
@@ -41,17 +54,17 @@
         signInWithPopup(auth, new GoogleAuthProvider()).then(() => alert("Login Success!")).catch(e => alert(e.message));
     };
 
-    // Phone Auth
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'otpBtn', { 'size': 'invisible' });
-
-    document.getElementById('otpBtn').onclick = () => {
-        let number = document.getElementById('phoneInput').value.trim();
-        if (!number.startsWith('+')) {
-            number = '+91' + number;
-        }
-        signInWithPhoneNumber(auth, number, window.recaptchaVerifier)
-            .then(res => { window.confirmationResult = res; alert("OTP Sent to " + number); })
-            .catch(e => alert("Error: " + e.message));
+    // Email/Password Auth
+    document.getElementById('emailLoginBtn').onclick = () => {
+        const email = document.getElementById('emailInput').value;
+        const pass = document.getElementById('passInput').value;
+        signInWithEmailAndPassword(auth, email, pass)
+            .then(() => alert("Login Successful!"))
+            .catch(() => {
+                createUserWithEmailAndPassword(auth, email, pass)
+                    .then(() => alert("Account Created & Logged In!"))
+                    .catch(e => alert(e.message));
+            });
     };
 </script>
 </body>
