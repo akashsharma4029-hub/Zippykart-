@@ -8,22 +8,16 @@
         header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
         .logo-box { font-weight: 900; font-size: 20px; color: #333; display: flex; align-items: center; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        
         .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
-        .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 60px; font-size: 11px; }
-        .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
+        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 11px; }
         .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
-        
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
         .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
         .product-card img { width: 100%; height: 150px; object-fit: cover; }
-        .p-name { font-weight: bold; font-size: 12px; margin: 5px 0; }
         .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; cursor: pointer; }
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
-        
-        .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; font-size: 14px; }
-        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; z-index: 9999; }
-        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .dropdown { display: none; position: absolute; top: 100%; right: 10%; background: #fff; border: 1px solid #ddd; width: 200px; z-index: 9999; }
+        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -31,16 +25,10 @@
 <header>
     <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
     <input type="text" class="search-bar" placeholder="Search...">
-    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
+    <div class="menu-wrapper" onclick="document.getElementById('loginDrop').style.display='block'">LOGIN ▾
         <div id="loginDrop" class="dropdown">
-            <div><i class="fa-regular fa-user"></i> My Profile</div>
-            <div><i class="fa-solid fa-box"></i> Orders</div>
-        </div>
-    </div>
-    <div class="menu-wrapper" onclick="toggle('moreDrop')">MORE ▾
-        <div id="moreDrop" class="dropdown">
-            <div><i class="fa-solid fa-bell"></i> Notifications</div>
-            <div onclick="openChat()"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
+            <div onclick="showAuth()">My Profile</div>
+            <div>Orders</div>
         </div>
     </div>
     <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
@@ -50,47 +38,54 @@
     <div class="nav-cat"><i class="fa-solid fa-shirt"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress"></i>Women</div>
     <div class="nav-cat"><i class="fa-solid fa-user-ninja"></i>Sweatshirt</div>
-    <div class="nav-cat"><i class="fa-solid fa-child-reaching"></i>Kids</div>
     <div class="nav-cat"><i class="fa-solid fa-robot"></i>Toys</div>
-    <div class="nav-cat"><i class="fa-solid fa-clock"></i>Watch</div>
-    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles"></i>Cosmetic</div>
-    <div class="nav-cat"><i class="fa-solid fa-headphones"></i>Electronics</div>
 </div>
 
 <div class="product-grid" id="productGrid"></div>
 
+<div id="authOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:20px; width:250px; text-align:center;">
+        <h3>Login / Signup</h3>
+        <input type="email" id="email" placeholder="Email" style="width:90%; padding:8px;"><br><br>
+        <input type="password" id="pass" placeholder="Password" style="width:90%; padding:8px;"><br><br>
+        <button id="loginBtn" style="width:100%; padding:10px;">Login/Signup</button>
+    </div>
+</div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    initializeApp({ apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" });
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+    // Firebase & Razorpay Config
+    const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", projectId: "zippykart-production-157e1" };
+    const auth = getAuth(initializeApp(firebaseConfig));
+    const rzpKey = "rzp_test_YourActualKeyHere"; 
 
-    const products = [
-        { n: "Streetwear Tee", p: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
-        { n: "Cargo Pants", p: "₹1299", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
-        { n: "Floral Gown", p: "₹1499", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
-        { n: "Headphones", p: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
+    const store = [
+        {n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"},
+        {n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300"}
     ];
 
     const grid = document.getElementById('productGrid');
-    products.forEach(item => {
+    store.forEach(item => {
         grid.innerHTML += `
             <div class="product-card">
                 <img src="${item.img}">
                 <div class="p-name">${item.n}</div>
-                <div class="p-price">${item.p}</div>
-                <button class="add-btn">ADD TO CART</button>
-                <button class="buy-btn" onclick="payNow('${item.p}')">BUY NOW</button>
+                <div style="color:red;">₹${item.p}</div>
+                <button class="add-btn">Add to Cart</button>
+                <button class="buy-btn" onclick="pay('${item.p}')">Buy Now</button>
             </div>`;
     });
 
-    window.toggle = (id) => {
-        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
+    window.pay = (price) => {
+        new Razorpay({ "key": rzpKey, "amount": price * 100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open();
     };
-    window.payNow = (price) => {
-        new Razorpay({ "key": "rzp_test_YourRazorpayKey", "amount": price.replace('₹','')*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open();
+    window.showAuth = () => document.getElementById('authOverlay').style.display = 'flex';
+    document.getElementById('loginBtn').onclick = () => {
+        createUserWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('pass').value)
+        .then(() => alert("Logged In!")).catch(() => signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('pass').value));
     };
-    window.openChat = () => alert("AI Agent Ready");
-    window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
 </script>
 </body>
 </html>
