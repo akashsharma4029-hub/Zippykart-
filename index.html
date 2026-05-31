@@ -4,24 +4,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
-        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 20px; }
-        .logo-box { font-weight: 900; font-size: 22px; color: #333; display: flex; align-items: center; }
+        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
+        .logo-box { font-weight: 900; font-size: 20px; color: #333; display: flex; align-items: center; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 20px; background: white; border-bottom: 1px solid #eee; }
-        .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 60px; font-size: 11px; }
-        .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
+        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
+        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 11px; }
         .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
-        .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 15px; }
-        .product-card { background: #fff; padding: 8px; border: 1px solid #ddd; border-radius: 6px; text-align: center; display: flex; flex-direction: column; }
-        .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; }
-        .p-name { font-size: 11px; font-weight: bold; margin: 8px 0 4px; height: 25px; overflow: hidden; }
-        .p-price { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
-        .p-rating { color: green; font-size: 10px; margin-bottom: 8px; }
-        .add-btn { background: #000; color: #fff; border: none; padding: 6px; font-size: 10px; cursor: pointer; border-radius: 3px; margin-top: auto; }
-        .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; }
-        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 9999; }
-        .dropdown div { padding: 12px; cursor: pointer; border-bottom: 1px solid #eee; }
-        .dropdown div:hover { background: #f5f5f5; color: #ff3e6c; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
+        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; cursor: pointer; }
+        .product-card img { width: 100%; height: 150px; object-fit: cover; }
+        .p-name { font-size: 12px; font-weight: bold; margin: 5px 0; }
+        .p-price { font-size: 13px; font-weight: bold; color: #ff3e6c; }
+        .p-rating { color: #f39c12; font-size: 10px; }
+        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
+
+        .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; font-size: 14px; }
+        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; z-index: 9999; }
+        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .dropdown div:hover { background: #f5f5f5; }
         #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
         .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
     </style>
@@ -30,15 +31,19 @@
 
 <header>
     <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
-    <input type="text" class="search-bar" placeholder="Search modern shirts, premium toys...">
-    <div class="menu-wrapper" onclick="document.getElementById('loginDrop').style.display = (document.getElementById('loginDrop').style.display === 'block' ? 'none' : 'block'); document.getElementById('moreDrop').style.display='none';">LOGIN ▾
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
         <div id="loginDrop" class="dropdown">
             <div onclick="showAuth()"><i class="fa-regular fa-user"></i> My Profile</div>
+            <div><i class="fa-solid fa-box"></i> Orders</div>
+            <div><i class="fa-regular fa-heart"></i> Wishlist</div>
         </div>
     </div>
-    <div class="menu-wrapper" onclick="document.getElementById('moreDrop').style.display = (document.getElementById('moreDrop').style.display === 'block' ? 'none' : 'block'); document.getElementById('loginDrop').style.display='none';">MORE ▾
+    <div class="menu-wrapper" onclick="toggle('moreDrop')">MORE ▾
         <div id="moreDrop" class="dropdown">
             <div><i class="fa-solid fa-bell"></i> Notifications</div>
+            <div><i class="fa-solid fa-headset"></i> Customer Care</div>
+            <div><i class="fa-solid fa-chart-line"></i> Advertise</div>
         </div>
     </div>
     <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
@@ -68,28 +73,39 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     
+    // API Key included as per your requirement
     const firebaseConfig = {
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
         authDomain: "zippykart-production-157e1.firebaseapp.com",
         projectId: "zippykart-production-157e1"
     };
-    
-    const auth = getAuth(initializeApp(firebaseConfig));
+    initializeApp(firebaseConfig);
+
     const products = [
-        { name: "Premium Streetwear Shirt", price: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
-        { name: "Designer Floral Dress", price: "₹1299", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
-        { name: "Advanced RC Robot", price: "₹2499", img: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=300" },
-        { name: "Wireless Noise-Cancelling", price: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
+        { name: "Men's Streetwear", price: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
+        { name: "Floral Dress", price: "₹1299", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
+        { name: "RC Robot", price: "₹2499", img: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=300" },
+        { name: "Wireless Headphones", price: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
     ];
+
     const grid = document.getElementById('productGrid');
-    for(let i=0; i<15; i++) {
-        let p = products[i % products.length];
-        let stars = Math.floor(Math.random() * 2) + 3;
-        grid.innerHTML += `<div class="product-card"><img src="${p.img}"><div class="p-name">${p.name}</div><div class="p-rating">${'★'.repeat(stars)}</div><div class="p-price">${p.price}</div><button class="add-btn">ADD TO CART</button></div>`;
-    }
+    products.forEach(p => {
+        grid.innerHTML += `
+            <div class="product-card" onclick="alert('Viewing: ${p.name}')">
+                <img src="${p.img}">
+                <div class="p-name">${p.name}</div>
+                <div class="p-rating">★★★★☆</div>
+                <div class="p-price">${p.price}</div>
+                <button class="add-btn">ADD TO CART</button>
+            </div>
+        `;
+    });
+
+    window.toggle = (id) => {
+        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    };
     window.showAuth = () => { document.getElementById('authOverlay').style.display = 'flex'; };
-    document.getElementById('googleBtn').onclick = () => signInWithPopup(auth, new GoogleAuthProvider());
-    document.getElementById('emailLoginBtn').onclick = () => { const e = document.getElementById('emailInput').value, p = document.getElementById('passInput').value; signInWithEmailAndPassword(auth, e, p).catch(() => createUserWithEmailAndPassword(auth, e, p)).then(() => alert("Logged In!")); };
     window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
 </script>
 </body>
