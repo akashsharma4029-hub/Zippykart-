@@ -5,102 +5,68 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
-        /* Header Section */
-        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 20px; }
-        .logo-box { font-weight: 900; font-size: 22px; color: #333; display: flex; align-items: center; }
+        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
+        .logo-box { font-weight: 900; font-size: 20px; color: #333; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        
-        /* Nav Icons Section */
-        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 20px; background: white; border-bottom: 1px solid #eee; }
-        .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 60px; font-size: 11px; }
-        .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
-        .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
-        
-        /* Product Grid Section */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
-        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; display: flex; flex-direction: column; }
-        .product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; }
-        .p-name { font-size: 12px; font-weight: bold; margin: 8px 0 4px; height: 30px; overflow: hidden; }
-        .p-price { font-size: 14px; font-weight: bold; color: #ff3e6c; margin-bottom: 4px; }
-        .p-rating { color: #f39c12; font-size: 10px; margin-bottom: 8px; }
-        .add-btn { background: #000; color: #fff; border: none; padding: 8px; font-size: 11px; cursor: pointer; border-radius: 3px; margin-top: auto; }
-        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; font-size: 11px; cursor: pointer; border-radius: 3px; margin-top: 5px; }
-
-        /* Dropdowns & Modals */
-        .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; font-size: 14px; }
-        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; z-index: 9999; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; cursor: pointer; }
-        .dropdown div:hover { background: #f5f5f5; color: #ff3e6c; }
+        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
+        .product-card img { width: 100%; height: 150px; object-fit: cover; }
+        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
+        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
+        #chatBox { display: none; position: fixed; bottom: 20px; right: 20px; width: 250px; background: #fff; border: 1px solid #ddd; padding: 10px; z-index: 9999; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
-    <input type="text" class="search-bar" placeholder="Search modern shirts, premium toys...">
-    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
-        <div id="loginDrop" class="dropdown">
-            <div onclick="alert('Profile Details')"><i class="fa-regular fa-user"></i> My Profile</div>
-            <div><i class="fa-solid fa-box"></i> Orders</div>
-            <div><i class="fa-regular fa-heart"></i> Wishlist</div>
-        </div>
+    <div class="logo-box">ZippyKart</div>
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div onclick="document.getElementById('loginDrop').classList.toggle('show')">LOGIN ▾</div>
+    <div id="loginDrop" style="display:none; position:absolute; right:150px; top:60px; background:#fff; border:1px solid #ccc; padding:10px;">
+        <div onclick="showAuth()">My Profile</div>
     </div>
-    <div class="menu-wrapper" onclick="toggle('moreDrop')">MORE ▾
-        <div id="moreDrop" class="dropdown">
-            <div><i class="fa-solid fa-bell"></i> Notifications</div>
-            <div><i class="fa-solid fa-headset"></i> Customer Care</div>
-            <div><i class="fa-solid fa-chart-line"></i> Advertise</div>
-        </div>
-    </div>
-    <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
+    <button onclick="openChat()">AI Chat</button>
 </header>
 
-<div class="nav-icons">
-    <div class="nav-cat"><i class="fa-solid fa-shirt"></i>Men</div>
-    <div class="nav-cat"><i class="fa-solid fa-person-dress"></i>Women</div>
-    <div class="nav-cat"><i class="fa-solid fa-user-ninja"></i>Sweatshirt</div>
-    <div class="nav-cat"><i class="fa-solid fa-child-reaching"></i>Kids</div>
-    <div class="nav-cat"><i class="fa-solid fa-robot"></i>Toys</div>
-    <div class="nav-cat"><i class="fa-solid fa-clock"></i>Watch</div>
-    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles"></i>Cosmetic</div>
-    <div class="nav-cat"><i class="fa-solid fa-headphones"></i>Electronics</div>
-</div>
+<div id="productGrid" class="product-grid"></div>
 
-<div class="product-grid" id="productGrid"></div>
+<div id="chatBox">
+    <div style="background:#000; color:#fff; padding:5px;">AI Agent <button onclick="this.parentElement.parentElement.style.display='none'" style="float:right;">X</button></div>
+    <div id="chatArea" style="height:150px; overflow-y:auto; font-size:12px;">Hello! How can I help?</div>
+    <input type="text" id="msg"><button onclick="sendMsg()">Send</button>
+</div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" };
     initializeApp(firebaseConfig);
 
-    const categories = ["Men", "Women", "Sweatshirt", "Kids", "Toys", "Watch", "Cosmetic", "Electronics"];
+    const store = [
+        {cat: "Men", n: "Streetwear Tee", p: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"},
+        {cat: "Men", n: "Cargo Pants", p: "₹1299", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300"},
+        {cat: "Women", n: "Floral Gown", p: "₹1499", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300"},
+        {cat: "Electronics", n: "ANC Headphones", p: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300"}
+    ];
+
     const grid = document.getElementById('productGrid');
-    
-    categories.forEach(cat => {
-        for(let i=1; i<=4; i++) {
-            grid.innerHTML += `
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" onclick="alert('Full Product Details for ${cat} ${i}: \n- Quality: Premium \n- Material: 100% Cotton \n- Delivery: 3-5 Days')">
-                    <div class="p-name">${cat} Style ${i}</div>
-                    <div class="p-rating">★★★★☆</div>
-                    <div class="p-price">₹${Math.floor(Math.random()*2000)+500}</div>
-                    <button class="add-btn">ADD TO CART</button>
-                    <button class="buy-btn" onclick="payNow()">BUY NOW</button>
-                </div>
-            `;
-        }
+    store.forEach(item => {
+        grid.innerHTML += `
+            <div class="product-card">
+                <img src="${item.img}" onclick="alert('Details: ${item.n}, Material: Premium, Category: ${item.cat}')">
+                <div>${item.n}</div>
+                <div style="color:green;">★★★★☆</div>
+                <div style="font-weight:bold;">${item.p}</div>
+                <button class="add-btn">Add to Cart</button>
+                <button class="buy-btn" onclick="payNow('${item.p}')">Buy Now</button>
+            </div>`;
     });
 
-    window.payNow = () => {
-        var options = { "key": "rzp_test_YourRazorpayKey", "amount": "10000", "currency": "INR", "name": "ZippyKart", "description": "Payment", "handler": function (response){ alert("Payment Success!"); } };
+    window.payNow = (price) => {
+        var options = { "key": "rzp_test_YourRazorpayKey", "amount": price.replace('₹','')*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment ID: "+r.razorpay_payment_id); } };
         new Razorpay(options).open();
     };
-
-    window.toggle = (id) => {
-        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-    };
-    window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
+    window.openChat = () => document.getElementById('chatBox').style.display = 'block';
+    window.sendMsg = () => { document.getElementById('chatArea').innerHTML += "<br>You: " + document.getElementById('msg').value; };
 </script>
 </body>
 </html>
