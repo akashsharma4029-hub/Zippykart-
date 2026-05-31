@@ -7,10 +7,14 @@
         header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
         .logo-box { font-weight: 900; font-size: 20px; color: #333; display: flex; align-items: center; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
-        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 11px; }
-        .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
         
+        /* Icons with Animation */
+        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
+        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 11px; transition: 0.3s; }
+        .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
+        .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
+
+        /* 4-Column Grid */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
         .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; cursor: pointer; }
         .product-card img { width: 100%; height: 150px; object-fit: cover; }
@@ -52,7 +56,11 @@
 <div class="nav-icons">
     <div class="nav-cat"><i class="fa-solid fa-shirt"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress"></i>Women</div>
+    <div class="nav-cat"><i class="fa-solid fa-user-ninja"></i>Sweatshirt</div>
+    <div class="nav-cat"><i class="fa-solid fa-child-reaching"></i>Kids</div>
     <div class="nav-cat"><i class="fa-solid fa-robot"></i>Toys</div>
+    <div class="nav-cat"><i class="fa-solid fa-clock"></i>Watch</div>
+    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles"></i>Cosmetic</div>
     <div class="nav-cat"><i class="fa-solid fa-headphones"></i>Electronics</div>
 </div>
 
@@ -73,7 +81,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     
-    // API Key included as per your requirement
     const firebaseConfig = {
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
         authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -91,7 +98,7 @@
     const grid = document.getElementById('productGrid');
     products.forEach(p => {
         grid.innerHTML += `
-            <div class="product-card" onclick="alert('Viewing: ${p.name}')">
+            <div class="product-card" onclick="alert('Full details for ${p.name}')">
                 <img src="${p.img}">
                 <div class="p-name">${p.name}</div>
                 <div class="p-rating">★★★★☆</div>
