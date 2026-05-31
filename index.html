@@ -6,67 +6,91 @@
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
         header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
-        .logo-box { font-weight: 900; font-size: 20px; color: #333; }
+        .logo-box { font-weight: 900; font-size: 20px; color: #333; display: flex; align-items: center; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
+        .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 60px; font-size: 11px; }
+        .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
+        .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
+        
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
         .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
         .product-card img { width: 100%; height: 150px; object-fit: cover; }
-        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
+        .p-name { font-weight: bold; font-size: 12px; margin: 5px 0; }
+        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; cursor: pointer; }
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
-        #chatBox { display: none; position: fixed; bottom: 20px; right: 20px; width: 250px; background: #fff; border: 1px solid #ddd; padding: 10px; z-index: 9999; }
+        
+        .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; font-size: 14px; }
+        .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; z-index: 9999; }
+        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box">ZippyKart</div>
+    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
     <input type="text" class="search-bar" placeholder="Search...">
-    <div onclick="document.getElementById('loginDrop').classList.toggle('show')">LOGIN ▾</div>
-    <div id="loginDrop" style="display:none; position:absolute; right:150px; top:60px; background:#fff; border:1px solid #ccc; padding:10px;">
-        <div onclick="showAuth()">My Profile</div>
+    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
+        <div id="loginDrop" class="dropdown">
+            <div><i class="fa-regular fa-user"></i> My Profile</div>
+            <div><i class="fa-solid fa-box"></i> Orders</div>
+        </div>
     </div>
-    <button onclick="openChat()">AI Chat</button>
+    <div class="menu-wrapper" onclick="toggle('moreDrop')">MORE ▾
+        <div id="moreDrop" class="dropdown">
+            <div><i class="fa-solid fa-bell"></i> Notifications</div>
+            <div onclick="openChat()"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
+        </div>
+    </div>
+    <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
 </header>
 
-<div id="productGrid" class="product-grid"></div>
-
-<div id="chatBox">
-    <div style="background:#000; color:#fff; padding:5px;">AI Agent <button onclick="this.parentElement.parentElement.style.display='none'" style="float:right;">X</button></div>
-    <div id="chatArea" style="height:150px; overflow-y:auto; font-size:12px;">Hello! How can I help?</div>
-    <input type="text" id="msg"><button onclick="sendMsg()">Send</button>
+<div class="nav-icons">
+    <div class="nav-cat"><i class="fa-solid fa-shirt"></i>Men</div>
+    <div class="nav-cat"><i class="fa-solid fa-person-dress"></i>Women</div>
+    <div class="nav-cat"><i class="fa-solid fa-user-ninja"></i>Sweatshirt</div>
+    <div class="nav-cat"><i class="fa-solid fa-child-reaching"></i>Kids</div>
+    <div class="nav-cat"><i class="fa-solid fa-robot"></i>Toys</div>
+    <div class="nav-cat"><i class="fa-solid fa-clock"></i>Watch</div>
+    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles"></i>Cosmetic</div>
+    <div class="nav-cat"><i class="fa-solid fa-headphones"></i>Electronics</div>
 </div>
+
+<div class="product-grid" id="productGrid"></div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" };
-    initializeApp(firebaseConfig);
+    initializeApp({ apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" });
 
-    const store = [
-        {cat: "Men", n: "Streetwear Tee", p: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"},
-        {cat: "Men", n: "Cargo Pants", p: "₹1299", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300"},
-        {cat: "Women", n: "Floral Gown", p: "₹1499", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300"},
-        {cat: "Electronics", n: "ANC Headphones", p: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300"}
+    const products = [
+        { n: "Streetwear Tee", p: "₹899", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
+        { n: "Cargo Pants", p: "₹1299", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
+        { n: "Floral Gown", p: "₹1499", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
+        { n: "Headphones", p: "₹3499", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
     ];
 
     const grid = document.getElementById('productGrid');
-    store.forEach(item => {
+    products.forEach(item => {
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${item.img}" onclick="alert('Details: ${item.n}, Material: Premium, Category: ${item.cat}')">
-                <div>${item.n}</div>
-                <div style="color:green;">★★★★☆</div>
-                <div style="font-weight:bold;">${item.p}</div>
-                <button class="add-btn">Add to Cart</button>
-                <button class="buy-btn" onclick="payNow('${item.p}')">Buy Now</button>
+                <img src="${item.img}">
+                <div class="p-name">${item.n}</div>
+                <div class="p-price">${item.p}</div>
+                <button class="add-btn">ADD TO CART</button>
+                <button class="buy-btn" onclick="payNow('${item.p}')">BUY NOW</button>
             </div>`;
     });
 
-    window.payNow = (price) => {
-        var options = { "key": "rzp_test_YourRazorpayKey", "amount": price.replace('₹','')*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment ID: "+r.razorpay_payment_id); } };
-        new Razorpay(options).open();
+    window.toggle = (id) => {
+        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
     };
-    window.openChat = () => document.getElementById('chatBox').style.display = 'block';
-    window.sendMsg = () => { document.getElementById('chatArea').innerHTML += "<br>You: " + document.getElementById('msg').value; };
+    window.payNow = (price) => {
+        new Razorpay({ "key": "rzp_test_YourRazorpayKey", "amount": price.replace('₹','')*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open();
+    };
+    window.openChat = () => alert("AI Agent Ready");
+    window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
 </script>
 </body>
 </html>
