@@ -5,19 +5,14 @@
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
         header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 20px; }
-        .logo-box { display: flex; align-items: center; font-weight: 900; font-size: 20px; }
+        .logo-box { font-weight: 900; font-size: 22px; color: #333; }
         .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        .nav-icons { display: flex; justify-content: center; gap: 30px; padding: 20px; background: white; border-bottom: 1px solid #eee; }
+        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 20px; background: white; }
         .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; }
         .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 24px; margin-bottom: 5px; }
-        
-        /* Dropdowns */
-        .menu-wrapper { position: relative; cursor: pointer; }
-        .dropdown { display: none; position: absolute; top: 150%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        .dropdown div { padding: 12px; border-bottom: 1px solid #f0f0f0; transition: 0.2s; }
-        .dropdown div:hover { background: #fdf2f4; color: #ff3e6c; }
-
+        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 1000; }
+        .dropdown div { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; }
         #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
         .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
     </style>
@@ -25,58 +20,64 @@
 <body>
 
 <header>
-    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
-    <input type="text" class="search-bar" id="searchInp" placeholder="Search products...">
-    
-    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
+    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red;"></i> ZippyKart</div>
+    <input type="text" class="search-bar" placeholder="Search modern shirts, premium toys...">
+    <div style="cursor:pointer;" onclick="document.getElementById('loginDrop').style.display='block'">LOGIN ▾
         <div id="loginDrop" class="dropdown">
-            <div onclick="showAuth()"><i class="fa-regular fa-user"></i> My Profile</div>
-            <div><i class="fa-solid fa-box"></i> Orders</div>
-            <div><i class="fa-regular fa-heart"></i> Wishlist</div>
+            <div onclick="showAuth()">My Profile</div>
+            <div>Orders</div>
+            <div>Wishlist</div>
         </div>
     </div>
-    
-    <div class="menu-wrapper" onclick="toggle('moreDrop')">MORE ▾
+    <div style="cursor:pointer;" onclick="document.getElementById('moreDrop').style.display='block'">MORE ▾
         <div id="moreDrop" class="dropdown">
-            <div><i class="fa-solid fa-bell"></i> Notifications</div>
-            <div onclick="openChat()"><i class="fa-solid fa-headset"></i> Customer Care</div>
-            <div><i class="fa-solid fa-chart-line"></i> Advertise</div>
+            <div>Notification Settings</div>
+            <div>24x7 Customer Care</div>
+            <div>Advertise</div>
         </div>
     </div>
+    <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
 </header>
 
 <div class="nav-icons">
-    <div class="nav-cat"><i class="fa-solid fa-shirt"></i> Men</div>
-    <div class="nav-cat"><i class="fa-solid fa-person-dress"></i> Women</div>
-    <div class="nav-cat"><i class="fa-solid fa-robot"></i> Toys</div>
-    <div class="nav-cat" onclick="openChat()"><i class="fa-solid fa-headphones"></i> Electronics</div>
+    <div class="nav-cat"><i class="fa-solid fa-shirt"></i>Men</div>
+    <div class="nav-cat"><i class="fa-solid fa-person-dress"></i>Women</div>
+    <div class="nav-cat"><i class="fa-solid fa-user-ninja"></i>Sweatshirt</div>
+    <div class="nav-cat"><i class="fa-solid fa-child-reaching"></i>Kids</div>
+    <div class="nav-cat"><i class="fa-solid fa-robot"></i>Toys</div>
+    <div class="nav-cat"><i class="fa-solid fa-clock"></i>Watch</div>
+    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles"></i>Cosmetic</div>
+    <div class="nav-cat"><i class="fa-solid fa-headphones"></i>Electronics</div>
 </div>
 
 <div id="authOverlay">
     <div class="auth-box">
-        <h3>Login</h3>
+        <h3>Login / Sign Up</h3>
         <input type="email" id="emailInput" placeholder="Email" style="width:90%; padding:10px;">
         <input type="password" id="passInput" placeholder="Password" style="width:90%; padding:10px; margin:10px 0;">
         <button id="emailLoginBtn" style="width:100%; padding:10px; background:#000; color:#fff; border:none;">Login</button>
+        <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px;">Sign in with Google</button>
         <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; margin-top:10px;">Close</button>
     </div>
 </div>
 
 <script type="module">
-    // Logic for toggles and dropdowns
-    window.toggle = (id) => {
-        const el = document.getElementById(id);
-        document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
-        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const auth = getAuth(initializeApp({
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+        authDomain: "zippykart-production-157e1.firebaseapp.com",
+        projectId: "zippykart-production-157e1"
+    }));
+
+    window.showAuth = () => { document.getElementById('authOverlay').style.display = 'flex'; document.getElementById('loginDrop').style.display = 'none'; };
+    document.getElementById('googleBtn').onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).then(() => alert("Login Success!"));
+    document.getElementById('emailLoginBtn').onclick = () => {
+        const e = document.getElementById('emailInput').value, p = document.getElementById('passInput').value;
+        signInWithEmailAndPassword(auth, e, p).catch(() => createUserWithEmailAndPassword(auth, e, p)).then(() => alert("Logged In!"));
     };
-    
-    window.showAuth = () => document.getElementById('authOverlay').style.display = 'flex';
-    window.openChat = () => alert("AI Chat Opening...");
-    
-    // Outside click to close
-    window.onclick = (e) => {
-        if (!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-    };
+    window.onclick = (e) => { if(!e.target.matches('.dropdown, .menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
 </script>
 </body>
 </html>
