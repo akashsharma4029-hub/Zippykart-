@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: sans-serif; background: #f1f2f4; margin: 0; }
-        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
         .card { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #ddd; }
         .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
@@ -30,7 +30,7 @@
 <div id="authOverlay">
     <div class="auth-box">
         <h3>Login / Sign Up</h3>
-        <input type="tel" id="phoneInput" placeholder="Mobile Number (+91...)" style="width:90%; padding:10px; margin:10px 0;">
+        <input type="tel" id="phoneInput" placeholder="9315224775" style="width:90%; padding:10px; margin:10px 0; border:1px solid #ccc;">
         <button id="sendOtpBtn" style="width:100%; padding:10px; background:#f0f0f0; border:1px solid #ccc; cursor:pointer;">Send OTP</button>
         <button id="googleBtn" style="width:100%; padding:10px; background:#4285F4; color:#fff; border:none; margin-top:10px; cursor:pointer;">Sign in with Google</button>
         <button onclick="document.getElementById('authOverlay').style.display='none'" style="width:100%; padding:10px; background:#ccc; border:none; margin-top:10px; cursor:pointer;">Close</button>
@@ -41,43 +41,24 @@
 <div class="grid" id="productGrid"></div>
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // Static Products takki page blank na rahe
+    const products = [
+        { title: "Men's Oversized Streetwear Overshirt", price: 899, img: "https://images.unsplash.com/photo-1602810318386-749160533385?w=500" },
+        { title: "Men's Baggy Multi-Pocket Cargo", price: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500" }
+    ];
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBr0cS6jfEOyyl8S2uvhaTgBVb6o8q_Xw4",
-        authDomain: "zippykartproduction.firebaseapp.com",
-        projectId: "zippykartproduction",
-        storageBucket: "zippykartproduction.firebaseapp.com",
-        messagingSenderId: "337115975126",
-        appId: "1:337115975126:web:36bee625cda4094a69622d"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth(app);
-
-    document.getElementById('googleBtn').onclick = () => {
-        signInWithPopup(auth, new GoogleAuthProvider())
-            .then(() => alert("Login Successful!"))
-            .catch((err) => alert(err.message));
-    };
-
-    onValue(ref(db, 'products'), (snapshot) => {
-        const data = snapshot.val();
+    function renderProducts() {
         const grid = document.getElementById('productGrid');
-        grid.innerHTML = "";
-        for(let id in data) {
-            let p = data[id];
-            grid.innerHTML += `<div class="card">
-                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
+        grid.innerHTML = products.map(p => `
+            <div class="card">
+                <img src="${p.img}">
                 <p><b>${p.title}</b></p>
                 <p>₹${p.price}</p>
                 <button class="buy-btn" onclick="triggerRazorpay(${p.price})">ADD TO CART</button>
-            </div>`;
-        }
-    });
+            </div>
+        `).join('');
+    }
+    renderProducts();
 
     window.triggerRazorpay = (price) => {
         new Razorpay({ "key": "rzp_live_SuidRs4KmU9W6w", "amount": price * 100, "currency": "INR", "name": "Zippykart", "handler": function(res){ alert("Payment Success!"); } }).open();
