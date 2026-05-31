@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zippykart.co.in | Store</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,15 +14,17 @@
         .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
         .buy-btn { width: 100%; padding: 10px; background: #111; color: #fff; border: none; margin-top: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
         #adminPanel { display: none; padding: 40px; background: #fff; min-height: 100vh; }
+        #chatBox { position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; background: #fff; border: 1px solid #000; display: none; flex-direction: column; z-index: 2000; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
-    <div>
-        <span onclick="alert('Login Required')"><i class="fa-solid fa-user"></i> Login</span>
-        <button onclick="openCart()" style="margin-left:15px; padding:8px 12px;">Cart (<span id="cartCount">0</span>)</button>
+    <div class="brand" style="font-weight:900; font-size:20px;">Zippy<span style="color:red;">Kart</span></div>
+    <div class="menu-items">
+        <span onclick="alert('Login System')"><i class="fa-solid fa-user"></i> Login</span>
+        <span onclick="toggleChat()" style="margin-left:15px; cursor:pointer;">More <i class="fa-solid fa-chevron-down"></i></span>
+        <button onclick="alert('Cart Opened')" style="margin-left:15px;"><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cartCount">0</span>)</button>
     </div>
 </header>
 
@@ -33,11 +35,18 @@
 
 <div id="adminPanel">
     <h1>Admin Terminal</h1>
-    <input type="text" id="admId" placeholder="Product ID"><br>
+    <input type="text" id="admId" placeholder="ID"><br>
     <input type="text" id="admTitle" placeholder="Title"><br>
     <input type="number" id="admPrice" placeholder="Price"><br>
     <input type="text" id="admImg" placeholder="Image URL"><br>
-    <button onclick="saveProduct()">Upload to Cloud</button>
+    <button onclick="saveProduct()">Upload Product</button>
+    <div id="adminTable"></div>
+</div>
+
+<div id="chatBox">
+    <div style="background:#000; color:#fff; padding:10px;">Support AI</div>
+    <div id="chatLogs" style="flex-grow:1; padding:10px;"></div>
+    <input type="text" id="chatInput" style="width:100%; padding:10px;" placeholder="Message...">
 </div>
 
 <script type="module">
@@ -76,7 +85,8 @@
         set(ref(db, 'products/' + id), { title: document.getElementById('admTitle').value, price: document.getElementById('admPrice').value, img: document.getElementById('admImg').value });
         alert("Product Uploaded Successfully!");
     };
-
+    
+    window.toggleChat = () => { document.getElementById('chatBox').style.display = 'flex'; };
     window.triggerRazorpay = (price) => {
         var options = { "key": "rzp_live_SuidRs4KmU9W6w", "amount": price * 100, "currency": "INR", "name": "ZippyKart", "description": "Checkout", "handler": function(res){ alert("Payment Success!"); } };
         new Razorpay(options).open();
