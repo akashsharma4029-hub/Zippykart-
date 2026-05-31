@@ -11,14 +11,20 @@
         .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 60px; font-size: 11px; }
         .nav-cat:hover { transform: scale(1.2); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 15px; }
+        .product-card { background: #fff; padding: 8px; border: 1px solid #ddd; border-radius: 6px; text-align: center; display: flex; flex-direction: column; }
+        .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; }
+        .p-name { font-size: 11px; font-weight: bold; margin: 8px 0 4px; height: 25px; overflow: hidden; }
+        .p-price { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+        .p-rating { color: green; font-size: 10px; margin-bottom: 8px; }
+        .add-btn { background: #000; color: #fff; border: none; padding: 6px; font-size: 10px; cursor: pointer; border-radius: 3px; margin-top: auto; }
+
         .menu-wrapper { position: relative; cursor: pointer; font-weight: bold; }
         .dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border: 1px solid #ddd; width: 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 9999; }
         .dropdown div { padding: 12px; cursor: pointer; border-bottom: 1px solid #eee; }
         .dropdown div:hover { background: #f5f5f5; color: #ff3e6c; }
-        .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 10px; }
-        .product-card { background:#fff; padding:5px; border:1px solid #eee; text-align:center; border-radius:4px; }
-        .product-card img { width: 100%; height: 80px; object-fit: cover; }
-        .product-card p { margin: 3px 0; font-size: 9px; }
+        
         #authOverlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
         .auth-box { background: #fff; padding: 25px; border-radius: 10px; width: 280px; text-align: center; }
         #chatBox { display: none; position: fixed; bottom: 20px; right: 20px; width: 250px; background: #fff; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 9999; padding: 10px; }
@@ -29,6 +35,7 @@
 <header>
     <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
     <input type="text" class="search-bar" placeholder="Search modern shirts, premium toys...">
+    
     <div class="menu-wrapper" onclick="document.getElementById('loginDrop').style.display = (document.getElementById('loginDrop').style.display === 'block' ? 'none' : 'block'); document.getElementById('moreDrop').style.display='none';">LOGIN ▾
         <div id="loginDrop" class="dropdown">
             <div onclick="showAuth()"><i class="fa-regular fa-user"></i> My Profile</div>
@@ -36,6 +43,7 @@
             <div><i class="fa-regular fa-heart"></i> Wishlist</div>
         </div>
     </div>
+    
     <div class="menu-wrapper" onclick="document.getElementById('moreDrop').style.display = (document.getElementById('moreDrop').style.display === 'block' ? 'none' : 'block'); document.getElementById('loginDrop').style.display='none';">MORE ▾
         <div id="moreDrop" class="dropdown">
             <div><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -58,12 +66,14 @@
 </div>
 
 <div class="product-grid">
-    <div class="product-card"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"><p>Shirt</p><button style="width:100%; font-size:8px;">Add</button></div>
-    <div class="product-card"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"><p>Shirt</p><button style="width:100%; font-size:8px;">Add</button></div>
-    <div class="product-card"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"><p>Shirt</p><button style="width:100%; font-size:8px;">Add</button></div>
-    <div class="product-card"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"><p>Shirt</p><button style="width:100%; font-size:8px;">Add</button></div>
-    <div class="product-card"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300"><p>Shirt</p><button style="width:100%; font-size:8px;">Add</button></div>
-</div>
+    <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300">
+        <div class="p-name">Men's Oversized Streetwear Overshirt</div>
+        <div class="p-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="p-price">₹899</div>
+        <button class="add-btn">ADD TO CART</button>
+    </div>
+    </div>
 
 <div id="chatBox">
     <div style="background:#000; color:#fff; padding:5px;">AI Support <button onclick="document.getElementById('chatBox').style.display='none'" style="float:right;">X</button></div>
@@ -85,9 +95,17 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    const auth = getAuth(initializeApp({apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1"}));
-    window.showAuth = () => { document.getElementById('authOverlay').style.display = 'flex'; };
-    window.openChat = () => { document.getElementById('chatBox').style.display = 'block'; };
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+        authDomain: "zippykart-production-157e1.firebaseapp.com",
+        projectId: "zippykart-production-157e1"
+    };
+    
+    const auth = getAuth(initializeApp(firebaseConfig));
+    
+    window.showAuth = () => { document.getElementById('authOverlay').style.display = 'flex'; document.getElementById('loginDrop').style.display = 'none'; };
+    window.openChat = () => { document.getElementById('chatBox').style.display = 'block'; document.getElementById('moreDrop').style.display = 'none'; };
     window.sendMsg = () => { document.getElementById('chatArea').innerHTML += "<br>You: " + document.getElementById('msg').value; document.getElementById('msg').value = ''; };
     document.getElementById('googleBtn').onclick = () => signInWithPopup(auth, new GoogleAuthProvider());
     document.getElementById('emailLoginBtn').onclick = () => { const e = document.getElementById('emailInput').value, p = document.getElementById('passInput').value; signInWithEmailAndPassword(auth, e, p).catch(() => createUserWithEmailAndPassword(auth, e, p)).then(() => alert("Logged In!")); };
