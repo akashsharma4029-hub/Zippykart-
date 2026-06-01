@@ -9,7 +9,7 @@
         /* Header Setup */
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; }
         .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; }
-        .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; }
         .menu-wrapper { position: relative; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 150px; z-index: 9999; top: 30px; left: -20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .dropdown div { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: normal; }
@@ -23,15 +23,30 @@
         
         /* Product Grid Setup */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; }
-        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
+        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; transition: box-shadow 0.3s; }
+        .product-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .product-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; border-radius: 4px; }
-        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; }
-        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; }
+        .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         
-        /* Modal Setup */
-        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        /* Common Modal Setup */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #aaa; transition: 0.3s; }
+        .close-btn:hover { color: #000; }
+
+        /* Product Modal */
         .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 20px; cursor: pointer; }
+        
+        /* Login/Auth Modal */
+        .auth-content { background: #fff; margin: 8% auto; width: 350px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .auth-header { background: #ff3e6c; color: white; padding: 25px 20px; text-align: center; }
+        .auth-header h2 { margin: 0; font-size: 22px; }
+        .auth-body { padding: 25px 20px; }
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px; }
+        .auth-submit-btn:hover { background: #333; }
+        .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
+        .auth-switch span { color: #ff3e6c; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -41,7 +56,10 @@
     <input type="text" class="search-bar" placeholder="Search for products, brands and more...">
     
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">LOGIN ▾
-        <div id="loginDrop" class="dropdown"><div onclick="window.location.href='profile.html'">My Profile</div><div>Orders</div></div>
+        <div id="loginDrop" class="dropdown">
+            <div onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
+            <div><i class="fa-solid fa-box"></i> Orders</div>
+        </div>
     </div>
     
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
@@ -51,6 +69,7 @@
     <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
+<!-- Navigation Icons -->
 <div class="nav-icons">
     <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
@@ -64,6 +83,7 @@
 
 <div class="product-grid" id="productGrid"></div>
 
+<!-- Product Detail Modal -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -76,6 +96,23 @@
     </div>
 </div>
 
+<!-- Authentication (Login/Signup) Modal -->
+<div id="authModal" class="modal">
+    <div class="auth-content">
+        <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
+        <div class="auth-header">
+            <h2 id="authTitle">Login to ZippyKart</h2>
+        </div>
+        <div class="auth-body">
+            <input type="email" id="authEmail" class="auth-input" placeholder="Email Address">
+            <input type="password" id="authPassword" class="auth-input" placeholder="Password">
+            <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
+            <div class="auth-switch" onclick="toggleAuthMode()">Don't have an account? <span id="authSwitchText">Sign Up</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
@@ -84,6 +121,7 @@
 </div>
 
 <script>
+    // --- Product Logic ---
     let cart = 0;
     const products = [
         { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
@@ -117,20 +155,53 @@
         alert("Product added to cart successfully!");
     }
 
+    window.payNow = (p) => { alert("Razorpay API Key setup needed to proceed with ₹" + p); };
+
+    // --- Dropdown Logic ---
     function toggleDrop(id) {
         document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
         const drop = document.getElementById(id);
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    window.payNow = (p) => { alert("Razorpay API Key setup needed to proceed with ₹" + p); };
+    // --- Authentication Logic ---
+    let isLoginMode = true;
+    
+    function openAuthModal() {
+        document.getElementById('authModal').style.display = 'block';
+        document.getElementById('loginDrop').style.display = 'none'; // Close dropdown
+    }
 
+    function toggleAuthMode() {
+        isLoginMode = !isLoginMode;
+        document.getElementById('authTitle').innerText = isLoginMode ? "Login to ZippyKart" : "Create an Account";
+        document.getElementById('authSubmit').innerText = isLoginMode ? "Login" : "Sign Up";
+        document.querySelector('.auth-switch').innerHTML = isLoginMode ? "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
+    }
+
+    function processAuth() {
+        let email = document.getElementById('authEmail').value;
+        let pass = document.getElementById('authPassword').value;
+        if(email === "" || pass === "") {
+            alert("Please enter both Email and Password!");
+            return;
+        }
+        alert((isLoginMode ? "Logging in: " : "Registering: ") + email + "\n\n(Backend API will be connected here)");
+        document.getElementById('authModal').style.display = 'none';
+        document.getElementById('authEmail').value = '';
+        document.getElementById('authPassword').value = '';
+    }
+
+    // --- Global Click Listener ---
     window.onclick = (e) => { 
         if(!e.target.closest('.menu-wrapper')) {
             document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         }
         if(e.target == document.getElementById('productModal')) {
             document.getElementById('productModal').style.display = 'none';
+        }
+        if(e.target == document.getElementById('authModal')) {
+            document.getElementById('authModal').style.display = 'none';
         }
     };
 </script>
