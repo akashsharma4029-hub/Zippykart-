@@ -39,7 +39,7 @@
         .slide-btn.next { right: 15px; }
         
         /* Product Grid Setup */
-        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%; min-height: 400px; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%; min-height: 400px; scroll-margin-top: 80px; }
         .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; transition: box-shadow 0.3s; }
         .product-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .product-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; border-radius: 4px; }
@@ -143,107 +143,39 @@
         .tab-content label { font-size: 12px; font-weight: bold; color: #777; margin-bottom: 6px; display: block; text-align: left; }
         .order-card { border: 1px solid #eee; background: #fff; padding: 15px; border-radius: 6px; margin-bottom: 15px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 
-        /* --- RESTORED: Professional Animated Footer Styles --- */
-        .main-footer { 
-            background-color: #1a1a1a; 
-            color: #fff; 
-            padding: 60px 5% 20px; 
-            margin-top: 40px; 
-            overflow: hidden; 
-        }
-        .footer-content { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 30px; 
-            margin-bottom: 40px; 
-        }
-        .footer-col { 
-            opacity: 0; 
-            transform: translateY(40px); 
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-        .footer-col.show-anim { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-        .footer-col h3 { 
-            font-size: 16px; 
-            margin-bottom: 20px; 
-            color: #ff3e6c; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-        }
-        .footer-col p { 
-            font-size: 13px; 
-            color: #bbb; 
-            line-height: 1.6; 
-            margin-bottom: 10px; 
-        }
-        .footer-col a { 
-            display: inline-block; 
-            width: fit-content; 
-            color: #bbb; 
-            text-decoration: none; 
-            font-size: 13px; 
-            margin-bottom: 12px; 
-            transition: 0.3s; 
-            position: relative; 
-            padding-bottom: 3px; 
-        }
-        .footer-col a::after { 
-            content: ''; 
-            position: absolute; 
-            width: 0; 
-            height: 2px; 
-            bottom: 0; 
-            left: 0; 
-            background-color: #ff3e6c; 
-            transition: width 0.3s ease; 
-        }
-        .footer-col a:hover { 
-            color: #ff3e6c; 
-            transform: translateX(5px); 
-        }
-        .footer-col a:hover::after { 
-            width: 100%; 
-        }
-        .social-icons { 
-            display: flex; 
-            gap: 15px; 
-            margin-top: 15px; 
-        }
-        .social-icons a { 
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 16px; 
-            width: 35px; 
-            height: 35px; 
-            background: #333; 
-            color: #fff; 
-            border-radius: 50%; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            padding: 0; 
-            margin: 0; 
-        }
-        .social-icons a::after { 
-            display: none; 
-        }
-        .social-icons a:hover { 
-            background: #ff3e6c; 
-            transform: translateY(-6px) scale(1.15); 
-            color: #fff; 
-            box-shadow: 0 5px 15px rgba(255, 62, 108, 0.5); 
-        }
-        .footer-bottom { 
-            text-align: center; 
-            padding-top: 20px; 
-            border-top: 1px solid #333; 
-            font-size: 12px; 
-            color: #888; 
-        }
+        /* Professional Animated Footer */
+        .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
+        .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .footer-col.show-anim { opacity: 1; transform: translateY(0); }
+        .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
+        .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; position: relative; padding-bottom: 3px; }
+        .footer-col a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #ff3e6c; transition: width 0.3s ease; }
+        .footer-col a:hover { color: #ff3e6c; transform: translateX(5px); }
+        .footer-col a:hover::after { width: 100%; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); padding: 0; margin: 0; }
+        .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px) scale(1.15); color: #fff; box-shadow: 0 5px 15px rgba(255, 62, 108, 0.5); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
         
         .empty-grid-msg { grid-column: span 4; text-align: center; padding: 50px; font-size: 16px; color: #777; font-weight: bold; }
+
+        /* --- NEW: Mobile App Bottom Navigation --- */
+        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
+        .bottom-nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; flex: 1; transition: 0.3s; position: relative; }
+        .bottom-nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }
+        .bottom-nav-item:hover, .bottom-nav-item.active { color: #ff3e6c; }
+        .nav-item-wrapper { position: relative; display: inline-block; width: 100%; }
+        .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: calc(50% - 20px); font-weight: bold; border: 2px solid #fff; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { padding-bottom: 60px; } /* Create space so content isn't hidden by bottom nav */
+            .bottom-nav { display: flex; }
+            #chatBox { bottom: 80px !important; right: 15px !important; } /* Move chatbox above the bottom nav */
+            .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px; } /* Make grid 2-column on mobile */
+        }
     </style>
 </head>
 <body>
@@ -254,12 +186,10 @@
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
-            <!-- Restored Dashboard Link -->
             <div onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Dashboard</div>
             <div id="logoutOpt" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
-    <!-- Restored Chat Dropdown -->
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
         <div id="moreDrop" class="dropdown">
             <div onclick="document.getElementById('chatBox').style.display='block'"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
@@ -285,14 +215,14 @@
             <div class="slide-content">
                 <h2>Mega <span>Summer</span> Sale</h2>
                 <p>Upto 50% Off on top fashion brands. Upgrade your wardrobe with the latest streetwear styles.</p>
-                <button onclick="filterCategory('Men'); window.scrollBy(0, 500);">Shop Men's Fashion</button>
+                <button onclick="filterCategory('Men'); document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'});">Shop Men's Fashion</button>
             </div>
         </div>
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200');">
             <div class="slide-content">
                 <h2>New <span>Tech</span> Arrivals</h2>
                 <p>Discover the latest gadgets and electronics. From smart watches to premium headphones.</p>
-                <button onclick="filterCategory('Electronics'); window.scrollBy(0, 500);">Explore Electronics</button>
+                <button onclick="filterCategory('Electronics'); document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'});">Explore Electronics</button>
             </div>
         </div>
     </div>
@@ -300,7 +230,6 @@
     <button class="slide-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
-<!-- Restored all 8 products in the UI via JS, container here -->
 <div class="product-grid" id="productGrid"></div>
 
 <!-- Flipkart/Myntra Style Product Modal -->
@@ -367,18 +296,16 @@
     </div>
 </div>
 
-<!-- Restored Full Registration Modal -->
+<!-- Full Registration Modal -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
         <div class="auth-header"><h2 id="authTitle">Login to ZippyKart</h2></div>
         <div class="auth-body">
-            <!-- Login -->
             <div id="loginFields">
                 <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
                 <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
             </div>
-            <!-- Restored Registration fields -->
             <div id="regFields" style="display: none;">
                 <div class="input-group">
                     <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
@@ -394,13 +321,12 @@
             <div class="auth-divider"><span>OR</span></div>
             <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color: #DB4437; margin-right: 8px;"></i> Continue with Google</button>
             
-            <!-- Restored Toggle Switch -->
             <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <span id="authSwitchAction">Sign Up</span></div>
         </div>
     </div>
 </div>
 
-<!-- Restored Dashboard Modal -->
+<!-- Dashboard Modal -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="color:white; top:15px;">&times;</span>
@@ -434,6 +360,7 @@
     </div>
 </div>
 
+<!-- Sidebar Cart -->
 <div id="cartSidebar" class="cart-sidebar">
     <div class="cart-title-box">
         <h3 style="margin:0;"><i class="fa-solid fa-cart-shopping" style="color:#ff3e6c;"></i> Shopping Cart</h3>
@@ -449,7 +376,7 @@
     </div>
 </div>
 
-<!-- --- RESTORED: Professional Animated Footer --- -->
+<!-- Professional Animated Footer -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -487,12 +414,31 @@
     </div>
 </footer>
 
-<!-- Restored AI Chat Box -->
+<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
     <hr style="border-top: 1px solid #eee;">
     <p style="font-size: 12px;">Hello Akash! How can I help you with ZippyKart today?</p>
+</div>
+
+<!-- --- NEW: Mobile App Bottom Navigation --- -->
+<div class="bottom-nav">
+    <div class="bottom-nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); setActiveNav(this)">
+        <div class="nav-item-wrapper"><i class="fa-solid fa-house"></i> Home</div>
+    </div>
+    <div class="bottom-nav-item" onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'}); setActiveNav(this)">
+        <div class="nav-item-wrapper"><i class="fa-solid fa-border-all"></i> Shop</div>
+    </div>
+    <div class="bottom-nav-item" onclick="toggleCart(true)">
+        <div class="nav-item-wrapper">
+            <i class="fa-solid fa-cart-shopping"></i> Cart
+            <span class="cart-badge-mobile" id="mobileCartCount">0</span>
+        </div>
+    </div>
+    <div class="bottom-nav-item" onclick="openDashboard()">
+        <div class="nav-item-wrapper"><i class="fa-solid fa-user"></i> Profile</div>
+    </div>
 </div>
 
 <script type="module">
@@ -513,17 +459,21 @@
     const provider = new GoogleAuthProvider();
     window.currentUser = null;
 
-    // --- RESTORED: Footer Scroll Animation Observer ---
+    // Mobile Nav Active State logic
+    window.setActiveNav = function(elem) {
+        document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+        elem.classList.add('active');
+    }
+
+    // Footer Scroll Animation Observer
     const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Thoda delay taaki ek-ek karke aaye
                 setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150);
             }
         });
     });
     
-    // Observer ko apply karna (Page load hone ke baad chale)
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col));
     });
@@ -552,7 +502,7 @@
         }
     });
 
-    // Restored 8 Products Array
+    // 8 Products Array
     window.cartList = [];
     const products = [
         { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", imgs: ["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800", "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800"], cat: "Men" },
@@ -628,6 +578,7 @@
     
     function updateCartUI() {
         document.getElementById('cartCount').innerText = window.cartList.length;
+        document.getElementById('mobileCartCount').innerText = window.cartList.length; // Added for Mobile Nav Badge
         const container = document.getElementById('cartItemsContainer'); container.innerHTML = ''; let total = 0;
         window.cartList.forEach((item, idx) => { total += item.p;
             container.innerHTML += `<div class="cart-item"><img src="${item.img}"><div class="cart-item-details"><div class="cart-item-title">${item.n}</div><div class="cart-item-price">₹${item.p}</div></div><button class="remove-item-btn" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`;
@@ -642,7 +593,6 @@
     window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
     window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
     
-    // Restored Auth Toggle Form Logic
     window.isLoginMode = true;
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
@@ -654,7 +604,6 @@
         document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
     }
 
-    // Restored Auth Processing 
     window.processAuth = function() {
         if(window.isLoginMode) {
             let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value;
