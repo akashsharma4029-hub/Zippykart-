@@ -57,7 +57,6 @@
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
         
-        /* RESTORED: Advanced Flipkart Modal */
         .large-modal { background: #fff; margin: 5% auto; padding: 20px; width: 950px; max-width: 95%; border-radius: 12px; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; gap: 20px; align-items: flex-start; box-sizing: border-box; }
         .modal-left { flex: 0.8; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 20px; }
         .modal-main-img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
@@ -90,7 +89,6 @@
         .modal-action-row { display: flex; gap: 10px; margin-top: 10px; position: sticky; bottom: 0; background: #fff; padding-top: 10px; border-top: 1px solid #eee; }
         .modal-action-row button { flex: 1; margin: 0; padding: 12px; font-size: 14px; }
 
-        /* Auth & Dash Modals */
         .auth-content, .dashboard-content { background: #fff; margin: 10% auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
         .auth-header, .dashboard-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; }
         .auth-body, .dashboard-body { padding: 20px; }
@@ -101,9 +99,8 @@
         .input-group { display: flex; gap: 10px; }
         .tab-btn { background: transparent; border: none; color: rgba(255,255,255,0.7); padding: 10px; font-weight: bold; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; }
         .tab-btn.active { color: white; border-bottom: 3px solid white; }
-        .order-card { border: 1px solid #eee; padding: 10px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
+        .order-card { border: 1px solid #eee; padding: 15px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; background:#fdfdfd;}
 
-        /* RESTORED: Full 4-Column Animated Footer */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -116,18 +113,15 @@
         .footer-col a:hover::after { width: 100%; }
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: 0.3s; text-decoration: none;}
-        .social-icons a::after { display: none; }
         .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px); }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
-        /* Mobile App Bottom Navigation */
         .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
         .bottom-nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; flex: 1; position: relative; }
         .bottom-nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }
         .bottom-nav-item.active { color: #ff3e6c; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: calc(50% - 20px); border: 2px solid #fff; font-weight: bold; }
 
-        /* Responsive Mobile View */
         @media (max-width: 768px) {
             body { padding-bottom: 65px; }
             .bottom-nav { display: flex; }
@@ -198,10 +192,8 @@
     <button class="slide-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
-<!-- Container for Products -->
 <div class="product-grid" id="productGrid"></div>
 
-<!-- RESTORED: Full Product Modal (Trust Badges + Specs included) -->
 <div id="productModal" class="modal">
     <div class="large-modal">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -242,15 +234,11 @@
                 <div class="del-row"><i class="fa-solid fa-location-dot"></i> Delivery to: <strong>Rajendra Place, New Delhi</strong></div>
                 <div class="del-row" style="margin-top:8px;"><i class="fa-solid fa-truck-fast"></i> Delivery by <strong>Tomorrow, 10 PM</strong></div>
             </div>
-            
-            <!-- RESTORED: Trust Badges -->
             <div class="trust-badges">
                 <div class="badge"><i class="fa-solid fa-cube"></i>100% Genuine<br>Product</div>
                 <div class="badge"><i class="fa-solid fa-arrow-rotate-left"></i>10 Days<br>Return Policy</div>
                 <div class="badge"><i class="fa-solid fa-money-bill-transfer"></i>Cash on<br>Delivery</div>
             </div>
-            
-            <!-- RESTORED: Product Specs -->
             <div class="spec-title">Product Details</div>
             <div class="spec-grid">
                 <div><span class="spec-key">Material</span><span class="spec-value">Premium Blend</span></div>
@@ -258,7 +246,6 @@
                 <div><span class="spec-key">Fit Type</span><span class="spec-value">Regular Fit</span></div>
                 <div><span class="spec-key">Wash Care</span><span class="spec-value">Machine Wash</span></div>
             </div>
-
             <div class="modal-action-row">
                 <button class="add-btn" id="modalAddBtn"><i class="fa-solid fa-cart-plus"></i> Add</button>
                 <button class="buy-btn" id="modalBuyNowBtn"><i class="fa-solid fa-bolt"></i> Buy Now</button>
@@ -267,7 +254,6 @@
     </div>
 </div>
 
-<!-- RESTORED: Full Auth Modal (with Last Name & Confirm Password) -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</span>
@@ -294,7 +280,6 @@
     </div>
 </div>
 
-<!-- Dashboard Modal -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</span>
@@ -302,7 +287,7 @@
             <h2>My Account</h2>
             <div class="tab-container">
                 <button class="tab-btn active" onclick="switchTab('profileTab', event)">Profile</button>
-                <button class="tab-btn" onclick="switchTab('ordersTab', event)">Orders</button>
+                <button class="tab-btn" onclick="switchTab('ordersTab', event)">My Orders</button>
             </div>
         </div>
         <div class="dashboard-body">
@@ -310,20 +295,16 @@
                 <label>Full Name</label>
                 <input type="text" id="dashName" class="auth-input" readonly style="background:#f5f5f5;">
                 <label>Delivery Address</label>
-                <textarea id="dashAddress" class="auth-input" placeholder="Enter your address..." rows="3"></textarea>
-                <button class="auth-submit-btn" onclick="alert('Address saved!')">Save</button>
+                <textarea id="dashAddress" class="auth-input" placeholder="Enter your full address here..." rows="3"></textarea>
+                <button class="auth-submit-btn" onclick="saveAddress()">Save Cloud Address</button>
             </div>
-            <div id="ordersTab" class="tab-content" style="display:none;">
-                <div class="order-card">
-                    <div style="display:flex; justify-content:space-between;"><strong>Order #9823</strong><span style="color:green;">Delivered</span></div>
-                    <p style="margin:5px 0 0 0;">Total: ₹899</p>
-                </div>
+            <div id="ordersTab" class="tab-content" style="display:none; max-height: 250px; overflow-y: auto;">
+                <!-- Live Orders will populate here from Database -->
             </div>
         </div>
     </div>
 </div>
 
-<!-- Cart Sidebar -->
 <div id="cartSidebar" class="cart-sidebar">
     <div class="cart-title-box">
         <h3 style="margin:0;"><i class="fa-solid fa-cart-shopping" style="color:#ff3e6c;"></i> Shopping Cart</h3>
@@ -332,11 +313,10 @@
     <div class="cart-items-wrapper" id="cartItemsContainer"></div>
     <div class="cart-footer">
         <div class="total-box"><span>Total Amount:</span><span id="cartTotalDisplay">₹0</span></div>
-        <button class="buy-btn" style="padding:12px; margin:0;" onclick="checkoutCart()">Checkout</button>
+        <button class="buy-btn" style="padding:12px; margin:0;" onclick="checkoutCart()">Secure Checkout</button>
     </div>
 </div>
 
-<!-- RESTORED: Full 4-Column Footer -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -368,7 +348,6 @@
     <div class="footer-bottom">&copy; 2026 ZippyKart. All Rights Reserved.</div>
 </footer>
 
-<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
@@ -376,7 +355,6 @@
     <p style="font-size: 12px;">Hello Akash! How can I help you today?</p>
 </div>
 
-<!-- APP BOTTOM NAV FOR MOBILE -->
 <div class="bottom-nav">
     <div class="bottom-nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); setActiveNav(this)">
         <i class="fa-solid fa-house"></i> Home
@@ -394,9 +372,12 @@
 </div>
 
 <script type="module">
+    // --- 1. FIREBASE IMPORTS (INCLUDING DATABASE) ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+    // --- 2. FIREBASE CONFIG ---
     const firebaseConfig = {
       apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
       authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -408,10 +389,11 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app); // Database initialized
     const provider = new GoogleAuthProvider();
     window.currentUser = null;
 
-    // Mobile Nav
+    // Nav Helper
     window.setActiveNav = function(elem) { document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active')); if(elem) elem.classList.add('active'); }
 
     // Banner Slider
@@ -425,26 +407,53 @@
         clearInterval(window.slideInterval); window.slideInterval = setInterval(() => { window.moveSlide(1) }, 5000);
     }
 
-    // Footer Animation Observer
+    // Footer Animation
     const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150); } });
     });
     document.addEventListener("DOMContentLoaded", () => { document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col)); });
 
-    // Auth State
-    onAuthStateChanged(auth, (user) => {
+    // --- 3. LIVE DATABASE SYNC ON LOGIN ---
+    onAuthStateChanged(auth, async (user) => {
         window.currentUser = user; 
         if (user) {
             let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
             document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
             document.getElementById('authOpt').style.display = 'none'; document.getElementById('logoutOpt').style.display = 'block';
+
+            // Fetch User Data from Firestore Database
+            const userRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(userRef);
+            if (docSnap.exists()) {
+                let data = docSnap.data();
+                // Load Cart from DB
+                if(data.cart) { window.cartList = data.cart; updateCartUI(); }
+                // Load Address from DB
+                if(data.address) { document.getElementById('dashAddress').value = data.address; }
+                // Load Orders from DB
+                if(data.orders) { renderOrdersUI(data.orders); }
+            } else {
+                // First time user - Create DB entry
+                await setDoc(userRef, { cart: [], orders: [], address: "" });
+            }
         } else {
+            // Logged out state
             document.getElementById('navLoginText').innerText = "LOGIN";
             document.getElementById('authOpt').style.display = 'block'; document.getElementById('logoutOpt').style.display = 'none';
+            window.cartList = []; updateCartUI(); // Empty cart on logout
+            document.getElementById('dashAddress').value = "";
+            renderOrdersUI([]);
         }
     });
 
-    // 8 Products Full Data
+    // --- 4. CLOUD CART SYNCING LOGIC ---
+    window.syncCartToDb = async function() {
+        if (window.currentUser) {
+            const userRef = doc(db, "users", window.currentUser.uid);
+            await updateDoc(userRef, { cart: window.cartList });
+        }
+    };
+
     window.cartList = [];
     const products = [
         { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", imgs: ["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800", "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800"], cat: "Men" },
@@ -476,8 +485,7 @@
         const prod = products.find(p => p.id === id);
         document.getElementById('modalName').innerText = prod.n;
         document.getElementById('modalPrice').innerText = "₹" + prod.p;
-        let mrp = Math.floor(prod.p * 1.45);
-        document.getElementById('modalMrp').innerText = "₹" + mrp;
+        let mrp = Math.floor(prod.p * 1.45); document.getElementById('modalMrp').innerText = "₹" + mrp;
         document.getElementById('modalDiscount').innerText = Math.floor(((mrp - prod.p) / mrp) * 100) + "% off";
         document.getElementById('modalMainImg').src = prod.imgs[0];
         
@@ -491,8 +499,10 @@
     }
     
     window.toggleCart = function(open) { const sidebar = document.getElementById('cartSidebar'); if (open) sidebar.classList.add('active'); else sidebar.classList.remove('active'); }
-    window.addToCartById = function(id) { window.cartList.push(products.find(p => p.id === id)); updateCartUI(); window.toggleCart(true); }
-    window.removeFromCart = function(index) { window.cartList.splice(index, 1); updateCartUI(); }
+    
+    // Add & Remove update Cloud Database instantly
+    window.addToCartById = function(id) { window.cartList.push(products.find(p => p.id === id)); updateCartUI(); window.toggleCart(true); window.syncCartToDb(); }
+    window.removeFromCart = function(index) { window.cartList.splice(index, 1); updateCartUI(); window.syncCartToDb(); }
     
     function updateCartUI() {
         document.getElementById('cartCount').innerText = window.cartList.length; document.getElementById('mobileCartCount').innerText = window.cartList.length;
@@ -501,13 +511,82 @@
         document.getElementById('cartTotalDisplay').innerText = "₹" + total;
     }
     
-    window.payNow = function(p) { new Razorpay({ "key": "YOUR_RAZORPAY_KEY", "amount": p * 100, "currency": "INR", "name": "ZippyKart" }).open(); };
-    window.checkoutCart = function() { let total = window.cartList.reduce((sum, item) => sum + item.p, 0); if (total === 0) return alert("Your cart is empty!"); window.payNow(total); }
+    // --- 5. LIVE CHECKOUT AND ORDER SAVING ---
+    window.checkoutCart = function() { 
+        if(!window.currentUser) { alert("Please Login to proceed to Checkout!"); return openAuthModal(); }
+        let total = window.cartList.reduce((sum, item) => sum + item.p, 0); 
+        if (total === 0) return alert("Your cart is empty!"); 
+        window.payNow(total); 
+    }
+
+    window.payNow = function(p) { 
+        new Razorpay({ 
+            "key": "YOUR_RAZORPAY_KEY", 
+            "amount": p * 100, 
+            "currency": "INR", 
+            "name": "ZippyKart",
+            "handler": async function(r) { 
+                alert("Payment Success! Your order has been placed."); 
+                // Saving Order to Database
+                if(window.currentUser) {
+                    const userRef = doc(db, "users", window.currentUser.uid);
+                    const docSnap = await getDoc(userRef);
+                    let orders = docSnap.exists() && docSnap.data().orders ? docSnap.data().orders : [];
+                    
+                    let newOrder = {
+                        orderId: "ZIPPY-" + Math.floor(Math.random() * 1000000),
+                        items: window.cartList,
+                        total: p,
+                        status: "Processing",
+                        date: new Date().toLocaleDateString()
+                    };
+                    
+                    orders.unshift(newOrder); // Add to top of list
+                    await updateDoc(userRef, { orders: orders, cart: [] }); // Clear cart after order
+                    
+                    window.cartList = [];
+                    updateCartUI();
+                    renderOrdersUI(orders);
+                }
+            }
+        }).open(); 
+    };
+
+    // Render Orders UI
+    window.renderOrdersUI = function(orders) {
+        const container = document.getElementById('ordersTab');
+        if(!orders || orders.length === 0) { container.innerHTML = '<p style="font-size:13px; color:#777;">No orders found.</p>'; return; }
+        let html = '';
+        orders.forEach(ord => {
+            let itemNames = ord.items.map(i => i.n).join(", ");
+            html += `
+                <div class="order-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                        <strong>Order #${ord.orderId}</strong>
+                        <span style="color:#ff9800; font-weight:bold; font-size:12px;">${ord.status}</span>
+                    </div>
+                    <p style="margin:0; font-size:12px; color:#555;">Items: ${itemNames}</p>
+                    <p style="margin:5px 0 0 0; font-weight:bold; font-size:14px;">Total: ₹${ord.total} <span style="float:right; font-size:11px; font-weight:normal; color:#888;">${ord.date}</span></p>
+                </div>`;
+        });
+        container.innerHTML = html;
+    }
     
+    // --- 6. SAVE ADDRESS TO CLOUD ---
+    window.saveAddress = async function() {
+        if(window.currentUser) {
+            let addr = document.getElementById('dashAddress').value;
+            if(!addr) return alert("Please enter an address first.");
+            const userRef = doc(db, "users", window.currentUser.uid);
+            await updateDoc(userRef, { address: addr });
+            alert("Address saved to Cloud successfully!");
+        }
+    }
+
+    // Modal Control Logic
     window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
     window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
     
-    // RESTORED: Full Auth Logic
     window.isLoginMode = true;
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
