@@ -48,7 +48,7 @@
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 12px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s; }
         .buy-btn:hover { background: #e0355f; }
         
-        /* Professional Side-out Cart Panel */
+        /* Side-out Cart */
         .cart-sidebar { position: fixed; top: 0; right: -350px; width: 320px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: 0.3s ease; padding: 20px; display: flex; flex-direction: column; }
         .cart-sidebar.active { right: 0; }
         .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; }
@@ -63,100 +63,185 @@
         .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         
-        /* Common Modal Setup */
+        /* Modals & Animations */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; transition: 0.3s; z-index: 10; }
         .close-btn:hover { color: #ff3e6c; }
         
-        /* --- NEW: Flipkart/Myntra Style Product Modal --- */
+        /* Advanced Flipkart/Myntra Product Modal */
         .large-modal { background: #fff; margin: 3% auto; padding: 25px; width: 950px; max-width: 95%; border-radius: 12px; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; gap: 30px; align-items: flex-start; }
-        
-        /* Left Sticky Image Section */
         .modal-left { flex: 0.8; display: flex; flex-direction: column; gap: 15px; position: sticky; top: 25px; }
         .modal-main-img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
         .thumb-gallery { display: flex; gap: 10px; justify-content: center; }
         .thumb-gallery img { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: 0.3s; }
         .thumb-gallery img:hover, .thumb-gallery img.active { opacity: 1; border-color: #ff3e6c; }
-        
-        /* Right Scrollable Details Section */
         .modal-right { flex: 1.2; display: flex; flex-direction: column; text-align: left; max-height: 80vh; overflow-y: auto; padding-right: 10px; }
-        
-        /* Hide Scrollbar for clean look */
         .modal-right::-webkit-scrollbar { width: 6px; }
         .modal-right::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
-        
         .brand-name { color: #777; font-weight: bold; font-size: 13px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
         .modal-right h3 { margin: 0 0 8px 0; font-size: 22px; color: #222; }
-        
-        /* Ratings */
         .rating-badge { display: inline-flex; align-items: center; background: #388e3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 15px; }
         .rating-badge i { font-size: 10px; margin-left: 4px; }
         .rating-text { color: #777; font-size: 13px; margin-left: 8px; font-weight: bold; }
-        
-        /* Pricing */
         .price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .modal-price-tag { color: #222; font-weight: 900; font-size: 28px; margin: 0; }
         .mrp { color: #888; text-decoration: line-through; font-size: 16px; }
         .discount { color: #388e3c; font-weight: bold; font-size: 16px; }
-        
-        /* Bank Offers Box */
         .offer-box { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #fdfdfd; }
         .offer-title { font-weight: bold; font-size: 14px; color: #222; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .offer-title i { color: #1976d2; }
         .offer-item { font-size: 13px; color: #444; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
         .offer-item i { color: #388e3c; margin-top: 3px; font-size: 12px; }
-        .offer-item strong { color: #222; }
-
-        /* Color & Size */
         .selector-title { font-size: 14px; font-weight: bold; margin: 0 0 10px 0; color: #222; }
         .color-opts { display: flex; gap: 12px; margin-bottom: 20px; }
         .color-dot { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 2px solid #ddd; transition: 0.3s; display: inline-block; padding: 2px; background-clip: content-box; }
         .color-dot.active { border-color: #ff3e6c; }
-        
         .size-opts { display: flex; gap: 10px; margin-bottom: 25px; }
         .size-btn-opt { padding: 10px 18px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.3s; color: #333; }
-        .size-btn-opt:hover { border-color: #999; }
         .size-btn-opt.active { border-color: #ff3e6c; color: #ff3e6c; background: #fff0f3; }
-        
-        /* Delivery Details */
         .delivery-box { border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
         .del-row { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #222; font-weight: bold; margin-bottom: 5px; }
         .del-row i { color: #777; font-size: 18px; width: 20px; text-align: center; }
         .del-sub { font-size: 12px; color: #388e3c; margin-left: 32px; font-weight: bold; }
-
-        /* Trust Badges */
         .trust-badges { display: flex; justify-content: space-around; background: #f9f9f9; border-radius: 8px; padding: 15px; margin-bottom: 25px; }
         .badge { text-align: center; font-size: 11px; color: #555; font-weight: bold; }
         .badge i { font-size: 24px; color: #1976d2; margin-bottom: 8px; display: block; }
-        
-        /* Specifications Grid */
         .spec-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #222; border-bottom: 1px solid #eee; padding-bottom: 8px; }
         .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 20px; margin-bottom: 25px; }
         .spec-item { font-size: 13px; }
         .spec-key { color: #777; margin-bottom: 4px; display: block; }
         .spec-value { color: #222; font-weight: bold; }
-
         .modal-action-row { display: flex; gap: 15px; margin-top: 10px; position: sticky; bottom: 0; background: #fff; padding-top: 10px; border-top: 1px solid #eee; }
         .modal-action-row button { flex: 1; margin: 0; padding: 16px; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        @media (max-width: 768px) {
-            .large-modal { flex-direction: column; width: 95%; padding: 15px; margin: 10% auto; }
-            .modal-left { position: relative; top: 0; }
-            .modal-right { max-height: none; overflow-y: visible; padding-right: 0; }
-            .modal-main-img { height: 300px; }
-            .modal-action-row { position: fixed; bottom: 0; left: 0; right: 0; padding: 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10; }
-        }
-
-        /* Other Modals (Auth, Dashboard) - Keep original styles */
+        /* Auth & Registration Modal */
         .auth-content { background: #fff; margin: 5% auto; width: 380px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .auth-header { background: #ff3e6c; color: white; padding: 25px 20px; text-align: center; }
         .auth-header h2 { margin: 0; font-size: 22px; }
         .auth-body { padding: 25px 20px; }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; outline: none; font-family: inherit; }
+        .auth-input:focus { border-color: #ff3e6c; }
+        .input-group { display: flex; gap: 10px; }
         .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .auth-submit-btn:hover { background: #333; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
-        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; margin-top:15px; transition: 0.3s; }
+        .auth-switch span { color: #ff3e6c; font-weight: bold; }
+        .auth-divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #aaa; font-size: 12px; font-weight: bold; }
+        .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-bottom: 1px solid #eee; }
+        .auth-divider span { padding: 0 10px; }
+        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .google-btn:hover { background: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        /* Dashboard Modal */
+        .dashboard-content { background: #fff; margin: 5% auto; width: 450px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .dashboard-header { background: #ff3e6c; color: white; padding: 25px 20px 0; text-align: center; }
+        .dashboard-header h2 { margin: 0 0 15px 0; font-size: 22px; }
+        .tab-container { display: flex; justify-content: center; gap: 15px; }
+        .tab-btn { background: transparent; border: none; color: rgba(255,255,255,0.7); padding: 10px 20px; font-weight: bold; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; transition: 0.3s; outline: none; }
+        .tab-btn.active { color: white; border-bottom: 3px solid white; }
+        .dashboard-body { padding: 25px 20px; min-height: 250px; background: #fdfdfd; }
+        .tab-content label { font-size: 12px; font-weight: bold; color: #777; margin-bottom: 6px; display: block; text-align: left; }
+        .order-card { border: 1px solid #eee; background: #fff; padding: 15px; border-radius: 6px; margin-bottom: 15px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+
+        /* --- RESTORED: Professional Animated Footer Styles --- */
+        .main-footer { 
+            background-color: #1a1a1a; 
+            color: #fff; 
+            padding: 60px 5% 20px; 
+            margin-top: 40px; 
+            overflow: hidden; 
+        }
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            margin-bottom: 40px; 
+        }
+        .footer-col { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .footer-col.show-anim { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        .footer-col h3 { 
+            font-size: 16px; 
+            margin-bottom: 20px; 
+            color: #ff3e6c; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+        .footer-col p { 
+            font-size: 13px; 
+            color: #bbb; 
+            line-height: 1.6; 
+            margin-bottom: 10px; 
+        }
+        .footer-col a { 
+            display: inline-block; 
+            width: fit-content; 
+            color: #bbb; 
+            text-decoration: none; 
+            font-size: 13px; 
+            margin-bottom: 12px; 
+            transition: 0.3s; 
+            position: relative; 
+            padding-bottom: 3px; 
+        }
+        .footer-col a::after { 
+            content: ''; 
+            position: absolute; 
+            width: 0; 
+            height: 2px; 
+            bottom: 0; 
+            left: 0; 
+            background-color: #ff3e6c; 
+            transition: width 0.3s ease; 
+        }
+        .footer-col a:hover { 
+            color: #ff3e6c; 
+            transform: translateX(5px); 
+        }
+        .footer-col a:hover::after { 
+            width: 100%; 
+        }
+        .social-icons { 
+            display: flex; 
+            gap: 15px; 
+            margin-top: 15px; 
+        }
+        .social-icons a { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 16px; 
+            width: 35px; 
+            height: 35px; 
+            background: #333; 
+            color: #fff; 
+            border-radius: 50%; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            padding: 0; 
+            margin: 0; 
+        }
+        .social-icons a::after { 
+            display: none; 
+        }
+        .social-icons a:hover { 
+            background: #ff3e6c; 
+            transform: translateY(-6px) scale(1.15); 
+            color: #fff; 
+            box-shadow: 0 5px 15px rgba(255, 62, 108, 0.5); 
+        }
+        .footer-bottom { 
+            text-align: center; 
+            padding-top: 20px; 
+            border-top: 1px solid #333; 
+            font-size: 12px; 
+            color: #888; 
+        }
         
         .empty-grid-msg { grid-column: span 4; text-align: center; padding: 50px; font-size: 16px; color: #777; font-weight: bold; }
     </style>
@@ -169,8 +254,15 @@
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
+            <!-- Restored Dashboard Link -->
             <div onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Dashboard</div>
             <div id="logoutOpt" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+        </div>
+    </div>
+    <!-- Restored Chat Dropdown -->
+    <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
+        <div id="moreDrop" class="dropdown">
+            <div onclick="document.getElementById('chatBox').style.display='block'"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
         </div>
     </div>
     <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
@@ -208,46 +300,41 @@
     <button class="slide-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
+<!-- Restored all 8 products in the UI via JS, container here -->
 <div class="product-grid" id="productGrid"></div>
 
+<!-- Flipkart/Myntra Style Product Modal -->
 <div id="productModal" class="modal">
     <div class="large-modal">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
-        
         <div class="modal-left">
             <img id="modalMainImg" class="modal-main-img" src="">
             <div class="thumb-gallery" id="modalThumbGallery"></div>
         </div>
-        
         <div class="modal-right">
             <div class="brand-name">ZippyKart Originals</div>
             <h3 id="modalName">Product Title</h3>
-            
             <div style="display: flex; align-items: center;">
                 <div class="rating-badge">4.3 <i class="fa-solid fa-star"></i></div>
                 <span class="rating-text">1,245 Ratings & 120 Reviews</span>
             </div>
-            
             <div class="price-row">
                 <p id="modalPrice" class="modal-price-tag">₹0</p>
                 <span id="modalMrp" class="mrp">₹0</span>
                 <span id="modalDiscount" class="discount">0% off</span>
             </div>
-
             <div class="offer-box">
                 <div class="offer-title"><i class="fa-solid fa-tags"></i> Available Offers</div>
                 <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Bank Offer:</strong> 5% Cashback on Flipkart Axis Bank Card</span></div>
-                <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Special Price:</strong> Get extra 10% off (price inclusive of cashback/coupon)</span></div>
+                <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Special Price:</strong> Get extra 10% off (price inclusive of cashback)</span></div>
                 <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Partner Offer:</strong> Sign up for ZippyKart Pay Later and get ₹500 Gift Card</span></div>
             </div>
-            
             <div class="selector-title">Select Color</div>
             <div class="color-opts">
                 <span class="color-dot active opt-color" style="background-color: #222;" onclick="selectOption('opt-color', this)"></span>
                 <span class="color-dot opt-color" style="background-color: #c0392b;" onclick="selectOption('opt-color', this)"></span>
                 <span class="color-dot opt-color" style="background-color: #2980b9;" onclick="selectOption('opt-color', this)"></span>
             </div>
-            
             <div class="selector-title">Select Size <span style="float:right; color:#ff3e6c; font-size:12px; font-weight:normal; cursor:pointer;">Size Chart</span></div>
             <div class="size-opts">
                 <button class="size-btn-opt opt-size active" onclick="selectOption('opt-size', this)">S</button>
@@ -255,30 +342,93 @@
                 <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">L</button>
                 <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">XL</button>
             </div>
-
             <div class="delivery-box">
                 <div class="del-row"><i class="fa-solid fa-location-dot"></i> Delivery to: <strong>Rajendra Place, New Delhi - 110008</strong></div>
                 <div class="del-row" style="margin-top:10px;"><i class="fa-solid fa-truck-fast"></i> Delivery by <strong>Tomorrow, 10 PM</strong></div>
                 <div class="del-sub">Free Delivery <del style="color:#888;">₹40</del></div>
             </div>
-
             <div class="trust-badges">
                 <div class="badge"><i class="fa-solid fa-cube"></i>100% Genuine<br>Product</div>
                 <div class="badge"><i class="fa-solid fa-arrow-rotate-left"></i>10 Days<br>Return Policy</div>
                 <div class="badge"><i class="fa-solid fa-money-bill-transfer"></i>Cash on<br>Delivery</div>
             </div>
-
             <div class="spec-title">Product Details</div>
             <div class="spec-grid">
-                <div class="spec-item"><span class="spec-key">Material Composition</span><span class="spec-value">Premium Cotton Blend</span></div>
+                <div class="spec-item"><span class="spec-key">Material Composition</span><span class="spec-value">Premium Blend</span></div>
                 <div class="spec-item"><span class="spec-key">Pattern</span><span class="spec-value">Solid / Printed</span></div>
                 <div class="spec-item"><span class="spec-key">Fit Type</span><span class="spec-value">Regular Fit</span></div>
                 <div class="spec-item"><span class="spec-key">Wash Care</span><span class="spec-value">Machine Wash</span></div>
             </div>
-            
             <div class="modal-action-row">
                 <button class="add-btn" id="modalAddBtn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
                 <button class="buy-btn" id="modalBuyNowBtn"><i class="fa-solid fa-bolt"></i> Buy Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Restored Full Registration Modal -->
+<div id="authModal" class="modal">
+    <div class="auth-content">
+        <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
+        <div class="auth-header"><h2 id="authTitle">Login to ZippyKart</h2></div>
+        <div class="auth-body">
+            <!-- Login -->
+            <div id="loginFields">
+                <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
+                <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
+            </div>
+            <!-- Restored Registration fields -->
+            <div id="regFields" style="display: none;">
+                <div class="input-group">
+                    <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
+                    <input type="text" id="regLastName" class="auth-input" placeholder="Last Name">
+                </div>
+                <input type="tel" id="regMobile" class="auth-input" placeholder="Mobile Number" maxlength="10">
+                <input type="email" id="regEmail" class="auth-input" placeholder="Email Address">
+                <input type="password" id="regPassword" class="auth-input" placeholder="Create Password">
+                <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Re-enter Password">
+            </div>
+            
+            <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
+            <div class="auth-divider"><span>OR</span></div>
+            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color: #DB4437; margin-right: 8px;"></i> Continue with Google</button>
+            
+            <!-- Restored Toggle Switch -->
+            <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <span id="authSwitchAction">Sign Up</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Restored Dashboard Modal -->
+<div id="dashboardModal" class="modal">
+    <div class="dashboard-content">
+        <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="color:white; top:15px;">&times;</span>
+        <div class="dashboard-header">
+            <h2>My Account</h2>
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('profileTab', event)">Profile Info</button>
+                <button class="tab-btn" onclick="switchTab('ordersTab', event)">My Orders</button>
+            </div>
+        </div>
+        <div class="dashboard-body">
+            <div id="profileTab" class="tab-content" style="display:block;">
+                <label>Full Name</label>
+                <input type="text" id="dashName" class="auth-input" readonly style="background:#f5f5f5; color:#555;">
+                <label>Email Address</label>
+                <input type="email" id="dashEmail" class="auth-input" readonly style="background:#f5f5f5; color:#555;">
+                <label>Delivery Address</label>
+                <textarea id="dashAddress" class="auth-input" placeholder="Enter your address..." rows="3" style="resize:none;"></textarea>
+                <button class="auth-submit-btn" onclick="alert('Address saved successfully!')">Save Changes</button>
+            </div>
+            <div id="ordersTab" class="tab-content" style="display:none;">
+                <div class="order-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                        <strong>Order #ZIPPY-9823</strong><span style="color:green; font-weight:bold; font-size:12px;">Delivered</span>
+                    </div>
+                    <p style="margin:0; font-size:13px; color:#555;">1x Streetwear Tee</p>
+                    <p style="margin:5px 0 0 0; font-weight:bold; font-size:14px;">Total: ₹899</p>
+                </div>
             </div>
         </div>
     </div>
@@ -299,19 +449,50 @@
     </div>
 </div>
 
-<div id="authModal" class="modal">
-    <div class="auth-content">
-        <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
-        <div class="auth-header"><h2 id="authTitle">Login to ZippyKart</h2></div>
-        <div class="auth-body">
-            <div id="loginFields">
-                <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
-                <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
+<!-- --- RESTORED: Professional Animated Footer --- -->
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-col">
+            <h3>ZippyKart</h3>
+            <p>Your premium destination for the latest trends and tech. We deliver quality products right to your doorstep with zero hassle.</p>
+        </div>
+        <div class="footer-col" style="display: flex; flex-direction: column;">
+            <h3>Quick Links</h3>
+            <a href="#" onclick="filterCategory('Men'); window.scrollTo(0,0);">Men's Fashion</a>
+            <a href="#" onclick="filterCategory('Electronics'); window.scrollTo(0,0);">Gadgets & Tech</a>
+            <a href="#" onclick="document.getElementById('chatBox').style.display='block'">Customer Support</a>
+            <a href="#">Track Order</a>
+        </div>
+        <div class="footer-col" style="display: flex; flex-direction: column;">
+            <h3>Policies</h3>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Return & Refund</a>
+            <a href="#">Shipping Details</a>
+        </div>
+        <div class="footer-col">
+            <h3>Get In Touch</h3>
+            <p>ZestGo Retail</p>
+            <p>Rajendra Place, New Delhi</p>
+            <p>Email: care@zippykart.co.in</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
             </div>
-            <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
-            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color: #DB4437; margin-right: 8px;"></i> Continue with Google</button>
         </div>
     </div>
+    <div class="footer-bottom">
+        &copy; 2026 ZippyKart | A ZestGo Retail Initiative. All Rights Reserved.
+    </div>
+</footer>
+
+<!-- Restored AI Chat Box -->
+<div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <strong style="color: #ff3e6c;">AI Agent Active</strong> 
+    <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
+    <hr style="border-top: 1px solid #eee;">
+    <p style="font-size: 12px;">Hello Akash! How can I help you with ZippyKart today?</p>
 </div>
 
 <script type="module">
@@ -331,6 +512,21 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     window.currentUser = null;
+
+    // --- RESTORED: Footer Scroll Animation Observer ---
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Thoda delay taaki ek-ek karke aaye
+                setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150);
+            }
+        });
+    });
+    
+    // Observer ko apply karna (Page load hone ke baad chale)
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col));
+    });
 
     // Auto-Sliding Banner logic
     window.currentSlide = 0;
@@ -356,12 +552,17 @@
         }
     });
 
+    // Restored 8 Products Array
     window.cartList = [];
     const products = [
         { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", imgs: ["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800", "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800"], cat: "Men" },
-        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300", imgs: ["https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800", "https://images.unsplash.com/photo-1584865288642-42078afe6942?w=800"], cat: "Women" },
-        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300", imgs: ["https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=800"], cat: "Women" },
-        { id: 4, n: "Premium Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", imgs: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800", "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800"], cat: "Electronics" }
+        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300", imgs: ["https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800", "https://images.unsplash.com/photo-1584865288642-42078afe6942?w=800", "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800"], cat: "Women" },
+        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300", imgs: ["https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=800", "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800", "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800"], cat: "Women" },
+        { id: 4, n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", imgs: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800", "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800", "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800"], cat: "Electronics" },
+        { id: 5, n: "Kids T-Shirt", p: 499, img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=300", imgs: ["https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=800", "https://images.unsplash.com/photo-1519278409-1f56fdda70f4?w=800", "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800"], cat: "Kids" },
+        { id: 6, n: "Smart Watch", p: 2499, img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300", imgs: ["https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800", "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800", "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800"], cat: "Watch" },
+        { id: 7, n: "Matte Lipstick", p: 599, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300", imgs: ["https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800", "https://images.unsplash.com/photo-1512496015851-a1c8413b53e7?w=800", "https://images.unsplash.com/photo-1599305090598-fe179d501227?w=800"], cat: "Cosmetic" },
+        { id: 8, n: "Action Figure", p: 899, img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300", imgs: ["https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800", "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800", "https://images.unsplash.com/photo-1606660265514-358ebbadc80d?w=800"], cat: "Toys" }
     ];
 
     window.renderProducts = function(filteredList) {
@@ -390,7 +591,6 @@
         document.querySelectorAll('.thumb-gallery img').forEach(img => img.classList.remove('active'));
         elem.classList.add('active');
     }
-    
     window.selectOption = function(className, elem) {
         document.querySelectorAll('.' + className).forEach(el => el.classList.remove('active'));
         elem.classList.add('active');
@@ -401,13 +601,9 @@
         const prod = products.find(p => p.id === id);
         document.getElementById('modalName').innerText = prod.n;
         document.getElementById('modalPrice').innerText = "₹" + prod.p;
-        
-        // Calculate fake MRP (approx 45% higher) for the visual effect
         let mrp = Math.floor(prod.p * 1.45);
         document.getElementById('modalMrp').innerText = "₹" + mrp;
-        let discountPercent = Math.floor(((mrp - prod.p) / mrp) * 100);
-        document.getElementById('modalDiscount').innerText = discountPercent + "% off";
-
+        document.getElementById('modalDiscount').innerText = Math.floor(((mrp - prod.p) / mrp) * 100) + "% off";
         document.getElementById('modalMainImg').src = prod.imgs[0];
         
         let thumbsHTML = '';
@@ -442,14 +638,58 @@
     window.payNow = function(p) { new Razorpay({ "key": "YOUR_RAZORPAY_KEY", "amount": p * 100, "currency": "INR", "name": "ZippyKart" }).open(); };
     window.checkoutCart = function() { let total = window.cartList.reduce((sum, item) => sum + item.p, 0); if (total === 0) return alert("Your cart is empty!"); window.payNow(total); }
     
+    // Auth & Dash Functions
     window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
     window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
+    
+    // Restored Auth Toggle Form Logic
+    window.isLoginMode = true;
+    window.toggleAuthMode = function() {
+        window.isLoginMode = !window.isLoginMode;
+        document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account"; 
+        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
+        document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none"; 
+        document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
+        document.getElementById('authSwitchPrompt').innerText = window.isLoginMode ? "Don't have an account?" : "Already have an account?";
+        document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
+    }
+
+    // Restored Auth Processing 
+    window.processAuth = function() {
+        if(window.isLoginMode) {
+            let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value;
+            if(!email || !pass) return alert("Please enter Email and Password!");
+            document.getElementById('authSubmit').innerText = "Logging in...";
+            signInWithEmailAndPassword(auth, email, pass).then(() => { alert("Login Successful!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Login"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Login"; });
+        } else {
+            let fName = document.getElementById('regFirstName').value, mobile = document.getElementById('regMobile').value, email = document.getElementById('regEmail').value, pass = document.getElementById('regPassword').value, cpass = document.getElementById('regConfirmPassword').value;
+            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!"); if(pass !== cpass) return alert("Passwords do not match!");
+            document.getElementById('authSubmit').innerText = "Creating Account...";
+            createUserWithEmailAndPassword(auth, email, pass).then(() => { alert("Account Created Successfully!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Register Now"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Register Now"; });
+        }
+    }
+    
     window.googleSignIn = function() { signInWithPopup(auth, provider).then(() => { document.getElementById('authModal').style.display = 'none'; }).catch((error) => { alert(error.message); }); }
+
+    window.openDashboard = function() {
+        document.getElementById('loginDrop').style.display = 'none'; 
+        if (!window.currentUser) { alert("Please login first to view your dashboard!"); openAuthModal(); return; }
+        document.getElementById('dashName').value = window.currentUser.displayName || "ZippyKart User";
+        document.getElementById('dashEmail').value = window.currentUser.email || "";
+        document.getElementById('dashboardModal').style.display = 'block';
+    }
+    
+    window.switchTab = function(tabId, event) {
+        document.getElementById('profileTab').style.display = 'none'; document.getElementById('ordersTab').style.display = 'none';
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).style.display = 'block'; event.currentTarget.classList.add('active');
+    }
     
     window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none';
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
+        if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
     };
 </script>
 </body>
