@@ -4,41 +4,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; }
-        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 2px solid #ddd; position: sticky; top: 0; z-index: 1000; }
-        .logo-box { font-weight: 900; font-size: 22px; color: #d32f2f; display: flex; align-items: center; }
-        .search-bar { flex: 1; margin: 0 20px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 20px; background: #fff; border-bottom: 1px solid #ddd; }
-        .nav-cat { text-align: center; cursor: pointer; transition: 0.3s; width: 70px; font-size: 11px; }
-        .nav-cat:hover { transform: scale(1.2); }
-        .nav-cat i { font-size: 28px; margin-bottom: 8px; display: block; }
-        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; }
-        .product-card { background: #fff; padding: 15px; border-radius: 8px; text-align: center; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card:hover { transform: translateY(-5px); }
-        .product-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 4px; }
-        .add-btn { background: #000; color: #fff; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 4px; margin-top: 10px; }
-        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 10px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; }
-        .dropdown { display: none; position: absolute; top: 100%; right: 10%; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; }
-        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+        body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
+        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
+        .logo-box { font-weight: 900; font-size: 20px; color: #333; display: flex; align-items: center; }
+        .search-bar { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
+        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 11px; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
+        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
+        .product-card img { width: 100%; height: 150px; object-fit: cover; cursor: pointer; }
+        
+        /* Modal Style */
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: #fff; margin: 5% auto; padding: 20px; width: 400px; border-radius: 8px; text-align: center; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="margin-right:10px;"></i> ZippyKart</div>
-    <input type="text" class="search-bar" placeholder="Search products...">
-    <div class="menu-wrapper" onclick="toggle('loginDrop')">LOGIN ▾
-        <div id="loginDrop" class="dropdown">
-            <div onclick="alert('Profile Loading...')">My Profile</div>
-            <div>Orders</div>
-        </div>
-    </div>
-    <div class="menu-wrapper" onclick="toggle('moreDrop')" style="margin: 0 20px;">MORE ▾
-        <div id="moreDrop" class="dropdown">
-            <div onclick="alert('AI Agent Active')">AI Chat Support</div>
-        </div>
-    </div>
-    <button style="background:#d32f2f; color:#fff; border:none; padding:10px 20px;">CART (0)</button>
+    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:8px;"></i> ZippyKart</div>
+    <input type="text" class="search-bar" placeholder="Search...">
+    <button style="background:#ff3e6c; color:white; border:none; padding:10px;">CART (0)</button>
 </header>
 
 <div class="nav-icons">
@@ -54,6 +40,17 @@
 
 <div class="product-grid" id="productGrid"></div>
 
+<!-- Modal -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="float:right; cursor:pointer;">&times;</span>
+        <img id="modalImg" src="" style="width:100%; height:200px;">
+        <h2 id="modalName"></h2>
+        <p id="modalDesc">Premium quality product designed for your comfort.</p>
+        <button style="background:#ff3e6c; color:#fff; border:none; padding:10px; width:100%;">Buy Now</button>
+    </div>
+</div>
+
 <script>
     const products = [
         { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
@@ -66,30 +63,20 @@
     products.forEach(item => {
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${item.img}">
-                <div style="font-weight:bold; margin:10px 0;">${item.n}</div>
+                <img src="${item.img}" onclick="openModal('${item.n}', '${item.img}')">
+                <div style="font-weight:bold; font-size:12px; margin:5px 0;">${item.n}</div>
                 <div style="color:red; font-weight:bold;">₹${item.p}</div>
-                <button class="add-btn">Add to Cart</button>
-                <button class="buy-btn" onclick="payNow('${item.p}')">Buy Now</button>
+                <button class="add-btn" onclick="alert('Added to Cart')">Add to Cart</button>
             </div>`;
     });
 
-    window.toggle = (id) => {
-        document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-    };
-
-    window.payNow = (price) => {
-        new Razorpay({ 
-            "key": "rzp_live_SuidRs4KmU9W6w", 
-            "amount": price * 100, 
-            "currency": "INR", 
-            "name": "ZippyKart", 
-            "handler": function(r){ alert("Payment Success!"); } 
-        }).open();
-    };
-
-    window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
+    function openModal(name, img) {
+        document.getElementById('modalName').innerText = name;
+        document.getElementById('modalImg').src = img;
+        document.getElementById('productModal').style.display = 'block';
+    }
+    function closeModal() { document.getElementById('productModal').style.display = 'none'; }
+    window.onclick = (e) => { if(e.target == document.getElementById('productModal')) closeModal(); };
 </script>
 </body>
 </html>
