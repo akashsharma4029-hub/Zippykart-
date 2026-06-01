@@ -5,31 +5,32 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
-        header { background: #fff; padding: 15px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
-        .logo-box { font-weight: 900; font-size: 20px; color: #333; }
-        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 15px; background: white; border-bottom: 1px solid #eee; }
-        .nav-cat { text-align: center; cursor: pointer; width: 70px; font-size: 11px; transition: 0.3s; }
-        .nav-cat:hover { transform: scale(1.2); }
-        .nav-cat i { font-size: 28px; margin-bottom: 8px; display: block; }
-        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; }
-        .product-card { background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: center; }
-        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 10px; width: 100%; margin-top: 5px; cursor: pointer; }
-        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; }
-        .dropdown div { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
-        #chatBox { display: none; position: fixed; bottom: 20px; right: 20px; width: 250px; background: #fff; border: 1px solid #ccc; padding: 10px; }
+        header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; }
+        .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; }
+        .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .nav-icons { display: flex; justify-content: center; gap: 20px; padding: 10px; background: white; border-bottom: 1px solid #eee; }
+        .nav-cat { text-align: center; cursor: pointer; width: 60px; font-size: 10px; transition: 0.3s; }
+        .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
+        .nav-cat i { display: block; font-size: 20px; margin-bottom: 4px; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 15px; }
+        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; }
+        .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
+        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 150px; z-index: 9999; }
+        .dropdown div { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box">ZippyKart</div>
-    <input type="text" style="flex:1; padding:10px;" placeholder="Search...">
-    <div onclick="toggle('loginDrop')">LOGIN ▾ 
-        <div id="loginDrop" class="dropdown"><div onclick="window.location.href='profile.html'"><i class="fa-solid fa-user"></i> Profile</div></div>
+    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div class="menu-wrapper" onclick="document.getElementById('loginDrop').style.display='block'">LOGIN ▾
+        <div id="loginDrop" class="dropdown"><div onclick="window.location.href='profile.html'">My Profile</div></div>
     </div>
-    <div onclick="toggle('moreDrop')">MORE ▾ 
-        <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'"><i class="fa-solid fa-headset"></i> AI Agent</div></div>
+    <div class="menu-wrapper" onclick="document.getElementById('moreDrop').style.display='block'">MORE ▾
+        <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'">AI Customer Agent</div></div>
     </div>
+    <button style="background:#ff3e6c; color:white; border:none; padding:8px;"><i class="fa-solid fa-cart-shopping"></i> (0)</button>
 </header>
 
 <div class="nav-icons">
@@ -45,12 +46,13 @@
 
 <div class="product-grid" id="productGrid"></div>
 
-<div id="chatBox">AI Customer Agent <button onclick="this.parentElement.style.display='none'">X</button><hr>Hello! How can I help?</div>
+<div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; z-index:9999;">
+    AI Agent Active <button onclick="this.parentElement.style.display='none'">X</button>
+</div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", projectId: "zippykart-production-157e1" };
-    initializeApp(firebaseConfig);
+    initializeApp({ apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", projectId: "zippykart-production-157e1" });
 
     const products = [
         { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
@@ -59,11 +61,11 @@
 
     const grid = document.getElementById('productGrid');
     products.forEach(item => {
-        grid.innerHTML += `<div class="product-card"><img src="${item.img}" style="width:100%"><p>${item.n}</p><button class="buy-btn" onclick="pay('${item.p}')">Buy Now</button></div>`;
+        grid.innerHTML += `<div class="product-card"><img src="${item.img}" style="width:100%"><div style="font-size:12px; margin:5px 0;">${item.n}</div><button class="buy-btn" onclick="pay('${item.p}')">Buy Now</button></div>`;
     });
 
-    window.pay = (p) => { new Razorpay({ "key": "rzp_live_SuidRs4KmU9W6w", "amount": p*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Success!"); } }).open(); };
-    window.toggle = (id) => { document.getElementById(id).style.display = (document.getElementById(id).style.display === 'block') ? 'none' : 'block'; };
+    window.pay = (p) => { new Razorpay({ "key": "rzp_test_YourKeyHere", "amount": p*100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Success!"); } }).open(); };
+    window.onclick = (e) => { if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); };
 </script>
 </body>
 </html>
