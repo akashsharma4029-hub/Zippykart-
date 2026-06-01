@@ -17,8 +17,6 @@
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; }
         .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
         .modal-content { background: #fff; margin: 10% auto; padding: 20px; width: 300px; border-radius: 8px; text-align: center; }
-        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 150px; z-index: 9999; }
-        .dropdown div { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -26,12 +24,6 @@
 <header>
     <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
     <input type="text" class="search-bar" placeholder="Search...">
-    <div class="menu-wrapper" onclick="document.getElementById('loginDrop').style.display='block'">LOGIN ▾
-        <div id="loginDrop" class="dropdown"><div>My Profile</div></div>
-    </div>
-    <div class="menu-wrapper" onclick="document.getElementById('moreDrop').style.display='block'">MORE ▾
-        <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'">AI Chat Support</div></div>
-    </div>
     <button style="background:#ff3e6c; color:white; border:none; padding:8px;"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
@@ -39,11 +31,7 @@
     <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
     <div class="nav-cat"><i class="fa-solid fa-user-ninja" style="color:#673ab7;"></i>Sweatshirt</div>
-    <div class="nav-cat"><i class="fa-solid fa-child-reaching" style="color:#2196f3;"></i>Kids</div>
     <div class="nav-cat"><i class="fa-solid fa-robot" style="color:#4caf50;"></i>Toys</div>
-    <div class="nav-cat"><i class="fa-solid fa-clock" style="color:#ff9800;"></i>Watch</div>
-    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles" style="color:#9c27b0;"></i>Cosmetic</div>
-    <div class="nav-cat"><i class="fa-solid fa-headphones" style="color:#00bcd4;"></i>Electronics</div>
 </div>
 
 <div class="product-grid" id="productGrid"></div>
@@ -51,18 +39,15 @@
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span onclick="document.getElementById('productModal').style.display='none'" style="float:right; cursor:pointer;">&times;</span>
-        <img id="modalImg" src="" style="width:100%;">
+        <img id="modalImg" src="" style="width:100%; border-radius:5px;">
         <h3 id="modalName"></h3>
+        <p id="modalPrice" style="color:red; font-weight:bold;"></p>
+        <p id="modalDesc">Detailed description of the product goes here. Premium quality, best in class.</p>
         <button class="buy-btn" onclick="payNow()">Buy Now</button>
     </div>
 </div>
 
-<div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; z-index:9999;">
-    AI Chat Active <button onclick="this.parentElement.style.display='none'">X</button>
-</div>
-
 <script>
-    let cart = 0;
     const products = [
         { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
         { n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" }
@@ -72,22 +57,21 @@
     products.forEach(item => {
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${item.img}" onclick="openModal('${item.n}', '${item.img}')" style="cursor:pointer;">
+                <img src="${item.img}" onclick="openModal('${item.n}', '${item.img}', '${item.p}')" style="cursor:pointer;">
                 <div style="font-weight:bold; font-size:12px; margin:5px 0;">${item.n}</div>
-                <button class="buy-btn" onclick="cart++; document.getElementById('cartCount').innerText = cart; alert('Added!');">Add to Cart</button>
+                <button class="buy-btn" onclick="payNow('${item.p}')">Buy Now</button>
             </div>`;
     });
 
-    function openModal(n, i) {
+    function openModal(n, i, p) {
         document.getElementById('modalName').innerText = n;
         document.getElementById('modalImg').src = i;
+        document.getElementById('modalPrice').innerText = "Price: ₹" + p;
         document.getElementById('productModal').style.display = 'block';
     }
+    
     window.payNow = () => { alert("Redirecting to Razorpay..."); };
-    window.onclick = (e) => { 
-        if(!e.target.matches('.menu-wrapper')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none';
-    };
+    window.onclick = (e) => { if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none'; };
 </script>
 </body>
 </html>
