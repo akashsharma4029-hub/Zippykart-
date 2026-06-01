@@ -29,21 +29,27 @@
         .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         
+        /* Modal Animation Keyframes */
+        @keyframes popUpAnim {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         /* Common Modal Setup */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #aaa; transition: 0.3s; }
         .close-btn:hover { color: #000; }
 
         /* Product Modal */
-        .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; }
+        .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
         /* Login/Auth Modal */
-        .auth-content { background: #fff; margin: 8% auto; width: 350px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .auth-content { background: #fff; margin: 8% auto; width: 350px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .auth-header { background: #ff3e6c; color: white; padding: 25px 20px; text-align: center; }
         .auth-header h2 { margin: 0; font-size: 22px; }
         .auth-body { padding: 25px 20px; }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-        .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px; }
+        .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s; }
         .auth-submit-btn:hover { background: #333; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
         .auth-switch span { color: #ff3e6c; font-weight: bold; }
@@ -120,9 +126,25 @@
     <p style="font-size: 12px;">Hello Akash! How can I help you with ZippyKart today?</p>
 </div>
 
-<script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // --- YAHAN APNI FIREBASE DETAILS DALEIN ---
+    const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
     // --- Product Logic ---
-    let cart = 0;
+    window.cart = 0;
     const products = [
         { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
         { n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
@@ -142,58 +164,81 @@
             </div>`;
     });
 
-    function openModal(n, i, p) {
+    window.openModal = function(n, i, p) {
         document.getElementById('modalName').innerText = n;
         document.getElementById('modalImg').src = i;
         document.getElementById('modalPrice').innerText = "₹" + p;
         document.getElementById('productModal').style.display = 'block';
     }
     
-    function addToCart() {
-        cart++;
-        document.getElementById('cartCount').innerText = cart;
+    window.addToCart = function() {
+        window.cart++;
+        document.getElementById('cartCount').innerText = window.cart;
         alert("Product added to cart successfully!");
     }
 
-    window.payNow = (p) => { alert("Razorpay API Key setup needed to proceed with ₹" + p); };
+    window.payNow = function(p) { alert("Razorpay API Key setup needed to proceed with ₹" + p); };
 
     // --- Dropdown Logic ---
-    function toggleDrop(id) {
+    window.toggleDrop = function(id) {
         document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
         const drop = document.getElementById(id);
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    // --- Authentication Logic ---
-    let isLoginMode = true;
+    // --- Firebase Authentication Logic ---
+    window.isLoginMode = true;
     
-    function openAuthModal() {
+    window.openAuthModal = function() {
         document.getElementById('authModal').style.display = 'block';
-        document.getElementById('loginDrop').style.display = 'none'; // Close dropdown
+        document.getElementById('loginDrop').style.display = 'none'; 
     }
 
-    function toggleAuthMode() {
-        isLoginMode = !isLoginMode;
-        document.getElementById('authTitle').innerText = isLoginMode ? "Login to ZippyKart" : "Create an Account";
-        document.getElementById('authSubmit').innerText = isLoginMode ? "Login" : "Sign Up";
-        document.querySelector('.auth-switch').innerHTML = isLoginMode ? "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
+    window.toggleAuthMode = function() {
+        window.isLoginMode = !window.isLoginMode;
+        document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account";
+        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Sign Up";
+        document.querySelector('.auth-switch').innerHTML = window.isLoginMode ? "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
     }
 
-    function processAuth() {
+    window.processAuth = function() {
         let email = document.getElementById('authEmail').value;
         let pass = document.getElementById('authPassword').value;
+        
         if(email === "" || pass === "") {
             alert("Please enter both Email and Password!");
             return;
         }
-        alert((isLoginMode ? "Logging in: " : "Registering: ") + email + "\n\n(Backend API will be connected here)");
-        document.getElementById('authModal').style.display = 'none';
-        document.getElementById('authEmail').value = '';
-        document.getElementById('authPassword').value = '';
+
+        document.getElementById('authSubmit').innerText = "Processing...";
+
+        if(window.isLoginMode) {
+            signInWithEmailAndPassword(auth, email, pass)
+            .then((userCredential) => {
+                alert("Login Successful! Welcome to ZippyKart.");
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('authSubmit').innerText = "Login";
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+                document.getElementById('authSubmit').innerText = "Login";
+            });
+        } else {
+            createUserWithEmailAndPassword(auth, email, pass)
+            .then((userCredential) => {
+                alert("Account Created Successfully! Welcome to ZippyKart.");
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('authSubmit').innerText = "Sign Up";
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+                document.getElementById('authSubmit').innerText = "Sign Up";
+            });
+        }
     }
 
     // --- Global Click Listener ---
-    window.onclick = (e) => { 
+    window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper')) {
             document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         }
