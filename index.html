@@ -72,16 +72,29 @@
         
         .empty-grid-msg { grid-column: span 4; text-align: center; padding: 50px; font-size: 16px; color: #777; font-weight: bold; }
 
-        /* --- NEW: Professional Footer Styles --- */
-        .main-footer { background-color: #1a1a1a; color: #fff; padding: 50px 5% 20px; margin-top: 40px; }
+        /* --- UPDATED: Professional Animated Footer Styles --- */
+        .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        
+        /* Initial state for Scroll Animation */
+        .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .footer-col.show-anim { opacity: 1; transform: translateY(0); }
+        
         .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; letter-spacing: 1px; }
         .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
-        .footer-col a { display: block; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; }
-        .footer-col a:hover { color: #fff; transform: translateX(5px); }
+        
+        /* Advanced Link Hover Animation */
+        .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; position: relative; padding-bottom: 3px; }
+        .footer-col a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #ff3e6c; transition: width 0.3s ease; }
+        .footer-col a:hover { color: #ff3e6c; transform: translateX(5px); }
+        .footer-col a:hover::after { width: 100%; }
+
+        /* Advanced Social Icon Bounce & Glow */
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
-        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: 0.3s; padding: 0; }
-        .social-icons a:hover { background: #ff3e6c; transform: translateY(-3px); }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); padding: 0; margin: 0; }
+        .social-icons a::after { display: none; } /* Remove underline effect from icons */
+        .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px) scale(1.15); color: #fff; box-shadow: 0 5px 15px rgba(255, 62, 108, 0.5); }
+        
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
     </style>
 </head>
@@ -89,9 +102,7 @@
 
 <header>
     <div class="logo-box" onclick="filterCategory('All')"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
-    
     <input type="text" id="mainSearchBar" class="search-bar" oninput="handleSearch(this.value)" placeholder="Search for products, brands and more...">
-    
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
@@ -99,11 +110,9 @@
             <div id="logoutOpt" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
-    
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
         <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'">AI Chat Support</div></div>
     </div>
-    
     <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
@@ -120,20 +129,21 @@
 
 <div class="product-grid" id="productGrid"></div>
 
+<!-- --- Professional Animated Footer --- -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
             <h3>ZippyKart</h3>
             <p>Your premium destination for the latest trends and tech. We deliver quality products right to your doorstep with zero hassle.</p>
         </div>
-        <div class="footer-col">
+        <div class="footer-col" style="display: flex; flex-direction: column;">
             <h3>Quick Links</h3>
             <a href="#" onclick="filterCategory('Men')">Men's Fashion</a>
             <a href="#" onclick="filterCategory('Electronics')">Gadgets & Tech</a>
             <a href="#" onclick="document.getElementById('chatBox').style.display='block'">Customer Support</a>
             <a href="#">Track Order</a>
         </div>
-        <div class="footer-col">
+        <div class="footer-col" style="display: flex; flex-direction: column;">
             <h3>Policies</h3>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
@@ -240,6 +250,16 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
+    // --- Footer Scroll Animation Observer ---
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150);
+            }
+        });
+    });
+    document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col));
+
     // --- Auth State Monitoring ---
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -271,16 +291,10 @@
         { id: 8, n: "Action Figure", p: 899, img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300", cat: "Toys" }
     ];
 
-    // --- Dynamic Rendering & Search/Filter Logic ---
     window.renderProducts = function(filteredList) {
         const grid = document.getElementById('productGrid');
         grid.innerHTML = '';
-        
-        if(filteredList.length === 0) {
-            grid.innerHTML = `<div class="empty-grid-msg">Oops! No products found matching your criteria.</div>`;
-            return;
-        }
-
+        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg">Oops! No products found matching your criteria.</div>`; return; }
         filteredList.forEach(item => {
             grid.innerHTML += `
                 <div class="product-card">
@@ -293,149 +307,57 @@
         });
     }
 
-    // Initial Load All Products
     window.renderProducts(products);
-
-    // Live Search Functionality
-    window.handleSearch = function(query) {
-        document.getElementById('mainSearchBar').value = query; // keep input synced
-        const searched = products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()));
-        window.renderProducts(searched);
-    }
-
-    // Category Filter Functionality
-    window.filterCategory = function(cat) {
-        document.getElementById('mainSearchBar').value = ''; // Reset search on category click
-        const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
-        window.renderProducts(filtered);
-    }
-
-    // --- Modal & Cart Operations ---
+    window.handleSearch = function(query) { document.getElementById('mainSearchBar').value = query; window.renderProducts(products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()))); }
+    window.filterCategory = function(cat) { document.getElementById('mainSearchBar').value = ''; window.renderProducts(cat === 'All' ? products : products.filter(p => p.cat === cat)); }
     window.openModal = function(id) {
         const prod = products.find(p => p.id === id);
-        document.getElementById('modalName').innerText = prod.n;
-        document.getElementById('modalImg').src = prod.img;
-        document.getElementById('modalPrice').innerText = "₹" + prod.p;
+        document.getElementById('modalName').innerText = prod.n; document.getElementById('modalImg').src = prod.img; document.getElementById('modalPrice').innerText = "₹" + prod.p;
         document.getElementById('modalAddBtn').setAttribute('onclick', `addToCartById(${prod.id}); document.getElementById('productModal').style.display='none';`);
-        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `payNow(${prod.p})`);
-        document.getElementById('productModal').style.display = 'block';
+        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `payNow(${prod.p})`); document.getElementById('productModal').style.display = 'block';
     }
-
     window.toggleCart = function(open) {
         const sidebar = document.getElementById('cartSidebar');
-        if (open) sidebar.classList.add('active');
-        else sidebar.classList.remove('active');
+        if (open) sidebar.classList.add('active'); else sidebar.classList.remove('active');
     }
-
-    window.addToCartById = function(id) {
-        const prod = products.find(p => p.id === id);
-        window.cartList.push(prod);
-        updateCartUI();
-        window.toggleCart(true); 
-    }
-
-    window.removeFromCart = function(index) {
-        window.cartList.splice(index, 1);
-        updateCartUI();
-    }
-
+    window.addToCartById = function(id) { window.cartList.push(products.find(p => p.id === id)); updateCartUI(); window.toggleCart(true); }
+    window.removeFromCart = function(index) { window.cartList.splice(index, 1); updateCartUI(); }
     function updateCartUI() {
         document.getElementById('cartCount').innerText = window.cartList.length;
-        const container = document.getElementById('cartItemsContainer');
-        container.innerHTML = '';
-        let total = 0;
-
-        window.cartList.forEach((item, idx) => {
-            total += item.p;
+        const container = document.getElementById('cartItemsContainer'); container.innerHTML = ''; let total = 0;
+        window.cartList.forEach((item, idx) => { total += item.p;
             container.innerHTML += `
                 <div class="cart-item">
                     <img src="${item.img}">
-                    <div class="cart-item-details">
-                        <div class="cart-item-title">${item.n}</div>
-                        <div class="cart-item-price">₹${item.p}</div>
-                    </div>
+                    <div class="cart-item-details"><div class="cart-item-title">${item.n}</div><div class="cart-item-price">₹${item.p}</div></div>
                     <button class="remove-item-btn" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can"></i></button>
                 </div>`;
         });
         document.getElementById('cartTotalDisplay').innerText = "₹" + total;
     }
-
-    window.payNow = function(p) {
-        new Razorpay({ "key": "YOUR_RAZORPAY_KEY", "amount": p * 100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open();
-    };
-
-    window.checkoutCart = function() {
-        let total = window.cartList.reduce((sum, item) => sum + item.p, 0);
-        if (total === 0) return alert("Your cart is empty!");
-        window.payNow(total);
-    }
-
-    // --- Dropdowns & Auth UI ---
-    window.toggleDrop = function(id) {
-        document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
-        const drop = document.getElementById(id);
-        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
-    }
-    window.openAuthModal = function() {
-        document.getElementById('authModal').style.display = 'block';
-        document.getElementById('loginDrop').style.display = 'none'; 
-    }
+    window.payNow = function(p) { new Razorpay({ "key": "YOUR_RAZORPAY_KEY", "amount": p * 100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open(); };
+    window.checkoutCart = function() { let total = window.cartList.reduce((sum, item) => sum + item.p, 0); if (total === 0) return alert("Your cart is empty!"); window.payNow(total); }
+    window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
+    window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
-        document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account";
-        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
-        document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none";
-        document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
+        document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account"; document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
+        document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none"; document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
     }
-
-    // --- Backend Authentication ---
     window.processAuth = function() {
         if(window.isLoginMode) {
-            let email = document.getElementById('loginEmail').value;
-            let pass = document.getElementById('loginPassword').value;
+            let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value;
             if(!email || !pass) return alert("Please enter Email and Password!");
-            
             document.getElementById('authSubmit').innerText = "Logging in...";
-            signInWithEmailAndPassword(auth, email, pass)
-            .then(() => {
-                alert("Login Successful! Welcome to ZippyKart.");
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('authSubmit').innerText = "Login";
-            }).catch((error) => {
-                alert("Error: " + error.message);
-                document.getElementById('authSubmit').innerText = "Login";
-            });
+            signInWithEmailAndPassword(auth, email, pass).then(() => { alert("Login Successful!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Login"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Login"; });
         } else {
-            let fName = document.getElementById('regFirstName').value;
-            let mobile = document.getElementById('regMobile').value;
-            let email = document.getElementById('regEmail').value;
-            let pass = document.getElementById('regPassword').value;
-            let cpass = document.getElementById('regConfirmPassword').value;
-            
-            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!");
-            if(pass !== cpass) return alert("Passwords do not match!");
-            
+            let fName = document.getElementById('regFirstName').value, mobile = document.getElementById('regMobile').value, email = document.getElementById('regEmail').value, pass = document.getElementById('regPassword').value, cpass = document.getElementById('regConfirmPassword').value;
+            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!"); if(pass !== cpass) return alert("Passwords do not match!");
             document.getElementById('authSubmit').innerText = "Creating Account...";
-            createUserWithEmailAndPassword(auth, email, pass)
-            .then(() => {
-                alert("Account Created Successfully! Welcome " + fName + ".");
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('authSubmit').innerText = "Register Now";
-            }).catch((error) => {
-                alert("Error: " + error.message);
-                document.getElementById('authSubmit').innerText = "Register Now";
-            });
+            createUserWithEmailAndPassword(auth, email, pass).then(() => { alert("Account Created Successfully!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Register Now"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Register Now"; });
         }
     }
-    window.googleSignIn = function() {
-        signInWithPopup(auth, provider).then(() => {
-            document.getElementById('authModal').style.display = 'none';
-        }).catch((error) => {
-            alert("Error with Google Sign-In: " + error.message);
-        });
-    }
-
-    // Global Click Listener
+    window.googleSignIn = function() { signInWithPopup(auth, provider).then(() => { document.getElementById('authModal').style.display = 'none'; }).catch((error) => { alert(error.message); }); }
     window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none';
