@@ -44,11 +44,13 @@
         .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
         /* Login/Auth Modal */
-        .auth-content { background: #fff; margin: 8% auto; width: 350px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .auth-content { background: #fff; margin: 5% auto; width: 380px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .auth-header { background: #ff3e6c; color: white; padding: 25px 20px; text-align: center; }
         .auth-header h2 { margin: 0; font-size: 22px; }
         .auth-body { padding: 25px 20px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; outline: none; }
+        .auth-input:focus { border-color: #ff3e6c; }
+        .input-group { display: flex; gap: 10px; }
         .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s; }
         .auth-submit-btn:hover { background: #333; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
@@ -75,7 +77,6 @@
     <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
-<!-- Navigation Icons -->
 <div class="nav-icons">
     <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
@@ -89,7 +90,6 @@
 
 <div class="product-grid" id="productGrid"></div>
 
-<!-- Product Detail Modal -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -102,7 +102,6 @@
     </div>
 </div>
 
-<!-- Authentication (Login/Signup) Modal -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
@@ -110,15 +109,29 @@
             <h2 id="authTitle">Login to ZippyKart</h2>
         </div>
         <div class="auth-body">
-            <input type="email" id="authEmail" class="auth-input" placeholder="Email Address">
-            <input type="password" id="authPassword" class="auth-input" placeholder="Password">
+            
+            <div id="loginFields">
+                <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
+                <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
+            </div>
+
+            <div id="regFields" style="display: none;">
+                <div class="input-group">
+                    <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
+                    <input type="text" id="regLastName" class="auth-input" placeholder="Last Name">
+                </div>
+                <input type="tel" id="regMobile" class="auth-input" placeholder="Mobile Number (10 digits)" maxlength="10">
+                <input type="email" id="regEmail" class="auth-input" placeholder="Email Address">
+                <input type="password" id="regPassword" class="auth-input" placeholder="Create Password">
+                <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Re-enter Password">
+            </div>
+
             <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
-            <div class="auth-switch" onclick="toggleAuthMode()">Don't have an account? <span id="authSwitchText">Sign Up</span></div>
+            <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <span id="authSwitchAction">Sign Up</span></div>
         </div>
     </div>
 </div>
 
-<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
@@ -192,27 +205,36 @@
     window.openAuthModal = function() {
         document.getElementById('authModal').style.display = 'block';
         document.getElementById('loginDrop').style.display = 'none'; 
+        
+        // Reset inputs on open
+        document.querySelectorAll('.auth-input').forEach(input => input.value = '');
+        if (!window.isLoginMode) window.toggleAuthMode(); // Ensure it opens on login by default
     }
 
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
+        
+        // Update Title & Button
         document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account";
-        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Sign Up";
-        document.querySelector('.auth-switch').innerHTML = window.isLoginMode ? "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
+        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
+        
+        // Toggle field visibility
+        document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none";
+        document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
+        
+        // Update switch text
+        document.getElementById('authSwitchPrompt').innerText = window.isLoginMode ? "Don't have an account?" : "Already have an account?";
+        document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
     }
 
     window.processAuth = function() {
-        let email = document.getElementById('authEmail').value;
-        let pass = document.getElementById('authPassword').value;
-        
-        if(email === "" || pass === "") {
-            alert("Please enter both Email and Password!");
-            return;
-        }
-
-        document.getElementById('authSubmit').innerText = "Processing...";
-
         if(window.isLoginMode) {
+            let email = document.getElementById('loginEmail').value;
+            let pass = document.getElementById('loginPassword').value;
+            
+            if(!email || !pass) return alert("Please enter Email and Password!");
+            document.getElementById('authSubmit').innerText = "Logging in...";
+
             signInWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
                 alert("Login Successful! Welcome to ZippyKart.");
@@ -223,23 +245,38 @@
                 alert("Error: " + error.message);
                 document.getElementById('authSubmit').innerText = "Login";
             });
+
         } else {
+            let fName = document.getElementById('regFirstName').value;
+            let lName = document.getElementById('regLastName').value;
+            let mobile = document.getElementById('regMobile').value;
+            let email = document.getElementById('regEmail').value;
+            let pass = document.getElementById('regPassword').value;
+            let cpass = document.getElementById('regConfirmPassword').value;
+
+            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!");
+            if(pass !== cpass) return alert("Passwords do not match!");
+            if(pass.length < 6) return alert("Password must be at least 6 characters.");
+
+            document.getElementById('authSubmit').innerText = "Creating Account...";
+
             createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
-                alert("Account Created Successfully! Welcome to ZippyKart.");
+                // Future step: Save fName, lName, mobile to Firebase Firestore here
+                alert("Account Created Successfully! Welcome " + fName + ".");
                 document.getElementById('authModal').style.display = 'none';
-                document.getElementById('authSubmit').innerText = "Sign Up";
+                document.getElementById('authSubmit').innerText = "Register Now";
             })
             .catch((error) => {
                 alert("Error: " + error.message);
-                document.getElementById('authSubmit').innerText = "Sign Up";
+                document.getElementById('authSubmit').innerText = "Register Now";
             });
         }
     }
 
     // --- Global Click Listener ---
     window.onclick = function(e) { 
-        if(!e.target.closest('.menu-wrapper')) {
+        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) {
             document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         }
         if(e.target == document.getElementById('productModal')) {
