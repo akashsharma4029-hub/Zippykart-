@@ -55,6 +55,14 @@
         .auth-submit-btn:hover { background: #333; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
         .auth-switch span { color: #ff3e6c; font-weight: bold; }
+        
+        /* Google Button Styles */
+        .auth-divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #aaa; font-size: 12px; font-weight: bold; }
+        .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-bottom: 1px solid #eee; }
+        .auth-divider span { padding: 0 10px; }
+        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .google-btn:hover { background: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .google-btn img { width: 18px; margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -77,6 +85,7 @@
     <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
+<!-- Navigation Icons -->
 <div class="nav-icons">
     <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
@@ -90,6 +99,7 @@
 
 <div class="product-grid" id="productGrid"></div>
 
+<!-- Product Detail Modal -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -102,6 +112,7 @@
     </div>
 </div>
 
+<!-- Authentication (Login/Signup) Modal -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
@@ -110,11 +121,13 @@
         </div>
         <div class="auth-body">
             
+            <!-- Login Fields -->
             <div id="loginFields">
                 <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
                 <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
             </div>
 
+            <!-- Registration Fields -->
             <div id="regFields" style="display: none;">
                 <div class="input-group">
                     <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
@@ -127,11 +140,19 @@
             </div>
 
             <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
+            
+            <!-- Google Sign-In Section -->
+            <div class="auth-divider"><span>OR</span></div>
+            <button class="google-btn" onclick="googleSignIn()">
+                <i class="fa-brands fa-google" style="color: #DB4437; font-size: 16px; margin-right: 8px;"></i> Continue with Google
+            </button>
+
             <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <span id="authSwitchAction">Sign Up</span></div>
         </div>
     </div>
 </div>
 
+<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
@@ -140,8 +161,9 @@
 </div>
 
 <script type="module">
+    // Firebase Imports including GoogleAuthProvider
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     // --- YAHAN APNI FIREBASE DETAILS DALEIN ---
     const firebaseConfig = {
@@ -155,6 +177,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider(); // Google Auth Provider
 
     // --- Product Logic ---
     window.cart = 0;
@@ -205,28 +228,21 @@
     window.openAuthModal = function() {
         document.getElementById('authModal').style.display = 'block';
         document.getElementById('loginDrop').style.display = 'none'; 
-        
-        // Reset inputs on open
         document.querySelectorAll('.auth-input').forEach(input => input.value = '');
-        if (!window.isLoginMode) window.toggleAuthMode(); // Ensure it opens on login by default
+        if (!window.isLoginMode) window.toggleAuthMode(); 
     }
 
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
-        
-        // Update Title & Button
         document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account";
         document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
-        
-        // Toggle field visibility
         document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none";
         document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
-        
-        // Update switch text
         document.getElementById('authSwitchPrompt').innerText = window.isLoginMode ? "Don't have an account?" : "Already have an account?";
         document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
     }
 
+    // Email/Password Auth
     window.processAuth = function() {
         if(window.isLoginMode) {
             let email = document.getElementById('loginEmail').value;
@@ -245,10 +261,8 @@
                 alert("Error: " + error.message);
                 document.getElementById('authSubmit').innerText = "Login";
             });
-
         } else {
             let fName = document.getElementById('regFirstName').value;
-            let lName = document.getElementById('regLastName').value;
             let mobile = document.getElementById('regMobile').value;
             let email = document.getElementById('regEmail').value;
             let pass = document.getElementById('regPassword').value;
@@ -256,13 +270,11 @@
 
             if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!");
             if(pass !== cpass) return alert("Passwords do not match!");
-            if(pass.length < 6) return alert("Password must be at least 6 characters.");
 
             document.getElementById('authSubmit').innerText = "Creating Account...";
 
             createUserWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
-                // Future step: Save fName, lName, mobile to Firebase Firestore here
                 alert("Account Created Successfully! Welcome " + fName + ".");
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('authSubmit').innerText = "Register Now";
@@ -272,6 +284,18 @@
                 document.getElementById('authSubmit').innerText = "Register Now";
             });
         }
+    }
+
+    // Google Sign-In Logic
+    window.googleSignIn = function() {
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            alert("Google Sign-In Successful! Welcome " + user.displayName);
+            document.getElementById('authModal').style.display = 'none';
+        }).catch((error) => {
+            alert("Error with Google Sign-In: " + error.message);
+        });
     }
 
     // --- Global Click Listener ---
@@ -288,4 +312,5 @@
     };
 </script>
 </body>
-</html>
+    </html>
+    
