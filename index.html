@@ -22,7 +22,7 @@
         .nav-cat i { display: block; font-size: 22px; margin-bottom: 5px; }
         
         /* Product Grid Setup */
-        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; min-height: 400px; }
         .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; transition: box-shadow 0.3s; }
         .product-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .product-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; border-radius: 4px; }
@@ -44,19 +44,14 @@
         .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         
-        /* Modal Animation Keyframes */
-        @keyframes popUpAnim {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Common Modal Setup */
+        /* Common Modal Setup & Animations */
+        @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #aaa; transition: 0.3s; }
         .close-btn:hover { color: #000; }
         .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
-        /* Login/Auth Modal */
+        /* Auth Modal */
         .auth-content { background: #fff; margin: 5% auto; width: 380px; border-radius: 8px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .auth-header { background: #ff3e6c; color: white; padding: 25px 20px; text-align: center; }
         .auth-header h2 { margin: 0; font-size: 22px; }
@@ -69,7 +64,6 @@
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
         .auth-switch span { color: #ff3e6c; font-weight: bold; }
         
-        /* Google Button Styles */
         .auth-divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #aaa; font-size: 12px; font-weight: bold; }
         .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-bottom: 1px solid #eee; }
         .auth-divider span { padding: 0 10px; }
@@ -77,6 +71,18 @@
         .google-btn:hover { background: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
         .empty-grid-msg { grid-column: span 4; text-align: center; padding: 50px; font-size: 16px; color: #777; font-weight: bold; }
+
+        /* --- NEW: Professional Footer Styles --- */
+        .main-footer { background-color: #1a1a1a; color: #fff; padding: 50px 5% 20px; margin-top: 40px; }
+        .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
+        .footer-col a { display: block; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; }
+        .footer-col a:hover { color: #fff; transform: translateX(5px); }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: 0.3s; padding: 0; }
+        .social-icons a:hover { background: #ff3e6c; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
@@ -113,6 +119,43 @@
 </div>
 
 <div class="product-grid" id="productGrid"></div>
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-col">
+            <h3>ZippyKart</h3>
+            <p>Your premium destination for the latest trends and tech. We deliver quality products right to your doorstep with zero hassle.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <a href="#" onclick="filterCategory('Men')">Men's Fashion</a>
+            <a href="#" onclick="filterCategory('Electronics')">Gadgets & Tech</a>
+            <a href="#" onclick="document.getElementById('chatBox').style.display='block'">Customer Support</a>
+            <a href="#">Track Order</a>
+        </div>
+        <div class="footer-col">
+            <h3>Policies</h3>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Return & Refund</a>
+            <a href="#">Shipping Details</a>
+        </div>
+        <div class="footer-col">
+            <h3>Get In Touch</h3>
+            <p>ZestGo Retail</p>
+            <p>Rajendra Place, New Delhi</p>
+            <p>Email: care@zippykart.co.in</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 ZippyKart | A ZestGo Retail Initiative. All Rights Reserved.
+    </div>
+</footer>
 
 <div id="cartSidebar" class="cart-sidebar">
     <div class="cart-title-box">
