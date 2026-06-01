@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
-        body { font-family: sans-serif; margin: 0; background: #f8f9fa; }
+        body { font-family: sans-serif; margin: 0; background: #f8f9fa; overflow-x: hidden; }
         
         /* Header Setup */
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; }
@@ -29,6 +29,21 @@
         .add-btn { background: #000; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         .buy-btn { background: #ff3e6c; color: #fff; border: none; padding: 8px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
         
+        /* Professional Side-out Cart Panel */
+        .cart-sidebar { position: fixed; top: 0; right: -350px; width: 320px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: 0.3s ease; padding: 20px; display: flex; flex-direction: column; }
+        .cart-sidebar.active { right: 0; }
+        .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; }
+        .cart-items-wrapper { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; position: relative; }
+        .cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
+        .cart-item-details { flex: 1; text-align: left; }
+        .cart-item-title { font-size: 13px; font-weight: bold; }
+        .cart-item-price { font-size: 12px; color: #ff3e6c; font-weight: bold; margin-top: 2px; }
+        .remove-item-btn { border: none; background: none; color: #aaa; cursor: pointer; font-size: 16px; }
+        .remove-item-btn:hover { color: red; }
+        .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-top: 15px; }
+        .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
+        
         /* Modal Animation Keyframes */
         @keyframes popUpAnim {
             0% { transform: scale(0.8); opacity: 0; }
@@ -39,8 +54,6 @@
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #aaa; transition: 0.3s; }
         .close-btn:hover { color: #000; }
-
-        /* Product Modal */
         .modal-content { background: #fff; margin: 8% auto; padding: 20px; width: 320px; border-radius: 8px; text-align: center; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
         /* Login/Auth Modal */
@@ -82,7 +95,7 @@
         <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'">AI Chat Support</div></div>
     </div>
     
-    <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
+    <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
 <div class="nav-icons">
@@ -98,6 +111,22 @@
 
 <div class="product-grid" id="productGrid"></div>
 
+<div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-title-box">
+        <h3 style="margin:0;"><i class="fa-solid fa-cart-shopping" style="color:#ff3e6c;"></i> Shopping Cart</h3>
+        <button onclick="toggleCart(false)" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
+    </div>
+    <div class="cart-items-wrapper" id="cartItemsContainer">
+        </div>
+    <div class="cart-footer">
+        <div class="total-box">
+            <span>Total Amount:</span>
+            <span id="cartTotalDisplay">₹0</span>
+        </div>
+        <button class="buy-btn" style="padding:12px; font-size:15px; margin:0;" onclick="checkoutCart()">Proceed to Checkout</button>
+    </div>
+</div>
+
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -105,8 +134,8 @@
         <h3 id="modalName" style="margin: 10px 0 5px 0;"></h3>
         <p id="modalPrice" style="color:#ff3e6c; font-weight:bold; font-size: 18px; margin: 0;"></p>
         <p id="modalDesc" style="font-size: 13px; color: #555;">Premium quality product. 100% genuine material with easy 7 days return policy.</p>
-        <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-        <button class="buy-btn" onclick="payNow()">Buy Now</button>
+        <button class="add-btn" id="modalAddBtn">Add to Cart</button>
+        <button class="buy-btn" id="modalBuyNowBtn">Buy Now</button>
     </div>
 </div>
 
@@ -117,30 +146,25 @@
             <h2 id="authTitle">Login to ZippyKart</h2>
         </div>
         <div class="auth-body">
-            
             <div id="loginFields">
                 <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
                 <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
             </div>
-
             <div id="regFields" style="display: none;">
                 <div class="input-group">
                     <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
                     <input type="text" id="regLastName" class="auth-input" placeholder="Last Name">
                 </div>
-                <input type="tel" id="regMobile" class="auth-input" placeholder="Mobile Number (10 digits)" maxlength="10">
+                <input type="tel" id="regMobile" class="auth-input" placeholder="Mobile Number" maxlength="10">
                 <input type="email" id="regEmail" class="auth-input" placeholder="Email Address">
                 <input type="password" id="regPassword" class="auth-input" placeholder="Create Password">
                 <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Re-enter Password">
             </div>
-
             <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
-            
             <div class="auth-divider"><span>OR</span></div>
             <button class="google-btn" onclick="googleSignIn()">
                 <i class="fa-brands fa-google" style="color: #DB4437; font-size: 16px; margin-right: 8px;"></i> Continue with Google
             </button>
-
             <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <span id="authSwitchAction">Sign Up</span></div>
         </div>
     </div>
@@ -157,7 +181,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    // ZippyKart Firebase Configuration (Live)
     const firebaseConfig = {
       apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
       authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -172,7 +195,7 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // --- Real-time Auth State Monitoring ---
+    // --- Auth State Monitoring ---
     onAuthStateChanged(auth, (user) => {
         if (user) {
             let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
@@ -187,141 +210,112 @@
     });
 
     window.handleLogout = function() {
-        signOut(auth).then(() => {
-            alert("Logged out successfully!");
-        }).catch((error) => {
-            alert("Error: " + error.message);
-        });
+        signOut(auth).then(() => { alert("Logged out successfully!"); }).catch((err) => { alert(err.message); });
     }
 
-    // --- Product Logic ---
-    window.cart = 0;
+    // --- E-Commerce & Cart Logic ---
+    window.cartList = [];
     const products = [
-        { n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
-        { n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
-        { n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
-        { n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
+        { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
+        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
+        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
+        { id: 4, n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
     ];
 
     const grid = document.getElementById('productGrid');
     products.forEach(item => {
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${item.img}" onclick="openModal('${item.n}', '${item.img}', '${item.p}')">
+                <img src="${item.img}" onclick="openModal(${item.id})">
                 <div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div>
                 <div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-                <button class="buy-btn" onclick="payNow('${item.p}')">Buy Now</button>
+                <button class="add-btn" onclick="addToCartById(${item.id})">Add to Cart</button>
+                <button class="buy-btn" onclick="payNow(${item.p})">Buy Now</button>
             </div>`;
     });
 
-    window.openModal = function(n, i, p) {
-        document.getElementById('modalName').innerText = n;
-        document.getElementById('modalImg').src = i;
-        document.getElementById('modalPrice').innerText = "₹" + p;
+    window.openModal = function(id) {
+        const prod = products.find(p => p.id === id);
+        document.getElementById('modalName').innerText = prod.n;
+        document.getElementById('modalImg').src = prod.img;
+        document.getElementById('modalPrice').innerText = "₹" + prod.p;
+        document.getElementById('modalAddBtn').setAttribute('onclick', `addToCartById(${prod.id}); document.getElementById('productModal').style.display='none';`);
+        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `payNow(${prod.p})`);
         document.getElementById('productModal').style.display = 'block';
     }
-    
-    window.addToCart = function() {
-        window.cart++;
-        document.getElementById('cartCount').innerText = window.cart;
-        alert("Product added to cart successfully!");
+
+    window.toggleCart = function(open) {
+        const sidebar = document.getElementById('cartSidebar');
+        if (open) sidebar.classList.add('active');
+        else sidebar.classList.remove('active');
     }
 
-    window.payNow = function(p) { alert("Razorpay API Key setup needed to proceed with ₹" + p); };
+    window.addToCartById = function(id) {
+        const prod = products.find(p => p.id === id);
+        window.cartList.push(prod);
+        updateCartUI();
+        window.toggleCart(true); // Automatically slide open cart
+    }
 
-    // --- Dropdown Logic ---
+    window.removeFromCart = function(index) {
+        window.cartList.splice(index, 1);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        document.getElementById('cartCount').innerText = window.cartList.length;
+        const container = document.getElementById('cartItemsContainer');
+        container.innerHTML = '';
+        let total = 0;
+
+        window.cartList.forEach((item, idx) => {
+            total += item.p;
+            container.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.img}">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.n}</div>
+                        <div class="cart-item-price">₹${item.p}</div>
+                    </div>
+                    <button class="remove-item-btn" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can"></i></button>
+                </div>`;
+        });
+        document.getElementById('cartTotalDisplay').innerText = "₹" + total;
+    }
+
+    window.payNow = function(p) {
+        new Razorpay({ "key": "YOUR_RAZORPAY_KEY", "amount": p * 100, "currency": "INR", "name": "ZippyKart", "handler": function(r){ alert("Payment Success!"); } }).open();
+    };
+
+    window.checkoutCart = function() {
+        let total = window.cartList.reduce((sum, item) => sum + item.p, 0);
+        if (total === 0) return alert("Your cart is empty!");
+        window.payNow(total);
+    }
+
+    // --- Dropdown & Auth triggers ---
     window.toggleDrop = function(id) {
         document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
         const drop = document.getElementById(id);
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
-
-    // --- Authentication Logic ---
-    window.isLoginMode = true;
-    
     window.openAuthModal = function() {
         document.getElementById('authModal').style.display = 'block';
         document.getElementById('loginDrop').style.display = 'none'; 
-        document.querySelectorAll('.auth-input').forEach(input => input.value = '');
-        if (!window.isLoginMode) window.toggleAuthMode(); 
     }
-
     window.toggleAuthMode = function() {
         window.isLoginMode = !window.isLoginMode;
         document.getElementById('authTitle').innerText = window.isLoginMode ? "Login to ZippyKart" : "Create an Account";
         document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register Now";
         document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none";
         document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
-        document.getElementById('authSwitchPrompt').innerText = window.isLoginMode ? "Don't have an account?" : "Already have an account?";
-        document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
     }
 
-    // Email/Password Auth
-    window.processAuth = function() {
-        if(window.isLoginMode) {
-            let email = document.getElementById('loginEmail').value;
-            let pass = document.getElementById('loginPassword').value;
-            
-            if(!email || !pass) return alert("Please enter Email and Password!");
-            document.getElementById('authSubmit').innerText = "Logging in...";
-
-            signInWithEmailAndPassword(auth, email, pass)
-            .then(() => {
-                alert("Login Successful! Welcome to ZippyKart.");
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('authSubmit').innerText = "Login";
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-                document.getElementById('authSubmit').innerText = "Login";
-            });
-        } else {
-            let fName = document.getElementById('regFirstName').value;
-            let mobile = document.getElementById('regMobile').value;
-            let email = document.getElementById('regEmail').value;
-            let pass = document.getElementById('regPassword').value;
-            let cpass = document.getElementById('regConfirmPassword').value;
-
-            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!");
-            if(pass !== cpass) return alert("Passwords do not match!");
-
-            document.getElementById('authSubmit').innerText = "Creating Account...";
-
-            createUserWithEmailAndPassword(auth, email, pass)
-            .then(() => {
-                alert("Account Created Successfully! Welcome " + fName + ".");
-                document.getElementById('authModal').style.display = 'none';
-                document.getElementById('authSubmit').innerText = "Register Now";
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-                document.getElementById('authSubmit').innerText = "Register Now";
-            });
-        }
-    }
-
-    // Google Sign-In Logic
-    window.googleSignIn = function() {
-        signInWithPopup(auth, provider)
-        .then(() => {
-            document.getElementById('authModal').style.display = 'none';
-        }).catch((error) => {
-            alert("Error with Google Sign-In: " + error.message);
-        });
-    }
-
-    // --- Global Click Listener ---
+    // Global Click Listener
     window.onclick = function(e) { 
-        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) {
-            document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        }
-        if(e.target == document.getElementById('productModal')) {
-            document.getElementById('productModal').style.display = 'none';
-        }
-        if(e.target == document.getElementById('authModal')) {
-            document.getElementById('authModal').style.display = 'none';
-        }
+        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none';
+        if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
     };
 </script>
 </body>
