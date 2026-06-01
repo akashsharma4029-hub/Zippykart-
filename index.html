@@ -84,7 +84,7 @@
 <header>
     <div class="logo-box" onclick="filterCategory('All')"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
     
-    <input type="text" class="search-bar" placeholder="Search for products, brands and more...">
+    <input type="text" id="mainSearchBar" class="search-bar" oninput="handleSearch(this.value)" placeholder="Search for products, brands and more...">
     
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
@@ -119,8 +119,7 @@
         <h3 style="margin:0;"><i class="fa-solid fa-cart-shopping" style="color:#ff3e6c;"></i> Shopping Cart</h3>
         <button onclick="toggleCart(false)" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
     </div>
-    <div class="cart-items-wrapper" id="cartItemsContainer">
-        </div>
+    <div class="cart-items-wrapper" id="cartItemsContainer"></div>
     <div class="cart-footer">
         <div class="total-box">
             <span>Total Amount:</span>
@@ -216,7 +215,7 @@
         signOut(auth).then(() => { alert("Logged out successfully!"); }).catch((err) => { alert(err.message); });
     }
 
-    // --- Products Array with Categories Added ---
+    // --- Products Dataset ---
     window.cartList = [];
     const products = [
         { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", cat: "Men" },
@@ -229,19 +228,17 @@
         { id: 8, n: "Action Figure", p: 899, img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300", cat: "Toys" }
     ];
 
-    // --- Dynamic Rendering & Filtering Logic ---
-    window.renderProducts = function(category = 'All') {
+    // --- Dynamic Rendering & Search/Filter Logic ---
+    window.renderProducts = function(filteredList) {
         const grid = document.getElementById('productGrid');
         grid.innerHTML = '';
         
-        const filteredProducts = category === 'All' ? products : products.filter(p => p.cat === category);
-        
-        if(filteredProducts.length === 0) {
-            grid.innerHTML = `<div class="empty-grid-msg">Opps! No products available in ${category} right now.</div>`;
+        if(filteredList.length === 0) {
+            grid.innerHTML = `<div class="empty-grid-msg">Oops! No products found matching your criteria.</div>`;
             return;
         }
 
-        filteredProducts.forEach(item => {
+        filteredList.forEach(item => {
             grid.innerHTML += `
                 <div class="product-card">
                     <img src="${item.img}" onclick="openModal(${item.id})">
@@ -253,14 +250,24 @@
         });
     }
 
-    // Call initially to load all products
-    window.renderProducts('All');
+    // Initial Load All Products
+    window.renderProducts(products);
 
-    window.filterCategory = function(cat) {
-        window.renderProducts(cat);
+    // Live Search Functionality
+    window.handleSearch = function(query) {
+        document.getElementById('mainSearchBar').value = query; // keep input synced
+        const searched = products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()));
+        window.renderProducts(searched);
     }
 
-    // --- Modal & Cart Logic ---
+    // Category Filter Functionality
+    window.filterCategory = function(cat) {
+        document.getElementById('mainSearchBar').value = ''; // Reset search on category click
+        const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
+        window.renderProducts(filtered);
+    }
+
+    // --- Modal & Cart Operations ---
     window.openModal = function(id) {
         const prod = products.find(p => p.id === id);
         document.getElementById('modalName').innerText = prod.n;
@@ -320,7 +327,7 @@
         window.payNow(total);
     }
 
-    // --- Dropdown & Auth triggers ---
+    // --- Dropdowns & Auth UI ---
     window.toggleDrop = function(id) {
         document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
         const drop = document.getElementById(id);
@@ -338,7 +345,7 @@
         document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
     }
 
-    // --- Auth Processing ---
+    // --- Backend Authentication ---
     window.processAuth = function() {
         if(window.isLoginMode) {
             let email = document.getElementById('loginEmail').value;
