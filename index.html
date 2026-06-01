@@ -8,7 +8,7 @@
         
         /* Header Setup */
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; }
-        .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; }
+        .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; cursor: pointer; }
         .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; }
         .menu-wrapper { position: relative; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 150px; z-index: 9999; top: 30px; left: -20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -41,7 +41,7 @@
         .cart-item-price { font-size: 12px; color: #ff3e6c; font-weight: bold; margin-top: 2px; }
         .remove-item-btn { border: none; background: none; color: #aaa; cursor: pointer; font-size: 16px; }
         .remove-item-btn:hover { color: red; }
-        .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-top: 15px; }
+        .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         
         /* Modal Animation Keyframes */
@@ -75,12 +75,15 @@
         .auth-divider span { padding: 0 10px; }
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .google-btn:hover { background: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        .empty-grid-msg { grid-column: span 4; text-align: center; padding: 50px; font-size: 16px; color: #777; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
+    <div class="logo-box" onclick="filterCategory('All')"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
+    
     <input type="text" class="search-bar" placeholder="Search for products, brands and more...">
     
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
@@ -99,14 +102,14 @@
 </header>
 
 <div class="nav-icons">
-    <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
-    <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
-    <div class="nav-cat"><i class="fa-solid fa-user-ninja" style="color:#673ab7;"></i>Sweatshirt</div>
-    <div class="nav-cat"><i class="fa-solid fa-child-reaching" style="color:#2196f3;"></i>Kids</div>
-    <div class="nav-cat"><i class="fa-solid fa-robot" style="color:#4caf50;"></i>Toys</div>
-    <div class="nav-cat"><i class="fa-solid fa-clock" style="color:#ff9800;"></i>Watch</div>
-    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles" style="color:#9c27b0;"></i>Cosmetic</div>
-    <div class="nav-cat"><i class="fa-solid fa-headphones" style="color:#00bcd4;"></i>Electronics</div>
+    <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
+    <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
+    <div class="nav-cat" onclick="filterCategory('Sweatshirt')"><i class="fa-solid fa-user-ninja" style="color:#673ab7;"></i>Sweatshirt</div>
+    <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child-reaching" style="color:#2196f3;"></i>Kids</div>
+    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color:#4caf50;"></i>Toys</div>
+    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color:#ff9800;"></i>Watch</div>
+    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color:#9c27b0;"></i>Cosmetic</div>
+    <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color:#00bcd4;"></i>Electronics</div>
 </div>
 
 <div class="product-grid" id="productGrid"></div>
@@ -213,27 +216,51 @@
         signOut(auth).then(() => { alert("Logged out successfully!"); }).catch((err) => { alert(err.message); });
     }
 
-    // --- E-Commerce & Cart Logic ---
+    // --- Products Array with Categories Added ---
     window.cartList = [];
     const products = [
-        { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300" },
-        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" },
-        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300" },
-        { id: 4, n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" }
+        { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", cat: "Men" },
+        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300", cat: "Women" },
+        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300", cat: "Women" },
+        { id: 4, n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", cat: "Electronics" },
+        { id: 5, n: "Kids T-Shirt", p: 499, img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=300", cat: "Kids" },
+        { id: 6, n: "Smart Watch", p: 2499, img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300", cat: "Watch" },
+        { id: 7, n: "Matte Lipstick", p: 599, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300", cat: "Cosmetic" },
+        { id: 8, n: "Action Figure", p: 899, img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300", cat: "Toys" }
     ];
 
-    const grid = document.getElementById('productGrid');
-    products.forEach(item => {
-        grid.innerHTML += `
-            <div class="product-card">
-                <img src="${item.img}" onclick="openModal(${item.id})">
-                <div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div>
-                <div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div>
-                <button class="add-btn" onclick="addToCartById(${item.id})">Add to Cart</button>
-                <button class="buy-btn" onclick="payNow(${item.p})">Buy Now</button>
-            </div>`;
-    });
+    // --- Dynamic Rendering & Filtering Logic ---
+    window.renderProducts = function(category = 'All') {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        
+        const filteredProducts = category === 'All' ? products : products.filter(p => p.cat === category);
+        
+        if(filteredProducts.length === 0) {
+            grid.innerHTML = `<div class="empty-grid-msg">Opps! No products available in ${category} right now.</div>`;
+            return;
+        }
 
+        filteredProducts.forEach(item => {
+            grid.innerHTML += `
+                <div class="product-card">
+                    <img src="${item.img}" onclick="openModal(${item.id})">
+                    <div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div>
+                    <div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div>
+                    <button class="add-btn" onclick="addToCartById(${item.id})">Add to Cart</button>
+                    <button class="buy-btn" onclick="payNow(${item.p})">Buy Now</button>
+                </div>`;
+        });
+    }
+
+    // Call initially to load all products
+    window.renderProducts('All');
+
+    window.filterCategory = function(cat) {
+        window.renderProducts(cat);
+    }
+
+    // --- Modal & Cart Logic ---
     window.openModal = function(id) {
         const prod = products.find(p => p.id === id);
         document.getElementById('modalName').innerText = prod.n;
@@ -254,7 +281,7 @@
         const prod = products.find(p => p.id === id);
         window.cartList.push(prod);
         updateCartUI();
-        window.toggleCart(true); // Automatically slide open cart
+        window.toggleCart(true); 
     }
 
     window.removeFromCart = function(index) {
@@ -311,6 +338,53 @@
         document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
     }
 
+    // --- Auth Processing ---
+    window.processAuth = function() {
+        if(window.isLoginMode) {
+            let email = document.getElementById('loginEmail').value;
+            let pass = document.getElementById('loginPassword').value;
+            if(!email || !pass) return alert("Please enter Email and Password!");
+            
+            document.getElementById('authSubmit').innerText = "Logging in...";
+            signInWithEmailAndPassword(auth, email, pass)
+            .then(() => {
+                alert("Login Successful! Welcome to ZippyKart.");
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('authSubmit').innerText = "Login";
+            }).catch((error) => {
+                alert("Error: " + error.message);
+                document.getElementById('authSubmit').innerText = "Login";
+            });
+        } else {
+            let fName = document.getElementById('regFirstName').value;
+            let mobile = document.getElementById('regMobile').value;
+            let email = document.getElementById('regEmail').value;
+            let pass = document.getElementById('regPassword').value;
+            let cpass = document.getElementById('regConfirmPassword').value;
+            
+            if(!fName || !mobile || !email || !pass) return alert("Please fill all the required fields!");
+            if(pass !== cpass) return alert("Passwords do not match!");
+            
+            document.getElementById('authSubmit').innerText = "Creating Account...";
+            createUserWithEmailAndPassword(auth, email, pass)
+            .then(() => {
+                alert("Account Created Successfully! Welcome " + fName + ".");
+                document.getElementById('authModal').style.display = 'none';
+                document.getElementById('authSubmit').innerText = "Register Now";
+            }).catch((error) => {
+                alert("Error: " + error.message);
+                document.getElementById('authSubmit').innerText = "Register Now";
+            });
+        }
+    }
+    window.googleSignIn = function() {
+        signInWithPopup(auth, provider).then(() => {
+            document.getElementById('authModal').style.display = 'none';
+        }).catch((error) => {
+            alert("Error with Google Sign-In: " + error.message);
+        });
+    }
+
     // Global Click Listener
     window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper') && !e.target.closest('.auth-content')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
@@ -319,5 +393,4 @@
     };
 </script>
 </body>
-    </html>
-    
+</html>
