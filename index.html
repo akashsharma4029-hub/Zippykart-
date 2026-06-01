@@ -62,7 +62,6 @@
         .auth-divider span { padding: 0 10px; }
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .google-btn:hover { background: #f8f9fa; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .google-btn img { width: 18px; margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -71,10 +70,11 @@
     <div class="logo-box"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
     <input type="text" class="search-bar" placeholder="Search for products, brands and more...">
     
-    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">LOGIN ▾
+    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
-            <div onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
+            <div id="authOpt" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
             <div><i class="fa-solid fa-box"></i> Orders</div>
+            <div id="logoutOpt" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
     
@@ -85,7 +85,6 @@
     <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
 </header>
 
-<!-- Navigation Icons -->
 <div class="nav-icons">
     <div class="nav-cat"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
@@ -99,7 +98,6 @@
 
 <div class="product-grid" id="productGrid"></div>
 
-<!-- Product Detail Modal -->
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
@@ -112,7 +110,6 @@
     </div>
 </div>
 
-<!-- Authentication (Login/Signup) Modal -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'" style="color:white; top:15px; z-index:2;">&times;</span>
@@ -121,13 +118,11 @@
         </div>
         <div class="auth-body">
             
-            <!-- Login Fields -->
             <div id="loginFields">
                 <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
                 <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
             </div>
 
-            <!-- Registration Fields -->
             <div id="regFields" style="display: none;">
                 <div class="input-group">
                     <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
@@ -141,7 +136,6 @@
 
             <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
             
-            <!-- Google Sign-In Section -->
             <div class="auth-divider"><span>OR</span></div>
             <button class="google-btn" onclick="googleSignIn()">
                 <i class="fa-brands fa-google" style="color: #DB4437; font-size: 16px; margin-right: 8px;"></i> Continue with Google
@@ -152,7 +146,6 @@
     </div>
 </div>
 
-<!-- AI Chat Box -->
 <div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
     <strong style="color: #ff3e6c;">AI Agent Active</strong> 
     <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
@@ -161,9 +154,8 @@
 </div>
 
 <script type="module">
-    // Firebase Imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     // ZippyKart Firebase Configuration (Live)
     const firebaseConfig = {
@@ -179,6 +171,28 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
+
+    // --- Real-time Auth State Monitoring ---
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
+            document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
+            document.getElementById('authOpt').style.display = 'none';
+            document.getElementById('logoutOpt').style.display = 'block';
+        } else {
+            document.getElementById('navLoginText').innerText = "LOGIN";
+            document.getElementById('authOpt').style.display = 'block';
+            document.getElementById('logoutOpt').style.display = 'none';
+        }
+    });
+
+    window.handleLogout = function() {
+        signOut(auth).then(() => {
+            alert("Logged out successfully!");
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+    }
 
     // --- Product Logic ---
     window.cart = 0;
@@ -223,7 +237,7 @@
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    // --- Firebase Authentication Logic ---
+    // --- Authentication Logic ---
     window.isLoginMode = true;
     
     window.openAuthModal = function() {
@@ -253,7 +267,7 @@
             document.getElementById('authSubmit').innerText = "Logging in...";
 
             signInWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
+            .then(() => {
                 alert("Login Successful! Welcome to ZippyKart.");
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('authSubmit').innerText = "Login";
@@ -275,7 +289,7 @@
             document.getElementById('authSubmit').innerText = "Creating Account...";
 
             createUserWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
+            .then(() => {
                 alert("Account Created Successfully! Welcome " + fName + ".");
                 document.getElementById('authModal').style.display = 'none';
                 document.getElementById('authSubmit').innerText = "Register Now";
@@ -290,9 +304,7 @@
     // Google Sign-In Logic
     window.googleSignIn = function() {
         signInWithPopup(auth, provider)
-        .then((result) => {
-            const user = result.user;
-            alert("Google Sign-In Successful! Welcome " + user.displayName);
+        .then(() => {
             document.getElementById('authModal').style.display = 'none';
         }).catch((error) => {
             alert("Error with Google Sign-In: " + error.message);
