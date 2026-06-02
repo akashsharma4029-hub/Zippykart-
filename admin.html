@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZippyKart Pro Admin</title>
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Base & Variables */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { display: flex; background-color: #f4f7f6; color: #333; overflow-x: hidden; }
 
-        /* Sidebar */
         .sidebar { width: 250px; background-color: #1a1a2e; color: white; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; transition: 0.3s; }
         .sidebar h2 { text-align: center; color: #ff4b4b; padding: 20px 0; font-size: 24px; border-bottom: 1px solid #2a2a4a; margin-bottom: 10px; }
         .sidebar ul { list-style: none; }
         .sidebar ul li { padding: 15px 20px; border-bottom: 1px solid #2a2a4a; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
         .sidebar ul li:hover, .sidebar ul li.active { background-color: #ff4b4b; color: white; }
         
-        /* Main Content */
         .main-content { margin-left: 250px; width: calc(100% - 250px); min-height: 100vh; display: flex; flex-direction: column; transition: 0.3s; }
 
-        /* Top Navbar */
         .top-navbar { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 99; }
         .menu-toggle { font-size: 22px; cursor: pointer; color: #333; display: none; }
         
@@ -32,18 +27,15 @@
         .icon-btn:hover { background: #ff4b4b; color: white; }
         .profile-btn { background: #ff4b4b; color: white; font-weight: bold; }
 
-        /* Dropdown */
         .dropdown-menu { display: none; position: absolute; right: 0; top: 55px; background: white; width: 150px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
         .dropdown-menu.show { display: block; }
         .dropdown-menu a { display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee; }
         .dropdown-menu a:hover { background: #f9f9f9; color: #ff4b4b; }
 
-        /* Sections (For SPA Tabs) */
         .content-section { display: none; padding: 20px; }
         .content-section.active { display: block; }
         .page-title { font-size: 22px; margin-bottom: 20px; color: #1a1a2e; }
 
-        /* Form Styling */
         .form-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .form-section { margin-bottom: 25px; border: 1px solid #eee; padding: 15px; border-radius: 8px; }
         .form-section h3 { color: #ff4b4b; font-size: 16px; margin-bottom: 15px; display: flex; gap: 8px; align-items: center; }
@@ -52,10 +44,11 @@
         .full-width { grid-column: span 2; }
         
         label { font-size: 13px; color: #666; font-weight: 600; margin-bottom: 5px; display: block; }
-        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; transition: 0.3s; }
-        input:focus { border-color: #ff4b4b; }
+        /* TEXTAREA ADDED HERE FOR STYLING */
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; transition: 0.3s; font-size: 14px; }
+        input:focus, select:focus, textarea:focus { border-color: #ff4b4b; }
+        textarea { resize: vertical; min-height: 100px; }
 
-        /* Dynamic Variants UI */
         .variant-box { background: #f8f9fa; border: 1px dashed #ccc; padding: 15px; border-radius: 8px; margin-top: 15px; }
         .variant-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .variant-row input { flex: 1; }
@@ -63,28 +56,25 @@
         .btn-add-variant { width: 100%; padding: 10px; background: transparent; border: 2px dashed #007bff; color: #007bff; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 5px; }
         .btn-add-variant:hover { background: #eef6ff; }
 
-        /* Submit Buttons */
         .action-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
         .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
         .btn-discard { background: #e0e0e0; color: #333; }
         .btn-save { background: #ff4b4b; color: white; display: flex; gap: 8px; align-items: center; }
         .btn-save:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .sidebar { left: -250px; } /* Hide off-screen by default */
+            .sidebar { left: -250px; } 
             .sidebar.show { left: 0; }
             .main-content { margin-left: 0; width: 100%; }
             .menu-toggle { display: block; }
             .input-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
-            .welcome-text { display: none; } /* Hide name on small screens */
+            .welcome-text { display: none; } 
         }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <h2>🛒 ZippyKart</h2>
         <ul>
@@ -95,10 +85,8 @@
         </ul>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         
-        <!-- Top Nav -->
         <div class="top-navbar">
             <div class="menu-toggle" onclick="toggleMobileSidebar()"><i class="fas fa-bars"></i></div>
             
@@ -114,7 +102,6 @@
             </div>
         </div>
 
-        <!-- TAB 1: Add Product (Default Active) -->
         <div id="addProduct" class="content-section active">
             <h2 class="page-title">Add New Product</h2>
             
@@ -136,6 +123,14 @@
                                 <label>Stock Quantity</label>
                                 <input type="number" placeholder="100" required>
                             </div>
+                            
+                            <!-- NAYA DESCRIPTION BOX YAHAN ADD KIYA HAI -->
+                            <div class="full-width" style="margin-top: 5px;">
+                                <label>Product Description (SEO Friendly)</label>
+                                <textarea placeholder="Enter product details, fabric type, fit, and SEO keywords here..." required></textarea>
+                            </div>
+                            <!-- YAHAN TAK -->
+
                         </div>
                     </div>
 
@@ -155,20 +150,17 @@
                             <div><label>Slider 3</label><input type="url"></div>
                         </div>
                         
-                        <!-- DYNAMIC VARIANTS SECTION -->
                         <div class="variant-box">
                             <label><i class="fas fa-layer-group"></i> Variety / Color Variants Images</label>
                             <p style="font-size:12px; color:#888; margin-bottom:10px;">Add extra images. Click + to add more.</p>
                             
                             <div id="dynamicVariantContainer">
-                                <!-- First variant input row -->
                                 <div class="variant-row">
                                     <input type="url" placeholder="https://...">
                                     <button type="button" class="btn-delete" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                             
-                            <!-- The + Button -->
                             <button type="button" class="btn-add-variant" onclick="addVariantField()">
                                 <i class="fas fa-plus"></i> Add Variant Image Link
                             </button>
@@ -185,7 +177,6 @@
             </div>
         </div>
 
-        <!-- TAB 2: Dashboard (Hidden by default) -->
         <div id="dashboard" class="content-section">
             <h2 class="page-title">Dashboard Overview</h2>
             <div class="form-container">
@@ -193,7 +184,6 @@
             </div>
         </div>
 
-        <!-- TAB 3: Inventory (Hidden by default) -->
         <div id="inventory" class="content-section">
             <h2 class="page-title">Manage Inventory</h2>
             <div class="form-container">
@@ -201,7 +191,6 @@
             </div>
         </div>
 
-        <!-- TAB 4: Settings (Hidden by default) -->
         <div id="settings" class="content-section">
             <h2 class="page-title">Store Settings</h2>
             <div class="form-container">
@@ -211,79 +200,53 @@
 
     </div>
 
-    <!-- Scripts for Functionality -->
     <script>
-        // 1. Sidebar Tab Switcher (SPA Logic)
         function switchTab(tabId, element) {
-            // Remove active class from all menu items
             let listItems = document.querySelectorAll('.sidebar ul li');
             listItems.forEach(li => li.classList.remove('active'));
-            
-            // Add active class to clicked item
             element.classList.add('active');
-
-            // Hide all content sections
             let sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.remove('active'));
-
-            // Show target section
             document.getElementById(tabId).classList.add('active');
-
-            // On mobile, close sidebar after clicking
             if(window.innerWidth <= 768) {
                 toggleMobileSidebar();
             }
         }
 
-        // 2. Mobile Sidebar Toggle
         function toggleMobileSidebar() {
             document.getElementById('sidebar').classList.toggle('show');
         }
 
-        // 3. Top Dropdown Menu
         function toggleDropdown() {
             document.getElementById("profileDropdown").classList.toggle("show");
         }
         
-        // 4. Dynamic '+ Add Variant' Logic
         function addVariantField() {
             let container = document.getElementById("dynamicVariantContainer");
-            
-            // Create a new div
             let newRow = document.createElement("div");
             newRow.className = "variant-row";
-            
-            // Put input and delete button inside it
             newRow.innerHTML = `
                 <input type="url" placeholder="https://...">
                 <button type="button" class="btn-delete" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button>
             `;
-            
-            // Append to container
             container.appendChild(newRow);
         }
 
-        // 5. Professional Save Button Logic (No Freezing)
         function saveProduct(event) {
-            event.preventDefault(); // Stop page reload
-            
+            event.preventDefault(); 
             let btn = document.getElementById("saveBtn");
             let text = document.getElementById("saveText");
             let icon = document.getElementById("saveIcon");
             
-            // Change to Saving State
             btn.disabled = true;
             text.innerHTML = "Publishing...";
             icon.className = "fas fa-spinner fa-spin";
             
-            // Simulate 2 second server upload delay
             setTimeout(function() {
-                // Success State
                 text.innerHTML = "Live on ZippyKart!";
                 icon.className = "fas fa-check-circle";
                 btn.style.backgroundColor = "#28a745"; 
                 
-                // Reset form after 3 seconds
                 setTimeout(function() {
                     text.innerHTML = "Save & Publish";
                     icon.className = "fas fa-save";
@@ -291,7 +254,6 @@
                     btn.disabled = false;
                     document.getElementById("productForm").reset();
                     
-                    // Clear extra variants added
                     document.getElementById("dynamicVariantContainer").innerHTML = `
                         <div class="variant-row">
                             <input type="url" placeholder="https://...">
@@ -302,7 +264,6 @@
             }, 2000);
         }
 
-        // Close dropdown if clicked outside
         window.onclick = function(event) {
             if (!event.target.matches('.profile-btn')) {
                 let drop = document.getElementById("profileDropdown");
