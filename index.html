@@ -521,7 +521,7 @@
 
     window.payNow = function(p) { 
         new Razorpay({ 
-            "key": "YOUR_RAZORPAY_KEY", 
+            "key": "rzp_live_SuidRs4KmU9W6w", 
             "amount": p * 100, 
             "currency": "INR", 
             "name": "ZippyKart",
@@ -634,6 +634,79 @@
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
     };
+    <!-- ========================================== -->
+<!-- ZIPPYKART REAL DATABASE INTEGRATION CODE   -->
+<!-- ========================================== -->
+
+<!-- 1. Firebase ki Core Libraries (Database se baat karne ke liye) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    // 2. 🛑 YAHAN APNI FIREBASE CONFIG KO REPLACE KIJIYE 🛑
+    // (Ye details aapko aapke Firebase Console ke Settings se milengi)
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+        authDomain: "zippykart-production-157e1.firebaseapp.com",
+        projectId: "zippykart-production-157e1",
+        storageBucket: "zippykart-production-157e1.firebasestorage.app",
+        messagingSenderId: "803651431969",
+        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+        measurementId: "G-7ZJ0QTZE1C"
+    };
+    
+    // Firebase ko initialize karna
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.firestore();
+
+    // 3. Database se Products khinch kar page par dikhana
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        // ZippyKart ke HTML design ke hissab se aapka main grid dabba jahan products dikhte hain
+        // Agar aapki class '.pro-container' hai, toh ye usko auto-target karega
+        const grid = document.querySelector('.pro-container') || document.getElementById('productGrid');
+        
+        if (grid) {
+            // Firebase Firestore se products nikalna (Naya product sabse pehle dikhega)
+            db.collection("zippykart_products").orderBy("timestamp", "desc").get().then((querySnapshot) => {
+                
+                // Agar database mein products milte hain, toh purane static products ko hataiye
+                if (!querySnapshot.empty) {
+                    grid.innerHTML = ""; 
+                }
+                
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    
+                    // Naya dynamic product card banana (Aapka original professional design)
+                    const productCard = document.createElement('div');
+                    productCard.className = 'pro'; // Aapki original CSS class
+                    
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.title}">
+                        <div class="des">
+                            <h5>${product.title}</h5>
+                            <h4>₹${product.price}</h4>
+                        </div>
+                        <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+                    `;
+                    
+                    // Card ko grid ke andar daalna
+                    grid.appendChild(productCard);
+                });
+            }).catch((error) => {
+                console.error("Firebase se product load karne mein error aaya: ", error);
+            });
+        } else {
+            console.error("Error: ZippyKart ka product container (.pro-container) page par nahi mila!");
+        }
+    });
+
+<!-- ========================================== -->
+<!-- INTEGRATION CODE ENDS HERE                 -->
+<!-- ========================================== -->
+
 </script>
 </body>
 </html>
