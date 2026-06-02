@@ -291,8 +291,8 @@
 
                 await db.collection("zippykart_products").add(newProduct);
                 
-                const docRef = await addDoc(collection(db, "products"), newProduct);
-                
+                const docRef = await addDoc(collection(db, "zippykart_products"), newProduct);
+          
                 alert("Success! Product LIVE ho gaya hai. Document ID: " + docRef.id);
                 
                 // Reset form
