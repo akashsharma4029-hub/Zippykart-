@@ -3,258 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZippyKart Pro Admin</title>
-    <!-- Icons ke liye -->
+    <title>ZippyKart - Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { display: flex; background-color: #f4f7f6; color: #333; overflow-x: hidden; }
-
-        /* Sidebar Design */
-        .sidebar { width: 250px; background-color: #1a1a2e; color: white; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; }
-        .sidebar h2 { text-align: center; color: #ff4b4b; padding: 20px 0; font-size: 24px; border-bottom: 1px solid #2a2a4a; margin-bottom: 10px; }
-        .sidebar ul { list-style: none; }
-        .sidebar ul li { padding: 15px 20px; border-bottom: 1px solid #2a2a4a; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .sidebar ul li:hover, .sidebar ul li.active { background-color: #ff4b4b; color: white; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f2f5; display: flex; color: #333; }
         
-        /* Main Content */
-        .main-content { margin-left: 250px; width: calc(100% - 250px); min-height: 100vh; padding: 20px; }
-        .page-title { font-size: 22px; margin-bottom: 20px; color: #1a1a2e; font-weight: bold; }
-
-        /* Form Design */
-        .form-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 900px; margin: 0 auto; }
-        .form-section { margin-bottom: 25px; border: 1px solid #eee; padding: 20px; border-radius: 8px; background: #fafafa; }
-        .form-section h3 { color: #ff4b4b; font-size: 16px; margin-bottom: 15px; display: flex; gap: 8px; align-items: center; }
+        /* Sidebar Styling */
+        .sidebar { width: 260px; background: #1a1b2e; color: #fff; min-height: 100vh; position: fixed; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 20px; font-size: 22px; font-weight: 900; border-bottom: 1px solid #2d2e42; color: #ff3e6c; display: flex; align-items: center; gap: 10px; }
+        .nav-list { list-style: none; padding: 0; margin: 20px 0; }
+        .nav-item { padding: 15px 25px; cursor: pointer; transition: 0.3s; font-size: 15px; display: flex; align-items: center; gap: 15px; color: #a0a5ba; }
+        .nav-item:hover, .nav-item.active { background: #2d2e42; color: #fff; border-left: 4px solid #ff3e6c; }
         
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .full-width { grid-column: span 2; }
+        /* Main Content Styling */
+        .main-content { margin-left: 260px; flex: 1; display: flex; flex-direction: column; }
+        .top-bar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .top-bar .user-info { font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .user-info img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
         
-        label { font-size: 13px; color: #666; font-weight: 600; margin-bottom: 5px; display: block; }
-        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 14px; }
-        input:focus, textarea:focus { border-color: #ff4b4b; }
-
-        /* Dynamic Variant Box */
-        .variant-box { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; background: white; padding: 10px; border: 1px dashed #ccc; border-radius: 6px; }
-        .btn-add { background: #1a1a2e; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
-        .btn-remove { background: #dc3545; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
-
-        /* Submit Button */
-        .action-buttons { display: flex; justify-content: flex-end; margin-top: 20px; }
-        .btn-save { background: #ff4b4b; color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; gap: 8px; align-items: center; }
+        .dashboard-container { padding: 30px; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        .page-title { margin: 0 0 25px 0; font-size: 24px; color: #1a1b2e; }
         
+        /* Form Cards */
+        .admin-card { background: #fff; border-radius: 10px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; border: 1px solid #eaeaea; }
+        .card-header { font-size: 16px; font-weight: bold; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; color: #ff3e6c; display: flex; align-items: center; gap: 8px; }
+        
+        /* Inputs Grid */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full-width { grid-column: span 2; }
+        label { font-size: 13px; font-weight: 600; color: #555; }
+        input, select, textarea { padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; outline: none; transition: 0.3s; background: #fdfdfd; }
+        input:focus, select:focus, textarea:focus { border-color: #ff3e6c; box-shadow: 0 0 0 3px rgba(255, 62, 108, 0.1); background: #fff; }
+        
+        /* Media Upload Section (5 Images) */
+        .image-inputs-wrapper { display: flex; flex-direction: column; gap: 12px; }
+        .img-input-row { display: flex; align-items: center; gap: 10px; }
+        .img-input-row .badge { background: #222; color: #fff; font-size: 11px; padding: 5px 10px; border-radius: 4px; font-weight: bold; white-space: nowrap; width: 60px; text-align: center; }
+        .img-input-row input { flex: 1; }
+        
+        /* Dynamic Variety Section */
+        .variety-section { background: #f9f9fb; padding: 20px; border-radius: 8px; border: 1px dashed #ddd; margin-top: 15px; }
+        .variety-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .variety-row { display: flex; gap: 10px; animation: slideDown 0.3s ease forwards; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .variety-row input { flex: 1; border-color: #1976d2; }
+        .remove-btn { background: #ffebee; color: #c0392b; border: none; width: 45px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .remove-btn:hover { background: #c0392b; color: #fff; }
+        
+        .add-variety-btn { background: rgba(25, 118, 210, 0.1); color: #1976d2; border: 2px dashed #1976d2; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .add-variety-btn:hover { background: #1976d2; color: #fff; }
+        
+        /* Actions */
+        .action-bar { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
+        .cancel-btn { background: #fff; border: 1px solid #ddd; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; color: #555; }
+        .save-btn { background: #ff3e6c; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; font-weight: bold; color: #fff; font-size: 15px; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); transition: 0.3s; }
+        .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(255, 62, 108, 0.4); }
+        .save-btn:disabled { background: #ff9fb4; cursor: not-allowed; transform: none; box-shadow: none; }
+
         @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; width: 100%; }
-            .input-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            .variant-box { flex-direction: column; }
+            .sidebar { transform: translateX(-100%); z-index: 1000; }
+            .main-content { margin-left: 0; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>🛒 ZippyKart</h2>
-        <ul>
-            <li><i class="fas fa-chart-pie"></i> Dashboard</li>
-            <li class="active"><i class="fas fa-plus-square"></i> Add Product</li>
-            <li><i class="fas fa-box-open"></i> Inventory</li>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header"><i class="fa-solid fa-cart-shopping"></i> ZippyKart Admin</div>
+        <ul class="nav-list">
+            <li class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+            <li class="nav-item active"><i class="fa-solid fa-box-open"></i> Add Product</li>
+            <li class="nav-item"><i class="fa-solid fa-list-check"></i> Manage Inventory</li>
+            <li class="nav-item"><i class="fa-solid fa-truck-fast"></i> Active Orders</li>
+            <li class="nav-item"><i class="fa-solid fa-users"></i> Customers</li>
+            <li class="nav-item"><i class="fa-solid fa-gear"></i> Settings</li>
         </ul>
-    </div>
+    </aside>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <h2 class="page-title">Add New Product to Live Website</h2>
-        
-        <div class="form-container">
-            <form id="productForm" onsubmit="saveProductToLive(event)">
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div style="font-size: 20px; cursor: pointer;"><i class="fa-solid fa-bars"></i></div>
+            <div class="user-info">
+                <span>Welcome, Akash (Admin)</span>
+                <img src="https://ui-avatars.com/api/?name=Akash+Kumar&background=ff3e6c&color=fff" alt="Admin">
+            </div>
+        </header>
+
+        <!-- Dashboard Area -->
+        <div class="dashboard-container">
+            <h1 class="page-title">Add New Product</h1>
+            
+            <form id="productForm" onsubmit="event.preventDefault(); window.saveProduct();">
                 
-                <!-- Basic Info & Description -->
-                <div class="form-section">
-                    <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
-                    <div class="input-grid">
-                        <div class="full-width">
+                <!-- Section 1: Basic Info -->
+                <div class="admin-card">
+                    <div class="card-header"><i class="fa-solid fa-circle-info"></i> Basic Information</div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
                             <label>Product Title Name</label>
-                            <input type="text" id="pTitle" placeholder="e.g. Oversized Maroon T-shirt" required>
+                            <input type="text" id="prodName" placeholder="e.g. Premium Cotton Oversized T-Shirt" required>
                         </div>
-                        <div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="prodCat" required>
+                                <option value="">Select Category...</option>
+                                <option value="Men">Men's Fashion</option>
+                                <option value="Women">Women's Fashion</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Kids">Kids</option>
+                                <option value="Cosmetic">Cosmetics</option>
+                                <option value="Watch">Watches</option>
+                                <option value="Toys">Toys</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock Quantity</label>
+                            <input type="number" id="prodStock" placeholder="e.g. 50" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Pricing -->
+                <div class="admin-card">
+                    <div class="card-header"><i class="fa-solid fa-indian-rupee-sign"></i> Pricing Details</div>
+                    <div class="form-grid">
+                        <div class="form-group">
                             <label>Selling Price (₹)</label>
-                            <input type="number" id="pPrice" placeholder="599" required>
+                            <input type="number" id="prodPrice" placeholder="Final Price for customer" required>
                         </div>
-                        <div class="full-width">
-                            <label>Product Description</label>
-                            <textarea id="pDesc" rows="4" placeholder="Write about fabric, fit, etc..." required></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5 Image Links -->
-                <div class="form-section">
-                    <h3><i class="fas fa-image"></i> Product Images (Up to 5)</h3>
-                    <div class="input-grid">
-                        <div class="full-width">
-                            <label>Main Cover Image (Required) 🌟</label>
-                            <input type="url" class="img-input" id="img1" placeholder="https://..." required>
-                        </div>
-                        <div>
-                            <label>Image 2 (Optional)</label>
-                            <input type="url" class="img-input" id="img2" placeholder="https://...">
-                        </div>
-                        <div>
-                            <label>Image 3 (Optional)</label>
-                            <input type="url" class="img-input" id="img3" placeholder="https://...">
-                        </div>
-                        <div>
-                            <label>Image 4 (Optional)</label>
-                            <input type="url" class="img-input" id="img4" placeholder="https://...">
-                        </div>
-                        <div>
-                            <label>Image 5 (Optional)</label>
-                            <input type="url" class="img-input" id="img5" placeholder="https://...">
+                        <div class="form-group">
+                            <label>MRP (₹) <span style="font-weight:normal; color:#888;">(To show discount)</span></label>
+                            <input type="number" id="prodMrp" placeholder="Original Price">
                         </div>
                     </div>
                 </div>
 
-                <!-- Varieties / Variants System -->
-                <div class="form-section">
-                    <h3><i class="fas fa-tags"></i> Add Varieties (Sizes / Colors)</h3>
-                    <div id="variantContainer">
-                        <div class="variant-box">
-                            <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
-                            <input type="number" class="v-stock" placeholder="Stock Qty" required>
+                <!-- Section 3: Media & Images -->
+                <div class="admin-card">
+                    <div class="card-header"><i class="fa-regular fa-images"></i> Product Media (5 Slider Images)</div>
+                    <p style="font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 15px;">Add up to 5 image links. These will be shown in the slider on the product page.</p>
+                    
+                    <div class="image-inputs-wrapper">
+                        <div class="img-input-row">
+                            <span class="badge">Cover 1</span>
+                            <input type="url" id="img1" placeholder="Paste main image URL here..." required>
+                        </div>
+                        <div class="img-input-row">
+                            <span class="badge" style="background:#666;">Slider 2</span>
+                            <input type="url" id="img2" placeholder="Paste image 2 URL here...">
+                        </div>
+                        <div class="img-input-row">
+                            <span class="badge" style="background:#666;">Slider 3</span>
+                            <input type="url" id="img3" placeholder="Paste image 3 URL here...">
+                        </div>
+                        <div class="img-input-row">
+                            <span class="badge" style="background:#666;">Slider 4</span>
+                            <input type="url" id="img4" placeholder="Paste image 4 URL here...">
+                        </div>
+                        <div class="img-input-row">
+                            <span class="badge" style="background:#666;">Slider 5</span>
+                            <input type="url" id="img5" placeholder="Paste image 5 URL here...">
                         </div>
                     </div>
-                    <!-- The Magic '+' Button -->
-                    <button type="button" class="btn-add" onclick="addMoreVariety()">
-                        <i class="fas fa-plus"></i> Add More Variety
-                    </button>
+
+                    <!-- Dynamic Variety Images Block -->
+                    <div class="variety-section">
+                        <div class="card-header" style="border:none; margin:0; padding:0; color:#1976d2;"><i class="fa-solid fa-swatchbook"></i> Variety / Color Variants Images</div>
+                        <p style="font-size: 12px; color: #777; margin-top: 5px; margin-bottom: 15px;">Add extra images for different colors or varieties. Click + to add more.</p>
+                        
+                        <div class="variety-list" id="varietyContainer">
+                            <!-- JS will inject dynamic rows here -->
+                        </div>
+                        
+                        <button type="button" class="add-variety-btn" onclick="window.addVarietyInput()">
+                            <i class="fa-solid fa-plus"></i> Add Variant Image Link
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="action-buttons">
-                    <button type="submit" class="btn-save" id="saveBtn">
-                        <i class="fas fa-upload" id="saveIcon"></i> <span id="saveText">Upload to ZippyKart</span>
-                    </button>
+                <!-- Submit Area -->
+                <div class="action-bar">
+                    <button type="button" class="cancel-btn">Discard</button>
+                    <button type="submit" class="save-btn" id="saveProductBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Publish Product</button>
                 </div>
+                
             </form>
         </div>
-    </div>
+    </main>
 
-    <!-- JAVASCRIPT & FIREBASE -->
-    <script>
-        // --- 1. Aapki Asli Firebase Config ---
+    <!-- FIREBASE MODULE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-            authDomain: "zippykart-production-157e1.firebaseapp.com",
-            projectId: "zippykart-production-157e1",
-            storageBucket: "zippykart-production-157e1.appspot.com",
-            messagingSenderId: "803651431969",
-            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60",
-            measurementId: "G-7ZJQQTZE1C"
+          apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+          authDomain: "zippykart-production-157e1.firebaseapp.com",
+          projectId: "zippykart-production-157e1",
+          storageBucket: "zippykart-production-157e1.firebasestorage.app",
+          messagingSenderId: "803651431969",
+          appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
         };
-        
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const db = firebase.firestore();
 
-        // --- 2. '+' Button Ka Logic (Add Variety) ---
-        function addMoreVariety() {
-            const container = document.getElementById("variantContainer");
+        // Initialize Firebase and Database
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- Logic to dynamically add Variety Images ---
+        let variantCount = 0;
+
+        window.addVarietyInput = function() {
+            variantCount++;
+            const container = document.getElementById('varietyContainer');
             
-            const box = document.createElement("div");
-            box.className = "variant-box";
-            box.innerHTML = `
-                <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
-                <input type="number" class="v-stock" placeholder="Stock Qty" required>
-                <button type="button" class="btn-remove" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button>
-            `;
+            const row = document.createElement('div');
+            row.className = 'variety-row';
+            row.id = 'varRow_' + variantCount;
             
-            container.appendChild(box);
+            const input = document.createElement('input');
+            input.type = 'url';
+            input.placeholder = `Paste variety image URL ${variantCount}...`;
+            input.className = 'variant-img-link';
+            
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'remove-btn';
+            btn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            btn.onclick = function() {
+                container.removeChild(row);
+            };
+            
+            row.appendChild(input);
+            row.appendChild(btn);
+            container.appendChild(row);
         }
 
-        // --- 3. Save Data to Firebase ---
-        function saveProductToLive(event) {
-            event.preventDefault(); 
-            
-            let btn = document.getElementById("saveBtn");
-            let text = document.getElementById("saveText");
-            let icon = document.getElementById("saveIcon");
-            
-            btn.disabled = true;
-            text.innerHTML = "Publishing to Website...";
-            icon.className = "fas fa-spinner fa-spin";
-            btn.style.backgroundColor = "#555";
-            
-            // Get text data
-            const title = document.getElementById("pTitle").value;
-            const price = document.getElementById("pPrice").value;
-            const desc = document.getElementById("pDesc").value;
-            
-            // Get all filled image links
-            let images = [];
-            for(let i=1; i<=5; i++) {
-                let imgLink = document.getElementById("img" + i).value;
-                if(imgLink.trim() !== "") {
-                    images.push(imgLink);
-                }
-            }
-            
-            // Get all varieties
-            let varieties = [];
-            const vNames = document.querySelectorAll(".v-name");
-            const vStocks = document.querySelectorAll(".v-stock");
-            for(let i=0; i<vNames.length; i++) {
-                varieties.push({
-                    name: vNames[i].value,
-                    stock: vStocks[i].value
-                });
-            }
-            
-            // Save to Firestore
-            db.collection("zippykart_products").add({
-                title: title,
-                price: price,
-                description: desc,
-                image: images[0], // Main cover image link
-                all_images: images, // Array of all 5 images
-                varieties: varieties, // Array of sizes/colors
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                text.innerHTML = "✅ Successfully Live!";
-                icon.className = "fas fa-check";
-                btn.style.backgroundColor = "#28a745"; 
+        // Add one empty variant field by default
+        window.addVarietyInput();
+
+        // --- SAVE PRODUCT TO CLOUD DATABASE ---
+        window.saveProduct = async function() {
+            const saveBtn = document.getElementById('saveProductBtn');
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                const name = document.getElementById('prodName').value;
+                const category = document.getElementById('prodCat').value;
+                const price = Number(document.getElementById('prodPrice').value);
+                const mrp = document.getElementById('prodMrp').value ? Number(document.getElementById('prodMrp').value) : Math.floor(price * 1.45);
+                const stock = Number(document.getElementById('prodStock').value);
                 
-                // Reset form after 3 seconds
-                setTimeout(() => {
-                    text.innerHTML = "Upload to ZippyKart";
-                    icon.className = "fas fa-upload";
-                    btn.style.backgroundColor = "#ff4b4b";
-                    btn.disabled = false;
-                    document.getElementById("productForm").reset();
-                    // Reset variety box to only 1 row
-                    document.getElementById("variantContainer").innerHTML = `
-                        <div class="variant-box">
-                            <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
-                            <input type="number" class="v-stock" placeholder="Stock Qty" required>
-                        </div>`;
-                }, 3000);
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-                text.innerHTML = "Upload to ZippyKart";
-                icon.className = "fas fa-upload";
-                btn.style.backgroundColor = "#ff4b4b";
-                btn.disabled = false;
-            });
+                // Collect Slider Images
+                let sliderImages = [];
+                for(let i=1; i<=5; i++) {
+                    let imgVal = document.getElementById('img' + i).value;
+                    if(imgVal) sliderImages.push(imgVal);
+                }
+
+                // Collect Variety Images
+                let variantImages = [];
+                document.querySelectorAll('.variant-img-link').forEach(input => {
+                    if(input.value) variantImages.push(input.value);
+                });
+
+                // Combine images for the gallery
+                const allImages = sliderImages.concat(variantImages);
+
+                // Prepare Data object that matches our index.html structure
+                const newProduct = {
+                    n: name,
+                    p: price,
+                    mrp: mrp,
+                    cat: category,
+                    stock: stock,
+                    img: sliderImages[0], // Main Cover image
+                    imgs: allImages, // All images array
+                    createdAt: serverTimestamp()
+                };
+
+                // Add to 'products' collection in Firestore
+                const docRef = await addDoc(collection(db, "products"), newProduct);
+                
+                alert("Success! Product LIVE ho gaya hai. Document ID: " + docRef.id);
+                
+                // Reset form
+                document.getElementById('productForm').reset();
+                document.getElementById('varietyContainer').innerHTML = '';
+                variantCount = 0;
+                window.addVarietyInput();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+
+            } catch (error) {
+                console.error("Error adding product: ", error);
+                alert("Oops! Product save nahi ho paya: " + error.message);
+            } finally {
+                saveBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Save & Publish Product';
+                saveBtn.disabled = false;
+            }
         }
     </script>
 </body>
-</html>
+    </html>
+    
