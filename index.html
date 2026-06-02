@@ -521,7 +521,7 @@
 
     window.payNow = function(p) { 
         new Razorpay({ 
-            "key": "rzp_live_SuidRs4KmU9W6w", 
+            "key": "YOUR_RAZORPAY_KEY", 
             "amount": p * 100, 
             "currency": "INR", 
             "name": "ZippyKart",
@@ -634,75 +634,6 @@
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
     };
-    <!-- ========================================== -->
-<!-- ZIPPYKART REAL DATABASE INTEGRATION CODE   -->
-<!-- ========================================== -->
-
-<!-- 1. Firebase Libraries (Nesting se alag, ekdum clean) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<script>
-    // 2. Aapki Asli Firebase Config (Auto-filled from your screenshot)
-    const firebaseConfig = {
-        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-        authDomain: "zippykart-production-157e1.firebaseapp.com",
-        projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.appspot.com",
-        messagingSenderId: "803651431969",
-        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60",
-        measurementId: "G-7ZJQQTZE1C"
-    };
-    
-    // Firebase initialization check
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    const db = firebase.firestore();
-
-    // 3. Database se Products fetch karne ka smooth logic
-    document.addEventListener("DOMContentLoaded", function() {
-        // Aapka main container target ho raha hai yahan
-        const grid = document.querySelector('.pro-container') || document.getElementById('productGrid');
-        
-        if (grid) {
-            db.collection("zippykart_products").orderBy("timestamp", "desc").get().then((querySnapshot) => {
-                
-                // Agar DB mein data hai, toh pehle se bane static products ko hide/clear karein
-                if (!querySnapshot.empty) {
-                    grid.innerHTML = ""; 
-                }
-                
-                querySnapshot.forEach((doc) => {
-                    const product = doc.data();
-                    
-                    // Naya dynamic element aapke professional design ke card ke sath
-                    const productCard = document.createElement('div');
-                    productCard.className = 'pro'; 
-                    
-                    productCard.innerHTML = `
-                        <img src="${product.image}" alt="${product.title}">
-                        <div class="des">
-                            <h5>${product.title}</h5>
-                            <h4>₹${product.price}</h4>
-                        </div>
-                        <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-                    `;
-                    
-                    grid.appendChild(productCard);
-                });
-            }).catch((error) => {
-                console.error("Firebase data load error: ", error);
-            });
-        } else {
-            console.error("Error: '.pro-container' layout element nahi mila.");
-        }
-    });
-
-<!-- ========================================== -->
-<!-- INTEGRATION CODE ENDS HERE                 -->
-<!-- ========================================== -->
-    
 </script>
 </body>
 </html>
