@@ -59,6 +59,7 @@
         .cancel-btn { background: #fff; border: 1px solid #ddd; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; color: #555; }
         .save-btn { background: #ff3e6c; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; font-weight: bold; color: #fff; font-size: 15px; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); transition: 0.3s; }
         .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(255, 62, 108, 0.4); }
+        .save-btn:disabled { background: #ff9fb4; cursor: not-allowed; transform: none; box-shadow: none; }
 
         @media (max-width: 768px) {
             .sidebar { transform: translateX(-100%); z-index: 1000; }
@@ -98,7 +99,7 @@
         <div class="dashboard-container">
             <h1 class="page-title">Add New Product</h1>
             
-            <form id="productForm" onsubmit="event.preventDefault(); saveProduct();">
+            <form id="productForm" onsubmit="event.preventDefault(); window.saveProduct();">
                 
                 <!-- Section 1: Basic Info -->
                 <div class="admin-card">
@@ -143,7 +144,7 @@
                     </div>
                 </div>
 
-                <!-- Section 3: Media & Images (As requested by User) -->
+                <!-- Section 3: Media & Images -->
                 <div class="admin-card">
                     <div class="card-header"><i class="fa-regular fa-images"></i> Product Media (5 Slider Images)</div>
                     <p style="font-size: 12px; color: #777; margin-top: -10px; margin-bottom: 15px;">Add up to 5 image links. These will be shown in the slider on the product page.</p>
@@ -180,7 +181,7 @@
                             <!-- JS will inject dynamic rows here -->
                         </div>
                         
-                        <button type="button" class="add-variety-btn" onclick="addVarietyInput()">
+                        <button type="button" class="add-variety-btn" onclick="window.addVarietyInput()">
                             <i class="fa-solid fa-plus"></i> Add Variant Image Link
                         </button>
                     </div>
@@ -189,33 +190,48 @@
                 <!-- Submit Area -->
                 <div class="action-bar">
                     <button type="button" class="cancel-btn">Discard</button>
-                    <button type="submit" class="save-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Publish Product</button>
+                    <button type="submit" class="save-btn" id="saveProductBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Save & Publish Product</button>
                 </div>
                 
             </form>
         </div>
     </main>
 
-    <script>
+    <!-- FIREBASE MODULE SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Your Firebase Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+          authDomain: "zippykart-production-157e1.firebaseapp.com",
+          projectId: "zippykart-production-157e1",
+          storageBucket: "zippykart-production-157e1.firebasestorage.app",
+          messagingSenderId: "803651431969",
+          appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+        };
+
+        // Initialize Firebase and Database
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         // --- Logic to dynamically add Variety Images ---
         let variantCount = 0;
 
-        function addVarietyInput() {
+        window.addVarietyInput = function() {
             variantCount++;
             const container = document.getElementById('varietyContainer');
             
-            // Create a new row
             const row = document.createElement('div');
             row.className = 'variety-row';
             row.id = 'varRow_' + variantCount;
             
-            // Create Input
             const input = document.createElement('input');
             input.type = 'url';
             input.placeholder = `Paste variety image URL ${variantCount}...`;
             input.className = 'variant-img-link';
             
-            // Create Remove Button
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'remove-btn';
@@ -224,55 +240,76 @@
                 container.removeChild(row);
             };
             
-            // Append to row, then to container
             row.appendChild(input);
             row.appendChild(btn);
             container.appendChild(row);
         }
 
         // Add one empty variant field by default
-        addVarietyInput();
+        window.addVarietyInput();
 
-        // --- Logic to handle Form Submission ---
-        function saveProduct() {
-            // Collect Basic Info
-            const name = document.getElementById('prodName').value;
-            const category = document.getElementById('prodCat').value;
-            const price = document.getElementById('prodPrice').value;
-            
-            // Collect the 5 Slider Images (Filter out empty ones)
-            let sliderImages = [];
-            for(let i=1; i<=5; i++) {
-                let imgVal = document.getElementById('img' + i).value;
-                if(imgVal) sliderImages.push(imgVal);
+        // --- SAVE PRODUCT TO CLOUD DATABASE ---
+        window.saveProduct = async function() {
+            const saveBtn = document.getElementById('saveProductBtn');
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                const name = document.getElementById('prodName').value;
+                const category = document.getElementById('prodCat').value;
+                const price = Number(document.getElementById('prodPrice').value);
+                const mrp = document.getElementById('prodMrp').value ? Number(document.getElementById('prodMrp').value) : Math.floor(price * 1.45);
+                const stock = Number(document.getElementById('prodStock').value);
+                
+                // Collect Slider Images
+                let sliderImages = [];
+                for(let i=1; i<=5; i++) {
+                    let imgVal = document.getElementById('img' + i).value;
+                    if(imgVal) sliderImages.push(imgVal);
+                }
+
+                // Collect Variety Images
+                let variantImages = [];
+                document.querySelectorAll('.variant-img-link').forEach(input => {
+                    if(input.value) variantImages.push(input.value);
+                });
+
+                // Combine images for the gallery
+                const allImages = sliderImages.concat(variantImages);
+
+                // Prepare Data object that matches our index.html structure
+                const newProduct = {
+                    n: name,
+                    p: price,
+                    mrp: mrp,
+                    cat: category,
+                    stock: stock,
+                    img: sliderImages[0], // Main Cover image
+                    imgs: allImages, // All images array
+                    createdAt: serverTimestamp()
+                };
+
+                // Add to 'products' collection in Firestore
+                const docRef = await addDoc(collection(db, "products"), newProduct);
+                
+                alert("Success! Product LIVE ho gaya hai. Document ID: " + docRef.id);
+                
+                // Reset form
+                document.getElementById('productForm').reset();
+                document.getElementById('varietyContainer').innerHTML = '';
+                variantCount = 0;
+                window.addVarietyInput();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+
+            } catch (error) {
+                console.error("Error adding product: ", error);
+                alert("Oops! Product save nahi ho paya: " + error.message);
+            } finally {
+                saveBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Save & Publish Product';
+                saveBtn.disabled = false;
             }
-
-            // Collect the Dynamic Variety Images
-            let variantImages = [];
-            document.querySelectorAll('.variant-img-link').forEach(input => {
-                if(input.value) variantImages.push(input.value);
-            });
-
-            // Make a Final Product Object
-            const newProduct = {
-                title: name,
-                category: category,
-                price: price,
-                mainSliderImages: sliderImages,
-                variantImages: variantImages
-            };
-
-            console.log("New Product Ready for Database:", newProduct);
-            alert("Success! Product '" + name + "' configuration generated. Check console for output.");
-            
-            // Reset form for next entry
-            document.getElementById('productForm').reset();
-            document.getElementById('varietyContainer').innerHTML = '';
-            variantCount = 0;
-            addVarietyInput();
-            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
-  </html>
-  
+    </html>
+    
