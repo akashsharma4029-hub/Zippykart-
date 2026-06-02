@@ -289,7 +289,8 @@
                     createdAt: serverTimestamp()
                 };
 
-                // Add to 'products' collection in Firestore
+                await db.collection("zippykart_products").add(newProduct);
+                
                 const docRef = await addDoc(collection(db, "products"), newProduct);
                 
                 alert("Success! Product LIVE ho gaya hai. Document ID: " + docRef.id);
