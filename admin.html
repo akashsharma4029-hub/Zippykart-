@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZippyKart Pro Admin</title>
+    <!-- Icons ke liye -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Firebase SDKs -->
@@ -11,45 +12,53 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { display: flex; background-color: #f4f7f6; color: #333; overflow-x: hidden; }
 
-        .sidebar { width: 250px; background-color: #1a1a2e; color: white; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; transition: 0.3s; }
+        /* Sidebar Design */
+        .sidebar { width: 250px; background-color: #1a1a2e; color: white; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; }
         .sidebar h2 { text-align: center; color: #ff4b4b; padding: 20px 0; font-size: 24px; border-bottom: 1px solid #2a2a4a; margin-bottom: 10px; }
         .sidebar ul { list-style: none; }
-        .sidebar ul li { padding: 15px 20px; border-bottom: 1px solid #2a2a4a; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .sidebar ul li { padding: 15px 20px; border-bottom: 1px solid #2a2a4a; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .sidebar ul li:hover, .sidebar ul li.active { background-color: #ff4b4b; color: white; }
         
-        .main-content { margin-left: 250px; width: calc(100% - 250px); min-height: 100vh; display: flex; flex-direction: column; transition: 0.3s; padding: 20px; }
-        .page-title { font-size: 22px; margin-bottom: 20px; color: #1a1a2e; }
+        /* Main Content */
+        .main-content { margin-left: 250px; width: calc(100% - 250px); min-height: 100vh; padding: 20px; }
+        .page-title { font-size: 22px; margin-bottom: 20px; color: #1a1a2e; font-weight: bold; }
 
-        .form-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 800px; margin: 0 auto; }
-        .form-section { margin-bottom: 25px; border: 1px solid #eee; padding: 15px; border-radius: 8px; }
+        /* Form Design */
+        .form-container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); max-width: 900px; margin: 0 auto; }
+        .form-section { margin-bottom: 25px; border: 1px solid #eee; padding: 20px; border-radius: 8px; background: #fafafa; }
         .form-section h3 { color: #ff4b4b; font-size: 16px; margin-bottom: 15px; display: flex; gap: 8px; align-items: center; }
         
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .full-width { grid-column: span 2; }
         
         label { font-size: 13px; color: #666; font-weight: 600; margin-bottom: 5px; display: block; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; transition: 0.3s; font-size: 14px; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 14px; }
         input:focus, textarea:focus { border-color: #ff4b4b; }
 
-        .action-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-        .btn { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; }
-        .btn-save { background: #ff4b4b; color: white; display: flex; gap: 8px; align-items: center; transition: 0.3s; }
-        .btn-save:disabled { opacity: 0.7; cursor: not-allowed; }
+        /* Dynamic Variant Box */
+        .variant-box { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; background: white; padding: 10px; border: 1px dashed #ccc; border-radius: 6px; }
+        .btn-add { background: #1a1a2e; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        .btn-remove { background: #dc3545; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+
+        /* Submit Button */
+        .action-buttons { display: flex; justify-content: flex-end; margin-top: 20px; }
+        .btn-save { background: #ff4b4b; color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; gap: 8px; align-items: center; }
         
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .main-content { margin-left: 0; width: 100%; }
             .input-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
+            .variant-box { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <h2>🛒 ZippyKart</h2>
         <ul>
@@ -59,12 +68,14 @@
         </ul>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-content">
         <h2 class="page-title">Add New Product to Live Website</h2>
         
         <div class="form-container">
-            <form id="productForm" onsubmit="saveProduct(event)">
+            <form id="productForm" onsubmit="saveProductToLive(event)">
                 
+                <!-- Basic Info & Description -->
                 <div class="form-section">
                     <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
                     <div class="input-grid">
@@ -72,31 +83,62 @@
                             <label>Product Title Name</label>
                             <input type="text" id="pTitle" placeholder="e.g. Oversized Maroon T-shirt" required>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3><i class="fas fa-rupee-sign"></i> Pricing</h3>
-                    <div class="input-grid">
                         <div>
                             <label>Selling Price (₹)</label>
                             <input type="number" id="pPrice" placeholder="599" required>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3><i class="fas fa-image"></i> Product Image (Direct URL)</h3>
-                    <div class="input-grid">
                         <div class="full-width">
-                            <label>Cover Image Link</label>
-                            <input type="url" id="pCover" placeholder="https://..." required>
+                            <label>Product Description</label>
+                            <textarea id="pDesc" rows="4" placeholder="Write about fabric, fit, etc..." required></textarea>
                         </div>
                     </div>
                 </div>
 
+                <!-- 5 Image Links -->
+                <div class="form-section">
+                    <h3><i class="fas fa-image"></i> Product Images (Up to 5)</h3>
+                    <div class="input-grid">
+                        <div class="full-width">
+                            <label>Main Cover Image (Required) 🌟</label>
+                            <input type="url" class="img-input" id="img1" placeholder="https://..." required>
+                        </div>
+                        <div>
+                            <label>Image 2 (Optional)</label>
+                            <input type="url" class="img-input" id="img2" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label>Image 3 (Optional)</label>
+                            <input type="url" class="img-input" id="img3" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label>Image 4 (Optional)</label>
+                            <input type="url" class="img-input" id="img4" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label>Image 5 (Optional)</label>
+                            <input type="url" class="img-input" id="img5" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Varieties / Variants System -->
+                <div class="form-section">
+                    <h3><i class="fas fa-tags"></i> Add Varieties (Sizes / Colors)</h3>
+                    <div id="variantContainer">
+                        <div class="variant-box">
+                            <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
+                            <input type="number" class="v-stock" placeholder="Stock Qty" required>
+                        </div>
+                    </div>
+                    <!-- The Magic '+' Button -->
+                    <button type="button" class="btn-add" onclick="addMoreVariety()">
+                        <i class="fas fa-plus"></i> Add More Variety
+                    </button>
+                </div>
+
+                <!-- Submit Button -->
                 <div class="action-buttons">
-                    <button type="submit" class="btn btn-save" id="saveBtn">
+                    <button type="submit" class="btn-save" id="saveBtn">
                         <i class="fas fa-upload" id="saveIcon"></i> <span id="saveText">Upload to ZippyKart</span>
                     </button>
                 </div>
@@ -104,8 +146,9 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT & FIREBASE -->
     <script>
-        // 1. Aapki Asli Firebase Config
+        // --- 1. Aapki Asli Firebase Config ---
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -116,51 +159,92 @@
             measurementId: "G-7ZJQQTZE1C"
         };
         
-        // 2. Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
 
-        // 3. Save Function
-        function saveProduct(event) {
-            event.preventDefault(); // Page reload hone se rokenge
+        // --- 2. '+' Button Ka Logic (Add Variety) ---
+        function addMoreVariety() {
+            const container = document.getElementById("variantContainer");
+            
+            const box = document.createElement("div");
+            box.className = "variant-box";
+            box.innerHTML = `
+                <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
+                <input type="number" class="v-stock" placeholder="Stock Qty" required>
+                <button type="button" class="btn-remove" onclick="this.parentElement.remove()"><i class="fas fa-trash"></i></button>
+            `;
+            
+            container.appendChild(box);
+        }
+
+        // --- 3. Save Data to Firebase ---
+        function saveProductToLive(event) {
+            event.preventDefault(); 
             
             let btn = document.getElementById("saveBtn");
             let text = document.getElementById("saveText");
             let icon = document.getElementById("saveIcon");
             
-            // Button ko loading state mein daalna
             btn.disabled = true;
-            text.innerHTML = "Publishing...";
+            text.innerHTML = "Publishing to Website...";
             icon.className = "fas fa-spinner fa-spin";
             btn.style.backgroundColor = "#555";
             
-            // Form se data uthana
+            // Get text data
             const title = document.getElementById("pTitle").value;
             const price = document.getElementById("pPrice").value;
-            const image = document.getElementById("pCover").value;
+            const desc = document.getElementById("pDesc").value;
             
-            // Firebase Database mein Bhejna
+            // Get all filled image links
+            let images = [];
+            for(let i=1; i<=5; i++) {
+                let imgLink = document.getElementById("img" + i).value;
+                if(imgLink.trim() !== "") {
+                    images.push(imgLink);
+                }
+            }
+            
+            // Get all varieties
+            let varieties = [];
+            const vNames = document.querySelectorAll(".v-name");
+            const vStocks = document.querySelectorAll(".v-stock");
+            for(let i=0; i<vNames.length; i++) {
+                varieties.push({
+                    name: vNames[i].value,
+                    stock: vStocks[i].value
+                });
+            }
+            
+            // Save to Firestore
             db.collection("zippykart_products").add({
                 title: title,
                 price: price,
-                image: image,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp() // Upload ka time record karega
+                description: desc,
+                image: images[0], // Main cover image link
+                all_images: images, // Array of all 5 images
+                varieties: varieties, // Array of sizes/colors
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
             .then(() => {
-                // Success message
-                text.innerHTML = "Live on Website!";
-                icon.className = "fas fa-check-circle";
-                btn.style.backgroundColor = "#28a745"; // Green color
+                text.innerHTML = "✅ Successfully Live!";
+                icon.className = "fas fa-check";
+                btn.style.backgroundColor = "#28a745"; 
                 
-                // 3 second baad form reset karna
+                // Reset form after 3 seconds
                 setTimeout(() => {
                     text.innerHTML = "Upload to ZippyKart";
                     icon.className = "fas fa-upload";
                     btn.style.backgroundColor = "#ff4b4b";
                     btn.disabled = false;
                     document.getElementById("productForm").reset();
+                    // Reset variety box to only 1 row
+                    document.getElementById("variantContainer").innerHTML = `
+                        <div class="variant-box">
+                            <input type="text" class="v-name" placeholder="Size (e.g. XL) or Color" required>
+                            <input type="number" class="v-stock" placeholder="Stock Qty" required>
+                        </div>`;
                 }, 3000);
             })
             .catch((error) => {
