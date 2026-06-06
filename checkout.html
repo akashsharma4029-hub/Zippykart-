@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ZippyKart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f1f3f6; color: #212121; }
+        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; }
+        
+        .checkout-container { max-width: 1000px; margin: 30px auto; display: flex; gap: 20px; padding: 0 20px; }
+        
+        /* Left: Address Form */
+        .address-section { width: 65%; background: #fff; padding: 25px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #2874f0; }
+        .form-group { display: flex; gap: 15px; margin-bottom: 15px; }
+        .input-box { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 4px; outline: none; font-size: 14px; }
+        .input-box:focus { border-color: #2874f0; }
+        
+        /* Right: Order Summary */
+        .summary-section { width: 35%; background: #fff; padding: 25px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); height: fit-content; }
+        .item-details { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .item-details img { width: 60px; height: 80px; object-fit: cover; border-radius: 4px; }
+        .item-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+        .item-info p { font-size: 13px; color: #878787; }
+        
+        .price-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
+        .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; border-top: 1px dashed #e0e0e0; padding-top: 15px; margin-top: 10px; }
+        
+        .place-order-btn { width: 100%; background: #fb641b; color: #fff; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; }
+        
+        @media (max-width: 800px) {
+            .checkout-container { flex-direction: column-reverse; }
+            .address-section, .summary-section { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar"><a href="index.html" class="logo">ZippyKart</a></div>
+
+<div class="checkout-container">
+    <!-- Left: Address Form -->
+    <div class="address-section">
+        <div class="section-title">1. Delivery Address</div>
+        <div class="form-group">
+            <input type="text" id="custName" class="input-box" placeholder="Full Name (Required)">
+            <input type="number" id="custPhone" class="input-box" placeholder="Phone Number (Required)">
+        </div>
+        <div class="form-group">
+            <input type="number" id="custPincode" class="input-box" placeholder="Pincode (Required)">
+            <input type="text" id="custCity" class="input-box" placeholder="City / District">
+        </div>
+        <textarea id="custAddress" class="input-box" rows="3" placeholder="Full Address (House No, Building, Street, Area)"></textarea>
+        
+        <div class="section-title" style="margin-top: 30px;">2. Payment Method</div>
+        <div style="border: 1px solid #e0e0e0; padding: 15px; border-radius: 4px; background: #f9f9f9;">
+            <input type="radio" checked> <strong>Cash on Delivery (COD)</strong>
+            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 20px;">Pay at your doorstep when receiving the order.</p>
+        </div>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="summary-section">
+        <div class="section-title" style="color: #212121;">Order Summary</div>
+        
+        <div class="item-details">
+            <img src="" id="chkImg">
+            <div class="item-info">
+                <h4 id="chkTitle">Loading...</h4>
+                <p>Size: <span id="chkSize"></span> | Qty: <span id="chkQty"></span></p>
+                <p style="color: #212121; font-weight: 600; margin-top: 5px;">₹<span id="chkItemPrice"></span></p>
+            </div>
+        </div>
+
+        <div class="price-row">
+            <span>Price (<span id="summaryQty">1</span> item)</span>
+            <span>₹<span id="summaryPrice">0</span></span>
+        </div>
+        <div class="price-row">
+            <span>Delivery Charges</span>
+            <span style="color: #388e3c;">FREE</span>
+        </div>
+        
+        <div class="total-row">
+            <span>Amount Payable</span>
+            <span>₹<span id="summaryTotal">0</span></span>
+        </div>
+
+        <button class="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
+    </div>
+</div>
+
+<script>
+    // Firebase Setup
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+        authDomain: "zippykart-production-157e1.firebaseapp.com",
+        projectId: "zippykart-production-157e1",
+        storageBucket: "zippykart-production-157e1.appspot.com",
+        messagingSenderId: "803651431969",
+        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // 1. Data load from LocalStorage
+    let orderData = JSON.parse(localStorage.getItem('zippy_checkout_data'));
+    
+    if(!orderData) {
+        alert("No product selected. Going back!");
+        window.location.href = 'index.html';
+    } else {
+        // UI mein data fill karna
+        document.getElementById('chkImg').src = orderData.image;
+        document.getElementById('chkTitle').innerText = orderData.title;
+        document.getElementById('chkSize').innerText = orderData.size;
+        document.getElementById('chkQty').innerText = orderData.quantity;
+        document.getElementById('chkItemPrice').innerText = orderData.price;
+        
+        document.getElementById('summaryQty').innerText = orderData.quantity;
+        
+        let totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
+        document.getElementById('summaryPrice').innerText = totalAmount;
+        document.getElementById('summaryTotal').innerText = totalAmount;
+    }
+
+    // 2. Place Order Logic
+    window.placeOrder = function() {
+        const name = document.getElementById('custName').value;
+        const phone = document.getElementById('custPhone').value;
+        const pincode = document.getElementById('custPincode').value;
+        const city = document.getElementById('custCity').value;
+        const address = document.getElementById('custAddress').value;
+
+        if(!name || !phone || !pincode || !address) {
+            alert("Please fill all the required address details!");
+            return;
+        }
+
+        let totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
+
+        // Firebase mein Order Save karna
+        db.collection("zippykart_orders").add({
+            productId: orderData.productId,
+            productTitle: orderData.title,
+            size: orderData.size,
+            quantity: orderData.quantity,
+            totalAmount: totalAmount,
+            paymentMethod: "COD",
+            status: "Pending",
+            customerInfo: {
+                name: name,
+                phone: phone,
+                pincode: pincode,
+                city: city,
+                address: address
+            },
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            alert("🎉 Order Successfully Placed!");
+            localStorage.removeItem('zippy_checkout_data'); // Cart clear karein
+            window.location.href = 'index.html'; // Home page par wapas bhej dein
+        }).catch((error) => {
+            alert("Error placing order: " + error.message);
+        });
+    }
+</script>
+</body>
+</html>
