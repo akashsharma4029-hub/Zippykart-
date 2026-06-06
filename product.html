@@ -543,4 +543,80 @@
                         document.getElementById('btnAddToCart').innerHTML = `<i class="fas fa-times-circle"></i> OUT OF STOCK`;
                         document.getElementById('btnAddToCart').disabled = true;
                         document.getElementById('btnBuyNow').style.display = "none";
-                        document.getElementById('deliver
+                        document.getElementById('deliveryMsg').innerHTML = `<span style="color:red; font-weight:bold;">Currently Unavailable</span>`;
+                    }
+
+                    // Setup Images
+                    const mainImgEl = document.getElementById('MainImg');
+                    mainImgEl.src = product.image;
+
+                    if(product.all_images && product.all_images.length > 0) {
+                        const smallImgGroup = document.getElementById('smallImgGroup');
+                        product.all_images.forEach((imgUrl) => {
+                            if(imgUrl) {
+                                smallImgGroup.innerHTML += `<div class="small-img-col"><img src="${imgUrl}" onclick="changeMainImg(this, '${imgUrl}')"></div>`;
+                            }
+                        });
+                    }
+
+                    // Setup Color Variants
+                    if(product.variants && product.variants.length > 0) {
+                        document.getElementById('variantsContainer').style.display = "block";
+                        const variantGroup = document.getElementById('variantGroup');
+                        product.variants.forEach((vImgUrl) => {
+                            if(vImgUrl) {
+                                variantGroup.innerHTML += `<img src="${vImgUrl}" class="variant-img" onclick="changeMainImg(this, '${vImgUrl}')">`;
+                            }
+                        });
+                    }
+
+                    // Size Selection Interactive Logic
+                    const sizeBoxes = document.querySelectorAll('.size-box');
+                    sizeBoxes.forEach(box => {
+                        box.addEventListener('click', function() {
+                            sizeBoxes.forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+                        });
+                    });
+
+                    // Add to Cart Logic (Local Storage)
+                    document.getElementById('btnAddToCart').onclick = function() {
+                        let cart = JSON.parse(localStorage.getItem('zippyCart')) || [];
+                        let existingProduct = cart.find(item => item.id === productId);
+                        if(existingProduct) { 
+                            existingProduct.quantity += 1; 
+                        } else { 
+                            cart.push({ id: productId, title: product.title, price: product.price, image: product.image, quantity: 1 }); 
+                        }
+                        localStorage.setItem('zippyCart', JSON.stringify(cart));
+                        alert("Great! Product added to Cart successfully! 🛒");
+                    };
+
+                    // Buy Now Link Setup
+                    document.getElementById('btnBuyNow').href = `checkout.html?id=${productId}`;
+
+                } else {
+                    document.getElementById('loader').innerHTML = "Product has been removed or deleted.";
+                }
+            }).catch((error) => {
+                console.error("Error fetching product:", error);
+                document.getElementById('loader').innerHTML = "Error loading product details.";
+            });
+        }
+
+        // Image Swap Logic
+        function changeMainImg(element, imgUrl) {
+            const mainImg = document.getElementById('MainImg');
+            mainImg.style.opacity = "0.5";
+            setTimeout(() => {
+                mainImg.src = imgUrl;
+                mainImg.style.opacity = "1";
+            }, 150);
+            
+            // Highlight active thumbnail
+            document.querySelectorAll('.small-img-col img').forEach(img => img.classList.remove('active'));
+            if(element.tagName === 'IMG') element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
