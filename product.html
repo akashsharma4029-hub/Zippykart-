@@ -3,120 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - ZippyKart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Buy Product - ZippyKart Premium</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Firebase V8 SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f8f9fa; color: #333; overflow-x: hidden; }
+        body { background: #f1f3f6; color: #212121; }
         
-        /* Navbar Simple */
-        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .navbar .logo { font-size: 22px; font-weight: 700; color: #fd3956; text-decoration: none; }
-        .navbar .cart-btn { background: #fd3956; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .navbar .cart-btn:hover { transform: scale(1.05); }
+        /* Navbar */
+        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .navbar .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; letter-spacing: -0.5px;}
+        .navbar .cart-btn { background: #e02844; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 14px; }
 
-        /* ✨ ANIMATIONS (Yahan Jadu Hai) ✨ */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        /* Container */
+        .pro-container { max-width: 1200px; margin: 20px auto; display: flex; gap: 30px; background: transparent; }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Left: Sticky Images */
+        .pro-image-section { width: 40%; position: sticky; top: 80px; height: fit-content; background: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .main-img { width: 100%; border-radius: 4px; object-fit: cover; aspect-ratio: 4/5; border: 1px solid #f0f0f0; transition: 0.3s; }
+        .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .small-img-col img { width: 70px; height: 85px; border-radius: 4px; border: 2px solid transparent; cursor: pointer; object-fit: cover; }
+        .small-img-col img:hover, .small-img-col img.active { border-color: #e02844; }
+
+        /* Right: Details Section */
+        .pro-details-section { width: 60%; background: #fff; padding: 30px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         
-        @keyframes pulseLoader {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Product Details Container */
-        .pro-details { max-width: 1200px; margin: 40px auto; padding: 20px; display: flex; gap: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        /* Brand & Title */
+        .brand-name { color: #878787; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
+        .pro-title { font-size: 22px; font-weight: 500; margin-bottom: 10px; color: #212121; line-height: 1.4; }
         
-        /* Left: Images (Fade In Effect) */
-        .single-pro-image { width: 45%; animation: fadeIn 1.2s ease-out; }
-        .main-img { width: 100%; border-radius: 8px; object-fit: cover; aspect-ratio: 1/1; border: 1px solid #eee; transition: 0.3s ease-in-out; }
-        .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; }
-        .small-img-col { flex-basis: 24%; cursor: pointer; }
-        .small-img-col img { width: 100%; border-radius: 6px; border: 2px solid transparent; transition: 0.3s; aspect-ratio: 1/1; object-fit: cover; }
-        .small-img-col img:hover { border-color: #fd3956; transform: translateY(-3px); }
+        /* Ratings */
+        .rating-box { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .badge-star { background: #388e3c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .rating-text { color: #878787; font-size: 14px; font-weight: 500; }
 
-        /* Right: Details (Slide Up Effect) */
-        .single-pro-details { width: 55%; padding-top: 10px; animation: slideUp 0.8s ease-out forwards; opacity: 0; }
-        .single-pro-details h6 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
-        .single-pro-details h4 { font-size: 28px; font-weight: 700; margin-bottom: 15px; color: #111; line-height: 1.3; }
-        .single-pro-details h2 { font-size: 26px; color: #fd3956; font-weight: 700; margin-bottom: 20px; }
-        .single-pro-details h2 del { font-size: 18px; color: #999; font-weight: normal; margin-left: 10px; }
-        
-        /* Variants */
-        .variants-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
-        .variant-group { display: flex; gap: 10px; margin-bottom: 25px; }
-        .variant-img { width: 60px; height: 60px; border-radius: 5px; cursor: pointer; object-fit: cover; border: 2px solid #ddd; transition: 0.3s; }
-        .variant-img:hover { border-color: #fd3956; transform: scale(1.1); }
+        /* Price Box */
+        .price-box { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 20px; }
+        .current-price { font-size: 28px; font-weight: 600; color: #212121; }
+        .mrp-price { font-size: 16px; color: #878787; text-decoration: line-through; margin-bottom: 4px; }
+        .discount-pct { font-size: 16px; color: #388e3c; font-weight: 600; margin-bottom: 4px; }
 
-        /* Buttons */
-        .action-btns { display: flex; gap: 15px; margin-top: 20px; }
-        .add-cart-btn { background: black; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; flex: 1; transition: 0.3s; }
-        .buy-now-btn { background: #fd3956; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; flex: 1; text-align: center; text-decoration: none; transition: 0.3s; }
-        .add-cart-btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .buy-now-btn:hover { background: #e02844; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(253,57,86,0.3); }
+        /* Available Offers */
+        .offers-section { margin-bottom: 25px; }
+        .section-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .offer-item { display: flex; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #212121; align-items: flex-start; }
+        .offer-item i { color: #388e3c; margin-top: 3px; }
+        .offer-item span { font-weight: 600; }
+        .offer-item a { color: #2874f0; text-decoration: none; font-weight: 500; }
 
-        /* Loading */
-        #loader { text-align: center; padding: 100px; font-size: 20px; font-weight: 600; color: #fd3956; animation: pulseLoader 1.5s infinite; }
+        /* Size Selector */
+        .size-section { margin-bottom: 25px; }
+        .size-group { display: flex; gap: 10px; margin-top: 10px; }
+        .size-box { border: 1px solid #e0e0e0; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: 0.2s; }
+        .size-box:hover, .size-box.active { border-color: #e02844; color: #e02844; background: #fff0f2; }
 
-        @media (max-width: 768px) {
-            .pro-details { flex-direction: column; }
-            .single-pro-image, .single-pro-details { width: 100%; }
-            .single-pro-details h4 { font-size: 22px; }
+        /* Color Variants */
+        .variant-group { display: flex; gap: 10px; margin-top: 10px; margin-bottom: 25px; }
+        .variant-img { width: 50px; height: 60px; cursor: pointer; border: 2px solid #ddd; border-radius: 4px; object-fit: cover; }
+        .variant-img:hover { border-color: #212121; }
+
+        /* Delivery & Services */
+        .delivery-box { border: 1px solid #f0f0f0; padding: 15px; border-radius: 4px; margin-bottom: 25px; background: #fafafa; }
+        .pincode-input { display: flex; gap: 0; margin-top: 10px; border-bottom: 2px solid #2874f0; width: max-content; padding-bottom: 5px; }
+        .pincode-input input { border: none; outline: none; background: transparent; font-size: 15px; font-weight: 500; width: 120px; }
+        .pincode-input button { border: none; background: none; color: #2874f0; font-weight: 600; cursor: pointer; }
+        .delivery-msg { font-size: 14px; margin-top: 10px; font-weight: 500; color: #212121; }
+
+        /* Trust Badges */
+        .trust-badges { display: flex; justify-content: space-between; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 15px 0; margin-bottom: 25px; text-align: center; }
+        .trust-item { flex: 1; font-size: 12px; font-weight: 500; color: #878787; }
+        .trust-item i { display: block; font-size: 20px; color: #212121; margin-bottom: 5px; }
+
+        /* Product Details Text */
+        .details-text { font-size: 14px; line-height: 1.6; color: #555; }
+        .details-text ul { padding-left: 20px; margin-top: 10px; }
+        .details-text li { margin-bottom: 5px; }
+
+        /* Action Buttons */
+        .action-btns { display: flex; gap: 15px; margin-top: 30px; position: sticky; bottom: 0; background: #fff; padding: 15px 0; border-top: 1px solid #eee;}
+        .add-cart-btn { background: #ff9f00; color: white; border: none; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .buy-now-btn { background: #fb641b; color: white; border: none; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; flex: 1; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .add-cart-btn:hover { background: #f39800; }
+        .buy-now-btn:hover { background: #f05a10; }
+
+        /* Loader */
+        #loader { text-align: center; padding: 100px; font-size: 20px; color: #2874f0; font-weight: 600; }
+
+        @media (max-width: 800px) {
+            .pro-container { flex-direction: column; margin: 0; gap: 0; }
+            .pro-image-section { width: 100%; position: relative; top: 0; border-radius: 0; }
+            .pro-details-section { width: 100%; border-radius: 0; padding: 20px; }
+            .trust-badges { flex-wrap: wrap; gap: 15px; }
+            .action-btns { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px; margin: 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+            body { padding-bottom: 70px; }
         }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <a href="index.html" class="logo"><i class="fas fa-shopping-bag"></i> ZippyKart</a>
+        <a href="index.html" class="logo">ZippyKart</a>
         <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart</a>
     </div>
 
-    <div id="loader"><i class="fas fa-spinner fa-spin"></i> Getting Product Ready...</div>
+    <!-- Loader -->
+    <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> Loading Premium Details...</div>
 
-    <div class="pro-details" id="productContent" style="display: none;">
+    <!-- Main Content -->
+    <div class="pro-container" id="productContent" style="display: none;">
         
-        <div class="single-pro-image">
+        <!-- Left: Images -->
+        <div class="pro-image-section">
             <img src="" id="MainImg" class="main-img" alt="Product Image">
-            <div class="small-img-group" id="smallImgGroup">
-                </div>
+            <div class="small-img-group" id="smallImgGroup"></div>
         </div>
 
-        <div class="single-pro-details">
-            <h6 id="proCategory">Category Name</h6>
-            <h4 id="proTitle">Product Title Here</h4>
-            <h2 id="proPrice">₹0 <del id="proMrp"></del></h2>
+        <!-- Right: Details -->
+        <div class="pro-details-section">
             
+            <div class="brand-name" id="proCategory">ZippyKart Originals</div>
+            <h1 class="pro-title" id="proTitle">Product Title Goes Here</h1>
+            
+            <div class="rating-box">
+                <div class="badge-star">4.3 <i class="fas fa-star" style="font-size:10px;"></i></div>
+                <div class="rating-text">1,245 Ratings & 120 Reviews</div>
+                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" width="70" alt="Assured">
+            </div>
+
+            <div class="price-box">
+                <div class="current-price" id="proPrice">₹0</div>
+                <div class="mrp-price" id="proMrp"></div>
+                <div class="discount-pct" id="proDiscount"></div>
+            </div>
+
+            <!-- Offers Section -->
+            <div class="offers-section">
+                <div class="section-title">Available Offers</div>
+                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 5% Cashback on Flipkart Axis Bank Card <a href="#">T&C</a></div></div>
+                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 10% off on HDFC Bank Credit Card EMI, up to ₹1,500 <a href="#">T&C</a></div></div>
+                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Special Price:</span> Get extra ₹200 off (price inclusive of cashback/coupon) <a href="#">T&C</a></div></div>
+            </div>
+
+            <!-- Colors -->
             <div id="variantsContainer" style="display:none;">
-                <div class="variants-title">Available Options / Colors:</div>
-                <div class="variant-group" id="variantGroup">
-                    </div>
+                <div class="section-title" style="color:#878787; font-size:14px;">Color Options</div>
+                <div class="variant-group" id="variantGroup"></div>
             </div>
 
-            <p style="color:#28a745; font-weight:600; margin-bottom: 20px;" id="proStock"><i class="fas fa-check-circle"></i> In Stock</p>
+            <!-- Sizes -->
+            <div class="size-section">
+                <div class="section-title" style="color:#878787; font-size:14px;">Select Size</div>
+                <div class="size-group">
+                    <div class="size-box">S</div>
+                    <div class="size-box active">M</div>
+                    <div class="size-box">L</div>
+                    <div class="size-box">XL</div>
+                </div>
+            </div>
 
+            <!-- Delivery -->
+            <div class="delivery-box">
+                <div class="section-title"><i class="fas fa-map-marker-alt" style="color:#2874f0;"></i> Deliver to</div>
+                <div class="pincode-input">
+                    <input type="number" placeholder="Enter Pincode" value="110001">
+                    <button onclick="alert('Delivery is available in your area!')">Check</button>
+                </div>
+                <div class="delivery-msg">
+                    Free Delivery by <strong style="color:#212121;">Tomorrow, 10 PM</strong> | <span style="color:#388e3c;">Free</span> <del style="color:#878787; font-size:12px;">₹40</del>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-item"><i class="fas fa-undo"></i> 7 Days<br>Replacement</div>
+                <div class="trust-item"><i class="fas fa-hand-holding-usd"></i> Cash on<br>Delivery</div>
+                <div class="trust-item"><i class="fas fa-truck"></i> Zippy<br>Delivered</div>
+                <div class="trust-item"><i class="fas fa-shield-alt"></i> Top<br>Brand</div>
+            </div>
+
+            <!-- Product Details Text -->
+            <div class="section-title">Product Details</div>
+            <div class="details-text">
+                <p>Elevate your everyday style with this premium urban streetwear piece. Designed for comfort and built for the modern trendsetter.</p>
+                <ul>
+                    <li><strong>Fabric:</strong> 100% Premium Cotton</li>
+                    <li><strong>Fit:</strong> Oversized / Drop-Shoulder</li>
+                    <li><strong>Wash Care:</strong> Machine wash cold, do not bleach.</li>
+                    <li><strong>Origin:</strong> Proudly Made in India</li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
             <div class="action-btns">
-                <button class="add-cart-btn" id="btnAddToCart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                <a href="#" class="buy-now-btn" id="btnBuyNow"><i class="fas fa-bolt"></i> Buy Now</a>
+                <button class="add-cart-btn" id="btnAddToCart"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+                <a href="#" class="buy-now-btn" id="btnBuyNow"><i class="fas fa-bolt"></i> BUY NOW</a>
             </div>
+
         </div>
     </div>
 
     <script>
-        // Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -132,27 +224,23 @@
         const productId = urlParams.get('id');
 
         if (!productId) {
-            document.getElementById('loader').innerHTML = "Product ID Missing! Please go back to homepage.";
+            document.getElementById('loader').innerHTML = "Product Not Found!";
         } else {
             db.collection("zippykart_products").doc(productId).get().then((doc) => {
                 if (doc.exists) {
                     const product = doc.data();
                     
-                    // Loader hide, content show (animations apne aap start ho jayengi)
                     document.getElementById('loader').style.display = "none";
                     document.getElementById('productContent').style.display = "flex";
 
-                    document.getElementById('proCategory').innerText = product.category || "General";
+                    document.getElementById('proCategory').innerText = product.category || "ZippyKart Originals";
                     document.getElementById('proTitle').innerText = product.title;
                     document.getElementById('proPrice').innerText = "₹" + product.price;
-                    if(product.mrp) {
-                        document.getElementById('proPrice').innerHTML = `₹${product.price} <del>₹${product.mrp}</del>`;
-                    }
                     
-                    if(product.stock <= 0) {
-                        document.getElementById('proStock').innerHTML = `<span style="color:red;"><i class="fas fa-times-circle"></i> Out of Stock</span>`;
-                        document.getElementById('btnAddToCart').disabled = true;
-                        document.getElementById('btnAddToCart').style.background = "#ccc";
+                    if(product.mrp && product.mrp > product.price) {
+                        document.getElementById('proMrp').innerText = "₹" + product.mrp;
+                        let discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
+                        document.getElementById('proDiscount').innerText = discount + "% off";
                     }
 
                     const mainImgEl = document.getElementById('MainImg');
@@ -162,10 +250,7 @@
                         const smallImgGroup = document.getElementById('smallImgGroup');
                         product.all_images.forEach((imgUrl) => {
                             if(imgUrl) {
-                                smallImgGroup.innerHTML += `
-                                <div class="small-img-col">
-                                    <img src="${imgUrl}" class="small-img" onclick="changeMainImg('${imgUrl}')">
-                                </div>`;
+                                smallImgGroup.innerHTML += `<div class="small-img-col"><img src="${imgUrl}" onclick="changeMainImg(this, '${imgUrl}')"></div>`;
                             }
                         });
                     }
@@ -175,43 +260,47 @@
                         const variantGroup = document.getElementById('variantGroup');
                         product.variants.forEach((vImgUrl) => {
                             if(vImgUrl) {
-                                variantGroup.innerHTML += `<img src="${vImgUrl}" class="variant-img" onclick="changeMainImg('${vImgUrl}')">`;
+                                variantGroup.innerHTML += `<img src="${vImgUrl}" class="variant-img" onclick="changeMainImg(this, '${vImgUrl}')">`;
                             }
                         });
                     }
 
+                    // Size Selection Logic
+                    const sizeBoxes = document.querySelectorAll('.size-box');
+                    sizeBoxes.forEach(box => {
+                        box.addEventListener('click', function() {
+                            sizeBoxes.forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+                        });
+                    });
+
+                    // Add to Cart
                     document.getElementById('btnAddToCart').onclick = function() {
                         let cart = JSON.parse(localStorage.getItem('zippyCart')) || [];
                         let existingProduct = cart.find(item => item.id === productId);
-                        
-                        if(existingProduct) {
-                            existingProduct.quantity += 1;
-                        } else {
-                            cart.push({ id: productId, title: product.title, price: product.price, image: product.image, quantity: 1 });
-                        }
-                        
+                        if(existingProduct) { existingProduct.quantity += 1; } 
+                        else { cart.push({ id: productId, title: product.title, price: product.price, image: product.image, quantity: 1 }); }
                         localStorage.setItem('zippyCart', JSON.stringify(cart));
-                        alert("Great! " + product.title + " added to your cart. 🛒");
+                        alert("Added to Cart successfully! 🛒");
                     };
 
                     document.getElementById('btnBuyNow').href = `checkout.html?id=${productId}`;
 
-                } else {
-                    document.getElementById('loader').innerHTML = "Product not found! It might be deleted.";
                 }
-            }).catch((error) => {
-                document.getElementById('loader').innerHTML = "Error loading product: " + error.message;
             });
         }
 
-        // Image change function 
-        function changeMainImg(imgUrl) {
+        function changeMainImg(element, imgUrl) {
             const mainImg = document.getElementById('MainImg');
-            mainImg.style.opacity = "0.5"; // Thoda blur effect
+            mainImg.style.opacity = "0.7";
             setTimeout(() => {
                 mainImg.src = imgUrl;
-                mainImg.style.opacity = "1"; // Wapas clear
-            }, 150);
+                mainImg.style.opacity = "1";
+            }, 100);
+            
+            // Remove active class from all thumb images
+            document.querySelectorAll('.small-img-col img').forEach(img => img.classList.remove('active'));
+            if(element.tagName === 'IMG') element.classList.add('active');
         }
     </script>
 </body>
