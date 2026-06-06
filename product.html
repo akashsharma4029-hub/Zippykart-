@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ZippyKart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f8f9fa; color: #333; overflow-x: hidden; }
+        
+        /* Navbar Simple */
+        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .navbar .logo { font-size: 22px; font-weight: 700; color: #fd3956; text-decoration: none; }
+        .navbar .cart-btn { background: #fd3956; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .navbar .cart-btn:hover { transform: scale(1.05); }
+
+        /* ✨ ANIMATIONS (Yahan Jadu Hai) ✨ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulseLoader {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Product Details Container */
+        .pro-details { max-width: 1200px; margin: 40px auto; padding: 20px; display: flex; gap: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        
+        /* Left: Images (Fade In Effect) */
+        .single-pro-image { width: 45%; animation: fadeIn 1.2s ease-out; }
+        .main-img { width: 100%; border-radius: 8px; object-fit: cover; aspect-ratio: 1/1; border: 1px solid #eee; transition: 0.3s ease-in-out; }
+        .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; }
+        .small-img-col { flex-basis: 24%; cursor: pointer; }
+        .small-img-col img { width: 100%; border-radius: 6px; border: 2px solid transparent; transition: 0.3s; aspect-ratio: 1/1; object-fit: cover; }
+        .small-img-col img:hover { border-color: #fd3956; transform: translateY(-3px); }
+
+        /* Right: Details (Slide Up Effect) */
+        .single-pro-details { width: 55%; padding-top: 10px; animation: slideUp 0.8s ease-out forwards; opacity: 0; }
+        .single-pro-details h6 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
+        .single-pro-details h4 { font-size: 28px; font-weight: 700; margin-bottom: 15px; color: #111; line-height: 1.3; }
+        .single-pro-details h2 { font-size: 26px; color: #fd3956; font-weight: 700; margin-bottom: 20px; }
+        .single-pro-details h2 del { font-size: 18px; color: #999; font-weight: normal; margin-left: 10px; }
+        
+        /* Variants */
+        .variants-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; margin-top: 20px; }
+        .variant-group { display: flex; gap: 10px; margin-bottom: 25px; }
+        .variant-img { width: 60px; height: 60px; border-radius: 5px; cursor: pointer; object-fit: cover; border: 2px solid #ddd; transition: 0.3s; }
+        .variant-img:hover { border-color: #fd3956; transform: scale(1.1); }
+
+        /* Buttons */
+        .action-btns { display: flex; gap: 15px; margin-top: 20px; }
+        .add-cart-btn { background: black; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; flex: 1; transition: 0.3s; }
+        .buy-now-btn { background: #fd3956; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; flex: 1; text-align: center; text-decoration: none; transition: 0.3s; }
+        .add-cart-btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .buy-now-btn:hover { background: #e02844; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(253,57,86,0.3); }
+
+        /* Loading */
+        #loader { text-align: center; padding: 100px; font-size: 20px; font-weight: 600; color: #fd3956; animation: pulseLoader 1.5s infinite; }
+
+        @media (max-width: 768px) {
+            .pro-details { flex-direction: column; }
+            .single-pro-image, .single-pro-details { width: 100%; }
+            .single-pro-details h4 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html" class="logo"><i class="fas fa-shopping-bag"></i> ZippyKart</a>
+        <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart</a>
+    </div>
+
+    <div id="loader"><i class="fas fa-spinner fa-spin"></i> Getting Product Ready...</div>
+
+    <div class="pro-details" id="productContent" style="display: none;">
+        
+        <div class="single-pro-image">
+            <img src="" id="MainImg" class="main-img" alt="Product Image">
+            <div class="small-img-group" id="smallImgGroup">
+                </div>
+        </div>
+
+        <div class="single-pro-details">
+            <h6 id="proCategory">Category Name</h6>
+            <h4 id="proTitle">Product Title Here</h4>
+            <h2 id="proPrice">₹0 <del id="proMrp"></del></h2>
+            
+            <div id="variantsContainer" style="display:none;">
+                <div class="variants-title">Available Options / Colors:</div>
+                <div class="variant-group" id="variantGroup">
+                    </div>
+            </div>
+
+            <p style="color:#28a745; font-weight:600; margin-bottom: 20px;" id="proStock"><i class="fas fa-check-circle"></i> In Stock</p>
+
+            <div class="action-btns">
+                <button class="add-cart-btn" id="btnAddToCart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                <a href="#" class="buy-now-btn" id="btnBuyNow"><i class="fas fa-bolt"></i> Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Setup
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+            authDomain: "zippykart-production-157e1.firebaseapp.com",
+            projectId: "zippykart-production-157e1",
+            storageBucket: "zippykart-production-157e1.appspot.com",
+            messagingSenderId: "803651431969",
+            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+        };
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.firestore();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        if (!productId) {
+            document.getElementById('loader').innerHTML = "Product ID Missing! Please go back to homepage.";
+        } else {
+            db.collection("zippykart_products").doc(productId).get().then((doc) => {
+                if (doc.exists) {
+                    const product = doc.data();
+                    
+                    // Loader hide, content show (animations apne aap start ho jayengi)
+                    document.getElementById('loader').style.display = "none";
+                    document.getElementById('productContent').style.display = "flex";
+
+                    document.getElementById('proCategory').innerText = product.category || "General";
+                    document.getElementById('proTitle').innerText = product.title;
+                    document.getElementById('proPrice').innerText = "₹" + product.price;
+                    if(product.mrp) {
+                        document.getElementById('proPrice').innerHTML = `₹${product.price} <del>₹${product.mrp}</del>`;
+                    }
+                    
+                    if(product.stock <= 0) {
+                        document.getElementById('proStock').innerHTML = `<span style="color:red;"><i class="fas fa-times-circle"></i> Out of Stock</span>`;
+                        document.getElementById('btnAddToCart').disabled = true;
+                        document.getElementById('btnAddToCart').style.background = "#ccc";
+                    }
+
+                    const mainImgEl = document.getElementById('MainImg');
+                    mainImgEl.src = product.image;
+
+                    if(product.all_images && product.all_images.length > 0) {
+                        const smallImgGroup = document.getElementById('smallImgGroup');
+                        product.all_images.forEach((imgUrl) => {
+                            if(imgUrl) {
+                                smallImgGroup.innerHTML += `
+                                <div class="small-img-col">
+                                    <img src="${imgUrl}" class="small-img" onclick="changeMainImg('${imgUrl}')">
+                                </div>`;
+                            }
+                        });
+                    }
+
+                    if(product.variants && product.variants.length > 0) {
+                        document.getElementById('variantsContainer').style.display = "block";
+                        const variantGroup = document.getElementById('variantGroup');
+                        product.variants.forEach((vImgUrl) => {
+                            if(vImgUrl) {
+                                variantGroup.innerHTML += `<img src="${vImgUrl}" class="variant-img" onclick="changeMainImg('${vImgUrl}')">`;
+                            }
+                        });
+                    }
+
+                    document.getElementById('btnAddToCart').onclick = function() {
+                        let cart = JSON.parse(localStorage.getItem('zippyCart')) || [];
+                        let existingProduct = cart.find(item => item.id === productId);
+                        
+                        if(existingProduct) {
+                            existingProduct.quantity += 1;
+                        } else {
+                            cart.push({ id: productId, title: product.title, price: product.price, image: product.image, quantity: 1 });
+                        }
+                        
+                        localStorage.setItem('zippyCart', JSON.stringify(cart));
+                        alert("Great! " + product.title + " added to your cart. 🛒");
+                    };
+
+                    document.getElementById('btnBuyNow').href = `checkout.html?id=${productId}`;
+
+                } else {
+                    document.getElementById('loader').innerHTML = "Product not found! It might be deleted.";
+                }
+            }).catch((error) => {
+                document.getElementById('loader').innerHTML = "Error loading product: " + error.message;
+            });
+        }
+
+        // Image change function 
+        function changeMainImg(imgUrl) {
+            const mainImg = document.getElementById('MainImg');
+            mainImg.style.opacity = "0.5"; // Thoda blur effect
+            setTimeout(() => {
+                mainImg.src = imgUrl;
+                mainImg.style.opacity = "1"; // Wapas clear
+            }, 150);
+        }
+    </script>
+</body>
+</html>
