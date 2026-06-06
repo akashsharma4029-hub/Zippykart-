@@ -17,7 +17,7 @@ const db = firebase.firestore();
 
 // Fetch Products and Display on Homepage
 document.addEventListener("DOMContentLoaded", function() {
-    const grid = document.querySelector('.pro-container');
+    const grid = document.querySelector('.product-grid');
 
     if (grid) {
         grid.innerHTML = ""; // Purana static kachra saaf karne ke liye
