@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy Product - ZippyKart Premium</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -31,7 +33,7 @@
         .main-img-container { position: relative; }
         .main-img { width: 100%; border-radius: 4px; object-fit: cover; aspect-ratio: 4/5; transition: 0.3s; border: 1px solid #f0f0f0; }
         
-        /* Thumbnails (Wapas Aa Gaye) */
+        /* Thumbnails */
         .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; }
         .small-img-col img { width: 70px; height: 85px; border-radius: 4px; border: 2px solid transparent; cursor: pointer; object-fit: cover; transition: 0.2s; }
         .small-img-col img:hover, .small-img-col img.active { border-color: #e02844; }
@@ -43,17 +45,22 @@
         
         /* Right: Details */
         .pro-details-section { width: 60%; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); animation: slideUp 0.8s ease-out; }
-        .seller-info { font-size: 13px; color: #878787; margin-bottom: 8px; font-weight: 500; }
-        .seller-info strong { color: #2874f0; }
+        .seller-info { font-size: 13px; color: #878787; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
         .pro-title { font-size: 24px; font-weight: 600; line-height: 1.3; }
         
-        /* Price Box (Discount ke sath) */
+        /* NEW: Ratings & ZippyAssured Badge (Wapas aa gaya) */
+        .rating-box { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; margin-bottom: 10px; }
+        .badge-star { background: #388e3c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .rating-text { color: #878787; font-size: 14px; font-weight: 500; }
+        .zippy-assured { background: #212121; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; font-style: italic; display: inline-flex; align-items: center; gap: 3px; }
+
+        /* Price Box */
         .price-box { display: flex; align-items: flex-end; gap: 12px; margin: 15px 0 25px 0; }
         .current-price { font-size: 28px; font-weight: 700; color: #212121; }
         .mrp-price { font-size: 16px; color: #878787; text-decoration: line-through; margin-bottom: 4px; }
         .discount-pct { font-size: 16px; color: #388e3c; font-weight: 600; margin-bottom: 4px; }
 
-        /* Offers Section (Wapas Aa Gaya) */
+        /* Offers Section */
         .offers-section { margin-bottom: 25px; }
         .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .offer-item { display: flex; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #212121; align-items: flex-start; }
@@ -72,14 +79,14 @@
         .qty-btn { padding: 10px 20px; border: none; background: #f9f9f9; cursor: pointer; font-size: 16px; font-weight: bold; }
         #qtyInput { width: 50px; text-align: center; border: none; padding: 10px; font-weight: 600; outline: none; }
 
-        /* Delivery Pincode (Wapas Aa Gaya) */
+        /* Delivery Pincode */
         .delivery-box { border: 1px solid #f0f0f0; padding: 15px; border-radius: 4px; margin-bottom: 25px; background: #fafafa; }
         .pincode-input { display: flex; gap: 0; margin-top: 10px; border-bottom: 2px solid #2874f0; width: max-content; padding-bottom: 5px; }
         .pincode-input input { border: none; outline: none; background: transparent; font-size: 15px; font-weight: 500; width: 120px; }
         .pincode-input button { border: none; background: none; color: #2874f0; font-weight: 600; cursor: pointer; }
         .delivery-msg { font-size: 14px; margin-top: 10px; font-weight: 500; color: #212121; }
 
-        /* Product Details Text (Wapas Aa Gaya) */
+        /* Product Details Text */
         .details-text { font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 25px; }
         .details-text ul { padding-left: 20px; margin-top: 10px; }
         .details-text li { margin-bottom: 5px; }
@@ -126,6 +133,7 @@
 
 <div class="pro-container" id="productContent">
     
+    <!-- Left: Image & Floating Actions -->
     <div class="pro-image-section">
         <div class="main-img-container">
             <img src="" id="MainImg" class="main-img" alt="Product">
@@ -134,31 +142,41 @@
                 <button class="icon-btn" onclick="shareProduct()" title="Share"><i class="fas fa-share-alt"></i></button>
             </div>
         </div>
-        <div class="small-img-group" id="smallImgGroup">
-            </div>
+        <!-- Thumbnails Gallery -->
+        <div class="small-img-group" id="smallImgGroup"></div>
     </div>
 
+    <!-- Right: Product Details -->
     <div class="pro-details-section">
-        <div class="seller-info">Sold by: <strong>ZippyKart Assured</strong> <i class="fas fa-check-circle" style="color: #28a745;"></i></div>
+        <div class="seller-info">Men's Fashion</div>
         <h1 class="pro-title" id="proTitle">Loading Premium Product...</h1>
         
+        <!-- Ratings & ZippyAssured Badge -->
+        <div class="rating-box">
+            <div class="badge-star">4.3 <i class="fas fa-star" style="font-size:10px;"></i></div>
+            <div class="rating-text">1,245 Ratings & 120 Reviews</div>
+            <span class="zippy-assured">Zippy<span style="color: #e02844;">Assured</span> <i class="fas fa-check-circle" style="color: #28a745; font-size: 10px;"></i></span>
+        </div>
+        
+        <!-- Price Box -->
         <div class="price-box">
             <div class="current-price" id="proPrice">₹0</div>
             <div class="mrp-price" id="proMrp"></div>
             <div class="discount-pct" id="proDiscount"></div>
         </div>
 
+        <!-- Available Offers -->
         <div class="offers-section">
-            <div class="section-title"><i class="fas fa-tag" style="color:#e02844;"></i> Available Offers</div>
-            <div class="offer-item"><i class="fas fa-certificate"></i> <div><span>Bank Offer:</span> 5% Cashback on ZippyKart ICICI Credit Card</div></div>
-            <div class="offer-item"><i class="fas fa-certificate"></i> <div><span>Bank Offer:</span> 10% off on SBI & HDFC Bank Cards</div></div>
-            <div class="offer-item"><i class="fas fa-certificate"></i> <div><span>Special Price:</span> Get extra ₹200 off for first order!</div></div>
+            <div class="section-title">Available Offers</div>
+            <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 5% Cashback on ZippyKart ICICI Credit Card <a href="#" style="color:#2874f0; text-decoration:none;">T&C</a></div></div>
+            <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 10% off on SBI & HDFC Bank Cards <a href="#" style="color:#2874f0; text-decoration:none;">T&C</a></div></div>
+            <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Special Price:</span> Get extra ₹200 off (price inclusive of discount) <a href="#" style="color:#2874f0; text-decoration:none;">T&C</a></div></div>
         </div>
         
+        <!-- Size Selector -->
         <div class="size-section">
             <div class="size-header">
-                <span style="font-size: 16px;">Select Size</span>
-                <a class="size-chart-link" onclick="alert('Size Chart will open here!')"><i class="fas fa-ruler-horizontal"></i> Size Chart</a>
+                <span style="font-size: 14px; color:#878787;">Select Size</span>
             </div>
             <div class="size-group">
                 <div class="size-box" onclick="selectSize(this)">S</div>
@@ -168,15 +186,17 @@
             </div>
         </div>
         
-        <div class="qty-title">Quantity:</div>
+        <!-- Quantity -->
+        <div class="qty-title" style="color:#878787; font-size: 14px; font-weight: normal;">Quantity</div>
         <div class="qty-selector">
             <button class="qty-btn" onclick="updateQty(-1)">-</button>
             <input type="text" id="qtyInput" value="1" readonly>
             <button class="qty-btn" onclick="updateQty(1)">+</button>
         </div>
 
+        <!-- Delivery Box -->
         <div class="delivery-box">
-            <div class="section-title"><i class="fas fa-map-marker-alt" style="color:#2874f0;"></i> Deliver to</div>
+            <div class="section-title" style="margin-bottom:0;"><i class="fas fa-map-marker-alt" style="color:#2874f0;"></i> Deliver to</div>
             <div class="pincode-input">
                 <input type="number" placeholder="Enter Pincode" value="110001">
                 <button onclick="alert('Delivery is available in your area! 🚚')">Check</button>
@@ -186,29 +206,33 @@
             </div>
         </div>
 
+        <!-- Trust Badges -->
+        <div class="trust-badges" style="border-top:none; margin-top:0; padding-top:0;">
+            <div class="trust-item"><i class="fas fa-undo" style="color:#555;"></i>7 Days<br>Replacement</div>
+            <div class="trust-item"><i class="fas fa-hand-holding-usd" style="color:#555;"></i>Cash on<br>Delivery</div>
+            <div class="trust-item"><i class="fas fa-truck" style="color:#555;"></i>ZippyKart<br>Delivered</div>
+            <div class="trust-item"><i class="fas fa-shield-alt" style="color:#555;"></i>Top<br>Brand</div>
+        </div>
+
+        <!-- Product Details Description -->
         <div class="section-title">Product Details</div>
         <div class="details-text">
-            <p>Elevate your everyday style with this premium piece. Designed for comfort and built for the modern trendsetter.</p>
+            <p>Elevate your everyday style with this premium urban streetwear piece. Designed for comfort and built for the modern trendsetter.</p>
             <ul>
-                <li><strong>Fabric:</strong> 100% Premium Material</li>
-                <li><strong>Fit:</strong> Standard / Comfort Fit</li>
+                <li><strong>Fabric:</strong> 100% Premium Cotton</li>
+                <li><strong>Fit:</strong> Oversized / Drop-Shoulder</li>
                 <li><strong>Wash Care:</strong> Machine wash cold, do not bleach.</li>
                 <li><strong>Origin:</strong> Proudly Made in India</li>
             </ul>
         </div>
 
-        <div class="trust-badges">
-            <div class="trust-item"><i class="fas fa-undo"></i>7 Days<br>Replacement</div>
-            <div class="trust-item"><i class="fas fa-hand-holding-usd"></i>Cash on<br>Delivery</div>
-            <div class="trust-item"><i class="fas fa-truck"></i>ZippyKart<br>Delivered</div>
-            <div class="trust-item"><i class="fas fa-shield-alt"></i>Top<br>Brand</div>
-        </div>
-
+        <!-- Action Buttons -->
         <div class="action-btns">
             <button class="btn add-cart" id="btnAddToCart"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
             <a href="#" class="btn buy-now" id="btnBuyNow"><i class="fas fa-bolt"></i> BUY NOW</a>
         </div>
 
+        <!-- Reviews -->
         <div class="review-section">
             <h2 class="section-title">Customer Reviews</h2>
             <div id="reviewContainer">Loading reviews...</div>
@@ -221,6 +245,7 @@
     </div>
 </div>
 
+<!-- Similar Products Section -->
 <div class="similar-section">
     <h2 class="section-title">You May Also Like</h2>
     <div class="similar-grid">
