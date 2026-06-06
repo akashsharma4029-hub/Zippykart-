@@ -410,9 +410,8 @@
         }
     }
 
-    // Fetch & Display Reviews (with Image Support)
-    db.collection("zippykart_reviews").where("productId", "==", productId).orderBy("timestamp", "desc").onSnapshot(snapshot => {
-        const container = document.getElementById('reviewContainer');
+     // Review Display Logic Update
+let imageHtml = rev.imageUrl ? `<br><img src="${rev.imageUrl}" class="rev-uploaded-img" onclick="window.open('${rev.imageUrl}', '_blank')">` : '';      const container = document.getElementById('reviewContainer');
         container.innerHTML = "";
         if(snapshot.empty) {
             container.innerHTML = "<p style='color:#878787; font-size:14px;'>No reviews yet. Be the first to review!</p>";
