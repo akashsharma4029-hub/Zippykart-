@@ -430,7 +430,7 @@
         });
     });
 
-    // Submit Review Function with Upload Logic
+    // 6. Updated Submit Review Function (No Storage Needed)
     window.submitReview = async function() {
         const name = document.getElementById('revName').value;
         const comment = document.getElementById('revComment').value;
@@ -439,54 +439,44 @@
 
         if(!name || !comment) return alert("Please fill your Name and Review text!");
 
-        // Button ko block karo jab tak upload ho raha hai
         postBtn.innerText = "Posting...";
         postBtn.disabled = true;
 
-        let uploadedImageUrl = null;
+        let base64Image = null;
 
         try {
             // Agar customer ne photo select ki hai
             if (fileInput.files.length > 0) {
+                postBtn.innerText = "Processing Photo...";
                 const file = fileInput.files[0];
-                postBtn.innerText = "Uploading Photo...";
                 
-                // Firebase Storage me folder banega 'review_images'
-                const storageRef = storage.ref();
-                const imageRef = storageRef.child('review_images/' + Date.now() + '_' + file.name);
-                
-                // Photo upload karna
-                await imageRef.put(file);
-                
-                // Upload hone ke baad Photo ka URL nikalna
-                uploadedImageUrl = await imageRef.getDownloadURL();
+                // Photo ko Base64 mein convert karna
+                base64Image = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
             }
 
-            postBtn.innerText = "Saving Review...";
-
-            // Firebase Firestore me Data Save karna
+            // Firestore mein Data Save karna (Image Base64 string ke roop mein)
             await db.collection("zippykart_reviews").add({
                 productId: productId,
                 customerName: name,
                 comment: comment,
                 rating: 5,
-                imageUrl: uploadedImageUrl, // Photo ka URL yahan save hoga
+                imageUrl: base64Image, // Yahan photo ki text string save hogi
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            alert("Awesome! Your review is posted successfully. 🌟"); 
-            
-            // Sab clean karna
+            alert("Awesome! Your review is posted. 🌟"); 
             document.getElementById('revName').value = "";
             document.getElementById('revComment').value = "";
             fileInput.value = "";
             document.getElementById('fileNameText').innerText = "";
-
         } catch (error) {
             console.error(error);
             alert("Error posting review. Try again.");
         } finally {
-            // Button wapas theek karna
             postBtn.innerText = "Post Review";
             postBtn.disabled = false;
         }
