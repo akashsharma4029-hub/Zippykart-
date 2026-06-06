@@ -8,9 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs (Ab Storage bhi add kiya gaya hai) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
     <style>
         /* Base Setup */
@@ -66,12 +67,12 @@
         .offer-item { display: flex; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #212121; align-items: flex-start; }
         .offer-item i { color: #388e3c; margin-top: 3px; }
         
-        /* Color Options (Wapas Aa Gaya!) */
+        /* Color Options */
         .color-section { margin-top: 20px; margin-bottom: 20px; }
         .color-title { font-size: 14px; color: #878787; margin-bottom: 10px; font-weight: normal; }
         .color-group { display: flex; gap: 10px; }
         .color-box { border: 2px solid transparent; border-radius: 4px; cursor: pointer; padding: 2px; transition: 0.2s; }
-        .color-box.active { border-color: #2874f0; } /* Flipkart style blue border for active color */
+        .color-box.active { border-color: #2874f0; }
         .color-box img { width: 45px; height: 55px; object-fit: cover; border-radius: 2px; border: 1px solid #eee; }
 
         /* Size Selector */
@@ -113,11 +114,24 @@
         .add-cart:hover { background: #f39800; transform: translateY(-2px); }
         .buy-now:hover { background: #f05a10; transform: translateY(-2px); }
 
-        /* Reviews Section */
+        /* REVIEWS SECTION WITH IMAGE UPLOAD */
         .review-section { margin-top: 20px; }
-        .rev-card { background: #f9f9f9; padding: 15px; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid #e02844; }
+        .rev-card { background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 6px; border-left: 4px solid #e02844; }
         .rev-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
-        .sub-btn { background: #e02844; color: #fff; border: none; padding: 12px 25px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 5px; }
+        
+        /* New Image Upload Styles */
+        .upload-wrapper { margin: 10px 0; display: flex; align-items: center; gap: 15px; }
+        .upload-label { cursor: pointer; color: #2874f0; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: 1px dashed #2874f0; padding: 8px 15px; border-radius: 4px; transition: 0.2s; }
+        .upload-label:hover { background: #eef5ff; }
+        #revImage { display: none; } /* Original input hidden, sirf label dikhega */
+        .file-name-text { font-size: 13px; color: #388e3c; font-weight: 500; }
+        
+        /* Uploaded Image display inside Review */
+        .rev-uploaded-img { width: 80px; height: 100px; object-fit: cover; border-radius: 4px; margin-top: 10px; border: 1px solid #ddd; cursor: pointer; transition: 0.2s; }
+        .rev-uploaded-img:hover { opacity: 0.8; }
+        
+        .sub-btn { background: #e02844; color: #fff; border: none; padding: 12px 25px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 5px; transition: 0.2s; }
+        .sub-btn:disabled { background: #ccc; cursor: not-allowed; }
 
         /* Similar Products */
         .similar-section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
@@ -151,7 +165,6 @@
                 <button class="icon-btn" onclick="shareProduct()" title="Share"><i class="fas fa-share-alt"></i></button>
             </div>
         </div>
-        <!-- Thumbnails Gallery -->
         <div class="small-img-group" id="smallImgGroup"></div>
     </div>
 
@@ -233,7 +246,7 @@
             <div class="trust-item"><i class="fas fa-shield-alt" style="color:#555;"></i>Top<br>Brand</div>
         </div>
 
-        <!-- Product Details Description -->
+        <!-- Product Details -->
         <div class="section-title">Product Details</div>
         <div class="details-text">
             <p>Elevate your everyday style with this premium urban streetwear piece. Designed for comfort and built for the modern trendsetter.</p>
@@ -251,7 +264,7 @@
             <a href="#" class="btn buy-now" id="btnBuyNow"><i class="fas fa-bolt"></i> BUY NOW</a>
         </div>
 
-        <!-- Reviews -->
+        <!-- NEW: Review Section with Photo Upload -->
         <div class="review-section">
             <h2 class="section-title">Customer Reviews</h2>
             <div id="reviewContainer">Loading reviews...</div>
@@ -259,7 +272,17 @@
             <h2 class="section-title" style="margin-top: 30px;">Add Your Review</h2>
             <input type="text" id="revName" class="rev-input" placeholder="Your Name">
             <textarea id="revComment" class="rev-input" rows="3" placeholder="Write your experience..."></textarea>
-            <button class="sub-btn" onclick="submitReview()">Post Review</button>
+            
+            <!-- Upload Photo UI -->
+            <div class="upload-wrapper">
+                <label class="upload-label" for="revImage">
+                    <i class="fas fa-camera"></i> Add Product Photo
+                </label>
+                <input type="file" id="revImage" accept="image/*" onchange="showFileName()">
+                <span class="file-name-text" id="fileNameText"></span>
+            </div>
+
+            <button class="sub-btn" id="postBtn" onclick="submitReview()">Post Review</button>
         </div>
     </div>
 </div>
@@ -297,36 +320,33 @@
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
         authDomain: "zippykart-production-157e1.firebaseapp.com",
         projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.appspot.com",
+        storageBucket: "zippykart-production-157e1.appspot.com", // Storage active!
         messagingSenderId: "803651431969",
         appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
     };
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const storage = firebase.storage(); // Init Storage
     const productId = new URLSearchParams(window.location.search).get('id');
 
-    // 2. Load Main Product & Calculate Discount
+    // Load Product Data
     db.collection("zippykart_products").doc(productId).get().then(doc => {
         if(doc.exists) {
             const product = doc.data();
             document.getElementById('proTitle').innerText = product.title;
             document.getElementById('proPrice').innerText = "₹" + product.price;
             document.getElementById('MainImg').src = product.image;
-            
-            // Set Color Option Image dynamically based on main image
             document.getElementById('colorImg1').src = product.image;
 
-            // Discount Logic
             if(product.mrp && product.mrp > product.price) {
                 document.getElementById('proMrp').innerText = "₹" + product.mrp;
                 let discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
                 document.getElementById('proDiscount').innerText = discount + "% off";
             }
 
-            // Thumbnail Images Logic
             if(product.all_images && product.all_images.length > 0) {
                 const smallImgGroup = document.getElementById('smallImgGroup');
-                 product.all_images.forEach((imgUrl) => {
+                product.all_images.forEach((imgUrl) => {
                     if(imgUrl) {
                         smallImgGroup.innerHTML += `<div class="small-img-col"><img src="${imgUrl}" onclick="changeMainImg(this, '${imgUrl}')"></div>`;
                     }
@@ -335,7 +355,6 @@
         }
     });
 
-    // Thumbnail Swap Logic
     window.changeMainImg = function(element, imgUrl) {
         const mainImg = document.getElementById('MainImg');
         mainImg.style.opacity = "0.5";
@@ -347,47 +366,52 @@
         if(element.tagName === 'IMG') element.classList.add('active');
     };
 
-    // Color Selection Logic
     window.selectColor = function(element) {
         document.querySelectorAll('.color-box').forEach(box => box.classList.remove('active'));
         element.classList.add('active');
     };
-
-    // 3. Size Selection Logic
     window.selectSize = function(element) {
         document.querySelectorAll('.size-box').forEach(box => box.classList.remove('active'));
         element.classList.add('active');
     };
-
-    // 4. Quantity Logic
     window.updateQty = function(change) {
         let input = document.getElementById('qtyInput');
         let val = parseInt(input.value) + change;
-        if(val >= 1 && val <= 10) input.value = val; // Max limit 10
+        if(val >= 1 && val <= 10) input.value = val; 
     };
 
-    // 5. Wishlist & Share Logic
-    window.toggleWishlist = function(btn) {
-        btn.classList.toggle('active');
-        if(btn.classList.contains('active')) {
-            alert("Added to your ZippyKart Wishlist! ❤️");
-        }
-    };
+    // BUY NOW Logic
+    document.getElementById('btnBuyNow').addEventListener('click', function(e) {
+        e.preventDefault(); 
+        let title = document.getElementById('proTitle').innerText;
+        let price = document.getElementById('proPrice').innerText.replace('₹', '').trim();
+        let qty = document.getElementById('qtyInput').value;
+        let selectedSize = document.querySelector('.size-box.active').innerText;
+        let img = document.getElementById('MainImg').src;
 
-    window.shareProduct = function() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'ZippyKart Premium',
-                text: 'Check out this awesome product on ZippyKart!',
-                url: window.location.href,
-            }).catch(console.error);
+        let checkoutData = {
+            productId: productId, title: title, price: price, quantity: qty, size: selectedSize, image: img
+        };
+        localStorage.setItem('zippy_checkout_data', JSON.stringify(checkoutData));
+        window.location.href = 'checkout.html';
+    });
+
+    // --------------------------------------------------
+    // NEW: IMAGE UPLOAD & REVIEW SYSTEM
+    // --------------------------------------------------
+    
+    // Show selected file name to user
+    window.showFileName = function() {
+        const fileInput = document.getElementById('revImage');
+        if (fileInput.files.length > 0) {
+            document.getElementById('fileNameText').innerText = "✓ " + fileInput.files[0].name;
         } else {
-            alert("Share feature is available on mobile devices!");
+            document.getElementById('fileNameText').innerText = "";
         }
-    };
+    }
 
-    // 6. Review System
-    db.collection("zippykart_reviews").where("productId", "==", productId).onSnapshot(snapshot => {
+    // Fetch & Display Reviews (with Image Support)
+    db.collection("zippykart_reviews").where("productId", "==", productId).orderBy("timestamp", "desc").onSnapshot(snapshot => {
         const container = document.getElementById('reviewContainer');
         container.innerHTML = "";
         if(snapshot.empty) {
@@ -395,55 +419,78 @@
         }
         snapshot.forEach(doc => {
             const rev = doc.data();
+            // Agar review mein image hai, toh use <img> tag me show karenge
+            let imageHtml = rev.imageUrl ? `<br><img src="${rev.imageUrl}" class="rev-uploaded-img" onclick="window.open('${rev.imageUrl}', '_blank')">` : '';
+
             container.innerHTML += `<div class="rev-card">
                 <strong>${rev.customerName}</strong> <i class="fas fa-check-circle" style="color: #28a745; font-size: 12px;"></i><br>
                 <div style="margin-top:5px; color:#555; line-height:1.4;">${rev.comment}</div>
+                ${imageHtml}
             </div>`;
         });
     });
 
-    window.submitReview = function() {
+    // Submit Review Function with Upload Logic
+    window.submitReview = async function() {
         const name = document.getElementById('revName').value;
         const comment = document.getElementById('revComment').value;
-        if(!name || !comment) return alert("Please fill your Name and Review!");
-        
-        db.collection("zippykart_reviews").add({
-            productId: productId,
-            customerName: name,
-            comment: comment,
-            rating: 5,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => { 
-            alert("Awesome! Your review is posted. 🌟"); 
+        const fileInput = document.getElementById('revImage');
+        const postBtn = document.getElementById('postBtn');
+
+        if(!name || !comment) return alert("Please fill your Name and Review text!");
+
+        // Button ko block karo jab tak upload ho raha hai
+        postBtn.innerText = "Posting...";
+        postBtn.disabled = true;
+
+        let uploadedImageUrl = null;
+
+        try {
+            // Agar customer ne photo select ki hai
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                postBtn.innerText = "Uploading Photo...";
+                
+                // Firebase Storage me folder banega 'review_images'
+                const storageRef = storage.ref();
+                const imageRef = storageRef.child('review_images/' + Date.now() + '_' + file.name);
+                
+                // Photo upload karna
+                await imageRef.put(file);
+                
+                // Upload hone ke baad Photo ka URL nikalna
+                uploadedImageUrl = await imageRef.getDownloadURL();
+            }
+
+            postBtn.innerText = "Saving Review...";
+
+            // Firebase Firestore me Data Save karna
+            await db.collection("zippykart_reviews").add({
+                productId: productId,
+                customerName: name,
+                comment: comment,
+                rating: 5,
+                imageUrl: uploadedImageUrl, // Photo ka URL yahan save hoga
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            alert("Awesome! Your review is posted successfully. 🌟"); 
+            
+            // Sab clean karna
             document.getElementById('revName').value = "";
             document.getElementById('revComment').value = "";
-        });
+            fileInput.value = "";
+            document.getElementById('fileNameText').innerText = "";
+
+        } catch (error) {
+            console.error(error);
+            alert("Error posting review. Try again.");
+        } finally {
+            // Button wapas theek karna
+            postBtn.innerText = "Post Review";
+            postBtn.disabled = false;
+        }
     };
-        // BUY NOW BUTTON LOGIC
-    document.getElementById('btnBuyNow').addEventListener('click', function(e) {
-        e.preventDefault(); // Page refresh rokne ke liye
-        
-        // Data collect karna
-        let title = document.getElementById('proTitle').innerText;
-        let price = document.getElementById('proPrice').innerText.replace('₹', '').trim();
-        let qty = document.getElementById('qtyInput').value;
-        let selectedSize = document.querySelector('.size-box.active').innerText;
-        let img = document.getElementById('MainImg').src;
-
-        // Order ka data ek bundle mein pack karna
-        let checkoutData = {
-            productId: productId,
-            title: title,
-            price: price,
-            quantity: qty,
-            size: selectedSize,
-            image: img
-        };
-
-        // Local browser storage mein save karna aur checkout page par bhejna
-        localStorage.setItem('zippy_checkout_data', JSON.stringify(checkoutData));
-        window.location.href = 'checkout.html';
-    });
 </script>
 </body>
 </html>
