@@ -419,6 +419,31 @@
             document.getElementById('revComment').value = "";
         });
     };
+        // BUY NOW BUTTON LOGIC
+    document.getElementById('btnBuyNow').addEventListener('click', function(e) {
+        e.preventDefault(); // Page refresh rokne ke liye
+        
+        // Data collect karna
+        let title = document.getElementById('proTitle').innerText;
+        let price = document.getElementById('proPrice').innerText.replace('₹', '').trim();
+        let qty = document.getElementById('qtyInput').value;
+        let selectedSize = document.querySelector('.size-box.active').innerText;
+        let img = document.getElementById('MainImg').src;
+
+        // Order ka data ek bundle mein pack karna
+        let checkoutData = {
+            productId: productId,
+            title: title,
+            price: price,
+            quantity: qty,
+            size: selectedSize,
+            image: img
+        };
+
+        // Local browser storage mein save karna aur checkout page par bhejna
+        localStorage.setItem('zippy_checkout_data', JSON.stringify(checkoutData));
+        window.location.href = 'checkout.html';
+    });
 </script>
 </body>
 </html>
