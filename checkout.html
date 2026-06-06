@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - ZippyKart</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -23,6 +26,11 @@
         .input-box { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 4px; outline: none; font-size: 14px; }
         .input-box:focus { border-color: #2874f0; }
         
+        /* Payment Options */
+        .pay-option { border: 1px solid #e0e0e0; padding: 15px; border-radius: 4px; background: #f9f9f9; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
+        .pay-option:hover { border-color: #2874f0; }
+        .pay-option input { margin-right: 10px; cursor: pointer; }
+        
         /* Right: Order Summary */
         .summary-section { width: 35%; background: #fff; padding: 25px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); height: fit-content; }
         .item-details { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
@@ -33,7 +41,8 @@
         .price-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
         .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; border-top: 1px dashed #e0e0e0; padding-top: 15px; margin-top: 10px; }
         
-        .place-order-btn { width: 100%; background: #fb641b; color: #fff; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; }
+        .place-order-btn { width: 100%; background: #fb641b; color: #fff; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: 0.2s; }
+        .place-order-btn:hover { background: #f05a10; }
         
         @media (max-width: 800px) {
             .checkout-container { flex-direction: column-reverse; }
@@ -46,7 +55,6 @@
 <div class="navbar"><a href="index.html" class="logo">ZippyKart</a></div>
 
 <div class="checkout-container">
-    <!-- Left: Address Form -->
     <div class="address-section">
         <div class="section-title">1. Delivery Address</div>
         <div class="form-group">
@@ -60,13 +68,21 @@
         <textarea id="custAddress" class="input-box" rows="3" placeholder="Full Address (House No, Building, Street, Area)"></textarea>
         
         <div class="section-title" style="margin-top: 30px;">2. Payment Method</div>
-        <div style="border: 1px solid #e0e0e0; padding: 15px; border-radius: 4px; background: #f9f9f9;">
-            <input type="radio" checked> <strong>Cash on Delivery (COD)</strong>
-            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 20px;">Pay at your doorstep when receiving the order.</p>
-        </div>
+        
+        <label class="pay-option" style="display: block;">
+            <input type="radio" name="payMethod" id="payOnline" value="online" checked> 
+            <strong>Online Payment (UPI, Cards, NetBanking)</strong>
+            <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" style="height: 15px; float: right;">
+            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 25px;">Pay securely via Razorpay. Fast & Safe.</p>
+        </label>
+
+        <label class="pay-option" style="display: block;">
+            <input type="radio" name="payMethod" id="payCod" value="cod"> 
+            <strong>Cash on Delivery (COD)</strong>
+            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 25px;">Pay at your doorstep when receiving the order.</p>
+        </label>
     </div>
 
-    <!-- Right: Order Summary -->
     <div class="summary-section">
         <div class="section-title" style="color: #212121;">Order Summary</div>
         
@@ -93,7 +109,7 @@
             <span>₹<span id="summaryTotal">0</span></span>
         </div>
 
-        <button class="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
+        <button class="place-order-btn" id="btnPlaceOrder" onclick="processOrder()">PLACE ORDER</button>
     </div>
 </div>
 
@@ -112,27 +128,26 @@
 
     // 1. Data load from LocalStorage
     let orderData = JSON.parse(localStorage.getItem('zippy_checkout_data'));
+    let totalAmount = 0;
     
     if(!orderData) {
         alert("No product selected. Going back!");
         window.location.href = 'index.html';
     } else {
-        // UI mein data fill karna
         document.getElementById('chkImg').src = orderData.image;
         document.getElementById('chkTitle').innerText = orderData.title;
         document.getElementById('chkSize').innerText = orderData.size;
         document.getElementById('chkQty').innerText = orderData.quantity;
         document.getElementById('chkItemPrice').innerText = orderData.price;
-        
         document.getElementById('summaryQty').innerText = orderData.quantity;
         
-        let totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
+        totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
         document.getElementById('summaryPrice').innerText = totalAmount;
         document.getElementById('summaryTotal').innerText = totalAmount;
     }
 
-    // 2. Place Order Logic
-    window.placeOrder = function() {
+    // 2. Process Order (Razorpay or COD)
+    window.processOrder = function() {
         const name = document.getElementById('custName').value;
         const phone = document.getElementById('custPhone').value;
         const pincode = document.getElementById('custPincode').value;
@@ -144,17 +159,54 @@
             return;
         }
 
-        let totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
+        let isOnline = document.getElementById('payOnline').checked;
 
-        // Firebase mein Order Save karna
+        if (isOnline) {
+            // ----- RAZORPAY ONLINE PAYMENT LOGIC -----
+            var options = {
+                "key": "YOUR_RAZORPAY_KEY", // 🔥 YAHAN APNI RAZORPAY KEY DAALIYE 🔥
+                "amount": totalAmount * 100, // Paise mein (₹1 = 100 paise)
+                "currency": "INR",
+                "name": "ZippyKart",
+                "description": "Order Payment for " + orderData.title,
+                "image": "https://cdn-icons-png.flaticon.com/512/3144/3144456.png", // Aapka Logo
+                "handler": function (response) {
+                    // Payment Successful hone ke baad database me save hoga
+                    saveOrderToFirebase("Online Payment (Razorpay)", response.razorpay_payment_id, name, phone, pincode, city, address);
+                },
+                "prefill": {
+                    "name": name,
+                    "contact": phone
+                },
+                "theme": {
+                    "color": "#e02844"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.on('payment.failed', function (response){
+                alert("Payment Failed! Reason: " + response.error.description);
+            });
+            rzp.open();
+        } else {
+            // ----- CASH ON DELIVERY LOGIC -----
+            saveOrderToFirebase("Cash on Delivery (COD)", "N/A", name, phone, pincode, city, address);
+        }
+    }
+
+    // 3. Save to Firebase Database
+    function saveOrderToFirebase(paymentMethod, transactionId, name, phone, pincode, city, address) {
+        document.getElementById('btnPlaceOrder').innerText = "Processing...";
+        document.getElementById('btnPlaceOrder').disabled = true;
+
         db.collection("zippykart_orders").add({
             productId: orderData.productId,
             productTitle: orderData.title,
             size: orderData.size,
             quantity: orderData.quantity,
             totalAmount: totalAmount,
-            paymentMethod: "COD",
-            status: "Pending",
+            paymentMethod: paymentMethod,
+            transactionId: transactionId,
+            status: "Order Confirmed",
             customerInfo: {
                 name: name,
                 phone: phone,
@@ -164,11 +216,13 @@
             },
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then(() => {
-            alert("🎉 Order Successfully Placed!");
-            localStorage.removeItem('zippy_checkout_data'); // Cart clear karein
-            window.location.href = 'index.html'; // Home page par wapas bhej dein
+            alert("🎉 Awesome! Order Successfully Placed.");
+            localStorage.removeItem('zippy_checkout_data'); 
+            window.location.href = 'index.html'; 
         }).catch((error) => {
             alert("Error placing order: " + error.message);
+            document.getElementById('btnPlaceOrder').innerText = "PLACE ORDER";
+            document.getElementById('btnPlaceOrder').disabled = false;
         });
     }
 </script>
