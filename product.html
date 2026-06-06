@@ -13,94 +13,383 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f3f6; color: #212121; }
+        /* Base Setup */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+        }
+        body { 
+            background: #f1f3f6; 
+            color: #212121; 
+            overflow-x: hidden;
+        }
         
         /* Navbar */
-        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .navbar .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; letter-spacing: -0.5px;}
-        .navbar .cart-btn { background: #e02844; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        .navbar { 
+            background: #fff; 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        .navbar .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: #e02844; 
+            text-decoration: none; 
+            letter-spacing: -0.5px;
+        }
+        .navbar .cart-btn { 
+            background: #e02844; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 14px; 
+            transition: transform 0.3s;
+        }
+        .navbar .cart-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ✨ ANIMATIONS (Yahan Wapas Daal Diye) ✨ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulseLoader {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         /* Container */
-        .pro-container { max-width: 1200px; margin: 20px auto; display: flex; gap: 30px; background: transparent; }
+        .pro-container { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            display: flex; 
+            gap: 30px; 
+            background: transparent; 
+        }
         
         /* Left: Sticky Images */
-        .pro-image-section { width: 40%; position: sticky; top: 80px; height: fit-content; background: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .main-img { width: 100%; border-radius: 4px; object-fit: cover; aspect-ratio: 4/5; border: 1px solid #f0f0f0; transition: 0.3s; }
-        .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; }
-        .small-img-col img { width: 70px; height: 85px; border-radius: 4px; border: 2px solid transparent; cursor: pointer; object-fit: cover; }
-        .small-img-col img:hover, .small-img-col img.active { border-color: #e02844; }
+        .pro-image-section { 
+            width: 40%; 
+            position: sticky; 
+            top: 80px; 
+            height: fit-content; 
+            background: #fff; 
+            padding: 15px; 
+            border-radius: 4px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+            animation: fadeIn 1.2s ease-out; /* Animation Added */
+        }
+        .main-img { 
+            width: 100%; 
+            border-radius: 4px; 
+            object-fit: cover; 
+            aspect-ratio: 4/5; 
+            border: 1px solid #f0f0f0; 
+            transition: opacity 0.3s ease-in-out; 
+        }
+        .small-img-group { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 15px; 
+            overflow-x: auto; 
+            padding-bottom: 5px; 
+        }
+        .small-img-col img { 
+            width: 70px; 
+            height: 85px; 
+            border-radius: 4px; 
+            border: 2px solid transparent; 
+            cursor: pointer; 
+            object-fit: cover; 
+            transition: 0.2s;
+        }
+        .small-img-col img:hover, .small-img-col img.active { 
+            border-color: #e02844; 
+        }
 
         /* Right: Details Section */
-        .pro-details-section { width: 60%; background: #fff; padding: 30px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .pro-details-section { 
+            width: 60%; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 4px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+            animation: slideUp 0.8s ease-out forwards; /* Animation Added */
+            opacity: 0;
+        }
         
         /* Brand & Title */
-        .brand-name { color: #878787; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
-        .pro-title { font-size: 22px; font-weight: 500; margin-bottom: 10px; color: #212121; line-height: 1.4; }
+        .brand-name { 
+            color: #878787; 
+            font-size: 14px; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            margin-bottom: 5px; 
+            letter-spacing: 1px; 
+        }
+        .pro-title { 
+            font-size: 22px; 
+            font-weight: 500; 
+            margin-bottom: 10px; 
+            color: #212121; 
+            line-height: 1.4; 
+        }
         
         /* Ratings */
-        .rating-box { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .badge-star { background: #388e3c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-        .rating-text { color: #878787; font-size: 14px; font-weight: 500; }
+        .rating-box { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-bottom: 20px; 
+        }
+        .badge-star { 
+            background: #388e3c; 
+            color: #fff; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+        }
+        .rating-text { 
+            color: #878787; 
+            font-size: 14px; 
+            font-weight: 500; 
+        }
 
         /* Price Box */
-        .price-box { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 20px; }
-        .current-price { font-size: 28px; font-weight: 600; color: #212121; }
-        .mrp-price { font-size: 16px; color: #878787; text-decoration: line-through; margin-bottom: 4px; }
-        .discount-pct { font-size: 16px; color: #388e3c; font-weight: 600; margin-bottom: 4px; }
+        .price-box { 
+            display: flex; 
+            align-items: flex-end; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+        }
+        .current-price { 
+            font-size: 28px; 
+            font-weight: 600; 
+            color: #212121; 
+        }
+        .mrp-price { 
+            font-size: 16px; 
+            color: #878787; 
+            text-decoration: line-through; 
+            margin-bottom: 4px; 
+        }
+        .discount-pct { 
+            font-size: 16px; 
+            color: #388e3c; 
+            font-weight: 600; 
+            margin-bottom: 4px; 
+        }
 
         /* Available Offers */
         .offers-section { margin-bottom: 25px; }
-        .section-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .offer-item { display: flex; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #212121; align-items: flex-start; }
+        .section-title { 
+            font-size: 16px; 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .offer-item { 
+            display: flex; 
+            gap: 10px; 
+            font-size: 14px; 
+            margin-bottom: 8px; 
+            color: #212121; 
+            align-items: flex-start; 
+        }
         .offer-item i { color: #388e3c; margin-top: 3px; }
         .offer-item span { font-weight: 600; }
         .offer-item a { color: #2874f0; text-decoration: none; font-weight: 500; }
 
-        /* Size Selector */
-        .size-section { margin-bottom: 25px; }
-        .size-group { display: flex; gap: 10px; margin-top: 10px; }
-        .size-box { border: 1px solid #e0e0e0; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: 0.2s; }
-        .size-box:hover, .size-box.active { border-color: #e02844; color: #e02844; background: #fff0f2; }
-
-        /* Color Variants */
-        .variant-group { display: flex; gap: 10px; margin-top: 10px; margin-bottom: 25px; }
-        .variant-img { width: 50px; height: 60px; cursor: pointer; border: 2px solid #ddd; border-radius: 4px; object-fit: cover; }
-        .variant-img:hover { border-color: #212121; }
+        /* Size & Color Variants */
+        .size-section, .variant-section { margin-bottom: 25px; }
+        .size-group, .variant-group { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 10px; 
+        }
+        .size-box { 
+            border: 1px solid #e0e0e0; 
+            padding: 10px 15px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: 500; 
+            transition: 0.2s; 
+        }
+        .size-box:hover, .size-box.active { 
+            border-color: #e02844; 
+            color: #e02844; 
+            background: #fff0f2; 
+        }
+        .variant-img { 
+            width: 50px; 
+            height: 60px; 
+            cursor: pointer; 
+            border: 2px solid #ddd; 
+            border-radius: 4px; 
+            object-fit: cover; 
+            transition: 0.3s;
+        }
+        .variant-img:hover { border-color: #e02844; transform: scale(1.05); }
 
         /* Delivery & Services */
-        .delivery-box { border: 1px solid #f0f0f0; padding: 15px; border-radius: 4px; margin-bottom: 25px; background: #fafafa; }
-        .pincode-input { display: flex; gap: 0; margin-top: 10px; border-bottom: 2px solid #2874f0; width: max-content; padding-bottom: 5px; }
-        .pincode-input input { border: none; outline: none; background: transparent; font-size: 15px; font-weight: 500; width: 120px; }
-        .pincode-input button { border: none; background: none; color: #2874f0; font-weight: 600; cursor: pointer; }
-        .delivery-msg { font-size: 14px; margin-top: 10px; font-weight: 500; color: #212121; }
+        .delivery-box { 
+            border: 1px solid #f0f0f0; 
+            padding: 15px; 
+            border-radius: 4px; 
+            margin-bottom: 25px; 
+            background: #fafafa; 
+        }
+        .pincode-input { 
+            display: flex; 
+            gap: 0; 
+            margin-top: 10px; 
+            border-bottom: 2px solid #2874f0; 
+            width: max-content; 
+            padding-bottom: 5px; 
+        }
+        .pincode-input input { 
+            border: none; 
+            outline: none; 
+            background: transparent; 
+            font-size: 15px; 
+            font-weight: 500; 
+            width: 120px; 
+        }
+        .pincode-input button { 
+            border: none; 
+            background: none; 
+            color: #2874f0; 
+            font-weight: 600; 
+            cursor: pointer; 
+        }
+        .delivery-msg { 
+            font-size: 14px; 
+            margin-top: 10px; 
+            font-weight: 500; 
+            color: #212121; 
+        }
 
         /* Trust Badges */
-        .trust-badges { display: flex; justify-content: space-between; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 15px 0; margin-bottom: 25px; text-align: center; }
+        .trust-badges { 
+            display: flex; 
+            justify-content: space-between; 
+            border-top: 1px solid #f0f0f0; 
+            border-bottom: 1px solid #f0f0f0; 
+            padding: 15px 0; 
+            margin-bottom: 25px; 
+            text-align: center; 
+        }
         .trust-item { flex: 1; font-size: 12px; font-weight: 500; color: #878787; }
         .trust-item i { display: block; font-size: 20px; color: #212121; margin-bottom: 5px; }
 
-        /* Product Details Text */
+        /* Details Text */
         .details-text { font-size: 14px; line-height: 1.6; color: #555; }
         .details-text ul { padding-left: 20px; margin-top: 10px; }
         .details-text li { margin-bottom: 5px; }
 
         /* Action Buttons */
-        .action-btns { display: flex; gap: 15px; margin-top: 30px; position: sticky; bottom: 0; background: #fff; padding: 15px 0; border-top: 1px solid #eee;}
-        .add-cart-btn { background: #ff9f00; color: white; border: none; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; flex: 1; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .buy-now-btn { background: #fb641b; color: white; border: none; padding: 16px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; flex: 1; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .add-cart-btn:hover { background: #f39800; }
-        .buy-now-btn:hover { background: #f05a10; }
+        .action-btns { 
+            display: flex; 
+            gap: 15px; 
+            margin-top: 30px; 
+            position: sticky; 
+            bottom: 0; 
+            background: #fff; 
+            padding: 15px 0; 
+            border-top: 1px solid #eee;
+        }
+        .add-cart-btn { 
+            background: #ff9f00; 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 8px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2); 
+            transition: 0.3s;
+        }
+        .buy-now-btn { 
+            background: #fb641b; 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            flex: 1; 
+            text-align: center; 
+            text-decoration: none; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 8px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2); 
+            transition: 0.3s;
+        }
+        .add-cart-btn:hover { background: #f39800; transform: translateY(-2px); }
+        .buy-now-btn:hover { background: #f05a10; transform: translateY(-2px); }
+        
+        /* Out of stock disabled button state */
+        .add-cart-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
 
         /* Loader */
-        #loader { text-align: center; padding: 100px; font-size: 20px; color: #2874f0; font-weight: 600; }
+        #loader { 
+            text-align: center; 
+            padding: 100px; 
+            font-size: 20px; 
+            color: #e02844; 
+            font-weight: 600; 
+            animation: pulseLoader 1.5s infinite;
+        }
 
+        /* Mobile View */
         @media (max-width: 800px) {
             .pro-container { flex-direction: column; margin: 0; gap: 0; }
             .pro-image-section { width: 100%; position: relative; top: 0; border-radius: 0; }
             .pro-details-section { width: 100%; border-radius: 0; padding: 20px; }
             .trust-badges { flex-wrap: wrap; gap: 15px; }
-            .action-btns { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px; margin: 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+            .action-btns { 
+                position: fixed; 
+                bottom: 0; 
+                left: 0; 
+                width: 100%; 
+                padding: 10px; 
+                margin: 0; 
+                z-index: 1000; 
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1); 
+            }
             body { padding-bottom: 70px; }
         }
     </style>
@@ -113,7 +402,7 @@
     </div>
 
     <!-- Loader -->
-    <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> Loading Premium Details...</div>
+    <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> Getting Product Ready...</div>
 
     <!-- Main Content -->
     <div class="pro-container" id="productContent" style="display: none;">
@@ -133,7 +422,8 @@
             <div class="rating-box">
                 <div class="badge-star">4.3 <i class="fas fa-star" style="font-size:10px;"></i></div>
                 <div class="rating-text">1,245 Ratings & 120 Reviews</div>
-                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" width="70" alt="Assured">
+                <!-- ✨ VIP ZippyAssured Badge ✨ -->
+                <span style="background: #212121; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; font-style: italic; display: inline-flex; align-items: center; gap: 3px;">Zippy<span style="color: #e02844;">Assured</span> <i class="fas fa-check-circle" style="color: #28a745; font-size: 10px;"></i></span>
             </div>
 
             <div class="price-box">
@@ -145,13 +435,13 @@
             <!-- Offers Section -->
             <div class="offers-section">
                 <div class="section-title">Available Offers</div>
-                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 5% Cashback on Flipkart Axis Bank Card <a href="#">T&C</a></div></div>
-                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 10% off on HDFC Bank Credit Card EMI, up to ₹1,500 <a href="#">T&C</a></div></div>
+                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 5% Cashback on ZippyKart ICICI Credit Card <a href="#">T&C</a></div></div>
+                <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 10% off on SBI & HDFC Bank Cards, up to ₹1,500 <a href="#">T&C</a></div></div>
                 <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Special Price:</span> Get extra ₹200 off (price inclusive of cashback/coupon) <a href="#">T&C</a></div></div>
             </div>
 
             <!-- Colors -->
-            <div id="variantsContainer" style="display:none;">
+            <div class="variant-section" id="variantsContainer" style="display:none;">
                 <div class="section-title" style="color:#878787; font-size:14px;">Color Options</div>
                 <div class="variant-group" id="variantGroup"></div>
             </div>
@@ -174,7 +464,7 @@
                     <input type="number" placeholder="Enter Pincode" value="110001">
                     <button onclick="alert('Delivery is available in your area!')">Check</button>
                 </div>
-                <div class="delivery-msg">
+                <div class="delivery-msg" id="deliveryMsg">
                     Free Delivery by <strong style="color:#212121;">Tomorrow, 10 PM</strong> | <span style="color:#388e3c;">Free</span> <del style="color:#878787; font-size:12px;">₹40</del>
                 </div>
             </div>
@@ -208,6 +498,7 @@
         </div>
     </div>
 
+    <!-- Firebase Connection & Script -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
@@ -217,6 +508,7 @@
             messagingSenderId: "803651431969",
             appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
         };
+        
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
 
@@ -224,84 +516,31 @@
         const productId = urlParams.get('id');
 
         if (!productId) {
-            document.getElementById('loader').innerHTML = "Product Not Found!";
+            document.getElementById('loader').innerHTML = "Product Not Found! Please go back.";
         } else {
             db.collection("zippykart_products").doc(productId).get().then((doc) => {
                 if (doc.exists) {
                     const product = doc.data();
                     
+                    // Hide Loader, Show Content (Triggers Animations)
                     document.getElementById('loader').style.display = "none";
                     document.getElementById('productContent').style.display = "flex";
 
+                    // Fill Text Data
                     document.getElementById('proCategory').innerText = product.category || "ZippyKart Originals";
                     document.getElementById('proTitle').innerText = product.title;
                     document.getElementById('proPrice').innerText = "₹" + product.price;
                     
+                    // Calculate Discount
                     if(product.mrp && product.mrp > product.price) {
                         document.getElementById('proMrp').innerText = "₹" + product.mrp;
                         let discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
                         document.getElementById('proDiscount').innerText = discount + "% off";
                     }
 
-                    const mainImgEl = document.getElementById('MainImg');
-                    mainImgEl.src = product.image;
-
-                    if(product.all_images && product.all_images.length > 0) {
-                        const smallImgGroup = document.getElementById('smallImgGroup');
-                        product.all_images.forEach((imgUrl) => {
-                            if(imgUrl) {
-                                smallImgGroup.innerHTML += `<div class="small-img-col"><img src="${imgUrl}" onclick="changeMainImg(this, '${imgUrl}')"></div>`;
-                            }
-                        });
-                    }
-
-                    if(product.variants && product.variants.length > 0) {
-                        document.getElementById('variantsContainer').style.display = "block";
-                        const variantGroup = document.getElementById('variantGroup');
-                        product.variants.forEach((vImgUrl) => {
-                            if(vImgUrl) {
-                                variantGroup.innerHTML += `<img src="${vImgUrl}" class="variant-img" onclick="changeMainImg(this, '${vImgUrl}')">`;
-                            }
-                        });
-                    }
-
-                    // Size Selection Logic
-                    const sizeBoxes = document.querySelectorAll('.size-box');
-                    sizeBoxes.forEach(box => {
-                        box.addEventListener('click', function() {
-                            sizeBoxes.forEach(b => b.classList.remove('active'));
-                            this.classList.add('active');
-                        });
-                    });
-
-                    // Add to Cart
-                    document.getElementById('btnAddToCart').onclick = function() {
-                        let cart = JSON.parse(localStorage.getItem('zippyCart')) || [];
-                        let existingProduct = cart.find(item => item.id === productId);
-                        if(existingProduct) { existingProduct.quantity += 1; } 
-                        else { cart.push({ id: productId, title: product.title, price: product.price, image: product.image, quantity: 1 }); }
-                        localStorage.setItem('zippyCart', JSON.stringify(cart));
-                        alert("Added to Cart successfully! 🛒");
-                    };
-
-                    document.getElementById('btnBuyNow').href = `checkout.html?id=${productId}`;
-
-                }
-            });
-        }
-
-        function changeMainImg(element, imgUrl) {
-            const mainImg = document.getElementById('MainImg');
-            mainImg.style.opacity = "0.7";
-            setTimeout(() => {
-                mainImg.src = imgUrl;
-                mainImg.style.opacity = "1";
-            }, 100);
-            
-            // Remove active class from all thumb images
-            document.querySelectorAll('.small-img-col img').forEach(img => img.classList.remove('active'));
-            if(element.tagName === 'IMG') element.classList.add('active');
-        }
-    </script>
-</body>
-</html>
+                    // Stock Logic (Wapas add kar diya)
+                    if(product.stock <= 0) {
+                        document.getElementById('btnAddToCart').innerHTML = `<i class="fas fa-times-circle"></i> OUT OF STOCK`;
+                        document.getElementById('btnAddToCart').disabled = true;
+                        document.getElementById('btnBuyNow').style.display = "none";
+                        document.getElementById('deliver
