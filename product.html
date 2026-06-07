@@ -8,10 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase SDKs (Ab Storage bhi add kiya gaya hai) -->
+    <!-- Firebase SDKs (Sirf Firestore, Storage ki zaroorat nahi) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
     <style>
         /* Base Setup */
@@ -117,20 +116,20 @@
         /* REVIEWS SECTION WITH IMAGE UPLOAD */
         .review-section { margin-top: 20px; }
         .rev-card { background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 6px; border-left: 4px solid #e02844; }
-        .rev-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+        .rev-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; outline: none;}
+        .rev-input:focus { border-color: #2874f0; }
         
-        /* New Image Upload Styles */
-        .upload-wrapper { margin: 10px 0; display: flex; align-items: center; gap: 15px; }
+        .upload-wrapper { margin: 10px 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
         .upload-label { cursor: pointer; color: #2874f0; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: 1px dashed #2874f0; padding: 8px 15px; border-radius: 4px; transition: 0.2s; }
         .upload-label:hover { background: #eef5ff; }
-        #revImage { display: none; } /* Original input hidden, sirf label dikhega */
+        #revImage { display: none; } 
         .file-name-text { font-size: 13px; color: #388e3c; font-weight: 500; }
         
-        /* Uploaded Image display inside Review */
         .rev-uploaded-img { width: 80px; height: 100px; object-fit: cover; border-radius: 4px; margin-top: 10px; border: 1px solid #ddd; cursor: pointer; transition: 0.2s; }
         .rev-uploaded-img:hover { opacity: 0.8; }
         
         .sub-btn { background: #e02844; color: #fff; border: none; padding: 12px 25px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 5px; transition: 0.2s; }
+        .sub-btn:hover { background: #c8233c; }
         .sub-btn:disabled { background: #ccc; cursor: not-allowed; }
 
         /* Similar Products */
@@ -246,7 +245,7 @@
             <div class="trust-item"><i class="fas fa-shield-alt" style="color:#555;"></i>Top<br>Brand</div>
         </div>
 
-        <!-- Product Details -->
+        <!-- Product Details Description -->
         <div class="section-title">Product Details</div>
         <div class="details-text">
             <p>Elevate your everyday style with this premium urban streetwear piece. Designed for comfort and built for the modern trendsetter.</p>
@@ -264,7 +263,7 @@
             <a href="#" class="btn buy-now" id="btnBuyNow"><i class="fas fa-bolt"></i> BUY NOW</a>
         </div>
 
-        <!-- NEW: Review Section with Photo Upload -->
+        <!-- Reviews with Base64 Image Upload -->
         <div class="review-section">
             <h2 class="section-title">Customer Reviews</h2>
             <div id="reviewContainer">Loading reviews...</div>
@@ -273,7 +272,6 @@
             <input type="text" id="revName" class="rev-input" placeholder="Your Name">
             <textarea id="revComment" class="rev-input" rows="3" placeholder="Write your experience..."></textarea>
             
-            <!-- Upload Photo UI -->
             <div class="upload-wrapper">
                 <label class="upload-label" for="revImage">
                     <i class="fas fa-camera"></i> Add Product Photo
@@ -320,16 +318,15 @@
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
         authDomain: "zippykart-production-157e1.firebaseapp.com",
         projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.appspot.com", // Storage active!
+        storageBucket: "zippykart-production-157e1.appspot.com",
         messagingSenderId: "803651431969",
         appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
     };
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
-    const storage = firebase.storage(); // Init Storage
     const productId = new URLSearchParams(window.location.search).get('id');
 
-    // Load Product Data
+    // 2. Load Main Product
     db.collection("zippykart_products").doc(productId).get().then(doc => {
         if(doc.exists) {
             const product = doc.data();
@@ -355,6 +352,7 @@
         }
     });
 
+    // Interactions
     window.changeMainImg = function(element, imgUrl) {
         const mainImg = document.getElementById('MainImg');
         mainImg.style.opacity = "0.5";
@@ -370,17 +368,23 @@
         document.querySelectorAll('.color-box').forEach(box => box.classList.remove('active'));
         element.classList.add('active');
     };
+
     window.selectSize = function(element) {
         document.querySelectorAll('.size-box').forEach(box => box.classList.remove('active'));
         element.classList.add('active');
     };
+
     window.updateQty = function(change) {
         let input = document.getElementById('qtyInput');
         let val = parseInt(input.value) + change;
-        if(val >= 1 && val <= 10) input.value = val; 
+        if(val >= 1 && val <= 10) input.value = val;
     };
 
-    // BUY NOW Logic
+    window.toggleWishlist = function(btn) {
+        btn.classList.toggle('active');
+    };
+
+    // BUY NOW logic
     document.getElementById('btnBuyNow').addEventListener('click', function(e) {
         e.preventDefault(); 
         let title = document.getElementById('proTitle').innerText;
@@ -396,11 +400,7 @@
         window.location.href = 'checkout.html';
     });
 
-    // --------------------------------------------------
-    // NEW: IMAGE UPLOAD & REVIEW SYSTEM
-    // --------------------------------------------------
-    
-    // Show selected file name to user
+    // --- REVIEWS WITH BASE64 IMAGE ---
     window.showFileName = function() {
         const fileInput = document.getElementById('revImage');
         if (fileInput.files.length > 0) {
@@ -410,7 +410,6 @@
         }
     }
 
-    // Fetch & Display Reviews (with Image Support)
     db.collection("zippykart_reviews").where("productId", "==", productId).orderBy("timestamp", "desc").onSnapshot(snapshot => {
         const container = document.getElementById('reviewContainer');
         container.innerHTML = "";
@@ -419,7 +418,6 @@
         }
         snapshot.forEach(doc => {
             const rev = doc.data();
-            // Agar review mein image hai, toh use <img> tag me show karenge
             let imageHtml = rev.imageUrl ? `<br><img src="${rev.imageUrl}" class="rev-uploaded-img" onclick="window.open('${rev.imageUrl}', '_blank')">` : '';
 
             container.innerHTML += `<div class="rev-card">
@@ -430,7 +428,6 @@
         });
     });
 
-    // Submit Review Function with Upload Logic
     window.submitReview = async function() {
         const name = document.getElementById('revName').value;
         const comment = document.getElementById('revComment').value;
@@ -439,44 +436,35 @@
 
         if(!name || !comment) return alert("Please fill your Name and Review text!");
 
-        // Button ko block karo jab tak upload ho raha hai
         postBtn.innerText = "Posting...";
         postBtn.disabled = true;
 
-        let uploadedImageUrl = null;
+        let base64Image = null;
 
         try {
-            // Agar customer ne photo select ki hai
             if (fileInput.files.length > 0) {
+                postBtn.innerText = "Processing Photo...";
                 const file = fileInput.files[0];
-                postBtn.innerText = "Uploading Photo...";
                 
-                // Firebase Storage me folder banega 'review_images'
-                const storageRef = storage.ref();
-                const imageRef = storageRef.child('review_images/' + Date.now() + '_' + file.name);
-                
-                // Photo upload karna
-                await imageRef.put(file);
-                
-                // Upload hone ke baad Photo ka URL nikalna
-                uploadedImageUrl = await imageRef.getDownloadURL();
+                base64Image = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
             }
 
             postBtn.innerText = "Saving Review...";
 
-            // Firebase Firestore me Data Save karna
             await db.collection("zippykart_reviews").add({
                 productId: productId,
                 customerName: name,
                 comment: comment,
                 rating: 5,
-                imageUrl: uploadedImageUrl, // Photo ka URL yahan save hoga
+                imageUrl: base64Image,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            alert("Awesome! Your review is posted successfully. 🌟"); 
-            
-            // Sab clean karna
+            alert("Awesome! Your review is posted. 🌟"); 
             document.getElementById('revName').value = "";
             document.getElementById('revComment').value = "";
             fileInput.value = "";
@@ -486,7 +474,6 @@
             console.error(error);
             alert("Error posting review. Try again.");
         } finally {
-            // Button wapas theek karna
             postBtn.innerText = "Post Review";
             postBtn.disabled = false;
         }
