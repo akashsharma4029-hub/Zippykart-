@@ -944,14 +944,29 @@
         }
     }
 
-    db.collection("zippykart_reviews").where("productId", "==", productId).orderBy("timestamp", "desc").onSnapshot(snapshot => {
+        // REVIEWS DIKHANE WALA NAYA CODE (Bina Index Error Ke)
+    db.collection("zippykart_reviews").where("productId", "==", productId).onSnapshot(snapshot => {
         const container = document.getElementById('reviewContainer');
         container.innerHTML = "";
+        
         if(snapshot.empty) {
             container.innerHTML = "<p style='color:#878787; font-size:14px;'>No reviews yet. Be the first to review!</p>";
+            return;
         }
+
+        // Reviews ko JavaScript ke zariye sort karna (Naya sabse upar)
+        let reviewsArray = [];
         snapshot.forEach(doc => {
-            const rev = doc.data();
+            reviewsArray.push(doc.data());
+        });
+
+        reviewsArray.sort((a, b) => {
+            let timeA = a.timestamp ? a.timestamp.toMillis() : 0;
+            let timeB = b.timestamp ? b.timestamp.toMillis() : 0;
+            return timeB - timeA;
+        });
+
+        reviewsArray.forEach(rev => {
             let imageHtml = rev.imageUrl ? `<br><img src="${rev.imageUrl}" class="rev-uploaded-img" onclick="window.open('${rev.imageUrl}', '_blank')">` : '';
 
             container.innerHTML += `<div class="rev-card">
@@ -961,6 +976,7 @@
             </div>`;
         });
     });
+
 
     // Auto-Compressor Logic & Review Submit
     window.submitReview = async function() {
