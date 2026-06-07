@@ -2,97 +2,390 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZippyKart Ultra-Pro Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZippyKart.co.in - Admin Panel</title>
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
-        body { display:flex; height:100vh; background:#f4f7fb; overflow:hidden; }
-        
-        /* Sidebar styling */
-        .sidebar { width:260px; background:#0f172a; color:#fff; display:flex; flex-direction:column; }
-        .menu-item { padding:20px 25px; cursor:pointer; display:flex; align-items:center; gap:15px; color:#94a3b8; transition: 0.3s; }
-        .menu-item:hover, .menu-item.active { background:#1e293b; color:#fff; border-left:4px solid #e02844; }
-        
-        /* Content styling */
-        .main { flex:1; padding:30px; overflow-y:auto; }
-        .page { display:none; animation: fadeIn 0.4s; }
-        .page.active { display:block; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        
-        /* Inventory Table Table */
-        .table-card { background:white; border-radius:12px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-        table { width:100%; border-collapse:collapse; margin-top:20px; }
-        th { text-align:left; padding:15px; color:#64748b; text-transform:uppercase; font-size:12px; }
-        td { padding:15px; border-bottom:1px solid #eee; }
-        
-        /* Modal */
-        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fe;
+            color: #2b3674;
+        }
+
+        /* Navbar & Top Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ZippyKart Logo Styling */
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #11047A, #4318FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .logo span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #868CFF;
+            -webkit-text-fill-color: #868CFF;
+            letter-spacing: normal;
+        }
+
+        /* Bell Icon & Notification Popup */
+        .nav-icons {
+            position: relative;
+        }
+
+        .bell-icon {
+            font-size: 22px;
+            cursor: pointer;
+            color: #a3aed1;
+            transition: 0.3s ease;
+        }
+
+        .bell-icon:hover {
+            color: #4318FF;
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .notification-popup {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 250px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 15px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .notification-popup.active {
+            display: block;
+        }
+
+        /* Main Content Area */
+        .container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Khatarnak Add Product Button */
+        .add-btn {
+            background: linear-gradient(135deg, #4318FF, #868CFF);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(67, 24, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 25px rgba(67, 24, 255, 0.4);
+        }
+
+        .add-btn i {
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Modal (New Page Feel) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #a3aed1;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #ff4757;
+            transform: rotate(90deg);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2b3674;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: #4318FF;
+            box-shadow: 0 0 0 3px rgba(67, 24, 255, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 100px;
+        }
+
+        /* Dynamic Photo Link Section */
+        .photo-link-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .add-more-btn {
+            background: #e2e8f0;
+            color: #2b3674;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .add-more-btn:hover {
+            background: #4318FF;
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #11047A;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #4318FF;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <div style="padding:25px; font-weight:800; font-size:22px; color:#e02844;">ZippyKart</div>
-    <div class="menu-item active" onclick="nav('Dash', this)"><i class="fas fa-home"></i> Dashboard / Orders</div>
-    <div class="menu-item" onclick="nav('Prods', this)"><i class="fas fa-box-open"></i> Products Inventory</div>
-    <div class="menu-item" onclick="nav('Cust', this)"><i class="fas fa-users"></i> Customers</div>
-    <div class="menu-item" onclick="nav('Anal', this)"><i class="fas fa-chart-line"></i> Analytics (Soon)</div>
-</div>
-
-<div class="main">
-    <div id="Dash" class="page active"><h1>Orders</h1><div id="orderList"></div></div>
-    
-    <div id="Prods" class="page">
-        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-            <h1>Products Inventory</h1>
-            <button onclick="document.getElementById('pModal').style.display='flex'" style="background:#e02844; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;">+ Add New Product</button>
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="logo">ZippyKart.co.in <span>Admin</span></div>
+        <div class="nav-icons">
+            <i class="fa-solid fa-bell bell-icon" onclick="toggleNotification()"></i>
+            <!-- Notification Popup -->
+            <div class="notification-popup" id="notifPopup">
+                <h4 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Notifications</h4>
+                <p style="font-size: 13px; color: #666;"><i class="fa-solid fa-circle-check" style="color: #2ed573;"></i> New order received on ZippyKart!</p>
+                <p style="font-size: 13px; color: #666; margin-top: 8px;"><i class="fa-solid fa-triangle-exclamation" style="color: #ffa502;"></i> Some products are out of stock.</p>
+            </div>
         </div>
-        <div class="table-card">
-            <table>
-                <thead><tr><th>Image</th><th>Title</th><th>Price</th><th>MRP</th><th>Action</th></tr></thead>
-                <tbody id="productList"></tbody>
-            </table>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Add Product Button -->
+        <button class="add-btn" onclick="openModal()">
+            <i class="fa-solid fa-circle-plus"></i> Add New Product to ZippyKart
+        </button>
+    </div>
+
+    <!-- Product Details Modal (Acts as a new page) -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-xmark close-btn" onclick="closeModal()"></i>
+            <h2 style="margin-bottom: 20px; color: #2b3674;">ZippyKart Product Details</h2>
+            
+            <form onsubmit="event.preventDefault(); alert('ZippyKart pe Product Add ho gaya!'); closeModal();">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" class="form-control" placeholder="Enter product name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Product Description</label>
+                    <textarea class="form-control" placeholder="Write full description here..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Color Variety (Comma separated)</label>
+                    <input type="text" class="form-control" placeholder="e.g., Red, Blue, Black">
+                </div>
+
+                <div class="form-group" id="photo-container">
+                    <label>Photo Links (Add as many as you want)</label>
+                    <div class="photo-link-group">
+                        <input type="url" class="form-control" placeholder="Paste image URL here...">
+                        <!-- Dynamic '+' Button -->
+                        <button type="button" class="add-more-btn" onclick="addPhotoField()" title="Add more photos">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Publish to ZippyKart</button>
+            </form>
         </div>
     </div>
-</div>
 
-<div id="pModal" class="modal">
-    <div style="background:white; padding:30px; border-radius:12px; width:400px;">
-        <h2>Add Product</h2>
-        <input id="pTitle" placeholder="Title" style="width:100%; padding:10px; margin:10px 0;">
-        <input id="pPrice" placeholder="Price" style="width:100%; padding:10px; margin:10px 0;">
-        <button onclick="saveProduct()" style="width:100%; padding:10px; background:#22c55e; color:white; border:none;">Save Product</button>
-    </div>
-</div>
+    <!-- JavaScript Features -->
+    <script>
+        // Toggle Bell Notification Popup
+        function toggleNotification() {
+            const popup = document.getElementById('notifPopup');
+            popup.classList.toggle('active');
+        }
 
-<script>
-    const db = firebase.firestore();
-    function nav(id, el) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
-    }
-    
-    function saveProduct() {
-        db.collection("zippykart_products").add({
-            title: document.getElementById('pTitle').value,
-            price: document.getElementById('pPrice').value,
-            mrp: 1000 // default
-        }).then(() => { alert("Product Saved!"); location.reload(); });
-    }
-
-    db.collection("zippykart_products").onSnapshot(snap => {
-        let h = "";
-        snap.forEach(d => {
-            let p = d.data();
-            h += `<tr><td><img src="${p.image}" width="50"></td><td>${p.title}</td><td>${p.price}</td><td>${p.mrp}</td><td><button>Edit</button></td></tr>`;
+        // Close notification when clicking outside
+        document.addEventListener('click', function(event) {
+            const navIcons = document.querySelector('.nav-icons');
+            if (!navIcons.contains(event.target)) {
+                document.getElementById('notifPopup').classList.remove('active');
+            }
         });
-        document.getElementById('productList').innerHTML = h;
-    });
-</script>
+
+        // Open Add Product Modal
+        function openModal() {
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        // Close Add Product Modal
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        // Dynamically Add More Photo Link Fields
+        function addPhotoField() {
+            const container = document.getElementById('photo-container');
+            
+            // Create wrapper div
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'photo-link-group';
+            groupDiv.style.animation = 'slideDown 0.3s ease'; 
+            
+            // Create input
+            const input = document.createElement('input');
+            input.type = 'url';
+            input.className = 'form-control';
+            input.placeholder = 'Paste another image URL here...';
+            
+            // Create remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'add-more-btn';
+            removeBtn.style.background = '#ff4757';
+            removeBtn.style.color = 'white';
+            removeBtn.innerHTML = '<i class="fa-solid fa-minus"></i>';
+            removeBtn.onclick = function() {
+                container.removeChild(groupDiv);
+            };
+            
+            // Append elements
+            groupDiv.appendChild(input);
+            groupDiv.appendChild(removeBtn);
+            container.appendChild(groupDiv);
+        }
+    </script>
 </body>
 </html>
+    
