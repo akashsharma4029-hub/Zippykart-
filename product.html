@@ -4,148 +4,687 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buy Product - ZippyKart Premium</title>
-    <!-- Fonts & Icons -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Firebase SDKs (Sirf Firestore, Storage ki zaroorat nahi) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
         /* Base Setup */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f3f6; color: #212121; overflow-x: hidden; scroll-behavior: smooth; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+        }
         
+        body { 
+            background: #f1f3f6; 
+            color: #212121; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
+
         /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+        
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(40px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
         /* Navbar */
-        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; letter-spacing: -0.5px;}
+        .navbar { 
+            background: #fff; 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: #e02844; 
+            text-decoration: none; 
+            letter-spacing: -0.5px;
+        }
 
         /* Container */
-        .pro-container { max-width: 1200px; margin: 20px auto; display: flex; gap: 30px; background: transparent; padding: 0 20px; animation: fadeIn 0.8s ease-out; }
+        .pro-container { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            display: flex; 
+            gap: 30px; 
+            background: transparent; 
+            padding: 0 20px; 
+            animation: fadeIn 0.8s ease-out; 
+        }
         
         /* Left: Images & Floating Icons */
-        .pro-image-section { width: 40%; position: sticky; top: 80px; height: fit-content; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .main-img-container { position: relative; }
-        .main-img { width: 100%; border-radius: 4px; object-fit: cover; aspect-ratio: 4/5; transition: 0.3s; border: 1px solid #f0f0f0; }
+        .pro-image-section { 
+            width: 40%; 
+            position: sticky; 
+            top: 80px; 
+            height: fit-content; 
+            background: #fff; 
+            padding: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+        }
+        
+        .main-img-container { 
+            position: relative; 
+        }
+        
+        .main-img { 
+            width: 100%; 
+            border-radius: 4px; 
+            object-fit: cover; 
+            aspect-ratio: 4/5; 
+            transition: 0.3s; 
+            border: 1px solid #f0f0f0; 
+        }
         
         /* Thumbnails */
-        .small-img-group { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; padding-bottom: 5px; }
-        .small-img-col img { width: 70px; height: 85px; border-radius: 4px; border: 2px solid transparent; cursor: pointer; object-fit: cover; transition: 0.2s; }
-        .small-img-col img:hover, .small-img-col img.active { border-color: #e02844; }
+        .small-img-group { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 15px; 
+            overflow-x: auto; 
+            padding-bottom: 5px; 
+        }
+        
+        .small-img-col img { 
+            width: 70px; 
+            height: 85px; 
+            border-radius: 4px; 
+            border: 2px solid transparent; 
+            cursor: pointer; 
+            object-fit: cover; 
+            transition: 0.2s; 
+        }
+        
+        .small-img-col img:hover, .small-img-col img.active { 
+            border-color: #e02844; 
+        }
 
-        .floating-icons { position: absolute; top: 15px; right: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .icon-btn { background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 40px; height: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-size: 16px; color: #878787; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
-        .icon-btn:hover { color: #e02844; transform: scale(1.1); }
-        .icon-btn.active { color: #e02844; }
+        .floating-icons { 
+            position: absolute; 
+            top: 15px; 
+            right: 15px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        
+        .icon-btn { 
+            background: rgba(255,255,255,0.9); 
+            border: none; 
+            border-radius: 50%; 
+            width: 40px; 
+            height: 40px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            cursor: pointer; 
+            font-size: 16px; 
+            color: #878787; 
+            transition: 0.3s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        
+        .icon-btn:hover, .icon-btn.active { 
+            color: #e02844; 
+            transform: scale(1.1);
+        }
         
         /* Right: Details */
-        .pro-details-section { width: 60%; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); animation: slideUp 0.8s ease-out; }
-        .seller-info { font-size: 13px; color: #878787; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-        .pro-title { font-size: 24px; font-weight: 600; line-height: 1.3; }
+        .pro-details-section { 
+            width: 60%; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+            animation: slideUp 0.8s ease-out; 
+        }
+        
+        .seller-info { 
+            font-size: 13px; 
+            color: #878787; 
+            margin-bottom: 8px; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+        
+        .pro-title { 
+            font-size: 24px; 
+            font-weight: 600; 
+            line-height: 1.3; 
+        }
         
         /* Ratings & ZippyAssured Badge */
-        .rating-box { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; margin-bottom: 10px; }
-        .badge-star { background: #388e3c; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-        .rating-text { color: #878787; font-size: 14px; font-weight: 500; }
-        .zippy-assured { background: #212121; color: white; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; font-style: italic; display: inline-flex; align-items: center; gap: 3px; }
+        .rating-box { 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+        }
+        
+        .badge-star { 
+            background: #388e3c; 
+            color: #fff; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+        }
+        
+        .rating-text { 
+            color: #878787; 
+            font-size: 14px; 
+            font-weight: 500; 
+        }
+        
+        .zippy-assured { 
+            background: #212121; 
+            color: white; 
+            padding: 3px 8px; 
+            border-radius: 12px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            font-style: italic; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 3px; 
+        }
 
         /* Price Box */
-        .price-box { display: flex; align-items: flex-end; gap: 12px; margin: 15px 0 25px 0; }
-        .current-price { font-size: 28px; font-weight: 700; color: #212121; }
-        .mrp-price { font-size: 16px; color: #878787; text-decoration: line-through; margin-bottom: 4px; }
-        .discount-pct { font-size: 16px; color: #388e3c; font-weight: 600; margin-bottom: 4px; }
+        .price-box { 
+            display: flex; 
+            align-items: flex-end; 
+            gap: 12px; 
+            margin: 15px 0 25px 0; 
+        }
+        
+        .current-price { 
+            font-size: 28px; 
+            font-weight: 700; 
+            color: #212121; 
+        }
+        
+        .mrp-price { 
+            font-size: 16px; 
+            color: #878787; 
+            text-decoration: line-through; 
+            margin-bottom: 4px; 
+        }
+        
+        .discount-pct { 
+            font-size: 16px; 
+            color: #388e3c; 
+            font-weight: 600; 
+            margin-bottom: 4px; 
+        }
 
         /* Offers Section */
-        .offers-section { margin-bottom: 25px; }
-        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .offer-item { display: flex; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #212121; align-items: flex-start; }
-        .offer-item i { color: #388e3c; margin-top: 3px; }
+        .offers-section { 
+            margin-bottom: 25px; 
+        }
+        
+        .section-title { 
+            font-size: 16px; 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        
+        .offer-item { 
+            display: flex; 
+            gap: 10px; 
+            font-size: 14px; 
+            margin-bottom: 8px; 
+            color: #212121; 
+            align-items: flex-start; 
+        }
+        
+        .offer-item i { 
+            color: #388e3c; 
+            margin-top: 3px; 
+        }
         
         /* Color Options */
-        .color-section { margin-top: 20px; margin-bottom: 20px; }
-        .color-title { font-size: 14px; color: #878787; margin-bottom: 10px; font-weight: normal; }
-        .color-group { display: flex; gap: 10px; }
-        .color-box { border: 2px solid transparent; border-radius: 4px; cursor: pointer; padding: 2px; transition: 0.2s; }
-        .color-box.active { border-color: #2874f0; }
-        .color-box img { width: 45px; height: 55px; object-fit: cover; border-radius: 2px; border: 1px solid #eee; }
+        .color-section { 
+            margin-top: 20px; 
+            margin-bottom: 20px; 
+        }
+        
+        .color-title { 
+            font-size: 14px; 
+            color: #878787; 
+            margin-bottom: 10px; 
+            font-weight: normal; 
+        }
+        
+        .color-group { 
+            display: flex; 
+            gap: 10px; 
+        }
+        
+        .color-box { 
+            border: 2px solid transparent; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            padding: 2px; 
+            transition: 0.2s; 
+        }
+        
+        .color-box.active { 
+            border-color: #2874f0; 
+        }
+        
+        .color-box img { 
+            width: 45px; 
+            height: 55px; 
+            object-fit: cover; 
+            border-radius: 2px; 
+            border: 1px solid #eee; 
+        }
 
         /* Size Selector */
-        .size-section { margin-top: 20px; }
-        .size-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; }
-        .size-chart-link { color: #2874f0; text-decoration: none; cursor: pointer; }
-        .size-group { display: flex; gap: 12px; margin-top: 10px; }
-        .size-box { border: 1px solid #ddd; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: 0.2s; }
-        .size-box.active { border-color: #e02844; color: #e02844; background: #fff0f2; font-weight: 600; }
+        .size-section { 
+            margin-top: 20px; 
+        }
+        
+        .size-header { 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 14px; 
+            font-weight: 600; 
+        }
+        
+        .size-group { 
+            display: flex; 
+            gap: 12px; 
+            margin-top: 10px; 
+        }
+        
+        .size-box { 
+            border: 1px solid #ddd; 
+            padding: 10px 18px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: 500; 
+            transition: 0.2s; 
+        }
+        
+        .size-box.active { 
+            border-color: #e02844; 
+            color: #e02844; 
+            background: #fff0f2; 
+            font-weight: 600; 
+        }
         
         /* Quantity */
-        .qty-title { font-size: 14px; font-weight: normal; margin-top: 20px; color: #878787; }
-        .qty-selector { display: flex; align-items: center; border: 1px solid #ddd; width: fit-content; border-radius: 4px; margin-top: 10px; margin-bottom: 20px; }
-        .qty-btn { padding: 10px 20px; border: none; background: #f9f9f9; cursor: pointer; font-size: 16px; font-weight: bold; }
-        #qtyInput { width: 50px; text-align: center; border: none; padding: 10px; font-weight: 600; outline: none; }
+        .qty-title { 
+            font-size: 14px; 
+            font-weight: normal; 
+            margin-top: 20px; 
+            color: #878787; 
+        }
+        
+        .qty-selector { 
+            display: flex; 
+            align-items: center; 
+            border: 1px solid #ddd; 
+            width: fit-content; 
+            border-radius: 4px; 
+            margin-top: 10px; 
+            margin-bottom: 20px; 
+        }
+        
+        .qty-btn { 
+            padding: 10px 20px; 
+            border: none; 
+            background: #f9f9f9; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+        }
+        
+        #qtyInput { 
+            width: 50px; 
+            text-align: center; 
+            border: none; 
+            padding: 10px; 
+            font-weight: 600; 
+            outline: none; 
+        }
 
         /* Delivery Pincode */
-        .delivery-box { border: 1px solid #f0f0f0; padding: 15px; border-radius: 4px; margin-bottom: 25px; background: #fafafa; }
-        .pincode-input { display: flex; gap: 0; margin-top: 10px; border-bottom: 2px solid #2874f0; width: max-content; padding-bottom: 5px; }
-        .pincode-input input { border: none; outline: none; background: transparent; font-size: 15px; font-weight: 500; width: 120px; }
-        .pincode-input button { border: none; background: none; color: #2874f0; font-weight: 600; cursor: pointer; }
-        .delivery-msg { font-size: 14px; margin-top: 10px; font-weight: 500; color: #212121; }
+        .delivery-box { 
+            border: 1px solid #f0f0f0; 
+            padding: 15px; 
+            border-radius: 4px; 
+            margin-bottom: 25px; 
+            background: #fafafa; 
+        }
+        
+        .pincode-input { 
+            display: flex; 
+            gap: 0; 
+            margin-top: 10px; 
+            border-bottom: 2px solid #2874f0; 
+            width: max-content; 
+            padding-bottom: 5px; 
+        }
+        
+        .pincode-input input { 
+            border: none; 
+            outline: none; 
+            background: transparent; 
+            font-size: 15px; 
+            font-weight: 500; 
+            width: 120px; 
+        }
+        
+        .pincode-input button { 
+            border: none; 
+            background: none; 
+            color: #2874f0; 
+            font-weight: 600; 
+            cursor: pointer; 
+        }
+        
+        .delivery-msg { 
+            font-size: 14px; 
+            margin-top: 10px; 
+            font-weight: 500; 
+            color: #212121; 
+        }
 
         /* Trust Badges */
-        .trust-badges { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; margin: 30px 0; padding-bottom: 15px; }
-        .trust-item { text-align: center; font-size: 12px; font-weight: 500; color: #555; flex: 1; }
-        .trust-item i { font-size: 22px; color: #2874f0; margin-bottom: 8px; display: block; }
+        .trust-badges { 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 1px solid #eee; 
+            margin: 30px 0; 
+            padding-bottom: 15px; 
+        }
+        
+        .trust-item { 
+            text-align: center; 
+            font-size: 12px; 
+            font-weight: 500; 
+            color: #555; 
+            flex: 1; 
+        }
+        
+        .trust-item i { 
+            font-size: 22px; 
+            color: #2874f0; 
+            margin-bottom: 8px; 
+            display: block; 
+        }
 
         /* Product Details Text */
-        .details-text { font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 25px; }
-        .details-text ul { padding-left: 20px; margin-top: 10px; }
-        .details-text li { margin-bottom: 5px; }
+        .details-text { 
+            font-size: 14px; 
+            line-height: 1.6; 
+            color: #555; 
+            margin-bottom: 25px; 
+        }
+        
+        .details-text ul { 
+            padding-left: 20px; 
+            margin-top: 10px; 
+        }
+        
+        .details-text li { 
+            margin-bottom: 5px; 
+        }
 
         /* Action Buttons */
-        .action-btns { display: flex; gap: 15px; margin-top: 25px; position: sticky; bottom: 0; background: #fff; padding: 15px 0; border-top: 1px solid #eee; z-index: 10; }
-        .btn { flex: 1; padding: 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 16px; color: white; text-align: center; text-decoration: none; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;}
-        .add-cart { background: #ff9f00; box-shadow: 0 2px 4px rgba(255, 159, 0, 0.3); }
-        .buy-now { background: #fb641b; box-shadow: 0 2px 4px rgba(251, 100, 27, 0.3); }
-        .add-cart:hover { background: #f39800; transform: translateY(-2px); }
-        .buy-now:hover { background: #f05a10; transform: translateY(-2px); }
+        .action-btns { 
+            display: flex; 
+            gap: 15px; 
+            margin-top: 25px; 
+            position: sticky; 
+            bottom: 0; 
+            background: #fff; 
+            padding: 15px 0; 
+            border-top: 1px solid #eee; 
+            z-index: 10; 
+        }
+        
+        .btn { 
+            flex: 1; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 16px; 
+            color: white; 
+            text-align: center; 
+            text-decoration: none; 
+            transition: 0.2s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 8px;
+        }
+        
+        .add-cart { 
+            background: #ff9f00; 
+            box-shadow: 0 2px 4px rgba(255, 159, 0, 0.3); 
+        }
+        
+        .buy-now { 
+            background: #fb641b; 
+            box-shadow: 0 2px 4px rgba(251, 100, 27, 0.3); 
+        }
+        
+        .add-cart:hover { 
+            background: #f39800; 
+            transform: translateY(-2px); 
+        }
+        
+        .buy-now:hover { 
+            background: #f05a10; 
+            transform: translateY(-2px); 
+        }
 
         /* REVIEWS SECTION WITH IMAGE UPLOAD */
-        .review-section { margin-top: 20px; }
-        .rev-card { background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 6px; border-left: 4px solid #e02844; }
-        .rev-input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; outline: none;}
-        .rev-input:focus { border-color: #2874f0; }
+        .review-section { 
+            margin-top: 20px; 
+        }
         
-        .upload-wrapper { margin: 10px 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .upload-label { cursor: pointer; color: #2874f0; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: 1px dashed #2874f0; padding: 8px 15px; border-radius: 4px; transition: 0.2s; }
-        .upload-label:hover { background: #eef5ff; }
-        #revImage { display: none; } 
-        .file-name-text { font-size: 13px; color: #388e3c; font-weight: 500; }
+        .rev-card { 
+            background: #f9f9f9; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 6px; 
+            border-left: 4px solid #e02844; 
+        }
         
-        .rev-uploaded-img { width: 80px; height: 100px; object-fit: cover; border-radius: 4px; margin-top: 10px; border: 1px solid #ddd; cursor: pointer; transition: 0.2s; }
-        .rev-uploaded-img:hover { opacity: 0.8; }
+        .rev-input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-family: inherit; 
+            outline: none;
+        }
         
-        .sub-btn { background: #e02844; color: #fff; border: none; padding: 12px 25px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 5px; transition: 0.2s; }
-        .sub-btn:hover { background: #c8233c; }
-        .sub-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .rev-input:focus { 
+            border-color: #2874f0; 
+        }
+        
+        .upload-wrapper { 
+            margin: 10px 0; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+        }
+        
+        .upload-label { 
+            cursor: pointer; 
+            color: #2874f0; 
+            font-size: 14px; 
+            font-weight: 600; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            border: 1px dashed #2874f0; 
+            padding: 8px 15px; 
+            border-radius: 4px; 
+            transition: 0.2s; 
+        }
+        
+        .upload-label:hover { 
+            background: #eef5ff; 
+        }
+        
+        #revImage { 
+            display: none; 
+        } 
+        
+        .file-name-text { 
+            font-size: 13px; 
+            color: #388e3c; 
+            font-weight: 500; 
+        }
+        
+        .rev-uploaded-img { 
+            width: 80px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            margin-top: 10px; 
+            border: 1px solid #ddd; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        
+        .rev-uploaded-img:hover { 
+            opacity: 0.8; 
+        }
+        
+        .sub-btn { 
+            background: #e02844; 
+            color: #fff; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            margin-top: 5px; 
+            transition: 0.2s; 
+        }
+        
+        .sub-btn:hover { 
+            background: #c8233c; 
+        }
+        
+        .sub-btn:disabled { 
+            background: #ccc; 
+            cursor: not-allowed; 
+        }
 
         /* Similar Products */
-        .similar-section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .similar-grid { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 15px; margin-top: 15px; }
-        .similar-card { min-width: 200px; background: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s; }
-        .similar-card:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-        .similar-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px; }
-        .sim-title { font-size: 14px; font-weight: 600; margin: 10px 0 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .sim-price { font-weight: 700; color: #212121; }
+        .similar-section { 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+        
+        .similar-grid { 
+            display: flex; 
+            gap: 20px; 
+            overflow-x: auto; 
+            padding-bottom: 15px; 
+            margin-top: 15px; 
+        }
+        
+        .similar-card { 
+            min-width: 200px; 
+            background: #fff; 
+            border-radius: 8px; 
+            padding: 10px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        
+        .similar-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+        }
+        
+        .similar-card img { 
+            width: 100%; 
+            aspect-ratio: 4/5; 
+            object-fit: cover; 
+            border-radius: 4px; 
+        }
+        
+        .sim-title { 
+            font-size: 14px; 
+            font-weight: 600; 
+            margin: 10px 0 5px 0; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+        
+        .sim-price { 
+            font-weight: 700; 
+            color: #212121; 
+        }
 
+        /* Mobile Responsiveness */
         @media (max-width: 800px) {
-            .pro-container { flex-direction: column; }
-            .pro-image-section, .pro-details-section { width: 100%; position: static; }
-            .action-btns { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px; margin: 0; background: #fff; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
-            body { padding-bottom: 70px; }
+            .pro-container { 
+                flex-direction: column; 
+            }
+            .pro-image-section, .pro-details-section { 
+                width: 100%; 
+                position: static; 
+            }
+            .action-btns { 
+                position: fixed; 
+                bottom: 0; 
+                left: 0; 
+                width: 100%; 
+                padding: 10px; 
+                margin: 0; 
+                background: #fff; 
+                z-index: 1000; 
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1); 
+            }
+            body { 
+                padding-bottom: 70px; 
+            }
         }
     </style>
 </head>
@@ -155,7 +694,6 @@
 
 <div class="pro-container" id="productContent">
     
-    <!-- Left: Image & Floating Actions -->
     <div class="pro-image-section">
         <div class="main-img-container">
             <img src="" id="MainImg" class="main-img" alt="Product">
@@ -167,26 +705,22 @@
         <div class="small-img-group" id="smallImgGroup"></div>
     </div>
 
-    <!-- Right: Product Details -->
     <div class="pro-details-section">
         <div class="seller-info">Men's Fashion</div>
         <h1 class="pro-title" id="proTitle">Loading Premium Product...</h1>
         
-        <!-- Ratings & ZippyAssured Badge -->
         <div class="rating-box">
             <div class="badge-star">4.3 <i class="fas fa-star" style="font-size:10px;"></i></div>
             <div class="rating-text">1,245 Ratings & 120 Reviews</div>
             <span class="zippy-assured">Zippy<span style="color: #e02844;">Assured</span> <i class="fas fa-check-circle" style="color: #28a745; font-size: 10px;"></i></span>
         </div>
         
-        <!-- Price Box -->
         <div class="price-box">
             <div class="current-price" id="proPrice">₹0</div>
             <div class="mrp-price" id="proMrp"></div>
             <div class="discount-pct" id="proDiscount"></div>
         </div>
 
-        <!-- Available Offers -->
         <div class="offers-section">
             <div class="section-title">Available Offers</div>
             <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Bank Offer:</span> 5% Cashback on ZippyKart ICICI Credit Card <a href="#" style="color:#2874f0; text-decoration:none;">T&C</a></div></div>
@@ -194,7 +728,6 @@
             <div class="offer-item"><i class="fas fa-tag"></i> <div><span>Special Price:</span> Get extra ₹200 off (price inclusive of discount) <a href="#" style="color:#2874f0; text-decoration:none;">T&C</a></div></div>
         </div>
 
-        <!-- Color Options -->
         <div class="color-section">
             <div class="color-title">Color Options</div>
             <div class="color-group">
@@ -204,7 +737,6 @@
             </div>
         </div>
         
-        <!-- Size Selector -->
         <div class="size-section">
             <div class="size-header">
                 <span style="font-size: 14px; color:#878787;">Select Size</span>
@@ -217,7 +749,6 @@
             </div>
         </div>
         
-        <!-- Quantity -->
         <div class="qty-title">Quantity</div>
         <div class="qty-selector">
             <button class="qty-btn" onclick="updateQty(-1)">-</button>
@@ -225,7 +756,6 @@
             <button class="qty-btn" onclick="updateQty(1)">+</button>
         </div>
 
-        <!-- Delivery Box -->
         <div class="delivery-box">
             <div class="section-title" style="margin-bottom:0;"><i class="fas fa-map-marker-alt" style="color:#2874f0;"></i> Deliver to</div>
             <div class="pincode-input">
@@ -237,7 +767,6 @@
             </div>
         </div>
 
-        <!-- Trust Badges -->
         <div class="trust-badges">
             <div class="trust-item"><i class="fas fa-undo" style="color:#555;"></i>7 Days<br>Replacement</div>
             <div class="trust-item"><i class="fas fa-hand-holding-usd" style="color:#555;"></i>Cash on<br>Delivery</div>
@@ -245,7 +774,6 @@
             <div class="trust-item"><i class="fas fa-shield-alt" style="color:#555;"></i>Top<br>Brand</div>
         </div>
 
-        <!-- Product Details Description -->
         <div class="section-title">Product Details</div>
         <div class="details-text">
             <p>Elevate your everyday style with this premium urban streetwear piece. Designed for comfort and built for the modern trendsetter.</p>
@@ -257,13 +785,11 @@
             </ul>
         </div>
 
-        <!-- Action Buttons -->
         <div class="action-btns">
             <button class="btn add-cart" id="btnAddToCart"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
             <a href="#" class="btn buy-now" id="btnBuyNow"><i class="fas fa-bolt"></i> BUY NOW</a>
         </div>
 
-        <!-- Reviews with Base64 Image Upload -->
         <div class="review-section">
             <h2 class="section-title">Customer Reviews</h2>
             <div id="reviewContainer">Loading reviews...</div>
@@ -285,7 +811,6 @@
     </div>
 </div>
 
-<!-- Similar Products Section -->
 <div class="similar-section">
     <h2 class="section-title">You May Also Like</h2>
     <div class="similar-grid">
@@ -322,7 +847,9 @@
         messagingSenderId: "803651431969",
         appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
     };
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
     const db = firebase.firestore();
     const productId = new URLSearchParams(window.location.search).get('id');
 
@@ -361,30 +888,33 @@
             mainImg.style.opacity = "1";
         }, 150);
         document.querySelectorAll('.small-img-col img').forEach(img => img.classList.remove('active'));
-        if(element.tagName === 'IMG') element.classList.add('active');
+        if(element.tagName === 'IMG') {
+            element.classList.add('active');
+        }
     };
 
-    window.selectColor = function(element) {
-        document.querySelectorAll('.color-box').forEach(box => box.classList.remove('active'));
-        element.classList.add('active');
+    window.selectColor = function(element) { 
+        document.querySelectorAll('.color-box').forEach(box => box.classList.remove('active')); 
+        element.classList.add('active'); 
+    };
+    
+    window.selectSize = function(element) { 
+        document.querySelectorAll('.size-box').forEach(box => box.classList.remove('active')); 
+        element.classList.add('active'); 
+    };
+    
+    window.updateQty = function(change) { 
+        let input = document.getElementById('qtyInput'); 
+        let val = parseInt(input.value) + change; 
+        if(val >= 1 && val <= 10) {
+            input.value = val; 
+        }
+    };
+    
+    window.toggleWishlist = function(btn) { 
+        btn.classList.toggle('active'); 
     };
 
-    window.selectSize = function(element) {
-        document.querySelectorAll('.size-box').forEach(box => box.classList.remove('active'));
-        element.classList.add('active');
-    };
-
-    window.updateQty = function(change) {
-        let input = document.getElementById('qtyInput');
-        let val = parseInt(input.value) + change;
-        if(val >= 1 && val <= 10) input.value = val;
-    };
-
-    window.toggleWishlist = function(btn) {
-        btn.classList.toggle('active');
-    };
-
-    // BUY NOW logic
     document.getElementById('btnBuyNow').addEventListener('click', function(e) {
         e.preventDefault(); 
         let title = document.getElementById('proTitle').innerText;
@@ -393,14 +923,18 @@
         let selectedSize = document.querySelector('.size-box.active').innerText;
         let img = document.getElementById('MainImg').src;
 
-        let checkoutData = {
-            productId: productId, title: title, price: price, quantity: qty, size: selectedSize, image: img
+        let checkoutData = { 
+            productId: productId, 
+            title: title, 
+            price: price, 
+            quantity: qty, 
+            size: selectedSize, 
+            image: img 
         };
         localStorage.setItem('zippy_checkout_data', JSON.stringify(checkoutData));
         window.location.href = 'checkout.html';
     });
 
-    // --- REVIEWS WITH BASE64 IMAGE ---
     window.showFileName = function() {
         const fileInput = document.getElementById('revImage');
         if (fileInput.files.length > 0) {
@@ -428,27 +962,58 @@
         });
     });
 
+    // Auto-Compressor Logic & Review Submit
     window.submitReview = async function() {
         const name = document.getElementById('revName').value;
         const comment = document.getElementById('revComment').value;
         const fileInput = document.getElementById('revImage');
         const postBtn = document.getElementById('postBtn');
 
-        if(!name || !comment) return alert("Please fill your Name and Review text!");
+        if(!name || !comment) {
+            return alert("Please fill your Name and Review text!");
+        }
 
-        postBtn.innerText = "Posting...";
+        postBtn.innerText = "Compressing Photo...";
         postBtn.disabled = true;
 
         let base64Image = null;
 
         try {
             if (fileInput.files.length > 0) {
-                postBtn.innerText = "Processing Photo...";
                 const file = fileInput.files[0];
                 
                 base64Image = await new Promise((resolve) => {
                     const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result);
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 600; 
+                            const MAX_HEIGHT = 600; 
+                            let width = img.width;
+                            let height = img.height;
+
+                            if (width > height) {
+                                if (width > MAX_WIDTH) { 
+                                    height *= MAX_WIDTH / width; 
+                                    width = MAX_WIDTH; 
+                                }
+                            } else {
+                                if (height > MAX_HEIGHT) { 
+                                    width *= MAX_HEIGHT / height; 
+                                    height = MAX_HEIGHT; 
+                                }
+                            }
+                            canvas.width = width; 
+                            canvas.height = height;
+                            
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, width, height);
+                            // Compressing to 60% quality JPEG
+                            resolve(canvas.toDataURL('image/jpeg', 0.6)); 
+                        };
+                        img.src = e.target.result;
+                    };
                     reader.readAsDataURL(file);
                 });
             }
@@ -472,7 +1037,7 @@
 
         } catch (error) {
             console.error(error);
-            alert("Error posting review. Try again.");
+            alert("Error posting review. Check Database Rules!");
         } finally {
             postBtn.innerText = "Post Review";
             postBtn.disabled = false;
