@@ -91,7 +91,7 @@
            7. THE ADVANCED MULTI-VARIANT MODAL
            ========================================= */
         .modal-blur-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-container-box { background: #ffffff; width: 750px; /* Made wider for variants */ max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 35px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .modal-container-box { background: #ffffff; width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 35px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
         .modal-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
@@ -110,6 +110,12 @@
         .checkbox-size-container { display: flex; gap: 15px; margin-top: 5px; flex-wrap: wrap;}
         .checkbox-wrapper-label { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; cursor: pointer; color: #475569; }
         .checkbox-wrapper-label input { width: 16px; height: 16px; accent-color: #e02844; }
+
+        /* MULTIPLE GALLERY IMAGES CSS (NEW) */
+        .gallery-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+        .gallery-item { width: 70px; height: 90px; border-radius: 6px; border: 1px solid #cbd5e1; position: relative; background: #f8fafc; overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-remove-btn { position: absolute; top: 2px; right: 2px; background: rgba(239, 68, 68, 0.9); color: white; border: none; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
 
         /* DYNAMIC VARIANT ROW CSS */
         .variant-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
@@ -252,10 +258,6 @@
                     <label>Discounted Sale Price (₹)</label>
                     <input type="number" id="formProductPrice" class="input-element-master" placeholder="799">
                 </div>
-                <div class="flex-col-item input-form-group">
-                    <label>Stated Baseline MRP (₹)</label>
-                    <input type="number" id="formProductMrp" class="input-element-master" placeholder="1499">
-                </div>
             </div>
 
             <div class="input-form-group">
@@ -275,10 +277,18 @@
                 </div>
             </div>
 
+            <div class="input-form-group" style="background:#f1f5f9; padding:15px; border-radius:10px; border:1px dashed #cbd5e1;">
+                <label style="color:#e02844;"><i class="fas fa-images"></i> Primary Product Gallery (Slide Images)</label>
+                <p style="font-size:12px; color:#64748b; margin-bottom:10px;">Select 4-5 images showing different angles. First image becomes the Cover Thumbnail.</p>
+                <input type="file" id="formGalleryUploader" accept="image/*" multiple class="input-element-master" onchange="processGalleryImages(event)" style="background:white;">
+                <div class="gallery-grid" id="uiGalleryPreviewGrid">
+                    </div>
+            </div>
+
             <div class="variant-box">
                 <div class="variant-header">
-                    <h4>Color Variants & Product Imagery</h4>
-                    <button type="button" class="btn-add-variant" onclick="addVariantRow()"><i class="fas fa-plus"></i> Add Color Variant</button>
+                    <h4>Color Variants <span style="font-size:11px; font-weight:normal; color:#64748b;">(Optional color specific thumbnails)</span></h4>
+                    <button type="button" class="btn-add-variant" onclick="addVariantRow()"><i class="fas fa-plus"></i> Add Color</button>
                 </div>
                 <div id="dynamicVariantsContainer">
                     </div>
@@ -291,9 +301,10 @@
     </div>
 
     <script>
-        // --- 1. UI ENGINE & DYNAMIC VARIANTS ---
-        let variantImagesCache = {}; // Stores compressed base64 images per row ID
+        // --- 1. UI ENGINE & DYNAMIC SYSTEMS ---
+        let variantImagesCache = {}; // For Color Variants
         let variantRowCounter = 0;
+        let mainGalleryImages = []; // NEW: Array for the slider gallery images
 
         window.triggerTabSwitch = function(targetTabSectionId, triggeringElement) {
             document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active-tab'));
@@ -307,18 +318,22 @@
         }
 
         window.launchProductModal = function() {
-            // Reset Form
+            // Reset Form Fields
             document.getElementById('formProductTitle').value = "";
             document.getElementById('formProductPrice').value = "";
             document.getElementById('formProductMrp').value = "";
             document.getElementById('formProductDescription').value = "";
             document.getElementById('formProductStock').value = "50";
+            document.getElementById('formGalleryUploader').value = "";
             
-            // Reset Dynamic Variants
+            // Reset Gallery
+            mainGalleryImages = [];
+            renderGalleryGrid();
+
+            // Reset Variants
             document.getElementById('dynamicVariantsContainer').innerHTML = "";
             variantImagesCache = {};
             variantRowCounter = 0;
-            addVariantRow(); // Add first default row
 
             document.getElementById('productModalPopupMaster').style.display = "flex";
         }
@@ -327,45 +342,9 @@
             document.getElementById('productModalPopupMaster').style.display = "none";
         }
 
-        // Add New Color Variant Row
-        window.addVariantRow = function() {
-            const rowId = variantRowCounter++;
-            const container = document.getElementById('dynamicVariantsContainer');
-            
-            const html = `
-            <div class="dynamic-row" id="var_row_${rowId}">
-                ${rowId > 0 ? `<button type="button" class="btn-remove-row" onclick="removeVariantRow(${rowId})"><i class="fas fa-times"></i></button>` : ''}
-                
-                <div class="flex-col-item" style="flex: 1.5;">
-                    <input type="text" id="var_color_${rowId}" class="input-element-master" placeholder="Color Name (e.g. Maroon)" style="padding: 10px;">
-                </div>
-                
-                <div class="flex-col-item" style="flex: 2;">
-                    <input type="file" accept="image/*" class="input-element-master" onchange="processVariantImage(event, ${rowId})" style="padding: 7px; font-size:12px;">
-                </div>
-                
-                <div class="variant-preview-img">
-                    <img id="var_img_preview_${rowId}" src="" style="width:100%; height:100%; object-fit:cover; border-radius:4px; display:none;">
-                    <span id="var_img_txt_${rowId}">No IMG</span>
-                </div>
-            </div>`;
-            
-            container.insertAdjacentHTML('beforeend', html);
-        }
-
-        window.removeVariantRow = function(rowId) {
-            document.getElementById(`var_row_${rowId}`).remove();
-            delete variantImagesCache[rowId];
-        }
-
-        // Individual Image Compressor for Variants
-        window.processVariantImage = async function(eventHook, rowId) {
-            const file = eventHook.target.files[0];
-            if(!file) return;
-            
-            document.getElementById(`var_img_txt_${rowId}`).innerText = "Wait...";
-            
-            const compressedBase64 = await new Promise((resolve) => {
+        // Helper: Image Compression Logic
+        async function compressImageCore(file) {
+            return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const img = new Image();
@@ -376,14 +355,85 @@
                         else if(h > 600) { w *= 600/h; h = 600; }
                         canvas.width = w; canvas.height = h;
                         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        resolve(canvas.toDataURL('image/jpeg', 0.6)); // Compressed
+                        resolve(canvas.toDataURL('image/jpeg', 0.6));
                     };
                     img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             });
+        }
 
+        // NEW: Process Multiple Gallery Images
+        window.processGalleryImages = async function(event) {
+            const files = event.target.files;
+            if(!files || files.length === 0) return;
+            
+            const btn = document.getElementById('formSubmitActionButton');
+            btn.innerText = "Compressing Gallery...";
+            btn.disabled = true;
+
+            for(let i=0; i<files.length; i++) {
+                let base64 = await compressImageCore(files[i]);
+                mainGalleryImages.push(base64);
+            }
+            
+            renderGalleryGrid();
+            btn.innerText = "Publish to Live Storefront";
+            btn.disabled = false;
+        }
+
+        function renderGalleryGrid() {
+            const grid = document.getElementById('uiGalleryPreviewGrid');
+            grid.innerHTML = "";
+            mainGalleryImages.forEach((imgBase64, index) => {
+                grid.innerHTML += `
+                <div class="gallery-item">
+                    <button class="gallery-remove-btn" onclick="removeGalleryImg(${index})"><i class="fas fa-times"></i></button>
+                    <img src="${imgBase64}">
+                </div>`;
+            });
+        }
+
+        window.removeGalleryImg = function(index) {
+            mainGalleryImages.splice(index, 1);
+            renderGalleryGrid();
+        }
+
+        // Color Variant Logic
+        window.addVariantRow = function() {
+            const rowId = variantRowCounter++;
+            const container = document.getElementById('dynamicVariantsContainer');
+            
+            const html = `
+            <div class="dynamic-row" id="var_row_${rowId}">
+                <button type="button" class="btn-remove-row" onclick="removeVariantRow(${rowId})"><i class="fas fa-times"></i></button>
+                <div class="flex-col-item" style="flex: 1.5;">
+                    <input type="text" id="var_color_${rowId}" class="input-element-master" placeholder="Color Name" style="padding: 10px;">
+                </div>
+                <div class="flex-col-item" style="flex: 2;">
+                    <input type="file" accept="image/*" class="input-element-master" onchange="processVariantImage(event, ${rowId})" style="padding: 7px; font-size:12px;">
+                </div>
+                <div class="variant-preview-img">
+                    <img id="var_img_preview_${rowId}" src="" style="width:100%; height:100%; object-fit:cover; border-radius:4px; display:none;">
+                    <span id="var_img_txt_${rowId}">No IMG</span>
+                </div>
+            </div>`;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        window.removeVariantRow = function(rowId) {
+            document.getElementById(`var_row_${rowId}`).remove();
+            delete variantImagesCache[rowId];
+        }
+
+        window.processVariantImage = async function(eventHook, rowId) {
+            const file = eventHook.target.files[0];
+            if(!file) return;
+            document.getElementById(`var_img_txt_${rowId}`).innerText = "Wait...";
+            
+            const compressedBase64 = await compressImageCore(file);
             variantImagesCache[rowId] = compressedBase64;
+            
             const previewImg = document.getElementById(`var_img_preview_${rowId}`);
             previewImg.src = compressedBase64;
             previewImg.style.display = "block";
@@ -440,7 +490,7 @@
 
             // Products Stream
             window.synchronizeInventoryTable = function() {
-                db.collection("zippykart_products").onSnapshot(snapshot => {
+                db.collection("zippykart_products").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                     const body = document.getElementById('liveProductsTablePayload');
                     if(!body) return;
                     body.innerHTML = "";
@@ -450,12 +500,11 @@
 
                     snapshot.forEach(doc => {
                         let p = doc.data();
-                        // Display the first variant image as main image
-                        let displayImg = (p.variants && p.variants.length > 0) ? p.variants[0].image : p.image;
+                        let displayImg = p.image || (p.all_images && p.all_images.length > 0 ? p.all_images[0] : '');
                         
                         body.innerHTML += `<tr>
                             <td><img src="${displayImg}" style="width:50px;height:65px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;"></td>
-                            <td style="font-weight:bold; font-size:14px;">${p.title}<br><small style="color:#64748b;">${p.category || 'Apparel'} | Colors: ${p.variants ? p.variants.length : 1}</small></td>
+                            <td style="font-weight:bold; font-size:14px;">${p.title}<br><small style="color:#64748b;">${p.category || 'Apparel'} | Colors: ${p.variants ? p.variants.length : 0} | Gallery: ${p.all_images ? p.all_images.length : 0}</small></td>
                             <td style="color:#16a34a; font-weight:bold; font-size:15px;">₹${p.price}</td>
                             <td><del>₹${p.mrp}</del></td>
                             <td><button onclick="if(confirm('Purge SKU permanently?')) db.collection('zippykart_products').doc('${doc.id}').delete()" style="background:#fef2f2; color:#ef4444; border:none; padding:8px 14px; border-radius:6px; font-weight:600; cursor:pointer;"><i class="fas fa-trash-can"></i> Purge</button></td>
@@ -464,7 +513,7 @@
                 });
             }
 
-            // Save Product with Multiple Variants
+            // Save Product to Firebase
             window.commitProductToFirestore = async function() {
                 const title = document.getElementById('formProductTitle').value;
                 const price = document.getElementById('formProductPrice').value;
@@ -475,6 +524,10 @@
                 const btn = document.getElementById('formSubmitActionButton');
 
                 if(!title || !price) return alert("Validation Error: Title and Price are required.");
+                
+                if(mainGalleryImages.length === 0) {
+                    return alert("Validation Error: You must upload at least ONE image in the Primary Gallery for customers to see.");
+                }
 
                 // Compile Sizes
                 let compiledSizes = [];
@@ -492,10 +545,6 @@
                     }
                 }
 
-                if(compiledVariants.length === 0) {
-                    return alert("Validation Error: You must upload at least one Color Variant Image!");
-                }
-
                 btn.innerText = "Transmitting Metadata...";
                 btn.disabled = true;
 
@@ -509,7 +558,8 @@
                         description: desc,
                         sizes: compiledSizes,
                         variants: compiledVariants, 
-                        image: compiledVariants[0].image, // Set primary image for backward compatibility
+                        all_images: mainGalleryImages, // THE SLIDER IMAGES (4-5 angles)
+                        image: mainGalleryImages[0], // First gallery image becomes the main thumbnail
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     alert("Marketplace Item Published Successfully!");
@@ -522,7 +572,6 @@
                 }
             }
 
-            // Initial counter sync
             db.collection("zippykart_products").get().then(s => document.getElementById('uiActiveProductsCount').innerText = s.size);
 
         } catch (e) { console.error(e); }
