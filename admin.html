@@ -6,7 +6,6 @@
     <title>ZippyKart Pro Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -14,77 +13,76 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f4f7fb; color: #1e293b; display: flex; height: 100vh; overflow: hidden; }
 
-        /* Sidebar */
+        /* Sidebar & Layout */
         .sidebar { width: 260px; background: #0f172a; color: #fff; display: flex; flex-direction: column; transition: 0.3s; z-index: 10;}
         .sidebar-header { padding: 20px 25px; font-size: 24px; font-weight: 800; color: #e02844; border-bottom: 1px solid #1e293b; display: flex; align-items: center; gap: 10px;}
-        .sidebar-menu { padding: 20px 0; flex: 1; }
+        .sidebar-menu { padding: 20px 0; flex: 1; display: flex; flex-direction: column;}
         .menu-item { padding: 15px 25px; display: flex; align-items: center; gap: 15px; color: #94a3b8; text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; border-left: 4px solid transparent; cursor: pointer; }
         .menu-item:hover, .menu-item.active { color: #fff; background: #1e293b; border-left-color: #e02844; }
-        .menu-item i { font-size: 18px; width: 20px; text-align: center; }
-
-        /* Main Content */
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative;}
+        .menu-item.settings-link { margin-top: auto; border-top: 1px solid #1e293b; padding-top: 20px; }
         
-        /* Topbar */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative;}
         .topbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top:0; z-index: 5;}
-        .search-bar { background: #f1f5f9; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px; width: 300px; }
-        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; }
-        .admin-profile { display: flex; align-items: center; gap: 15px; }
-        .notify-icon { position: relative; cursor: pointer; font-size: 20px; color: #64748b; }
-        .notify-badge { position: absolute; top: -5px; right: -5px; background: #e02844; color: #fff; font-size: 10px; font-weight: bold; padding: 2px 5px; border-radius: 50%; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #e02844; color: #fff; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; }
-
-        /* Tabs Setup */
+        
+        /* Tabs */
         .tab-section { display: none; padding: 30px; animation: fadeIn 0.4s ease-out; }
         .tab-section.active-tab { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .page-title { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #0f172a; display: flex; justify-content: space-between; align-items: center;}
         
-        /* Buttons */
         .btn-primary { background: #e02844; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; display: flex; gap: 8px; align-items: center; transition: 0.2s;}
         .btn-primary:hover { background: #c8233c; }
 
-        /* Stats Grid */
+        /* Tables & Stats */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: space-between; border: 1px solid #e2e8f0; }
-        .stat-info h3 { font-size: 14px; color: #64748b; font-weight: 600; margin-bottom: 5px; text-transform: uppercase; }
+        .stat-card { background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;}
+        .stat-info h3 { font-size: 14px; color: #64748b; margin-bottom: 5px; text-transform: uppercase;}
         .stat-info h2 { font-size: 28px; font-weight: 800; color: #0f172a; }
-        .stat-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 24px; }
-        .icon-blue { background: #eff6ff; color: #3b82f6; } .icon-green { background: #f0fdf4; color: #22c55e; }
-        .icon-orange { background: #fff7ed; color: #f97316; } .icon-purple { background: #faf5ff; color: #a855f7; }
-
-        /* Table Section */
-        .table-section { background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; overflow: hidden; }
+        
+        .table-section { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
         .table-header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-        .table-header h3 { font-size: 18px; font-weight: 700; color: #0f172a; }
-        
         .data-table { width: 100%; border-collapse: collapse; }
-        .data-table th { background: #f8fafc; padding: 15px 20px; text-align: left; font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; }
-        .data-table td { padding: 15px 20px; font-size: 14px; border-bottom: 1px solid #e2e8f0; color: #334155; vertical-align: middle;}
-        .data-table tr:hover { background: #f8fafc; }
+        .data-table th { background: #f8fafc; padding: 15px 20px; text-align: left; font-size: 13px; color: #64748b; border-bottom: 1px solid #e2e8f0; text-transform: uppercase;}
+        .data-table td { padding: 15px 20px; font-size: 14px; border-bottom: 1px solid #e2e8f0; }
+
+        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-pending { background: #fff7ed; color: #f97316; } .status-delivered { background: #f0fdf4; color: #22c55e; }
+        .status-select { padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px; cursor: pointer; }
+
+        /* --- PRODUCT MODAL (POPUP) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-box { background: #fff; width: 600px; max-height: 90vh; overflow-y: auto; border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideUp 0.3s ease-out;}
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;}
+        .modal-header h2 { font-size: 20px; color: #0f172a; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #64748b; }
         
-        /* Badges & Select */
-        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-align: center; display: inline-block; }
-        .status-pending { background: #fff7ed; color: #f97316; border: 1px solid #fdba74; }
-        .status-confirmed { background: #eff6ff; color: #3b82f6; border: 1px solid #93c5fd; }
-        .status-shipped { background: #f5f3ff; color: #8b5cf6; border: 1px solid #c4b5fd; }
-        .status-delivered { background: #f0fdf4; color: #22c55e; border: 1px solid #86efac; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; }
+        .form-control:focus { border-color: #e02844; }
+        .row { display: flex; gap: 15px; }
+        .col { flex: 1; }
         
-        .status-select { padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 600; cursor: pointer; background: #fff; color: #1e293b; }
+        .size-checkboxes { display: flex; gap: 15px; margin-top: 5px; }
+        .size-label { display: flex; align-items: center; gap: 5px; font-size: 14px; cursor: pointer;}
+        
+        .image-preview-box { width: 100px; height: 120px; border: 1px dashed #cbd5e1; border-radius: 6px; margin-top: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;}
+        .image-preview-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
     </style>
 </head>
 <body>
 
+    <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="sidebar-header">
-            <i class="fas fa-bolt"></i> <span>ZippyKart</span>
-        </div>
+        <div class="sidebar-header"><i class="fas fa-bolt"></i> <span>ZippyKart</span></div>
         <div class="sidebar-menu">
-            <div class="menu-item active" onclick="switchTab('dashboardTab', this)"><i class="fas fa-home"></i> <span>Dashboard / Orders</span></div>
-            <div class="menu-item" onclick="switchTab('productsTab', this)"><i class="fas fa-box-open"></i> <span>Products Inventory</span></div>
+            <div class="menu-item active" onclick="switchTab('dashboardTab', this)"><i class="fas fa-home"></i> <span>Orders</span></div>
+            <div class="menu-item" onclick="switchTab('productsTab', this)"><i class="fas fa-box-open"></i> <span>Products</span></div>
             <div class="menu-item" onclick="switchTab('customersTab', this)"><i class="fas fa-users"></i> <span>Customers</span></div>
-            <div class="menu-item" onclick="switchTab('analyticsTab', this)"><i class="fas fa-chart-line"></i> <span>Analytics (Soon)</span></div>
+            <div class="menu-item" onclick="switchTab('analyticsTab', this)"><i class="fas fa-chart-line"></i> <span>Analytics</span></div>
+            
+            <!-- Restored Settings Icon -->
+            <div class="menu-item settings-link" onclick="switchTab('settingsTab', this)"><i class="fas fa-cog"></i> <span>Settings</span></div>
         </div>
     </aside>
 
@@ -92,108 +90,129 @@
         <header class="topbar">
             <div class="search-bar">
                 <i class="fas fa-search" style="color:#94a3b8;"></i>
-                <input type="text" placeholder="Search orders, products...">
+                <input type="text" placeholder="Search orders, products..." style="border:none; background:transparent; outline:none; margin-left:10px;">
             </div>
-            <div class="admin-profile">
-                <div class="notify-icon">
-                    <i class="fas fa-bell"></i>
-                    <span class="notify-badge" id="newOrderBadge">0</span>
-                </div>
-                <div class="avatar">A</div>
-                <div style="font-weight: 600; font-size: 14px;">Admin Akash</div>
+            <div style="font-weight: 600; display:flex; align-items:center; gap:10px;">
+                <div style="width:35px; height:35px; background:#e02844; color:#fff; border-radius:50%; display:flex; justify-content:center; align-items:center;">A</div>
+                Admin Akash
             </div>
         </header>
 
+        <!-- DASHBOARD TAB -->
         <div id="dashboardTab" class="tab-section active-tab">
             <h1 class="page-title">Dashboard Overview</h1>
-            
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-info"><h3>Total Revenue</h3><h2 id="totRevenue">₹0</h2></div>
-                    <div class="stat-icon icon-blue"><i class="fas fa-wallet"></i></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-info"><h3>Total Orders</h3><h2 id="totOrders">0</h2></div>
-                    <div class="stat-icon icon-orange"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-info"><h3>Pending Deliveries</h3><h2 id="totPending">0</h2></div>
-                    <div class="stat-icon icon-purple"><i class="fas fa-truck-fast"></i></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-info"><h3>Active Products</h3><h2 id="totActiveProducts">0</h2></div>
-                    <div class="stat-icon icon-green"><i class="fas fa-box"></i></div>
-                </div>
+                <div class="stat-card"><div><h3>Total Revenue</h3><h2 id="totRevenue">₹0</h2></div></div>
+                <div class="stat-card"><div><h3>Total Orders</h3><h2 id="totOrders">0</h2></div></div>
+                <div class="stat-card"><div><h3>Active Products</h3><h2 id="totActiveProducts">0</h2></div></div>
             </div>
-
             <div class="table-section">
-                <div class="table-header">
-                    <h3>Recent Orders</h3>
-                    <button class="btn-primary"><i class="fas fa-download"></i> Export</button>
-                </div>
                 <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Order Details</th>
-                            <th>Customer Info</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ordersTableBody">
-                        <tr><td colspan="5" style="text-align: center; padding: 30px;">Loading live orders...</td></tr>
-                    </tbody>
+                    <thead><tr><th>Product</th><th>Customer</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+                    <tbody id="ordersTableBody"><tr><td colspan="5" align="center">Loading...</td></tr></tbody>
                 </table>
             </div>
         </div>
 
+        <!-- PRODUCTS TAB -->
         <div id="productsTab" class="tab-section">
             <div class="page-title">
                 <span>Products Inventory</span>
-                <button class="btn-primary"><i class="fas fa-plus"></i> Add New Product</button>
+                <button class="btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> Add New Product</button>
             </div>
-            
             <div class="table-section">
                 <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Title</th>
-                            <th>Price</th>
-                            <th>MRP</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productsTableBody">
-                        <tr><td colspan="5" style="text-align: center; padding: 30px;">Loading your products...</td></tr>
-                    </tbody>
+                    <thead><tr><th>Image</th><th>Title</th><th>Price</th><th>MRP</th><th>Action</th></tr></thead>
+                    <tbody id="productsTableBody"><tr><td colspan="5" align="center">Loading...</td></tr></tbody>
                 </table>
             </div>
         </div>
 
+        <!-- CUSTOMERS TAB -->
         <div id="customersTab" class="tab-section">
             <h1 class="page-title">Customer Database</h1>
             <div class="table-section" style="padding: 50px; text-align: center; color: #64748b;">
                 <i class="fas fa-users" style="font-size: 40px; margin-bottom: 15px; color: #cbd5e1;"></i>
-                <h2>Customer List Syncing...</h2>
-                <p>This module will compile all buyers from your order history.</p>
+                <h2>Customer Data Syncing...</h2>
             </div>
         </div>
 
+        <!-- ANALYTICS TAB -->
         <div id="analyticsTab" class="tab-section">
-            <h1 class="page-title">Sales Analytics</h1>
+            <h1 class="page-title">Analytics</h1>
             <div class="table-section" style="padding: 50px; text-align: center; color: #64748b;">
-                <i class="fas fa-chart-pie" style="font-size: 40px; margin-bottom: 15px; color: #cbd5e1;"></i>
-                <h2>Advanced Charts Coming Soon</h2>
-                <p>Track your weekly and monthly sales growth here.</p>
+                <i class="fas fa-chart-line" style="font-size: 40px; margin-bottom: 15px; color: #cbd5e1;"></i>
+                <h2>Sales Charts Coming Soon</h2>
+            </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="settingsTab" class="tab-section">
+            <h1 class="page-title">Store Settings</h1>
+            <div class="table-section" style="padding: 50px; text-align: center; color: #64748b;">
+                <i class="fas fa-cog" style="font-size: 40px; margin-bottom: 15px; color: #cbd5e1;"></i>
+                <h2>Admin Configurations</h2>
+                <p>Manage payment gateways and shipping rules here.</p>
             </div>
         </div>
 
     </main>
 
+    <!-- 🟢 ADD/EDIT PRODUCT MODAL 🟢 -->
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Product</h2>
+                <button class="close-btn" onclick="closeProductModal()">&times;</button>
+            </div>
+            
+            <input type="hidden" id="editProductId">
+
+            <div class="form-group">
+                <label>Product Title</label>
+                <input type="text" id="pTitle" class="form-control" placeholder="e.g. Urban Oversized Tee">
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label>Selling Price (₹)</label>
+                    <input type="number" id="pPrice" class="form-control" placeholder="799">
+                </div>
+                <div class="col form-group">
+                    <label>MRP (₹)</label>
+                    <input type="number" id="pMrp" class="form-control" placeholder="1499">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="pDesc" class="form-control" rows="3" placeholder="Premium cotton t-shirt..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Available Sizes</label>
+                <div class="size-checkboxes">
+                    <label class="size-label"><input type="checkbox" value="S" class="pSize"> S</label>
+                    <label class="size-label"><input type="checkbox" value="M" class="pSize" checked> M</label>
+                    <label class="size-label"><input type="checkbox" value="L" class="pSize" checked> L</label>
+                    <label class="size-label"><input type="checkbox" value="XL" class="pSize"> XL</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Product Image</label>
+                <input type="file" id="pImage" accept="image/*" class="form-control" onchange="previewImage(event)">
+                <div class="image-preview-box">
+                    <span id="imgPlaceholderText" style="font-size:12px; color:#999;">No Image</span>
+                    <img id="imgPreview">
+                </div>
+            </div>
+
+            <button class="btn-primary" id="saveBtn" style="width: 100%; justify-content: center; margin-top: 20px;" onclick="saveProduct()">Save Product</button>
+        </div>
+    </div>
+
 <script>
-    // 1. Firebase Setup
     const firebaseConfig = {
         apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
         authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -202,112 +221,54 @@
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // 2. TAB SWITCHING LOGIC (Magic starts here)
+    let currentBase64Image = null;
+
+    // Tab Logic
     window.switchTab = function(tabId, element) {
-        // Hide all tabs
         document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active-tab'));
-        // Show clicked tab
         document.getElementById(tabId).classList.add('active-tab');
-        
-        // Update Sidebar Active Color
         document.querySelectorAll('.menu-item').forEach(btn => btn.classList.remove('active'));
         element.classList.add('active');
-
-        // Agar Product tab khola hai toh Firebase se Products load karo
-        if(tabId === 'productsTab') {
-            loadProducts();
-        }
+        if(tabId === 'productsTab') loadProducts();
     }
 
-    // 3. Load LIVE ORDERS (Pehle jaisa)
+    // Load Orders
     db.collection("zippykart_orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-        const tbody = document.getElementById('ordersTableBody');
-        tbody.innerHTML = "";
-        
-        let totalRev = 0, totalOrd = 0, pendingOrd = 0;
-
-        if(snapshot.empty) {
-            tbody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>No orders received yet.</td></tr>";
-            return;
-        }
-
+        const tbody = document.getElementById('ordersTableBody'); tbody.innerHTML = "";
+        let rev = 0, ord = 0;
+        if(snapshot.empty) return tbody.innerHTML = "<tr><td colspan='5' align='center'>No orders yet.</td></tr>";
         snapshot.forEach(doc => {
-            const order = doc.data();
-            const orderId = doc.id;
-            
-            totalOrd++;
-            totalRev += parseInt(order.totalAmount || 0);
-            if(order.status !== "Delivered") pendingOrd++;
-
-            let badgeClass = "status-pending";
-            if(order.status === "Order Confirmed") badgeClass = "status-confirmed";
-            if(order.status === "Shipped") badgeClass = "status-shipped";
-            if(order.status === "Delivered") badgeClass = "status-delivered";
-
-            tbody.innerHTML += `
-                <tr>
-                    <td>
-                        <div style="font-weight: 600; color: #0f172a;">${order.productTitle || 'Product Name'}</div>
-                        <div style="font-size: 12px; color: #64748b;">Size: ${order.size} | Qty: ${order.quantity} | ${order.paymentMethod}</div>
-                    </td>
-                    <td>
-                        <div style="font-weight: 600;">${order.customerInfo?.name || 'User'}</div>
-                        <div style="font-size: 12px; color: #64748b;">📞 ${order.customerInfo?.phone || 'N/A'}</div>
-                        <div style="font-size: 12px; color: #64748b;">📍 ${order.customerInfo?.city || ''}</div>
-                    </td>
-                    <td style="font-weight: 700;">₹${order.totalAmount}</td>
-                    <td><span class="status-badge ${badgeClass}">${order.status || 'Pending'}</span></td>
-                    <td>
-                        <select class="status-select" onchange="updateStatus('${orderId}', this.value)">
-                            <option value="">Change Status...</option>
-                            <option value="Order Confirmed">Confirm Order</option>
-                            <option value="Shipped">Mark Shipped</option>
-                            <option value="Delivered">Mark Delivered</option>
-                        </select>
-                    </td>
-                </tr>
-            `;
+            const o = doc.data(); rev += parseInt(o.totalAmount||0); ord++;
+            tbody.innerHTML += `<tr>
+                <td><b>${o.productTitle}</b><br><small>Size: ${o.size} | Qty: ${o.quantity}</small></td>
+                <td><b>${o.customerInfo?.name}</b><br><small>${o.customerInfo?.phone}</small></td>
+                <td>₹${o.totalAmount}</td>
+                <td><span class="status-badge status-pending">${o.status}</span></td>
+                <td><select onchange="db.collection('zippykart_orders').doc('${doc.id}').update({status:this.value})">
+                    <option value="">Update...</option><option value="Shipped">Shipped</option><option value="Delivered">Delivered</option>
+                </select></td>
+            </tr>`;
         });
-
-        document.getElementById('totRevenue').innerText = "₹" + totalRev.toLocaleString('en-IN');
-        document.getElementById('totOrders').innerText = totalOrd;
-        document.getElementById('totPending').innerText = pendingOrd;
-        document.getElementById('newOrderBadge').innerText = pendingOrd; 
+        document.getElementById('totRevenue').innerText = "₹" + rev; document.getElementById('totOrders').innerText = ord;
     });
 
-    // 4. Update Status Function
-    window.updateStatus = function(orderId, newStatus) {
-        if(!newStatus) return;
-        if(confirm(`Change status to "${newStatus}"?`)) {
-            db.collection("zippykart_orders").doc(orderId).update({ status: newStatus })
-              .catch(err => alert("Error: " + err.message));
-        }
-    }
-
-    // 5. Load PRODUCTS INVENTORY
+    // Load Products
     function loadProducts() {
-        db.collection("zippykart_products").get().then(snapshot => {
-            const tbody = document.getElementById('productsTableBody');
-            tbody.innerHTML = "";
-            
+        db.collection("zippykart_products").onSnapshot(snapshot => {
+            const tbody = document.getElementById('productsTableBody'); tbody.innerHTML = "";
             document.getElementById('totActiveProducts').innerText = snapshot.size;
-
-            if(snapshot.empty) {
-                tbody.innerHTML = "<tr><td colspan='5' style='text-align: center; padding: 30px;'>No products found. Add your first product!</td></tr>";
-                return;
-            }
-
+            if(snapshot.empty) return tbody.innerHTML = "<tr><td colspan='5' align='center'>No products found.</td></tr>";
+            
             snapshot.forEach(doc => {
-                const product = doc.data();
+                const p = doc.data();
                 tbody.innerHTML += `
                     <tr>
-                        <td><img src="${product.image}" style="width: 50px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid #eee;"></td>
-                        <td style="font-weight: 600; color: #0f172a;">${product.title}</td>
-                        <td style="font-weight: 700; color: #388e3c;">₹${product.price}</td>
-                        <td style="color: #878787; text-decoration: line-through;">₹${product.mrp || ''}</td>
+                        <td><img src="${p.image}" style="width:50px;height:60px;object-fit:cover;border-radius:4px;"></td>
+                        <td><b>${p.title}</b></td>
+                        <td style="color:#388e3c;font-weight:bold;">₹${p.price}</td>
+                        <td><del>₹${p.mrp}</del></td>
                         <td>
-                            <button style="padding: 6px 12px; background: #eff6ff; color: #3b82f6; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; margin-right: 5px;"><i class="fas fa-edit"></i> Edit</button>
-                            <button style="padding: 6px 12px; background: #fef2f2; color: #ef4444; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;"><i class="fas fa-trash"></i></button>
+                            <button onclick="deleteProduct('${doc.id}')" style="background:#fef2f2; color:#ef4444; border:none; padding:8px 12px; cursor:pointer; border-radius:4px;"><i class="fas fa-trash"></i> Delete</button>
                         </td>
                     </tr>
                 `;
@@ -315,9 +276,88 @@
         });
     }
 
-    // Initialize Products count on load
-    db.collection("zippykart_products").get().then(snap => document.getElementById('totActiveProducts').innerText = snap.size);
-</script>
-</body>
-    </html>
-    
+    // Modal Logic
+    window.openProductModal = function() {
+        document.getElementById('modalTitle').innerText = "Add New Product";
+        document.getElementById('editProductId').value = "";
+        document.getElementById('pTitle').value = "";
+        document.getElementById('pPrice').value = "";
+        document.getElementById('pMrp').value = "";
+        document.getElementById('pDesc').value = "";
+        document.getElementById('pImage').value = "";
+        document.getElementById('imgPreview').style.display = "none";
+        document.getElementById('imgPlaceholderText').style.display = "block";
+        currentBase64Image = null;
+        document.getElementById('productModal').style.display = "flex";
+    }
+
+    window.closeProductModal = function() { document.getElementById('productModal').style.display = "none"; }
+
+    window.deleteProduct = function(docId) {
+        if(confirm("Are you sure you want to delete this product?")) {
+            db.collection("zippykart_products").doc(docId).delete();
+        }
+    }
+
+    // Image Compressor
+    window.previewImage = async function(event) {
+        const file = event.target.files[0];
+        if(!file) return;
+        document.getElementById('imgPlaceholderText').innerText = "Compressing...";
+        
+        currentBase64Image = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width, height = img.height;
+                    const MAX = 600;
+                    if(width > height) { if(width > MAX) { height *= MAX / width; width = MAX; } } 
+                    else { if(height > MAX) { width *= MAX / height; height = MAX; } }
+                    canvas.width = width; canvas.height = height;
+                    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', 0.7));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        const preview = document.getElementById('imgPreview');
+        preview.src = currentBase64Image;
+        preview.style.display = "block";
+        document.getElementById('imgPlaceholderText').style.display = "none";
+    }
+
+    // Save Product
+    window.saveProduct = async function() {
+        const title = document.getElementById('pTitle').value;
+        const price = document.getElementById('pPrice').value;
+        const mrp = document.getElementById('pMrp').value;
+        const desc = document.getElementById('pDesc').value;
+        const btn = document.getElementById('saveBtn');
+
+        if(!title || !price || !currentBase64Image) return alert("Title, Price and Image are mandatory!");
+
+        let sizes = [];
+        document.querySelectorAll('.pSize:checked').forEach(cb => sizes.push(cb.value));
+
+        btn.innerText = "Saving..."; btn.disabled = true;
+
+        const productData = {
+            title: title,
+            price: parseInt(price),
+            mrp: parseInt(mrp || price),
+            description: desc,
+            sizes: sizes,
+            image: currentBase64Image,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        try {
+            await db.collection("zippykart_products").add(productData);
+            alert("Product Added Successfully!");
+            closeProductModal();
+        } catch(e) {
+            alert("Error adding product. Check Databas
