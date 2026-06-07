@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZippyKart Ultra-Pro Command Center</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <style>
+        /* --- PREMIUM CSS CORE SETUP --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: #0f172a;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- NEXT-GEN SIDEBAR (GLASSMORPHISM TINT) --- */
+        .sidebar {
+            width: 280px;
+            background: #0f172a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 25px rgba(15, 23, 42, 0.15);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .sidebar-header {
+            padding: 30px 25px;
+            font-size: 26px;
+            font-weight: 800;
+            color: #e02844;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .sidebar-header span {
+            color: #ffffff;
+        }
+        
+        .sidebar-menu {
+            padding: 25px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .menu-item {
+            padding: 16px 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.03);
+            padding-left: 30px;
+        }
+        
+        .menu-item.active {
+            color: #ffffff;
+            background: linear-gradient(90deg, rgba(224, 40, 68, 0.15) 0%, rgba(224, 40, 68, 0) 100%);
+            border-left-color: #e02844;
+            font-weight: 600;
+        }
+        
+        .menu-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover i {
+            transform: scale(1.15);
+        }
+        
+        .menu-item.settings-link {
+            margin-top: auto;
+            border-top: 1px solid #1e293b;
+            padding-top: 25px;
+        }
+
+        /* --- MAIN VIEWPORT LAYER --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+            background: #f1f5f9;
+        }
+        
+        /* --- PRO TOPBAR --- */
+        .topbar {
+            background: #ffffff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        
+        .search-container {
+            background: #f1f5f9;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 350px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .search-container input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            color: #334155;
+        }
+        
+        .admin-profile-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+            color: #64748b;
+            transition: 0.3s;
+        }
+        
+        .notification-bell:hover {
+            color: #0f172a;
+        }
+        
+        .bell-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #e02844;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+        
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e02844 0%, #fb641b 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(224, 40, 68, 0.25);
+        }
+
+        /* --- TAB LAYER ANIMATION ENGINE --- */
+        .tab-section {
+            display: none;
+            padding: 40px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tab-section.active-tab {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page-header-row {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: #0f172a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+        
+        /* --- ULTRA BUTTON GRADIANT --- */
+        .btn-action-master {
+            background: linear-gradient(135deg, #e02844 0%, #fb641b 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(224, 40, 68, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-action-master:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 40, 68, 0.4);
+        }
+
+        /* --- ANALYTICS CARDS GRID --- */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .metric-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .metric-info h4 {
+            font-size: 13px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .metric-info h2 {
+            font-size: 30px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        
+        .metric-icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        
+        .c-blue { background: #eff6ff; color: #3b82f6; }
+        .c-orange { background: #fff7ed; color: #f97316; }
+        .c-purple { background: #faf5ff; color: #a855f7; }
+        .c-green { background: #f0fdf4; color: #22c55e; }
+
+        /* --- PREMIUM DATA TABLES --- */
+        .table-wrapper {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+        
+        .table-title-bar {
+            padding: 24px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .table-title-bar h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        
+        .master-data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .master-data-table th {
+            background: #f8fafc;
+            padding: 16px 30px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e2e8f0;
+            letter-spacing: 0.5px;
+        }
+        
+        .master-data-table td {
+            padding: 18px 30px;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: middle;
+        }
+        
+        .master-data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .master-data-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        /* --- STATUS BADGES --- */
+        .badge-status {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .b-pending { background: #fff7ed; color: #f97316; border: 1px solid #ffedd5; }
+        .b-confirmed { background: #eff6ff; color: #3b82f6; border: 1px solid #dbeafe; }
+        .b-shipped { background: #f5f3ff; color: #8b5cf6; border: 1px solid #ede9fe; }
+        .b-delivered { background: #f0fdf4; color: #22c55e; border: 1px solid #dcfce7; }
+        
+        .select-status-dropdown {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 13px;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            background: #ffffff;
+            transition: 0.2s;
+        }
+        
+        .select-status-dropdown:focus {
+            border-color: #3b82f6;
+        }
+
+        /* --- THE ADD PRODUCT ULTRA MODAL --- */
+        .modal-blur-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-container-box {
+            background: #ffffff;
+            width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        
+        .modal-header-row h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        
+        .modal-close-trigger {
+            background: none;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: 0.2s;
+        }
+        
+        .modal-close-trigger:hover {
+            color: #0f172a;
+        }
+        
+        .input-form-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        
+        .input-element-master {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+            color: #0f172a;
+        }
+        
+        .input-element-master:focus {
+            border-color: #e02844;
+            box-shadow: 0 0 0 3px rgba(224, 40, 68, 0.15);
+        }
+        
+        .flex-row-inputs {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .flex-col-item {
+            flex: 1;
+        }
+        
+        .checkbox-size-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .checkbox-wrapper-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #475569;
+        }
+        
+        .checkbox-wrapper-label input {
+            width: 16px;
+            height: 16px;
+            accent-color: #e02844;
+        }
+        
+        /* --- IMAGE LIVE PREVIEW BOX --- */
+        .live-preview-image-frame {
+            width: 110px;
+            height: 140px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #f8fafc;
+            position: relative;
+        }
+        
+        .live-preview-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .live-preview-image-frame span {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+            padding: 5px;
+        }
+
+        /* --- DUMMY PLACEHOLDERS --- */
+        .empty-placeholder-box {
+            padding: 60px;
+            text-align: center;
+            color: #64748b;
+        }
+        
+        .empty-placeholder-box i {
+            font-size: 48px;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 950px) {
+            .sidebar { width: 80px; }
+            .sidebar-header span, .menu-item span { display: none; }
+            .menu-item i { font-size: 22px; width: 100%; }
+            .analytics-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-bolt"></i> <span>ZIPPY<span>KART</span></span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item active" onclick="triggerTabSwitch('dashboardTab', this)">
+                <i class="fas fa-shopping-bag"></i> <span>Orders Feed</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('productsTab', this)">
+                <i class="fas fa-box-open"></i> <span>Products Inventory</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('customersTab', this)">
+                <i class="fas fa-users"></i> <span>Customers List</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('analyticsTab', this)">
+                <i class="fas fa-chart-line"></i> <span>Analytics Engine</span>
+            </div>
+            
+            <div class="menu-item settings-link" onclick="triggerTabSwitch('settingsTab', this)">
+                <i class="fas fa-cog"></i> <span>Store Settings</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="topbar">
+            <div class="search-container">
+                <i class="fas fa-search" style="color:#94a3b8;"></i>
+                <input type="text" placeholder="Search across systems...">
+            </div>
+            <div class="admin-profile-box">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="bell-badge" id="liveNotificationCount">0</span>
+                </div>
+                <div class="admin-avatar">A</div>
+                <div style="font-weight: 600; font-size: 14px; color: #1e293b;">Admin Akash</div>
+            </div>
+        </header>
+
+        <div id="dashboardTab" class="tab-section active-tab">
+            <div class="page-header-row">
+                <span>Command Control Overview</span>
+            </div>
+            
+            <div class="analytics-grid">
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Total Revenue</h4>
+                        <h2 id="uiTotalRevenue">₹0</h2>
+                    </div>
+                    <div class="metric-icon-box c-blue"><i class="fas fa-wallet"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Total Orders</h4>
+                        <h2 id="uiTotalOrders">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-orange"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Unfulfilled Pipeline</h4>
+                        <h2 id="uiPendingOrders">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-purple"><i class="fas fa-truck-fast"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Active SKU Stock</h4>
+                        <h2 id="uiActiveProductsCount">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-green"><i class="fas fa-box"></i></div>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-title-bar">
+                    <h3>Real-time Order Stream</h3>
+                    <button class="btn-action-master" style="padding: 8px 16px;" onclick="alert('Exporting system CSV records...')"><i class="fas fa-download"></i> Export Data</button>
+                </div>
+                <table class="master-data-table">
+                    <thead>
+                        <tr>
+                            <th>Product Information</th>
+                            <th>Customer Coordinates</th>
+                            <th>Gross Amount</th>
+                            <th>State status</th>
+                            <th>Operational Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody 
