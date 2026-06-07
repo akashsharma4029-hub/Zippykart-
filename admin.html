@@ -2,86 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZippyKart Admin Dashboard</title>
+    <title>ZippyKart Ultra-Pro Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
-        /* CSS Wahi hai jo aapko pasand thi, Smooth animations ke saath */
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-        body { display:flex; height:100vh; background:#f4f7fb; overflow:hidden; }
-        .sidebar { width:260px; background:#0f172a; color:#fff; display:flex; flex-direction:column; }
-        .menu-item { padding:18px 25px; cursor:pointer; display:flex; align-items:center; gap:15px; color:#94a3b8; transition: 0.3s; }
-        .menu-item:hover, .menu-item.active { background:#1e293b; color:#fff; border-left:4px solid #e02844; }
-        .main { flex:1; overflow-y:auto; padding:30px; }
-        .tab { display:none; animation: fadeIn 0.4s; }
-        .tab.active { display:block; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        /* Add Product Modal */
-        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
-        .modal-content { background:white; padding:30px; border-radius:12px; width:400px; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        body { background: #0f172a; color: white; display:flex; height:100vh; overflow:hidden; }
+        
+        /* Sidebar - Glassmorphism */
+        .sidebar { width:280px; background:rgba(255,255,255,0.05); backdrop-filter:blur(15px); border-right:1px solid rgba(255,255,255,0.1); display:flex; flex-direction:column; }
+        .menu-item { padding:20px 30px; cursor:pointer; display:flex; align-items:center; gap:15px; color:#94a3b8; transition:0.4s; border-left:4px solid transparent; }
+        .menu-item:hover, .menu-item.active { background:rgba(224,40,68,0.15); color:#e02844; border-left-color:#e02844; }
+        
+        /* Main Container */
+        .main { flex:1; padding:40px; overflow-y:auto; }
+        .page { display:none; animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .page.active { display:block; }
+        @keyframes slideIn { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+        
+        /* Premium Dashboard Card */
+        .glass-card { background:rgba(255,255,255,0.03); backdrop-filter:blur(10px); padding:30px; border-radius:20px; border:1px solid rgba(255,255,255,0.1); margin-bottom:20px; }
+        button.pro-btn { background:linear-gradient(45deg, #e02844, #fb641b); color:white; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; font-weight:600; transition:0.3s; }
+        button.pro-btn:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(224,40,68,0.5); }
     </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <div style="padding:20px; font-weight:bold; font-size:22px; color:#e02844;">ZippyKart Admin</div>
-    <div class="menu-item active" onclick="switchTab('Dashboard', this)"><i class="fas fa-home"></i> Orders</div>
-    <div class="menu-item" onclick="switchTab('Products', this)"><i class="fas fa-box-open"></i> Products</div>
-    <div class="menu-item" onclick="switchTab('Customers', this)"><i class="fas fa-users"></i> Customers</div>
-    <div class="menu-item" onclick="switchTab('Settings', this)"><i class="fas fa-cog"></i> Settings</div>
+    <div style="padding:30px; font-weight:800; font-size:24px; color:#e02844; letter-spacing:2px;">ZIPPY<span style="color:white;">KART</span></div>
+    <div class="menu-item active" onclick="nav('Dash', this)"><i class="fas fa-microchip"></i> Dashboard</div>
+    <div class="menu-item" onclick="nav('Prods', this)"><i class="fas fa-tags"></i> Inventory</div>
+    <div class="menu-item" onclick="nav('Cust', this)"><i class="fas fa-user-shield"></i> Customers</div>
 </div>
 
 <div class="main">
-    <div id="Dashboard" class="tab active"><h1>Orders</h1><div id="orderList"></div></div>
-    
-    <div id="Products" class="tab">
-        <div style="display:flex; justify-content:space-between;">
-            <h1>Products Inventory</h1>
-            <button onclick="document.getElementById('pModal').style.display='flex'" style="background:#e02844; color:white; border:none; padding:10px 20px; border-radius:5px;">+ Add Product</button>
+    <div id="Dash" class="page active">
+        <h1 style="margin-bottom:30px;">Ultra-Pro Command Center</h1>
+        <div class="glass-card">
+            <h2>Live Sales Feed</h2>
+            <div id="orderList"></div>
         </div>
-        <div id="productList"></div>
+    </div>
+    
+    <div id="Prods" class="page">
+        <div class="glass-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h1>Inventory Master</h1>
+                <button class="pro-btn" onclick="document.getElementById('modal').style.display='flex'">+ Add New Product</button>
+            </div>
+            <div id="productList"></div>
+        </div>
     </div>
 </div>
 
-<div id="pModal" class="modal">
-    <div class="modal-content">
-        <h2>Add Product</h2>
-        <input type="text" id="pTitle" placeholder="Title" style="width:100%; margin:10px 0; padding:10px;">
-        <input type="number" id="pPrice" placeholder="Price" style="width:100%; margin:10px 0; padding:10px;">
-        <button onclick="saveProduct()" style="width:100%; padding:10px; background:#22c55e; color:white; border:none;">Save</button>
-        <button onclick="document.getElementById('pModal').style.display='none'" style="width:100%; margin-top:10px; padding:10px;">Close</button>
+<!-- Modal -->
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+    <div class="glass-card" style="width:500px;">
+        <h2 style="margin-bottom:20px;">New Product Entry</h2>
+        <input id="title" placeholder="Product Title" style="width:100%; padding:15px; margin-bottom:10px; border-radius:8px;">
+        <input id="price" placeholder="Selling Price" style="width:100%; padding:15px; margin-bottom:20px; border-radius:8px;">
+        <button class="pro-btn" style="width:100%;" onclick="save()">Publish to Store</button>
+        <button onclick="document.getElementById('modal').style.display='none'" style="width:100%; margin-top:10px; background:transparent; border:none; color:white;">Cancel</button>
     </div>
 </div>
 
 <script>
     const db = firebase.firestore();
-
-    // Tab Switcher with Animation
-    function switchTab(id, el) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    function nav(id, el) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         el.classList.add('active');
     }
-
-    // Add Product Logic
-    function saveProduct() {
-        const title = document.getElementById('pTitle').value;
-        const price = document.getElementById('pPrice').value;
-        db.collection("zippykart_products").add({ title, price }).then(() => {
-            alert("Done!");
-            document.getElementById('pModal').style.display = 'none';
-        });
+    
+    function save() {
+        db.collection("zippykart_products").add({
+            title: document.getElementById('title').value,
+            price: document.getElementById('price').value
+        }).then(() => alert("Product Added! Data is Live."));
     }
-
-    // Real-time listener to keep data flowing
-    db.collection("zippykart_products").onSnapshot(snap => {
-        let html = "<table>";
-        snap.forEach(doc => { html += `<tr><td>${doc.data().title}</td><td>${doc.data().price}</td></tr>`; });
-        document.getElementById('productList').innerHTML = html + "</table>";
-    });
 </script>
-
 </body>
 </html>
