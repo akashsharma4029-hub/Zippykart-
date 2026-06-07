@@ -12,7 +12,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
-        /* --- PREMIUM CSS CORE SETUP --- */
+        /* =========================================
+           1. PREMIUM CSS CORE SETUP
+           ========================================= */
         * {
             margin: 0;
             padding: 0;
@@ -28,7 +30,9 @@
             overflow: hidden;
         }
 
-        /* --- NEXT-GEN SIDEBAR (GLASSMORPHISM TINT) --- */
+        /* =========================================
+           2. NEXT-GEN SIDEBAR 
+           ========================================= */
         .sidebar {
             width: 280px;
             background: #0f172a;
@@ -108,7 +112,9 @@
             padding-top: 25px;
         }
 
-        /* --- MAIN VIEWPORT LAYER --- */
+        /* =========================================
+           3. MAIN VIEWPORT LAYER & TOPBAR
+           ========================================= */
         .main-content {
             flex: 1;
             display: flex;
@@ -118,7 +124,6 @@
             background: #f1f5f9;
         }
         
-        /* --- PRO TOPBAR --- */
         .topbar {
             background: #ffffff;
             padding: 15px 40px;
@@ -196,19 +201,26 @@
             box-shadow: 0 4px 10px rgba(224, 40, 68, 0.25);
         }
 
-        /* --- TAB LAYER ANIMATION ENGINE --- */
+        /* =========================================
+           4. TAB LAYER ANIMATION ENGINE
+           ========================================= */
         .tab-section {
             display: none;
             padding: 40px;
             opacity: 0;
             transform: translateY(15px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInSlide 0.4s ease-out forwards;
         }
         
         .tab-section.active-tab {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
+        }
+
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .page-header-row {
@@ -222,7 +234,6 @@
             letter-spacing: -0.5px;
         }
         
-        /* --- ULTRA BUTTON GRADIANT --- */
         .btn-action-master {
             background: linear-gradient(135deg, #e02844 0%, #fb641b 100%);
             color: #ffffff;
@@ -244,7 +255,9 @@
             box-shadow: 0 6px 20px rgba(224, 40, 68, 0.4);
         }
 
-        /* --- ANALYTICS CARDS GRID --- */
+        /* =========================================
+           5. ANALYTICS CARDS GRID
+           ========================================= */
         .analytics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -299,7 +312,9 @@
         .c-purple { background: #faf5ff; color: #a855f7; }
         .c-green { background: #f0fdf4; color: #22c55e; }
 
-        /* --- PREMIUM DATA TABLES --- */
+        /* =========================================
+           6. PREMIUM DATA TABLES
+           ========================================= */
         .table-wrapper {
             background: #ffffff;
             border-radius: 16px;
@@ -347,15 +362,11 @@
             vertical-align: middle;
         }
         
-        .master-data-table tr:last-child td {
-            border-bottom: none;
-        }
-        
         .master-data-table tr:hover {
             background: #f8fafc;
         }
         
-        /* --- STATUS BADGES --- */
+        /* STATUS BADGES */
         .badge-status {
             padding: 6px 14px;
             border-radius: 50px;
@@ -386,7 +397,9 @@
             border-color: #3b82f6;
         }
 
-        /* --- THE ADD PRODUCT ULTRA MODAL --- */
+        /* =========================================
+           7. THE ADD PRODUCT ULTRA MODAL
+           ========================================= */
         .modal-blur-overlay {
             display: none;
             position: fixed;
@@ -547,7 +560,7 @@
             display: block;
         }
 
-        /* Responsive */
+        /* Responsive Settings */
         @media (max-width: 950px) {
             .sidebar { width: 80px; }
             .sidebar-header span, .menu-item span { display: none; }
@@ -650,4 +663,385 @@
                             <th>Operational Actions</th>
                         </tr>
                     </thead>
-                    <tbody 
+                    <tbody id="liveOrdersTablePayload">
+                        <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Awaiting Firestore pipeline synchronization...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="productsTab" class="tab-section">
+            <div class="page-header-row">
+                <span>Products Inventory Master</span>
+                <button class="btn-action-master" onclick="launchProductModal()"><i class="fas fa-plus"></i> Add New Premium Product</button>
+            </div>
+            
+            <div class="table-wrapper">
+                <table class="master-data-table">
+                    <thead>
+                        <tr>
+                            <th>SKU Image</th>
+                            <th>Product Identification Title</th>
+                            <th>Selling Price Tag</th>
+                            <th>Stated MRP</th>
+                            <th>System Action Management</th>
+                        </tr>
+                    </thead>
+                    <tbody id="liveProductsTablePayload">
+                        <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Loading active item manifest...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="customersTab" class="tab-section">
+            <div class="page-header-row"><span>Customers Database Ledger</span></div>
+            <div class="table-wrapper empty-placeholder-box">
+                <i class="fas fa-users-viewfinder"></i>
+                <h2>Customer Matrix Indexing</h2>
+                <p style="margin-top:5px; font-size:14px;">This panel automatically maps out unique telephone nodes from your real-time sales transactions.</p>
+            </div>
+        </div>
+
+        <div id="analyticsTab" class="tab-section">
+            <div class="page-header-row"><span>Advanced Growth Metrics</span></div>
+            <div class="table-wrapper empty-placeholder-box">
+                <i class="fas fa-chart-pie"></i>
+                <h2>High-fidelity Visual Analytical Mapping</h2>
+                <p style="margin-top:5px; font-size:14px;">Weekly turnover trend lines and demographic analytics charts will populate here natively.</p>
+            </div>
+        </div>
+
+        <div id="settingsTab" class="tab-section">
+            <div class="page-header-row"><span>Global Architecture Settings</span></div>
+            <div class="table-wrapper empty-placeholder-box">
+                <i class="fas fa-sliders"></i>
+                <h2>System Core Node Configurations</h2>
+                <p style="margin-top:5px; font-size:14px;">Modify active payment gateway parameters, production API configurations, and tax matrices.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="productModalPopupMaster" class="modal-blur-overlay">
+        <div class="modal-container-box">
+            <div class="modal-header-row">
+                <h2>Create Live Marketplace Entry</h2>
+                <button class="modal-close-trigger" onclick="dismissProductModal()">&times;</button>
+            </div>
+
+            <div class="input-form-group">
+                <label>Commercial Product Title</label>
+                <input type="text" id="formProductTitle" class="input-element-master" placeholder="e.g. Premium Cotton Oversized Tee">
+            </div>
+
+            <div class="flex-row-inputs">
+                <div class="flex-col-item input-form-group">
+                    <label>Discounted Sale Price (₹)</label>
+                    <input type="number" id="formProductPrice" class="input-element-master" placeholder="799">
+                </div>
+                <div class="flex-col-item input-form-group">
+                    <label>Stated Baseline MRP (₹)</label>
+                    <input type="number" id="formProductMrp" class="input-element-master" placeholder="1499">
+                </div>
+            </div>
+
+            <div class="input-form-group">
+                <label>Technical Description / Wash Specifications</label>
+                <textarea id="formProductDescription" class="input-element-master" rows="3" placeholder="Enter full specifications of the fabric, weight, and origin details..."></textarea>
+            </div>
+
+            <div class="input-form-group">
+                <label>Permissible Purchase Sizes</label>
+                <div class="checkbox-size-container">
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="S" class="formSizeNode"> S</label>
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="M" class="formSizeNode" checked> M</label>
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="L" class="formSizeNode" checked> L</label>
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="XL" class="formSizeNode"> XL</label>
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="XXL" class="formSizeNode"> XXL</label>
+                </div>
+            </div>
+
+            <div class="input-form-group">
+                <label>Product Imagery Asset Selection</label>
+                <input type="file" id="formProductImageFile" accept="image/*" class="input-element-master" onchange="processLocalImagePreview(event)">
+                <div class="live-preview-image-frame">
+                    <span id="previewStatusLabel">System awaiting asset payload selection...</span>
+                    <img id="uiImageRendererPreview">
+                </div>
+            </div>
+
+            <button class="btn-action-master" id="formSubmitActionButton" style="width: 100%; justify-content: center; margin-top: 15px;" onclick="commitProductToFirestore()">
+                <i class="fas fa-cloud-arrow-up"></i> Publish to Live Storefront
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 1. INDEPENDENT UI ENGINE (Tab Switching & Modals - Will not freeze)
+        let structuralBase64AssetData = null;
+
+        window.triggerTabSwitch = function(targetTabSectionId, triggeringElement) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-section').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+            // Remove active style from menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Activate requested tab
+            document.getElementById(targetTabSectionId).classList.add('active-tab');
+            triggeringElement.classList.add('active');
+            
+            // Trigger Database load ONLY if products tab is opened
+            if(targetTabSectionId === 'productsTab' && typeof synchronizeInventoryTable === 'function') {
+                synchronizeInventoryTable();
+            }
+        }
+
+        window.launchProductModal = function() {
+            // Clear form when opening
+            document.getElementById('formProductTitle').value = "";
+            document.getElementById('formProductPrice').value = "";
+            document.getElementById('formProductMrp').value = "";
+            document.getElementById('formProductDescription').value = "";
+            document.getElementById('formProductImageFile').value = "";
+            document.getElementById('uiImageRendererPreview').style.display = "none";
+            document.getElementById('previewStatusLabel').style.display = "block";
+            document.getElementById('previewStatusLabel').innerText = "System awaiting asset payload selection...";
+            structuralBase64AssetData = null;
+            
+            // Show Modal
+            document.getElementById('productModalPopupMaster').style.display = "flex";
+        }
+
+        window.dismissProductModal = function() {
+            document.getElementById('productModalPopupMaster').style.display = "none";
+        }
+
+        // Image Compression Engine
+        window.processLocalImagePreview = async function(eventHook) {
+            const structuralFileObject = eventHook.target.files[0];
+            if(!structuralFileObject) return;
+            
+            document.getElementById('previewStatusLabel').innerText = "Processing compression algorithm...";
+            
+            structuralBase64AssetData = await new Promise((resolveCompute) => {
+                const genericReaderPipeline = new FileReader();
+                genericReaderPipeline.onload = (fileLoadedEvent) => {
+                    const virtualImageObject = new Image();
+                    virtualImageObject.onload = () => {
+                        const dynamicCanvasNode = document.createElement('canvas');
+                        let computedWidth = virtualImageObject.width;
+                        let computedHeight = virtualImageObject.height;
+                        const RENDER_BOUNDS_LIMIT = 600;
+                        
+                        if(computedWidth > computedHeight) {
+                            if(computedWidth > RENDER_BOUNDS_LIMIT) {
+                                computedHeight *= RENDER_BOUNDS_LIMIT / computedWidth;
+                                computedWidth = RENDER_BOUNDS_LIMIT;
+                            }
+                        } else {
+                            if(computedHeight > RENDER_BOUNDS_LIMIT) {
+                                computedWidth *= RENDER_BOUNDS_LIMIT / computedHeight;
+                                computedHeight = RENDER_BOUNDS_LIMIT;
+                            }
+                        }
+                        
+                        dynamicCanvasNode.width = computedWidth;
+                        dynamicCanvasNode.height = computedHeight;
+                        
+                        const renderContext2d = dynamicCanvasNode.getContext('2d');
+                        renderContext2d.drawImage(virtualImageObject, 0, 0, computedWidth, computedHeight);
+                        resolveCompute(dynamicCanvasNode.toDataURL('image/jpeg', 0.7));
+                    };
+                    virtualImageObject.src = fileLoadedEvent.target.result;
+                };
+                genericReaderPipeline.readAsDataURL(structuralFileObject);
+            });
+
+            const previewRenderer = document.getElementById('uiImageRendererPreview');
+            previewRenderer.src = structuralBase64AssetData;
+            previewRenderer.style.display = "block";
+            document.getElementById('previewStatusLabel').style.display = "none";
+        }
+
+        // 2. FIREBASE DATABASE ENGINE
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+                authDomain: "zippykart-production-157e1.firebaseapp.com",
+                projectId: "zippykart-production-157e1"
+            };
+            
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            const db = firebase.firestore();
+
+            // Orders Stream
+            db.collection("zippykart_orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+                const containerBody = document.getElementById('liveOrdersTablePayload');
+                if(!containerBody) return;
+                containerBody.innerHTML = "";
+                
+                let cumulativeRevenueValue = 0;
+                let aggregatedOrderCount = 0;
+                let pendingOrderPipelineCount = 0;
+
+                if(snapshot.empty) {
+                    containerBody.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px; color:#64748b;'>No transaction signatures caught in current pipeline block.</td></tr>";
+                    return;
+                }
+
+                snapshot.forEach(documentNode => {
+                    const orderData = documentNode.data();
+                    const nodeRecordId = documentNode.id;
+                    
+                    aggregatedOrderCount++;
+                    cumulativeRevenueValue += parseInt(orderData.totalAmount || 0);
+                    if(orderData.status !== "Delivered") {
+                        pendingOrderPipelineCount++;
+                    }
+
+                    let aestheticBadgeStyleClass = "b-pending";
+                    if(orderData.status === "Order Confirmed") aestheticBadgeStyleClass = "b-confirmed";
+                    if(orderData.status === "Shipped") aestheticBadgeStyleClass = "b-shipped";
+                    if(orderData.status === "Delivered") aestheticBadgeStyleClass = "b-delivered";
+
+                    containerBody.innerHTML += `
+                        <tr>
+                            <td>
+                                <div style="font-weight: 700; color: #0f172a; margin-bottom: 3px;">${orderData.productTitle || 'Premium Unspecified SKU'}</div>
+                                <div style="font-size: 12px; color: #64748b;">SKU Size Config: <strong style="color:#0f172a;">${orderData.size || 'M'}</strong> | Units: ${orderData.quantity || 1}</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600; color: #334155;">${orderData.customerInfo?.name || 'Anonymous Client'}</div>
+                                <div style="font-size: 12px; color: #64748b;">📞 ${orderData.customerInfo?.phone || 'No Signature'}</div>
+                            </td>
+                            <td style="font-weight: 800; color: #0f172a; font-size: 15px;">₹${orderData.totalAmount || '0'}</td>
+                            <td><span class="badge-status ${aestheticBadgeStyleClass}">${orderData.status || 'Pending Verification'}</span></td>
+                            <td>
+                                <select class="select-status-dropdown" onchange="modifyOrderTransactionState('${nodeRecordId}', this.value)">
+                                    <option value="">Alter Pipeline State...</option>
+                                    <option value="Order Confirmed">Confirm Order Node</option>
+                                    <option value="Shipped">Dispatched / Shipped</option>
+                                    <option value="Delivered">Transaction Delivered</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('uiTotalRevenue').innerText = "₹" + cumulativeRevenueValue.toLocaleString('en-IN');
+                document.getElementById('uiTotalOrders').innerText = aggregatedOrderCount;
+                document.getElementById('uiPendingOrders').innerText = pendingOrderPipelineCount;
+                document.getElementById('liveNotificationCount').innerText = pendingOrderPipelineCount;
+            });
+
+            // Modify Order State
+            window.modifyOrderTransactionState = function(recordNodeId, evaluatedTargetStateValue) {
+                if(!evaluatedTargetStateValue) return;
+                if(confirm(`Commit pipeline modification protocol to state: "${evaluatedTargetStateValue}"?`)) {
+                    db.collection("zippykart_orders").doc(recordNodeId).update({
+                        status: evaluatedTargetStateValue
+                    });
+                }
+            }
+
+            // Products Stream
+            window.synchronizeInventoryTable = function() {
+                db.collection("zippykart_products").onSnapshot(snapshot => {
+                    const targetViewPayload = document.getElementById('liveProductsTablePayload');
+                    if(!targetViewPayload) return;
+                    targetViewPayload.innerHTML = "";
+                    
+                    document.getElementById('uiActiveProductsCount').innerText = snapshot.size;
+
+                    if(snapshot.empty) {
+                        targetViewPayload.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px; color:#64748b;'>No data objects discovered.</td></tr>";
+                        return;
+                    }
+
+                    snapshot.forEach(productDocNode => {
+                        const productMap = productDocNode.data();
+                        const targetDocNodeId = productDocNode.id;
+                        
+                        targetViewPayload.innerHTML += `
+                            <tr>
+                                <td><img src="${productMap.image || ''}" style="width: 50px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0;"></td>
+                                <td style="font-weight: 700; color: #0f172a; font-size: 15px;">${productMap.title || 'Untitled Item Node'}</td>
+                                <td style="font-weight: 800; color: #16a34a; font-size: 15px;">₹${productMap.price || '0'}</td>
+                                <td style="color: #94a3b8; text-decoration: line-through;">₹${productMap.mrp || '0'}</td>
+                                <td>
+                                    <button onclick="purgeProductNodeFromInventory('${targetDocNodeId}')" style="background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; padding: 8px 14px; cursor: pointer; border-radius: 6px; font-weight: 600; transition: 0.2s;"><i class="fas fa-trash-can"></i> Purge SKU</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                });
+            }
+
+            // Delete Product
+            window.purgeProductNodeFromInventory = function(targetNodeUid) {
+                if(confirm("Execute fatal database destruction query? This item will permanently be deleted!")) {
+                    db.collection("zippykart_products").doc(targetNodeUid).delete();
+                }
+            }
+
+            // Submit Product to Firebase
+            window.commitProductToFirestore = async function() {
+                const extractedTitle = document.getElementById('formProductTitle').value;
+                const extractedPrice = document.getElementById('formProductPrice').value;
+                const extractedMrp = document.getElementById('formProductMrp').value;
+                const extractedDescription = document.getElementById('formProductDescription').value;
+                const actionSubmissionButton = document.getElementById('formSubmitActionButton');
+
+                if(!extractedTitle || !extractedPrice || !structuralBase64AssetData) {
+                    return alert("Validation Constraint Error: Product Title, Sale Price, and Image Data must be complete!");
+                }
+
+                let compiledSizesArray = [];
+                document.querySelectorAll('.formSizeNode:checked').forEach(checkboxNode => {
+                    compiledSizesArray.push(checkboxNode.value);
+                });
+
+                actionSubmissionButton.innerText = "Transmitting Metadata Node...";
+                actionSubmissionButton.disabled = true;
+
+                const synchronizedProductDocumentPayload = {
+                    title: extractedTitle,
+                    price: parseInt(extractedPrice),
+                    mrp: parseInt(extractedMrp || extractedPrice),
+                    description: extractedDescription,
+                    sizes: compiledSizesArray,
+                    image: structuralBase64AssetData,
+                    all_images: [structuralBase64AssetData],
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                try {
+                    await db.collection("zippykart_products").add(synchronizedProductDocumentPayload);
+                    alert("Marketplace sync structural block accepted successfully! Item is now live.");
+                    dismissProductModal();
+                } catch(error) {
+                    alert("Database transactional rejection error. Check Firebase Rules.");
+                } finally {
+                    actionSubmissionButton.innerText = "Publish to Live Storefront";
+                    actionSubmissionButton.disabled = false;
+                }
+            }
+
+            // Initial Load for Analytics
+            db.collection("zippykart_products").get().then(snap => {
+                document.getElementById('uiActiveProductsCount').innerText = snap.size;
+            });
+
+        } catch (error) {
+            console.error("Firebase Core Initialization Failed:", error);
+        }
+    </script>
+</body>
+</html>
