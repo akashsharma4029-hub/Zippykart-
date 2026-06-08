@@ -15,145 +15,720 @@
         /* =========================================
            1. PREMIUM CSS CORE SETUP
            ========================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f8fafc; color: #0f172a; display: flex; height: 100vh; overflow: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+        }
+        
+        body { 
+            background: #f8fafc; 
+            color: #0f172a; 
+            display: flex; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
 
         /* =========================================
            2. NEXT-GEN SIDEBAR & OVERLAY
            ========================================= */
-        .sidebar { width: 280px; background: #0f172a; color: #ffffff; display: flex; flex-direction: column; box-shadow: 4px 0 25px rgba(15, 23, 42, 0.15); z-index: 1001; position: relative; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .sidebar-header { padding: 30px 25px; font-size: 26px; font-weight: 800; color: #e02844; border-bottom: 1px solid #1e293b; display: flex; align-items: center; gap: 12px; letter-spacing: -0.5px; }
-        .sidebar-header span { color: #ffffff; }
-        .sidebar-menu { padding: 25px 0; flex: 1; display: flex; flex-direction: column; gap: 5px; overflow-y: auto;}
+        .sidebar { 
+            width: 280px; 
+            background: #0f172a; 
+            color: #ffffff; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 4px 0 25px rgba(15, 23, 42, 0.15); 
+            z-index: 1001; 
+            position: relative; 
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
         
-        .menu-item { padding: 16px 25px; display: flex; align-items: center; gap: 18px; color: #94a3b8; text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.4s ease; border-left: 4px solid transparent; cursor: pointer; }
-        .menu-item:hover { color: #ffffff; background: rgba(255, 255, 255, 0.03); padding-left: 30px; }
-        .menu-item.active { color: #ffffff; background: linear-gradient(90deg, rgba(224, 40, 68, 0.15) 0%, rgba(224, 40, 68, 0) 100%); border-left-color: #e02844; font-weight: 600; }
-        .menu-item i { font-size: 18px; width: 24px; text-align: center; transition: transform 0.3s ease; }
-        .menu-item:hover i { transform: scale(1.15); }
-        .menu-item.settings-link { margin-top: auto; border-top: 1px solid #1e293b; padding-top: 25px; }
+        .sidebar-header { 
+            padding: 30px 25px; 
+            font-size: 26px; 
+            font-weight: 800; 
+            color: #e02844; 
+            border-bottom: 1px solid #1e293b; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            letter-spacing: -0.5px; 
+        }
+        
+        .sidebar-header span { 
+            color: #ffffff; 
+        }
+        
+        .sidebar-menu { 
+            padding: 25px 0; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+            overflow-y: auto;
+        }
+        
+        .menu-item { 
+            padding: 16px 25px; 
+            display: flex; 
+            align-items: center; 
+            gap: 18px; 
+            color: #94a3b8; 
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: 500; 
+            transition: all 0.4s ease; 
+            border-left: 4px solid transparent; 
+            cursor: pointer; 
+        }
+        
+        .menu-item:hover { 
+            color: #ffffff; 
+            background: rgba(255, 255, 255, 0.03); 
+            padding-left: 30px; 
+        }
+        
+        .menu-item.active { 
+            color: #ffffff; 
+            background: linear-gradient(90deg, rgba(224, 40, 68, 0.15) 0%, rgba(224, 40, 68, 0) 100%); 
+            border-left-color: #e02844; 
+            font-weight: 600; 
+        }
+        
+        .menu-item i { 
+            font-size: 18px; 
+            width: 24px; 
+            text-align: center; 
+            transition: transform 0.3s ease; 
+        }
+        
+        .menu-item:hover i { 
+            transform: scale(1.15); 
+        }
+        
+        .menu-item.settings-link { 
+            margin-top: auto; 
+            border-top: 1px solid #1e293b; 
+            padding-top: 25px; 
+        }
 
-        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s; }
-        .mobile-overlay.active { display: block; opacity: 1; }
+        .mobile-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            z-index: 1000; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+        }
+        
+        .mobile-overlay.active { 
+            display: block; 
+            opacity: 1; 
+        }
 
         /* =========================================
            3. MAIN VIEWPORT LAYER & TOPBAR
            ========================================= */
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; background: #f1f5f9; width: 100%;}
-        .topbar { background: #ffffff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 5; }
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-y: auto; 
+            position: relative; 
+            background: #f1f5f9; 
+            width: 100%;
+        }
         
-        .topbar-left { display: flex; align-items: center; gap: 15px; }
-        .hamburger-btn { display: none; font-size: 24px; color: #0f172a; cursor: pointer; }
+        .topbar { 
+            background: #ffffff; 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 5; 
+        }
         
-        .search-container { background: #f1f5f9; padding: 10px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px; width: 300px; border: 1px solid #e2e8f0; }
-        .search-container input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; color: #334155; }
+        .topbar-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
         
-        .admin-profile-box { display: flex; align-items: center; gap: 15px; }
-        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: #64748b; transition: 0.3s; }
-        .notification-bell:hover { color: #0f172a; }
-        .bell-badge { position: absolute; top: -4px; right: -4px; background: #e02844; color: #ffffff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 50%; border: 2px solid #ffffff; }
-        .admin-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 18px; box-shadow: 0 4px 10px rgba(224, 40, 68, 0.25); }
+        .hamburger-btn { 
+            display: none; 
+            font-size: 24px; 
+            color: #0f172a; 
+            cursor: pointer; 
+        }
+        
+        .search-container { 
+            background: #f1f5f9; 
+            padding: 10px 20px; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            width: 300px; 
+            border: 1px solid #e2e8f0; 
+        }
+        
+        .search-container input { 
+            border: none; 
+            background: transparent; 
+            outline: none; 
+            width: 100%; 
+            font-size: 14px; 
+            color: #334155; 
+        }
+        
+        .admin-profile-box { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        
+        .notification-bell { 
+            position: relative; 
+            cursor: pointer; 
+            font-size: 22px; 
+            color: #64748b; 
+            transition: 0.3s; 
+        }
+        
+        .notification-bell:hover { 
+            color: #0f172a; 
+        }
+        
+        .bell-badge { 
+            position: absolute; 
+            top: -4px; 
+            right: -4px; 
+            background: #e02844; 
+            color: #ffffff; 
+            font-size: 10px; 
+            font-weight: 700; 
+            padding: 2px 6px; 
+            border-radius: 50%; 
+            border: 2px solid #ffffff; 
+        }
+        
+        .admin-avatar { 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); 
+            color: #ffffff; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-weight: 700; 
+            font-size: 18px; 
+            box-shadow: 0 4px 10px rgba(224, 40, 68, 0.25); 
+        }
 
         /* =========================================
            4. TAB LAYER ANIMATION ENGINE
            ========================================= */
-        .tab-section { display: none; padding: 30px; opacity: 0; transform: translateY(15px); animation: fadeInSlide 0.4s ease-out forwards; }
-        .tab-section.active-tab { display: block; }
-        @keyframes fadeInSlide { to { opacity: 1; transform: translateY(0); } }
+        .tab-section { 
+            display: none; 
+            padding: 30px; 
+            opacity: 0; 
+            transform: translateY(15px); 
+            animation: fadeInSlide 0.4s ease-out forwards; 
+        }
         
-        .page-header-row { font-size: 24px; font-weight: 800; margin-bottom: 30px; color: #0f172a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
+        .tab-section.active-tab { 
+            display: block; 
+        }
         
-        .btn-action-master { background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(224, 40, 68, 0.3); transition: all 0.3s ease; white-space: nowrap;}
-        .btn-action-master:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(224, 40, 68, 0.4); }
+        @keyframes fadeInSlide { 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        .page-header-row { 
+            font-size: 24px; 
+            font-weight: 800; 
+            margin-bottom: 30px; 
+            color: #0f172a; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 15px;
+        }
+        
+        .btn-action-master { 
+            background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); 
+            color: #ffffff; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            box-shadow: 0 4px 15px rgba(224, 40, 68, 0.3); 
+            transition: all 0.3s ease; 
+            white-space: nowrap;
+        }
+        
+        .btn-action-master:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(224, 40, 68, 0.4); 
+        }
 
         /* =========================================
            5. ANALYTICS CARDS GRID
            ========================================= */
-        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .metric-card { background: #ffffff; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-        .metric-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .metric-info h4 { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-        .metric-info h2 { font-size: 26px; font-weight: 800; color: #0f172a; }
-        .metric-icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 22px; }
-        .c-blue { background: #eff6ff; color: #3b82f6; } .c-orange { background: #fff7ed; color: #f97316; } .c-purple { background: #faf5ff; color: #a855f7; } .c-green { background: #f0fdf4; color: #22c55e; }
+        .analytics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 30px; 
+        }
+        
+        .metric-card { 
+            background: #ffffff; 
+            padding: 20px; 
+            border-radius: 16px; 
+            border: 1px solid #e2e8f0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
+            transition: all 0.3s ease; 
+        }
+        
+        .metric-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+        }
+        
+        .metric-info h4 { 
+            font-size: 12px; 
+            color: #64748b; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+        }
+        
+        .metric-info h2 { 
+            font-size: 26px; 
+            font-weight: 800; 
+            color: #0f172a; 
+        }
+        
+        .metric-icon-box { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 12px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 22px; 
+        }
+        
+        .c-blue { background: #eff6ff; color: #3b82f6; } 
+        .c-orange { background: #fff7ed; color: #f97316; } 
+        .c-purple { background: #faf5ff; color: #a855f7; } 
+        .c-green { background: #f0fdf4; color: #22c55e; }
 
         /* =========================================
            6. PREMIUM DATA TABLES (MOBILE SCROLLABLE)
            ========================================= */
-        .table-container { background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); overflow: hidden; width: 100%;}
-        .table-title-bar { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap:10px;}
-        .table-title-bar h3 { font-size: 16px; font-weight: 700; color: #0f172a; }
+        .table-container { 
+            background: #ffffff; 
+            border-radius: 16px; 
+            border: 1px solid #e2e8f0; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
+            overflow: hidden; 
+            width: 100%;
+        }
         
-        .table-responsive-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .table-title-bar { 
+            padding: 20px; 
+            border-bottom: 1px solid #e2e8f0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 10px;
+        }
         
-        .master-data-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .master-data-table th { background: #f8fafc; padding: 16px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; white-space: nowrap;}
-        .master-data-table td { padding: 16px 20px; font-size: 14px; border-bottom: 1px solid #e2e8f0; color: #334155; vertical-align: middle; }
-        .master-data-table tr:hover { background: #f8fafc; }
+        .table-title-bar h3 { 
+            font-size: 16px; 
+            font-weight: 700; 
+            color: #0f172a; 
+        }
         
-        .badge-status { padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; display: inline-block; text-align: center; white-space: nowrap;}
-        .b-pending { background: #fff7ed; color: #f97316; border: 1px solid #ffedd5; } .b-confirmed { background: #eff6ff; color: #3b82f6; border: 1px solid #dbeafe; } .b-shipped { background: #f5f3ff; color: #8b5cf6; border: 1px solid #ede9fe; } .b-delivered { background: #f0fdf4; color: #22c55e; border: 1px solid #dcfce7; }
-        .select-status-dropdown { padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 500; outline: none; cursor: pointer; background: #ffffff; }
+        .table-responsive-wrapper { 
+            width: 100%; 
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+        
+        .master-data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 700px; 
+        }
+        
+        .master-data-table th { 
+            background: #f8fafc; 
+            padding: 16px 20px; 
+            text-align: left; 
+            font-size: 12px; 
+            font-weight: 600; 
+            color: #64748b; 
+            text-transform: uppercase; 
+            border-bottom: 1px solid #e2e8f0; 
+            white-space: nowrap;
+        }
+        
+        .master-data-table td { 
+            padding: 16px 20px; 
+            font-size: 14px; 
+            border-bottom: 1px solid #e2e8f0; 
+            color: #334155; 
+            vertical-align: middle; 
+        }
+        
+        .master-data-table tr:hover { 
+            background: #f8fafc; 
+        }
+        
+        .badge-status { 
+            padding: 6px 12px; 
+            border-radius: 50px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            display: inline-block; 
+            text-align: center; 
+            white-space: nowrap;
+        }
+        
+        .b-pending { background: #fff7ed; color: #f97316; border: 1px solid #ffedd5; } 
+        .b-confirmed { background: #eff6ff; color: #3b82f6; border: 1px solid #dbeafe; } 
+        .b-shipped { background: #f5f3ff; color: #8b5cf6; border: 1px solid #ede9fe; } 
+        .b-delivered { background: #f0fdf4; color: #22c55e; border: 1px solid #dcfce7; }
+        
+        .select-status-dropdown { 
+            padding: 8px; 
+            border-radius: 8px; 
+            border: 1px solid #cbd5e1; 
+            font-size: 13px; 
+            font-weight: 500; 
+            outline: none; 
+            cursor: pointer; 
+            background: #ffffff; 
+        }
 
-        /* ACTION BUTTONS (EDIT & DELETE) */
-        .btn-edit-sku { background: #eff6ff; color: #3b82f6; border: 1px solid #bfdbfe; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 13px; }
-        .btn-edit-sku:hover { background: #dbeafe; }
-        .btn-purge-sku { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 13px; }
-        .btn-purge-sku:hover { background: #fee2e2; }
-        .action-flex { display: flex; gap: 8px; }
+        .btn-edit-sku { 
+            background: #eff6ff; 
+            color: #3b82f6; 
+            border: 1px solid #bfdbfe; 
+            padding: 8px 12px; 
+            border-radius: 6px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            font-size: 13px; 
+        }
+        
+        .btn-edit-sku:hover { 
+            background: #dbeafe; 
+        }
+        
+        .btn-purge-sku { 
+            background: #fef2f2; 
+            color: #ef4444; 
+            border: 1px solid #fecaca; 
+            padding: 8px 12px; 
+            border-radius: 6px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            font-size: 13px; 
+        }
+        
+        .btn-purge-sku:hover { 
+            background: #fee2e2; 
+        }
+        
+        .action-flex { 
+            display: flex; 
+            gap: 8px; 
+        }
 
         /* =========================================
            7. THE ADVANCED MULTI-VARIANT MODAL
            ========================================= */
-        .modal-blur-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 15px;}
-        .modal-container-box { background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalSlideUp 0.4s ease; }
-        @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-blur-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(8px); 
+            z-index: 2000; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 15px;
+        }
         
-        .modal-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
-        .modal-header-row h2 { font-size: 20px; font-weight: 700; color: #0f172a; }
-        .modal-close-trigger { background: none; border: none; font-size: 26px; cursor: pointer; color: #94a3b8; }
+        .modal-container-box { 
+            background: #ffffff; 
+            width: 100%; 
+            max-width: 750px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+            animation: modalSlideUp 0.4s ease; 
+        }
         
-        .input-form-group { margin-bottom: 15px; }
-        .input-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #334155; }
-        .input-element-master { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; color: #0f172a; background: #fff; }
-        .input-element-master:focus { border-color: #e02844; }
+        @keyframes modalSlideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
-        .flex-row-inputs { display: flex; gap: 15px; flex-wrap: wrap;}
-        .flex-col-item { flex: 1; min-width: 200px;}
+        .modal-header-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #e2e8f0; 
+            padding-bottom: 15px; 
+        }
         
-        .checkbox-size-container { display: flex; gap: 12px; margin-top: 5px; flex-wrap: wrap;}
-        .checkbox-wrapper-label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; color: #475569; }
+        .modal-header-row h2 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: #0f172a; 
+        }
+        
+        .modal-close-trigger { 
+            background: none; 
+            border: none; 
+            font-size: 26px; 
+            cursor: pointer; 
+            color: #94a3b8; 
+        }
+        
+        .input-form-group { 
+            margin-bottom: 15px; 
+        }
+        
+        .input-form-group label { 
+            display: block; 
+            font-size: 13px; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+            color: #334155; 
+        }
+        
+        .input-element-master { 
+            width: 100%; 
+            padding: 12px 14px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            outline: none; 
+            transition: 0.2s; 
+            color: #0f172a; 
+            background: #fff; 
+        }
+        
+        .input-element-master:focus { 
+            border-color: #e02844; 
+        }
+        
+        .flex-row-inputs { 
+            display: flex; 
+            gap: 15px; 
+            flex-wrap: wrap;
+        }
+        
+        .flex-col-item { 
+            flex: 1; 
+            min-width: 200px;
+        }
+        
+        .checkbox-size-container { 
+            display: flex; 
+            gap: 12px; 
+            margin-top: 5px; 
+            flex-wrap: wrap;
+        }
+        
+        .checkbox-wrapper-label { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            font-size: 14px; 
+            cursor: pointer; 
+            color: #475569; 
+        }
 
-        .gallery-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-        .gallery-item { width: 60px; height: 80px; border-radius: 6px; border: 1px solid #cbd5e1; position: relative; background: #f8fafc; overflow: hidden; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-remove-btn { position: absolute; top: 2px; right: 2px; background: rgba(239, 68, 68, 0.9); color: white; border: none; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; cursor: pointer; }
-
-        .variant-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-        .variant-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;}
-        .btn-add-variant { background: #eff6ff; color: #3b82f6; border: 1px dashed #3b82f6; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .gallery-grid { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+            margin-top: 10px; 
+        }
         
-        .dynamic-row { display: flex; gap: 10px; align-items: center; background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 10px; position: relative; flex-wrap: wrap;}
-        .variant-preview-img { width: 45px; height: 45px; border-radius: 6px; object-fit: cover; border: 1px solid #cbd5e1; background: #f1f5f9; display: flex; justify-content: center; align-items: center; font-size: 10px; text-align: center; }
-        .btn-remove-row { position: absolute; right: -8px; top: -8px; background: #ef4444; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-size: 10px; z-index: 5;}
+        .gallery-item { 
+            width: 60px; 
+            height: 80px; 
+            border-radius: 6px; 
+            border: 1px solid #cbd5e1; 
+            position: relative; 
+            background: #f8fafc; 
+            overflow: hidden; 
+        }
+        
+        .gallery-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        
+        .gallery-remove-btn { 
+            position: absolute; 
+            top: 2px; 
+            right: 2px; 
+            background: rgba(239, 68, 68, 0.9); 
+            color: white; 
+            border: none; 
+            width: 18px; 
+            height: 18px; 
+            border-radius: 50%; 
+            font-size: 10px; 
+            cursor: pointer; 
+        }
+
+        .variant-box { 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 12px; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+        }
+        
+        .variant-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px; 
+            flex-wrap: wrap; 
+            gap: 10px;
+        }
+        
+        .btn-add-variant { 
+            background: #eff6ff; 
+            color: #3b82f6; 
+            border: 1px dashed #3b82f6; 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+        }
+        
+        .dynamic-row { 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; 
+            background: #ffffff; 
+            padding: 10px; 
+            border-radius: 8px; 
+            border: 1px solid #e2e8f0; 
+            margin-bottom: 10px; 
+            position: relative; 
+            flex-wrap: wrap;
+        }
+        
+        .variant-preview-img { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 6px; 
+            object-fit: cover; 
+            border: 1px solid #cbd5e1; 
+            background: #f1f5f9; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 10px; 
+            text-align: center; 
+        }
+        
+        .btn-remove-row { 
+            position: absolute; 
+            right: -8px; 
+            top: -8px; 
+            background: #ef4444; 
+            color: white; 
+            border: none; 
+            width: 22px; 
+            height: 22px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 10px; 
+            z-index: 5;
+        }
 
         /* =========================================
            8. MOBILE RESPONSIVE QUERIES
            ========================================= */
         @media (max-width: 950px) {
-            .sidebar { position: fixed; left: -280px; height: 100%; top: 0; }
-            .sidebar.active-mobile { transform: translateX(280px); }
-            
-            .hamburger-btn { display: block; }
-            .search-container { display: none; } 
-            
-            .tab-section { padding: 20px 15px; }
-            .page-header-row { font-size: 20px; }
-            .admin-profile-box { gap: 10px; }
-            
-            .modal-container-box { padding: 20px; }
-            .dynamic-row { flex-direction: column; align-items: flex-start;} 
-            .dynamic-row .flex-col-item { width: 100%; }
+            .sidebar { 
+                position: fixed; 
+                left: -280px; 
+                height: 100%; 
+                top: 0; 
+            }
+            .sidebar.active-mobile { 
+                transform: translateX(280px); 
+            }
+            .hamburger-btn { 
+                display: block; 
+            }
+            .search-container { 
+                display: none; 
+            } 
+            .tab-section { 
+                padding: 20px 15px; 
+            }
+            .page-header-row { 
+                font-size: 20px; 
+            }
+            .admin-profile-box { 
+                gap: 10px; 
+            }
+            .modal-container-box { 
+                padding: 20px; 
+            }
+            .dynamic-row { 
+                flex-direction: column; 
+                align-items: flex-start;
+            } 
+            .dynamic-row .flex-col-item { 
+                width: 100%; 
+            }
         }
     </style>
 </head>
@@ -178,7 +753,6 @@
             <div class="menu-item" onclick="triggerTabSwitch('analyticsTab', this)">
                 <i class="fas fa-chart-line"></i> <span>Analytics Engine</span>
             </div>
-            
             <div class="menu-item settings-link" onclick="triggerTabSwitch('settingsTab', this)">
                 <i class="fas fa-cog"></i> <span>Store Settings</span>
             </div>
@@ -186,7 +760,6 @@
     </aside>
 
     <main class="main-content">
-        
         <header class="topbar">
             <div class="topbar-left">
                 <i class="fas fa-bars hamburger-btn" onclick="window.toggleMobileSidebar()"></i>
@@ -209,14 +782,36 @@
             <div class="page-header-row">
                 <span>Command Control Overview</span>
             </div>
-            
             <div class="analytics-grid">
-                <div class="metric-card"><div class="metric-info"><h4>Total Revenue</h4><h2 id="uiTotalRevenue">₹0</h2></div><div class="metric-icon-box c-blue"><i class="fas fa-wallet"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h4>Total Orders</h4><h2 id="uiTotalOrders">0</h2></div><div class="metric-icon-box c-orange"><i class="fas fa-shopping-cart"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h4>Unfulfilled Pipeline</h4><h2 id="uiPendingOrders">0</h2></div><div class="metric-icon-box c-purple"><i class="fas fa-truck-fast"></i></div></div>
-                <div class="metric-card"><div class="metric-info"><h4>Active SKU Stock</h4><h2 id="uiActiveProductsCount">0</h2></div><div class="metric-icon-box c-green"><i class="fas fa-box"></i></div></div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Total Revenue</h4>
+                        <h2 id="uiTotalRevenue">₹0</h2>
+                    </div>
+                    <div class="metric-icon-box c-blue"><i class="fas fa-wallet"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Total Orders</h4>
+                        <h2 id="uiTotalOrders">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-orange"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Unfulfilled Pipeline</h4>
+                        <h2 id="uiPendingOrders">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-purple"><i class="fas fa-truck-fast"></i></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-info">
+                        <h4>Active SKU Stock</h4>
+                        <h2 id="uiActiveProductsCount">0</h2>
+                    </div>
+                    <div class="metric-icon-box c-green"><i class="fas fa-box"></i></div>
+                </div>
             </div>
-
             <div class="table-container">
                 <div class="table-title-bar">
                     <h3>Real-time Order Stream</h3>
@@ -224,7 +819,15 @@
                 </div>
                 <div class="table-responsive-wrapper">
                     <table class="master-data-table">
-                        <thead><tr><th>Product Information</th><th>Customer Coordinates</th><th>Gross Amount</th><th>State status</th><th>Operational Actions</th></tr></thead>
+                        <thead>
+                            <tr>
+                                <th>Product Information</th>
+                                <th>Customer Coordinates</th>
+                                <th>Gross Amount</th>
+                                <th>State status</th>
+                                <th>Operational Actions</th>
+                            </tr>
+                        </thead>
                         <tbody id="liveOrdersTablePayload">
                             <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Awaiting Firestore pipeline synchronization...</td></tr>
                         </tbody>
@@ -238,11 +841,18 @@
                 <span>Products Inventory Master</span>
                 <button class="btn-action-master" onclick="window.launchProductModal()"><i class="fas fa-plus"></i> Add New Premium Product</button>
             </div>
-            
             <div class="table-container">
                 <div class="table-responsive-wrapper">
                     <table class="master-data-table">
-                        <thead><tr><th>SKU Image</th><th>Product Identification Title</th><th>Selling Price Tag</th><th>Stated MRP</th><th>System Action Management</th></tr></thead>
+                        <thead>
+                            <tr>
+                                <th>SKU Image</th>
+                                <th>Product Identification Title</th>
+                                <th>Selling Price Tag</th>
+                                <th>Stated MRP</th>
+                                <th>System Action Management</th>
+                            </tr>
+                        </thead>
                         <tbody id="liveProductsTablePayload">
                             <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Loading active item manifest...</td></tr>
                         </tbody>
@@ -251,16 +861,35 @@
             </div>
         </div>
 
-        <div id="customersTab" class="tab-section"><div class="page-header-row"><span>Customers Database Ledger</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-users-viewfinder" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">Customer Matrix Indexing</h2></div></div>
-        <div id="analyticsTab" class="tab-section"><div class="page-header-row"><span>Advanced Growth Metrics</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-chart-pie" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">Visual Analytical Mapping</h2></div></div>
-        <div id="settingsTab" class="tab-section"><div class="page-header-row"><span>Global Architecture Settings</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-sliders" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">System Core Configurations</h2></div></div>
-
+        <div id="customersTab" class="tab-section">
+            <div class="page-header-row"><span>Customers Database Ledger</span></div>
+            <div class="table-container" style="padding: 40px; text-align:center;">
+                <i class="fas fa-users-viewfinder" style="font-size:30px; color:#cbd5e1;"></i>
+                <h2 style="margin-top:10px;">Customer Matrix Indexing</h2>
+            </div>
+        </div>
+        
+        <div id="analyticsTab" class="tab-section">
+            <div class="page-header-row"><span>Advanced Growth Metrics</span></div>
+            <div class="table-container" style="padding: 40px; text-align:center;">
+                <i class="fas fa-chart-pie" style="font-size:30px; color:#cbd5e1;"></i>
+                <h2 style="margin-top:10px;">Visual Analytical Mapping</h2>
+            </div>
+        </div>
+        
+        <div id="settingsTab" class="tab-section">
+            <div class="page-header-row"><span>Global Architecture Settings</span></div>
+            <div class="table-container" style="padding: 40px; text-align:center;">
+                <i class="fas fa-sliders" style="font-size:30px; color:#cbd5e1;"></i>
+                <h2 style="margin-top:10px;">System Core Configurations</h2>
+            </div>
+        </div>
     </main>
 
     <div id="productModalPopupMaster" class="modal-blur-overlay">
         <div class="modal-container-box">
             <div class="modal-header-row">
-                <h2>Create Live Marketplace Entry</h2>
+                <h2 id="modalMainTitle">Create Live Marketplace Entry</h2>
                 <button class="modal-close-trigger" onclick="window.dismissProductModal()">&times;</button>
             </div>
 
@@ -335,15 +964,19 @@
     </div>
 
     <script>
+        // GLOBALS
         window.variantImagesCache = {}; 
         window.variantRowCounter = 0;
         window.mainGalleryImages = []; 
+        window.editingProductId = null; // EDIT ENGINE TRACKER
 
+        // 0. MOBILE SIDEBAR TOGGLE
         window.toggleMobileSidebar = function() {
             document.getElementById('mainSidebar').classList.toggle('active-mobile');
             document.getElementById('mobileOverlayMaster').classList.toggle('active');
         }
 
+        // 1. UI NAVIGATION
         window.triggerTabSwitch = function(targetTabSectionId, triggeringElement) {
             document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active-tab'));
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
@@ -353,14 +986,18 @@
             if(window.innerWidth <= 950) {
                 window.toggleMobileSidebar();
             }
-            
             if(targetTabSectionId === 'productsTab' && typeof window.synchronizeInventoryTable === 'function') {
                 window.synchronizeInventoryTable();
             }
         }
 
+        // 2. MODAL LOGIC (ADD MODE)
         window.launchProductModal = function() {
             try {
+                window.editingProductId = null; // Ensure we are adding, not editing
+                document.getElementById('modalMainTitle').innerText = "Create Live Marketplace Entry";
+                document.getElementById('formSubmitActionButton').innerHTML = `<i class="fas fa-cloud-arrow-up"></i> Publish to Live Storefront`;
+
                 document.getElementById('formProductTitle').value = "";
                 document.getElementById('formProductPrice').value = "";
                 document.getElementById('formProductMrp').value = "";
@@ -377,18 +1014,16 @@
                 window.addVariantRow();
 
                 document.getElementById('productModalPopupMaster').style.display = "flex";
-            } catch(e) { console.error("Modal Launch Error:", e); }
+            } catch(e) { 
+                console.error("Modal Launch Error:", e); 
+            }
         }
 
         window.dismissProductModal = function() {
             document.getElementById('productModalPopupMaster').style.display = "none";
         }
 
-        // EDIT PRODUCT FUNCTION (DUMMY FOR NOW, PREPARED FOR FUTURE)
-        window.editProductNode = function(productId) {
-            alert("Edit Product interface is opening soon! Backend linkage pending for ID: " + productId);
-        }
-
+        // 3. IMAGE COMPRESSOR & GALLERY
         window.compressImageCore = async function(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -414,6 +1049,7 @@
             if(!files || files.length === 0) return;
             
             const btn = document.getElementById('formSubmitActionButton');
+            const originalText = btn.innerHTML;
             btn.innerText = "Compressing Gallery...";
             btn.disabled = true;
 
@@ -423,7 +1059,7 @@
             }
             
             window.renderGalleryGrid();
-            btn.innerText = "Publish to Live Storefront";
+            btn.innerHTML = originalText;
             btn.disabled = false;
         }
 
@@ -444,22 +1080,31 @@
             window.renderGalleryGrid();
         }
 
-        window.addVariantRow = function() {
+        // 4. COLOR VARIANTS LOGIC
+        window.addVariantRow = function(existingColor = "", existingImage = "") {
             const rowId = window.variantRowCounter++;
             const container = document.getElementById('dynamicVariantsContainer');
             
+            if(existingImage) {
+                window.variantImagesCache[rowId] = existingImage;
+            }
+
+            const imgDisplay = existingImage ? "block" : "none";
+            const txtDisplay = existingImage ? "none" : "inline";
+
             const html = `
             <div class="dynamic-row" id="var_row_${rowId}">
                 <button type="button" class="btn-remove-row" onclick="window.removeVariantRow(${rowId})"><i class="fas fa-times"></i></button>
                 <div class="flex-col-item">
-                    <input type="text" id="var_color_${rowId}" class="input-element-master" placeholder="Color Name" style="padding: 10px;">
+                    <input type="text" id="var_color_${rowId}" class="input-element-master" value="${existingColor}" placeholder="Color Name" style="padding: 10px;">
                 </div>
                 <div class="flex-col-item">
                     <input type="file" accept="image/*" class="input-element-master" onchange="window.processVariantImage(event, ${rowId})" style="padding: 7px; font-size:12px;">
+                    ${existingImage ? '<small style="color:#16a34a; font-size:10px;">Leave empty to keep existing image</small>' : ''}
                 </div>
                 <div class="variant-preview-img">
-                    <img id="var_img_preview_${rowId}" src="" style="width:100%; height:100%; object-fit:cover; border-radius:4px; display:none;">
-                    <span id="var_img_txt_${rowId}">IMG</span>
+                    <img id="var_img_preview_${rowId}" src="${existingImage}" style="width:100%; height:100%; object-fit:cover; border-radius:4px; display:${imgDisplay};">
+                    <span id="var_img_txt_${rowId}" style="display:${txtDisplay};">IMG</span>
                 </div>
             </div>`;
             container.insertAdjacentHTML('beforeend', html);
@@ -485,16 +1130,20 @@
             document.getElementById(`var_img_txt_${rowId}`).style.display = "none";
         }
 
-        // FIREBASE SYSTEM
+        // 5. FIREBASE SYSTEM & EDIT ENGINE
+        let db;
         try {
             const firebaseConfig = {
                 apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
                 authDomain: "zippykart-production-157e1.firebaseapp.com",
                 projectId: "zippykart-production-157e1"
             };
-            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            db = firebase.firestore();
 
+            // Orders Listener
             db.collection("zippykart_orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                 const body = document.getElementById('liveOrdersTablePayload');
                 if(!body) return;
@@ -516,15 +1165,18 @@
                     if(d.status === "Shipped") bCls = "b-shipped";
                     if(d.status === "Delivered") bCls = "b-delivered";
 
-                    body.innerHTML += `<tr>
+                    body.innerHTML += `
+                    <tr>
                         <td><b>${d.productTitle}</b><br><small>Size: ${d.size} | Qty: ${d.quantity}</small></td>
                         <td><b>${d.customerInfo?.name}</b><br><small>📞 ${d.customerInfo?.phone}</small></td>
                         <td style="font-weight:bold; font-size:15px;">₹${d.totalAmount}</td>
                         <td><span class="badge-status ${bCls}">${d.status}</span></td>
                         <td>
                             <select class="select-status-dropdown" onchange="if(confirm('Change state?')) db.collection('zippykart_orders').doc('${doc.id}').update({status:this.value})">
-                                <option value="">Alter State...</option><option value="Order Confirmed">Confirmed</option>
-                                <option value="Shipped">Shipped</option><option value="Delivered">Delivered</option>
+                                <option value="">Alter State...</option>
+                                <option value="Order Confirmed">Confirmed</option>
+                                <option value="Shipped">Shipped</option>
+                                <option value="Delivered">Delivered</option>
                             </select>
                         </td>
                     </tr>`;
@@ -535,6 +1187,7 @@
                 document.getElementById('liveNotificationCount').innerText = pend;
             });
 
+            // Products Listener
             window.synchronizeInventoryTable = function() {
                 db.collection("zippykart_products").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                     const body = document.getElementById('liveProductsTablePayload');
@@ -551,8 +1204,8 @@
                         let p = doc.data();
                         let displayImg = p.image || (p.all_images && p.all_images.length > 0 ? p.all_images[0] : '');
                         
-                        // EDIT & DELETE BUTTONS RESTORED HERE
-                        body.innerHTML += `<tr>
+                        body.innerHTML += `
+                        <tr>
                             <td><img src="${displayImg}" style="width:50px;height:65px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;"></td>
                             <td style="font-weight:bold; font-size:14px;">${p.title}<br><small style="color:#64748b;">${p.category || 'Apparel'} | Colors: ${p.variants ? p.variants.length : 0} | Gallery: ${p.all_images ? p.all_images.length : 0}</small></td>
                             <td style="color:#16a34a; font-weight:bold; font-size:15px;">₹${p.price}</td>
@@ -568,6 +1221,60 @@
                 });
             }
 
+            // THE NEW EDIT ENGINE LOGIC
+            window.editProductNode = async function(productId) {
+                try {
+                    const docSnap = await db.collection('zippykart_products').doc(productId).get();
+                    if(!docSnap.exists) return alert("Product data not found!");
+                    
+                    const p = docSnap.data();
+                    window.editingProductId = productId; // Set tracker to Edit Mode
+                    
+                    document.getElementById('modalMainTitle').innerText = "Update Existing Product";
+                    document.getElementById('formSubmitActionButton').innerHTML = `<i class="fas fa-save"></i> Save Changes`;
+
+                    // Pre-fill fields
+                    document.getElementById('formProductTitle').value = p.title || "";
+                    document.getElementById('formProductCategory').value = p.category || "Streetwear T-Shirts";
+                    document.getElementById('formProductStock').value = p.stockCount || "50";
+                    document.getElementById('formProductPrice').value = p.price || "";
+                    document.getElementById('formProductMrp').value = p.mrp || "";
+                    document.getElementById('formProductDescription').value = p.description || "";
+
+                    // Pre-fill sizes
+                    document.querySelectorAll('.formSizeNode').forEach(cb => {
+                        cb.checked = p.sizes && p.sizes.includes(cb.value);
+                    });
+
+                    // Pre-fill Gallery
+                    window.mainGalleryImages = p.all_images || [];
+                    if(p.image && window.mainGalleryImages.length === 0) {
+                        window.mainGalleryImages.push(p.image); // Fallback for old products
+                    }
+                    window.renderGalleryGrid();
+                    document.getElementById('formGalleryUploader').value = ""; // Clear input
+
+                    // Pre-fill Variants
+                    document.getElementById('dynamicVariantsContainer').innerHTML = "";
+                    window.variantImagesCache = {};
+                    window.variantRowCounter = 0;
+                    
+                    if(p.variants && p.variants.length > 0) {
+                        p.variants.forEach(v => {
+                            window.addVariantRow(v.color, v.image);
+                        });
+                    } else {
+                        window.addVariantRow();
+                    }
+
+                    document.getElementById('productModalPopupMaster').style.display = "flex";
+                } catch(error) {
+                    console.error("Edit load failed:", error);
+                    alert("Error loading product details.");
+                }
+            }
+
+            // SAVE / UPDATE LOGIC
             window.commitProductToFirestore = async function() {
                 const title = document.getElementById('formProductTitle').value;
                 const price = document.getElementById('formProductPrice').value;
@@ -597,36 +1304,49 @@
                     }
                 }
 
-                btn.innerText = "Transmitting Metadata...";
+                const originalBtnHtml = btn.innerHTML;
+                btn.innerText = "Transmitting Data...";
                 btn.disabled = true;
 
+                const payload = {
+                    title: title,
+                    price: parseInt(price),
+                    mrp: parseInt(mrp || price),
+                    category: category,
+                    stockCount: parseInt(stock || 0),
+                    description: desc,
+                    sizes: compiledSizes,
+                    variants: compiledVariants, 
+                    all_images: window.mainGalleryImages, 
+                    image: window.mainGalleryImages[0], 
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
                 try {
-                    await db.collection("zippykart_products").add({
-                        title: title,
-                        price: parseInt(price),
-                        mrp: parseInt(mrp || price),
-                        category: category,
-                        stockCount: parseInt(stock || 0),
-                        description: desc,
-                        sizes: compiledSizes,
-                        variants: compiledVariants, 
-                        all_images: window.mainGalleryImages, 
-                        image: window.mainGalleryImages[0], 
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                    alert("Marketplace Item Published Successfully!");
+                    if(window.editingProductId) {
+                        // UPDATE EXISTING PRODUCT
+                        await db.collection("zippykart_products").doc(window.editingProductId).update(payload);
+                        alert("✅ Product Details Updated Successfully!");
+                    } else {
+                        // ADD NEW PRODUCT
+                        await db.collection("zippykart_products").add(payload);
+                        alert("✅ New Product Published Successfully!");
+                    }
                     window.dismissProductModal();
                 } catch(error) {
                     alert("Database write error.");
+                    console.error(error);
                 } finally {
-                    btn.innerText = "Publish to Live Storefront";
+                    btn.innerHTML = originalBtnHtml;
                     btn.disabled = false;
                 }
             }
 
             db.collection("zippykart_products").get().then(s => document.getElementById('uiActiveProductsCount').innerText = s.size);
 
-        } catch (e) { console.error("Firebase Core Error: ", e); }
+        } catch (e) { 
+            console.error("Firebase Core Error: ", e); 
+        }
     </script>
 </body>
 </html>
