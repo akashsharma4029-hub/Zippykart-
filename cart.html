@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Your Shopping Cart - ZippyKart</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <style>
+        /* =========================================
+           1. PREMIUM CSS CORE SETUP
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f1f5f9; color: #0f172a; }
+
+        /* NAVBAR */
+        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; display: flex; align-items: center; gap: 8px;}
+        .logo span { color: #0f172a; }
+        .continue-shopping { color: #3b82f6; font-size: 14px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+
+        /* LAYOUT CONTAINER */
+        .cart-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; gap: 30px; align-items: flex-start; }
+
+        /* LEFT: CART ITEMS */
+        .cart-items-section { flex: 1.5; }
+        .cart-header { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .empty-cart-msg { background: #fff; padding: 50px 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: none; }
+        .empty-cart-msg img { width: 150px; opacity: 0.5; margin-bottom: 20px; }
+        .empty-cart-msg h2 { font-size: 20px; color: #0f172a; margin-bottom: 10px; }
+        .empty-cart-msg button { background: #e02844; color: white; border: none; padding: 12px 25px; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 15px; }
+
+        .cart-item-card { background: #fff; border-radius: 12px; padding: 20px; display: flex; gap: 20px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); position: relative; border: 1px solid #e2e8f0; }
+        .item-img { width: 100px; height: 120px; border-radius: 8px; object-fit: cover; background: #f8fafc; border: 1px solid #e2e8f0; }
+        
+        .item-details { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .item-title { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 5px; line-height: 1.4; }
+        .item-meta { font-size: 13px; color: #64748b; margin-bottom: 10px; }
+        .item-meta span { font-weight: 600; color: #0f172a; }
+        
+        .item-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 15px; }
+        .item-price { font-size: 18px; font-weight: 800; color: #0f172a; }
+        .item-mrp { font-size: 13px; color: #94a3b8; text-decoration: line-through; }
+        
+        .item-actions { display: flex; align-items: center; justify-content: space-between; }
+        .qty-controls { display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; }
+        .qty-btn { width: 35px; height: 35px; background: #f8fafc; border: none; font-size: 16px; cursor: pointer; color: #0f172a; font-weight: 600; }
+        .qty-btn:hover { background: #e2e8f0; }
+        .qty-input { width: 40px; height: 35px; text-align: center; border: none; border-left: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; font-weight: 600; outline: none; background: white; }
+        
+        .remove-btn { color: #ef4444; background: none; border: none; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .remove-btn:hover { text-decoration: underline; }
+
+        /* RIGHT: BILLING & CHECKOUT */
+        .checkout-section { flex: 1; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; position: sticky; top: 90px; }
+        .bill-header { font-size: 16px; font-weight: 700; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px; }
+        
+        .bill-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; color: #334155; }
+        .bill-row.discount { color: #16a34a; }
+        .bill-row.total { font-size: 18px; font-weight: 800; color: #0f172a; border-top: 1px dashed #cbd5e1; padding-top: 15px; margin-top: 5px; }
+        
+        /* CUSTOMER DETAILS FORM */
+        .checkout-form { margin-top: 25px; }
+        .form-title { font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #0f172a; }
+        .input-field { width: 100%; padding: 12px 15px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; background: #f8fafc;}
+        .input-field:focus { border-color: #e02844; background: #fff; box-shadow: 0 0 0 3px rgba(224, 40, 68, 0.1); }
+        
+        .payment-box { border: 1px solid #16a34a; background: #f0fdf4; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #15803d; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+
+        .place-order-btn { width: 100%; background: #fb641b; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .place-order-btn:hover { background: #f97316; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(251, 100, 27, 0.3); }
+
+        /* Trust Badges */
+        .trust-strip { display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+        .trust-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #64748b; font-weight: 600; }
+        .trust-item i { color: #94a3b8; font-size: 16px; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .cart-container { flex-direction: column; }
+            .checkout-section { position: static; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo"><i class="fas fa-bolt"></i> Zippy<span>Kart</span></a>
+        <a href="index.html" class="continue-shopping"><i class="fas fa-arrow-left"></i> Keep Shopping</a>
+    </header>
+
+    <div class="cart-container">
+        
+        <div class="cart-items-section">
+            <div class="cart-header">
+                My Shopping Bag <span id="cartCountBadge" style="font-size:14px; color:#64748b; font-weight:500;">(0 items)</span>
+            </div>
+
+            <div class="empty-cart-msg" id="emptyCartMessage">
+                <i class="fas fa-shopping-bag" style="font-size: 80px; color:#cbd5e1; margin-bottom: 20px;"></i>
+                <h2>Your bag is empty!</h2>
+                <p style="color:#64748b; font-size:14px;">Looks like you haven't added anything to your cart yet.</p>
+                <button onclick="window.location.href='index.html'">Explore Products</button>
+            </div>
+
+            <div id="cartItemsList">
+                </div>
+        </div>
+
+        <div class="checkout-section" id="checkoutSectionPanel">
+            <div class="bill-header">Price Details</div>
+            
+            <div class="bill-row">
+                <span>Price (<span id="billItemCount">0</span> items)</span>
+                <span id="billTotalMrp">₹0</span>
+            </div>
+            <div class="bill-row discount">
+                <span>Discount</span>
+                <span id="billDiscount">- ₹0</span>
+            </div>
+            <div class="bill-row">
+                <span>Delivery Charges</span>
+                <span style="color:#16a34a;">Free</span>
+            </div>
+            <div class="bill-row total">
+                <span>Total Amount</span>
+                <span id="billFinalAmount">₹0</span>
+            </div>
+            
+            <div style="color:#16a34a; font-size:13px; font-weight:600; margin-bottom:20px;">
+                You will save <span id="billSavings">₹0</span> on this order
+            </div>
+
+            <div class="checkout-form">
+                <div class="form-title">Delivery Details</div>
+                <input type="text" id="custName" class="input-field" placeholder="Full Name (Required)">
+                <input type="tel" id="custPhone" class="input-field" placeholder="Mobile Number (Required)">
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="custCity" class="input-field" placeholder="City / District">
+                    <input type="text" id="custPincode" class="input-field" placeholder="Pincode">
+                </div>
+                <textarea id="custAddress" class="input-field" rows="2" placeholder="Full Delivery Address"></textarea>
+            </div>
+
+            <div class="payment-box">
+                <input type="radio" checked style="accent-color:#16a34a;"> Cash on Delivery (COD) Available
+            </div>
+
+            <button class="place-order-btn" id="btnPlaceOrder" onclick="placeMegaOrder()">
+                PLACE ORDER <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <div class="trust-strip">
+                <div class="trust-item"><i class="fas fa-shield-alt"></i> Safe & Secure</div>
+                <div class="trust-item"><i class="fas fa-undo"></i> Easy Returns</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. FIREBASE SETUP
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+            authDomain: "zippykart-production-157e1.firebaseapp.com",
+            projectId: "zippykart-production-157e1"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 2. LOAD CART DATA FROM LOCAL STORAGE
+        let cartItems = JSON.parse(localStorage.getItem('zippy_mega_cart')) || [];
+
+        function renderCart() {
+            const listContainer = document.getElementById('cartItemsList');
+            const emptyMsg = document.getElementById('emptyCartMessage');
+            const checkoutPanel = document.getElementById('checkoutSectionPanel');
+            
+            listContainer.innerHTML = "";
+
+            // Check if cart is empty
+            if(cartItems.length === 0) {
+                emptyMsg.style.display = "block";
+                checkoutPanel.style.display = "none";
+                document.getElementById('cartCountBadge').innerText = "(0 items)";
+                return;
+            }
+
+            emptyMsg.style.display = "none";
+            checkoutPanel.style.display = "block";
+            document.getElementById('cartCountBadge').innerText = `(${cartItems.length} items)`;
+
+            // Render Items
+            cartItems.forEach((item, index) => {
+                let mrpHtml = item.mrp && item.mrp > item.price ? `<span class="item-mrp">₹${item.mrp}</span>` : '';
+
+                listContainer.innerHTML += `
+                <div class="cart-item-card">
+                    <img src="${item.image}" class="item-img" alt="Product">
+                    <div class="item-details">
+                        <div class="item-title">${item.title}</div>
+                        <div class="item-meta">Size: <span>${item.size}</span></div>
+                        <div class="item-price-row">
+                            <span class="item-price">₹${item.price}</span>
+                            ${mrpHtml}
+                        </div>
+                        <div class="item-actions">
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                                <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">
+                                <i class="fas fa-trash-alt"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            calculateBill();
+        }
+
+        // 3. CART INTERACTIONS
+        window.updateQty = function(index, change) {
+            let newQty = cartItems[index].qty + change;
+            if(newQty >= 1 && newQty <= 10) {
+                cartItems[index].qty = newQty;
+                saveCart();
+                renderCart();
+            }
+        }
+
+        window.removeItem = function(index) {
+            if(confirm("Remove this item from your bag?")) {
+                cartItems.splice(index, 1);
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('zippy_mega_cart', JSON.stringify(cartItems));
+        }
+
+        // 4. BILLING CALCULATOR
+        function calculateBill() {
+            let totalMrp = 0;
+            let totalPrice = 0;
+            let totalItems = 0;
+
+            cartItems.forEach(item => {
+                let itemMrp = item.mrp ? item.mrp : item.price; // Fallback if MRP missing
+                totalMrp += (itemMrp * item.qty);
+                totalPrice += (item.price * item.qty);
+                totalItems += item.qty;
+            });
+
+            let discount = totalMrp - totalPrice;
+
+            document.getElementById('billItemCount').innerText = totalItems;
+            document.getElementById('billTotalMrp').innerText = "₹" + totalMrp;
+            document.getElementById('billDiscount').innerText = "- ₹" + discount;
+            document.getElementById('billFinalAmount').innerText = "₹" + totalPrice;
+            document.getElementById('billSavings').innerText = "₹" + discount;
+        }
+
+        // 5. PLACE MEGA ORDER LOGIC
+        window.placeMegaOrder = async function() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const city = document.getElementById('custCity').value;
+            const pin = document.getElementById('custPincode').value;
+            const address = document.getElementById('custAddress').value;
+            const btn = document.getElementById('btnPlaceOrder');
+
+            if(!name || !phone || !address) {
+                return alert("Please fill Name, Phone and Full Address to place the order.");
+            }
+
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing Order...`;
+            btn.disabled = true;
+
+            // Calculate Final Total
+            let finalTotal = 0;
+            cartItems.forEach(item => finalTotal += (item.price * item.qty));
+
+            // Create a bundled product string for the Admin Panel
+            let productSummaryString = "";
+            cartItems.forEach((item, index) => {
+                productSummaryString += `${index+1}. ${item.title} (Size: ${item.size}, Qty: ${item.qty})\n`;
+            });
+
+            const orderPayload = {
+                productTitle: "Multi-Item Order (" + cartItems.length + " Items)",
+                detailedItems: cartItems, // Saves full array in DB
+                size: "Mixed",
+                quantity: cartItems.length,
+                totalAmount: finalTotal,
+                paymentMethod: "COD",
+                status: "Pending Verification",
+                customerInfo: {
+                    name: name,
+                    phone: phone,
+                    city: city,
+                    pincode: pin,
+                    fullAddress: address
+                },
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // SENDS TO ADMIN DASHBOARD
+                await db.collection('zippykart_orders').add(orderPayload);
+                
+                // Clear Cart
+                localStorage.removeItem('zippy_mega_cart');
+                
+                alert("🎉 Order Successfully Placed! Our team will contact you shortly.");
+                window.location.href = "index.html"; 
+
+            } catch(e) {
+                console.error("Order Error: ", e);
+                alert("Failed to place order. Check your connection.");
+                btn.innerHTML = `PLACE ORDER <i class="fas fa-arrow-right"></i>`;
+                btn.disabled = false;
+            }
+        }
+
+        // INITIALIZE PAGE
+        renderCart();
+
+    </script>
+</body>
+</html>
