@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ZippyKart Ultra-Pro Command Center</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,118 +12,204 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <style>
-        /* CSS WAHI PREMIUM WALI HAI, KOI BHI CHEEZ MISS NAHI KI HAI */
+        /* =========================================
+           1. PREMIUM CSS CORE SETUP
+           ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f8fafc; color: #0f172a; display: flex; height: 100vh; overflow: hidden; }
 
-        .sidebar { width: 280px; background: #0f172a; color: #ffffff; display: flex; flex-direction: column; box-shadow: 4px 0 25px rgba(15, 23, 42, 0.15); z-index: 10; position: relative; }
-        .sidebar-header { padding: 30px 25px; font-size: 26px; font-weight: 800; color: #e02844; border-bottom: 1px solid #1e293b; display: flex; align-items: center; gap: 12px; }
+        /* =========================================
+           2. NEXT-GEN SIDEBAR & OVERLAY
+           ========================================= */
+        .sidebar { width: 280px; background: #0f172a; color: #ffffff; display: flex; flex-direction: column; box-shadow: 4px 0 25px rgba(15, 23, 42, 0.15); z-index: 1001; position: relative; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .sidebar-header { padding: 30px 25px; font-size: 26px; font-weight: 800; color: #e02844; border-bottom: 1px solid #1e293b; display: flex; align-items: center; gap: 12px; letter-spacing: -0.5px; }
         .sidebar-header span { color: #ffffff; }
-        .sidebar-menu { padding: 25px 0; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .sidebar-menu { padding: 25px 0; flex: 1; display: flex; flex-direction: column; gap: 5px; overflow-y: auto;}
         
-        .menu-item { padding: 16px 25px; display: flex; align-items: center; gap: 18px; color: #94a3b8; text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.4s; border-left: 4px solid transparent; cursor: pointer; }
+        .menu-item { padding: 16px 25px; display: flex; align-items: center; gap: 18px; color: #94a3b8; text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.4s ease; border-left: 4px solid transparent; cursor: pointer; }
         .menu-item:hover { color: #ffffff; background: rgba(255, 255, 255, 0.03); padding-left: 30px; }
         .menu-item.active { color: #ffffff; background: linear-gradient(90deg, rgba(224, 40, 68, 0.15) 0%, rgba(224, 40, 68, 0) 100%); border-left-color: #e02844; font-weight: 600; }
-        .menu-item i { font-size: 18px; width: 24px; text-align: center; transition: 0.3s; }
+        .menu-item i { font-size: 18px; width: 24px; text-align: center; transition: transform 0.3s ease; }
         .menu-item:hover i { transform: scale(1.15); }
         .menu-item.settings-link { margin-top: auto; border-top: 1px solid #1e293b; padding-top: 25px; }
 
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: #f1f5f9; }
-        .topbar { background: #ffffff; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 5; }
-        .search-container { background: #f1f5f9; padding: 10px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px; width: 350px; border: 1px solid #e2e8f0; }
-        .search-container input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; color: #334155; }
-        .admin-profile-box { display: flex; align-items: center; gap: 15px; }
-        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: #64748b; }
-        .bell-badge { position: absolute; top: -4px; right: -4px; background: #e02844; color: #ffffff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 50%; border: 2px solid #ffffff; }
-        .admin-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 18px; }
+        .mobile-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s; }
+        .mobile-overlay.active { display: block; opacity: 1; }
 
-        .tab-section { display: none; padding: 40px; opacity: 0; transform: translateY(15px); animation: fadeInSlide 0.4s forwards; }
+        /* =========================================
+           3. MAIN VIEWPORT LAYER & TOPBAR
+           ========================================= */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; background: #f1f5f9; width: 100%;}
+        .topbar { background: #ffffff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 5; }
+        
+        .topbar-left { display: flex; align-items: center; gap: 15px; }
+        .hamburger-btn { display: none; font-size: 24px; color: #0f172a; cursor: pointer; }
+        
+        .search-container { background: #f1f5f9; padding: 10px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px; width: 300px; border: 1px solid #e2e8f0; }
+        .search-container input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; color: #334155; }
+        
+        .admin-profile-box { display: flex; align-items: center; gap: 15px; }
+        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: #64748b; transition: 0.3s; }
+        .notification-bell:hover { color: #0f172a; }
+        .bell-badge { position: absolute; top: -4px; right: -4px; background: #e02844; color: #ffffff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 50%; border: 2px solid #ffffff; }
+        .admin-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 18px; box-shadow: 0 4px 10px rgba(224, 40, 68, 0.25); }
+
+        /* =========================================
+           4. TAB LAYER ANIMATION ENGINE
+           ========================================= */
+        .tab-section { display: none; padding: 30px; opacity: 0; transform: translateY(15px); animation: fadeInSlide 0.4s ease-out forwards; }
         .tab-section.active-tab { display: block; }
         @keyframes fadeInSlide { to { opacity: 1; transform: translateY(0); } }
         
-        .page-header-row { font-size: 28px; font-weight: 800; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .btn-action-master { background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(224, 40, 68, 0.3); transition: 0.3s; }
+        .page-header-row { font-size: 24px; font-weight: 800; margin-bottom: 30px; color: #0f172a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
+        
+        .btn-action-master { background: linear-gradient(135deg, #e02844 0%, #fb641b 100%); color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(224, 40, 68, 0.3); transition: all 0.3s ease; white-space: nowrap;}
         .btn-action-master:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(224, 40, 68, 0.4); }
 
-        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .metric-card { background: #ffffff; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
+        /* =========================================
+           5. ANALYTICS CARDS GRID
+           ========================================= */
+        .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { background: #ffffff; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: all 0.3s ease; }
         .metric-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .metric-info h4 { font-size: 13px; color: #64748b; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-        .metric-info h2 { font-size: 30px; font-weight: 800; color: #0f172a; }
-        .metric-icon-box { width: 55px; height: 55px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 24px; }
+        .metric-info h4 { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+        .metric-info h2 { font-size: 26px; font-weight: 800; color: #0f172a; }
+        .metric-icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 22px; }
         .c-blue { background: #eff6ff; color: #3b82f6; } .c-orange { background: #fff7ed; color: #f97316; } .c-purple { background: #faf5ff; color: #a855f7; } .c-green { background: #f0fdf4; color: #22c55e; }
 
-        .table-wrapper { background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; }
-        .table-title-bar { padding: 24px 30px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-        .master-data-table { width: 100%; border-collapse: collapse; }
-        .master-data-table th { background: #f8fafc; padding: 16px 30px; text-align: left; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; }
-        .master-data-table td { padding: 18px 30px; font-size: 14px; border-bottom: 1px solid #e2e8f0; color: #334155; vertical-align: middle; }
+        /* =========================================
+           6. PREMIUM DATA TABLES (MOBILE SCROLLABLE)
+           ========================================= */
+        .table-container { background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); overflow: hidden; width: 100%;}
+        .table-title-bar { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap:10px;}
+        .table-title-bar h3 { font-size: 16px; font-weight: 700; color: #0f172a; }
         
-        .badge-status { padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600; text-align: center; }
+        .table-responsive-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        
+        .master-data-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .master-data-table th { background: #f8fafc; padding: 16px 20px; text-align: left; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; white-space: nowrap;}
+        .master-data-table td { padding: 16px 20px; font-size: 14px; border-bottom: 1px solid #e2e8f0; color: #334155; vertical-align: middle; }
+        .master-data-table tr:hover { background: #f8fafc; }
+        
+        .badge-status { padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; display: inline-block; text-align: center; white-space: nowrap;}
         .b-pending { background: #fff7ed; color: #f97316; border: 1px solid #ffedd5; } .b-confirmed { background: #eff6ff; color: #3b82f6; border: 1px solid #dbeafe; } .b-shipped { background: #f5f3ff; color: #8b5cf6; border: 1px solid #ede9fe; } .b-delivered { background: #f0fdf4; color: #22c55e; border: 1px solid #dcfce7; }
-        .select-status-dropdown { padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 500; outline: none; background: #ffffff; }
+        .select-status-dropdown { padding: 8px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 500; outline: none; cursor: pointer; background: #ffffff; }
 
-        /* THE ADVANCED MODAL CSS */
-        .modal-blur-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-container-box { background: #ffffff; width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 35px; animation: modalSlideUp 0.4s ease; }
+        /* ACTION BUTTONS (EDIT & DELETE) */
+        .btn-edit-sku { background: #eff6ff; color: #3b82f6; border: 1px solid #bfdbfe; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 13px; }
+        .btn-edit-sku:hover { background: #dbeafe; }
+        .btn-purge-sku { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 13px; }
+        .btn-purge-sku:hover { background: #fee2e2; }
+        .action-flex { display: flex; gap: 8px; }
+
+        /* =========================================
+           7. THE ADVANCED MULTI-VARIANT MODAL
+           ========================================= */
+        .modal-blur-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 15px;}
+        .modal-container-box { background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 20px; padding: 30px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalSlideUp 0.4s ease; }
         @keyframes modalSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        .modal-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
+        .modal-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
+        .modal-header-row h2 { font-size: 20px; font-weight: 700; color: #0f172a; }
         .modal-close-trigger { background: none; border: none; font-size: 26px; cursor: pointer; color: #94a3b8; }
         
-        .input-form-group { margin-bottom: 20px; }
-        .input-form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; }
-        .input-element-master { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; background: #fff; }
+        .input-form-group { margin-bottom: 15px; }
+        .input-form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #334155; }
+        .input-element-master { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; color: #0f172a; background: #fff; }
         .input-element-master:focus { border-color: #e02844; }
         
-        .flex-row-inputs { display: flex; gap: 20px; }
-        .flex-col-item { flex: 1; }
+        .flex-row-inputs { display: flex; gap: 15px; flex-wrap: wrap;}
+        .flex-col-item { flex: 1; min-width: 200px;}
         
-        .checkbox-size-container { display: flex; gap: 15px; margin-top: 5px; flex-wrap: wrap;}
+        .checkbox-size-container { display: flex; gap: 12px; margin-top: 5px; flex-wrap: wrap;}
         .checkbox-wrapper-label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; color: #475569; }
 
-        /* GALLERY IMAGES CSS */
-        .gallery-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
-        .gallery-item { width: 70px; height: 90px; border-radius: 6px; border: 1px solid #cbd5e1; position: relative; background: #f8fafc; overflow: hidden; }
+        .gallery-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .gallery-item { width: 60px; height: 80px; border-radius: 6px; border: 1px solid #cbd5e1; position: relative; background: #f8fafc; overflow: hidden; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-remove-btn { position: absolute; top: 2px; right: 2px; background: rgba(239, 68, 68, 0.9); color: white; border: none; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; cursor: pointer; }
 
-        /* VARIANT ROW CSS */
         .variant-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
-        .variant-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .variant-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;}
         .btn-add-variant { background: #eff6ff; color: #3b82f6; border: 1px dashed #3b82f6; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
         
-        .dynamic-row { display: flex; gap: 15px; align-items: center; background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 10px; position: relative; }
+        .dynamic-row { display: flex; gap: 10px; align-items: center; background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 10px; position: relative; flex-wrap: wrap;}
         .variant-preview-img { width: 45px; height: 45px; border-radius: 6px; object-fit: cover; border: 1px solid #cbd5e1; background: #f1f5f9; display: flex; justify-content: center; align-items: center; font-size: 10px; text-align: center; }
-        .btn-remove-row { position: absolute; right: -8px; top: -8px; background: #ef4444; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-size: 10px; }
+        .btn-remove-row { position: absolute; right: -8px; top: -8px; background: #ef4444; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-size: 10px; z-index: 5;}
 
-        .empty-placeholder-box { padding: 60px; text-align: center; color: #64748b; }
+        /* =========================================
+           8. MOBILE RESPONSIVE QUERIES
+           ========================================= */
+        @media (max-width: 950px) {
+            .sidebar { position: fixed; left: -280px; height: 100%; top: 0; }
+            .sidebar.active-mobile { transform: translateX(280px); }
+            
+            .hamburger-btn { display: block; }
+            .search-container { display: none; } 
+            
+            .tab-section { padding: 20px 15px; }
+            .page-header-row { font-size: 20px; }
+            .admin-profile-box { gap: 10px; }
+            
+            .modal-container-box { padding: 20px; }
+            .dynamic-row { flex-direction: column; align-items: flex-start;} 
+            .dynamic-row .flex-col-item { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="sidebar-header"><i class="fas fa-bolt"></i> <span>ZIPPY<span>KART</span></span></div>
+    <div class="mobile-overlay" id="mobileOverlayMaster" onclick="window.toggleMobileSidebar()"></div>
+
+    <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-bolt"></i> <span>ZIPPY<span>KART</span></span>
+        </div>
         <div class="sidebar-menu">
-            <div class="menu-item active" onclick="triggerTabSwitch('dashboardTab', this)"><i class="fas fa-shopping-bag"></i> <span>Orders Feed</span></div>
-            <div class="menu-item" onclick="triggerTabSwitch('productsTab', this)"><i class="fas fa-box-open"></i> <span>Products Inventory</span></div>
-            <div class="menu-item" onclick="triggerTabSwitch('customersTab', this)"><i class="fas fa-users"></i> <span>Customers List</span></div>
-            <div class="menu-item" onclick="triggerTabSwitch('analyticsTab', this)"><i class="fas fa-chart-line"></i> <span>Analytics Engine</span></div>
-            <div class="menu-item settings-link" onclick="triggerTabSwitch('settingsTab', this)"><i class="fas fa-cog"></i> <span>Store Settings</span></div>
+            <div class="menu-item active" onclick="triggerTabSwitch('dashboardTab', this)">
+                <i class="fas fa-shopping-bag"></i> <span>Orders Feed</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('productsTab', this)">
+                <i class="fas fa-box-open"></i> <span>Products Inventory</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('customersTab', this)">
+                <i class="fas fa-users"></i> <span>Customers List</span>
+            </div>
+            <div class="menu-item" onclick="triggerTabSwitch('analyticsTab', this)">
+                <i class="fas fa-chart-line"></i> <span>Analytics Engine</span>
+            </div>
+            
+            <div class="menu-item settings-link" onclick="triggerTabSwitch('settingsTab', this)">
+                <i class="fas fa-cog"></i> <span>Store Settings</span>
+            </div>
         </div>
     </aside>
 
     <main class="main-content">
+        
         <header class="topbar">
-            <div class="search-container"><i class="fas fa-search" style="color:#94a3b8;"></i><input type="text" placeholder="Search across systems..."></div>
+            <div class="topbar-left">
+                <i class="fas fa-bars hamburger-btn" onclick="window.toggleMobileSidebar()"></i>
+                <div class="search-container">
+                    <i class="fas fa-search" style="color:#94a3b8;"></i>
+                    <input type="text" placeholder="Search across systems...">
+                </div>
+            </div>
             <div class="admin-profile-box">
-                <div class="notification-bell"><i class="fas fa-bell"></i><span class="bell-badge" id="liveNotificationCount">0</span></div>
-                <div class="admin-avatar">A</div><div style="font-weight: 600; font-size: 14px; color: #1e293b;">Admin Akash</div>
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="bell-badge" id="liveNotificationCount">0</span>
+                </div>
+                <div class="admin-avatar">A</div>
+                <div style="font-weight: 600; font-size: 14px; color: #1e293b; display:none;">Admin Akash</div>
             </div>
         </header>
 
         <div id="dashboardTab" class="tab-section active-tab">
-            <div class="page-header-row"><span>Command Control Overview</span></div>
+            <div class="page-header-row">
+                <span>Command Control Overview</span>
+            </div>
+            
             <div class="analytics-grid">
                 <div class="metric-card"><div class="metric-info"><h4>Total Revenue</h4><h2 id="uiTotalRevenue">₹0</h2></div><div class="metric-icon-box c-blue"><i class="fas fa-wallet"></i></div></div>
                 <div class="metric-card"><div class="metric-info"><h4>Total Orders</h4><h2 id="uiTotalOrders">0</h2></div><div class="metric-icon-box c-orange"><i class="fas fa-shopping-cart"></i></div></div>
@@ -131,14 +217,19 @@
                 <div class="metric-card"><div class="metric-info"><h4>Active SKU Stock</h4><h2 id="uiActiveProductsCount">0</h2></div><div class="metric-icon-box c-green"><i class="fas fa-box"></i></div></div>
             </div>
 
-            <div class="table-wrapper">
-                <div class="table-title-bar"><h3>Real-time Order Stream</h3><button class="btn-action-master" style="padding: 8px 16px;"><i class="fas fa-download"></i> Export Data</button></div>
-                <table class="master-data-table">
-                    <thead><tr><th>Product Information</th><th>Customer Coordinates</th><th>Gross Amount</th><th>State status</th><th>Operational Actions</th></tr></thead>
-                    <tbody id="liveOrdersTablePayload">
-                        <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Awaiting Firestore pipeline synchronization...</td></tr>
-                    </tbody>
-                </table>
+            <div class="table-container">
+                <div class="table-title-bar">
+                    <h3>Real-time Order Stream</h3>
+                    <button class="btn-action-master" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Exporting system CSV records...')"><i class="fas fa-download"></i> Export Data</button>
+                </div>
+                <div class="table-responsive-wrapper">
+                    <table class="master-data-table">
+                        <thead><tr><th>Product Information</th><th>Customer Coordinates</th><th>Gross Amount</th><th>State status</th><th>Operational Actions</th></tr></thead>
+                        <tbody id="liveOrdersTablePayload">
+                            <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Awaiting Firestore pipeline synchronization...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -148,19 +239,22 @@
                 <button class="btn-action-master" onclick="window.launchProductModal()"><i class="fas fa-plus"></i> Add New Premium Product</button>
             </div>
             
-            <div class="table-wrapper">
-                <table class="master-data-table">
-                    <thead><tr><th>SKU Image</th><th>Product Identification Title</th><th>Selling Price Tag</th><th>Stated MRP</th><th>System Action Management</th></tr></thead>
-                    <tbody id="liveProductsTablePayload">
-                        <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Loading active item manifest...</td></tr>
-                    </tbody>
-                </table>
+            <div class="table-container">
+                <div class="table-responsive-wrapper">
+                    <table class="master-data-table">
+                        <thead><tr><th>SKU Image</th><th>Product Identification Title</th><th>Selling Price Tag</th><th>Stated MRP</th><th>System Action Management</th></tr></thead>
+                        <tbody id="liveProductsTablePayload">
+                            <tr><td colspan="5" align="center" style="padding: 40px; color:#64748b;">Loading active item manifest...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <div id="customersTab" class="tab-section"><div class="page-header-row"><span>Customers Database Ledger</span></div><div class="table-wrapper empty-placeholder-box"><i class="fas fa-users-viewfinder"></i><h2>Customer Matrix Indexing</h2></div></div>
-        <div id="analyticsTab" class="tab-section"><div class="page-header-row"><span>Advanced Growth Metrics</span></div><div class="table-wrapper empty-placeholder-box"><i class="fas fa-chart-pie"></i><h2>High-fidelity Visual Analytical Mapping</h2></div></div>
-        <div id="settingsTab" class="tab-section"><div class="page-header-row"><span>Global Architecture Settings</span></div><div class="table-wrapper empty-placeholder-box"><i class="fas fa-sliders"></i><h2>System Core Node Configurations</h2></div></div>
+        <div id="customersTab" class="tab-section"><div class="page-header-row"><span>Customers Database Ledger</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-users-viewfinder" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">Customer Matrix Indexing</h2></div></div>
+        <div id="analyticsTab" class="tab-section"><div class="page-header-row"><span>Advanced Growth Metrics</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-chart-pie" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">Visual Analytical Mapping</h2></div></div>
+        <div id="settingsTab" class="tab-section"><div class="page-header-row"><span>Global Architecture Settings</span></div><div class="table-container" style="padding: 40px; text-align:center;"><i class="fas fa-sliders" style="font-size:30px; color:#cbd5e1;"></i><h2 style="margin-top:10px;">System Core Configurations</h2></div></div>
+
     </main>
 
     <div id="productModalPopupMaster" class="modal-blur-overlay">
@@ -215,6 +309,7 @@
                     <label class="checkbox-wrapper-label"><input type="checkbox" value="L" class="formSizeNode" checked> L</label>
                     <label class="checkbox-wrapper-label"><input type="checkbox" value="XL" class="formSizeNode"> XL</label>
                     <label class="checkbox-wrapper-label"><input type="checkbox" value="XXL" class="formSizeNode"> XXL</label>
+                    <label class="checkbox-wrapper-label"><input type="checkbox" value="Free Size" class="formSizeNode"> Free Size</label>
                 </div>
             </div>
 
@@ -222,8 +317,7 @@
                 <label style="color:#e02844;"><i class="fas fa-images"></i> Primary Product Gallery (Slide Images)</label>
                 <p style="font-size:12px; color:#64748b; margin-bottom:10px;">Select images showing different angles. First image becomes the Cover Thumbnail.</p>
                 <input type="file" id="formGalleryUploader" accept="image/*" multiple class="input-element-master" onchange="window.processGalleryImages(event)" style="background:white;">
-                <div class="gallery-grid" id="uiGalleryPreviewGrid">
-                    </div>
+                <div class="gallery-grid" id="uiGalleryPreviewGrid"></div>
             </div>
 
             <div class="variant-box">
@@ -231,8 +325,7 @@
                     <h4>Color Variants <span style="font-size:11px; font-weight:normal; color:#64748b;">(Optional)</span></h4>
                     <button type="button" class="btn-add-variant" onclick="window.addVariantRow()"><i class="fas fa-plus"></i> Add Color</button>
                 </div>
-                <div id="dynamicVariantsContainer">
-                    </div>
+                <div id="dynamicVariantsContainer"></div>
             </div>
 
             <button class="btn-action-master" id="formSubmitActionButton" style="width: 100%; justify-content: center; margin-top: 15px; font-size:16px;" onclick="window.commitProductToFirestore()">
@@ -242,27 +335,32 @@
     </div>
 
     <script>
-        // GLOBALS
         window.variantImagesCache = {}; 
         window.variantRowCounter = 0;
         window.mainGalleryImages = []; 
 
-        // 1. UI NAVIGATION
+        window.toggleMobileSidebar = function() {
+            document.getElementById('mainSidebar').classList.toggle('active-mobile');
+            document.getElementById('mobileOverlayMaster').classList.toggle('active');
+        }
+
         window.triggerTabSwitch = function(targetTabSectionId, triggeringElement) {
             document.querySelectorAll('.tab-section').forEach(tab => tab.classList.remove('active-tab'));
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             document.getElementById(targetTabSectionId).classList.add('active-tab');
             triggeringElement.classList.add('active');
             
+            if(window.innerWidth <= 950) {
+                window.toggleMobileSidebar();
+            }
+            
             if(targetTabSectionId === 'productsTab' && typeof window.synchronizeInventoryTable === 'function') {
                 window.synchronizeInventoryTable();
             }
         }
 
-        // 2. MODAL LOGIC (FIXED)
         window.launchProductModal = function() {
             try {
-                // Reset inputs
                 document.getElementById('formProductTitle').value = "";
                 document.getElementById('formProductPrice').value = "";
                 document.getElementById('formProductMrp').value = "";
@@ -270,29 +368,27 @@
                 document.getElementById('formProductStock').value = "50";
                 document.getElementById('formGalleryUploader').value = "";
                 
-                // Reset Gallery
                 window.mainGalleryImages = [];
                 window.renderGalleryGrid();
 
-                // Reset Variants & Add 1 Default Row
                 document.getElementById('dynamicVariantsContainer').innerHTML = "";
                 window.variantImagesCache = {};
                 window.variantRowCounter = 0;
-                window.addVariantRow(); // <-- YAHI MISS THA PICHLE WALE MEIN
+                window.addVariantRow();
 
-                // Open Modal
                 document.getElementById('productModalPopupMaster').style.display = "flex";
-            } catch(e) {
-                console.error("Modal Launch Error:", e);
-                alert("Ek choti si error aayi hai, please page refresh karke try karein.");
-            }
+            } catch(e) { console.error("Modal Launch Error:", e); }
         }
 
         window.dismissProductModal = function() {
             document.getElementById('productModalPopupMaster').style.display = "none";
         }
 
-        // 3. IMAGE COMPRESSOR & GALLERY
+        // EDIT PRODUCT FUNCTION (DUMMY FOR NOW, PREPARED FOR FUTURE)
+        window.editProductNode = function(productId) {
+            alert("Edit Product interface is opening soon! Backend linkage pending for ID: " + productId);
+        }
+
         window.compressImageCore = async function(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -348,7 +444,6 @@
             window.renderGalleryGrid();
         }
 
-        // 4. COLOR VARIANTS LOGIC
         window.addVariantRow = function() {
             const rowId = window.variantRowCounter++;
             const container = document.getElementById('dynamicVariantsContainer');
@@ -356,10 +451,10 @@
             const html = `
             <div class="dynamic-row" id="var_row_${rowId}">
                 <button type="button" class="btn-remove-row" onclick="window.removeVariantRow(${rowId})"><i class="fas fa-times"></i></button>
-                <div class="flex-col-item" style="flex: 1.5;">
+                <div class="flex-col-item">
                     <input type="text" id="var_color_${rowId}" class="input-element-master" placeholder="Color Name" style="padding: 10px;">
                 </div>
-                <div class="flex-col-item" style="flex: 2;">
+                <div class="flex-col-item">
                     <input type="file" accept="image/*" class="input-element-master" onchange="window.processVariantImage(event, ${rowId})" style="padding: 7px; font-size:12px;">
                 </div>
                 <div class="variant-preview-img">
@@ -390,7 +485,7 @@
             document.getElementById(`var_img_txt_${rowId}`).style.display = "none";
         }
 
-        // 5. FIREBASE SYSTEM
+        // FIREBASE SYSTEM
         try {
             const firebaseConfig = {
                 apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
@@ -400,7 +495,6 @@
             if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
             const db = firebase.firestore();
 
-            // Orders Listener
             db.collection("zippykart_orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                 const body = document.getElementById('liveOrdersTablePayload');
                 if(!body) return;
@@ -441,7 +535,6 @@
                 document.getElementById('liveNotificationCount').innerText = pend;
             });
 
-            // Products Listener
             window.synchronizeInventoryTable = function() {
                 db.collection("zippykart_products").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                     const body = document.getElementById('liveProductsTablePayload');
@@ -458,18 +551,23 @@
                         let p = doc.data();
                         let displayImg = p.image || (p.all_images && p.all_images.length > 0 ? p.all_images[0] : '');
                         
+                        // EDIT & DELETE BUTTONS RESTORED HERE
                         body.innerHTML += `<tr>
                             <td><img src="${displayImg}" style="width:50px;height:65px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;"></td>
                             <td style="font-weight:bold; font-size:14px;">${p.title}<br><small style="color:#64748b;">${p.category || 'Apparel'} | Colors: ${p.variants ? p.variants.length : 0} | Gallery: ${p.all_images ? p.all_images.length : 0}</small></td>
                             <td style="color:#16a34a; font-weight:bold; font-size:15px;">₹${p.price}</td>
                             <td><del>₹${p.mrp}</del></td>
-                            <td><button onclick="if(confirm('Purge SKU permanently?')) db.collection('zippykart_products').doc('${doc.id}').delete()" style="background:#fef2f2; color:#ef4444; border:none; padding:8px 14px; border-radius:6px; font-weight:600; cursor:pointer;"><i class="fas fa-trash-can"></i> Purge</button></td>
+                            <td>
+                                <div class="action-flex">
+                                    <button class="btn-edit-sku" onclick="window.editProductNode('${doc.id}')"><i class="fas fa-edit"></i> Edit</button>
+                                    <button class="btn-purge-sku" onclick="if(confirm('Purge SKU permanently?')) db.collection('zippykart_products').doc('${doc.id}').delete()"><i class="fas fa-trash-can"></i></button>
+                                </div>
+                            </td>
                         </tr>`;
                     });
                 });
             }
 
-            // Save Product
             window.commitProductToFirestore = async function() {
                 const title = document.getElementById('formProductTitle').value;
                 const price = document.getElementById('formProductPrice').value;
@@ -526,10 +624,9 @@
                 }
             }
 
-            // Init Counter
             db.collection("zippykart_products").get().then(s => document.getElementById('uiActiveProductsCount').innerText = s.size);
 
-        } catch (e) { console.error("Firebase Auth/Init Error: ", e); }
+        } catch (e) { console.error("Firebase Core Error: ", e); }
     </script>
 </body>
 </html>
