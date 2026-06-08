@@ -394,7 +394,41 @@
             }
         });
     }
+// ADD TO CART FUNCTION FOR PRODUCT.HTML
+document.getElementById('btnAddToCart').addEventListener('click', function(e) {
+    e.preventDefault();
+    if(!currentProductData) return;
 
+    let qty = parseInt(document.getElementById('qtyInput').value) || 1;
+    
+    // Fetch existing cart from localStorage or create new array
+    let cart = JSON.parse(localStorage.getItem('zippy_mega_cart')) || [];
+
+    // Create Item Object
+    let itemData = {
+        productId: productId,
+        title: currentProductData.title,
+        price: currentProductData.price,
+        mrp: currentProductData.mrp || currentProductData.price,
+        size: selectedSize || "M",
+        qty: qty,
+        image: document.getElementById('MainImg').src
+    };
+
+    // Check if same item + same size already exists
+    let existingItemIndex = cart.findIndex(i => i.productId === itemData.productId && i.size === itemData.size);
+    
+    if(existingItemIndex > -1) {
+        cart[existingItemIndex].qty += qty; // Just increase quantity
+    } else {
+        cart.push(itemData); // Add new item
+    }
+
+    localStorage.setItem('zippy_mega_cart', JSON.stringify(cart));
+    
+    alert(`🛒 ${itemData.title} added to your bag!`);
+});
+    
     // Interactions
     window.changeMainImg = function(element, imgUrl) {
         const mainImg = document.getElementById('MainImg');
