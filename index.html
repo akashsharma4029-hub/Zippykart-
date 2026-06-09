@@ -16,7 +16,7 @@
         .dropdown div:hover { background: #f8f9fa; color: #ff3e6c; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         
-        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
+        .nav-icons { display: flex; justify-content: flex-start; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
         .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; }
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
@@ -143,7 +143,10 @@
 <body>
 
 <header>
-    <div class="logo-box" onclick="window.scrollTo(0,0)"><i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i> ZippyKart</div>
+    <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
+        <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
+        <span style="color: red;">Zippy</span>Kart
+    </div>
     <input type="text" id="mainSearchBar" class="search-bar" oninput="handleSearch(this.value)" placeholder="Search products...">
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
@@ -166,6 +169,7 @@
 </header>
 
 <div class="nav-icons">
+    <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color:#212121;"></i>All Products</div>
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
     <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
     <div class="nav-cat" onclick="filterCategory('Sweatshirt')"><i class="fa-solid fa-user-ninja" style="color:#673ab7;"></i>Sweatshirt</div>
@@ -304,7 +308,7 @@
                 <button class="auth-submit-btn" onclick="saveAddress()">Save Cloud Address</button>
             </div>
             <div id="ordersTab" class="tab-content" style="display:none; max-height: 250px; overflow-y: auto;">
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -371,7 +375,7 @@
 </div>
 
 <div class="bottom-nav">
-    <div class="bottom-nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); setActiveNav(this)">
+    <div class="bottom-nav-item active" onclick="filterCategory('All'); window.scrollTo({top: 0, behavior: 'smooth'}); setActiveNav(this)">
         <i class="fa-solid fa-house"></i> Home
     </div>
     <div class="bottom-nav-item" onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'}); setActiveNav(this)">
@@ -387,12 +391,10 @@
 </div>
 
 <script type="module">
-    // --- 1. FIREBASE IMPORTS (INCLUDING DATABASE) ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // --- 2. FIREBASE CONFIG ---
     const firebaseConfig = {
       apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
       authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -404,11 +406,10 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app); // Database initialized
+    const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
     window.currentUser = null;
 
-    // --- ADDED: LOGOUT ENGINE LOGIC ---
     window.handleLogout = function() {
         signOut(auth).then(() => {
             alert("Aap successfully logout ho gaye hain!");
@@ -418,7 +419,6 @@
         });
     };
 
-    // --- ADDED: AI CHATBOT LOGIC ---
     window.openZippyAI = function() {
         document.getElementById('zippyAiChat').style.display = 'block';
     };
@@ -430,7 +430,6 @@
         
         const chatBody = document.getElementById("aiChatBody");
         
-        // Customer Message
         chatBody.innerHTML += `
             <div style="margin-bottom:15px; text-align:right;">
                 <span style="background:#e2e8f0; color:#0f172a; padding:10px 14px; border-radius:15px 15px 0 15px; display:inline-block; line-height:1.4;">
@@ -441,7 +440,6 @@
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // AI Response Logic
         setTimeout(() => {
             let aiReply = "Aapka sawal mil gaya hai. Humari team ispar jaldi hi kaam karegi. Kya main aapki kisi aur cheez mein madad karoon?";
             let lowerMsg = msg.toLowerCase();
@@ -466,10 +464,8 @@
         }, 1000);
     };
 
-    // Nav Helper
     window.setActiveNav = function(elem) { document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active')); if(elem) elem.classList.add('active'); }
 
-    // Banner Slider
     window.currentSlide = 0;
     window.slideInterval = setInterval(() => { window.moveSlide(1) }, 5000);
     window.moveSlide = function(step) {
@@ -480,13 +476,11 @@
         clearInterval(window.slideInterval); window.slideInterval = setInterval(() => { window.moveSlide(1) }, 5000);
     }
 
-    // Footer Animation
     const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150); } });
     });
     document.addEventListener("DOMContentLoaded", () => { document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col)); });
 
-    // --- 3. LIVE DATABASE SYNC ON LOGIN ---
     onAuthStateChanged(auth, async (user) => {
         window.currentUser = user; 
         if (user) {
@@ -494,32 +488,25 @@
             document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
             document.getElementById('authOpt').style.display = 'none'; document.getElementById('logoutOpt').style.display = 'block';
 
-            // Fetch User Data from Firestore Database
             const userRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(userRef);
             if (docSnap.exists()) {
                 let data = docSnap.data();
-                // Load Cart from DB
                 if(data.cart) { window.cartList = data.cart; updateCartUI(); }
-                // Load Address from DB
                 if(data.address) { document.getElementById('dashAddress').value = data.address; }
-                // Load Orders from DB
                 if(data.orders) { renderOrdersUI(data.orders); }
             } else {
-                // First time user - Create DB entry
                 await setDoc(userRef, { cart: [], orders: [], address: "" });
             }
         } else {
-            // Logged out state
             document.getElementById('navLoginText').innerText = "LOGIN";
             document.getElementById('authOpt').style.display = 'block'; document.getElementById('logoutOpt').style.display = 'none';
-            window.cartList = []; updateCartUI(); // Empty cart on logout
+            window.cartList = []; updateCartUI();
             document.getElementById('dashAddress').value = "";
             renderOrdersUI([]);
         }
     });
 
-    // --- 4. CLOUD CART SYNCING LOGIC ---
     window.syncCartToDb = async function() {
         if (window.currentUser) {
             const userRef = doc(db, "users", window.currentUser.uid);
@@ -541,7 +528,7 @@
 
     window.renderProducts = function(filteredList) {
         const grid = document.getElementById('productGrid'); grid.innerHTML = '';
-        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg">No products found.</div>`; return; }
+        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg" style="grid-column: 1/-1; text-align:center; padding:40px; color:#777;">No products found.</div>`; return; }
         filteredList.forEach(item => {
             grid.innerHTML += `<div class="product-card"><img src="${item.img}" onclick="openModal(${item.id})"><div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div><div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div><button class="add-btn" onclick="addToCartById(${item.id})">Add to Cart</button><button class="buy-btn" onclick="payNow(${item.p})">Buy Now</button></div>`;
         });
@@ -549,7 +536,11 @@
 
     window.renderProducts(products);
     window.handleSearch = function(query) { document.getElementById('mainSearchBar').value = query; window.renderProducts(products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()))); }
-    window.filterCategory = function(cat) { document.getElementById('mainSearchBar').value = ''; window.renderProducts(cat === 'All' ? products : products.filter(p => p.cat === cat)); }
+    
+    window.filterCategory = function(cat) { 
+        document.getElementById('mainSearchBar').value = ''; 
+        window.renderProducts(cat === 'All' ? products : products.filter(p => p.cat === cat)); 
+    }
     
     window.changeMainImg = function(src, elem) { document.getElementById('modalMainImg').src = src; document.querySelectorAll('.thumb-gallery img').forEach(img => img.classList.remove('active')); elem.classList.add('active'); }
     window.selectOption = function(className, elem) { document.querySelectorAll('.' + className).forEach(el => el.classList.remove('active')); elem.classList.add('active'); }
@@ -573,7 +564,6 @@
     
     window.toggleCart = function(open) { const sidebar = document.getElementById('cartSidebar'); if (open) sidebar.classList.add('active'); else sidebar.classList.remove('active'); }
     
-    // Add & Remove update Cloud Database instantly
     window.addToCartById = function(id) { window.cartList.push(products.find(p => p.id === id)); updateCartUI(); window.toggleCart(true); window.syncCartToDb(); }
     window.removeFromCart = function(index) { window.cartList.splice(index, 1); updateCartUI(); window.syncCartToDb(); }
     
@@ -584,7 +574,6 @@
         document.getElementById('cartTotalDisplay').innerText = "₹" + total;
     }
     
-    // --- 5. UPDATED SECURE CHECKOUT (API KEY REMOVED) ---
     window.checkoutCart = function() { 
         if(!window.currentUser) { alert("Please Login to proceed to Checkout!"); return openAuthModal(); }
         let total = window.cartList.reduce((sum, item) => sum + item.p, 0); 
@@ -593,12 +582,10 @@
     }
 
     window.payNow = function(p) { 
-        // RAZORPAY API HAS BEEN SAFELY REMOVED FROM INDEX PAGE
-        alert("Redirecting to secure payment page... (Payment logic has been moved to cart.html for security)");
-        window.location.href = "cart.html"; // Seedha aapke purane cart wale secure page par bhej dega
+        alert("Redirecting to secure payment page...");
+        window.location.href = "cart.html";
     };
 
-    // Render Orders UI
     window.renderOrdersUI = function(orders) {
         const container = document.getElementById('ordersTab');
         if(!orders || orders.length === 0) { container.innerHTML = '<p style="font-size:13px; color:#777;">No orders found.</p>'; return; }
@@ -618,7 +605,6 @@
         container.innerHTML = html;
     }
     
-    // --- 6. SAVE ADDRESS TO CLOUD ---
     window.saveAddress = async function() {
         if(window.currentUser) {
             let addr = document.getElementById('dashAddress').value;
@@ -629,7 +615,6 @@
         }
     }
 
-    // Modal Control Logic
     window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
     window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
     
