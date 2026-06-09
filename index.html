@@ -12,12 +12,11 @@
         .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; min-width: 150px; margin: 0 15px; }
         .menu-wrapper { position: relative; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 160px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .dropdown div { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: normal; transition: 0.2s; }
-        .dropdown div:hover { background: #f8f9fa; color: #ff3e6c; }
+        .dropdown div.drop-item { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: normal; transition: 0.2s; }
+        .dropdown div.drop-item:hover { background: #f8f9fa; color: #ff3e6c; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         
-        /* ICONS CENTERED HERE */
-        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
+        .nav-icons { display: flex; justify-content: flex-start; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
         .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; }
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
@@ -57,6 +56,7 @@
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
         
+        /* Product Modal (Unchanged) */
         .large-modal { background: #fff; margin: 5% auto; padding: 20px; width: 950px; max-width: 95%; border-radius: 12px; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; gap: 20px; align-items: flex-start; box-sizing: border-box; }
         .modal-left { flex: 0.8; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 20px; }
         .modal-main-img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
@@ -89,18 +89,35 @@
         .modal-action-row { display: flex; gap: 10px; margin-top: 10px; position: sticky; bottom: 0; background: #fff; padding-top: 10px; border-top: 1px solid #eee; }
         .modal-action-row button { flex: 1; margin: 0; padding: 12px; font-size: 14px; }
 
-        .auth-content, .dashboard-content { background: #fff; margin: 10% auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
-        .auth-header, .dashboard-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; }
-        .auth-body, .dashboard-body { padding: 20px; }
+        /* Auth Modal */
+        .auth-content { background: #fff; margin: 10% auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
+        .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; }
+        .auth-body { padding: 20px; }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
         .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer;}
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
         .input-group { display: flex; gap: 10px; }
-        .tab-btn { background: transparent; border: none; color: rgba(255,255,255,0.7); padding: 10px; font-weight: bold; cursor: pointer; border-bottom: 3px solid transparent; font-size: 14px; }
-        .tab-btn.active { color: white; border-bottom: 3px solid white; }
-        .order-card { border: 1px solid #eee; padding: 15px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; background:#fdfdfd;}
 
+        /* =========================================
+           NEW PRO DASHBOARD (AMAZON/FLIPKART STYLE)
+           ========================================= */
+        .dashboard-content { background: #f1f3f6; margin: 5% auto; width: 95%; max-width: 1000px; border-radius: 8px; position: relative; box-sizing: border-box; animation: popUpAnim 0.4s; display: flex; height: 75vh; overflow: hidden;}
+        .dash-sidebar { width: 280px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; z-index: 2;}
+        .dash-user-info { padding: 25px 20px; border-bottom: 1px solid #e0e0e0; display:flex; align-items:center; gap:15px; background: #fff;}
+        .dash-avatar { width: 55px; height: 55px; border-radius: 50%; background: #2874f0; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; box-shadow: 0 4px 8px rgba(40,116,240,0.3);}
+        .dash-nav { padding: 10px 0; overflow-y: auto; flex:1;}
+        .dash-nav-item { padding: 16px 25px; display: flex; align-items: center; gap: 15px; color: #555; cursor: pointer; transition: 0.2s; font-size: 15px; font-weight: 500;}
+        .dash-nav-item:hover { background: #f5faff; color: #2874f0; }
+        .dash-nav-item.active { background: #f5faff; color: #2874f0; border-left: 4px solid #2874f0; font-weight: bold;}
+        .dash-nav-item i { width: 20px; text-align: center; font-size: 18px; color:#2874f0;}
+        
+        .dash-main { flex: 1; padding: 25px; overflow-y: auto; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.08);}
+        .dash-header { font-size: 20px; font-weight: bold; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
+        .order-card { border: 1px solid #e0e0e0; padding: 15px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s;}
+        .order-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-color:#d0d0d0;}
+
+        /* Footer & Others */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -138,7 +155,15 @@
             .modal-left { position: static; }
             .modal-main-img { height: 300px; }
             .modal-right { overflow-y: visible; max-height: none; }
-            .nav-icons { justify-content: flex-start; } /* Safe scrolling for mobile */
+            .nav-icons { justify-content: flex-start; }
+            
+            /* Dashboard Mobile Fix */
+            .dashboard-content { flex-direction: column; height: 85vh; margin: 0; width: 100%; border-radius: 0;}
+            .dash-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e0e0e0; flex: none;}
+            .dash-nav { display: flex; overflow-x: auto; padding: 0; white-space: nowrap;}
+            .dash-nav-item { padding: 12px 15px; border-left: none; border-bottom: 3px solid transparent;}
+            .dash-nav-item.active { border-left: none; border-bottom: 3px solid #2874f0; }
+            .dash-main { margin: 0; border-radius: 0; box-shadow: none; padding: 15px;}
         }
     </style>
 </head>
@@ -150,22 +175,37 @@
         <span style="color: red;">Zippy</span>Kart
     </div>
     <input type="text" id="mainSearchBar" class="search-bar" oninput="handleSearch(this.value)" placeholder="Search products...">
+    
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
-            <div id="authOpt" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
-            <div onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Dashboard</div>
-            <div id="logoutOpt" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+            <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
+            <div class="drop-item" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Dashboard</div>
+            <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
+    
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
-        <div id="moreDrop" class="dropdown"><div onclick="window.openZippyAI()"><i class="fa-solid fa-headset"></i> AI Chat Support</div></div>
+        <div id="moreDrop" class="dropdown">
+            <div class="drop-item" onclick="window.openZippyAI()"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
+        </div>
     </div>
     
     <div style="display:flex; align-items:center; gap:15px;">
-        <div class="nav-icon-btn" onclick="window.openZippyAI()" style="position:relative; cursor:pointer; font-size:22px; color:#333; margin-right:5px; transition: 0.2s;">
+        <div class="menu-wrapper" onclick="toggleDrop('notifDrop')" style="position:relative; cursor:pointer; font-size:22px; color:#333; margin-right:5px; transition: 0.2s;">
             <i class="fa-solid fa-bell"></i>
             <span style="position:absolute; top:-6px; right:-8px; background:#ff3e6c; color:white; font-size:10px; padding:2px 5px; border-radius:50%; font-weight:bold; border: 2px solid #fff;">1</span>
+            
+            <div id="notifDrop" class="dropdown" style="width:280px; right:-10px; top:35px; text-align:left; cursor:default; border-radius:6px; overflow:hidden;">
+                <div style="padding:12px 15px; background:#f8f9fa; border-bottom:1px solid #eee; font-weight:bold; font-size:13px; display:flex; justify-content:space-between; align-items:center;">
+                    Notifications <span style="color:#2874f0; font-size:11px; cursor:pointer; font-weight:normal;">Mark read</span>
+                </div>
+                <div style="padding:30px 20px; text-align:center; color:#777; font-size:13px;">
+                    <i class="fa-solid fa-box-open" style="font-size:35px; margin-bottom:12px; color:#e0e0e0;"></i><br>
+                    Welcome to ZippyKart!<br>Fresh drops and orders will appear here.
+                </div>
+            </div>
         </div>
+        
         <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
     </div>
 </header>
@@ -217,16 +257,16 @@
             <h3 id="modalName">Product Title</h3>
             <div style="display: flex; align-items: center;">
                 <div class="rating-badge">4.3 <i class="fa-solid fa-star"></i></div>
-                <span class="rating-text">1,245 Ratings & 120 Reviews</span>
+                <span class="rating-text" style="margin-left: 10px; font-size:12px; color:#555;">1,245 Ratings & 120 Reviews</span>
             </div>
             <div class="price-row">
-               <p id="modalPrice" class="modal-price-tag">₹0</p>
+                <p id="modalPrice" class="modal-price-tag">₹0</p>
                 <span id="modalMrp" class="mrp">₹0</span>
                 <span id="modalDiscount" class="discount">0% off</span>
             </div>
             <div class="offer-box">
-                <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Bank Offer:</strong> 5% Cashback on Flipkart Axis Bank Card</span></div>
-                <div class="offer-item"><i class="fa-solid fa-tag"></i> <span><strong>Partner Offer:</strong> Sign up for ZippyKart Pay Later and get ₹500 Gift Card</span></div>
+                <div class="offer-item"><i class="fa-solid fa-tag" style="color:#388e3c;"></i> <span><strong>Bank Offer:</strong> 5% Cashback on Flipkart Axis Bank Card</span></div>
+                <div class="offer-item" style="margin-top:5px;"><i class="fa-solid fa-tag" style="color:#388e3c;"></i> <span><strong>Partner Offer:</strong> Sign up for ZippyKart Pay Later and get ₹500 Gift Card</span></div>
             </div>
             <div class="selector-title">Select Color</div>
             <div class="color-opts">
@@ -242,8 +282,8 @@
                 <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">XL</button>
             </div>
             <div class="delivery-box">
-                <div class="del-row"><i class="fa-solid fa-location-dot"></i> Delivery to: <strong>Rajendra Place, New Delhi</strong></div>
-                <div class="del-row" style="margin-top:8px;"><i class="fa-solid fa-truck-fast"></i> Delivery by <strong>Tomorrow, 10 PM</strong></div>
+                <div class="del-row"><i class="fa-solid fa-location-dot" style="color:#2874f0;"></i> Delivery to: <strong>Rajendra Place, New Delhi</strong></div>
+                <div class="del-row" style="margin-top:8px;"><i class="fa-solid fa-truck-fast" style="color:#2874f0;"></i> Delivery by <strong>Tomorrow, 10 PM</strong></div>
             </div>
             <div class="trust-badges">
                 <div class="badge"><i class="fa-solid fa-cube"></i>100% Genuine<br>Product</div>
@@ -293,23 +333,62 @@
 
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
-        <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</span>
-        <div class="dashboard-header">
-            <h2>My Account</h2>
-            <div class="tab-container">
-                <button class="tab-btn active" onclick="switchTab('profileTab', event)">Profile</button>
-                <button class="tab-btn" onclick="switchTab('ordersTab', event)">My Orders</button>
+        <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="z-index: 10; right: 15px; top: 10px; color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 28px;">&times;</span>
+        
+        <div class="dash-sidebar">
+            <div class="dash-user-info">
+                <div class="dash-avatar" id="dashAvatarLtr">A</div>
+                <div>
+                    <div style="font-size: 12px; color: #777;">Hello,</div>
+                    <div style="font-weight: bold; font-size: 16px; color:#212121;" id="dashSidebarName">User</div>
+                </div>
+            </div>
+            <div class="dash-nav">
+                <div class="dash-nav-item active" onclick="switchDashTab('dashOrders', this)"><i class="fa-solid fa-box-open"></i> My Orders <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
+                <div class="dash-nav-item" onclick="switchDashTab('dashProfile', this)"><i class="fa-solid fa-user"></i> Profile Info <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
+                <div class="dash-nav-item" onclick="switchDashTab('dashAddress', this)"><i class="fa-solid fa-location-dot"></i> Manage Addresses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
+                <div class="dash-nav-item" onclick="switchDashTab('dashWishlist', this)"><i class="fa-solid fa-heart"></i> My Wishlist <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
+                <div class="dash-nav-item" onclick="handleLogout()" style="color:#ff3e6c;"><i class="fa-solid fa-power-off" style="color:#ff3e6c;"></i> Logout</div>
             </div>
         </div>
-        <div class="dashboard-body">
-            <div id="profileTab" class="tab-content" style="display:block;">
-                <label>Full Name</label>
-                <input type="text" id="dashName" class="auth-input" readonly style="background:#f5f5f5;">
-                <label>Delivery Address</label>
-                <textarea id="dashAddress" class="auth-input" placeholder="Enter your full address here..." rows="3"></textarea>
-                <button class="auth-submit-btn" onclick="saveAddress()">Save Cloud Address</button>
+        
+        <div class="dash-main">
+            <div id="dashOrders" class="dash-tab-content" style="display:block;">
+                <div class="dash-header">My Orders</div>
+                <div id="ordersTabPayload">
+                    <p style="color:#777; font-size:14px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching your orders...</p>
+                </div>
             </div>
-            <div id="ordersTab" class="tab-content" style="display:none; max-height: 250px; overflow-y: auto;">
+            
+            <div id="dashProfile" class="dash-tab-content" style="display:none;">
+                <div class="dash-header">Personal Information</div>
+                <div style="max-width: 400px;">
+                    <label style="font-size:12px; color:#777; font-weight:bold;">Full Name</label>
+                    <input type="text" id="dashNameInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
+                    
+                    <label style="font-size:12px; color:#777; font-weight:bold;">Email Address</label>
+                    <input type="text" id="dashEmailInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
+                    
+                    <button class="buy-btn" style="background:#2874f0; width:auto; padding:10px 25px; margin-top:10px;">Edit Profile</button>
+                </div>
+            </div>
+            
+            <div id="dashAddress" class="dash-tab-content" style="display:none;">
+                <div class="dash-header">Manage Addresses</div>
+                <div style="border: 1px dashed #2874f0; background: #f5faff; padding: 20px; border-radius: 4px; text-align: left;">
+                    <label style="font-size:13px; color:#2874f0; font-weight:bold; display:block; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> ADD A NEW ADDRESS</label>
+                    <textarea id="dashAddressInput" class="auth-input" placeholder="Enter your full home/office address..." rows="3" style="background:#fff; border-color:#dbeafe;"></textarea>
+                    <button class="buy-btn" onclick="saveAddress()" style="background:#2874f0; width:auto; padding:10px 25px;">Save Address</button>
+                </div>
+            </div>
+            
+            <div id="dashWishlist" class="dash-tab-content" style="display:none;">
+                <div class="dash-header">My Wishlist</div>
+                <div style="text-align:center; padding: 60px 20px; color:#777;">
+                    <i class="fa-solid fa-heart-crack" style="font-size: 50px; color:#e0e0e0; margin-bottom:15px;"></i>
+                    <h3 style="margin:0; color:#333;">Your wishlist is empty!</h3>
+                    <p style="font-size:13px; margin-top:5px;">Explore more and shortlist some items.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -495,16 +574,17 @@
             if (docSnap.exists()) {
                 let data = docSnap.data();
                 if(data.cart) { window.cartList = data.cart; updateCartUI(); }
-                if(data.address) { document.getElementById('dashAddress').value = data.address; }
-                if(data.orders) { renderOrdersUI(data.orders); }
+                if(data.address) { document.getElementById('dashAddressInput').value = data.address; }
+                if(data.orders) { renderOrdersUI(data.orders); } else { renderOrdersUI([]); }
             } else {
                 await setDoc(userRef, { cart: [], orders: [], address: "" });
+                renderOrdersUI([]);
             }
         } else {
             document.getElementById('navLoginText').innerText = "LOGIN";
             document.getElementById('authOpt').style.display = 'block'; document.getElementById('logoutOpt').style.display = 'none';
             window.cartList = []; updateCartUI();
-            document.getElementById('dashAddress').value = "";
+            document.getElementById('dashAddressInput').value = "";
             renderOrdersUI([]);
         }
     });
@@ -519,7 +599,6 @@
     window.cartList = [];
     window.products = []; 
 
-    // --- LIVE DATABASE CONNECTION FOR PRODUCTS ---
     const productsRef = collection(db, "zippykart_products");
     const q = query(productsRef, orderBy("timestamp", "desc"));
     
@@ -628,8 +707,16 @@
     };
 
     window.renderOrdersUI = function(orders) {
-        const container = document.getElementById('ordersTab');
-        if(!orders || orders.length === 0) { container.innerHTML = '<p style="font-size:13px; color:#777;">No orders found.</p>'; return; }
+        const container = document.getElementById('ordersTabPayload');
+        if(!orders || orders.length === 0) { 
+            container.innerHTML = `
+                <div style="text-align:center; padding: 40px; color:#777;">
+                    <i class="fa-solid fa-box-open" style="font-size: 40px; color:#e0e0e0; margin-bottom:15px;"></i>
+                    <h4 style="margin:0; color:#333;">No orders yet</h4>
+                    <p style="font-size:13px; margin-top:5px;">Looks like you haven't made your first purchase.</p>
+                </div>`; 
+            return; 
+        }
         let html = '';
         orders.forEach(ord => {
             let itemNames = ord.items.map(i => i.n).join(", ");
@@ -637,10 +724,10 @@
                 <div class="order-card">
                     <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
                         <strong>Order #${ord.orderId}</strong>
-                        <span style="color:#ff9800; font-weight:bold; font-size:12px;">${ord.status}</span>
+                        <span style="color:#2874f0; font-weight:bold; font-size:12px; background:#f5faff; padding:3px 8px; border-radius:4px;">${ord.status}</span>
                     </div>
                     <p style="margin:0; font-size:12px; color:#555;">Items: ${itemNames}</p>
-                    <p style="margin:5px 0 0 0; font-weight:bold; font-size:14px;">Total: ₹${ord.total} <span style="float:right; font-size:11px; font-weight:normal; color:#888;">${ord.date}</span></p>
+                    <p style="margin:8px 0 0 0; font-weight:bold; font-size:14px; color:#212121;">Total: ₹${ord.total} <span style="float:right; font-size:11px; font-weight:normal; color:#888;">${ord.date}</span></p>
                 </div>`;
         });
         container.innerHTML = html;
@@ -648,7 +735,7 @@
     
     window.saveAddress = async function() {
         if(window.currentUser) {
-            let addr = document.getElementById('dashAddress').value;
+            let addr = document.getElementById('dashAddressInput').value;
             if(!addr) return alert("Please enter an address first.");
             const userRef = doc(db, "users", window.currentUser.uid);
             await updateDoc(userRef, { address: addr });
@@ -686,17 +773,26 @@
     
     window.googleSignIn = function() { signInWithPopup(auth, provider).then(() => { document.getElementById('authModal').style.display = 'none'; }).catch((error) => { alert(error.message); }); }
 
+    // --- FIX: DASHBOARD OPEN & TABS LOGIC ---
     window.openDashboard = function() {
         document.getElementById('loginDrop').style.display = 'none'; 
         if (!window.currentUser) { alert("Please login first to view your dashboard!"); openAuthModal(); return; }
-        document.getElementById('dashName').value = window.currentUser.displayName || window.currentUser.email.split('@')[0] || "ZippyKart User";
-        document.getElementById('dashboardModal').style.display = 'block';
+        
+        let fullName = window.currentUser.displayName || window.currentUser.email.split('@')[0] || "User";
+        document.getElementById('dashSidebarName').innerText = fullName;
+        document.getElementById('dashAvatarLtr').innerText = fullName.charAt(0).toUpperCase();
+        
+        document.getElementById('dashNameInput').value = window.currentUser.displayName || "";
+        document.getElementById('dashEmailInput').value = window.currentUser.email || "";
+        
+        document.getElementById('dashboardModal').style.display = 'flex';
     }
     
-    window.switchTab = function(tabId, event) {
-        document.getElementById('profileTab').style.display = 'none'; document.getElementById('ordersTab').style.display = 'none';
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(tabId).style.display = 'block'; event.currentTarget.classList.add('active');
+    window.switchDashTab = function(tabId, eventElem) {
+        document.querySelectorAll('.dash-tab-content').forEach(tab => tab.style.display = 'none');
+        document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).style.display = 'block'; 
+        eventElem.classList.add('active');
     }
     
     window.onclick = function(e) { 
@@ -710,4 +806,4 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="db.js"></script>
 </body>
-</html> 
+</html>
