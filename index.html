@@ -16,7 +16,8 @@
         .dropdown div.drop-item:hover { background: #f5faff; color: #2874f0; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         
-        .nav-icons { display: flex; justify-content: flex-start; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
+        /* FIX 1: CENTERED ICONS FOR DESKTOP */
+        .nav-icons { display: flex; justify-content: center; gap: 30px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
         .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; }
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
@@ -52,7 +53,6 @@
         .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         
-        /* Modals & Premium Animation */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
@@ -60,7 +60,6 @@
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
         
-        /* Product Modal (Unchanged) */
         .large-modal { background: #fff; margin: 5% auto; padding: 20px; width: 950px; max-width: 95%; border-radius: 12px; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; gap: 20px; align-items: flex-start; box-sizing: border-box; }
         .modal-left { flex: 0.8; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 20px; }
         .modal-main-img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
@@ -93,7 +92,6 @@
         .modal-action-row { display: flex; gap: 10px; margin-top: 10px; position: sticky; bottom: 0; background: #fff; padding-top: 10px; border-top: 1px solid #eee; }
         .modal-action-row button { flex: 1; margin: 0; padding: 12px; font-size: 14px; }
 
-        /* Auth Modal */
         .auth-content { background: #fff; margin: 10% auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
         .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; }
         .auth-body { padding: 20px; }
@@ -110,7 +108,6 @@
         
         .dash-sidebar { width: 320px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
         
-        /* Flipkart Style Grouping */
         .dash-group-title { padding: 20px 20px 8px 20px; font-size: 15px; font-weight: 800; color: #212121; background: #fff; border-bottom: 1px solid transparent; }
         .dash-nav-item { padding: 16px 20px; display: flex; align-items: center; gap: 15px; color: #444; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
         .dash-nav-item:hover { background: #f9f9f9; color: #2874f0; }
@@ -119,7 +116,6 @@
         
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
         
-        /* Mobile Back Header */
         .dash-mobile-header { display: none; background: #2874f0; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
         .dash-mobile-header i { cursor: pointer; font-size: 20px; }
 
@@ -131,6 +127,16 @@
         
         .logout-full-btn { width: 100%; background: #fff; color: #2874f0; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
         .logout-full-btn:hover { background: #f5faff; }
+
+        /* FIX 3: FLIPKART STYLE LANGUAGE UI */
+        .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e0e0e0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
+        .lang-option.active { border-color:#2874f0; background:#f5faff; box-shadow: 0 2px 5px rgba(40,116,240,0.1);}
+        .lang-radio { width:22px; height:22px; border-radius:50%; border:2px solid #ccc; margin-right:15px; display:flex; justify-content:center; align-items:center; }
+        .lang-option.active .lang-radio { border-color:#2874f0; background:#2874f0; }
+        .lang-option.active .lang-radio::after { content:''; width:8px; height:8px; border-radius:50%; background:#fff; }
+        .lang-text { flex:1; font-weight:bold; font-size:16px; color:#212121; }
+        .lang-text small { display:block; font-weight:normal; font-size:13px; color:#777; margin-top:2px; }
+        .lang-btn { background:#2874f0; color:#fff; width:100%; padding:14px; border:none; border-radius:4px; font-weight:bold; font-size:16px; cursor:pointer; margin-top:20px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
 
         /* Footer */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
@@ -154,9 +160,6 @@
         .bottom-nav-item.active { color: #ff3e6c; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: calc(50% - 20px); border: 2px solid #fff; font-weight: bold; }
 
-        /* =========================================
-           MOBILE SPECIFIC DASHBOARD FIXES
-           ========================================= */
         @media (max-width: 768px) {
             body { padding-bottom: 65px; }
             .bottom-nav { display: flex; }
@@ -173,15 +176,16 @@
             .modal-left { position: static; }
             .modal-main-img { height: 300px; }
             .modal-right { overflow-y: visible; max-height: none; }
-            .nav-icons { justify-content: flex-start; }
             
-            /* APP-LIKE MOBILE DASHBOARD */
+            /* Mobile Nav Icons Scroll Fix */
+            .nav-icons { justify-content: flex-start; gap: 15px; } 
+            
             .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
             .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
-            .dash-mobile-header { display: flex; } /* Shows Back Button Header */
+            .dash-mobile-header { display: flex; } 
             .dash-inner-content { margin: 10px; border-radius: 6px; }
-            #dashDesktopCloseBtn { display: none; } /* Hide the X button, rely on Back button or closing modal via code */
+            #dashDesktopCloseBtn { display: none; } 
         }
     </style>
 </head>
@@ -198,7 +202,6 @@
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
             <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Profile</div>
-            <div id="adminOpt" class="drop-item" style="display:none;" onclick="window.location.href='admin.html'"><i class="fa-solid fa-store"></i> Sell on ZippyKart</div>
             <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
@@ -374,8 +377,8 @@
             <div class="dash-nav-item" onclick="switchDashTab('dashReviews', this, 'My Reviews')"><i class="fa-solid fa-pen-to-square"></i> Reviews <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
             <div class="dash-nav-item" onclick="switchDashTab('dashQA', this, 'Questions & Answers')"><i class="fa-solid fa-comments"></i> Questions & Answers <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
 
-            <div class="dash-group-title">Earn with ZippyKart</div>
-            <div class="dash-nav-item" onclick="window.location.href='admin.html'"><i class="fa-solid fa-store"></i> Sell on ZippyKart <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-group-title">Offers & Rewards</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashRefer', this, 'Share to Earn')"><i class="fa-solid fa-share-nodes"></i> Share & Earn <span style="margin-left:auto; background:#22c55e; color:white; font-size:10px; padding:2px 6px; border-radius:10px; font-weight:bold;">NEW</span></div>
 
             <div class="dash-group-title">Feedback & Information</div>
             <div class="dash-nav-item" onclick="switchDashTab('dashTerms', this, 'Terms & Policies')"><i class="fa-solid fa-file-contract"></i> Terms, Policies and Licenses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
@@ -439,12 +442,50 @@
                 </div>
 
                 <div id="dashLanguage" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Select Language</div>
-                    <p>Current Language: <strong>English (Default)</strong></p>
+                    <div class="dash-header-title">Choose Language</div>
+                    <div style="max-width: 500px;">
+                        <div class="lang-option" onclick="selectLangUi(this)">
+                            <div class="lang-radio"></div>
+                            <div class="lang-text">हिंदी <small>Hindi</small></div>
+                        </div>
+                        <div class="lang-option" onclick="selectLangUi(this)">
+                            <div class="lang-radio"></div>
+                            <div class="lang-text">தமிழ் <small>Tamil</small></div>
+                        </div>
+                        <div class="lang-option" onclick="selectLangUi(this)">
+                            <div class="lang-radio"></div>
+                            <div class="lang-text">తెలుగు <small>Telugu</small></div>
+                        </div>
+                        <div class="lang-option active" onclick="selectLangUi(this)">
+                            <div class="lang-radio"></div>
+                            <div class="lang-text">English <small>English</small></div>
+                        </div>
+                        <div class="lang-option" onclick="selectLangUi(this)">
+                            <div class="lang-radio"></div>
+                            <div class="lang-text">मराठी <small>Marathi</small></div>
+                        </div>
+                        <button class="lang-btn" onclick="alert('Language settings applied successfully!')">Continue</button>
+                    </div>
                 </div>
+                
+                <div id="dashRefer" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Share & Earn Rewards</div>
+                    <div style="text-align:center; padding: 20px;">
+                        <i class="fa-solid fa-gift" style="font-size: 60px; color:#ff3e6c; margin-bottom:15px;"></i>
+                        <h3 style="margin:0; color:#333; font-size:22px;">Invite Friends, Earn Wallet Cash!</h3>
+                        <p style="font-size:14px; color:#555; margin-top:10px;">Get <strong>₹100 Zippy Cash</strong> when your friend makes their first purchase using your link.</p>
+                        
+                        <div style="border: 2px dashed #ccc; padding: 15px; border-radius: 8px; font-size: 22px; font-weight: bold; color: #2874f0; margin: 25px 0; background: #fafafa; letter-spacing: 2px;">
+                            ZIPPY-AKASH-26
+                        </div>
+                        
+                        <button class="buy-btn" style="background:#25d366; width:100%; max-width:300px; padding:15px; font-size:16px; border-radius:6px;" onclick="alert('Link copied to clipboard! Open WhatsApp to paste and share.')"><i class="fa-brands fa-whatsapp"></i> Share on WhatsApp</button>
+                    </div>
+                </div>
+
                 <div id="dashNotifSet" class="dash-tab-content" style="display:none;">
                     <div class="dash-header-title">Notification Settings</div>
-                    <p>✔️ Email Alerts active<br>✔️ Push Notifications active</p>
+                    <p style="font-size:14px; color:#444;"><i class="fa-solid fa-check" style="color:#22c55e;"></i> Email Alerts active<br><br><i class="fa-solid fa-check" style="color:#22c55e;"></i> Push Notifications active</p>
                 </div>
                 <div id="dashPrivacy" class="dash-tab-content" style="display:none;">
                     <div class="dash-header-title">Privacy Center</div>
@@ -636,10 +677,11 @@
         if (user) {
             let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
             document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
+            
+            // Show proper menus based on login (ADMIN LINK REMOVED)
             document.getElementById('authOpt').style.display = 'none'; 
             document.getElementById('profileOpt').style.display = 'flex';
             document.getElementById('logoutOpt').style.display = 'flex';
-            document.getElementById('adminOpt').style.display = 'flex'; 
 
             const userRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(userRef);
@@ -656,8 +698,8 @@
             document.getElementById('navLoginText').innerText = "LOGIN";
             document.getElementById('authOpt').style.display = 'flex'; 
             document.getElementById('profileOpt').style.display = 'none';
-            document.getElementById('adminOpt').style.display = 'none';
             document.getElementById('logoutOpt').style.display = 'none';
+            
             window.cartList = []; updateCartUI();
             document.getElementById('dashAddressInput').value = "";
             renderOrdersUI([]);
@@ -848,7 +890,6 @@
         
         document.getElementById('dashboardModal').style.display = 'flex';
         
-        // Reset to Sidebar view on mobile
         if(window.innerWidth <= 768) {
             document.querySelector('.dash-sidebar').style.display = 'flex';
             document.querySelector('.dash-main').style.display = 'none';
@@ -864,7 +905,6 @@
         
         if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
         
-        // App-like transition for Mobile
         if(window.innerWidth <= 768) {
             document.querySelector('.dash-sidebar').style.display = 'none';
             document.querySelector('.dash-main').style.display = 'block';
@@ -874,6 +914,12 @@
     window.closeDashMainMobile = function() {
         document.querySelector('.dash-main').style.display = 'none';
         document.querySelector('.dash-sidebar').style.display = 'flex';
+    }
+
+    // FIX: Custom function for Language UI selection
+    window.selectLangUi = function(elem) {
+        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
+        elem.classList.add('active');
     }
     
     window.onclick = function(e) { 
