@@ -1147,7 +1147,7 @@
             document.getElementById(`var_img_txt_${rowId}`).style.display = "none";
         }
 
-        // 5. FIREBASE SYSTEM & SHIPROCKET API ENGINE
+        // 5. FIREBASE ENGINE & OPERATIONS CENTER
         let db;
         try {
             const firebaseConfig = {
@@ -1158,7 +1158,6 @@
             if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
             db = firebase.firestore();
 
-            // Load saved settings tokens locally on boot
             if(localStorage.getItem('sr_token')) {
                 document.getElementById('shiprocketStaticToken').value = localStorage.getItem('sr_token');
             }
@@ -1166,7 +1165,7 @@
                 document.getElementById('shiprocketPickupName').value = localStorage.getItem('sr_pickup');
             }
 
-            // Orders Listener with Integrated Shiprocket Button Trigger Channel
+            // Real-time Orders Listener (Now with fully operational Delete/Purge system)
             db.collection("zippykart_orders").orderBy("timestamp", "desc").onSnapshot(snapshot => {
                 const body = document.getElementById('liveOrdersTablePayload');
                 if(!body) return;
@@ -1174,7 +1173,11 @@
                 let rev = 0, ord = 0, pend = 0;
 
                 if(snapshot.empty) {
-                    body.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px;'>No orders found.</td></tr>";
+                    body.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px;'>No orders found. Dashboard is fresh! 🧹</td></tr>";
+                    document.getElementById('uiTotalRevenue').innerText = "₹0";
+                    document.getElementById('uiTotalOrders').innerText = "0";
+                    document.getElementById('uiPendingOrders').innerText = "0";
+                    document.getElementById('liveNotificationCount').innerText = "0";
                     return;
                 }
 
@@ -1202,6 +1205,7 @@
                                     <option value="Delivered">Delivered</option>
                                 </select>
                                 <button class="btn-shiprocket" onclick="window.pushToShiprocket('${doc.id}')"><i class="fas fa-rocket"></i> Ship</button>
+                                <button class="btn-purge-sku" onclick="window.deleteOrderNode('${doc.id}')" title="Delete Order Permanently"><i class="fas fa-trash-can"></i></button>
                             </div>
                         </td>
                     </tr>`;
@@ -1212,7 +1216,19 @@
                 document.getElementById('liveNotificationCount').innerText = pend;
             });
 
-            // SHIPROCKET DIRECT AUTOMATION FUNCTION
+            // LIVE ORDER DELETION HANDLER (Tarika 2)
+            window.deleteOrderNode = async function(firebaseOrderId) {
+                if(confirm("🚨 WARNING: Kya aap is order ko database aur panel se permanently delete karna chahte hain? Ye action reverse nahi hoga!")) {
+                    try {
+                        await db.collection('zippykart_orders').doc(firebaseOrderId).delete();
+                        alert("🗑️ Order successfully deleted from live stream!");
+                    } catch(e) {
+                        alert("Error trying to delete order record.");
+                    }
+                }
+            }
+
+            // SHIPROCKET API LOGISTICS TRANSMITTER
             window.pushToShiprocket = async function(firebaseOrderId) {
                 const token = localStorage.getItem('sr_token');
                 const pickupLocation = localStorage.getItem('sr_pickup') || "Primary";
@@ -1229,12 +1245,10 @@
                     if(!doc.exists) return alert("Order payload lost.");
                     const order = doc.data();
 
-                    // Map payment flags safely
                     const isCod = order.paymentMethod === "COD" ? 1 : 0;
 
-                    // Build Adhoc Order Payload exactly matching Shiprocket API Spec Architecture
                     const payload = {
-                        "order_id": firebaseOrderId.substring(0, 15), // Unique internal reference ID string
+                        "order_id": firebaseOrderId.substring(0, 15), 
                         "order_date": new Date().toISOString().split('T')[0],
                         "pickup_location": pickupLocation,
                         "billing_customer_name": order.customerInfo?.name || "Customer",
@@ -1257,13 +1271,9 @@
                         ],
                         "payment_method": isCod ? "COD" : "Prepaid",
                         "sub_total": parseInt(order.totalAmount),
-                        "length": 15,
-                        "width": 15,
-                        "height": 10,
-                        "weight": 0.4
+                        "length": 15, "width": 15, "height": 10, "weight": 0.4
                     };
 
-                    // Execute live fetch request packet cross platform
                     const response = await fetch("https://cors-anywhere.herokuapp.com/https://apiv2.shiprocket.in/v1/external/orders/create/adhoc", {
                         method: "POST",
                         headers: {
@@ -1277,7 +1287,6 @@
 
                     if(response.status === 200 || resData.order_id) {
                         alert(`🚀 Success! Order pushed to Shiprocket.\nShiprocket Order ID: ${resData.order_id}\nShipment ID: ${resData.shipment_id}`);
-                        // Update tracking status inside cloud node database instantly
                         await db.collection("zippykart_orders").doc(firebaseOrderId).update({
                             status: "Shipped",
                             shiprocketOrderId: resData.order_id,
@@ -1285,12 +1294,12 @@
                         });
                     } else {
                         console.error(resData);
-                        alert("Shiprocket Rejected Package. Reason: " + (resData.message || "Check log stream console panels."));
+                        alert("Shiprocket Rejected Package. Reason: " + (resData.message || "Check console stream."));
                     }
 
                 } catch(error) {
                     console.error(error);
-                    alert("CORS or Connection Interruption occurred. Ensure your Shiprocket Token is valid and fresh!");
+                    alert("CORS or Connection Interruption occurred. Check configuration tokens!");
                 }
             }
 
@@ -1303,7 +1312,7 @@
                     document.getElementById('uiActiveProductsCount').innerText = snapshot.size;
 
                     if(snapshot.empty) {
-                        body.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px;'>No active items.</td></tr>";
+                        body.innerHTML = "<tr><td colspan='5' align='center' style='padding:40px;'>No active items. Inventory empty.</td></tr>";
                         return;
                     }
 
