@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZippyKart - Premium E-Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; overflow-x: hidden; }
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; justify-content: space-between;}
@@ -138,7 +137,6 @@
             .modal-left { position: static; }
             .modal-main-img { height: 300px; }
             .modal-right { overflow-y: visible; max-height: none; }
-            #chatBox { bottom: 80px !important; right: 10px !important; width: 200px; }
         }
     </style>
 </head>
@@ -155,9 +153,16 @@
         </div>
     </div>
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
-        <div id="moreDrop" class="dropdown"><div onclick="document.getElementById('chatBox').style.display='block'"><i class="fa-solid fa-headset"></i> AI Chat Support</div></div>
+        <div id="moreDrop" class="dropdown"><div onclick="window.openZippyAI()"><i class="fa-solid fa-headset"></i> AI Chat Support</div></div>
     </div>
-    <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
+    
+    <div style="display:flex; align-items:center; gap:15px;">
+        <div class="nav-icon-btn" onclick="window.openZippyAI()" style="position:relative; cursor:pointer; font-size:22px; color:#333; margin-right:5px; transition: 0.2s;">
+            <i class="fa-solid fa-bell"></i>
+            <span style="position:absolute; top:-6px; right:-8px; background:#ff3e6c; color:white; font-size:10px; padding:2px 5px; border-radius:50%; font-weight:bold; border: 2px solid #fff;">1</span>
+        </div>
+        <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
+    </div>
 </header>
 
 <div class="nav-icons">
@@ -299,8 +304,7 @@
                 <button class="auth-submit-btn" onclick="saveAddress()">Save Cloud Address</button>
             </div>
             <div id="ordersTab" class="tab-content" style="display:none; max-height: 250px; overflow-y: auto;">
-                <!-- Live Orders will populate here from Database -->
-            </div>
+                </div>
         </div>
     </div>
 </div>
@@ -327,7 +331,7 @@
             <h3>Quick Links</h3>
             <a href="#" onclick="filterCategory('Men'); window.scrollTo(0,0);">Men's Fashion</a>
             <a href="#" onclick="filterCategory('Electronics'); window.scrollTo(0,0);">Gadgets & Tech</a>
-            <a href="#" onclick="document.getElementById('chatBox').style.display='block'">AI Support</a>
+            <a href="#" onclick="window.openZippyAI()">AI Support</a>
         </div>
         <div class="footer-col">
             <h3>Policies</h3>
@@ -348,11 +352,22 @@
     <div class="footer-bottom">&copy; 2026 ZippyKart. All Rights Reserved.</div>
 </footer>
 
-<div id="chatBox" style="display:none; position:fixed; bottom:20px; right:20px; background:#fff; padding:15px; border:1px solid #ccc; width: 250px; border-radius: 8px; z-index:9999; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    <strong style="color: #ff3e6c;">AI Agent Active</strong> 
-    <button onclick="this.parentElement.style.display='none'" style="float:right; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
-    <hr style="border-top: 1px solid #eee;">
-    <p style="font-size: 12px;">Hello Akash! How can I help you today?</p>
+<div id="zippyAiChat" style="display:none; position:fixed; bottom:20px; right:20px; width:320px; max-width:90%; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.15); z-index:10002; overflow:hidden; border: 1px solid #e2e8f0; font-family: 'Inter', sans-serif;">
+    <div style="background: linear-gradient(135deg, #ff3e6c 0%, #fb641b 100%); color:white; padding:15px; font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+        <span style="display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-robot"></i> Neon AI Support</span>
+        <span style="cursor:pointer; font-size:22px; line-height:1;" onclick="document.getElementById('zippyAiChat').style.display='none'">&times;</span>
+    </div>
+    <div id="aiChatBody" style="height:300px; padding:15px; overflow-y:auto; background:#f8fafc; font-size:14px; color:#334155; scroll-behavior: smooth;">
+        <div style="margin-bottom:15px; text-align:left;">
+            <span style="background:#ffe4e6; color:#e02844; padding:10px 14px; border-radius:0 15px 15px 15px; display:inline-block; border:1px solid #fecdd3; line-height:1.4;">
+                <b>Neon AI:</b> Hi! Main ZippyKart ka smart assistant hoon. Aaj main aapki kya madad kar sakta hoon?
+            </span>
+        </div>
+    </div>
+    <div style="display:flex; border-top:1px solid #e2e8f0; background:white; padding:5px;">
+        <input type="text" id="aiUserInput" placeholder="Type your query..." style="flex:1; border:none; padding:12px; outline:none; font-size:14px; background:transparent;" onkeypress="if(event.key === 'Enter') window.sendAiMessage()">
+        <button onclick="window.sendAiMessage()" style="background:none; color:#ff3e6c; border:none; padding:0 15px; cursor:pointer; font-size:18px;"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
 </div>
 
 <div class="bottom-nav">
@@ -392,6 +407,64 @@
     const db = getFirestore(app); // Database initialized
     const provider = new GoogleAuthProvider();
     window.currentUser = null;
+
+    // --- ADDED: LOGOUT ENGINE LOGIC ---
+    window.handleLogout = function() {
+        signOut(auth).then(() => {
+            alert("Aap successfully logout ho gaye hain!");
+            window.location.reload();
+        }).catch((error) => {
+            console.error("Logout Error:", error);
+        });
+    };
+
+    // --- ADDED: AI CHATBOT LOGIC ---
+    window.openZippyAI = function() {
+        document.getElementById('zippyAiChat').style.display = 'block';
+    };
+
+    window.sendAiMessage = function() {
+        const input = document.getElementById("aiUserInput");
+        const msg = input.value.trim();
+        if(!msg) return;
+        
+        const chatBody = document.getElementById("aiChatBody");
+        
+        // Customer Message
+        chatBody.innerHTML += `
+            <div style="margin-bottom:15px; text-align:right;">
+                <span style="background:#e2e8f0; color:#0f172a; padding:10px 14px; border-radius:15px 15px 0 15px; display:inline-block; line-height:1.4;">
+                    ${msg}
+                </span>
+            </div>`;
+        
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // AI Response Logic
+        setTimeout(() => {
+            let aiReply = "Aapka sawal mil gaya hai. Humari team ispar jaldi hi kaam karegi. Kya main aapki kisi aur cheez mein madad karoon?";
+            let lowerMsg = msg.toLowerCase();
+            
+            if(lowerMsg.includes("order") || lowerMsg.includes("track")) {
+                aiReply = "Apna order track karne ke liye apne Profile Dashboard mein 'My Orders' check karein.";
+            } else if(lowerMsg.includes("return") || lowerMsg.includes("refund")) {
+                aiReply = "Humari 10 Days no-questions-asked return policy hai. Refund aapke account mein 48 hours mein aa jayega.";
+            } else if(lowerMsg.includes("delivery") || lowerMsg.includes("time")) {
+                aiReply = "Humare saare orders fast delivery partners ke through 3-5 din mein deliver ho jate hain.";
+            } else if(lowerMsg.includes("hi") || lowerMsg.includes("hello")) {
+                aiReply = "Hello! Batayiye, aaj aap ZippyKart par kya dhoondh rahe hain?";
+            }
+
+            chatBody.innerHTML += `
+                <div style="margin-bottom:15px; text-align:left;">
+                    <span style="background:#ffe4e6; color:#e02844; padding:10px 14px; border-radius:0 15px 15px 15px; display:inline-block; border:1px solid #fecdd3; line-height:1.4;">
+                        <b>Neon AI:</b> ${aiReply}
+                    </span>
+                </div>`;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    };
 
     // Nav Helper
     window.setActiveNav = function(elem) { document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active')); if(elem) elem.classList.add('active'); }
@@ -511,7 +584,7 @@
         document.getElementById('cartTotalDisplay').innerText = "₹" + total;
     }
     
-    // --- 5. LIVE CHECKOUT AND ORDER SAVING ---
+    // --- 5. UPDATED SECURE CHECKOUT (API KEY REMOVED) ---
     window.checkoutCart = function() { 
         if(!window.currentUser) { alert("Please Login to proceed to Checkout!"); return openAuthModal(); }
         let total = window.cartList.reduce((sum, item) => sum + item.p, 0); 
@@ -520,36 +593,9 @@
     }
 
     window.payNow = function(p) { 
-        new Razorpay({ 
-            "key": "YOUR_RAZORPAY_KEY", 
-            "amount": p * 100, 
-            "currency": "INR", 
-            "name": "ZippyKart",
-            "handler": async function(r) { 
-                alert("Payment Success! Your order has been placed."); 
-                // Saving Order to Database
-                if(window.currentUser) {
-                    const userRef = doc(db, "users", window.currentUser.uid);
-                    const docSnap = await getDoc(userRef);
-                    let orders = docSnap.exists() && docSnap.data().orders ? docSnap.data().orders : [];
-                    
-                    let newOrder = {
-                        orderId: "ZIPPY-" + Math.floor(Math.random() * 1000000),
-                        items: window.cartList,
-                        total: p,
-                        status: "Processing",
-                        date: new Date().toLocaleDateString()
-                    };
-                    
-                    orders.unshift(newOrder); // Add to top of list
-                    await updateDoc(userRef, { orders: orders, cart: [] }); // Clear cart after order
-                    
-                    window.cartList = [];
-                    updateCartUI();
-                    renderOrdersUI(orders);
-                }
-            }
-        }).open(); 
+        // RAZORPAY API HAS BEEN SAFELY REMOVED FROM INDEX PAGE
+        alert("Redirecting to secure payment page... (Payment logic has been moved to cart.html for security)");
+        window.location.href = "cart.html"; // Seedha aapke purane cart wale secure page par bhej dega
     };
 
     // Render Orders UI
@@ -617,8 +663,7 @@
     window.openDashboard = function() {
         document.getElementById('loginDrop').style.display = 'none'; 
         if (!window.currentUser) { alert("Please login first to view your dashboard!"); openAuthModal(); return; }
-        document.getElementById('dashName').value = window.currentUser.displayName || "ZippyKart User";
-        document.getElementById('dashEmail').value = window.currentUser.email || "";
+        document.getElementById('dashName').value = window.currentUser.displayName || window.currentUser.email.split('@')[0] || "ZippyKart User";
         document.getElementById('dashboardModal').style.display = 'block';
     }
     
@@ -635,8 +680,8 @@
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
     };
 </script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="db.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="db.js"></script>
 </body>
 </html>
