@@ -16,7 +16,8 @@
         .dropdown div:hover { background: #f8f9fa; color: #ff3e6c; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         
-        .nav-icons { display: flex; justify-content: flex-start; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
+        /* ICONS CENTERED HERE */
+        .nav-icons { display: flex; justify-content: center; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
         .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; }
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
@@ -137,6 +138,7 @@
             .modal-left { position: static; }
             .modal-main-img { height: 300px; }
             .modal-right { overflow-y: visible; max-height: none; }
+            .nav-icons { justify-content: flex-start; } /* Safe scrolling for mobile */
         }
     </style>
 </head>
@@ -218,7 +220,7 @@
                 <span class="rating-text">1,245 Ratings & 120 Reviews</span>
             </div>
             <div class="price-row">
-                <p id="modalPrice" class="modal-price-tag">₹0</p>
+               <p id="modalPrice" class="modal-price-tag">₹0</p>
                 <span id="modalMrp" class="mrp">₹0</span>
                 <span id="modalDiscount" class="discount">0% off</span>
             </div>
@@ -393,7 +395,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
@@ -515,41 +517,69 @@
     };
 
     window.cartList = [];
-    const products = [
-        { id: 1, n: "Streetwear Tee", p: 899, img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300", imgs: ["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800", "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800", "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800"], cat: "Men" },
-        { id: 2, n: "Cargo Pants", p: 1299, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300", imgs: ["https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800", "https://images.unsplash.com/photo-1584865288642-42078afe6942?w=800"], cat: "Women" },
-        { id: 3, n: "Floral Gown", p: 1499, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=300", imgs: ["https://images.unsplash.com/photo-1515372039744-b8f02a3ae2a6?w=800"], cat: "Women" },
-        { id: 4, n: "Headphones", p: 3499, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", imgs: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"], cat: "Electronics" },
-        { id: 5, n: "Kids T-Shirt", p: 499, img: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=300", imgs: ["https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=800"], cat: "Kids" },
-        { id: 6, n: "Smart Watch", p: 2499, img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=300", imgs: ["https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800"], cat: "Watch" },
-        { id: 7, n: "Matte Lipstick", p: 599, img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300", imgs: ["https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800"], cat: "Cosmetic" },
-        { id: 8, n: "Action Figure", p: 899, img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300", imgs: ["https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800"], cat: "Toys" }
-    ];
+    window.products = []; 
+
+    // --- LIVE DATABASE CONNECTION FOR PRODUCTS ---
+    const productsRef = collection(db, "zippykart_products");
+    const q = query(productsRef, orderBy("timestamp", "desc"));
+    
+    onSnapshot(q, (snapshot) => {
+        window.products = [];
+        snapshot.forEach((docSnap) => {
+            let d = docSnap.data();
+            window.products.push({
+                id: docSnap.id,
+                n: d.title || 'Premium Product',
+                p: parseInt(d.price || 0),
+                mrp: parseInt(d.mrp || d.price || 0),
+                img: d.image || (d.all_images && d.all_images.length > 0 ? d.all_images[0] : 'https://via.placeholder.com/300'),
+                imgs: d.all_images && d.all_images.length > 0 ? d.all_images : [d.image || 'https://via.placeholder.com/300'],
+                cat: d.category || 'Men'
+            });
+        });
+        
+        let currentSearch = document.getElementById('mainSearchBar').value;
+        if(currentSearch) {
+             window.handleSearch(currentSearch);
+        } else {
+             window.renderProducts(window.products);
+        }
+    });
 
     window.renderProducts = function(filteredList) {
         const grid = document.getElementById('productGrid'); grid.innerHTML = '';
-        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg" style="grid-column: 1/-1; text-align:center; padding:40px; color:#777;">No products found.</div>`; return; }
+        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg" style="grid-column: 1/-1; text-align:center; padding:40px; color:#777;"><i class="fa-solid fa-box-open" style="font-size:30px; margin-bottom:10px;"></i><br>No products available yet. Add from Admin Panel!</div>`; return; }
         filteredList.forEach(item => {
-            grid.innerHTML += `<div class="product-card"><img src="${item.img}" onclick="openModal(${item.id})"><div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div><div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div><button class="add-btn" onclick="addToCartById(${item.id})">Add to Cart</button><button class="buy-btn" onclick="payNow(${item.p})">Buy Now</button></div>`;
+            grid.innerHTML += `<div class="product-card">
+                <img src="${item.img}" onclick="openModal('${item.id}')">
+                <div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0;">${item.n}</div>
+                <div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div>
+                <button class="add-btn" onclick="addToCartById('${item.id}')">Add to Cart</button>
+                <button class="buy-btn" onclick="window.location.href='product.html?id=${item.id}'">Buy Now</button>
+            </div>`;
         });
     }
 
-    window.renderProducts(products);
-    window.handleSearch = function(query) { document.getElementById('mainSearchBar').value = query; window.renderProducts(products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()))); }
+    window.handleSearch = function(query) { 
+        document.getElementById('mainSearchBar').value = query; 
+        window.renderProducts(window.products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()))); 
+    }
     
     window.filterCategory = function(cat) { 
         document.getElementById('mainSearchBar').value = ''; 
-        window.renderProducts(cat === 'All' ? products : products.filter(p => p.cat === cat)); 
+        window.renderProducts(cat === 'All' ? window.products : window.products.filter(p => p.cat === cat)); 
     }
     
     window.changeMainImg = function(src, elem) { document.getElementById('modalMainImg').src = src; document.querySelectorAll('.thumb-gallery img').forEach(img => img.classList.remove('active')); elem.classList.add('active'); }
     window.selectOption = function(className, elem) { document.querySelectorAll('.' + className).forEach(el => el.classList.remove('active')); elem.classList.add('active'); }
 
     window.openModal = function(id) {
-        const prod = products.find(p => p.id === id);
+        const prod = window.products.find(p => p.id === id);
+        if(!prod) return;
         document.getElementById('modalName').innerText = prod.n;
         document.getElementById('modalPrice').innerText = "₹" + prod.p;
-        let mrp = Math.floor(prod.p * 1.45); document.getElementById('modalMrp').innerText = "₹" + mrp;
+        let mrp = prod.mrp > prod.p ? prod.mrp : Math.floor(prod.p * 1.45); 
+        document.getElementById('modalMrp').innerText = "₹" + mrp;
         document.getElementById('modalDiscount').innerText = Math.floor(((mrp - prod.p) / mrp) * 100) + "% off";
         document.getElementById('modalMainImg').src = prod.imgs[0];
         
@@ -557,15 +587,26 @@
         prod.imgs.forEach((imgUrl, index) => { let activeClass = index === 0 ? 'active' : ''; thumbsHTML += `<img src="${imgUrl}" class="${activeClass}" onclick="changeMainImg('${imgUrl}', this)">`; });
         document.getElementById('modalThumbGallery').innerHTML = thumbsHTML;
 
-        document.getElementById('modalAddBtn').setAttribute('onclick', `addToCartById(${prod.id}); document.getElementById('productModal').style.display='none';`);
-        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `payNow(${prod.p})`); 
+        document.getElementById('modalAddBtn').setAttribute('onclick', `addToCartById('${prod.id}'); document.getElementById('productModal').style.display='none';`);
+        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `window.location.href='product.html?id=${prod.id}'`); 
         document.getElementById('productModal').style.display = 'block';
     }
     
     window.toggleCart = function(open) { const sidebar = document.getElementById('cartSidebar'); if (open) sidebar.classList.add('active'); else sidebar.classList.remove('active'); }
     
-    window.addToCartById = function(id) { window.cartList.push(products.find(p => p.id === id)); updateCartUI(); window.toggleCart(true); window.syncCartToDb(); }
-    window.removeFromCart = function(index) { window.cartList.splice(index, 1); updateCartUI(); window.syncCartToDb(); }
+    window.addToCartById = function(id) { 
+        window.cartList.push(window.products.find(p => p.id === id)); 
+        updateCartUI(); 
+        window.toggleCart(true); 
+        window.syncCartToDb(); 
+        localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
+    }
+    window.removeFromCart = function(index) { 
+        window.cartList.splice(index, 1); 
+        updateCartUI(); 
+        window.syncCartToDb(); 
+        localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
+    }
     
     function updateCartUI() {
         document.getElementById('cartCount').innerText = window.cartList.length; document.getElementById('mobileCartCount').innerText = window.cartList.length;
@@ -669,4 +710,4 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="db.js"></script>
 </body>
-</html>
+</html> 
