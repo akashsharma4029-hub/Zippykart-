@@ -11,23 +11,23 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <style>
-        /* =========================================
-           1. PREMIUM CSS CORE SETUP
-           ========================================= */
+        /* Base Setup */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: #f1f5f9; color: #0f172a; }
 
-        /* NAVBAR */
+        /* Navbar */
         .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; display: flex; align-items: center; gap: 8px;}
         .logo span { color: #0f172a; }
         .continue-shopping { color: #3b82f6; font-size: 14px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
 
-        /* LAYOUT CONTAINER */
+        /* Container */
         .cart-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; gap: 30px; align-items: flex-start; }
 
-        /* LEFT: CART ITEMS */
+        /* Left Items Section */
         .cart-items-section { flex: 1.5; }
         .cart-header { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         
@@ -57,7 +57,7 @@
         .remove-btn { color: #ef4444; background: none; border: none; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
         .remove-btn:hover { text-decoration: underline; }
 
-        /* RIGHT: BILLING & CHECKOUT */
+        /* Right Checkout Section */
         .checkout-section { flex: 1; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; position: sticky; top: 90px; }
         .bill-header { font-size: 16px; font-weight: 700; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px; }
         
@@ -65,23 +65,25 @@
         .bill-row.discount { color: #16a34a; }
         .bill-row.total { font-size: 18px; font-weight: 800; color: #0f172a; border-top: 1px dashed #cbd5e1; padding-top: 15px; margin-top: 5px; }
         
-        /* CUSTOMER DETAILS FORM */
+        /* Form Inputs */
         .checkout-form { margin-top: 25px; }
         .form-title { font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #0f172a; }
         .input-field { width: 100%; padding: 12px 15px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; background: #f8fafc;}
         .input-field:focus { border-color: #e02844; background: #fff; box-shadow: 0 0 0 3px rgba(224, 40, 68, 0.1); }
         
-        .payment-box { border: 1px solid #16a34a; background: #f0fdf4; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #15803d; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        /* Payment Options Box */
+        .payment-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 600; display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .payment-box label { cursor: pointer; display: flex; align-items: center; gap: 8px; }
 
         .place-order-btn { width: 100%; background: #fb641b; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .place-order-btn:hover { background: #f97316; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(251, 100, 27, 0.3); }
 
-        /* Trust Badges */
+        /* Trust Strip */
         .trust-strip { display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
         .trust-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #64748b; font-weight: 600; }
         .trust-item i { color: #94a3b8; font-size: 16px; }
 
-        /* Mobile Responsiveness */
+        /* Mobile */
         @media (max-width: 900px) {
             .cart-container { flex-direction: column; }
             .checkout-section { position: static; width: 100%; }
@@ -109,8 +111,7 @@
                 <button onclick="window.location.href='index.html'">Explore Products</button>
             </div>
 
-            <div id="cartItemsList">
-                </div>
+            <div id="cartItemsList"></div>
         </div>
 
         <div class="checkout-section" id="checkoutSectionPanel">
@@ -149,7 +150,12 @@
             </div>
 
             <div class="payment-box">
-                <input type="radio" checked style="accent-color:#16a34a;"> Cash on Delivery (COD) Available
+                <label style="color:#15803d;">
+                    <input type="radio" name="cartPayOpt" value="COD" checked style="accent-color:#16a34a;"> Cash on Delivery (COD)
+                </label>
+                <label style="color:#1d4ed8;">
+                    <input type="radio" name="cartPayOpt" value="Online" style="accent-color:#3b82f6;"> Pay Online (UPI / Card / Razorpay)
+                </label>
             </div>
 
             <button class="place-order-btn" id="btnPlaceOrder" onclick="placeMegaOrder()">
@@ -165,7 +171,7 @@
     </div>
 
     <script>
-        // 1. FIREBASE SETUP
+        // FIREBASE SETUP
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -174,7 +180,7 @@
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 2. LOAD CART DATA FROM LOCAL STORAGE
+        // LOAD CART
         let cartItems = JSON.parse(localStorage.getItem('zippy_mega_cart')) || [];
 
         function renderCart() {
@@ -184,7 +190,6 @@
             
             listContainer.innerHTML = "";
 
-            // Check if cart is empty
             if(cartItems.length === 0) {
                 emptyMsg.style.display = "block";
                 checkoutPanel.style.display = "none";
@@ -196,7 +201,6 @@
             checkoutPanel.style.display = "block";
             document.getElementById('cartCountBadge').innerText = `(${cartItems.length} items)`;
 
-            // Render Items
             cartItems.forEach((item, index) => {
                 let mrpHtml = item.mrp && item.mrp > item.price ? `<span class="item-mrp">₹${item.mrp}</span>` : '';
 
@@ -227,7 +231,6 @@
             calculateBill();
         }
 
-        // 3. CART INTERACTIONS
         window.updateQty = function(index, change) {
             let newQty = cartItems[index].qty + change;
             if(newQty >= 1 && newQty <= 10) {
@@ -249,14 +252,13 @@
             localStorage.setItem('zippy_mega_cart', JSON.stringify(cartItems));
         }
 
-        // 4. BILLING CALCULATOR
         function calculateBill() {
             let totalMrp = 0;
             let totalPrice = 0;
             let totalItems = 0;
 
             cartItems.forEach(item => {
-                let itemMrp = item.mrp ? item.mrp : item.price; // Fallback if MRP missing
+                let itemMrp = item.mrp ? item.mrp : item.price; 
                 totalMrp += (itemMrp * item.qty);
                 totalPrice += (item.price * item.qty);
                 totalItems += item.qty;
@@ -271,71 +273,75 @@
             document.getElementById('billSavings').innerText = "₹" + discount;
         }
 
-        // 5. PLACE MEGA ORDER LOGIC
+        // MASTER ORDER ENGINE WITH RAZORPAY
         window.placeMegaOrder = async function() {
             const name = document.getElementById('custName').value;
             const phone = document.getElementById('custPhone').value;
             const city = document.getElementById('custCity').value;
             const pin = document.getElementById('custPincode').value;
             const address = document.getElementById('custAddress').value;
-            const btn = document.getElementById('btnPlaceOrder');
+            
+            const selectedMethod = document.querySelector('input[name="cartPayOpt"]:checked').value;
 
             if(!name || !phone || !address) {
                 return alert("Please fill Name, Phone and Full Address to place the order.");
             }
 
-            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing Order...`;
-            btn.disabled = true;
-
-            // Calculate Final Total
             let finalTotal = 0;
             cartItems.forEach(item => finalTotal += (item.price * item.qty));
 
-            // Create a bundled product string for the Admin Panel
-            let productSummaryString = "";
-            cartItems.forEach((item, index) => {
-                productSummaryString += `${index+1}. ${item.title} (Size: ${item.size}, Qty: ${item.qty})\n`;
-            });
+            if(selectedMethod === "COD") {
+                executeCartFirestoreOrder(name, phone, city, pin, address, finalTotal, "COD", "Pending Verification");
+            } else {
+                var options = {
+                    "key": "rzp_test_ePqyDkWgVvInuX", // <-- YAHAN APNI ASLI RAZORPAY API KEY DAALEIN
+                    "amount": finalTotal * 100, 
+                    "currency": "INR",
+                    "name": "ZippyKart Cart Purchase",
+                    "description": "Payment for " + cartItems.length + " items",
+                    "handler": function (response){
+                        executeCartFirestoreOrder(name, phone, city, pin, address, finalTotal, "Razorpay Online", "Paid & Confirmed", response.razorpay_payment_id);
+                    },
+                    "prefill": { "name": name, "contact": phone },
+                    "theme": { "color": "#fb641b" }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+            }
+        }
+
+        async function executeCartFirestoreOrder(name, phone, city, pin, address, finalTotal, method, status, paymentId = "") {
+            const btn = document.getElementById('btnPlaceOrder');
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing...`;
+            btn.disabled = true;
 
             const orderPayload = {
                 productTitle: "Multi-Item Order (" + cartItems.length + " Items)",
-                detailedItems: cartItems, // Saves full array in DB
+                detailedItems: cartItems,
                 size: "Mixed",
                 quantity: cartItems.length,
                 totalAmount: finalTotal,
-                paymentMethod: "COD",
-                status: "Pending Verification",
-                customerInfo: {
-                    name: name,
-                    phone: phone,
-                    city: city,
-                    pincode: pin,
-                    fullAddress: address
-                },
+                paymentMethod: method,
+                razorpayPaymentId: paymentId,
+                status: status,
+                customerInfo: { name: name, phone: phone, city: city, pincode: pin, fullAddress: address },
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
 
             try {
-                // SENDS TO ADMIN DASHBOARD
                 await db.collection('zippykart_orders').add(orderPayload);
-                
-                // Clear Cart
                 localStorage.removeItem('zippy_mega_cart');
-                
-                alert("🎉 Order Successfully Placed! Our team will contact you shortly.");
+                alert("🎉 Order Successfully Placed!");
                 window.location.href = "index.html"; 
-
             } catch(e) {
-                console.error("Order Error: ", e);
-                alert("Failed to place order. Check your connection.");
+                alert("Failed to place order.");
                 btn.innerHTML = `PLACE ORDER <i class="fas fa-arrow-right"></i>`;
                 btn.disabled = false;
             }
         }
 
-        // INITIALIZE PAGE
         renderCart();
-
     </script>
 </body>
 </html>
+    
