@@ -11,9 +11,9 @@
         .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; cursor: pointer; }
         .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; min-width: 150px; margin: 0 15px; }
         .menu-wrapper { position: relative; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
-        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 160px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .dropdown div.drop-item { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 12px; font-weight: normal; transition: 0.2s; }
-        .dropdown div.drop-item:hover { background: #f8f9fa; color: #ff3e6c; }
+        .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 6px; overflow:hidden;}
+        .dropdown div.drop-item { padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; display:flex; align-items:center; gap:10px;}
+        .dropdown div.drop-item:hover { background: #f5faff; color: #2874f0; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         
         .nav-icons { display: flex; justify-content: flex-start; gap: 15px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
@@ -52,8 +52,12 @@
         .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
         
+        /* Modals & Premium Animation */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); overflow-y: auto; }
+        @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
+        @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
+        
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
         
         /* Product Modal (Unchanged) */
@@ -100,24 +104,35 @@
         .input-group { display: flex; gap: 10px; }
 
         /* =========================================
-           NEW PRO DASHBOARD (AMAZON/FLIPKART STYLE)
+           ADVANCED PRO DASHBOARD (FLIPKART CLONE)
            ========================================= */
-        .dashboard-content { background: #f1f3f6; margin: 5% auto; width: 95%; max-width: 1000px; border-radius: 8px; position: relative; box-sizing: border-box; animation: popUpAnim 0.4s; display: flex; height: 75vh; overflow: hidden;}
-        .dash-sidebar { width: 280px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; z-index: 2;}
-        .dash-user-info { padding: 25px 20px; border-bottom: 1px solid #e0e0e0; display:flex; align-items:center; gap:15px; background: #fff;}
-        .dash-avatar { width: 55px; height: 55px; border-radius: 50%; background: #2874f0; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; box-shadow: 0 4px 8px rgba(40,116,240,0.3);}
-        .dash-nav { padding: 10px 0; overflow-y: auto; flex:1;}
-        .dash-nav-item { padding: 16px 25px; display: flex; align-items: center; gap: 15px; color: #555; cursor: pointer; transition: 0.2s; font-size: 15px; font-weight: 500;}
-        .dash-nav-item:hover { background: #f5faff; color: #2874f0; }
-        .dash-nav-item.active { background: #f5faff; color: #2874f0; border-left: 4px solid #2874f0; font-weight: bold;}
-        .dash-nav-item i { width: 20px; text-align: center; font-size: 18px; color:#2874f0;}
+        .dashboard-content { background: #f1f3f6; margin: 5% auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 80vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
         
-        .dash-main { flex: 1; padding: 25px; overflow-y: auto; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.08);}
-        .dash-header { font-size: 20px; font-weight: bold; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
-        .order-card { border: 1px solid #e0e0e0; padding: 15px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s;}
-        .order-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-color:#d0d0d0;}
+        .dash-sidebar { width: 320px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
+        
+        /* Flipkart Style Grouping */
+        .dash-group-title { padding: 20px 20px 8px 20px; font-size: 15px; font-weight: 800; color: #212121; background: #fff; border-bottom: 1px solid transparent; }
+        .dash-nav-item { padding: 16px 20px; display: flex; align-items: center; gap: 15px; color: #444; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
+        .dash-nav-item:hover { background: #f9f9f9; color: #2874f0; }
+        .dash-nav-item.active { background: #f5faff; color: #2874f0; font-weight: 600; border-left: 4px solid #2874f0;}
+        .dash-nav-item i { width: 22px; text-align: center; font-size: 18px; color:#2874f0;}
+        
+        .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
+        
+        /* Mobile Back Header */
+        .dash-mobile-header { display: none; background: #2874f0; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
+        .dash-mobile-header i { cursor: pointer; font-size: 20px; }
 
-        /* Footer & Others */
+        .dash-inner-content { padding: 20px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
+        .dash-header-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
+        
+        .order-card { border: 1px solid #e0e0e0; padding: 15px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s;}
+        .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color:#d0d0d0;}
+        
+        .logout-full-btn { width: 100%; background: #fff; color: #2874f0; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
+        .logout-full-btn:hover { background: #f5faff; }
+
+        /* Footer */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -139,6 +154,9 @@
         .bottom-nav-item.active { color: #ff3e6c; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: calc(50% - 20px); border: 2px solid #fff; font-weight: bold; }
 
+        /* =========================================
+           MOBILE SPECIFIC DASHBOARD FIXES
+           ========================================= */
         @media (max-width: 768px) {
             body { padding-bottom: 65px; }
             .bottom-nav { display: flex; }
@@ -157,13 +175,13 @@
             .modal-right { overflow-y: visible; max-height: none; }
             .nav-icons { justify-content: flex-start; }
             
-            /* Dashboard Mobile Fix */
-            .dashboard-content { flex-direction: column; height: 85vh; margin: 0; width: 100%; border-radius: 0;}
-            .dash-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e0e0e0; flex: none;}
-            .dash-nav { display: flex; overflow-x: auto; padding: 0; white-space: nowrap;}
-            .dash-nav-item { padding: 12px 15px; border-left: none; border-bottom: 3px solid transparent;}
-            .dash-nav-item.active { border-left: none; border-bottom: 3px solid #2874f0; }
-            .dash-main { margin: 0; border-radius: 0; box-shadow: none; padding: 15px;}
+            /* APP-LIKE MOBILE DASHBOARD */
+            .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
+            .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
+            .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
+            .dash-mobile-header { display: flex; } /* Shows Back Button Header */
+            .dash-inner-content { margin: 10px; border-radius: 6px; }
+            #dashDesktopCloseBtn { display: none; } /* Hide the X button, rely on Back button or closing modal via code */
         }
     </style>
 </head>
@@ -179,7 +197,8 @@
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
-            <div class="drop-item" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Dashboard</div>
+            <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Profile</div>
+            <div id="adminOpt" class="drop-item" style="display:none;" onclick="window.location.href='admin.html'"><i class="fa-solid fa-store"></i> Sell on ZippyKart</div>
             <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
@@ -333,61 +352,119 @@
 
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
-        <span class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="z-index: 10; right: 15px; top: 10px; color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 28px;">&times;</span>
+        <span id="dashDesktopCloseBtn" class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="z-index: 10; right: 15px; top: 10px; color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 28px;">&times;</span>
         
         <div class="dash-sidebar">
-            <div class="dash-user-info">
-                <div class="dash-avatar" id="dashAvatarLtr">A</div>
-                <div>
-                    <div style="font-size: 12px; color: #777;">Hello,</div>
-                    <div style="font-weight: bold; font-size: 16px; color:#212121;" id="dashSidebarName">User</div>
-                </div>
+            <div style="padding: 15px 20px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #e0e0e0; display:flex; justify-content:space-between;">
+                My Account 
+                <span onclick="document.getElementById('dashboardModal').style.display='none'" style="color:#ff3e6c; cursor:pointer; font-size: 20px;">&times;</span>
             </div>
-            <div class="dash-nav">
-                <div class="dash-nav-item active" onclick="switchDashTab('dashOrders', this)"><i class="fa-solid fa-box-open"></i> My Orders <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
-                <div class="dash-nav-item" onclick="switchDashTab('dashProfile', this)"><i class="fa-solid fa-user"></i> Profile Info <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
-                <div class="dash-nav-item" onclick="switchDashTab('dashAddress', this)"><i class="fa-solid fa-location-dot"></i> Manage Addresses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
-                <div class="dash-nav-item" onclick="switchDashTab('dashWishlist', this)"><i class="fa-solid fa-heart"></i> My Wishlist <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc; font-size:12px;"></i></div>
-                <div class="dash-nav-item" onclick="handleLogout()" style="color:#ff3e6c;"><i class="fa-solid fa-power-off" style="color:#ff3e6c;"></i> Logout</div>
-            </div>
-        </div>
+            
+            <div class="dash-group-title">Account Settings</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashZippyPlus', this, 'Zippy Premium')"><i class="fa-solid fa-star"></i> Zippy Premium <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item active" onclick="switchDashTab('dashOrders', this, 'My Orders')"><i class="fa-solid fa-box-open"></i> My Orders <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashProfile', this, 'Edit Profile')"><i class="fa-solid fa-user"></i> Edit Profile <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashCards', this, 'Saved Cards')"><i class="fa-solid fa-wallet"></i> Saved Credit / Debit Cards <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashAddress', this, 'Saved Addresses')"><i class="fa-solid fa-location-dot"></i> Saved Addresses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashLanguage', this, 'Select Language')"><i class="fa-solid fa-language"></i> Select Language <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashNotifSet', this, 'Notification Settings')"><i class="fa-solid fa-bell"></i> Notification Settings <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashPrivacy', this, 'Privacy Center')"><i class="fa-solid fa-shield-halved"></i> Privacy Center <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+
+            <div class="dash-group-title">My Activity</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashReviews', this, 'My Reviews')"><i class="fa-solid fa-pen-to-square"></i> Reviews <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashQA', this, 'Questions & Answers')"><i class="fa-solid fa-comments"></i> Questions & Answers <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+
+            <div class="dash-group-title">Earn with ZippyKart</div>
+            <div class="dash-nav-item" onclick="window.location.href='admin.html'"><i class="fa-solid fa-store"></i> Sell on ZippyKart <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+
+            <div class="dash-group-title">Feedback & Information</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashTerms', this, 'Terms & Policies')"><i class="fa-solid fa-file-contract"></i> Terms, Policies and Licenses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashFAQ', this, 'Browse FAQs')"><i class="fa-solid fa-circle-question"></i> Browse FAQs <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
+
+            <button class="logout-full-btn" onclick="handleLogout()">Log Out</button>
+            <div style="height: 30px;"></div> </div>
         
         <div class="dash-main">
-            <div id="dashOrders" class="dash-tab-content" style="display:block;">
-                <div class="dash-header">My Orders</div>
-                <div id="ordersTabPayload">
-                    <p style="color:#777; font-size:14px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching your orders...</p>
-                </div>
+            <div class="dash-mobile-header">
+                <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
+                <span id="dashHeaderDynamicTitle">My Orders</span>
             </div>
-            
-            <div id="dashProfile" class="dash-tab-content" style="display:none;">
-                <div class="dash-header">Personal Information</div>
-                <div style="max-width: 400px;">
-                    <label style="font-size:12px; color:#777; font-weight:bold;">Full Name</label>
-                    <input type="text" id="dashNameInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
-                    
-                    <label style="font-size:12px; color:#777; font-weight:bold;">Email Address</label>
-                    <input type="text" id="dashEmailInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
-                    
-                    <button class="buy-btn" style="background:#2874f0; width:auto; padding:10px 25px; margin-top:10px;">Edit Profile</button>
+
+            <div class="dash-inner-content">
+                <div id="dashOrders" class="dash-tab-content" style="display:block;">
+                    <div class="dash-header-title">My Orders</div>
+                    <div id="ordersTabPayload">
+                        <p style="color:#777; font-size:14px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching your orders...</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="dashAddress" class="dash-tab-content" style="display:none;">
-                <div class="dash-header">Manage Addresses</div>
-                <div style="border: 1px dashed #2874f0; background: #f5faff; padding: 20px; border-radius: 4px; text-align: left;">
-                    <label style="font-size:13px; color:#2874f0; font-weight:bold; display:block; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> ADD A NEW ADDRESS</label>
-                    <textarea id="dashAddressInput" class="auth-input" placeholder="Enter your full home/office address..." rows="3" style="background:#fff; border-color:#dbeafe;"></textarea>
-                    <button class="buy-btn" onclick="saveAddress()" style="background:#2874f0; width:auto; padding:10px 25px;">Save Address</button>
+                
+                <div id="dashZippyPlus" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Zippy Premium</div>
+                    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color:white; padding:30px; border-radius:12px; position:relative; overflow:hidden;">
+                        <i class="fa-solid fa-star" style="position:absolute; right:20px; top:20px; font-size:40px; color: gold; opacity:0.3;"></i>
+                        <h2 style="margin:0 0 10px 0; color:gold;">Premium Member</h2>
+                        <p style="margin:0; font-size:14px; color:#cbd5e1;">Enjoy free shipping and early access to streetwear drops!</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="dashWishlist" class="dash-tab-content" style="display:none;">
-                <div class="dash-header">My Wishlist</div>
-                <div style="text-align:center; padding: 60px 20px; color:#777;">
-                    <i class="fa-solid fa-heart-crack" style="font-size: 50px; color:#e0e0e0; margin-bottom:15px;"></i>
-                    <h3 style="margin:0; color:#333;">Your wishlist is empty!</h3>
-                    <p style="font-size:13px; margin-top:5px;">Explore more and shortlist some items.</p>
+
+                <div id="dashProfile" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Edit Profile</div>
+                    <div style="max-width: 400px;">
+                        <label style="font-size:12px; color:#777; font-weight:bold;">Full Name</label>
+                        <input type="text" id="dashNameInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
+                        
+                        <label style="font-size:12px; color:#777; font-weight:bold;">Email Address</label>
+                        <input type="text" id="dashEmailInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
+                        
+                        <button class="buy-btn" style="background:#2874f0; width:auto; padding:10px 25px; margin-top:10px;">Update Details</button>
+                    </div>
+                </div>
+                
+                <div id="dashCards" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Saved Credit / Debit Cards</div>
+                    <div style="text-align:center; padding: 40px 20px; color:#777;">
+                        <i class="fa-solid fa-credit-card" style="font-size: 40px; color:#e0e0e0; margin-bottom:15px;"></i>
+                        <h4 style="margin:0; color:#333;">No Cards Saved</h4>
+                        <p style="font-size:13px; margin-top:5px;">You can save a card during the secure checkout process.</p>
+                    </div>
+                </div>
+
+                <div id="dashAddress" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Saved Addresses</div>
+                    <div style="border: 1px dashed #2874f0; background: #f5faff; padding: 20px; border-radius: 4px; text-align: left;">
+                        <label style="font-size:13px; color:#2874f0; font-weight:bold; display:block; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> ADD A NEW ADDRESS</label>
+                        <textarea id="dashAddressInput" class="auth-input" placeholder="Enter your full home/office address..." rows="3" style="background:#fff; border-color:#dbeafe;"></textarea>
+                        <button class="buy-btn" onclick="saveAddress()" style="background:#2874f0; width:auto; padding:10px 25px;">Save Address</button>
+                    </div>
+                </div>
+
+                <div id="dashLanguage" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Select Language</div>
+                    <p>Current Language: <strong>English (Default)</strong></p>
+                </div>
+                <div id="dashNotifSet" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Notification Settings</div>
+                    <p>✔️ Email Alerts active<br>✔️ Push Notifications active</p>
+                </div>
+                <div id="dashPrivacy" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Privacy Center</div>
+                    <p>Manage your data and privacy preferences securely.</p>
+                </div>
+                <div id="dashReviews" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">My Reviews</div>
+                    <p style="color:#777;">You haven't written any product reviews yet.</p>
+                </div>
+                <div id="dashQA" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Questions & Answers</div>
+                    <p style="color:#777;">No questions asked recently.</p>
+                </div>
+                <div id="dashTerms" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Terms, Policies & Licenses</div>
+                    <p>Please refer to our standard E-Commerce terms of service.</p>
+                </div>
+                <div id="dashFAQ" class="dash-tab-content" style="display:none;">
+                    <div class="dash-header-title">Browse FAQs</div>
+                    <p>How can we help you today? Contact AI Support for instant answers!</p>
                 </div>
             </div>
         </div>
@@ -510,30 +587,22 @@
         if(!msg) return;
         
         const chatBody = document.getElementById("aiChatBody");
-        
         chatBody.innerHTML += `
             <div style="margin-bottom:15px; text-align:right;">
                 <span style="background:#e2e8f0; color:#0f172a; padding:10px 14px; border-radius:15px 15px 0 15px; display:inline-block; line-height:1.4;">
                     ${msg}
                 </span>
             </div>`;
-        
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
         setTimeout(() => {
             let aiReply = "Aapka sawal mil gaya hai. Humari team ispar jaldi hi kaam karegi. Kya main aapki kisi aur cheez mein madad karoon?";
             let lowerMsg = msg.toLowerCase();
-            
-            if(lowerMsg.includes("order") || lowerMsg.includes("track")) {
-                aiReply = "Apna order track karne ke liye apne Profile Dashboard mein 'My Orders' check karein.";
-            } else if(lowerMsg.includes("return") || lowerMsg.includes("refund")) {
-                aiReply = "Humari 10 Days no-questions-asked return policy hai. Refund aapke account mein 48 hours mein aa jayega.";
-            } else if(lowerMsg.includes("delivery") || lowerMsg.includes("time")) {
-                aiReply = "Humare saare orders fast delivery partners ke through 3-5 din mein deliver ho jate hain.";
-            } else if(lowerMsg.includes("hi") || lowerMsg.includes("hello")) {
-                aiReply = "Hello! Batayiye, aaj aap ZippyKart par kya dhoondh rahe hain?";
-            }
+            if(lowerMsg.includes("order") || lowerMsg.includes("track")) { aiReply = "Apna order track karne ke liye apne Profile Dashboard mein 'My Orders' check karein."; } 
+            else if(lowerMsg.includes("return") || lowerMsg.includes("refund")) { aiReply = "Humari 10 Days no-questions-asked return policy hai. Refund aapke account mein 48 hours mein aa jayega."; } 
+            else if(lowerMsg.includes("delivery") || lowerMsg.includes("time")) { aiReply = "Humare saare orders fast delivery partners ke through 3-5 din mein deliver ho jate hain."; } 
+            else if(lowerMsg.includes("hi") || lowerMsg.includes("hello")) { aiReply = "Hello! Batayiye, aaj aap ZippyKart par kya dhoondh rahe hain?"; }
 
             chatBody.innerHTML += `
                 <div style="margin-bottom:15px; text-align:left;">
@@ -567,7 +636,10 @@
         if (user) {
             let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
             document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
-            document.getElementById('authOpt').style.display = 'none'; document.getElementById('logoutOpt').style.display = 'block';
+            document.getElementById('authOpt').style.display = 'none'; 
+            document.getElementById('profileOpt').style.display = 'flex';
+            document.getElementById('logoutOpt').style.display = 'flex';
+            document.getElementById('adminOpt').style.display = 'flex'; 
 
             const userRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(userRef);
@@ -582,7 +654,10 @@
             }
         } else {
             document.getElementById('navLoginText').innerText = "LOGIN";
-            document.getElementById('authOpt').style.display = 'block'; document.getElementById('logoutOpt').style.display = 'none';
+            document.getElementById('authOpt').style.display = 'flex'; 
+            document.getElementById('profileOpt').style.display = 'none';
+            document.getElementById('adminOpt').style.display = 'none';
+            document.getElementById('logoutOpt').style.display = 'none';
             window.cartList = []; updateCartUI();
             document.getElementById('dashAddressInput').value = "";
             renderOrdersUI([]);
@@ -618,11 +693,7 @@
         });
         
         let currentSearch = document.getElementById('mainSearchBar').value;
-        if(currentSearch) {
-             window.handleSearch(currentSearch);
-        } else {
-             window.renderProducts(window.products);
-        }
+        if(currentSearch) { window.handleSearch(currentSearch); } else { window.renderProducts(window.products); }
     });
 
     window.renderProducts = function(filteredList) {
@@ -675,15 +746,12 @@
     
     window.addToCartById = function(id) { 
         window.cartList.push(window.products.find(p => p.id === id)); 
-        updateCartUI(); 
-        window.toggleCart(true); 
-        window.syncCartToDb(); 
+        updateCartUI(); window.toggleCart(true); window.syncCartToDb(); 
         localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
     }
     window.removeFromCart = function(index) { 
         window.cartList.splice(index, 1); 
-        updateCartUI(); 
-        window.syncCartToDb(); 
+        updateCartUI(); window.syncCartToDb(); 
         localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
     }
     
@@ -701,10 +769,7 @@
         window.payNow(total); 
     }
 
-    window.payNow = function(p) { 
-        alert("Redirecting to secure payment page...");
-        window.location.href = "cart.html";
-    };
+    window.payNow = function(p) { alert("Redirecting to secure payment page..."); window.location.href = "cart.html"; };
 
     window.renderOrdersUI = function(orders) {
         const container = document.getElementById('ordersTabPayload');
@@ -773,26 +838,42 @@
     
     window.googleSignIn = function() { signInWithPopup(auth, provider).then(() => { document.getElementById('authModal').style.display = 'none'; }).catch((error) => { alert(error.message); }); }
 
-    // --- FIX: DASHBOARD OPEN & TABS LOGIC ---
+    // --- APP-LEVEL DASHBOARD NAVIGATION LOGIC ---
     window.openDashboard = function() {
         document.getElementById('loginDrop').style.display = 'none'; 
         if (!window.currentUser) { alert("Please login first to view your dashboard!"); openAuthModal(); return; }
-        
-        let fullName = window.currentUser.displayName || window.currentUser.email.split('@')[0] || "User";
-        document.getElementById('dashSidebarName').innerText = fullName;
-        document.getElementById('dashAvatarLtr').innerText = fullName.charAt(0).toUpperCase();
         
         document.getElementById('dashNameInput').value = window.currentUser.displayName || "";
         document.getElementById('dashEmailInput').value = window.currentUser.email || "";
         
         document.getElementById('dashboardModal').style.display = 'flex';
+        
+        // Reset to Sidebar view on mobile
+        if(window.innerWidth <= 768) {
+            document.querySelector('.dash-sidebar').style.display = 'flex';
+            document.querySelector('.dash-main').style.display = 'none';
+        }
     }
     
-    window.switchDashTab = function(tabId, eventElem) {
+    window.switchDashTab = function(tabId, eventElem, title) {
         document.querySelectorAll('.dash-tab-content').forEach(tab => tab.style.display = 'none');
         document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
+        
         document.getElementById(tabId).style.display = 'block'; 
         eventElem.classList.add('active');
+        
+        if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
+        
+        // App-like transition for Mobile
+        if(window.innerWidth <= 768) {
+            document.querySelector('.dash-sidebar').style.display = 'none';
+            document.querySelector('.dash-main').style.display = 'block';
+        }
+    }
+    
+    window.closeDashMainMobile = function() {
+        document.querySelector('.dash-main').style.display = 'none';
+        document.querySelector('.dash-sidebar').style.display = 'flex';
     }
     
     window.onclick = function(e) { 
