@@ -32,6 +32,7 @@
             height: 100vh;
             left: 0;
             top: 0;
+            z-index: 100;
         }
 
         .brand-logo {
@@ -47,6 +48,7 @@
             color: #ff3e6c;
         }
 
+        /* Sidebar Items Basic Styling */
         .menu-item {
             display: flex;
             align-items: center;
@@ -56,13 +58,33 @@
             text-decoration: none;
             border-radius: 6px;
             margin-bottom: 8px;
-            transition: all 0.3s;
+            transition: all 0.25s ease-in-out;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .menu-item:hover, .menu-item.active {
-            background-color: #334155;
+        /* Hover and Dynamic Push Animation */
+        .menu-item:hover {
+            background-color: #2d3748;
             color: #fff;
+            padding-left: 20px;
+        }
+
+        /* Animated Active State Selector */
+        .menu-item.active {
+            background: linear-gradient(135deg, #2d3748, #334155);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: inset 4px 0px 0px 0px #ff3e6c; /* Left red bar */
+            padding-left: 20px;
+            animation: slideActive 0.3s ease-out;
+        }
+
+        /* Smooth pop micro-animation */
+        @keyframes slideActive {
+            0% { transform: scale(0.98); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* Main Content Area */
@@ -70,6 +92,21 @@
             margin-left: 260px;
             padding: 40px;
             width: calc(100% - 260px);
+        }
+
+        /* Content Panel Visibility Animation System */
+        .admin-panel-section {
+            display: none; 
+        }
+        
+        .admin-panel-section.active-view {
+            display: block; 
+            animation: fadeInView 0.4s ease-in-out;
+        }
+
+        @keyframes fadeInView {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header-section {
@@ -158,7 +195,7 @@
         .edit-icon { color: #2196f3; }
         .delete-icon { color: #f44336; }
 
-        /* Modal Overlay Styles matching your exact design UI */
+        /* Modal Overlay Styles */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -347,40 +384,53 @@
 
     <div class="sidebar">
         <div class="brand-logo"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
-        <div class="menu-item active"><i class="fa-solid fa-boxes-stacked"></i> Products Master</div>
-        <div class="menu-item"><i class="fa-solid fa-truck-ramp-box"></i> Live Orders</div>
-        <div class="menu-item"><i class="fa-solid fa-users"></i> Customers</div>
-        <div class="menu-item"><i class="fa-solid fa-gears"></i> Store Settings</div>
+        <div class="menu-item active" onclick="switchAdminTab(this, 'productsMasterView')"><i class="fa-solid fa-boxes-stacked"></i> Products Master</div>
+        <div class="menu-item" onclick="switchAdminTab(this, 'liveOrdersView')"><i class="fa-solid fa-truck-ramp-box"></i> Live Orders</div>
+        <div class="menu-item" onclick="switchAdminTab(this, 'customersView')"><i class="fa-solid fa-users"></i> Customers</div>
+        <div class="menu-item" onclick="switchAdminTab(this, 'storeSettingsView')"><i class="fa-solid fa-gears"></i> Store Settings</div>
     </div>
 
     <div class="main-content">
-        <div class="header-section">
-            <div>
-                <h1>Products Inventory Master</h1>
-                <p style="color: #64748b; font-size: 14px; margin-top: 4px;">Manage your live marketplace synchronization entries</p>
+        
+        <div id="productsMasterView" class="admin-panel-section active-view">
+            <div class="header-section">
+                <div>
+                    <h1>Products Inventory Master</h1>
+                    <p style="color: #64748b; font-size: 14px; margin-top: 4px;">Manage your live marketplace synchronization entries</p>
+                </div>
+                <button class="primary-btn" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Create Marketplace Entry</button>
             </div>
-            <button class="primary-btn" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Create Marketplace Entry</button>
+
+            <div class="inventory-card">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                               <th>Image</th><th>Commercial Title</th><th>Category Sync</th><th>Sale Price</th><th>MRP</th><th>Stock Count</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div class="inventory-card">
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Commercial Title</th>
-                            <th>Category Sync</th>
-                            <th>Sale Price</th>
-                            <th>MRP</th>
-                            <th>Stock Count</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventoryTableBody">
-                        </tbody>
-                </table>
-            </div>
+        <div id="liveOrdersView" class="admin-panel-section">
+            <h1 style="font-size: 24px; font-weight: 600;">Live Orders Panel</h1>
+            <p style="color: #64748b; margin-top: 10px; font-size:14px;">Incoming customer purchase streams show up here in real time.</p>
         </div>
+
+        <div id="customersView" class="admin-panel-section">
+            <h1 style="font-size: 24px; font-weight: 600;">Customers Database</h1>
+            <p style="color: #64748b; margin-top: 10px; font-size:14px;">Registered user profiles management console system.</p>
+        </div>
+
+        <div id="storeSettingsView" class="admin-panel-section">
+            <h1 style="font-size: 24px; font-weight: 600;">Store Engine Settings</h1>
+            <p style="color: #64748b; margin-top: 10px; font-size:14px;">Configure payment routing parameters and storefront style models.</p>
+        </div>
+
     </div>
 
     <div id="productModal" class="modal-overlay">
@@ -474,8 +524,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // --- STEP 1: FIREBASE INITIALIZATION CONFIGURATION BLOCK ---
-        // Apni website ka asli config data yahan niche paste kar lena!
+        // --- STEP 1: FIREBASE CONTEXT ENVIRONMENT METRICS ---
+        // Apne project ke actual parameters yahan replace kar lijiye!
         const firebaseConfig = {
             apiKey: "AIzaSyYourActualAPIKeyHere_ReplaceMe",
             authDomain: "zippykart-co-in.firebaseapp.com",
@@ -490,12 +540,29 @@
         }
         const db = firebase.firestore();
 
-        // --- STEP 2: GLOBAL MEMORY STATES ---
+        // --- STEP 2: RUNTIME CONFIG MEMORY BUFFERS ---
         window.editingProductId = null;
         window.mainGalleryImages = []; 
         window.compiledVariants = [];  
 
-        // --- STEP 3: CONTROLS & UI FLOWS ---
+        // --- STEP 3: SIDEBAR PANEL NAV TRIGGER CORE ENGINE ---
+        window.switchAdminTab = function(element, targetSectionId) {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+
+            document.querySelectorAll('.admin-panel-section').forEach(section => {
+                section.classList.remove('active-view');
+            });
+            
+            const targetSection = document.getElementById(targetSectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-view');
+            }
+        }
+
+        // --- STEP 4: CONTROLS & MANAGEMENT METRICS INTERFACES ---
         window.openProductModal = function(id = null) {
             const form = document.getElementById('marketplaceForm');
             form.reset();
@@ -587,7 +654,7 @@
             if(row) row.remove();
         }
 
-        // --- STEP 4: CORE SUBMIT / PUBLISH TECH LOGIC FIX ---
+        // --- STEP 5: SYNC TRANSACTION LOGIC FLOW SYSTEM ---
         window.handleFormSubmit = async function(event) {
             event.preventDefault();
             
@@ -618,7 +685,7 @@
                 }
             });
 
-            // 100% SECURE CRASH-PROOF PAYLOAD STRUCTURE FOR FIREBASE
+            // CRASH-PROOF PAYLOAD SYNCHRONIZATION DATA SHAPE
             const payload = {
                 title: title,
                 price: parseInt(price) || 0,
@@ -646,7 +713,7 @@
                 loadInventoryDashboard();
 
             } catch (error) {
-                console.error("Firestore Transaction Crash Logs:", error);
+                console.error("Firestore Core Sync Write Crash:", error);
                 alert("Database write error: " + error.message);
             } finally {
                 btn.innerHTML = originalBtnHtml;
@@ -654,7 +721,7 @@
             }
         }
 
-        // Load Inventory Data Stream from Database
+        // Render live inventory collections mapping rows
         async function loadInventoryDashboard() {
             const tableBody = document.getElementById('inventoryTableBody');
             tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading collection streams...</td></tr>`;
@@ -743,5 +810,3 @@
             loadInventoryDashboard();
         }
     </script>
-</body>
-</html>
