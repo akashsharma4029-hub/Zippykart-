@@ -1417,17 +1417,20 @@
                 btn.innerText = "Transmitting Data...";
                 btn.disabled = true;
 
+                // const payload = { ... } se theek do-teen line upar check karo jahan variables nikal rahe hain, wahan ye line add/fix kar do:
+                const category = document.getElementById('productCategory').value;
+                // Aur apne payload ke andar bas is tarah se mapping rkhna:
                 const payload = {
                     title: title,
                     price: parseInt(price),
                     mrp: parseInt(mrp || price),
-                    category: category,
+                    category: category,  // <-- Yeh aapka naya fix string bhejeha
                     stockCount: parseInt(stock || 0),
                     description: desc,
                     sizes: compiledSizes,
-                    variants: compiledVariants, 
-                    all_images: window.mainGalleryImages, 
-                    image: window.mainGalleryImages[0], 
+                    variants: compiledVariants,
+                    all_images: window.mainGalleryImages,
+                    image: window.mainGalleryImages[0] || "", // Taaki galti se undefined hoke crash na ho
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 };
 
