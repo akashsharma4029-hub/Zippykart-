@@ -188,12 +188,17 @@
             border: none;
             cursor: pointer;
             padding: 5px;
-            font-size: 16px;
-            margin-right: 10px;
+            font-size: 18px;
+            margin-right: 12px;
+            transition: transform 0.2s;
+        }
+        
+        .actions-cell button:hover {
+            transform: scale(1.15);
         }
 
         .edit-icon { color: #2196f3; }
-        .delete-icon { color: #f44336; }
+        .delete-icon { color: #ef4444; }
 
         /* Modal Overlay Styles */
         .modal-overlay {
@@ -428,7 +433,21 @@
 
         <div id="storeSettingsView" class="admin-panel-section">
             <h1 style="font-size: 24px; font-weight: 600;">Store Engine Settings</h1>
-            <p style="color: #64748b; margin-top: 10px; font-size:14px;">Configure payment routing parameters and storefront style models.</p>
+            <p style="color: #64748b; margin-top: 10px; font-size:14px;">Configure logistical settings and API integrations below.</p>
+            
+            <div class="inventory-card" style="margin-top: 20px; max-width: 600px;">
+                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-truck-fast" style="color: #ff3e6c;"></i> Shiprocket API Integration</h3>
+                <div class="form-group">
+                    <label>Shiprocket Account Email</label>
+                    <input type="email" id="srEmail" class="admin-input" placeholder="e.g. business@zippykart.co.in">
+                </div>
+                <div class="form-group">
+                    <label>Shiprocket Account Password</label>
+                    <input type="password" id="srPassword" class="admin-input" placeholder="••••••••">
+                </div>
+                <p style="font-size: 11px; color:#64748b; margin-bottom: 15px;">The server will auto-generate OAuth tokens to securely inject orders directly to your delivery panel.</p>
+                <button class="primary-btn" onclick="saveShiprocketCredentials()" style="padding: 10px 20px; font-size:13px;">Save Token Config</button>
+            </div>
         </div>
 
     </div>
@@ -525,7 +544,6 @@
 
     <script>
         // --- STEP 1: FIREBASE CONTEXT ENVIRONMENT METRICS ---
-        // Apne project ke actual parameters yahan replace kar lijiye!
         const firebaseConfig = {
             apiKey: "AIzaSyYourActualAPIKeyHere_ReplaceMe",
             authDomain: "zippykart-co-in.firebaseapp.com",
@@ -545,10 +563,10 @@
         window.mainGalleryImages = []; 
         window.compiledVariants = [];  
 
-        // --- STEP 3: SIDEBAR PANEL NAV TRIGGER CORE ENGINE ---
+        // --- STEP 3: SIDEBAR PANEL NAV TRIGGER ENGINE ---
         window.switchAdminTab = function(element, targetSectionId) {
             document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('active');
+                 item.classList.remove('active');
             });
             element.classList.add('active');
 
@@ -559,10 +577,40 @@
             const targetSection = document.getElementById(targetSectionId);
             if (targetSection) {
                 targetSection.classList.add('active-view');
+                if(targetSectionId === 'storeSettingsView') { loadShiprocketCredentials(); }
             }
         }
 
-        // --- STEP 4: CONTROLS & MANAGEMENT METRICS INTERFACES ---
+        // --- STEP 4: SHIPROCKET API CREDENTIAL MANAGEMENT LOGIC ---
+        window.saveShiprocketCredentials = async function() {
+            const email = document.getElementById('srEmail').value.trim();
+            const password = document.getElementById('srPassword').value;
+            
+            if(!email || !password) { alert("Please complete both username and authentication token inputs."); return; }
+            
+            try {
+                await db.collection("store_config").doc("shiprocket_api").set({
+                    email: email,
+                    password: password,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert("🚀 Shiprocket OAuth Engine API Parameters Configured Successfully!");
+            } catch(e) {
+                alert("Config sync crash: " + e.message);
+            }
+        }
+
+        async function loadShiprocketCredentials() {
+            try {
+                const doc = await db.collection("store_config").doc("shiprocket_api").get();
+                if(doc.exists) {
+                    document.getElementById('srEmail').value = doc.data().email || "";
+                    document.getElementById('srPassword').value = doc.data().password || "";
+                }
+            } catch(e) { console.error("Error reading logic profiles:", e); }
+        }
+
+        // --- STEP 5: CONTROLS & MANAGEMENT METRICS INTERFACES ---
         window.openProductModal = function(id = null) {
             const form = document.getElementById('marketplaceForm');
             form.reset();
@@ -654,7 +702,7 @@
             if(row) row.remove();
         }
 
-        // --- STEP 5: SYNC TRANSACTION LOGIC FLOW SYSTEM ---
+        // --- STEP 6: SYNC TRANSACTION WRITE LOGIC SYSTEM ---
         window.handleFormSubmit = async function(event) {
             event.preventDefault();
             
@@ -685,7 +733,6 @@
                 }
             });
 
-            // CRASH-PROOF PAYLOAD SYNCHRONIZATION DATA SHAPE
             const payload = {
                 title: title,
                 price: parseInt(price) || 0,
@@ -721,10 +768,10 @@
             }
         }
 
-        // Render live inventory collections mapping rows
+        // --- STEP 7: LIVE INVENTORY RENDERING CONSOLE ENGINE (EDIT & DELETE ACTIVE) ---
         async function loadInventoryDashboard() {
             const tableBody = document.getElementById('inventoryTableBody');
-            tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading collection streams...</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading live database streams...</td></tr>`;
             
             try {
                 const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
@@ -738,6 +785,8 @@
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     const coverImg = data.image || 'https://via.placeholder.com/50?text=No+Img';
+                    
+                    // Directly injecting fully functional programmatic event handlers inside dynamic template strings
                     tableBody.innerHTML += `
                         <tr>
                             <td><img src="${coverImg}" class="prod-thumb"></td>
@@ -747,8 +796,8 @@
                             <td style="color:#94a3b8; text-decoration:line-through;">₹${data.mrp}</td>
                             <td style="font-weight:500;">${data.stockCount} pcs</td>
                             <td class="actions-cell">
-                                <button class="edit-icon" onclick="openProductModal('${doc.id}')"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                                <button class="edit-icon" onclick="openProductModal('${doc.id}')" title="Edit Product Specs"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')" title="Delete Product From Storefront"><i class="fa-solid fa-trash-can"></i></button>
                             </td>
                         </tr>
                     `;
@@ -758,6 +807,7 @@
             }
         }
 
+        // Fetch selected doc directly to modal input properties
         async function fetchProductDetailsForEditing(id) {
             try {
                 const doc = await db.collection("zippykart_products").doc(id).get();
@@ -794,11 +844,12 @@
             }
         }
 
+        // Delete confirmation transaction block
         window.deleteProductEntry = async function(id) {
-            if(confirm("⚠️ Are you sure you want to delete this product?")) {
+            if(confirm("⚠️ Are you absolutely sure you want to delete this product from your store? This action cannot be undone.")) {
                 try {
                     await db.collection("zippykart_products").doc(id).delete();
-                    alert("🗑️ Product removed successfully.");
+                    alert("🗑️ Product deleted from live channels successfully.");
                     loadInventoryDashboard();
                 } catch (error) {
                     alert("Error: " + error.message);
@@ -810,3 +861,5 @@
             loadInventoryDashboard();
         }
     </script>
+</body>
+</html>
