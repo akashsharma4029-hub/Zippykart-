@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>ZippyKart - Admin Inventory Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            -webkit-touch-callout: none;
         }
 
         body {
@@ -21,57 +22,141 @@
             display: flex;
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Mobile Header Trigger Row (Only visible on Mobile viewports) */
-        .mobile-navbar-header {
-            display: none;
+        /* Top Header Row for Desktop & Mobile Both Views */
+        .global-header-navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            height: 60px;
+            height: 65px;
             background-color: #1e293b;
             color: white;
-            padding: 0 20px;
+            padding: 0 24px;
+            display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 200;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-left-block {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-right-block {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .hamburger-trigger {
             background: none;
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .hamburger-trigger:active { transform: scale(0.9); }
+
+        .global-header-navbar .brand-logo {
+            margin-bottom: 0;
+            font-size: 20px;
         }
 
-        /* Sidebar Standard Desktop & Sliding Mobile Architecture */
+        /* Professional User Name Badge UI */
+        .user-profile-badge {
+            background: rgba(255, 62, 108, 0.15);
+            border: 1px solid rgba(255, 62, 108, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff3e6c;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50; /* Green live indicator status */
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #4caf50;
+        }
+
+        /* Dynamic Notification Bell Indicator System */
+        .notification-bell-box {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #cbd5e1;
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .notification-bell-box:hover {
+            color: #fff;
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .bell-alert-dot {
+            position: absolute;
+            top: 6px; right: 7px;
+            width: 8px; height: 8px;
+            background-color: #ff3e6c;
+            border-radius: 50%;
+            border: 1px solid #1e293b;
+            animation: pulseAlert 1.5s infinite;
+        }
+
+        @keyframes pulseAlert {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 108, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(255, 62, 108, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 108, 0); }
+        }
+
+        /* Sidebar Architecture Layout (Under top navbar stream) */
         .sidebar {
             width: 260px;
             background-color: #1e293b;
             color: #fff;
             padding: 20px;
             position: fixed;
-            height: 100vh;
+            height: calc(100vh - 65px);
             left: 0;
-            top: 0;
-            z-index: 500;
-            transition: transform 0.3s ease-in-out;
+            top: 65px;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid rgba(255,255,255,0.05);
         }
 
         .brand-logo {
             font-size: 22px;
             font-weight: 700;
-            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .brand-logo span {
-            color: #ff3e6c;
-        }
+        .brand-logo span { color: #ff3e6c; }
 
         /* Menu Items Interaction Layout */
         .menu-item {
@@ -116,24 +201,19 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5);
             z-index: 400;
+            backdrop-filter: blur(2px);
         }
 
         /* Main Content Workspace Framework */
         .main-content {
             margin-left: 260px;
-            padding: 40px;
+            padding: 105px 40px 40px 40px; /* Top space balanced for static navbar layer clear */
             width: calc(100% - 260px);
             transition: all 0.3s ease-in-out;
         }
 
-        .admin-panel-section {
-            display: none; 
-        }
-        
-        .admin-panel-section.active-view {
-            display: block; 
-            animation: fadeInView 0.4s ease-in-out;
-        }
+        .admin-panel-section { display: none; }
+        .admin-panel-section.active-view { display: block; animation: fadeInView 0.4s ease-in-out; }
 
         @keyframes fadeInView {
             from { opacity: 0; transform: translateY(10px); }
@@ -147,10 +227,7 @@
             margin-bottom: 30px;
         }
 
-        .header-section h1 {
-            font-size: 26px;
-            font-weight: 600;
-        }
+        .header-section h1 { font-size: 26px; font-weight: 600; }
 
         .primary-btn {
             background-color: #ff3e6c;
@@ -167,9 +244,7 @@
             transition: background 0.3s;
         }
 
-        .primary-btn:hover {
-            background-color: #e0355f;
-        }
+        .primary-btn:hover { background-color: #e0355f; }
 
         /* Inventory Master Table Design Core Metrics */
         .inventory-card {
@@ -201,28 +276,12 @@
             font-size: 13px;
         }
 
-        td {
-            padding: 14px;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 14px;
-        }
-
-        .prod-thumb {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 4px;
-            background: #f1f5f9;
-        }
+        td { padding: 14px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .prod-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; background: #f1f5f9; }
 
         .actions-cell button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            font-size: 18px;
-            margin-right: 12px;
-            transition: transform 0.2s;
+            background: none; border: none; cursor: pointer; padding: 5px;
+            font-size: 18px; margin-right: 12px; transition: transform 0.2s;
         }
         
         .actions-cell button:hover { transform: scale(1.15); }
@@ -231,206 +290,101 @@
 
         /* Modal Layout Structures */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto; padding: 20px;
         }
 
         .modal-box {
-            background: white;
-            max-width: 650px;
-            margin: 30px auto;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            padding: 25px;
-            position: relative;
+            background: white; max-width: 650px; margin: 30px auto; border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); padding: 25px; position: relative;
         }
 
         .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;
         }
 
-        .modal-header h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #94a3b8;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 6px;
-        }
-
-        .admin-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 14px;
-            outline: none;
-            transition: border 0.2s;
-        }
-
+        .modal-header h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
+        .close-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #94a3b8; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        .form-group label { font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        .admin-input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; transition: border 0.2s; }
         .admin-input:focus { border-color: #ff3e6c; }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 5px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .gallery-container {
-            border: 1px dashed #cbd5e1;
-            padding: 15px;
-            border-radius: 6px;
-            background: #f8fafc;
-            margin-top: 5px;
-        }
-
-        .preview-thumbs-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .thumb-wrapper {
-            position: relative;
-            width: 65px;
-            height: 65px;
-        }
-
-        .thumb-wrapper img {
-            width: 100%; height: 100%;
-            object-fit: cover; border-radius: 6px;
-            border: 1px solid #e2e8f0;
-        }
-
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 5px; }
+        .checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; }
+        .gallery-container { border: 1px dashed #cbd5e1; padding: 15px; border-radius: 6px; background: #f8fafc; margin-top: 5px; }
+        .preview-thumbs-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .thumb-wrapper { position: relative; width: 65px; height: 65px; }
+        .thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
         .remove-thumb {
-            position: absolute;
-            top: -5px; right: -5px;
-            background: #ef4444; color: white;
-            border: none; border-radius: 50%;
-            width: 18px; height: 18px;
-            font-size: 10px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: -5px; right: -5px; background: #ef4444; color: white;
+            border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
 
-        .variant-row {
-            display: flex; align-items: center; gap: 10px;
-            margin-top: 8px; background: #f1f5f9;
-            padding: 8px; border-radius: 6px;
-        }
-
+        .variant-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; background: #f1f5f9; padding: 8px; border-radius: 6px; }
         .variant-row input[type="text"] { flex: 1; }
         .submit-btn-container { margin-top: 25px; }
 
         .publish-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #ff5722, #ff3e6c);
-            color: white; border: none; padding: 14px;
-            font-size: 15px; font-weight: 700; border-radius: 8px;
-            cursor: pointer; display: flex; align-items: center;
-            justify-content: center; gap: 8px;
-            box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3);
-            transition: transform 0.2s;
+            width: 100%; background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; border: none; padding: 14px;
+            font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); transition: transform 0.2s;
         }
 
         .publish-btn:hover { transform: translateY(-1px); }
         .publish-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* 📱 RESPONSIVE CORE MEDIA LAYOUT ENGINE (AUTO CONVERT STRATEGY) */
+        /* 📱 RESPONSIVE VIEW ENGINE TUNING CONTROLS */
         @media (max-width: 991px) {
-            .mobile-navbar-header {
-                display: flex; /* Activate top row navbar trigger layout */
-            }
-
+            html, body { touch-action: pan-x pan-y; }
+            
             .sidebar {
-                transform: translateX(-100%); /* Slide out hide menu view default */
-                top: 0;
-                height: 100vh;
+                transform: translateX(-100%);
+                top: 65px;
+                height: calc(100vh - 65px);
+                z-index: 500;
             }
 
-            /* Responsive class triggered via dynamic state logic arrays */
-            .sidebar.mobile-open {
-                transform: translateX(0); /* Animate slide-in view state */
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 80px 20px 40px 20px; /* Give clearance under navbar header block */
-                width: 100%;
-            }
-
-            .header-section {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .header-section .primary-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr; /* Stack inputs cleanly inside phone viewports */
-            }
+            .sidebar.mobile-open { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 100px 15px 40px 15px; width: 100%; }
+            .header-section { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .header-section .primary-btn { width: 100%; justify-content: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .user-profile-badge span { display: none; } /* Shrink profile name text inside extremely tight screen breakpoints */
+        }
+        
+        @media (min-width: 992px) {
+            html, body { touch-action: auto; }
+            .hamburger-trigger { display: none; } /* Hide layout toggler buttons when windows stretch to desktop resolutions */
         }
     </style>
 </head>
 <body>
 
-    <div class="mobile-navbar-header">
-        <div class="brand-logo" style="margin-bottom:0; font-size:18px;"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
-        <button class="hamburger-trigger" onclick="toggleMobileSidebar(true)"><i class="fa-solid fa-bars"></i></button>
+    <div class="global-header-navbar">
+        <div class="header-left-block">
+            <button class="hamburger-trigger" onclick="toggleMobileSidebar(true)"><i class="fa-solid fa-bars"></i></button>
+            <div class="brand-logo"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
+        </div>
+        
+        <div class="header-right-block">
+            <div class="notification-bell-box" onclick="alert('⚡ No new live incoming order packets inside delivery queues.')">
+                <i class="fa-regular fa-bell"></i>
+                <div class="bell-alert-dot"></div>
+            </div>
+            
+            <div class="user-profile-badge">
+                <div class="user-avatar-dot"></div>
+                <span>Akash Kumar</span>
+            </div>
+        </div>
     </div>
 
     <div id="sidebarOverlay" class="sidebar-overlay-mask" onclick="toggleMobileSidebar(false)"></div>
 
     <div id="adminSidebar" class="sidebar">
-        <div class="brand-logo"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
         <div class="menu-item active" onclick="switchAdminTab(this, 'productsMasterView')"><i class="fa-solid fa-boxes-stacked"></i> Products Master</div>
         <div class="menu-item" onclick="switchAdminTab(this, 'liveOrdersView')"><i class="fa-solid fa-truck-ramp-box"></i> Live Orders</div>
         <div class="menu-item" onclick="switchAdminTab(this, 'customersView')"><i class="fa-solid fa-users"></i> Customers</div>
@@ -585,7 +539,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // --- STEP 1: LOCKED LIVE PRODUCTION FIREBASE SETTINGS CONFIG ---
+        // --- STEP 1: PRODUCTION LOGGED SERVER CREDENTIAL ARRAYS ---
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -599,7 +553,7 @@
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
 
-        // --- STEP 2: GLOBAL PROCESSING CACHE BUFFER SCHEMAS ---
+        // --- STEP 2: STACK STATE REGISTERS CONTROLS ---
         window.editingProductId = null;
         window.mainGalleryImages = []; 
         window.compiledVariants = [];  
@@ -625,7 +579,7 @@
             });
         }
 
-        // --- STEP 4: RESPONSIVE THREE-DOT TOOGLE / SLIDER LOGIC ---
+        // --- STEP 4: TRUE LEFT ALIGNED MENU DRAWER RESPONSIVE ANIMATOR ---
         window.toggleMobileSidebar = function(openState) {
             const sidebar = document.getElementById('adminSidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -638,7 +592,7 @@
             }
         }
 
-        // --- STEP 5: PANEL TAB SWITCH ROUTER PANEL BLOCK ---
+        // --- STEP 5: INTERFACE LAYER VIEW CONTROLLERS REDIRECTIONS ---
         window.switchAdminTab = function(element, targetSectionId) {
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
@@ -650,11 +604,10 @@
                 targetSection.classList.add('active-view');
                 if(targetSectionId === 'storeSettingsView') { loadShiprocketCredentials(); }
             }
-            // Auto close drawer menu when mobile link gets clicked
-            toggleMobileSidebar(false);
+            toggleMobileSidebar(false); 
         }
 
-        // --- STEP 6: LOGISTICS PANEL CONFIG SYNCS MODULES ---
+        // --- STEP 6: LOGISTICS PARAMETERS FIRESTORE CONTROLLERS ---
         window.saveShiprocketCredentials = async function() {
             const email = document.getElementById('srEmail').value.trim();
             const password = document.getElementById('srPassword').value;
@@ -677,7 +630,7 @@
             } catch(e) { console.error("Error fetching credentials map:", e); }
         }
 
-        // --- STEP 7: INTERFACE DATA MODAL HANDLERS ---
+        // --- STEP 7: ENTRY SUBMODAL INGESTION UI CONTROLS ---
         window.openProductModal = function(id = null) {
             const form = document.getElementById('marketplaceForm');
             form.reset(); window.mainGalleryImages = []; window.compiledVariants = [];
@@ -764,7 +717,7 @@
             const row = document.getElementById(`variantRow_${index}`); if(row) row.remove();
         }
 
-        // --- STEP 8: SYNC TRANSACTION ENGINE SAVE PARAMETERS ---
+        // --- STEP 8: PAYLOAD COMPILATION ENGINE SUBS ---
         window.handleFormSubmit = async function(event) {
             event.preventDefault();
             const btn = document.getElementById('publishBtn'); const originalBtnHtml = btn.innerHTML;
@@ -810,7 +763,7 @@
             } finally { btn.innerHTML = originalBtnHtml; btn.disabled = false; }
         }
 
-        // --- STEP 9: LIVE DATA READ STREAMS WITH INTERACTIVE EVENTS INJECTED ---
+        // --- STEP 9: TRANSACTION QUERY CONSOLE RENDER DATA LINE ---
         async function loadInventoryDashboard() {
             const tableBody = document.getElementById('inventoryTableBody');
             tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Synchronizing cloud instances...</td></tr>`;
