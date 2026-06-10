@@ -48,7 +48,7 @@
             color: #ff3e6c;
         }
 
-        /* Sidebar Items Basic Styling */
+        /* Sidebar Items Basic Styling with Push Effect */
         .menu-item {
             display: flex;
             align-items: center;
@@ -64,7 +64,7 @@
             overflow: hidden;
         }
 
-        /* Hover and Dynamic Push Animation */
+        /* Hover Animation */
         .menu-item:hover {
             background-color: #2d3748;
             color: #fff;
@@ -76,7 +76,7 @@
             background: linear-gradient(135deg, #2d3748, #334155);
             color: #fff;
             font-weight: 600;
-            box-shadow: inset 4px 0px 0px 0px #ff3e6c; /* Left red bar */
+            box-shadow: inset 4px 0px 0px 0px #ff3e6c; /* Left edge red bar */
             padding-left: 20px;
             animation: slideActive 0.3s ease-out;
         }
@@ -94,7 +94,7 @@
             width: calc(100% - 260px);
         }
 
-        /* Content Panel Visibility Animation System */
+        /* Content Panel Visibility Transition */
         .admin-panel-section {
             display: none; 
         }
@@ -543,31 +543,32 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // --- STEP 1: FIREBASE CONTEXT ENVIRONMENT METRICS ---
+        // --- STEP 1: LOCKED LIVE PRODUCTION FIREBASE KEY INTEGRATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
             projectId: "zippykart-production-157e1",
             storageBucket: "zippykart-production-157e1.firebasestorage.app",
             messagingSenderId: "803651431969",
-            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60",
             measurementId: "G-7ZJ0QTZE1C"
         };
 
+        // Secure context initialize
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
 
-        // --- STEP 2: RUNTIME CONFIG MEMORY BUFFERS ---
+        // --- STEP 2: GLOBAL CACHE CONTROLS ---
         window.editingProductId = null;
         window.mainGalleryImages = []; 
         window.compiledVariants = [];  
 
-        // --- STEP 3: SIDEBAR PANEL NAV TRIGGER ENGINE ---
+        // --- STEP 3: SIDEBAR PANEL TABS NAV TRIGGER CONSOLE ---
         window.switchAdminTab = function(element, targetSectionId) {
             document.querySelectorAll('.menu-item').forEach(item => {
-                 item.classList.remove('active');
+                item.classList.remove('active');
             });
             element.classList.add('active');
 
@@ -582,12 +583,12 @@
             }
         }
 
-        // --- STEP 4: SHIPROCKET API CREDENTIAL MANAGEMENT LOGIC ---
+        // --- STEP 4: SHIPROCKET API ENGINE PROPERTIES ---
         window.saveShiprocketCredentials = async function() {
             const email = document.getElementById('srEmail').value.trim();
             const password = document.getElementById('srPassword').value;
             
-            if(!email || !password) { alert("Please complete both username and authentication token inputs."); return; }
+            if(!email || !password) { alert("Please complete both configuration fields."); return; }
             
             try {
                 await db.collection("store_config").doc("shiprocket_api").set({
@@ -608,10 +609,10 @@
                     document.getElementById('srEmail').value = doc.data().email || "";
                     document.getElementById('srPassword').value = doc.data().password || "";
                 }
-            } catch(e) { console.error("Error reading logic profiles:", e); }
+            } catch(e) { console.error("Error fetching credentials map:", e); }
         }
 
-        // --- STEP 5: CONTROLS & MANAGEMENT METRICS INTERFACES ---
+        // --- STEP 5: INTERFACE MODAL SYSTEMS ---
         window.openProductModal = function(id = null) {
             const form = document.getElementById('marketplaceForm');
             form.reset();
@@ -703,7 +704,7 @@
             if(row) row.remove();
         }
 
-        // --- STEP 6: SYNC TRANSACTION WRITE LOGIC SYSTEM ---
+        // --- STEP 6: SECURE DATA WRITE METHOD SYNC ---
         window.handleFormSubmit = async function(event) {
             event.preventDefault();
             
@@ -761,7 +762,7 @@
                 loadInventoryDashboard();
 
             } catch (error) {
-                console.error("Firestore Core Sync Write Crash:", error);
+                console.error("Firestore Document Sync Error Log:", error);
                 alert("Database write error: " + error.message);
             } finally {
                 btn.innerHTML = originalBtnHtml;
@@ -769,10 +770,10 @@
             }
         }
 
-        // --- STEP 7: LIVE INVENTORY RENDERING CONSOLE ENGINE (EDIT & DELETE ACTIVE) ---
+        // --- STEP 7: LIVE PRODUCTION DASHBOARD (EDIT & DELETE INJECTED) ---
         async function loadInventoryDashboard() {
             const tableBody = document.getElementById('inventoryTableBody');
-            tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading live database streams...</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Synchronizing cloud instances...</td></tr>`;
             
             try {
                 const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
@@ -787,7 +788,6 @@
                     const data = doc.data();
                     const coverImg = data.image || 'https://via.placeholder.com/50?text=No+Img';
                     
-                    // Directly injecting fully functional programmatic event handlers inside dynamic template strings
                     tableBody.innerHTML += `
                         <tr>
                             <td><img src="${coverImg}" class="prod-thumb"></td>
@@ -797,18 +797,17 @@
                             <td style="color:#94a3b8; text-decoration:line-through;">₹${data.mrp}</td>
                             <td style="font-weight:500;">${data.stockCount} pcs</td>
                             <td class="actions-cell">
-                                <button class="edit-icon" onclick="openProductModal('${doc.id}')" title="Edit Product Specs"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')" title="Delete Product From Storefront"><i class="fa-solid fa-trash-can"></i></button>
+                                <button class="edit-icon" onclick="openProductModal('${doc.id}')" title="Edit Properties"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')" title="Drop Storefront Document"><i class="fa-solid fa-trash-can"></i></button>
                             </td>
                         </tr>
                     `;
                 });
             } catch (error) {
-                tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Error: ${error.message}</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Error Stream: ${error.message}</td></tr>`;
             }
         }
 
-        // Fetch selected doc directly to modal input properties
         async function fetchProductDetailsForEditing(id) {
             try {
                 const doc = await db.collection("zippykart_products").doc(id).get();
@@ -841,16 +840,15 @@
                     addColorVariantField();
                 }
             } catch (error) {
-                alert("Error loading properties: " + error.message);
+                alert("Error loading structural properties: " + error.message);
             }
         }
 
-        // Delete confirmation transaction block
         window.deleteProductEntry = async function(id) {
-            if(confirm("⚠️ Are you absolutely sure you want to delete this product from your store? This action cannot be undone.")) {
+            if(confirm("⚠️ Are you absolutely sure you want to delete this product? This action cannot be reversed.")) {
                 try {
                     await db.collection("zippykart_products").doc(id).delete();
-                    alert("🗑️ Product deleted from live channels successfully.");
+                    alert("🗑️ Product purged from live storefront clusters successfully.");
                     loadInventoryDashboard();
                 } catch (error) {
                     alert("Error: " + error.message);
