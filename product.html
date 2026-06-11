@@ -17,12 +17,11 @@
         .brand-logo:hover { transform: scale(1.02); }
         .brand-logo span { color: #ff3e6c; }
 
-        /* 🔥 PREMIUM ENTRY ANIMATIONS */
+        /* ENTRY ANIMATIONS */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
         .animated-block { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
@@ -33,8 +32,6 @@
         /* Center Main Preview Box */
         .image-gallery-block { display: block; position: sticky; top: 80px; height: max-content; text-align: center; }
         .main-preview-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: inline-block; width: 100%; position: relative; }
-        
-        /* Smooth Image Swap Fade Effect */
         .main-preview-box img { width: 100%; height: auto; max-height: 550px; object-fit: contain; border-radius: 4px; transition: opacity 0.3s ease, transform 0.3s ease; display: block; margin: 0 auto; }
         
         .share-wishlist-btns { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 10; }
@@ -49,7 +46,21 @@
         .ratings-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .rating-badge { background: #388e3c; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 5px rgba(56, 142, 60, 0.2); }
         .rating-count-text { font-size: 12px; color: #64748b; font-weight: 500; }
-        .assured-tag { background: #1e293b; color: white; font-size: 10px; padding: 3px 8px; border-radius: 12px; font-weight: 700; font-style: italic; }
+        
+        /* 🔥 FIX 2: ZippyTrust Premium Pink Badge */
+        .zippy-trust-badge { 
+            background: linear-gradient(135deg, #ff3e6c, #e0355f); 
+            color: white; 
+            font-size: 11px; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-weight: 700; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 4px; 
+            box-shadow: 0 2px 6px rgba(255, 62, 108, 0.3); 
+            letter-spacing: 0.5px; 
+        }
 
         .pricing-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
         .current-price { font-size: 28px; font-weight: 700; color: #1e293b; }
@@ -64,38 +75,37 @@
         .offer-item i { color: #388e3c; margin-top: 2px; }
         .offer-item a { color: #2196f3; text-decoration: none; font-weight: 600; cursor: pointer; }
 
-        /* Circular Color Swatches List Framework */
+        /* Circular Color Swatches */
         .variant-headline { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
         .color-swatches-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; }
-        
         .color-swatch-item { border: 2px solid #cbd5e1; padding: 3px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: white; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .color-swatch-item:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-color: #94a3b8; }
         .color-swatch-item.active { border-color: #ff3e6c; background: #fff5f7; transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 62, 108, 0.2); }
         .swatch-img-circle { width: 45px; height: 45px; object-fit: cover; border-radius: 50%; }
 
-        /* Size Options Selection Buttons Grid */
+        /* Size Options */
         .size-buttons-row { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .size-btn { width: 45px; height: 45px; border: 1px solid #cbd5e1; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; cursor: pointer; color: #1e293b; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .size-btn:hover { border-color: #ff3e6c; color: #ff3e6c; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(255, 62, 108, 0.15); }
         .size-btn.active { background: #ff3e6c; color: white; border-color: #ff3e6c; transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 62, 108, 0.3); }
 
-        /* Quantity Controls Selector */
+        /* Quantity Controls */
         .quantity-selector { margin-bottom: 25px; }
         .qty-controls { display: flex; align-items: center; border: 1px solid #cbd5e1; width: max-content; border-radius: 6px; overflow: hidden; background: white; }
         .qty-btn { width: 40px; height: 40px; background: #f8fafc; border: none; font-size: 18px; cursor: pointer; font-weight: bold; color: #1e293b; transition: background 0.2s ease; }
         .qty-btn:hover { background: #e2e8f0; }
         .qty-input { width: 45px; height: 40px; border: none; border-left: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; text-align: center; font-size: 15px; font-weight: 700; pointer-events: none; background: white; }
 
-        /* Shipping Pincode verification field box */
-        .pincode-delivery-box { background: white; border: 1px solid #e2e8f0; padding: 18px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        /* Shipping Pincode Box */
+        .pincode-delivery-box { background: white; border: 1px solid #e2e8f0; padding: 18px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.3s ease; }
         .pincode-input-row { display: flex; gap: 10px; align-items: center; border-bottom: 2px solid #2196f3; padding-bottom: 8px; width: max-content; margin-bottom: 12px; }
         .pincode-input-row i { color: #2196f3; }
         .pin-field { border: none; background: transparent; font-size: 15px; font-weight: 600; color: #1e293b; outline: none; width: 120px; }
-        .pin-check-btn { background: none; color: #2196f3; border: none; font-size: 14px; font-weight: 700; cursor: pointer; }
-        .delivery-status-msg { font-size: 13px; font-weight: 500; color: #475569; }
-        .delivery-status-msg span { color: #388e3c; font-weight: 700; }
+        .pin-check-btn { background: none; color: #2196f3; border: none; font-size: 14px; font-weight: 700; cursor: pointer; width: 60px; }
+        .delivery-status-msg { font-size: 13px; font-weight: 500; color: #475569; line-height: 1.5; }
+        .delivery-status-msg span.free-tag { color: #388e3c; font-weight: 700; }
 
-        /* Trust Badges Colored Icons Matrix */
+        /* Trust Badges */
         .trust-badges-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 25px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin-bottom: 25px; text-align: center; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .trust-item:hover { transform: translateY(-5px); }
@@ -104,28 +114,23 @@
         .trust-item span { font-size: 11px; font-weight: 600; color: #475569; line-height: 1.3; }
         .icon-blue { color: #2196f3; } .icon-green { color: #4caf50; } .icon-pink { color: #ff3e6c; } .icon-orange { color: #ff9800; }
 
-        /* Specifications Text layout */
+        /* Specifications */
         .description-section { margin-bottom: 35px; }
         .description-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 12px; }
         .description-content { font-size: 14px; color: #475569; line-height: 1.7; white-space: pre-line; transition: opacity 0.3s ease; }
 
-        /* Action Buttons Mechanics */
+        /* Action Buttons */
         .action-buttons-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 35px; }
         .cart-action-btn { padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        
         .btn-add-to-cart { background-color: #ff9800; color: white; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
         .btn-add-to-cart:hover { background-color: #f57c00; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
-        .btn-add-to-cart:active { transform: scale(0.96); }
-
         .btn-buy-now { background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3); }
         .btn-buy-now:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 62, 108, 0.4); filter: brightness(1.1); }
-        .btn-buy-now:active { transform: scale(0.96); }
 
-        /* Customer Reviews Content Frame */
+        /* Customer Reviews */
         .reviews-section { border-top: 1px solid #f1f5f9; padding-top: 25px; margin-bottom: 30px; }
         .reviews-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 15px; }
         .no-review-text { font-size: 14px; color: #64748b; margin-bottom: 25px; font-style: italic; }
-        
         .review-card { border-bottom: 1px solid #f1f5f9; padding: 15px 0; margin-bottom: 10px; }
         .review-card:last-child { border-bottom: none; }
         .reviewer-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -134,14 +139,11 @@
         .review-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
         .review-text-content { font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
         .review-uploaded-img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer; transition: transform 0.2s; }
-        .review-uploaded-img:hover { transform: scale(1.05); }
-
+        
         .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 15px; font-size: 14px; outline: none; }
         .review-form-input:focus { border-color: #ff3e6c; box-shadow: 0 0 0 3px rgba(255, 62, 108, 0.1); }
         .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
-        .add-photo-btn:hover { background: #e3f2fd; }
         .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-        .post-review-btn:hover { background: #e0355f; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); }
 
         /* You May Also Like Slider Array */
         .similar-products-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px; }
@@ -158,7 +160,6 @@
             .details-info-block { border-radius: 0; box-shadow: none; padding: 20px; }
             .image-gallery-block { display: block; position: relative; top: 0; background: white; padding: 20px; margin-bottom: -15px; }
             .main-preview-box img { max-height: 420px; width: 100%; }
-            .similar-products-section { border-radius: 0; margin-top: 10px; }
             .action-buttons-row { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px; background: white; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 100; margin-bottom: 0; border-radius: 15px 15px 0 0; }
             body { padding-bottom: 90px; }
         }
@@ -191,7 +192,7 @@
             <div class="ratings-row">
                 <div class="rating-badge">4.3 <i class="fa-solid fa-star" style="font-size:10px;"></i></div>
                 <div class="rating-count-text">1,245 Ratings & 120 Reviews</div>
-                <div class="assured-tag">Zippy Assured</div>
+                <div class="zippy-trust-badge"><i class="fa-solid fa-medal"></i> ZippyTrust</div>
             </div>
 
             <div class="pricing-row">
@@ -232,7 +233,7 @@
                     <button class="pin-check-btn" onclick="verifyPincode()">Check</button>
                 </div>
                 <div id="pincodeStatusMsg" class="delivery-status-msg">
-                    Free Delivery by <strong>Tomorrow, 10 PM</strong> | <span>Free</span> <strike style="color:#94a3b8;">₹40</strike>
+                    Free Delivery by <strong>Tomorrow, 10 PM</strong> | <span class="free-tag">Free</span> <strike style="color:#94a3b8;">₹40</strike>
                 </div>
             </div>
 
@@ -329,13 +330,14 @@
                 document.getElementById('displaySalePrice').innerText = "₹" + data.price;
                 document.getElementById('displayMrpPrice').innerText = "₹" + data.mrp;
                 document.getElementById('displayDiscountPct').innerText = Math.floor(((data.mrp - data.price) / data.mrp) * 100) + "% off";
+
+                const imgs = data.all_images || [];
+                if(imgs.length === 0 && data.image) imgs.push(data.image);
+                if(imgs.length > 0) { document.getElementById('mainProductPreviewImage').src = imgs[0]; }
                 
                 renderSizeCheckboxesMatrix(data.sizes || []);
                 
-                // Process Variant mapping
                 const variantsList = data.variants || [];
-                let initialImageToLoad = "";
-
                 if(variantsList.length > 0 && variantsList[0].color !== "") {
                     document.getElementById('variantOptionsSection').style.display = 'block';
                     const swatches = document.getElementById('colorSwatchesContainer');
@@ -348,20 +350,17 @@
                         </div>`;
                     });
                     
-                    // Call select variant for initial load instantly (True flag skips animation)
                     selectVariant(0, true); 
                 } else {
                     document.getElementById('mainProductDisplayTitle').innerText = data.title;
                     document.getElementById('mainProductDisplayDescription').innerText = data.description;
-                    initialImageToLoad = (data.all_images && data.all_images.length > 0) ? data.all_images[0] : data.image;
-                    if (initialImageToLoad) document.getElementById('mainProductPreviewImage').src = initialImageToLoad;
                 }
 
                 loadReviews();
             } catch (e) { console.error("Database connection dropped context loop:", e); }
         }
 
-        // 4. 🔥 FAST OVERRIDE DATA ROUTER ENGINE 🔥
+        // 4. OVERRIDE DATA ROUTER TRANSITION ENGINE
         window.selectVariant = function(index, isInitialLoad = false) {
             if(!window.globalProductData || !window.globalProductData.variants) return;
             
@@ -379,17 +378,13 @@
             let finalImg = variant.img && variant.img.startsWith('data:image') ? variant.img : (window.globalProductData.all_images && window.globalProductData.all_images.length > 0 ? window.globalProductData.all_images[0] : window.globalProductData.image);
 
             if(isInitialLoad) {
-                // Instant Swap, No blinking on page load
-                titleEl.innerText = finalTitle;
-                descEl.innerText = finalDesc;
+                titleEl.innerText = finalTitle; descEl.innerText = finalDesc;
                 titleEl.style.opacity = 1; descEl.style.opacity = 1;
                 document.getElementById('mainProductPreviewImage').src = finalImg;
             } else {
-                // Smooth Animation when User Clicks Color Swatch
                 titleEl.style.opacity = 0; descEl.style.opacity = 0;
                 setTimeout(() => {
-                    titleEl.innerText = finalTitle;
-                    descEl.innerText = finalDesc;
+                    titleEl.innerText = finalTitle; descEl.innerText = finalDesc;
                     titleEl.style.opacity = 1; descEl.style.opacity = 1;
                 }, 200);
                 animateImageSwap(finalImg);
@@ -419,7 +414,48 @@
             if(val >= 1 && val <= 10) { input.value = val; }
         }
 
-        window.verifyPincode = function() { alert("Pincode verified! Delivery options active."); }
+        // 🔥 FIX 1: LIVE INDIAN POSTAL PINCODE FETCH API
+        window.verifyPincode = async function() {
+            const pin = document.getElementById('deliveryPinInput').value.trim();
+            const resultDiv = document.getElementById('pincodeStatusMsg');
+            const checkBtn = document.querySelector('.pin-check-btn');
+
+            if(pin.length !== 6) {
+                resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Please enter a valid 6-digit Pincode.</span>`;
+                return;
+            }
+
+            checkBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+            checkBtn.disabled = true;
+
+            try {
+                // Fetching Location Data without API key using standard Indian Postal Service
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                const data = await response.json();
+
+                if (data && data[0].Status === "Success") {
+                    const postOffice = data[0].PostOffice[0];
+                    const location = `${postOffice.Name}, ${postOffice.District}, ${postOffice.State}`;
+                    
+                    resultDiv.innerHTML = `
+                        <div style="color:#388e3c; margin-bottom: 5px;">
+                            <i class="fa-solid fa-circle-check"></i> <strong>Pincode successfully available!</strong>
+                        </div>
+                        <div style="color:#1e293b; font-weight:600; font-size:12px; margin-bottom: 5px;">
+                            <i class="fa-solid fa-map-location-dot" style="color:#ff3e6c;"></i> Delivering to: ${location}
+                        </div>
+                        Free Delivery by <strong>Tomorrow, 10 PM</strong> | <span class="free-tag">Free</span> <strike style="color:#94a3b8;">₹40</strike>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Pincode not serviceable or invalid.</span>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-wifi"></i> Network error checking pincode.</span>`;
+            } finally {
+                checkBtn.innerHTML = `Check`;
+                checkBtn.disabled = false;
+            }
+        }
 
         // 5. SECURE CART COMPILATION PACKETS
         function getCartPacket() {
@@ -428,13 +464,9 @@
             const customizedTitle = document.getElementById('mainProductDisplayTitle').innerText; 
             const qty = parseInt(document.getElementById('qtyInput').value);
             return {
-                id: productId, 
-                title: customizedTitle,
-                size: window.selectedSizeValue, 
-                color: variantColor, 
-                price: window.globalProductData.price,
-                img: document.getElementById('mainProductPreviewImage').src, 
-                quantity: qty
+                id: productId, title: customizedTitle, size: window.selectedSizeValue, 
+                color: variantColor, price: window.globalProductData.price,
+                img: document.getElementById('mainProductPreviewImage').src, quantity: qty
             };
         }
 
