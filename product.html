@@ -23,41 +23,37 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .animated-block {
-            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
+        .animated-block { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
 
         /* Main Container */
         .product-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 30px; }
         
-        /* Left: Image Gallery */
-        .image-gallery-block { display: flex; gap: 15px; position: sticky; top: 80px; height: max-content; }
-        .thumb-stack { display: flex; flex-direction: column; gap: 10px; width: 70px; }
-        .thumb-stack img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; }
-        .thumb-stack img:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .thumb-stack img.active { border-color: #ff3e6c; }
+        /* 🔥 FIX 1: Left Image Gallery with Small Circles */
+        .image-gallery-block { display: flex; flex-direction: row; gap: 15px; position: sticky; top: 80px; height: max-content; }
+        
+        .thumb-stack { display: flex; flex-direction: column; gap: 12px; width: 65px; overflow-y: auto; max-height: 500px; padding: 5px; }
+        .thumb-stack::-webkit-scrollbar { width: 0px; } /* Hide scrollbar for clean look */
+        
+        /* Small Circular Thumbnails */
+        .thumb-stack img { width: 55px; height: 55px; object-fit: cover; border-radius: 50%; border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.3s ease; padding: 2px; background: white; flex-shrink: 0; }
+        .thumb-stack img:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-color: #94a3b8; }
+        .thumb-stack img.active { border-color: #ff3e6c; box-shadow: 0 2px 8px rgba(255, 62, 108, 0.3); }
         
         .main-preview-box { flex: 1; position: relative; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; }
         
-        /* 🔥 IMAGE SWAP ANIMATION */
-        .main-preview-box img { 
-            width: 100%; height: auto; max-height: 550px; object-fit: contain; border-radius: 4px; 
-            transition: opacity 0.3s ease, transform 0.3s ease; 
-        }
+        /* Smooth Image Swap Animation */
+        .main-preview-box img { width: 100%; height: auto; max-height: 550px; object-fit: contain; border-radius: 4px; transition: opacity 0.3s ease, transform 0.3s ease; }
         
         .share-wishlist-btns { position: absolute; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 10; }
         .circle-btn { width: 38px; height: 38px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.12); color: #64748b; cursor: pointer; border: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .circle-btn:hover { transform: scale(1.1); color: #ff3e6c; box-shadow: 0 4px 12px rgba(255, 62, 108, 0.2); }
-        .circle-btn:active { transform: scale(0.9); }
 
         /* Right: Details Info */
         .details-info-block { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
         .breadcrumbs { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .product-main-title { font-size: 24px; font-weight: 600; color: #1e293b; margin-bottom: 12px; line-height: 1.3; transition: color 0.3s ease; }
+        .product-main-title { font-size: 24px; font-weight: 600; color: #1e293b; margin-bottom: 12px; line-height: 1.3; transition: opacity 0.3s ease; }
         
         .ratings-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .rating-badge { background: #388e3c; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 5px rgba(56, 142, 60, 0.2); }
@@ -81,10 +77,11 @@
         .variant-headline { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
         .color-swatches-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; }
         
-        .color-swatch-item { border: 2px solid #cbd5e1; padding: 3px; border-radius: 6px; display: flex; align-items: center; cursor: pointer; background: white; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .color-swatch-item { border: 2px solid #cbd5e1; padding: 4px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; background: white; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .color-swatch-item:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-color: #94a3b8; }
         .color-swatch-item.active { border-color: #ff3e6c; background: #fff5f7; transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 62, 108, 0.2); }
-        .swatch-img-circle { width: 40px; height: 45px; object-fit: cover; border-radius: 3px; }
+        .swatch-img-circle { width: 35px; height: 35px; object-fit: cover; border-radius: 5px; }
+        .swatch-text-lbl { font-size: 12px; font-weight: 600; color: #1e293b; padding-right: 8px; }
 
         .size-buttons-row { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .size-btn { width: 45px; height: 45px; border: 1px solid #cbd5e1; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; cursor: pointer; color: #1e293b; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -96,57 +93,57 @@
         .qty-controls { display: flex; align-items: center; border: 1px solid #cbd5e1; width: max-content; border-radius: 6px; overflow: hidden; background: white; }
         .qty-btn { width: 40px; height: 40px; background: #f8fafc; border: none; font-size: 18px; cursor: pointer; font-weight: bold; color: #1e293b; transition: background 0.2s ease; }
         .qty-btn:hover { background: #e2e8f0; }
-        .qty-btn:active { background: #cbd5e1; }
         .qty-input { width: 45px; height: 40px; border: none; border-left: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; text-align: center; font-size: 15px; font-weight: 700; pointer-events: none; background: white; }
 
         /* Pincode Box */
         .pincode-delivery-box { background: white; border: 1px solid #e2e8f0; padding: 18px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-        .pincode-delivery-box:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-color: #cbd5e1; }
         .pincode-input-row { display: flex; gap: 10px; align-items: center; border-bottom: 2px solid #2196f3; padding-bottom: 8px; width: max-content; margin-bottom: 12px; }
         .pincode-input-row i { color: #2196f3; }
         .pin-field { border: none; background: transparent; font-size: 15px; font-weight: 600; color: #1e293b; outline: none; width: 120px; }
         .pin-check-btn { background: none; color: #2196f3; border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform 0.2s ease; }
         .pin-check-btn:hover { transform: scale(1.05); }
-        .pin-check-btn:active { transform: scale(0.95); }
         .delivery-status-msg { font-size: 13px; font-weight: 500; color: #475569; }
         .delivery-status-msg span { color: #388e3c; font-weight: 700; }
 
-        /* Trust Badges Row */
+        /* 🔥 FIX 2: Colored Trust Badges Row */
         .trust-badges-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 25px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin-bottom: 25px; text-align: center; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .trust-item:hover { transform: translateY(-5px); }
-        .trust-item i { font-size: 24px; color: #64748b; transition: color 0.3s ease; }
-        .trust-item:hover i { color: #ff3e6c; }
+        .trust-item i { font-size: 24px; transition: transform 0.3s ease; }
+        .trust-item:hover i { transform: scale(1.1); }
         .trust-item span { font-size: 11px; font-weight: 600; color: #475569; line-height: 1.3; }
+
+        /* Specific Colors for Icons */
+        .icon-blue { color: #2196f3; }
+        .icon-green { color: #4caf50; }
+        .icon-pink { color: #ff3e6c; }
+        .icon-orange { color: #ff9800; }
 
         /* Description */
         .description-section { margin-bottom: 35px; }
         .description-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 12px; }
-        .description-content { font-size: 14px; color: #475569; line-height: 1.7; white-space: pre-line; transition: opacity 0.4s ease; }
+        .description-content { font-size: 14px; color: #475569; line-height: 1.7; white-space: pre-line; transition: opacity 0.3s ease; }
 
-        /* 🔥 ACTION BUTTONS ANIMATIONS */
+        /* Action Buttons Grid */
         .action-buttons-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 35px; }
         .cart-action-btn { padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .btn-add-to-cart { background-color: #ff9800; color: white; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
         .btn-add-to-cart:hover { background-color: #f57c00; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
-        .btn-add-to-cart:active { transform: scale(0.96); box-shadow: 0 2px 10px rgba(255, 152, 0, 0.3); }
+        .btn-add-to-cart:active { transform: scale(0.96); }
 
         .btn-buy-now { background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3); }
         .btn-buy-now:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 62, 108, 0.4); filter: brightness(1.1); }
-        .btn-buy-now:active { transform: scale(0.96); box-shadow: 0 2px 10px rgba(255, 62, 108, 0.3); }
+        .btn-buy-now:active { transform: scale(0.96); }
 
         /* Reviews Section */
         .reviews-section { border-top: 1px solid #f1f5f9; padding-top: 25px; margin-bottom: 30px; }
         .reviews-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 15px; }
         .no-review-text { font-size: 14px; color: #64748b; margin-bottom: 25px; font-style: italic; }
-        .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 15px; font-size: 14px; outline: none; transition: border 0.3s ease, box-shadow 0.3s ease; }
+        .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 15px; font-size: 14px; outline: none; }
         .review-form-input:focus { border-color: #ff3e6c; box-shadow: 0 0 0 3px rgba(255, 62, 108, 0.1); }
-        .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; }
-        .add-photo-btn:hover { background: #e3f2fd; transform: translateY(-2px); }
-        .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; }
-        .post-review-btn:hover { background: #e0355f; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); }
-        .post-review-btn:active { transform: scale(0.96); }
+        .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; }
 
         /* You May Also Like */
         .similar-products-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px; }
@@ -159,12 +156,16 @@
         .similar-card img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s ease; }
         .similar-card:hover img { transform: scale(1.05); }
 
+        /* Mobile View Specific Tweaks */
         @media (max-width: 768px) {
             .product-container { grid-template-columns: 1fr; gap: 20px; padding: 0; margin-top: 0; }
             .details-info-block { border-radius: 0; box-shadow: none; padding: 20px; }
-            .image-gallery-block { flex-direction: column-reverse; position: relative; top: 0; background: white; padding: 20px; margin-bottom: -15px; }
-            .thumb-stack { flex-direction: row; width: 100%; overflow-x: auto; }
-            .main-preview-box img { max-height: 420px; }
+            
+            /* Mobile View Left Aligned Circular Thumbs */
+            .image-gallery-block { flex-direction: row; position: relative; top: 0; background: white; padding: 20px; margin-bottom: -15px; }
+            .thumb-stack { height: 350px; }
+            .main-preview-box img { max-height: 350px; }
+            
             .similar-products-section { border-radius: 0; margin-top: 10px; }
             .action-buttons-row { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px; background: white; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 100; margin-bottom: 0; border-radius: 15px 15px 0 0; }
             body { padding-bottom: 90px; }
@@ -218,7 +219,7 @@
             </div>
 
             <div id="variantOptionsSection" style="display: none;">
-                <div class="variant-headline">Color Options</div>
+                <div class="variant-headline">Select Color Variant</div>
                 <div id="colorSwatchesContainer" class="color-swatches-grid"></div>
             </div>
 
@@ -247,16 +248,17 @@
             </div>
 
             <div class="trust-badges-row">
-                <div class="trust-item"><i class="fa-solid fa-arrow-rotate-left"></i><span>7 Days<br>Replacement</span></div>
-                <div class="trust-item"><i class="fa-solid fa-hand-holding-dollar"></i><span>Cash on<br>Delivery</span></div>
-                <div class="trust-item"><i class="fa-solid fa-truck-fast"></i><span>ZippyKart<br>Delivered</span></div>
-                <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Top<br>Brand</span></div>
+                <div class="trust-item"><i class="fa-solid fa-arrow-rotate-left icon-blue"></i><span>7 Days<br>Replacement</span></div>
+                <div class="trust-item"><i class="fa-solid fa-hand-holding-dollar icon-green"></i><span>Cash on<br>Delivery</span></div>
+                <div class="trust-item"><i class="fa-solid fa-truck-fast icon-pink"></i><span>ZippyKart<br>Delivered</span></div>
+                <div class="trust-item"><i class="fa-solid fa-shield-halved icon-orange"></i><span>Top<br>Brand</span></div>
             </div>
 
             <div class="description-section">
-                <h3>Product Details</h3>
+                <h3>Product Specifications</h3>
                 <div id="mainProductDisplayDescription" class="description-content">Loading...</div>
             </div>
+
             <div class="action-buttons-row">
                 <button class="cart-action-btn btn-add-to-cart" onclick="triggerAddToCartAction()"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                 <button class="cart-action-btn btn-buy-now" onclick="triggerBuyNowDirectAction()"><i class="fa-solid fa-bolt"></i> Buy Now</button>
@@ -320,14 +322,14 @@
                 if(!doc.exists) { window.location.href="index.html"; return; }
                 const data = doc.data(); window.globalProductData = data;
 
-                document.getElementById('productBreadcrumb').innerText = (data.category || "Men") + " T-SHIRTS";
+                document.getElementById('productBreadcrumb').innerText = "STREETWEAR COLLECTION / " + (data.category || "MEN");
                 document.getElementById('displaySalePrice').innerText = "₹" + data.price;
                 document.getElementById('displayMrpPrice').innerText = "₹" + data.mrp;
                 document.getElementById('displayDiscountPct').innerText = Math.floor(((data.mrp - data.price) / data.mrp) * 100) + "% off";
 
                 renderGallery(data); renderSizes(data.sizes || []);
                 
-                // Advanced Variants Engine
+                // 🔥 FIX 3: Advanced Variants Engine Sync 
                 const variantsList = data.variants || [];
                 if(variantsList.length > 0 && variantsList[0].color !== "") {
                     document.getElementById('variantOptionsSection').style.display = 'block';
@@ -335,7 +337,11 @@
                     swatches.innerHTML = '';
                     variantsList.forEach((variant, index) => {
                         const img = variant.img || data.image;
-                        swatches.innerHTML += `<div class="color-swatch-item" id="swatchBtn_${index}" onclick="selectVariant(${index})"><img src="${img}" class="swatch-img-circle"></div>`;
+                        swatches.innerHTML += `
+                        <div class="color-swatch-item" id="swatchBtn_${index}" onclick="selectVariant(${index})">
+                            <img src="${img}" class="swatch-img-circle">
+                            <span class="swatch-text-lbl">${variant.color}</span>
+                        </div>`;
                     });
                     selectVariant(0);
                 } else {
@@ -345,8 +351,10 @@
             } catch (e) { console.log(e); }
         }
 
-        // 4. 🔥 ANIMATED VARIANT SELECTOR 🔥
+        // 4. 🔥 ANIMATED VARIANT SELECTOR (Details Update Fix) 🔥
         window.selectVariant = function(index) {
+            if(!window.globalProductData || !window.globalProductData.variants) return;
+            
             window.activeVariantIndex = index;
             const variant = window.globalProductData.variants[index];
 
@@ -360,6 +368,7 @@
             titleEl.style.opacity = 0; descEl.style.opacity = 0;
             
             setTimeout(() => {
+                // Ensure specific variant text is applied if it exists, otherwise use global default
                 titleEl.innerText = (variant.vTitle && variant.vTitle.trim() !== "") ? variant.vTitle : window.globalProductData.title;
                 descEl.innerText = (variant.vDesc && variant.vDesc.trim() !== "") ? variant.vDesc : window.globalProductData.description;
                 titleEl.style.opacity = 1; descEl.style.opacity = 1;
@@ -395,6 +404,7 @@
             }, 200);
         }
 
+        // Keep thumbnail clicks independent from variant details
         window.changeImg = function(src, element) {
             animateImageSwap(src);
             document.querySelectorAll('.thumb-stack img').forEach(img => img.classList.remove('active'));
@@ -423,7 +433,7 @@
 
         window.verifyPincode = function() { alert("Pincode verified! Delivery available."); }
 
-        // 6. ACTION BUTTONS (Cart / Buy Now FIX)
+        // 6. ACTION BUTTONS (Cart / Buy Now)
         function getCartPacket() {
             if(!window.selectedSizeValue) { alert("Please select a Size first!"); return null; }
             const variantColor = window.activeVariantIndex !== null ? window.globalProductData.variants[window.activeVariantIndex].color : "Standard";
@@ -440,7 +450,6 @@
             let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || [];
             cart.push(packet); localStorage.setItem('zippykart_user_cart', JSON.stringify(cart));
             
-            // Animation trick for cart button
             const btn = document.querySelector('.btn-add-to-cart');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
