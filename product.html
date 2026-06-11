@@ -30,7 +30,7 @@
         /* Main Container Layout */
         .product-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 30px; }
         
-        /* Center Main Preview Box & Hide Thumbnails */
+        /* Center Main Preview Box */
         .image-gallery-block { display: block; position: sticky; top: 80px; height: max-content; text-align: center; }
         .main-preview-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: inline-block; width: 100%; position: relative; }
         
@@ -121,12 +121,11 @@
         .btn-buy-now:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 62, 108, 0.4); filter: brightness(1.1); }
         .btn-buy-now:active { transform: scale(0.96); }
 
-        /* 🔥 FIX: FULLY FUNCTIONAL CUSTOMER REVIEWS CSS 🔥 */
+        /* Customer Reviews Content Frame */
         .reviews-section { border-top: 1px solid #f1f5f9; padding-top: 25px; margin-bottom: 30px; }
         .reviews-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 15px; }
         .no-review-text { font-size: 14px; color: #64748b; margin-bottom: 25px; font-style: italic; }
         
-        /* Rendered Review Cards */
         .review-card { border-bottom: 1px solid #f1f5f9; padding: 15px 0; margin-bottom: 10px; }
         .review-card:last-child { border-bottom: none; }
         .reviewer-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -137,7 +136,6 @@
         .review-uploaded-img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer; transition: transform 0.2s; }
         .review-uploaded-img:hover { transform: scale(1.05); }
 
-        /* Review Input Form */
         .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 15px; font-size: 14px; outline: none; }
         .review-form-input:focus { border-color: #ff3e6c; box-shadow: 0 0 0 3px rgba(255, 62, 108, 0.1); }
         .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
@@ -257,7 +255,6 @@
 
             <div class="reviews-section">
                 <h3>Customer Reviews</h3>
-                
                 <div id="reviewsListContainer" style="margin-bottom: 25px;">
                     <p class="no-review-text" id="noReviewMsg">No reviews yet. Be the first to review!</p>
                 </div>
@@ -332,14 +329,13 @@
                 document.getElementById('displaySalePrice').innerText = "₹" + data.price;
                 document.getElementById('displayMrpPrice').innerText = "₹" + data.mrp;
                 document.getElementById('displayDiscountPct').innerText = Math.floor(((data.mrp - data.price) / data.mrp) * 100) + "% off";
-
-                const imgs = data.all_images || [];
-                if(imgs.length === 0 && data.image) imgs.push(data.image);
-                if(imgs.length > 0) { document.getElementById('mainProductPreviewImage').src = imgs[0]; }
                 
                 renderSizeCheckboxesMatrix(data.sizes || []);
                 
+                // Process Variant mapping
                 const variantsList = data.variants || [];
+                let initialImageToLoad = "";
+
                 if(variantsList.length > 0 && variantsList[0].color !== "") {
                     document.getElementById('variantOptionsSection').style.display = 'block';
                     const swatches = document.getElementById('colorSwatchesContainer');
@@ -347,24 +343,26 @@
                     variantsList.forEach((variant, index) => {
                         const img = variant.img || data.image;
                         swatches.innerHTML += `
-                        <div class="color-swatch-item" id="swatchBtn_${index}" onclick="selectVariant(${index})">
+                        <div class="color-swatch-item" id="swatchBtn_${index}" onclick="selectVariant(${index}, false)">
                             <img src="${img}" class="swatch-img-circle">
                         </div>`;
                     });
-                    selectVariant(0); 
+                    
+                    // Call select variant for initial load instantly (True flag skips animation)
+                    selectVariant(0, true); 
                 } else {
                     document.getElementById('mainProductDisplayTitle').innerText = data.title;
                     document.getElementById('mainProductDisplayDescription').innerText = data.description;
+                    initialImageToLoad = (data.all_images && data.all_images.length > 0) ? data.all_images[0] : data.image;
+                    if (initialImageToLoad) document.getElementById('mainProductPreviewImage').src = initialImageToLoad;
                 }
 
-                // Load existing reviews immediately on page load
                 loadReviews();
-
-            } catch (e) { console.error("Database connection error:", e); }
+            } catch (e) { console.error("Database connection dropped context loop:", e); }
         }
 
-        // 4. 🔥 OVERRIDE DATA ROUTER TRANSITION ENGINE 🔥
-        window.selectVariant = function(index) {
+        // 4. 🔥 FAST OVERRIDE DATA ROUTER ENGINE 🔥
+        window.selectVariant = function(index, isInitialLoad = false) {
             if(!window.globalProductData || !window.globalProductData.variants) return;
             
             window.activeVariantIndex = index;
@@ -376,18 +374,25 @@
             const titleEl = document.getElementById('mainProductDisplayTitle');
             const descEl = document.getElementById('mainProductDisplayDescription');
             
-            titleEl.style.opacity = 0; descEl.style.opacity = 0;
-            
-            setTimeout(() => {
-                titleEl.innerText = (variant.vTitle && variant.vTitle.trim() !== "") ? variant.vTitle : window.globalProductData.title;
-                descEl.innerText = (variant.vDesc && variant.vDesc.trim() !== "") ? variant.vDesc : window.globalProductData.description;
-                titleEl.style.opacity = 1; descEl.style.opacity = 1;
-            }, 200);
+            let finalTitle = (variant.vTitle && variant.vTitle.trim() !== "") ? variant.vTitle : window.globalProductData.title;
+            let finalDesc = (variant.vDesc && variant.vDesc.trim() !== "") ? variant.vDesc : window.globalProductData.description;
+            let finalImg = variant.img && variant.img.startsWith('data:image') ? variant.img : (window.globalProductData.all_images && window.globalProductData.all_images.length > 0 ? window.globalProductData.all_images[0] : window.globalProductData.image);
 
-            if(variant.img && variant.img.startsWith('data:image')) {
-                animateImageSwap(variant.img);
-            } else if(window.globalProductData.all_images && window.globalProductData.all_images.length > 0) {
-                animateImageSwap(window.globalProductData.all_images[0]);
+            if(isInitialLoad) {
+                // Instant Swap, No blinking on page load
+                titleEl.innerText = finalTitle;
+                descEl.innerText = finalDesc;
+                titleEl.style.opacity = 1; descEl.style.opacity = 1;
+                document.getElementById('mainProductPreviewImage').src = finalImg;
+            } else {
+                // Smooth Animation when User Clicks Color Swatch
+                titleEl.style.opacity = 0; descEl.style.opacity = 0;
+                setTimeout(() => {
+                    titleEl.innerText = finalTitle;
+                    descEl.innerText = finalDesc;
+                    titleEl.style.opacity = 1; descEl.style.opacity = 1;
+                }, 200);
+                animateImageSwap(finalImg);
             }
         }
 
@@ -450,10 +455,9 @@
             window.location.href = "cart.html";
         }
 
-        // --- 6. 🔥 CUSTOMER REVIEWS ENGINE (IMAGE COMPRESS & FIREBASE SYNC) 🔥 ---
+        // 6. CUSTOMER REVIEWS ENGINE
         let pendingReviewImage = "";
 
-        // Smart Compressor reuse for customer review images
         function compressImageEngine(base64Str, maxWidth = 800, maxHeight = 800, quality = 0.7) {
             return new Promise((resolve) => {
                 const img = new Image(); img.src = base64Str;
@@ -472,7 +476,6 @@
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
-                    // Compress customer image to save database space (prevent 1MB limit crash)
                     const compressed = await compressImageEngine(e.target.result, 600, 600, 0.6);
                     pendingReviewImage = compressed;
                     document.getElementById('reviewImagePreview').src = compressed;
@@ -484,8 +487,7 @@
         }
 
         window.clearReviewImage = function() {
-            pendingReviewImage = "";
-            document.getElementById('reviewImageInput').value = "";
+            pendingReviewImage = ""; document.getElementById('reviewImageInput').value = "";
             document.getElementById('reviewImagePreviewWrap').style.display = 'none';
             document.getElementById('reviewPhotoBtnText').innerText = 'Add Product Photo';
         }
@@ -498,86 +500,45 @@
             if(!name || !text) { alert("Please enter your name and review details."); return; }
             if(!productId) return;
 
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Posting...`;
-            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Posting...`; btn.disabled = true;
 
             const reviewData = {
-                name: name,
-                text: text,
-                image: pendingReviewImage, // Base64 compressed image (if any)
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                name: name, text: text, image: pendingReviewImage, timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
 
             try {
-                // Save review inside a sub-collection for this specific product
                 await db.collection("zippykart_products").doc(productId).collection("reviews").add(reviewData);
-                
-                // Clear Form
-                document.getElementById('reviewerName').value = "";
-                document.getElementById('reviewText').value = "";
-                clearReviewImage();
-                
-                // Reload list
-                loadReviews();
-                alert("Thank you! Your review has been successfully posted.");
-            } catch(e) {
-                alert("Network Error: Could not post review. " + e.message);
-            } finally {
-                btn.innerHTML = `Post Review`;
-                btn.disabled = false;
-            }
+                document.getElementById('reviewerName').value = ""; document.getElementById('reviewText').value = ""; clearReviewImage();
+                loadReviews(); alert("Thank you! Your review has been successfully posted.");
+            } catch(e) { alert("Network Error: Could not post review. " + e.message); } 
+            finally { btn.innerHTML = `Post Review`; btn.disabled = false; }
         }
 
         async function loadReviews() {
             if(!productId) return;
             const container = document.getElementById('reviewsListContainer');
-            
             try {
                 const snapshot = await db.collection("zippykart_products").doc(productId).collection("reviews").orderBy("timestamp", "desc").get();
-                
-                if(snapshot.empty) {
-                    container.innerHTML = `<p class="no-review-text" id="noReviewMsg">No reviews yet. Be the first to review!</p>`;
-                    return;
-                }
-
+                if(snapshot.empty) { container.innerHTML = `<p class="no-review-text" id="noReviewMsg">No reviews yet. Be the first to review!</p>`; return; }
                 container.innerHTML = '';
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    
-                    // Format date
                     let dateStr = "Just now";
-                    if(data.timestamp) {
-                        const d = data.timestamp.toDate();
-                        dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-                    }
-                    
+                    if(data.timestamp) { const d = data.timestamp.toDate(); dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); }
                     const initial = data.name.charAt(0).toUpperCase();
-                    
-                    // Conditionally show image if uploaded
-                    let imgHtml = "";
-                    if(data.image && data.image !== "") {
-                        imgHtml = `<img src="${data.image}" class="review-uploaded-img" onclick="window.open('${data.image}', '_blank')">`;
-                    }
-
+                    let imgHtml = ""; if(data.image && data.image !== "") { imgHtml = `<img src="${data.image}" class="review-uploaded-img" onclick="window.open('${data.image}', '_blank')">`; }
                     container.innerHTML += `
                         <div class="review-card">
                             <div class="reviewer-header">
                                 <div class="reviewer-avatar">${initial}</div>
-                                <div>
-                                    <div class="reviewer-name">${data.name}</div>
-                                    <div class="review-date">${dateStr}</div>
-                                </div>
+                                <div><div class="reviewer-name">${data.name}</div><div class="review-date">${dateStr}</div></div>
                             </div>
-                            <div class="review-text-content">${data.text}</div>
-                            ${imgHtml}
-                        </div>
-                    `;
+                            <div class="review-text-content">${data.text}</div>${imgHtml}
+                        </div>`;
                 });
-
             } catch(e) { console.error("Error loading reviews:", e); }
         }
 
-        // Initialize script logic
         window.onload = loadProductPageDetails;
     </script>
 </body>
