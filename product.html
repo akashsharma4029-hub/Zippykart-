@@ -11,21 +11,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-touch-callout: none; }
         body { background-color: #f8fafc; color: #1e293b; padding-bottom: 60px; overflow-x: hidden; }
 
-        /* Navbar */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; box-shadow: 0 1px 5px rgba(0,0,0,0.08); position: sticky; top:0; z-index: 1000; }
         .brand-logo { font-size: 22px; font-weight: 800; color: #1e293b; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: transform 0.3s ease; }
         .brand-logo span { color: #ff3e6c; }
 
-        /* Animations */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseAlert { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
         .animated-block { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; }
 
-        /* Main Container */
         .product-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 30px; }
         
-        /* Image Box */
         .image-gallery-block { display: block; position: sticky; top: 80px; height: max-content; text-align: center; }
         .main-preview-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: inline-block; width: 100%; position: relative; }
         .main-preview-box img { width: 100%; height: auto; max-height: 550px; object-fit: contain; border-radius: 4px; transition: opacity 0.3s ease, transform 0.3s ease; display: block; margin: 0 auto; }
@@ -33,7 +29,6 @@
         .circle-btn { width: 38px; height: 38px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.12); color: #64748b; cursor: pointer; border: none; transition: all 0.3s ease; }
         .circle-btn:hover { transform: scale(1.1); color: #ff3e6c; }
 
-        /* Right Details Info */
         .details-info-block { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
         .breadcrumbs { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
         .product-main-title { font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 12px; line-height: 1.3; transition: opacity 0.3s ease; }
@@ -43,32 +38,28 @@
         .rating-count-text { font-size: 12px; color: #64748b; font-weight: 500; }
         .zippy-trust-badge { background: linear-gradient(135deg, #ff3e6c, #e0355f); color: white; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(255, 62, 108, 0.3); }
 
+        .fomo-banner { background: #fff5f7; border: 1px solid #ffe4e6; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 12px; font-weight: 600; color: #e11d48; }
+        .fomo-dot { width: 8px; height: 8px; background: #e11d48; border-radius: 50%; animation: pulseAlert 1.5s infinite; }
+        
         .pricing-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
         .current-price { font-size: 28px; font-weight: 800; color: #1e293b; }
         .original-mrp { font-size: 15px; color: #94a3b8; text-decoration: line-through; }
         .discount-pct { color: #388e3c; font-size: 15px; font-weight: 700; background: rgba(56, 142, 60, 0.1); padding: 2px 8px; border-radius: 4px; }
 
-        /* 🔥 FEATURE 1: LIVE FOMO ENGINE */
-        .fomo-banner { background: #fff5f7; border: 1px solid #ffe4e6; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 12px; font-weight: 600; color: #e11d48; }
-        .fomo-dot { width: 8px; height: 8px; background: #e11d48; border-radius: 50%; animation: pulseAlert 1.5s infinite; }
-        
         .available-offers { margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1; }
         .available-offers h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
         .offer-item { font-size: 12px; color: #475569; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
         .offer-item i { color: #388e3c; margin-top: 2px; }
 
-        /* Variants */
         .variant-headline { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 10px; text-transform: uppercase; }
         .color-swatches-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
         .color-swatch-item { border: 2px solid #cbd5e1; padding: 3px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; }
         .color-swatch-item.active { border-color: #ff3e6c; transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 62, 108, 0.2); }
         .swatch-img-circle { width: 45px; height: 45px; object-fit: cover; border-radius: 50%; }
 
-        /* 🔥 FEATURE 2: SMART FIT PREDICTOR */
         .size-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .fit-predictor-btn { font-size: 12px; font-weight: 700; color: #2196f3; cursor: pointer; display: flex; align-items: center; gap: 4px; background: none; border: none; }
-        .fit-predictor-btn:hover { text-decoration: underline; }
-
+        
         .size-buttons-row { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
         .size-btn { width: 45px; height: 45px; border: 1px solid #cbd5e1; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; cursor: pointer; color: #1e293b; transition: all 0.2s; }
         .size-btn.active { background: #1e293b; color: white; border-color: #1e293b; transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
@@ -78,14 +69,12 @@
         .qty-btn { width: 40px; height: 40px; background: #f8fafc; border: none; font-size: 18px; cursor: pointer; font-weight: bold; color: #1e293b; }
         .qty-input { width: 45px; height: 40px; border: none; border-left: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; text-align: center; font-size: 15px; font-weight: 700; pointer-events: none; background: white; }
 
-        /* Pincode Box */
         .pincode-delivery-box { background: white; border: 1px solid #e2e8f0; padding: 18px; border-radius: 8px; margin-bottom: 25px; }
         .pincode-input-row { display: flex; gap: 10px; align-items: center; border-bottom: 2px solid #2196f3; padding-bottom: 8px; width: max-content; margin-bottom: 12px; }
         .pin-field { border: none; background: transparent; font-size: 15px; font-weight: 600; color: #1e293b; outline: none; width: 120px; }
         .pin-check-btn { background: none; color: #2196f3; border: none; font-size: 14px; font-weight: 700; cursor: pointer; }
         .delivery-status-msg { font-size: 13px; font-weight: 500; color: #475569; }
 
-        /* Trust Badges */
         .trust-badges-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 25px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin-bottom: 25px; text-align: center; }
         .trust-item i { font-size: 24px; margin-bottom: 5px; }
         .trust-item span { font-size: 11px; font-weight: 600; color: #475569; }
@@ -95,13 +84,6 @@
         .description-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
         .description-content { font-size: 14px; color: #475569; line-height: 1.7; white-space: pre-line; }
 
-        /* Action Buttons */
-        .action-buttons-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .cart-action-btn { padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 800; text-transform: uppercase; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; }
-        .btn-add-to-cart { background-color: #ff9800; color: white; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
-        .btn-buy-now { background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3); }
-
-        /* 🔥 FEATURE 3: AI COMPLETE THE LOOK */
         .complete-look-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; margin-bottom: 30px; }
         .ai-title { font-size: 15px; font-weight: 800; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
         .combo-items-wrap { display: flex; gap: 15px; align-items: center; overflow-x: auto; padding-bottom: 10px; }
@@ -111,17 +93,22 @@
         .combo-plus { font-size: 20px; color: #94a3b8; font-weight: bold; }
         .add-combo-btn { width: 100%; background: #1e293b; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 13px; font-weight: 700; margin-top: 10px; cursor: pointer; }
 
-        /* 🔥 FEATURE 4: DRIP CHECK REELS */
-        .drip-check-section { margin-bottom: 30px; }
+        .action-buttons-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .cart-action-btn { padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 800; text-transform: uppercase; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; }
+        .btn-add-to-cart { background-color: #ff9800; color: white; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3); }
+        .btn-buy-now { background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3); }
+
+        /* 🔥 Drip Check Videos Section */
+        .drip-check-section { margin-bottom: 30px; display: none; } /* Hidden by default until videos exist */
         .drip-check-title { font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .reels-container { display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px; }
         .reels-container::-webkit-scrollbar { display: none; }
-        .reel-card { min-width: 130px; height: 220px; border-radius: 12px; position: relative; overflow: hidden; background: #000; flex-shrink: 0; cursor: pointer; }
-        .reel-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .reel-card { min-width: 130px; height: 220px; border-radius: 12px; position: relative; overflow: hidden; background: #000; flex-shrink: 0; cursor: pointer; transition: transform 0.2s; }
+        .reel-card:hover { transform: scale(1.05); }
+        .reel-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
         .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 30px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .reel-user { position: absolute; bottom: 10px; left: 10px; color: white; font-size: 11px; font-weight: 600; z-index: 2; }
+        .reel-user { position: absolute; bottom: 10px; left: 10px; color: white; font-size: 11px; font-weight: 700; z-index: 2; display: flex; align-items: center; gap: 4px; }
 
-        /* Reviews Section */
         .reviews-section { border-top: 1px solid #f1f5f9; padding-top: 25px; margin-bottom: 30px; }
         .review-card { border-bottom: 1px solid #f1f5f9; padding: 15px 0; }
         .reviewer-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -129,16 +116,15 @@
         .review-text-content { font-size: 13px; color: #475569; margin-bottom: 10px; }
         .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; margin-bottom: 10px; font-size: 13px; outline: none; }
         .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 10px 20px; font-weight: 600; border-radius: 6px; cursor: pointer; }
+        .review-uploaded-img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer; }
+        .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 
-        /* 🔥 MODALS (Fit Predictor & Mystery Box) */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
         .modal-box { background: white; width: 90%; max-width: 400px; padding: 25px; border-radius: 16px; text-align: center; position: relative; animation: fadeUp 0.3s ease; }
         .close-modal { position: absolute; top: 15px; right: 15px; font-size: 20px; cursor: pointer; color: #94a3b8; border: none; background: none; }
-        
         .mystery-box-img { width: 120px; cursor: pointer; animation: pulseAlert 1.5s infinite; margin: 15px auto; }
         .coupon-code { font-size: 24px; font-weight: 800; color: #ff3e6c; border: 2px dashed #ff3e6c; padding: 10px; border-radius: 8px; margin: 15px 0; background: #fff5f7; display: none; letter-spacing: 2px; }
 
-        /* You May Also Like */
         .similar-products-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px; }
         .similar-grid { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; }
         .similar-card { min-width: 140px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
@@ -147,6 +133,7 @@
         @media (max-width: 768px) {
             .product-container { grid-template-columns: 1fr; gap: 20px; padding: 0; margin-top: 0; }
             .details-info-block { border-radius: 0; box-shadow: none; padding: 20px; }
+            .image-gallery-block { display: block; position: relative; top: 0; background: white; padding: 20px; margin-bottom: -15px; }
             .action-buttons-row { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px; background: white; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); z-index: 100; margin-bottom: 0; border-radius: 15px 15px 0 0; }
             body { padding-bottom: 90px; }
         }
@@ -161,33 +148,30 @@
         </div>
     </div>
 
+    <!-- Mystery Box Modal -->
     <div id="mysteryModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-modal" onclick="closeMysteryBox()"><i class="fa-solid fa-xmark"></i></button>
             <h2 style="font-size:20px; font-weight:800; color:#1e293b; margin-bottom:10px;">🎁 Secret Drop!</h2>
             <p style="font-size:13px; color:#64748b;">Tap the mystery box to reveal a secret discount for your first streetwear fit.</p>
-            
             <div id="mysteryBoxTap" onclick="revealCoupon()">
                 <img src="https://cdn-icons-png.flaticon.com/512/3233/3233483.png" class="mystery-box-img">
                 <p style="font-weight:700; color:#ff3e6c; font-size:12px;">TAP TO UNLOCK</p>
             </div>
-            
             <div id="couponResult" class="coupon-code">ZIPPY10</div>
             <p id="couponMsg" style="display:none; font-size:12px; font-weight:600; color:#388e3c; margin-top:10px;">Applied automatically at checkout!</p>
         </div>
     </div>
 
+    <!-- Fit Predictor Modal -->
     <div id="fitPredictorModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-modal" onclick="closeFitModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 style="font-size:18px; font-weight:800; margin-bottom:15px;"><i class="fa-solid fa-ruler-combined" style="color:#2196f3;"></i> Smart Fit Predictor</h2>
             <p style="font-size:12px; color:#64748b; margin-bottom:20px;">Enter your details to find the perfect streetwear drop-shoulder fit.</p>
-            
             <input type="number" id="userHeight" class="review-form-input" placeholder="Height (in cm) e.g., 175" style="margin-bottom:10px;">
             <input type="number" id="userWeight" class="review-form-input" placeholder="Weight (in kg) e.g., 70">
-            
             <button onclick="calculateFit()" style="width:100%; background:#1e293b; color:white; border:none; padding:12px; border-radius:6px; font-weight:700; cursor:pointer; margin-bottom:15px;">Find My Size</button>
-            
             <div id="fitResult" style="display:none; font-size:16px; font-weight:800; color:#ff3e6c; padding:15px; background:#fff5f7; border-radius:8px; border:1px dashed #ff3e6c;">
                 Your Ideal Fit is: <span id="predictedSizeText" style="font-size:24px;">L</span>
             </div>
@@ -195,6 +179,7 @@
     </div>
 
     <div class="product-container">
+        <!-- Left Image Preview -->
         <div class="image-gallery-block animated-block">
             <div class="main-preview-box">
                 <div class="share-wishlist-btns">
@@ -205,6 +190,7 @@
             </div>
         </div>
 
+        <!-- Right Panels -->
         <div class="details-info-block animated-block delay-1">
             <div class="breadcrumbs" id="productBreadcrumb">Streetwear T-Shirts</div>
             <h1 id="mainProductDisplayTitle" class="product-main-title">Loading Product Details...</h1>
@@ -215,6 +201,7 @@
                 <div class="zippy-trust-badge"><i class="fa-solid fa-medal"></i> ZippyTrust</div>
             </div>
 
+            <!-- FOMO Engine -->
             <div class="fomo-banner">
                 <div class="fomo-dot"></div>
                 <span id="fomoText">🔥 14 streetwear fans are looking at this right now!</span>
@@ -237,6 +224,7 @@
                 <div id="colorSwatchesContainer" class="color-swatches-grid"></div>
             </div>
 
+            <!-- Size Options & Fit Predictor -->
             <div class="size-header-row">
                 <div class="variant-headline" style="margin:0;">Select Size</div>
                 <button class="fit-predictor-btn" onclick="openFitModal()"><i class="fa-solid fa-wand-magic-sparkles"></i> Find My Perfect Fit</button>
@@ -276,24 +264,14 @@
                 <div id="mainProductDisplayDescription" class="description-content">Loading...</div>
             </div>
 
+            <!-- AI Complete The Look -->
             <div class="complete-look-box">
                 <div class="ai-title"><i class="fa-solid fa-robot" style="color:#2196f3;"></i> AI Styled Outfit Match</div>
                 <p style="font-size:12px; color:#64748b; margin-bottom:12px;">Pair this tee with these trending items for a complete drip.</p>
                 <div class="combo-items-wrap">
-                    <div class="combo-item">
-                        <img src="https://via.placeholder.com/150/1e293b/fff?text=Baggy+Cargos" alt="Pants">
-                        <p>Baggy Cargos</p>
-                    </div>
-                    <div class="combo-plus">+</div>
-                    <div class="combo-item">
-                        <img src="https://via.placeholder.com/150/e2e8f0/333?text=Sneakers" alt="Shoes">
-                        <p>Retro Sneakers</p>
-                    </div>
-                    <div class="combo-plus">+</div>
-                    <div class="combo-item">
-                        <img src="https://via.placeholder.com/150/ff3e6c/fff?text=Cap" alt="Cap">
-                        <p>Street Cap</p>
-                    </div>
+                    <div class="combo-item"><img src="https://via.placeholder.com/150/1e293b/fff?text=Baggy+Cargos"><p>Baggy Cargos</p></div><div class="combo-plus">+</div>
+                    <div class="combo-item"><img src="https://via.placeholder.com/150/e2e8f0/333?text=Sneakers"><p>Retro Sneakers</p></div><div class="combo-plus">+</div>
+                    <div class="combo-item"><img src="https://via.placeholder.com/150/ff3e6c/fff?text=Cap"><p>Street Cap</p></div>
                 </div>
                 <button class="add-combo-btn" onclick="alert('Combo details added to session cart!')">Add Full Look to Bag - Save 15%</button>
             </div>
@@ -303,31 +281,18 @@
                 <button class="cart-action-btn btn-buy-now" onclick="triggerBuyNowDirectAction()"><i class="fa-solid fa-bolt"></i> Buy Now</button>
             </div>
 
-            <div class="drip-check-section">
+            <!-- 🔥 NEW: DYNAMIC DRIP CHECK REELS -->
+            <div class="drip-check-section" id="dripCheckSection">
                 <div class="drip-check-title"><i class="fa-brands fa-tiktok" style="color:#ff3e6c;"></i> Drip Check Videos</div>
-                <div class="reels-container">
-                    <div class="reel-card" onclick="alert('Playing user reel video...')">
-                        <img src="https://via.placeholder.com/200x350/333/fff?text=Fit+Check+1">
-                        <i class="fa-solid fa-play play-icon"></i>
-                        <div class="reel-user">@Rahul_Street</div>
-                    </div>
-                    <div class="reel-card" onclick="alert('Playing user reel video...')">
-                        <img src="https://via.placeholder.com/200x350/555/fff?text=Fit+Check+2">
-                        <i class="fa-solid fa-play play-icon"></i>
-                        <div class="reel-user">@SneakerBoy</div>
-                    </div>
-                    <div class="reel-card" onclick="alert('Playing user reel video...')">
-                        <img src="https://via.placeholder.com/200x350/777/fff?text=Fit+Check+3">
-                        <i class="fa-solid fa-play play-icon"></i>
-                        <div class="reel-user">@Vibes_21</div>
-                    </div>
+                <div class="reels-container" id="reelsContainer">
+                    <!-- Javascript will inject real video cards here -->
                 </div>
             </div>
 
+            <!-- Reviews -->
             <div class="reviews-section">
                 <h3>Customer Reviews</h3>
                 <div id="reviewsListContainer" style="margin-bottom: 25px;"><p class="no-review-text" id="noReviewMsg">No reviews yet.</p></div>
-                
                 <h3 style="margin-top: 20px;">Add Your Review</h3>
                 <input type="text" id="reviewerName" class="review-form-input" placeholder="Your Name">
                 <textarea id="reviewText" class="review-form-input" style="height: 80px; resize:none;" placeholder="Write your experience..."></textarea>
@@ -342,6 +307,18 @@
         </div>
     </div>
 
+    <div class="product-container animated-block delay-2" style="margin-top:0;">
+        <div class="similar-products-section">
+            <h3>You May Also Like</h3>
+            <div class="similar-grid">
+                <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=White+Tee"></div>
+                <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Black+Tee"></div>
+                <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Logo+Tee"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -364,45 +341,25 @@
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
-        // 🔥 FOMO Engine Logic
-        setInterval(() => {
-            const count = Math.floor(Math.random() * (18 - 8 + 1)) + 8; // Random number between 8 and 18
-            document.getElementById('fomoText').innerText = `🔥 ${count} streetwear fans are looking at this right now!`;
-        }, 5000);
+        // FOMO Engine Logic
+        setInterval(() => { const count = Math.floor(Math.random() * (18 - 8 + 1)) + 8; document.getElementById('fomoText').innerText = `🔥 ${count} streetwear fans are looking at this right now!`; }, 5000);
 
-        // 🔥 Mystery Box Logic
-        setTimeout(() => { 
-            if(!localStorage.getItem('zippy_mystery_claimed')) {
-                document.getElementById('mysteryModal').style.display = 'flex'; 
-            }
-        }, 3000);
-
+        // Mystery Box Logic
+        setTimeout(() => { if(!localStorage.getItem('zippy_mystery_claimed')) { document.getElementById('mysteryModal').style.display = 'flex'; } }, 3000);
         function closeMysteryBox() { document.getElementById('mysteryModal').style.display = 'none'; }
-        function revealCoupon() {
-            document.getElementById('mysteryBoxTap').style.display = 'none';
-            document.getElementById('couponResult').style.display = 'inline-block';
-            document.getElementById('couponMsg').style.display = 'block';
-            localStorage.setItem('zippy_mystery_claimed', 'true');
-        }
+        function revealCoupon() { document.getElementById('mysteryBoxTap').style.display = 'none'; document.getElementById('couponResult').style.display = 'inline-block'; document.getElementById('couponMsg').style.display = 'block'; localStorage.setItem('zippy_mystery_claimed', 'true'); }
 
-        // 🔥 Fit Predictor Logic
+        // Fit Predictor Logic
         function openFitModal() { document.getElementById('fitPredictorModal').style.display = 'flex'; }
         function closeFitModal() { document.getElementById('fitPredictorModal').style.display = 'none'; }
         function calculateFit() {
-            const h = document.getElementById('userHeight').value;
-            const w = document.getElementById('userWeight').value;
+            const h = document.getElementById('userHeight').value; const w = document.getElementById('userWeight').value;
             if(!h || !w) { alert("Dono details fill karein bhai!"); return; }
-            
-            let size = "M"; // Basic logic simulation
-            if (h > 178 || w > 75) size = "XL";
-            else if (h > 170 || w > 65) size = "L";
-            else if (h < 160) size = "S";
-
-            document.getElementById('predictedSizeText').innerText = size;
-            document.getElementById('fitResult').style.display = 'block';
+            let size = "M"; if (h > 178 || w > 75) size = "XL"; else if (h > 170 || w > 65) size = "L"; else if (h < 160) size = "S";
+            document.getElementById('predictedSizeText').innerText = size; document.getElementById('fitResult').style.display = 'block';
         }
 
-        // 3. LOAD PRODUCT DATA (Unchanged logic)
+        // 3. LOAD PRODUCT DATA
         async function loadProductPageDetails() {
             if(!productId) { window.location.href="index.html"; return; }
             try {
@@ -417,7 +374,6 @@
 
                 const imgs = data.all_images || [];
                 if(imgs.length === 0 && data.image) imgs.push(data.image);
-                if(imgs.length > 0) { document.getElementById('mainProductPreviewImage').src = imgs[0]; }
                 
                 renderSizeCheckboxesMatrix(data.sizes || []);
                 
@@ -434,7 +390,27 @@
                 } else {
                     document.getElementById('mainProductDisplayTitle').innerText = data.title;
                     document.getElementById('mainProductDisplayDescription').innerText = data.description;
+                    if(imgs.length > 0) document.getElementById('mainProductPreviewImage').src = imgs[0];
                 }
+
+                // 🔥 Render Video Links if Admin added them
+                const videoLinks = data.video_links || [];
+                if(videoLinks.length > 0) {
+                    document.getElementById('dripCheckSection').style.display = 'block';
+                    const reelsContainer = document.getElementById('reelsContainer');
+                    reelsContainer.innerHTML = '';
+                    const coverImg = imgs.length > 0 ? imgs[0] : 'https://via.placeholder.com/200';
+                    videoLinks.forEach((link, idx) => {
+                        reelsContainer.innerHTML += `
+                            <div class="reel-card" onclick="window.open('${link}', '_blank')">
+                                <img src="${coverImg}">
+                                <i class="fa-solid fa-play play-icon"></i>
+                                <div class="reel-user"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> Watch Reel ${idx + 1}</div>
+                            </div>
+                        `;
+                    });
+                }
+
                 loadReviews();
             } catch (e) { console.error("Data drop error:", e); }
         }
@@ -446,16 +422,13 @@
             document.querySelectorAll('.color-swatch-item').forEach(el => el.classList.remove('active'));
             document.getElementById(`swatchBtn_${index}`).classList.add('active');
 
-            const titleEl = document.getElementById('mainProductDisplayTitle');
-            const descEl = document.getElementById('mainProductDisplayDescription');
+            const titleEl = document.getElementById('mainProductDisplayTitle'); const descEl = document.getElementById('mainProductDisplayDescription');
             let finalTitle = (variant.vTitle && variant.vTitle.trim() !== "") ? variant.vTitle : window.globalProductData.title;
             let finalDesc = (variant.vDesc && variant.vDesc.trim() !== "") ? variant.vDesc : window.globalProductData.description;
             let finalImg = variant.img && variant.img.startsWith('data:image') ? variant.img : (window.globalProductData.all_images && window.globalProductData.all_images.length > 0 ? window.globalProductData.all_images[0] : window.globalProductData.image);
 
             if(isInitialLoad) {
-                titleEl.innerText = finalTitle; descEl.innerText = finalDesc;
-                titleEl.style.opacity = 1; descEl.style.opacity = 1;
-                document.getElementById('mainProductPreviewImage').src = finalImg;
+                titleEl.innerText = finalTitle; descEl.innerText = finalDesc; titleEl.style.opacity = 1; descEl.style.opacity = 1; document.getElementById('mainProductPreviewImage').src = finalImg;
             } else {
                 titleEl.style.opacity = 0; descEl.style.opacity = 0;
                 setTimeout(() => { titleEl.innerText = finalTitle; descEl.innerText = finalDesc; titleEl.style.opacity = 1; descEl.style.opacity = 1; }, 200);
@@ -464,112 +437,37 @@
             }
         }
 
-        function renderSizeCheckboxesMatrix(sizesArray) {
-            const container = document.getElementById('sizeButtonsContainer'); container.innerHTML = '';
-            if(sizesArray.length === 0) return;
-            sizesArray.forEach(size => { container.innerHTML += `<button class="size-btn" onclick="window.selectSizeMetricValue('${size}', this)">${size}</button>`; });
-        }
+        function renderSizeCheckboxesMatrix(sizesArray) { const container = document.getElementById('sizeButtonsContainer'); container.innerHTML = ''; if(sizesArray.length === 0) return; sizesArray.forEach(size => { container.innerHTML += `<button class="size-btn" onclick="window.selectSizeMetricValue('${size}', this)">${size}</button>`; }); }
+        window.selectSizeMetricValue = function(size, element) { window.selectedSizeValue = size; document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active'); }
+        window.changeQty = function(change) { const input = document.getElementById('qtyInput'); let val = parseInt(input.value) + change; if(val >= 1 && val <= 10) { input.value = val; } }
 
-        window.selectSizeMetricValue = function(size, element) {
-            window.selectedSizeValue = size;
-            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active')); element.classList.add('active');
-        }
-
-        window.changeQty = function(change) {
-            const input = document.getElementById('qtyInput');
-            let val = parseInt(input.value) + change;
-            if(val >= 1 && val <= 10) { input.value = val; }
-        }
-
-        // Live PINCODE API
+        // PINCODE
         window.verifyPincode = async function() {
-            const pin = document.getElementById('deliveryPinInput').value.trim();
-            const resultDiv = document.getElementById('pincodeStatusMsg');
-            const checkBtn = document.querySelector('.pin-check-btn');
-
+            const pin = document.getElementById('deliveryPinInput').value.trim(); const resultDiv = document.getElementById('pincodeStatusMsg'); const checkBtn = document.querySelector('.pin-check-btn');
             if(pin.length !== 6) { resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Invalid Pincode.</span>`; return; }
             checkBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; checkBtn.disabled = true;
-
             try {
-                const response = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
-                const data = await response.json();
-                if (data && data[0].Status === "Success") {
-                    const postOffice = data[0].PostOffice[0];
-                    const location = `${postOffice.Name}, ${postOffice.District}`;
-                    resultDiv.innerHTML = `<div style="color:#388e3c; margin-bottom: 5px;"><i class="fa-solid fa-circle-check"></i> <strong>Pincode successfully available!</strong></div><div style="color:#1e293b; font-weight:600; font-size:12px; margin-bottom: 5px;"><i class="fa-solid fa-map-location-dot" style="color:#ff3e6c;"></i> Delivering to: ${location}</div>Free Delivery by <strong>Tomorrow, 10 PM</strong> | <span style="color:#388e3c; font-weight:700;">Free</span> <strike style="color:#94a3b8;">₹40</strike>`;
-                } else { resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Pincode not serviceable.</span>`; }
-            } catch (error) { resultDiv.innerHTML = `<span style="color:#ef4444;">Network error.</span>`; } 
-            finally { checkBtn.innerHTML = `Check`; checkBtn.disabled = false; }
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pin}`); const data = await response.json();
+                if (data && data[0].Status === "Success") { const postOffice = data[0].PostOffice[0]; const location = `${postOffice.Name}, ${postOffice.District}`; resultDiv.innerHTML = `<div style="color:#388e3c; margin-bottom: 5px;"><i class="fa-solid fa-circle-check"></i> <strong>Pincode successfully available!</strong></div><div style="color:#1e293b; font-weight:600; font-size:12px; margin-bottom: 5px;"><i class="fa-solid fa-map-location-dot" style="color:#ff3e6c;"></i> Delivering to: ${location}</div>Free Delivery by <strong>Tomorrow, 10 PM</strong> | <span style="color:#388e3c; font-weight:700;">Free</span> <strike style="color:#94a3b8;">₹40</strike>`; } else { resultDiv.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> Pincode not serviceable.</span>`; }
+            } catch (error) { resultDiv.innerHTML = `<span style="color:#ef4444;">Network error.</span>`; } finally { checkBtn.innerHTML = `Check`; checkBtn.disabled = false; }
         }
 
         // CART LOGIC
         function getCartPacket() {
             if(!window.selectedSizeValue) { alert("Please select a Size first!"); return null; }
-            const variantColor = window.activeVariantIndex !== null ? window.globalProductData.variants[window.activeVariantIndex].color : "Standard";
-            const qty = parseInt(document.getElementById('qtyInput').value);
+            const variantColor = window.activeVariantIndex !== null ? window.globalProductData.variants[window.activeVariantIndex].color : "Standard"; const qty = parseInt(document.getElementById('qtyInput').value);
             return { id: productId, title: document.getElementById('mainProductDisplayTitle').innerText, size: window.selectedSizeValue, color: variantColor, price: window.globalProductData.price, img: document.getElementById('mainProductPreviewImage').src, quantity: qty };
         }
-
-        window.triggerAddToCartAction = function() {
-            const packet = getCartPacket(); if(!packet) return;
-            let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; cart.push(packet); localStorage.setItem('zippykart_user_cart', JSON.stringify(cart));
-            const btn = document.querySelector('.btn-add-to-cart'); const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added'; btn.style.backgroundColor = '#4caf50';
-            setTimeout(() => { btn.innerHTML = originalText; btn.style.backgroundColor = '#ff9800'; }, 1500);
-        }
-
-        window.triggerBuyNowDirectAction = function() {
-            const packet = getCartPacket(); if(!packet) return;
-            let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; cart.push(packet); localStorage.setItem('zippykart_user_cart', JSON.stringify(cart));
-            window.location.href = "cart.html";
-        }
+        window.triggerAddToCartAction = function() { const packet = getCartPacket(); if(!packet) return; let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; cart.push(packet); localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); const btn = document.querySelector('.btn-add-to-cart'); const originalText = btn.innerHTML; btn.innerHTML = '<i class="fa-solid fa-check"></i> Added'; btn.style.backgroundColor = '#4caf50'; setTimeout(() => { btn.innerHTML = originalText; btn.style.backgroundColor = '#ff9800'; }, 1500); }
+        window.triggerBuyNowDirectAction = function() { const packet = getCartPacket(); if(!packet) return; let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; cart.push(packet); localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); window.location.href = "cart.html"; }
 
         // REVIEWS ENGINE
         let pendingReviewImage = "";
-        function compressImageEngine(base64Str, maxWidth = 800, maxHeight = 800, quality = 0.7) {
-            return new Promise((resolve) => {
-                const img = new Image(); img.src = base64Str;
-                img.onload = function() { let width = img.width; let height = img.height; if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } } else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } }
-                    const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height); resolve(canvas.toDataURL('image/jpeg', quality)); };
-            });
-        }
-
-        window.processReviewImage = function(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader(); reader.onload = async function(e) {
-                    const compressed = await compressImageEngine(e.target.result, 600, 600, 0.6); pendingReviewImage = compressed;
-                    document.getElementById('reviewImagePreview').src = compressed; document.getElementById('reviewImagePreviewWrap').style.display = 'block'; document.getElementById('reviewPhotoBtnText').innerText = 'Change Photo';
-                }; reader.readAsDataURL(input.files[0]);
-            }
-        }
-
+        function compressImageEngine(base64Str, maxWidth = 800, maxHeight = 800, quality = 0.7) { return new Promise((resolve) => { const img = new Image(); img.src = base64Str; img.onload = function() { let width = img.width; let height = img.height; if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } } else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } } const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height; const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height); resolve(canvas.toDataURL('image/jpeg', quality)); }; }); }
+        window.processReviewImage = function(input) { if (input.files && input.files[0]) { const reader = new FileReader(); reader.onload = async function(e) { const compressed = await compressImageEngine(e.target.result, 600, 600, 0.6); pendingReviewImage = compressed; document.getElementById('reviewImagePreview').src = compressed; document.getElementById('reviewImagePreviewWrap').style.display = 'block'; document.getElementById('reviewPhotoBtnText').innerText = 'Change Photo'; }; reader.readAsDataURL(input.files[0]); } }
         window.clearReviewImage = function() { pendingReviewImage = ""; document.getElementById('reviewImageInput').value = ""; document.getElementById('reviewImagePreviewWrap').style.display = 'none'; document.getElementById('reviewPhotoBtnText').innerText = 'Add Product Photo'; }
-
-        window.submitReview = async function() {
-            const name = document.getElementById('reviewerName').value.trim(); const text = document.getElementById('reviewText').value.trim(); const btn = document.getElementById('postReviewBtn');
-            if(!name || !text) { alert("Please enter details."); return; }
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Posting...`; btn.disabled = true;
-            try {
-                await db.collection("zippykart_products").doc(productId).collection("reviews").add({ name: name, text: text, image: pendingReviewImage, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                document.getElementById('reviewerName').value = ""; document.getElementById('reviewText').value = ""; clearReviewImage(); loadReviews(); alert("Review posted!");
-            } catch(e) { alert("Error: " + e.message); } finally { btn.innerHTML = `Post Review`; btn.disabled = false; }
-        }
-
-        async function loadReviews() {
-            if(!productId) return;
-            const container = document.getElementById('reviewsListContainer');
-            try {
-                const snapshot = await db.collection("zippykart_products").doc(productId).collection("reviews").orderBy("timestamp", "desc").get();
-                if(snapshot.empty) { container.innerHTML = `<p class="no-review-text" id="noReviewMsg">No reviews yet.</p>`; return; }
-                container.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data(); let dateStr = "Just now";
-                    if(data.timestamp) { const d = data.timestamp.toDate(); dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); }
-                    const initial = data.name.charAt(0).toUpperCase(); let imgHtml = ""; if(data.image && data.image !== "") { imgHtml = `<img src="${data.image}" class="review-uploaded-img" onclick="window.open('${data.image}', '_blank')">`; }
-                    container.innerHTML += `<div class="review-card"><div class="reviewer-header"><div class="reviewer-avatar">${initial}</div><div><div class="reviewer-name">${data.name}</div><div class="review-date">${dateStr}</div></div></div><div class="review-text-content">${data.text}</div>${imgHtml}</div>`;
-                });
-            } catch(e) { console.error("Reviews error:", e); }
-        }
+        window.submitReview = async function() { const name = document.getElementById('reviewerName').value.trim(); const text = document.getElementById('reviewText').value.trim(); const btn = document.getElementById('postReviewBtn'); if(!name || !text) { alert("Please enter details."); return; } btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Posting...`; btn.disabled = true; try { await db.collection("zippykart_products").doc(productId).collection("reviews").add({ name: name, text: text, image: pendingReviewImage, timestamp: firebase.firestore.FieldValue.serverTimestamp() }); document.getElementById('reviewerName').value = ""; document.getElementById('reviewText').value = ""; clearReviewImage(); loadReviews(); alert("Review posted!"); } catch(e) { alert("Error: " + e.message); } finally { btn.innerHTML = `Post Review`; btn.disabled = false; } }
+        async function loadReviews() { if(!productId) return; const container = document.getElementById('reviewsListContainer'); try { const snapshot = await db.collection("zippykart_products").doc(productId).collection("reviews").orderBy("timestamp", "desc").get(); if(snapshot.empty) { container.innerHTML = `<p class="no-review-text" id="noReviewMsg">No reviews yet.</p>`; return; } container.innerHTML = ''; snapshot.forEach(doc => { const data = doc.data(); let dateStr = "Just now"; if(data.timestamp) { const d = data.timestamp.toDate(); dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); } const initial = data.name.charAt(0).toUpperCase(); let imgHtml = ""; if(data.image && data.image !== "") { imgHtml = `<img src="${data.image}" class="review-uploaded-img" onclick="window.open('${data.image}', '_blank')">`; } container.innerHTML += `<div class="review-card"><div class="reviewer-header"><div class="reviewer-avatar">${initial}</div><div><div class="reviewer-name">${data.name}</div><div class="review-date">${dateStr}</div></div></div><div class="review-text-content">${data.text}</div>${imgHtml}</div>`; }); } catch(e) {} }
 
         window.onload = loadProductPageDetails;
     </script>
