@@ -8,124 +8,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            -webkit-touch-callout: none;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-touch-callout: none; }
+        body { background-color: #f4f6f9; color: #333; display: flex; min-height: 100vh; position: relative; overflow-x: hidden; }
 
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            display: flex;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Top Header Row for Desktop & Mobile Both Views */
         .global-header-navbar {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            height: 65px;
-            background-color: #1e293b;
-            color: white;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 200;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: fixed; top: 0; left: 0; width: 100%; height: 65px; background-color: #1e293b; color: white;
+            padding: 0 24px; display: flex; align-items: center; justify-content: space-between; z-index: 200; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .header-left-block {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-right-block {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+        .header-left-block { display: flex; align-items: center; gap: 15px; }
+        .header-right-block { display: flex; align-items: center; gap: 20px; }
 
         .hamburger-trigger {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s ease;
+            background: none; border: none; color: white; font-size: 22px; cursor: pointer;
+            padding: 5px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease;
         }
-        
         .hamburger-trigger:active { transform: scale(0.9); }
+        .global-header-navbar .brand-logo { margin-bottom: 0; font-size: 20px; }
 
-        .global-header-navbar .brand-logo {
-            margin-bottom: 0;
-            font-size: 20px;
-        }
-
-        /* Professional User Name Badge UI */
         .user-profile-badge {
-            background: rgba(255, 62, 108, 0.15);
-            border: 1px solid rgba(255, 62, 108, 0.3);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ff3e6c;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            background: rgba(255, 62, 108, 0.15); border: 1px solid rgba(255, 62, 108, 0.3); padding: 6px 14px;
+            border-radius: 20px; font-size: 13px; font-weight: 600; color: #ff3e6c; display: flex; align-items: center; gap: 8px;
         }
 
-        .user-avatar-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #4caf50; /* Green live indicator status */
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #4caf50;
-        }
+        .user-avatar-dot { width: 8px; height: 8px; background-color: #4caf50; border-radius: 50%; box-shadow: 0 0 8px #4caf50; }
 
-        /* Dynamic Notification Bell Indicator System */
         .notification-bell-box {
-            position: relative;
-            cursor: pointer;
-            font-size: 20px;
-            color: #cbd5e1;
-            transition: color 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
+            position: relative; cursor: pointer; font-size: 20px; color: #cbd5e1; transition: color 0.2s, transform 0.2s;
+            display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05);
         }
 
-        .notification-bell-box:hover {
-            color: #fff;
-            transform: scale(1.05);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .bell-alert-dot {
-            position: absolute;
-            top: 6px; right: 7px;
-            width: 8px; height: 8px;
-            background-color: #ff3e6c;
-            border-radius: 50%;
-            border: 1px solid #1e293b;
-            animation: pulseAlert 1.5s infinite;
-        }
+        .notification-bell-box:hover { color: #fff; transform: scale(1.05); background: rgba(255,255,255,0.1); }
+        .bell-alert-dot { position: absolute; top: 6px; right: 7px; width: 8px; height: 8px; background-color: #ff3e6c; border-radius: 50%; border: 1px solid #1e293b; animation: pulseAlert 1.5s infinite; }
 
         @keyframes pulseAlert {
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 108, 0.7); }
@@ -133,179 +47,59 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 62, 108, 0); }
         }
 
-        /* Sidebar Architecture Layout (Under top navbar stream) */
         .sidebar {
-            width: 260px;
-            background-color: #1e293b;
-            color: #fff;
-            padding: 20px;
-            position: fixed;
-            height: calc(100vh - 65px);
-            left: 0;
-            top: 65px;
-            z-index: 100;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-right: 1px solid rgba(255,255,255,0.05);
+            width: 260px; background-color: #1e293b; color: #fff; padding: 20px; position: fixed;
+            height: calc(100vh - 65px); left: 0; top: 65px; z-index: 100; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(255,255,255,0.05);
         }
 
-        .brand-logo {
-            font-size: 22px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .brand-logo { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .brand-logo span { color: #ff3e6c; }
 
-        /* Menu Items Interaction Layout */
         .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            color: #cbd5e1;
-            text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            transition: all 0.25s ease-in-out;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px; color: #cbd5e1; text-decoration: none;
+            border-radius: 6px; margin-bottom: 8px; transition: all 0.25s ease-in-out; cursor: pointer; position: relative; overflow: hidden;
         }
 
-        .menu-item:hover {
-            background-color: #2d3748;
-            color: #fff;
-            padding-left: 20px;
-        }
+        .menu-item:hover { background-color: #2d3748; color: #fff; padding-left: 20px; }
+        .menu-item.active { background: linear-gradient(135deg, #2d3748, #334155); color: #fff; font-weight: 600; box-shadow: inset 4px 0px 0px 0px #ff3e6c; padding-left: 20px; animation: slideActive 0.3s ease-out; }
 
-        .menu-item.active {
-            background: linear-gradient(135deg, #2d3748, #334155);
-            color: #fff;
-            font-weight: 600;
-            box-shadow: inset 4px 0px 0px 0px #ff3e6c;
-            padding-left: 20px;
-            animation: slideActive 0.3s ease-out;
-        }
+        @keyframes slideActive { 0% { transform: scale(0.98); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
 
-        @keyframes slideActive {
-            0% { transform: scale(0.98); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .sidebar-overlay-mask { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 400; backdrop-filter: blur(2px); }
 
-        /* Sidebar Overlay Background Mask for Mobile View */
-        .sidebar-overlay-mask {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 400;
-            backdrop-filter: blur(2px);
-        }
-
-        /* Main Content Workspace Framework */
-        .main-content {
-            margin-left: 260px;
-            padding: 105px 40px 40px 40px; /* Top space balanced for static navbar layer clear */
-            width: calc(100% - 260px);
-            transition: all 0.3s ease-in-out;
-        }
-
+        .main-content { margin-left: 260px; padding: 105px 40px 40px 40px; width: calc(100% - 260px); transition: all 0.3s ease-in-out; }
         .admin-panel-section { display: none; }
         .admin-panel-section.active-view { display: block; animation: fadeInView 0.4s ease-in-out; }
 
-        @keyframes fadeInView {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
+        .header-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .header-section h1 { font-size: 26px; font-weight: 600; }
 
         .primary-btn {
-            background-color: #ff3e6c;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 6px -1px rgba(255, 62, 108, 0.2);
-            transition: background 0.3s;
+            background-color: #ff3e6c; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px -1px rgba(255, 62, 108, 0.2); transition: background 0.3s;
         }
-
         .primary-btn:hover { background-color: #e0355f; }
 
-        /* Inventory Master Table Design Core Metrics */
-        .inventory-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            min-width: 600px;
-        }
-
-        th {
-            background-color: #f8fafc;
-            color: #64748b;
-            padding: 14px;
-            font-weight: 600;
-            border-bottom: 2px solid #e2e8f0;
-            font-size: 13px;
-        }
-
+        .inventory-card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px; }
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        th { background-color: #f8fafc; color: #64748b; padding: 14px; font-weight: 600; border-bottom: 2px solid #e2e8f0; font-size: 13px; }
         td { padding: 14px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
         .prod-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; background: #f1f5f9; }
 
-        .actions-cell button {
-            background: none; border: none; cursor: pointer; padding: 5px;
-            font-size: 18px; margin-right: 12px; transition: transform 0.2s;
-        }
-        
+        .actions-cell button { background: none; border: none; cursor: pointer; padding: 5px; font-size: 18px; margin-right: 12px; transition: transform 0.2s; }
         .actions-cell button:hover { transform: scale(1.15); }
         .edit-icon { color: #2196f3; }
         .delete-icon { color: #ef4444; }
 
-        /* Modal Layout Structures */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto; padding: 20px;
-        }
-
-        .modal-box {
-            background: white; max-width: 650px; margin: 30px auto; border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); padding: 25px; position: relative;
-        }
-
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;
-        }
-
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto; padding: 20px; }
+        .modal-box { background: white; max-width: 650px; margin: 30px auto; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); padding: 25px; position: relative; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
         .modal-header h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
         .close-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #94a3b8; }
+        
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
         .form-group label { font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px; }
@@ -317,48 +111,27 @@
         .preview-thumbs-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
         .thumb-wrapper { position: relative; width: 65px; height: 65px; }
         .thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
-        .remove-thumb {
-            position: absolute; top: -5px; right: -5px; background: #ef4444; color: white;
-            border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-        }
+        .remove-thumb { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        .variant-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; background: #f1f5f9; padding: 8px; border-radius: 6px; }
-        .variant-row input[type="text"] { flex: 1; }
         .submit-btn-container { margin-top: 25px; }
-
-        .publish-btn {
-            width: 100%; background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; border: none; padding: 14px;
-            font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer; display: flex; align-items: center;
-            justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); transition: transform 0.2s;
-        }
-
+        .publish-btn { width: 100%; background: linear-gradient(135deg, #ff5722, #ff3e6c); color: white; border: none; padding: 14px; font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); transition: transform 0.2s; }
         .publish-btn:hover { transform: translateY(-1px); }
         .publish-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* 📱 RESPONSIVE VIEW ENGINE TUNING CONTROLS */
+        /* Advanced Variant Card Styling */
+        .variant-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 18px; border-radius: 8px; margin-bottom: 15px; position: relative; }
+
         @media (max-width: 991px) {
             html, body { touch-action: pan-x pan-y; }
-            
-            .sidebar {
-                transform: translateX(-100%);
-                top: 65px;
-                height: calc(100vh - 65px);
-                z-index: 500;
-            }
-
+            .sidebar { transform: translateX(-100%); top: 65px; height: calc(100vh - 65px); z-index: 500; }
             .sidebar.mobile-open { transform: translateX(0); }
             .main-content { margin-left: 0; padding: 100px 15px 40px 15px; width: 100%; }
             .header-section { flex-direction: column; align-items: flex-start; gap: 15px; }
             .header-section .primary-btn { width: 100%; justify-content: center; }
             .form-row { grid-template-columns: 1fr; }
-            .user-profile-badge span { display: none; } /* Shrink profile name text inside extremely tight screen breakpoints */
+            .user-profile-badge span { display: none; }
         }
-        
-        @media (min-width: 992px) {
-            html, body { touch-action: auto; }
-            .hamburger-trigger { display: none; } /* Hide layout toggler buttons when windows stretch to desktop resolutions */
-        }
+        @media (min-width: 992px) { html, body { touch-action: auto; } .hamburger-trigger { display: none; } }
     </style>
 </head>
 <body>
@@ -368,16 +141,12 @@
             <button class="hamburger-trigger" onclick="toggleMobileSidebar(true)"><i class="fa-solid fa-bars"></i></button>
             <div class="brand-logo"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
         </div>
-        
         <div class="header-right-block">
             <div class="notification-bell-box" onclick="alert('⚡ No new live incoming order packets inside delivery queues.')">
-                <i class="fa-regular fa-bell"></i>
-                <div class="bell-alert-dot"></div>
+                <i class="fa-regular fa-bell"></i><div class="bell-alert-dot"></div>
             </div>
-            
             <div class="user-profile-badge">
-                <div class="user-avatar-dot"></div>
-                <span>Akash Kumar</span>
+                <div class="user-avatar-dot"></div><span>Akash Kumar</span>
             </div>
         </div>
     </div>
@@ -392,7 +161,6 @@
     </div>
 
     <div class="main-content">
-        
         <div id="productsMasterView" class="admin-panel-section active-view">
             <div class="header-section">
                 <div>
@@ -401,17 +169,13 @@
                 </div>
                 <button class="primary-btn" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Create Marketplace Entry</button>
             </div>
-
             <div class="inventory-card">
                 <div class="table-responsive">
                     <table>
                         <thead>
-                            <tr>
-                               <th>Image</th><th>Commercial Title</th><th>Category Sync</th><th>Sale Price</th><th>MRP</th><th>Stock Count</th><th>Actions</th>
-                            </tr>
+                            <tr><th>Image</th><th>Commercial Title</th><th>Category Sync</th><th>Sale Price</th><th>MRP</th><th>Stock Count</th><th>Actions</th></tr>
                         </thead>
-                        <tbody id="inventoryTableBody">
-                            </tbody>
+                        <tbody id="inventoryTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -430,26 +194,17 @@
         <div id="storeSettingsView" class="admin-panel-section">
             <h1 style="font-size: 24px; font-weight: 600;">Store Engine Settings</h1>
             <p style="color: #64748b; margin-top: 10px; font-size:14px;">Configure logistical settings and API integrations below.</p>
-            
             <div class="inventory-card" style="margin-top: 20px; max-width: 600px;">
                 <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-truck-fast" style="color: #ff3e6c;"></i> Shiprocket API Integration</h3>
-                <div class="form-group">
-                    <label>Shiprocket Account Email</label>
-                    <input type="email" id="srEmail" class="admin-input" placeholder="e.g. business@zippykart.co.in">
-                </div>
-                <div class="form-group">
-                    <label>Shiprocket Account Password</label>
-                    <input type="password" id="srPassword" class="admin-input" placeholder="••••••••">
-                </div>
-                <p style="font-size: 11px; color:#64748b; margin-bottom: 15px;">The server will auto-generate OAuth tokens to securely inject orders directly to your delivery panel.</p>
+                <div class="form-group"><label>Shiprocket Account Email</label><input type="email" id="srEmail" class="admin-input" placeholder="e.g. business@zippykart.co.in"></div>
+                <div class="form-group"><label>Shiprocket Account Password</label><input type="password" id="srPassword" class="admin-input" placeholder="••••••••"></div>
                 <button class="primary-btn" onclick="saveShiprocketCredentials()" style="padding: 10px 20px; font-size:13px;">Save Token Config</button>
             </div>
         </div>
-
     </div>
 
     <div id="productModal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="max-width: 750px;">
             <div class="modal-header">
                 <h3 id="modalBoxTitle">Create Live Marketplace Entry</h3>
                 <button class="close-btn" onclick="dismissProductModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -457,55 +212,34 @@
 
             <form id="marketplaceForm" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
-                    <label>Commercial Product Title</label>
-                    <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. Premium Never Give Up Oversized T-Shirt - Beige" required>
+                    <label>Main Commercial Title (Global)</label>
+                    <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. Premium Never Give Up Oversized T-Shirt" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Category Department</label>
                         <select id="productCategory" class="admin-input" required>
-                            <option value="Men">Men</option>
-                            <option value="Women">Women</option>
-                            <option value="Sweatshirt">Sweatshirt</option>
-                            <option value="Kids">Kids</option>
-                            <option value="Toys">Toys</option>
-                            <option value="Watch">Watch</option>
-                            <option value="Cosmetic">Cosmetic</option>
-                            <option value="Electronics">Electronics</option>
+                            <option value="Men">Men</option><option value="Women">Women</option><option value="Sweatshirt">Sweatshirt</option><option value="Kids">Kids</option><option value="Toys">Toys</option><option value="Watch">Watch</option><option value="Cosmetic">Cosmetic</option><option value="Electronics">Electronics</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Initial Stock Quantity</label>
-                        <input type="number" id="prodStock" class="admin-input" placeholder="100" min="0" required>
-                    </div>
+                    <div class="form-group"><label>Initial Stock Quantity</label><input type="number" id="prodStock" class="admin-input" placeholder="100" min="0" required></div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
-                        <label>Discounted Sale Price (₹)</label>
-                        <input type="number" id="prodPrice" class="admin-input" placeholder="499" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Stated Baseline MRP (₹)</label>
-                        <input type="number" id="prodMrp" class="admin-input" placeholder="1299" min="0" required>
-                    </div>
+                    <div class="form-group"><label>Discounted Sale Price (₹)</label><input type="number" id="prodPrice" class="admin-input" placeholder="499" min="0" required></div>
+                    <div class="form-group"><label>Stated Baseline MRP (₹)</label><input type="number" id="prodMrp" class="admin-input" placeholder="1299" min="0" required></div>
                 </div>
 
                 <div class="form-group">
-                    <label>Technical Description / Wash Specifications</label>
-                    <textarea id="prodDesc" class="admin-input" style="height: 80px; resize: none;" placeholder="Provide details..." required></textarea>
+                    <label>Main Description / Wash Specifications (Global)</label>
+                    <textarea id="prodDesc" class="admin-input" style="height: 80px; resize: none;" placeholder="Provide common details..." required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Permissible Purchase Sizes</label>
                     <div class="checkbox-group">
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="S" checked> S</label>
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="M" checked> M</label>
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="L" checked> L</label>
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="XL" checked> XL</label>
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="XXL" checked> XXL</label>
-                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="Free Size"> Free Size</label>
+                        <label class="checkbox-item"><input type="checkbox" name="sizes" value="S" checked> S</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="M" checked> M</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="L" checked> L</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="XL" checked> XL</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="XXL" checked> XXL</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="Free Size"> Free Size</label>
                     </div>
                 </div>
 
@@ -513,17 +247,16 @@
                     <label><i class="fa-regular fa-image" style="color: #ff3e6c;"></i> Primary Product Gallery (Slide Images)</label>
                     <div class="gallery-container">
                         <input type="file" id="primaryImgInput" multiple accept="image/*" onchange="processGalleryImages(this)">
-                        <p style="font-size: 11px; color:#64748b; margin-top:5px;">Select images showing different angles.</p>
                         <div id="galleryThumbsGrid" class="preview-thumbs-grid"></div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <label>Color Variants <span style="color:#94a3b8; font-weight: normal;">(Optional)</span></label>
-                        <button type="button" class="primary-btn" style="padding: 4px 10px; font-size: 11px;" onclick="addColorVariantField()"><i class="fa-solid fa-plus"></i> Add Color</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                        <label style="font-size: 15px; font-weight: 700; color: #1e293b;">Advanced Variants Engine <span style="font-weight:normal; font-size:12px; color:#94a3b8;">(Titles, Descriptions, Colors)</span></label>
+                        <button type="button" class="primary-btn" style="padding: 6px 12px; font-size: 12px;" onclick="addColorVariantField()"><i class="fa-solid fa-plus"></i> Add New Variant</button>
                     </div>
-                    <div id="variantsContainer" style="margin-top: 5px;"></div>
+                    <div id="variantsContainer"></div>
                 </div>
 
                 <div class="submit-btn-container">
@@ -539,7 +272,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // --- STEP 1: PRODUCTION LOGGED SERVER CREDENTIAL ARRAYS ---
+        // --- 1. FIREBASE CONFIG ---
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -549,154 +282,130 @@
             appId: "1:803651431969:web:7432f351ec9f5f0ec23d60",
             measurementId: "G-7ZJ0QTZE1C"
         };
-
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
 
-        // --- STEP 2: STACK STATE REGISTERS CONTROLS ---
+        // --- 2. GLOBAL BUFFERS ---
         window.editingProductId = null;
         window.mainGalleryImages = []; 
-        window.compiledVariants = [];  
 
-        // --- STEP 3: AUTOMATIC SMART COMPRESSION ENGINE (1MB FIRESTORE FIX) ---
+        // --- 3. AUTO COMPRESSION ENGINE ---
         function compressImageEngine(base64Str, maxWidth = 800, maxHeight = 800, quality = 0.7) {
             return new Promise((resolve) => {
-                const img = new Image();
-                img.src = base64Str;
+                const img = new Image(); img.src = base64Str;
                 img.onload = function() {
                     let width = img.width; let height = img.height;
-                    if (width > height) {
-                        if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; }
-                    } else {
-                        if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; }
-                    }
-                    const canvas = document.createElement('canvas');
-                    canvas.width = width; canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
+                    if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } } 
+                    else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } }
+                    const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+                    const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
                     resolve(canvas.toDataURL('image/jpeg', quality));
                 };
             });
         }
 
-        // --- STEP 4: TRUE LEFT ALIGNED MENU DRAWER RESPONSIVE ANIMATOR ---
+        // --- 4. UI CONTROLLERS ---
         window.toggleMobileSidebar = function(openState) {
-            const sidebar = document.getElementById('adminSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (openState) {
-                sidebar.classList.add('mobile-open');
-                overlay.style.display = 'block';
-            } else {
-                sidebar.classList.remove('mobile-open');
-                overlay.style.display = 'none';
-            }
+            const sidebar = document.getElementById('adminSidebar'); const overlay = document.getElementById('sidebarOverlay');
+            if (openState) { sidebar.classList.add('mobile-open'); overlay.style.display = 'block'; } 
+            else { sidebar.classList.remove('mobile-open'); overlay.style.display = 'none'; }
         }
 
-        // --- STEP 5: INTERFACE LAYER VIEW CONTROLLERS REDIRECTIONS ---
         window.switchAdminTab = function(element, targetSectionId) {
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
-
             document.querySelectorAll('.admin-panel-section').forEach(section => section.classList.remove('active-view'));
-            
             const targetSection = document.getElementById(targetSectionId);
-            if (targetSection) {
-                targetSection.classList.add('active-view');
-                if(targetSectionId === 'storeSettingsView') { loadShiprocketCredentials(); }
-            }
+            if (targetSection) { targetSection.classList.add('active-view'); if(targetSectionId === 'storeSettingsView') { loadShiprocketCredentials(); } }
             toggleMobileSidebar(false); 
         }
 
-        // --- STEP 6: LOGISTICS PARAMETERS FIRESTORE CONTROLLERS ---
         window.saveShiprocketCredentials = async function() {
-            const email = document.getElementById('srEmail').value.trim();
-            const password = document.getElementById('srPassword').value;
-            if(!email || !password) { alert("Please complete both username and authentication token inputs."); return; }
+            const email = document.getElementById('srEmail').value.trim(); const password = document.getElementById('srPassword').value;
+            if(!email || !password) return;
             try {
-                await db.collection("store_config").doc("shiprocket_api").set({
-                    email: email, password: password, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                alert("🚀 Shiprocket OAuth Engine API Parameters Configured Successfully!");
-            } catch(e) { alert("Config sync crash: " + e.message); }
+                await db.collection("store_config").doc("shiprocket_api").set({ email: email, password: password, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+                alert("🚀 Configured Successfully!");
+            } catch(e) { alert("Error: " + e.message); }
         }
 
         async function loadShiprocketCredentials() {
             try {
                 const doc = await db.collection("store_config").doc("shiprocket_api").get();
-                if(doc.exists) {
-                    document.getElementById('srEmail').value = doc.data().email || "";
-                    document.getElementById('srPassword').value = doc.data().password || "";
-                }
-            } catch(e) { console.error("Error fetching credentials map:", e); }
+                if(doc.exists) { document.getElementById('srEmail').value = doc.data().email || ""; document.getElementById('srPassword').value = doc.data().password || ""; }
+            } catch(e) {}
         }
 
-        // --- STEP 7: ENTRY SUBMODAL INGESTION UI CONTROLS ---
         window.openProductModal = function(id = null) {
-            const form = document.getElementById('marketplaceForm');
-            form.reset(); window.mainGalleryImages = []; window.compiledVariants = [];
-            document.getElementById('galleryThumbsGrid').innerHTML = '';
-            document.getElementById('variantsContainer').innerHTML = '';
+            document.getElementById('marketplaceForm').reset(); window.mainGalleryImages = [];
+            document.getElementById('galleryThumbsGrid').innerHTML = ''; document.getElementById('variantsContainer').innerHTML = '';
             
             if(id) {
-                window.editingProductId = id;
-                document.getElementById('modalBoxTitle').innerText = "Edit Marketplace Entry";
-                document.getElementById('publishBtnText').innerText = "Update Product Specifications";
-                fetchProductDetailsForEditing(id);
+                window.editingProductId = id; document.getElementById('modalBoxTitle').innerText = "Edit Marketplace Entry";
+                document.getElementById('publishBtnText').innerText = "Update Product Specifications"; fetchProductDetailsForEditing(id);
             } else {
-                window.editingProductId = null;
-                document.getElementById('modalBoxTitle').innerText = "Create Live Marketplace Entry";
-                document.getElementById('publishBtnText').innerText = "Publish to Live Storefront";
-                addColorVariantField();
+                window.editingProductId = null; document.getElementById('modalBoxTitle').innerText = "Create Live Marketplace Entry";
+                document.getElementById('publishBtnText').innerText = "Publish to Live Storefront"; addColorVariantField();
             }
             document.getElementById('productModal').style.display = 'block';
         }
 
-        window.dismissProductModal = function() {
-            document.getElementById('productModal').style.display = 'none';
-            window.editingProductId = null;
-        }
+        window.dismissProductModal = function() { document.getElementById('productModal').style.display = 'none'; window.editingProductId = null; }
 
         window.processGalleryImages = function(input) {
-            if (input.files) {
-                Array.from(input.files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = async function(e) {
-                        const compressed = await compressImageEngine(e.target.result);
-                        window.mainGalleryImages.push(compressed);
-                        renderGalleryThumbs();
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
+            if (input.files) { Array.from(input.files).forEach(file => { const reader = new FileReader(); reader.onload = async function(e) {
+                const compressed = await compressImageEngine(e.target.result); window.mainGalleryImages.push(compressed); renderGalleryThumbs();
+            }; reader.readAsDataURL(file); }); }
         }
 
         function renderGalleryThumbs() {
             const grid = document.getElementById('galleryThumbsGrid'); grid.innerHTML = '';
-            window.mainGalleryImages.forEach((src, idx) => {
-                grid.innerHTML += `
-                    <div class="thumb-wrapper">
-                        <img src="${src}">
-                        <button type="button" class="remove-thumb" onclick="removeGalleryImage(${idx})"><i class="fa-solid fa-xmark"></i></button>
-                    </div>`;
-            });
+            window.mainGalleryImages.forEach((src, idx) => { grid.innerHTML += `<div class="thumb-wrapper"><img src="${src}"><button type="button" class="remove-thumb" onclick="removeGalleryImage(${idx})"><i class="fa-solid fa-xmark"></i></button></div>`; });
         }
 
-        window.removeGalleryImage = function(index) {
-            window.mainGalleryImages.splice(index, 1); renderGalleryThumbs();
-        }
+        window.removeGalleryImage = function(index) { window.mainGalleryImages.splice(index, 1); renderGalleryThumbs(); }
 
-        window.addColorVariantField = function(name = '', imgSrc = '') {
+        // --- 5. ADVANCED VARIANT ENGINE GENERATOR ---
+        window.addColorVariantField = function(name = '', imgSrc = '', vTitle = '', vDesc = '') {
             const container = document.getElementById('variantsContainer');
             const index = container.children.length;
             const row = document.createElement('div');
-            row.className = 'variant-row'; row.id = `variantRow_${index}`;
+            row.className = 'variant-card';
+            row.id = `variantRow_${index}`;
+
+            // Image display logic bug fix
+            const displayMode = (imgSrc && imgSrc.startsWith('data:')) ? 'block' : 'none';
+            const safeImgSrc = (imgSrc && imgSrc.startsWith('data:')) ? imgSrc : '';
+
             row.innerHTML = `
-                <input type="text" class="admin-input variant-name" style="padding: 6px 10px;" placeholder="Color Name" value="${name}" required>
-                <input type="file" accept="image/*" style="font-size:11px; max-width:150px;" onchange="processVariantImage(this, ${index})">
-                <div id="variantPreviewWrap_${index}" class="thumb-wrapper" style="width:35px; height:35px; display: ${imgSrc ? 'block' : 'none'};">
-                    <img id="variantPreviewImg_${index}" src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;">
+                <button type="button" class="close-btn" style="position:absolute; top:15px; right:15px; color:#ef4444; font-size:18px;" onclick="removeVariantField(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                <h4 style="font-size:14px; margin-bottom:12px; color:#1e293b; border-bottom:1px solid #e2e8f0; padding-bottom:5px;">Variant Package #${index + 1}</h4>
+                
+                <div class="form-row">
+                    <div>
+                        <label style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px; display:block;">Variant Color / Name <span style="color:red;">*</span></label>
+                        <input type="text" class="admin-input variant-name" placeholder="e.g. Cherry Red" value="${name}" required>
+                    </div>
+                    <div>
+                        <label style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px; display:block;">Variant Image <span style="font-weight:normal;">(Fix applied)</span></label>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="file" accept="image/*" style="font-size:11px; width:100%; border:1px solid #ddd; padding:5px; border-radius:4px;" onchange="processVariantImage(this, ${index})">
+                            <div id="variantPreviewWrap_${index}" class="thumb-wrapper" style="width:40px; height:40px; display:${displayMode}; flex-shrink:0;">
+                                <img id="variantPreviewImg_${index}" src="${safeImgSrc}" style="width:100%; height:100%; object-fit:cover; border-radius:4px;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button type="button" class="close-btn" style="color:#ef4444; font-size:14px;" onclick="removeVariantField(${index})"><i class="fa-solid fa-trash-can"></i></button>
+
+                <div class="form-group" style="margin-top:10px; margin-bottom:10px;">
+                    <label style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px; display:block;">Specific Variant Title <span style="font-weight:normal;">(Overrides global title if set)</span></label>
+                    <input type="text" class="admin-input variant-title" placeholder="e.g. Premium Never Give Up - Cherry Edition" value="${vTitle}">
+                </div>
+
+                <div class="form-group" style="margin-bottom:0;">
+                    <label style="font-size:11px; font-weight:600; color:#64748b; margin-bottom:4px; display:block;">Specific Variant Details / Desc <span style="font-weight:normal;">(Overrides global desc if set)</span></label>
+                    <textarea class="admin-input variant-desc" style="height:60px; resize:none;" placeholder="Enter specific features for this variant...">${vDesc}</textarea>
+                </div>
             `;
             container.appendChild(row);
         }
@@ -706,22 +415,21 @@
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     const compressed = await compressImageEngine(e.target.result);
-                    document.getElementById(`variantPreviewImg_${index}`).src = compressed;
+                    const imgEl = document.getElementById(`variantPreviewImg_${index}`);
+                    imgEl.src = compressed;
                     document.getElementById(`variantPreviewWrap_${index}`).style.display = 'block';
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        window.removeVariantField = function(index) {
-            const row = document.getElementById(`variantRow_${index}`); if(row) row.remove();
-        }
+        window.removeVariantField = function(index) { const row = document.getElementById(`variantRow_${index}`); if(row) row.remove(); }
 
-        // --- STEP 8: PAYLOAD COMPILATION ENGINE SUBS ---
+        // --- 6. ADVANCED PAYLOAD SYNC ---
         window.handleFormSubmit = async function(event) {
             event.preventDefault();
             const btn = document.getElementById('publishBtn'); const originalBtnHtml = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing System Sync...`; btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Synchronizing Core...`; btn.disabled = true;
 
             const title = document.getElementById('prodTitle').value.trim();
             const category = document.getElementById('productCategory').value;
@@ -733,11 +441,20 @@
             const compiledSizes = [];
             document.querySelectorAll('input[name="sizes"]:checked').forEach(cb => compiledSizes.push(cb.value));
 
+            // Variant Loop Extractor
             const compiledVariants = [];
-            document.querySelectorAll('.variant-row').forEach(row => {
+            document.querySelectorAll('.variant-card').forEach(row => {
                 const cName = row.querySelector('.variant-name').value.trim();
-                const imgEl = row.querySelector('.thumb-wrapper img'); const cImg = imgEl ? imgEl.src : "";
-                if(cName) { compiledVariants.push({ color: cName, img: cImg }); }
+                const vTitle = row.querySelector('.variant-title').value.trim();
+                const vDesc = row.querySelector('.variant-desc').value.trim();
+                
+                const imgEl = row.querySelector('.thumb-wrapper img'); 
+                let cImg = imgEl ? imgEl.getAttribute('src') : "";
+                
+                // Bug Guard: Prevent broken dummy URLs from saving into DB
+                if(cImg && !cImg.startsWith('data:image') && !cImg.startsWith('http')) { cImg = ""; }
+
+                if(cName) { compiledVariants.push({ color: cName, img: cImg, vTitle: vTitle, vDesc: vDesc }); }
             });
 
             const payload = {
@@ -749,35 +466,21 @@
             };
 
             try {
-                if (window.editingProductId) {
-                    await db.collection("zippykart_products").doc(window.editingProductId).set(payload, { merge: true });
-                    alert("✅ Product Details Updated Successfully!");
-                } else {
-                    await db.collection("zippykart_products").add(payload);
-                    alert("✅ New Product Published Successfully!");
-                }
+                if (window.editingProductId) { await db.collection("zippykart_products").doc(window.editingProductId).set(payload, { merge: true }); alert("✅ Product Details Updated!"); } 
+                else { await db.collection("zippykart_products").add(payload); alert("✅ New Product Published!"); }
                 dismissProductModal(); loadInventoryDashboard();
-            } catch (error) {
-                console.error("Firestore Document Sync Write Error:", error);
-                alert("Database write error: " + error.message);
-            } finally { btn.innerHTML = originalBtnHtml; btn.disabled = false; }
+            } catch (error) { alert("Database write error: " + error.message); } finally { btn.innerHTML = originalBtnHtml; btn.disabled = false; }
         }
 
-        // --- STEP 9: TRANSACTION QUERY CONSOLE RENDER DATA LINE ---
+        // --- 7. INVENTORY DASHBOARD CONTROLS ---
         async function loadInventoryDashboard() {
-            const tableBody = document.getElementById('inventoryTableBody');
-            tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Synchronizing cloud instances...</td></tr>`;
+            const tableBody = document.getElementById('inventoryTableBody'); tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#64748b;"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading Database...</td></tr>`;
             try {
-                const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
-                tableBody.innerHTML = '';
-                if(snapshot.empty) {
-                    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:40px; color:#94a3b8;"><i class="fa-solid fa-box-open" style="font-size:24px;"></i><br><br>No products synchronized yet.</td></tr>`;
-                    return;
-                }
+                const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get(); tableBody.innerHTML = '';
+                if(snapshot.empty) { tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:40px; color:#94a3b8;"><i class="fa-solid fa-box-open" style="font-size:24px;"></i><br><br>No products found.</td></tr>`; return; }
                 snapshot.forEach(doc => {
                     const data = doc.data(); const coverImg = data.image || 'https://via.placeholder.com/50?text=No+Img';
-                    tableBody.innerHTML += `
-                        <tr>
+                    tableBody.innerHTML += `<tr>
                             <td><img src="${coverImg}" class="prod-thumb"></td>
                             <td style="font-weight:600; color:#1e293b;">${data.title || 'Untitled'}</td>
                             <td><span style="background:#e2e8f0; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:500;">${data.category}</span></td>
@@ -786,38 +489,31 @@
                             <td style="font-weight:500;">${data.stockCount} pcs</td>
                             <td class="actions-cell">
                                 <button class="edit-icon" onclick="openProductModal('${doc.id}')" title="Edit Properties"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')" title="Drop Storefront Document"><i class="fa-solid fa-trash-can"></i></button>
+                                <button class="delete-icon" onclick="deleteProductEntry('${doc.id}')" title="Delete Product"><i class="fa-solid fa-trash-can"></i></button>
                             </td>
                         </tr>`;
                 });
-            } catch (error) { tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Error Stream: ${error.message}</td></tr>`; }
+            } catch (error) { tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#ef4444;">Error: ${error.message}</td></tr>`; }
         }
 
         async function fetchProductDetailsForEditing(id) {
             try {
-                const doc = await db.collection("zippykart_products").doc(id).get(); if(!doc.exists) return;
-                const data = doc.data();
-                document.getElementById('prodTitle').value = data.title || "";
-                document.getElementById('productCategory').value = data.category || "Men";
-                document.getElementById('prodStock').value = data.stockCount || 0;
-                document.getElementById('prodPrice').value = data.price || 0;
-                document.getElementById('prodMrp').value = data.mrp || 0;
-                document.getElementById('prodDesc').value = data.description || "";
-
+                const doc = await db.collection("zippykart_products").doc(id).get(); if(!doc.exists) return; const data = doc.data();
+                document.getElementById('prodTitle').value = data.title || ""; document.getElementById('productCategory').value = data.category || "Men";
+                document.getElementById('prodStock').value = data.stockCount || 0; document.getElementById('prodPrice').value = data.price || 0;
+                document.getElementById('prodMrp').value = data.mrp || 0; document.getElementById('prodDesc').value = data.description || "";
                 document.querySelectorAll('input[name="sizes"]').forEach(cb => { cb.checked = data.sizes ? data.sizes.includes(cb.value) : false; });
                 if(data.all_images) { window.mainGalleryImages = [...data.all_images]; renderGalleryThumbs(); }
-
                 const container = document.getElementById('variantsContainer'); container.innerHTML = '';
-                if(data.variants && data.variants.length > 0) { data.variants.forEach(v => { window.addColorVariantField(v.color, v.img); }); } else { addColorVariantField(); }
-            } catch (error) { alert("Error loading structural properties: " + error.message); }
+                
+                // Load advanced variants
+                if(data.variants && data.variants.length > 0) { data.variants.forEach(v => { window.addColorVariantField(v.color, v.img, v.vTitle, v.vDesc); }); } else { addColorVariantField(); }
+            } catch (error) { alert("Error loading details: " + error.message); }
         }
 
         window.deleteProductEntry = async function(id) {
-            if(confirm("⚠️ Are you absolutely sure you want to delete this product? This action cannot be reversed.")) {
-                try {
-                    await db.collection("zippykart_products").doc(id).delete();
-                    alert("🗑️ Product purged successfully."); loadInventoryDashboard();
-                } catch (error) { alert("Error: " + error.message); }
+            if(confirm("⚠️ Are you sure you want to delete this product?")) {
+                try { await db.collection("zippykart_products").doc(id).delete(); loadInventoryDashboard(); } catch (error) { alert("Error: " + error.message); }
             }
         }
 
