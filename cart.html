@@ -162,11 +162,13 @@
         </div>
     </div>
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // 1. FIREBASE CONFIGURATION (For sending orders to Admin Panel)
+        // 1. FIREBASE CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
             authDomain: "zippykart-production-157e1.firebaseapp.com",
@@ -184,7 +186,6 @@
         let selectedPaymentMethod = "COD";
 
         function loadCartData() {
-            // Safely parse localStorage
             try {
                 cartItems = JSON.parse(localStorage.getItem('zippykart_user_cart')) || [];
             } catch (e) {
@@ -216,14 +217,11 @@
             placeOrderBtn.disabled = false;
             let totalAmount = 0;
 
-            // Generate HTML for each item dynamically
             cartItems.forEach((item, index) => {
-                // Ensure proper numeric calculation
                 const itemPrice = parseInt(item.price) || 0;
                 const itemQty = parseInt(item.quantity) || 1;
                 totalAmount += (itemPrice * itemQty);
 
-                // Use fallback strings if data is missing
                 const safeImg = item.img || "https://via.placeholder.com/90x110?text=No+Image";
                 const safeTitle = item.title || "ZippyKart Premium Item";
                 const safeSize = item.size || "Free Size";
@@ -286,7 +284,6 @@
                 return;
             }
 
-            // Simulate a standard 10% structural discount for UI aesthetics if MRP wasn't passed perfectly
             const assumedMrp = Math.floor(total * 1.15); 
             const discountAmt = assumedMrp - total;
 
@@ -310,17 +307,15 @@
             element.querySelector('input').checked = true;
         }
 
-        // 4. FIREBASE CHECKOUT SUBMISSION LOGIC
+        // 4. 🔥 FIREBASE + RAZORPAY CHECKOUT LOGIC 🔥
         document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             if(cartItems.length === 0) return;
 
             const btn = document.getElementById('placeOrderBtn');
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
             btn.disabled = true;
 
-            // Collect Data
             const customerData = {
                 name: document.getElementById('custName').value.trim(),
                 phone: document.getElementById('custPhone').value.trim(),
@@ -329,36 +324,82 @@
                 address: document.getElementById('custAddress').value.trim()
             };
 
-            // Calculate exact total one last time to be safe
             let finalAmount = 0;
             cartItems.forEach(item => finalAmount += ((parseInt(item.price)||0) * (parseInt(item.quantity)||1)));
 
-            const orderPayload = {
-                customer: customerData,
-                items: cartItems,
-                totalAmount: finalAmount,
-                paymentMethod: selectedPaymentMethod,
-                orderStatus: "Pending", // For admin panel tracking
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            try {
-                // Send directly to the database collection that Admin Panel 'Live Orders' reads from!
-                await db.collection("zippykart_orders").add(orderPayload);
+            if (selectedPaymentMethod === "ONLINE") {
+                // RAZORPAY ONLINE PAYMENT MODULE
+                var options = {
+                    "key": "rzp_test_YourTestKeyHere", // ⚠️ Akash bhai, yahan apna asli Razorpay Key daal dena
+                    "amount": finalAmount * 100, // Amount in paise
+                    "currency": "INR",
+                    "name": "ZippyKart",
+                    "description": "Premium Order Checkout",
+                    "theme": { "color": "#ff3e6c" },
+                    "prefill": {
+                        "name": customerData.name,
+                        "contact": customerData.phone
+                    },
+                    "handler": async function (response) {
+                        // Jab payment SUCCESS ho jayega, tabhi order Firebase mein jayega
+                        const orderPayload = {
+                            customer: customerData,
+                            items: cartItems,
+                            totalAmount: finalAmount,
+                            paymentMethod: "ONLINE (Razorpay)",
+                            paymentId: response.razorpay_payment_id,
+                            orderStatus: "Paid & Confirmed",
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        };
+                        await submitOrderToDatabase(orderPayload, btn);
+                    },
+                    "modal": {
+                        "ondismiss": function(){
+                            // Agar customer pop-up cancel kar de
+                            btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
+                            btn.disabled = false;
+                        }
+                    }
+                };
                 
-                // Clear cart locally
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                    alert("Payment Failed! Reason: " + response.error.description);
+                    btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
+                    btn.disabled = false;
+                });
+                rzp1.open();
+
+            } else {
+                // CASH ON DELIVERY MODULE
+                const orderPayload = {
+                    customer: customerData,
+                    items: cartItems,
+                    totalAmount: finalAmount,
+                    paymentMethod: "Cash on Delivery",
+                    orderStatus: "Pending COD",
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                await submitOrderToDatabase(orderPayload, btn);
+            }
+        });
+
+        // Backend Sync Function
+        async function submitOrderToDatabase(orderPayload, btn) {
+            try {
+                await db.collection("zippykart_orders").add(orderPayload);
                 localStorage.removeItem('zippykart_user_cart');
                 cartItems = [];
                 
                 alert("🎉 Order Placed Successfully! Your items will be dispatched soon.");
-                window.location.href = "index.html"; // Redirect to home
+                window.location.href = "index.html"; 
             } catch (error) {
                 console.error("Order Sync Error:", error);
                 alert("Order processing failed due to network connection. Please try again.");
                 btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
                 btn.disabled = false;
             }
-        });
+        }
 
         // Initialize script
         window.onload = loadCartData;
