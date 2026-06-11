@@ -30,7 +30,7 @@
         /* Main Container Layout */
         .product-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 30px; }
         
-        /* 🔥 FIX: Center Main Preview Box & Hide Thumbnails */
+        /* Center Main Preview Box & Hide Thumbnails */
         .image-gallery-block { display: block; position: sticky; top: 80px; height: max-content; text-align: center; }
         .main-preview-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: inline-block; width: 100%; position: relative; }
         
@@ -64,7 +64,7 @@
         .offer-item i { color: #388e3c; margin-top: 2px; }
         .offer-item a { color: #2196f3; text-decoration: none; font-weight: 600; cursor: pointer; }
 
-        /* 🔥 FIX: Circular Color Swatches List Framework */
+        /* Circular Color Swatches List Framework */
         .variant-headline { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
         .color-swatches-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; }
         
@@ -102,11 +102,7 @@
         .trust-item i { font-size: 24px; transition: transform 0.3s ease; }
         .trust-item:hover i { transform: scale(1.1); }
         .trust-item span { font-size: 11px; font-weight: 600; color: #475569; line-height: 1.3; }
-
-        .icon-blue { color: #2196f3; }
-        .icon-green { color: #4caf50; }
-        .icon-pink { color: #ff3e6c; }
-        .icon-orange { color: #ff9800; }
+        .icon-blue { color: #2196f3; } .icon-green { color: #4caf50; } .icon-pink { color: #ff3e6c; } .icon-orange { color: #ff9800; }
 
         /* Specifications Text layout */
         .description-section { margin-bottom: 35px; }
@@ -125,14 +121,29 @@
         .btn-buy-now:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 62, 108, 0.4); filter: brightness(1.1); }
         .btn-buy-now:active { transform: scale(0.96); }
 
-        /* Customer Reviews Content Frame */
+        /* 🔥 FIX: FULLY FUNCTIONAL CUSTOMER REVIEWS CSS 🔥 */
         .reviews-section { border-top: 1px solid #f1f5f9; padding-top: 25px; margin-bottom: 30px; }
         .reviews-section h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 15px; }
         .no-review-text { font-size: 14px; color: #64748b; margin-bottom: 25px; font-style: italic; }
+        
+        /* Rendered Review Cards */
+        .review-card { border-bottom: 1px solid #f1f5f9; padding: 15px 0; margin-bottom: 10px; }
+        .review-card:last-child { border-bottom: none; }
+        .reviewer-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .reviewer-avatar { width: 35px; height: 35px; background: #1e293b; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; }
+        .reviewer-name { font-size: 14px; font-weight: 700; color: #1e293b; }
+        .review-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
+        .review-text-content { font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
+        .review-uploaded-img { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer; transition: transform 0.2s; }
+        .review-uploaded-img:hover { transform: scale(1.05); }
+
+        /* Review Input Form */
         .review-form-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; padding: 14px; margin-bottom: 15px; font-size: 14px; outline: none; }
         .review-form-input:focus { border-color: #ff3e6c; box-shadow: 0 0 0 3px rgba(255, 62, 108, 0.1); }
-        .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; }
+        .add-photo-btn { border: 1px dashed #2196f3; color: #2196f3; background: #f0f8ff; padding: 10px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; width: max-content; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .add-photo-btn:hover { background: #e3f2fd; }
+        .post-review-btn { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+        .post-review-btn:hover { background: #e0355f; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 62, 108, 0.3); }
 
         /* You May Also Like Slider Array */
         .similar-products-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px; }
@@ -165,7 +176,6 @@
     </div>
 
     <div class="product-container">
-        
         <div class="image-gallery-block animated-block">
             <div class="main-preview-box">
                 <div class="share-wishlist-btns">
@@ -178,7 +188,6 @@
 
         <div class="details-info-block animated-block delay-1">
             <div class="breadcrumbs" id="productBreadcrumb">Streetwear T-Shirts</div>
-            
             <h1 id="mainProductDisplayTitle" class="product-main-title">Loading Product Details...</h1>
             
             <div class="ratings-row">
@@ -248,12 +257,27 @@
 
             <div class="reviews-section">
                 <h3>Customer Reviews</h3>
-                <p class="no-review-text">No reviews yet. Be the first to review!</p>
+                
+                <div id="reviewsListContainer" style="margin-bottom: 25px;">
+                    <p class="no-review-text" id="noReviewMsg">No reviews yet. Be the first to review!</p>
+                </div>
+                
                 <h3 style="margin-top: 20px;">Add Your Review</h3>
-                <input type="text" class="review-form-input" placeholder="Your Name">
-                <textarea class="review-form-input" style="height: 80px; resize:none;" placeholder="Write your experience..."></textarea>
-                <div class="add-photo-btn"><i class="fa-solid fa-camera"></i> Add Product Photo</div>
-                <button class="post-review-btn">Post Review</button>
+                <input type="text" id="reviewerName" class="review-form-input" placeholder="Your Name">
+                <textarea id="reviewText" class="review-form-input" style="height: 80px; resize:none;" placeholder="Write your experience..."></textarea>
+                
+                <input type="file" id="reviewImageInput" accept="image/*" style="display:none;" onchange="processReviewImage(this)">
+                
+                <div class="add-photo-btn" onclick="document.getElementById('reviewImageInput').click()">
+                    <i class="fa-solid fa-camera"></i> <span id="reviewPhotoBtnText">Add Product Photo</span>
+                </div>
+                
+                <div id="reviewImagePreviewWrap" style="display:none; position:relative; width:80px; height:80px; margin-bottom:15px;">
+                    <img id="reviewImagePreview" src="" style="width:100%; height:100%; object-fit:cover; border-radius:6px; border:1px solid #cbd5e1;">
+                    <button onclick="clearReviewImage()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:white; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;">&times;</button>
+                </div>
+
+                <button id="postReviewBtn" class="post-review-btn" onclick="submitReview()">Post Review</button>
             </div>
         </div>
     </div>
@@ -263,7 +287,7 @@
             <h3>You May Also Like</h3>
             <div class="similar-grid">
                 <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=White+Tee"></div>
-               <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Black+Tee"></div>
+                <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Black+Tee"></div>
                 <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Logo+Tee"></div>
                 <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Combo+Pack"></div>
                 <div class="similar-card"><img src="https://via.placeholder.com/200x250/f4f4f4/888?text=Graphic+Print"></div>
@@ -309,14 +333,12 @@
                 document.getElementById('displayMrpPrice').innerText = "₹" + data.mrp;
                 document.getElementById('displayDiscountPct').innerText = Math.floor(((data.mrp - data.price) / data.mrp) * 100) + "% off";
 
-                // Seed data elements safely
                 const imgs = data.all_images || [];
                 if(imgs.length === 0 && data.image) imgs.push(data.image);
                 if(imgs.length > 0) { document.getElementById('mainProductPreviewImage').src = imgs[0]; }
                 
                 renderSizeCheckboxesMatrix(data.sizes || []);
                 
-                // Process Variant mapping loops
                 const variantsList = data.variants || [];
                 if(variantsList.length > 0 && variantsList[0].color !== "") {
                     document.getElementById('variantOptionsSection').style.display = 'block';
@@ -329,12 +351,16 @@
                             <img src="${img}" class="swatch-img-circle">
                         </div>`;
                     });
-                    selectVariant(0); // Launch first active configuration
+                    selectVariant(0); 
                 } else {
                     document.getElementById('mainProductDisplayTitle').innerText = data.title;
                     document.getElementById('mainProductDisplayDescription').innerText = data.description;
                 }
-            } catch (e) { console.error("Database connection dropped context loop:", e); }
+
+                // Load existing reviews immediately on page load
+                loadReviews();
+
+            } catch (e) { console.error("Database connection error:", e); }
         }
 
         // 4. 🔥 OVERRIDE DATA ROUTER TRANSITION ENGINE 🔥
@@ -390,14 +416,15 @@
 
         window.verifyPincode = function() { alert("Pincode verified! Delivery options active."); }
 
-        // 5. SECURE CART COMPILATION PACKETS (Mismatches logic verified)
+        // 5. SECURE CART COMPILATION PACKETS
         function getCartPacket() {
             if(!window.selectedSizeValue) { alert("Please select a Size first!"); return null; }
             const variantColor = window.activeVariantIndex !== null ? window.globalProductData.variants[window.activeVariantIndex].color : "Standard";
+            const customizedTitle = document.getElementById('mainProductDisplayTitle').innerText; 
             const qty = parseInt(document.getElementById('qtyInput').value);
             return {
                 id: productId, 
-                title: document.getElementById('mainProductDisplayTitle').innerText, // Fix applied to map true heading element
+                title: customizedTitle,
                 size: window.selectedSizeValue, 
                 color: variantColor, 
                 price: window.globalProductData.price,
@@ -423,7 +450,135 @@
             window.location.href = "cart.html";
         }
 
+        // --- 6. 🔥 CUSTOMER REVIEWS ENGINE (IMAGE COMPRESS & FIREBASE SYNC) 🔥 ---
+        let pendingReviewImage = "";
+
+        // Smart Compressor reuse for customer review images
+        function compressImageEngine(base64Str, maxWidth = 800, maxHeight = 800, quality = 0.7) {
+            return new Promise((resolve) => {
+                const img = new Image(); img.src = base64Str;
+                img.onload = function() {
+                    let width = img.width; let height = img.height;
+                    if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } } 
+                    else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } }
+                    const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+                    const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+            });
+        }
+
+        window.processReviewImage = function(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    // Compress customer image to save database space (prevent 1MB limit crash)
+                    const compressed = await compressImageEngine(e.target.result, 600, 600, 0.6);
+                    pendingReviewImage = compressed;
+                    document.getElementById('reviewImagePreview').src = compressed;
+                    document.getElementById('reviewImagePreviewWrap').style.display = 'block';
+                    document.getElementById('reviewPhotoBtnText').innerText = 'Change Photo';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        window.clearReviewImage = function() {
+            pendingReviewImage = "";
+            document.getElementById('reviewImageInput').value = "";
+            document.getElementById('reviewImagePreviewWrap').style.display = 'none';
+            document.getElementById('reviewPhotoBtnText').innerText = 'Add Product Photo';
+        }
+
+        window.submitReview = async function() {
+            const name = document.getElementById('reviewerName').value.trim();
+            const text = document.getElementById('reviewText').value.trim();
+            const btn = document.getElementById('postReviewBtn');
+
+            if(!name || !text) { alert("Please enter your name and review details."); return; }
+            if(!productId) return;
+
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Posting...`;
+            btn.disabled = true;
+
+            const reviewData = {
+                name: name,
+                text: text,
+                image: pendingReviewImage, // Base64 compressed image (if any)
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // Save review inside a sub-collection for this specific product
+                await db.collection("zippykart_products").doc(productId).collection("reviews").add(reviewData);
+                
+                // Clear Form
+                document.getElementById('reviewerName').value = "";
+                document.getElementById('reviewText').value = "";
+                clearReviewImage();
+                
+                // Reload list
+                loadReviews();
+                alert("Thank you! Your review has been successfully posted.");
+            } catch(e) {
+                alert("Network Error: Could not post review. " + e.message);
+            } finally {
+                btn.innerHTML = `Post Review`;
+                btn.disabled = false;
+            }
+        }
+
+        async function loadReviews() {
+            if(!productId) return;
+            const container = document.getElementById('reviewsListContainer');
+            
+            try {
+                const snapshot = await db.collection("zippykart_products").doc(productId).collection("reviews").orderBy("timestamp", "desc").get();
+                
+                if(snapshot.empty) {
+                    container.innerHTML = `<p class="no-review-text" id="noReviewMsg">No reviews yet. Be the first to review!</p>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    
+                    // Format date
+                    let dateStr = "Just now";
+                    if(data.timestamp) {
+                        const d = data.timestamp.toDate();
+                        dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+                    }
+                    
+                    const initial = data.name.charAt(0).toUpperCase();
+                    
+                    // Conditionally show image if uploaded
+                    let imgHtml = "";
+                    if(data.image && data.image !== "") {
+                        imgHtml = `<img src="${data.image}" class="review-uploaded-img" onclick="window.open('${data.image}', '_blank')">`;
+                    }
+
+                    container.innerHTML += `
+                        <div class="review-card">
+                            <div class="reviewer-header">
+                                <div class="reviewer-avatar">${initial}</div>
+                                <div>
+                                    <div class="reviewer-name">${data.name}</div>
+                                    <div class="review-date">${dateStr}</div>
+                                </div>
+                            </div>
+                            <div class="review-text-content">${data.text}</div>
+                            ${imgHtml}
+                        </div>
+                    `;
+                });
+
+            } catch(e) { console.error("Error loading reviews:", e); }
+        }
+
+        // Initialize script logic
         window.onload = loadProductPageDetails;
     </script>
 </body>
-</html> 
+</html>
