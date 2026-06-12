@@ -16,15 +16,15 @@
         .notif-wrapper { position: relative; cursor: pointer; font-size: 22px; color: #333; margin-right: 5px; transition: 0.2s; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 6px; overflow:hidden;}
         .dropdown div.drop-item { padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; display:flex; align-items:center; gap:10px;}
-        .dropdown div.drop-item:hover { background: #f5faff; color: #ff3e6c; }
+        .dropdown div.drop-item:hover { background: #fff0f3; color: #ff3e6c; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; border: 2px solid #fff; font-weight: bold; }
 
         /* NAV CATEGORIES */
         .nav-icons { display: flex; justify-content: center; gap: 30px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
-        .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; font-weight: 600;}
+        .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 5px;}
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
-        .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
+        .nav-cat i { font-size: 20px; }
 
         /* SLIDER CSS */
         .banner-slider { position: relative; width: 95%; max-width: 1200px; height: 350px; margin: 20px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -53,31 +53,27 @@
         .current-price-home { font-size: 15px; font-weight: 800; color: #1e293b; }
         .upi-offer-home { font-size: 11px; color: #2563eb; font-weight: 600; margin-top: 4px; padding: 0 10px; }
 
-        /* SIDEBARS (Notifications) */
+        /* NOTIFICATIONS & AI CHAT */
         .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
         .cart-sidebar.active { right: 0; }
         .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold; font-size: 18px;}
         .cart-items-wrapper { flex: 1; overflow-y: auto; padding-right: 5px;}
-        .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .notif-card h4 { margin: 0 0 5px 0; font-size: 14px; color: #1e293b; }
-        .notif-card p { margin: 0; font-size: 12px; color: #475569; line-height: 1.4; }
-        .notif-time { font-size: 10px; color: #94a3b8; margin-top: 8px; display: block; }
-
-        /* AI CHATBOX CSS */
+        .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; }
+        
         .ai-chat-box { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 10002; transform: translateY(150%) scale(0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none;}
         .ai-chat-box.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-        .chat-header { background: linear-gradient(135deg, #1e293b, #334155); color: #fff; padding: 15px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .chat-header { background: linear-gradient(135deg, #ff3e6c, #e11d48); color: #fff; padding: 15px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; font-weight: bold; }
         .chat-body { padding: 15px; height: 320px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
-        .chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.4; position: relative; animation: popUpAnim 0.3s ease; }
-        .bot-msg { background: #fff; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;}
-        .user-msg { background: #ff3e6c; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 2px 8px rgba(255,62,108,0.2);}
+        .chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.4; animation: popUpAnim 0.3s ease; }
+        .bot-msg { background: #fff; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #e2e8f0;}
+        .user-msg { background: #1e293b; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px;}
         .chat-footer { padding: 12px; display: flex; gap: 10px; border-top: 1px solid #e2e8f0; background:#fff; border-radius: 0 0 12px 12px;}
-        .chat-footer input { flex: 1; padding: 10px 15px; border: 1px solid #cbd5e1; border-radius: 20px; outline: none; font-size: 13px; background: #f1f5f9; transition: 0.2s;}
-        .chat-footer button { background: #1e293b; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;}
+        .chat-footer input { flex: 1; padding: 10px 15px; border: 1px solid #cbd5e1; border-radius: 20px; outline: none; font-size: 13px;}
+        .chat-footer button { background: #ff3e6c; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display:flex; align-items:center; justify-content:center;}
 
-        /* MODALS CSS */
+        /* MODALS & ANIMATIONS */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
+        @keyframes slideInRight { 0% { transform: translateX(30px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
         @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; align-items:center; justify-content:center;}
@@ -86,51 +82,65 @@
         .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 12px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
         .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; font-weight:bold;}
         .auth-body { padding: 25px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline:none;}
-        .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition:0.3s;}
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline:none;}
+        .auth-input:focus { border-color: #ff3e6c;}
+        .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer;}
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
-        .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
-
-        /* 🔥 MEGA DASHBOARD (FLIPKART STYLE) 🔥 */
+        
+        /* 🔥 THEME COLOR UPDATED: MEGA DASHBOARD (PINK THEME) 🔥 */
         .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 85vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
         .dash-sidebar { width: 340px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
+        .dash-sidebar::-webkit-scrollbar { width: 4px; } .dash-sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
         
         .dash-user-card { padding: 20px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 15px; }
-        .dash-avatar { width: 50px; height: 50px; background: #2874f0; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
+        .dash-avatar { width: 50px; height: 50px; background: #ff3e6c; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
         
-        .dash-group-title { padding: 20px 20px 8px 20px; font-size: 13px; font-weight: 800; color: #878787; background: #fff; text-transform: uppercase; }
+        .dash-group-title { padding: 20px 20px 8px 20px; font-size: 12px; font-weight: 800; color: #878787; background: #fff; text-transform: uppercase; letter-spacing:0.5px;}
         .dash-nav-item { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; color: #212121; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
-        .dash-nav-item:hover { background: #f9f9f9; color: #2874f0; }
-        .dash-nav-item.active { background: #f5faff; color: #2874f0; font-weight: 600; border-left: 4px solid #2874f0;}
+        .dash-nav-item:hover { background: #fff0f3; color: #ff3e6c; }
+        .dash-nav-item.active { background: #fff0f3; color: #ff3e6c; font-weight: 700; border-left: 4px solid #ff3e6c;}
         .item-left { display: flex; align-items: center; gap: 15px; }
-        .item-left i { width: 22px; text-align: center; font-size: 18px; color: #2874f0; }
+        .item-left i { width: 22px; text-align: center; font-size: 18px; color: #ff3e6c; }
         
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
-        .dash-mobile-header { display: none; background: #2874f0; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
+        .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
         
-        .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
-        .dash-header-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
+        /* Dashboard Tabs Animation */
+        .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); min-height: 80%; display:none;}
+        .slide-in-active { animation: slideInRight 0.4s ease forwards; display:block !important;}
         
-        .logout-full-btn { width: 100%; background: #fff; color: #2874f0; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
-        .logout-full-btn:hover { background: #f5faff; }
+        .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
+        
+        /* Beautiful Active Pages UI Elements */
+        .order-card { border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s; display:flex; justify-content:space-between; align-items:center;}
+        .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color:#cbd5e1;}
+        .bank-card { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); position:relative; overflow:hidden;}
+        
+        /* Language Options UI */
+        .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
+        .lang-option:hover { border-color: #ff3e6c; }
+        .lang-option.active { border-color:#ff3e6c; background:#fff0f3; box-shadow: 0 2px 8px rgba(255,62,108,0.15);}
+        .lang-radio { width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center; transition:0.2s;}
+        .lang-option.active .lang-radio { border-color:#ff3e6c; background:#ff3e6c; }
+        .lang-option.active .lang-radio::after { content:''; width:8px; height:8px; border-radius:50%; background:#fff; }
+        .lang-text { flex:1; font-weight:700; font-size:16px; color:#1e293b; }
+        .lang-text small { display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px; }
+
+        .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
+        .logout-full-btn:hover { background: #fff0f3; }
 
         /* FOOTER */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; }
-        .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
-        .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px;}
+        .footer-col p, .footer-col a { font-size: 13px; color: #bbb; text-decoration: none; margin-bottom: 12px; display:block;}
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; text-decoration: none;}
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
-        /* 🔥 MOBILE BOTTOM NAVIGATION APP BAR 🔥 */
         .bottom-nav { display: none; }
 
         @media (max-width: 768px) {
             body { padding-bottom: 70px; }
-            
-            /* HEADER ADJUSTMENTS FOR MOBILE */
             header { padding: 10px; justify-content: space-between; gap: 10px; }
             .logo-box { order: 1; margin-right: auto; font-size: 16px; }
             .notif-wrapper { order: 2; margin-right: 15px; font-size: 20px; }
@@ -138,11 +148,10 @@
             .search-bar { order: 4; width: 100%; flex: 1 1 100%; margin: 5px 0 0 0; box-sizing: border-box; } 
             .menu-wrapper { display: none; } 
 
-            /* SHOW BOTTOM NAV */
             .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
             .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
             .bottom-nav-item i { font-size: 20px; }
-            .bottom-nav-item.active { color: #2874f0; }
+            .bottom-nav-item.active { color: #ff3e6c; }
 
             .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
@@ -151,7 +160,6 @@
             .slide-content p { font-size: 12px; margin-bottom: 10px; }
             .slide-content button { padding: 8px 15px; font-size: 12px; }
             
-            /* DASHBOARD MOBILE FIXES */
             .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
             .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
@@ -161,31 +169,33 @@
         }
     </style>
 </head>
-<body>
+<body id="appBody">
 
+<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
-        <span style="color: red;">Zippy</span>Kart
+        <span style="color: red;" class="translate" data-en="Zippy" data-hi="ज़िप्पी">Zippy</span><span class="translate" data-en="Kart" data-hi="कार्ट">Kart</span>
     </div>
     
-    <input type="text" id="mainSearchBar" class="search-bar" placeholder="Search products...">
+    <input type="text" id="mainSearchBar" class="search-bar translate-placeholder" data-en="Search products..." data-hi="उत्पाद खोजें..." placeholder="Search products...">
     
+    <!-- Visible only on Desktop -->
     <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">
-        <span id="navLoginText">LOGIN</span> ▾
+        <span id="navLoginText" class="translate" data-en="LOGIN" data-hi="लॉग इन">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
-            <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
-            <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-table-columns" style="color:#2874f0;"></i> Dashboard</div>
-            <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+            <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> <span class="translate" data-en="Sign In / Register" data-hi="साइन इन / रजिस्टर">Sign In / Register</span></div>
+            <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-table-columns" style="color:#ff3e6c;"></i> <span class="translate" data-en="Dashboard" data-hi="डैशबोर्ड">Dashboard</span></div>
+            <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> <span class="translate" data-en="Logout" data-hi="लॉग आउट">Logout</span></div>
         </div>
     </div>
     
+    <!-- Visible only on Desktop -->
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
-        MORE ▾
+        <span class="translate" data-en="MORE" data-hi="अधिक">MORE</span> ▾
         <div id="moreDrop" class="dropdown">
-            <div class="drop-item" onclick="toggleChat(); toggleDrop('moreDrop');"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> 24x7 Customer Care</div>
-            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at <b>ads@zippykart.co.in</b> to grow your business.', 'fa-bullhorn', '#ff9800'); toggleDrop('moreDrop');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> Advertise</div>
-            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart mobile app is launching soon on iOS and Android! Stay tuned for exclusive app-only drops.', 'fa-mobile-screen-button', '#4caf50'); toggleDrop('moreDrop');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> Download App</div>
+            <div class="drop-item" onclick="toggleChat(); toggleDrop('moreDrop');"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div>
+            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon on iOS and Android!', 'fa-mobile-screen-button', '#4caf50'); toggleDrop('moreDrop');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div>
         </div>
     </div>
     
@@ -194,281 +204,322 @@
         <span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
     </div>
     
-    <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
+    <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span class="translate" data-en="Cart" data-hi="कार्ट">Cart</span></button>
 </header>
 
+<!-- 🔥 MOBILE BOTTOM NAVIGATION APP BAR 🔥 -->
 <div class="bottom-nav">
     <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-house"></i>
-        <span>Home</span>
+        <span class="translate" data-en="Home" data-hi="होम">Home</span>
     </div>
     <div class="bottom-nav-item" onclick="document.querySelector('.nav-icons').scrollIntoView({behavior:'smooth'});">
         <i class="fa-solid fa-border-all"></i>
-        <span>Categories</span>
+        <span class="translate" data-en="Categories" data-hi="श्रेणियाँ">Categories</span>
     </div>
     <div class="bottom-nav-item" onclick="openDashboard()">
         <i class="fa-regular fa-user"></i>
-        <span>Account</span>
+        <span class="translate" data-en="Account" data-hi="खाता">Account</span>
     </div>
     <div class="bottom-nav-item" onclick="document.getElementById('mobileMoreModal').style.display='flex'">
         <i class="fa-solid fa-ellipsis"></i>
-        <span>More</span>
+        <span class="translate" data-en="More" data-hi="अधिक">More</span>
     </div>
 </div>
 
+<!-- 🔥 MOBILE 'MORE' BOTTOM SHEET MODAL 🔥 -->
 <div id="mobileMoreModal" class="modal" onclick="if(event.target==this) this.style.display='none'">
     <div class="auth-content" style="margin: auto; margin-bottom: 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; animation: slideUpMobile 0.3s;">
         <div class="auth-header" style="background:#1e293b; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
-            <h3 style="margin:0; color:white; font-size:16px;">More Options</h3>
+            <h3 style="margin:0; color:white; font-size:16px;" class="translate" data-en="More Options" data-hi="अधिक विकल्प">More Options</h3>
             <i class="fa-solid fa-xmark" style="color:white; font-size:20px; cursor:pointer;" onclick="document.getElementById('mobileMoreModal').style.display='none'"></i>
         </div>
-        <div class="dash-nav-item" onclick="toggleChat(); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> 24x7 Customer Care</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
-        <div class="dash-nav-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at ads@zippykart.co.in to grow your business.', 'fa-bullhorn', '#ff9800'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> Advertise</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
-        <div class="dash-nav-item" onclick="openInfoModal('Download App', 'The ZippyKart mobile app is launching soon on iOS and Android! Stay tuned for exclusive app-only drops.', 'fa-mobile-screen-button', '#4caf50'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-download" style="color:#4caf50;"></i> Download App</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
+        <div class="dash-nav-item" onclick="toggleChat(); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at ads@zippykart.co.in.', 'fa-bullhorn', '#ff9800'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon!', 'fa-mobile-screen-button', '#4caf50'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div></div>
     </div>
 </div>
 
+<!-- NOTIFICATIONS SIDEBAR -->
 <div class="cart-sidebar" id="notifSidebar">
     <div class="cart-title-box">
-        <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> Notifications</span>
+        <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> <span class="translate" data-en="Notifications" data-hi="सूचनाएं">Notifications</span></span>
         <button class="close-btn" style="position:static; color:#1e293b;" onclick="toggleNotifications()">&times;</button>
     </div>
     <div class="cart-items-wrapper">
         <div class="notif-card">
-            <h4>🔥 Mega Summer Sale is Live!</h4>
-            <p>Get flat 50% OFF on all premium streetwear and sneakers.</p>
-            <span class="notif-time">2 hours ago</span>
+            <h4 class="translate" data-en="🔥 Mega Summer Sale is Live!" data-hi="🔥 मेगा समर सेल लाइव है!">🔥 Mega Summer Sale is Live!</h4>
+            <p class="translate" data-en="Get flat 50% OFF on all premium streetwear and sneakers." data-hi="सभी प्रीमियम स्ट्रीटवियर और स्नीकर्स पर 50% की छूट पाएं।">Get flat 50% OFF on all premium streetwear and sneakers.</p>
         </div>
         <div class="notif-card" style="border-left-color: #2196f3;">
-            <h4>📦 Order Delivered</h4>
-            <p>Your previous order 'Oversized Beige T-Shirt' has been delivered successfully.</p>
-            <span class="notif-time">1 day ago</span>
+            <h4 class="translate" data-en="📦 Order Delivered" data-hi="📦 ऑर्डर डिलीवर हो गया">📦 Order Delivered</h4>
+            <p class="translate" data-en="Your previous order has been delivered successfully." data-hi="आपका पिछला ऑर्डर सफलतापूर्वक डिलीवर हो गया है।">Your previous order has been delivered successfully.</p>
         </div>
     </div>
 </div>
 
+<!-- AI CHAT AGENT BOX -->
 <div class="ai-chat-box" id="aiChatBox">
     <div class="chat-header">
         <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
         <i class="fa-solid fa-chevron-down" style="cursor:pointer;" onclick="toggleChat()"></i>
     </div>
     <div class="chat-body" id="chatBody">
-        <div class="chat-msg bot-msg">Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?</div>
+        <div class="chat-msg bot-msg translate" data-en="Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?" data-hi="नमस्ते! 👋 मैं ज़िप्पी हूँ, आपका निजी AI सहायक। मैं आज आपकी कैसे मदद कर सकता हूँ?">Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?</div>
     </div>
     <div class="chat-footer">
-        <input type="text" id="chatInput" placeholder="Type your message here..." onkeypress="handleChatEnter(event)">
+        <input type="text" id="chatInput" placeholder="Type here..." class="translate-placeholder" data-en="Type your message here..." data-hi="अपना संदेश यहाँ टाइप करें..." onkeypress="handleChatEnter(event)">
         <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
     </div>
 </div>
 
-<div id="infoModal" class="modal">
-    <div class="auth-content" style="max-width:450px;">
-        <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
-        <div class="auth-header" style="background:#1e293b;"><h2 id="infoModalTitle" style="margin:0;">Info</h2></div>
-        <div class="auth-body" style="text-align:center; padding: 40px 20px;">
-            <i id="infoModalIcon" class="fa-solid fa-info-circle" style="font-size:50px; margin-bottom:20px; color:#1e293b;"></i>
-            <p id="infoModalText" style="font-size:15px; color:#475569; line-height:1.6;"></p>
-            <button class="auth-submit-btn" style="margin-top:25px; background:#1e293b;" onclick="document.getElementById('infoModal').style.display='none'">Got it!</button>
-        </div>
-    </div>
-</div>
-
+<!-- NAV CATEGORIES -->
 <div class="nav-icons">
-    <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
-    <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
-    <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i>Women</div>
-    <div class="nav-cat" onclick="filterCategory('Streetwear')"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i>Streetwear</div>
-    <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child" style="color: #2196f3;"></i>Kids</div>
-    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color: #4caf50;"></i>Toys</div>
-    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color: #ff9800;"></i>Watch</div>
-    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i>Cosmetic</div>
-    <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
+    <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i><span class="translate" data-en="All" data-hi="सभी">All</span></div>
+    <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i><span class="translate" data-en="Men" data-hi="पुरुष">Men</span></div>
+    <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i><span class="translate" data-en="Women" data-hi="महिला">Women</span></div>
+    <div class="nav-cat" onclick="filterCategory('Streetwear')"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i><span class="translate" data-en="Streetwear" data-hi="स्ट्रीटवियर">Streetwear</span></div>
+    <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child" style="color: #2196f3;"></i><span class="translate" data-en="Kids" data-hi="बच्चे">Kids</span></div>
+    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color: #4caf50;"></i><span class="translate" data-en="Toys" data-hi="खिलौने">Toys</span></div>
+    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color: #ff9800;"></i><span class="translate" data-en="Watch" data-hi="घड़ियाँ">Watch</span></div>
+    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i><span class="translate" data-en="Cosmetic" data-hi="सौंदर्य">Cosmetic</span></div>
+    <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i><span class="translate" data-en="Tech" data-hi="इलेक्ट्रॉनिक्स">Tech</span></div>
 </div>
 
+<!-- BANNER SLIDER -->
 <div class="banner-slider">
     <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
     <div class="slides" id="sliderTrack">
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000');">
             <div class="slide-content">
-                <h2>Mega <span>Summer</span> Sale</h2>
-                <p>Upto 50% OFF on top fashion brands.</p>
-                <button>Shop Men's Fashion</button>
-            </div>
-        </div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000');">
-            <div class="slide-content">
-                <h2>New <span>Tech</span> Arrivals</h2>
-                <p>Discover the latest gadgets and electronics.</p>
-                <button>Explore Electronics</button>
+                <h2><span class="translate" data-en="Mega" data-hi="मेगा">Mega</span> <span><span class="translate" data-en="Summer" data-hi="समर">Summer</span></span> <span class="translate" data-en="Sale" data-hi="सेल">Sale</span></h2>
+                <p class="translate" data-en="Upto 50% OFF on top fashion brands." data-hi="शीर्ष फैशन ब्रांडों पर 50% तक की छूट।">Upto 50% OFF on top fashion brands.</p>
+                <button class="translate" data-en="Shop Now" data-hi="अभी खरीदें">Shop Now</button>
             </div>
         </div>
     </div>
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
+<!-- DYNAMIC PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
-        <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
+        <i class="fa-solid fa-spinner fa-spin"></i> <span class="translate" data-en="Loading Products..." data-hi="उत्पाद लोड हो रहे हैं...">Loading Products...</span>
     </div>
 </div>
 
-<footer class="main-footer">
-    <div class="footer-content">
-        <div class="footer-col">
-            <h3>ZippyKart</h3>
-            <p>Premium destination for the latest trends and tech. Quality products to your doorstep.</p>
-        </div>
-        <div class="footer-col">
-            <h3>Quick Links</h3>
-            <a href="#">Men's Fashion</a><br>
-            <a href="#">Gadgets & Tech</a><br>
-            <a href="#">AI Support</a>
-        </div>
-        <div class="footer-col">
-            <h3>Policies</h3>
-            <a href="#">Privacy Policy</a><br>
-            <a href="#">Terms of Service</a><br>
-            <a href="#">Return & Refund</a>
-        </div>
-        <div class="footer-col">
-            <h3>Get In Touch</h3>
-            <p>ZippyKart<br>Rajendra Place, New Delhi</p>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2026 ZippyKart. All Rights Reserved.
-    </div>
-</footer>
-
+<!-- AUTHENTICATION MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
-        <div class="auth-header"><h2 id="authModalTitle" style="margin:0;">Login</h2></div>
+        <div class="auth-header"><h2 id="authModalTitle" style="margin:0;" class="translate" data-en="Login" data-hi="लॉग इन">Login</h2></div>
         <div class="auth-body">
-            <input type="email" class="auth-input" placeholder="Email Address">
-            <input type="password" class="auth-input" placeholder="Password">
-            <button id="authSubmitBtn" class="auth-submit-btn" onclick="alert('Please use Continue with Google for instant login!')">Login</button>
-            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335;"></i> Continue with Google</button>
-            <div class="auth-switch" id="authSwitchText" onclick="toggleAuthMode()">
-                Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>
+            <input type="email" class="auth-input translate-placeholder" data-en="Email Address" data-hi="ईमेल पता" placeholder="Email Address">
+            <input type="password" class="auth-input translate-placeholder" data-en="Password" data-hi="पासवर्ड" placeholder="Password">
+            <button id="authSubmitBtn" class="auth-submit-btn" onclick="alert('Please use Continue with Google!')"><span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span></button>
+            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335;"></i> <span class="translate" data-en="Continue with Google" data-hi="Google के साथ जारी रखें">Continue with Google</span></button>
+            <div class="auth-switch" onclick="toggleAuthMode()">
+                <span id="authSwitchText" class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">Don't have an account? Sign Up</span>
             </div>
         </div>
     </div>
 </div>
 
+<!-- 🔥 ULTIMATE MEGA DASHBOARD MODAL (PINK THEME & ACTIVE PAGES) 🔥 -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
         
+        <!-- SIDEBAR MENU -->
         <div class="dash-sidebar">
             <div class="dash-user-card">
                 <div class="dash-avatar" id="dashAvatarInitial">Z</div>
                 <div>
-                    <div style="font-size:12px; color:#878787; font-weight:600;">Hello,</div>
+                    <div style="font-size:12px; color:#878787; font-weight:600;" class="translate" data-en="Hello," data-hi="नमस्ते,">Hello,</div>
                     <div style="font-size:16px; font-weight:800; color:#212121;" id="dashDisplayName">User</div>
                 </div>
             </div>
 
-            <div class="dash-group-title">Account Settings</div>
+            <!-- Group 1: Account Settings -->
+            <div class="dash-group-title translate" data-en="Account Settings" data-hi="खाता सेटिंग">Account Settings</div>
             <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Edit Profile')">
-                <div class="item-left"><i class="fa-solid fa-user"></i> Edit Profile</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-user"></i> <span class="translate" data-en="Edit Profile" data-hi="प्रोफ़ाइल संपादित करें">Edit Profile</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')">
-                <div class="item-left"><i class="fa-solid fa-box-open"></i> My Orders</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-box-open"></i> <span class="translate" data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Saved Addresses')">
-                <div class="item-left"><i class="fa-solid fa-location-dot"></i> Saved Addresses</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-location-dot"></i> <span class="translate" data-en="Saved Addresses" data-hi="सहेजे गए पते">Saved Addresses</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashCardsTab', this, 'Saved Cards')">
-                <div class="item-left"><i class="fa-solid fa-wallet"></i> Saved Cards</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-wallet"></i> <span class="translate" data-en="Saved Cards" data-hi="सहेजे गए कार्ड">Saved Cards</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashLangTab', this, 'Select Language')">
-                <div class="item-left"><i class="fa-solid fa-language"></i> Select Language</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-language"></i> <span class="translate" data-en="Select Language" data-hi="भाषा चुनें">Select Language</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashNotifTab', this, 'Notification Settings')">
-                <div class="item-left"><i class="fa-regular fa-bell"></i> Notification Settings</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-regular fa-bell"></i> <span class="translate" data-en="Notification Settings" data-hi="अधिसूचना सेटिंग">Notification Settings</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
 
-            <div class="dash-group-title">My Activity</div>
+            <!-- Group 2: My Activity -->
+            <div class="dash-group-title translate" data-en="My Activity" data-hi="मेरी गतिविधि">My Activity</div>
             <div class="dash-nav-item" onclick="switchDashTab('dashReviewsTab', this, 'My Reviews')">
-                <div class="item-left"><i class="fa-solid fa-pen-to-square"></i> Reviews</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-pen-to-square"></i> <span class="translate" data-en="Reviews" data-hi="समीक्षाएं">Reviews</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashQATab', this, 'Questions & Answers')">
-                <div class="item-left"><i class="fa-solid fa-comments"></i> Questions & Answers</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-comments"></i> <span class="translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
 
-            <div class="dash-group-title">Earn with ZippyKart</div>
+            <!-- Group 3: Earn with ZippyKart -->
+            <div class="dash-group-title translate" data-en="Earn with ZippyKart" data-hi="ZippyKart के साथ कमाएं">Earn with ZippyKart</div>
             <div class="dash-nav-item" onclick="switchDashTab('dashSellTab', this, 'Sell on ZippyKart')">
-                <div class="item-left"><i class="fa-solid fa-store"></i> Sell on ZippyKart</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-store"></i> <span class="translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
 
-            <div class="dash-group-title">Feedback & Information</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashTermsTab', this, 'Terms, Policies and Licenses')">
-                <div class="item-left"><i class="fa-solid fa-file-contract"></i> Terms & Policies</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            <!-- Group 4: Feedback & Information -->
+            <div class="dash-group-title translate" data-en="Feedback & Information" data-hi="प्रतिक्रिया और जानकारी">Feedback & Information</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashTermsTab', this, 'Terms & Policies')">
+                <div class="item-left"><i class="fa-solid fa-file-contract"></i> <span class="translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
             <div class="dash-nav-item" onclick="switchDashTab('dashFAQTab', this, 'Browse FAQs')">
-                <div class="item-left"><i class="fa-solid fa-circle-question"></i> Browse FAQs</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+                <div class="item-left"><i class="fa-solid fa-circle-question"></i> <span class="translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
 
-            <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> Log Out</button>
+            <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> <span class="translate" data-en="Log Out" data-hi="लॉग आउट">Log Out</span></button>
         </div>
 
+        <!-- MAIN ACTIVE CONTENT PAGES -->
         <div class="dash-main">
             <div class="dash-mobile-header">
                 <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
-                <span id="dashHeaderDynamicTitle">Edit Profile</span>
+                <span id="dashHeaderDynamicTitle" class="translate" data-en="Edit Profile" data-hi="प्रोफ़ाइल संपादित करें">Edit Profile</span>
             </div>
             
-            <div class="dash-inner-content" id="dashProfileTab">
-                <h2 class="dash-header-title">Personal Information</h2>
-                <input type="text" class="auth-input" placeholder="Full Name" id="dashNameInput">
-                <input type="email" class="auth-input" placeholder="Email Address" id="dashEmailInput" readonly>
-                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px; background:#2874f0;">Save Info</button>
+            <!-- 1. Tab: Profile Info -->
+            <div class="dash-inner-content slide-in-active" id="dashProfileTab">
+                <h2 class="dash-header-title translate" data-en="Personal Information" data-hi="व्यक्तिगत जानकारी">Personal Information</h2>
+                <input type="text" class="auth-input translate-placeholder" data-en="Full Name" data-hi="पूरा नाम" placeholder="Full Name" id="dashNameInput">
+                <input type="email" class="auth-input translate-placeholder" data-en="Email Address" data-hi="ईमेल पता" placeholder="Email Address" id="dashEmailInput" readonly style="background:#f1f5f9; color:#94a3b8;">
+                <input type="number" class="auth-input translate-placeholder" data-en="Mobile Number" data-hi="मोबाइल नंबर" placeholder="Mobile Number">
+                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px; background:#ff3e6c;"><span class="translate" data-en="Save Changes" data-hi="परिवर्तन सहेजें">Save Changes</span></button>
             </div>
             
-            <div class="dash-inner-content" id="dashOrdersTab" style="display:none;">
-                <h2 class="dash-header-title">My Orders</h2>
-                <div style="text-align: center; color: #888; padding: 40px 0;"><i class="fa-solid fa-box-open" style="font-size:40px; margin-bottom:10px;"></i><br>No recent orders found.</div>
+            <!-- 2. Tab: Orders -->
+            <div class="dash-inner-content" id="dashOrdersTab">
+                <h2 class="dash-header-title translate" data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</h2>
+                <!-- Active Demo Orders -->
+                <div class="order-card">
+                    <div>
+                        <div style="font-weight:800; font-size:14px; margin-bottom:5px;">Oversized Maroon T-Shirt</div>
+                        <div style="color:#64748b; margin-bottom:8px;">Size: L | Qty: 1</div>
+                        <div style="font-weight:800; font-size:16px;">₹499</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="background:#dcfce7; color:#16a34a; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:11px;" class="translate" data-en="Delivered" data-hi="वितरित">Delivered</span>
+                        <div style="margin-top:10px;"><i class="fa-solid fa-chevron-right" style="color:#ccc;"></i></div>
+                    </div>
+                </div>
+                <div class="order-card">
+                    <div>
+                        <div style="font-weight:800; font-size:14px; margin-bottom:5px;">White Luxury Sneakers</div>
+                        <div style="color:#64748b; margin-bottom:8px;">Size: 9 | Qty: 1</div>
+                        <div style="font-weight:800; font-size:16px;">₹1299</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="background:#fef08a; color:#b45309; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:11px;" class="translate" data-en="Shipped" data-hi="भेज दिया गया">Shipped</span>
+                        <div style="margin-top:10px;"><i class="fa-solid fa-chevron-right" style="color:#ccc;"></i></div>
+                    </div>
+                </div>
             </div>
             
-            <div class="dash-inner-content" id="dashAddressTab" style="display:none;">
-                <h2 class="dash-header-title">Manage Addresses</h2>
-                <button style="border:1px dashed #2874f0; color:#2874f0; background:#f5faff; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
+            <!-- 3. Tab: Address -->
+            <div class="dash-inner-content" id="dashAddressTab">
+                <h2 class="dash-header-title translate" data-en="Manage Addresses" data-hi="पते प्रबंधित करें">Manage Addresses</h2>
+                <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px; margin-bottom:15px;"><span class="translate" data-en="+ ADD A NEW ADDRESS" data-hi="+ एक नया पता जोड़ें">+ ADD A NEW ADDRESS</span></button>
+                <div style="border:1px solid #e2e8f0; border-radius:8px; padding:15px; position:relative;">
+                    <span style="background:#f1f5f9; font-size:10px; padding:3px 6px; border-radius:4px; font-weight:bold; color:#64748b;">HOME</span>
+                    <div style="font-weight:800; margin-top:10px; margin-bottom:5px;" id="addressNameSpan">User</div>
+                    <div style="font-size:13px; color:#475569; line-height:1.5;">Rajendra Place, New Delhi<br>India - 110008</div>
+                    <div style="font-size:13px; font-weight:600; margin-top:8px;">+91 9876543210</div>
+                    <i class="fa-solid fa-ellipsis-vertical" style="position:absolute; top:15px; right:15px; cursor:pointer; color:#94a3b8;"></i>
+                </div>
             </div>
 
-            <div class="dash-inner-content" id="dashCardsTab" style="display:none;">
-                <h2 class="dash-header-title">Saved Cards</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-wallet" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Saved Cards</h3><p style="color:#777;">Save your credit/debit cards during checkout for faster payments.</p></div>
+            <!-- 4. Tab: Saved Cards (With Dynamic Name Integration) -->
+            <div class="dash-inner-content" id="dashCardsTab">
+                <h2 class="dash-header-title translate" data-en="Saved Cards" data-hi="सहेजे गए कार्ड">Saved Cards</h2>
+                <div class="bank-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 25px;"><i class="fa-brands fa-cc-visa" style="font-size:28px;"></i> <span style="font-weight:800; font-style:italic;">HDFC BANK</span></div>
+                    <div style="letter-spacing: 3px; font-size: 18px; margin-bottom: 20px; font-family:monospace;">**** **** **** 4321</div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8; text-transform:uppercase;">
+                        <span id="cardHolderName">Akash Kumar</span><span>12/28</span>
+                    </div>
+                </div>
+                <button style="border:1px dashed #cbd5e1; color:#1e293b; background:#f8fafc; padding:15px; width:100%; max-width:320px; font-weight:bold; cursor:pointer; border-radius:4px;"><span class="translate" data-en="+ ADD NEW CARD" data-hi="+ नया कार्ड जोड़ें">+ ADD NEW CARD</span></button>
             </div>
-            <div class="dash-inner-content" id="dashLangTab" style="display:none;">
-                <h2 class="dash-header-title">Select Language</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-language" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Coming Soon</h3><p style="color:#777;">Hindi, Tamil, Telugu options are coming soon.</p></div>
+
+            <!-- 5. 🔥 Tab: LANGUAGE SELECTOR (ACTIVE) 🔥 -->
+            <div class="dash-inner-content" id="dashLangTab">
+                <h2 class="dash-header-title translate" data-en="Select Language" data-hi="भाषा चुनें">Select Language</h2>
+                
+                <div class="lang-option active" onclick="setLanguageUI('en', this)">
+                    <div class="lang-radio"></div>
+                    <div class="lang-text">English<small>English</small></div>
+                </div>
+                
+                <div class="lang-option" onclick="setLanguageUI('hi', this)">
+                    <div class="lang-radio"></div>
+                    <div class="lang-text">हिंदी<small>Hindi</small></div>
+                </div>
             </div>
-            <div class="dash-inner-content" id="dashNotifTab" style="display:none;">
-                <h2 class="dash-header-title">Notification Settings</h2><div style="text-align:center; padding:40px;"><i class="fa-regular fa-bell" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>All Notifications Active</h3><p style="color:#777;">You are receiving SMS, Email, and WhatsApp updates.</p></div>
+
+            <!-- 6. Tab: Notifications -->
+            <div class="dash-inner-content" id="dashNotifTab">
+                <h2 class="dash-header-title translate" data-en="Notification Settings" data-hi="अधिसूचना सेटिंग">Notification Settings</h2>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #eee;">
+                    <div><div style="font-weight:bold; font-size:14px;">WhatsApp Alerts</div><div style="font-size:12px; color:#777;">Order tracking and offers</div></div>
+                    <input type="checkbox" checked style="width:18px; height:18px; accent-color:#ff3e6c;">
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #eee;">
+                    <div><div style="font-weight:bold; font-size:14px;">Email Notifications</div><div style="font-size:12px; color:#777;">Invoices and security alerts</div></div>
+                    <input type="checkbox" checked style="width:18px; height:18px; accent-color:#ff3e6c;">
+                </div>
             </div>
-            <div class="dash-inner-content" id="dashReviewsTab" style="display:none;">
-                <h2 class="dash-header-title">My Reviews</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-pen-to-square" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Reviews Yet</h3><p style="color:#777;">You haven't reviewed any products yet.</p></div>
+
+            <!-- 7 & 8. Tab: Reviews & QA -->
+            <div class="dash-inner-content" id="dashReviewsTab">
+                <h2 class="dash-header-title translate" data-en="My Reviews" data-hi="मेरी समीक्षाएं">My Reviews</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-pen-to-square" style="font-size:40px; color:#cbd5e1; margin-bottom:15px;"></i><h3 class="translate" data-en="No Reviews Yet" data-hi="अभी तक कोई समीक्षा नहीं">No Reviews Yet</h3></div>
             </div>
-            <div class="dash-inner-content" id="dashQATab" style="display:none;">
-                <h2 class="dash-header-title">Questions & Answers</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-comments" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Questions Asked</h3><p style="color:#777;">Ask questions on product pages to get answers from verified buyers.</p></div>
+            <div class="dash-inner-content" id="dashQATab">
+                <h2 class="dash-header-title translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-comments" style="font-size:40px; color:#cbd5e1; margin-bottom:15px;"></i><h3 class="translate" data-en="No Questions Asked" data-hi="कोई प्रश्न नहीं पूछा गया">No Questions Asked</h3></div>
             </div>
-            <div class="dash-inner-content" id="dashSellTab" style="display:none;">
-                <h2 class="dash-header-title">Sell on ZippyKart</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-store" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Become a Seller</h3><p style="color:#777;">Register as a seller and reach millions of customers.</p><button style="margin-top:15px; padding:10px 20px; background:#2874f0; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Start Selling</button></div>
+
+            <!-- 9. Tab: Sell -->
+            <div class="dash-inner-content" id="dashSellTab">
+                <h2 class="dash-header-title translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</h2>
+                <div style="background:#fff0f3; border:1px solid #ffe4e6; padding:20px; border-radius:8px; text-align:center;">
+                    <i class="fa-solid fa-store" style="font-size:40px; color:#ff3e6c; margin-bottom:15px;"></i>
+                    <h3 style="color:#1e293b; margin-top:0;" class="translate" data-en="Start your e-commerce journey" data-hi="अपनी ई-कॉमर्स यात्रा शुरू करें">Start your e-commerce journey</h3>
+                    <p style="color:#475569; font-size:14px;" class="translate" data-en="Zero registration fee. Reach millions of streetwear and tech fans instantly." data-hi="शून्य पंजीकरण शुल्क। लाखों ग्राहकों तक तुरंत पहुंचें।">Zero registration fee. Reach millions of streetwear and tech fans instantly.</p>
+                    <button style="margin-top:15px; padding:12px 25px; background:#ff3e6c; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;"><span class="translate" data-en="Register as Seller" data-hi="विक्रेता के रूप में पंजीकरण करें">Register as Seller</span></button>
+                </div>
             </div>
-            <div class="dash-inner-content" id="dashTermsTab" style="display:none;">
-                <h2 class="dash-header-title">Terms & Policies</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-file-contract" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>ZippyKart Policies</h3><p style="color:#777;">Read our complete terms of service and privacy policy.</p></div>
+
+            <!-- 10 & 11. Tab: Terms & FAQ -->
+            <div class="dash-inner-content" id="dashTermsTab">
+                <h2 class="dash-header-title translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</h2><div style="padding:10px; font-size:13px; color:#475569; line-height:1.6;">By using ZippyKart, you agree to our standard Terms of Service and Privacy Policy. All transactions are securely processed. We do not store sensitive payment details on our servers. Returns are accepted within 7 days of delivery for unworn apparel and unused tech items.</div>
             </div>
-            <div class="dash-inner-content" id="dashFAQTab" style="display:none;">
-                <h2 class="dash-header-title">Browse FAQs</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-circle-question" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Help Center</h3><p style="color:#777;">Find answers to frequently asked questions about orders, returns, and more.</p></div>
+            <div class="dash-inner-content" id="dashFAQTab">
+                <h2 class="dash-header-title translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</h2>
+                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;">How to track my order? <i class="fa-solid fa-chevron-down"></i></div>
+                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;">What is the refund policy? <i class="fa-solid fa-chevron-down"></i></div>
+                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;">How to use Zippy Coins? <i class="fa-solid fa-chevron-down"></i></div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- FIREBASE SCRIPTS & LOGIC -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -479,42 +530,83 @@
     const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
     window.allFetchedProducts = []; window.currentUser = null;
 
-    // 🔥 NEW ANIMATED FEATURES LOGIC 🔥
+    // 🔥 LANGUAGE TRANSLATION LOGIC 🔥
+    window.currentLanguage = 'en';
+    function setLanguageUI(langCode, element) {
+        // Update active radio button
+        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        window.currentLanguage = langCode;
+
+        // Apply translation to all text & placeholders
+        document.querySelectorAll('.translate').forEach(el => {
+            const translation = el.getAttribute('data-' + langCode);
+            if(translation) el.innerHTML = translation;
+        });
+
+        document.querySelectorAll('.translate-placeholder').forEach(el => {
+            const translation = el.getAttribute('data-' + langCode);
+            if(translation) el.placeholder = translation;
+        });
+        
+        // Update dynamic mobile header if needed
+        const activeNav = document.querySelector('.dash-nav-item.active');
+        if(activeNav) {
+            const titleSpan = activeNav.querySelector('.translate');
+            if(titleSpan) document.getElementById('dashHeaderDynamicTitle').innerText = titleSpan.getAttribute('data-' + langCode);
+        }
+    }
+
+    // 2. DASHBOARD & MODAL ANIMATIONS
+    function switchDashTab(tabId, eventElem, fallbackTitle) {
+        // Reset all tabs
+        document.querySelectorAll('.dash-inner-content').forEach(tab => {
+            tab.style.display = 'none';
+            tab.classList.remove('slide-in-active'); 
+        });
+        document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
+        
+        // Activate target tab with animation
+        const targetTab = document.getElementById(tabId);
+        targetTab.style.display = 'block';
+        void targetTab.offsetWidth; // Trigger reflow for animation restart
+        targetTab.classList.add('slide-in-active');
+        
+        eventElem.classList.add('active'); 
+        
+        // Set Header Title (Translate if available)
+        const transSpan = eventElem.querySelector('.translate');
+        document.getElementById('dashHeaderDynamicTitle').innerText = transSpan ? transSpan.getAttribute('data-' + window.currentLanguage) : fallbackTitle;
+        
+        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'none'; document.querySelector('.dash-main').style.display = 'block'; }
+    }
+
+    function closeDashMainMobile() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
+
     function toggleNotifications() {
-        const panel = document.getElementById('notifSidebar');
-        panel.classList.toggle('active');
+        const panel = document.getElementById('notifSidebar'); panel.classList.toggle('active');
         if(panel.classList.contains('active')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
     }
 
-    function toggleChat() {
-        const chatBox = document.getElementById('aiChatBox');
-        chatBox.classList.toggle('active');
-    }
-
+    function toggleChat() { document.getElementById('aiChatBox').classList.toggle('active'); }
     function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
-
     function sendChatMessage() {
-        const input = document.getElementById('chatInput'); const text = input.value.trim();
-        if(!text) return;
+        const input = document.getElementById('chatInput'); const text = input.value.trim(); if(!text) return;
         const chatBody = document.getElementById('chatBody');
-        chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`;
-        input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
+        chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`; input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
         setTimeout(() => {
-            chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly. You can also track your orders from the Dashboard.</div>`;
+            chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly.</div>`;
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 1000);
     }
 
     function openInfoModal(title, text, iconClass, iconColor) {
-        document.getElementById('infoModalTitle').innerText = title;
-        document.getElementById('infoModalText').innerHTML = text;
-        const icon = document.getElementById('infoModalIcon');
-        icon.className = `fa-solid ${iconClass}`; icon.style.color = iconColor;
+        document.getElementById('infoModalTitle').innerText = title; document.getElementById('infoModalText').innerHTML = text;
+        const icon = document.getElementById('infoModalIcon'); icon.className = `fa-solid ${iconClass}`; icon.style.color = iconColor;
         document.getElementById('infoModal').style.display = 'flex';
     }
 
-
-    // 2. AUTHENTICATION LOGIC
+    // 3. AUTHENTICATION LOGIC
     window.googleSignIn = function() {
         auth.signInWithPopup(googleProvider).then((result) => {
             window.currentUser = result.user;
@@ -523,13 +615,21 @@
             document.getElementById('authOpt').style.display = 'none';
             document.getElementById('profileOpt').style.display = 'flex';
             document.getElementById('logoutOpt').style.display = 'flex';
+            
+            // Set User details across dashboard
+            document.getElementById('dashDisplayName').innerText = window.currentUser.displayName;
+            document.getElementById('dashAvatarInitial').innerText = window.currentUser.displayName.charAt(0).toUpperCase();
+            document.getElementById('addressNameSpan').innerText = window.currentUser.displayName;
+            // The name on the credit card mock is already stylized, but we'll link it too for perfection
+            document.getElementById('cardHolderName').innerText = window.currentUser.displayName;
+            
         }).catch((error) => { alert("Error: " + error.message); });
     }
 
     window.handleLogout = function() {
         auth.signOut().then(() => {
             window.currentUser = null;
-            document.getElementById('navLoginText').innerText = "LOGIN";
+            document.getElementById('navLoginText').innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "LOGIN";
             document.getElementById('authOpt').style.display = 'flex';
             document.getElementById('profileOpt').style.display = 'none';
             document.getElementById('logoutOpt').style.display = 'none';
@@ -539,8 +639,15 @@
 
     window.toggleAuthMode = function() {
         const title = document.getElementById('authModalTitle'); const btn = document.getElementById('authSubmitBtn'); const switchTxt = document.getElementById('authSwitchText');
-        if(title.innerText === "Login") { title.innerText = "Sign Up"; btn.innerText = "Register"; switchTxt.innerHTML = `Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span>`; } 
-        else { title.innerText = "Login"; btn.innerText = "Login"; switchTxt.innerHTML = `Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>`; }
+        if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
+            title.innerText = window.currentLanguage === 'hi' ? "साइन अप" : "Sign Up"; 
+            btn.innerHTML = window.currentLanguage === 'hi' ? "रजिस्टर" : "Register"; 
+            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span>` : `Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span>`; 
+        } else { 
+            title.innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
+            btn.innerHTML = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
+            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `खाता नहीं है? <span style="color:#ff3e6c; font-weight:bold;">साइन अप करें</span>` : `Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>`; 
+        }
     }
 
     auth.onAuthStateChanged((user) => {
@@ -551,36 +658,24 @@
             document.getElementById('profileOpt').style.display = 'flex';
             document.getElementById('logoutOpt').style.display = 'flex';
             
-            // Set Dashboard Name/Initial
             document.getElementById('dashDisplayName').innerText = user.displayName;
             document.getElementById('dashAvatarInitial').innerText = user.displayName.charAt(0).toUpperCase();
+            document.getElementById('addressNameSpan').innerText = user.displayName;
         }
     });
 
-    // 3. DROPDOWN & MODALS LOGIC
-    function toggleDrop(id) {
-        document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
-        const drop = document.getElementById(id);
-        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
-    }
-
+    // 4. DROPDOWN CONTROLS
+    function toggleDrop(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
     function openAuthModal() { document.getElementById('loginDrop').style.display = 'none'; document.getElementById('authModal').style.display = 'flex'; }
-    
     function openDashboard() {
         document.getElementById('loginDrop').style.display = 'none'; 
         if(!window.currentUser) { openAuthModal(); return; }
         document.getElementById('dashNameInput').value = window.currentUser.displayName || ""; document.getElementById('dashEmailInput').value = window.currentUser.email || "";
         document.getElementById('dashboardModal').style.display = 'flex';
+        // Reset to first tab on open
+        switchDashTab('dashProfileTab', document.querySelector('.dash-nav-item'), 'Edit Profile');
         if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'flex'; document.querySelector('.dash-main').style.display = 'none'; }
     }
-
-    function switchDashTab(tabId, eventElem, title) {
-        document.querySelectorAll('.dash-inner-content').forEach(tab => tab.style.display = 'none'); document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(tabId).style.display = 'block'; eventElem.classList.add('active'); if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
-        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'none'; document.querySelector('.dash-main').style.display = 'block'; }
-    }
-
-    function closeDashMainMobile() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
 
     window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper') && !e.target.closest('.notif-wrapper') && !e.target.closest('.ai-chat-box') && !e.target.closest('.cart-sidebar')) {
@@ -592,16 +687,7 @@
         if(e.target == document.getElementById('mobileMoreModal')) document.getElementById('mobileMoreModal').style.display = 'none';
     };
 
-    // 4. SLIDER LOGIC
-    let currentSlide = 0;
-    function moveSlide(direction) {
-        const track = document.getElementById('sliderTrack'); const totalSlides = document.querySelectorAll('.slide').length;
-        currentSlide += direction; if(currentSlide < 0) currentSlide = totalSlides - 1; if(currentSlide >= totalSlides) currentSlide = 0;
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-    setInterval(() => moveSlide(1), 5000);
-
-    // 5. FETCH & FILTER PRODUCTS
+    // 5. DATA FETCHING (PRODUCTS)
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
@@ -622,16 +708,18 @@
             const upiPrice = price > 100 ? price - 50 : price; const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
             grid.innerHTML += `
                 <a href="product.html?id=${p.id}" class="product-card">
-                    <div class="image-wrapper"><img src="${img}" alt="${title}"><div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div></div>
+                    <div class="image-wrapper"><img src="${img}"><div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div></div>
                     <div class="product-brand">${title}</div>
                     <div class="price-row-home"><span class="current-price-home">₹${price}</span><span class="mrp-price-home">₹${mrp}</span></div>
-                    <div class="upi-offer-home">₹${upiPrice} with UPI offer</div>
+                    <div class="upi-offer-home">₹${upiPrice} <span class="translate" data-en="with UPI offer" data-hi="UPI ऑफर के साथ">with UPI offer</span></div>
                 </a>`;
         });
+        
+        // Re-apply translations if language is already Hindi
+        if(window.currentLanguage === 'hi') { setLanguageUI('hi', document.querySelector('.lang-option.active')); }
     }
 
     window.filterCategory = function(categoryName) {
-        // Active logic for bottom nav
         document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
         if(document.querySelector('.bottom-nav-item:nth-child(2)')) document.querySelector('.bottom-nav-item:nth-child(2)').classList.add('active');
 
