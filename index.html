@@ -53,19 +53,17 @@
         .current-price-home { font-size: 15px; font-weight: 800; color: #1e293b; }
         .upi-offer-home { font-size: 11px; color: #2563eb; font-weight: 600; margin-top: 4px; padding: 0 10px; }
 
-        /* SIDEBARS (Notifications & Cart) */
+        /* SIDEBARS (Notifications) */
         .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
         .cart-sidebar.active { right: 0; }
         .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold; font-size: 18px;}
         .cart-items-wrapper { flex: 1; overflow-y: auto; padding-right: 5px;}
-        
-        /* NOTIFICATION CARDS */
         .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
         .notif-card h4 { margin: 0 0 5px 0; font-size: 14px; color: #1e293b; }
         .notif-card p { margin: 0; font-size: 12px; color: #475569; line-height: 1.4; }
         .notif-time { font-size: 10px; color: #94a3b8; margin-top: 8px; display: block; }
 
-        /* 🔥 AI CHATBOX CSS 🔥 */
+        /* AI CHATBOX CSS */
         .ai-chat-box { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 10002; transform: translateY(150%) scale(0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none;}
         .ai-chat-box.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
         .chat-header { background: linear-gradient(135deg, #1e293b, #334155); color: #fff; padding: 15px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
@@ -75,9 +73,7 @@
         .user-msg { background: #ff3e6c; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 2px 8px rgba(255,62,108,0.2);}
         .chat-footer { padding: 12px; display: flex; gap: 10px; border-top: 1px solid #e2e8f0; background:#fff; border-radius: 0 0 12px 12px;}
         .chat-footer input { flex: 1; padding: 10px 15px; border: 1px solid #cbd5e1; border-radius: 20px; outline: none; font-size: 13px; background: #f1f5f9; transition: 0.2s;}
-        .chat-footer input:focus { border-color: #ff3e6c; background: #fff;}
         .chat-footer button { background: #1e293b; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;}
-        .chat-footer button:hover { background: #ff3e6c; transform: scale(1.1);}
 
         /* MODALS CSS */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -86,56 +82,67 @@
         
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; align-items:center; justify-content:center;}
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; transition:0.2s;}
-        .close-btn:hover { color: #ff3e6c; transform: scale(1.2);}
         
         .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 12px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
         .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; font-weight:bold;}
         .auth-body { padding: 25px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline:none; transition:0.2s;}
-        .auth-input:focus { border-color: #ff3e6c;}
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline:none;}
         .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition:0.3s;}
-        .auth-submit-btn:hover { background: #0f172a; }
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
-        .google-btn:hover { background: #f8f9fa; border-color: #ccc;}
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
 
-        /* DASHBOARD */
-        .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 80vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
-        .dash-sidebar { width: 320px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
-        .dash-group-title { padding: 20px 20px 8px 20px; font-size: 15px; font-weight: 800; color: #212121; background: #fff; border-bottom: 1px solid transparent; }
-        .dash-nav-item { padding: 16px 20px; display: flex; align-items: center; gap: 15px; color: #444; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
-        .dash-nav-item:hover { background: #f9f9f9; color: #ff3e6c; }
-        .dash-nav-item.active { background: #fff0f3; color: #ff3e6c; font-weight: 600; border-left: 4px solid #ff3e6c;}
-        .dash-nav-item i { width: 22px; text-align: center; font-size: 18px; color:#ff3e6c;}
+        /* 🔥 MEGA DASHBOARD (FLIPKART STYLE) 🔥 */
+        .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 85vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
+        .dash-sidebar { width: 340px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
+        
+        .dash-user-card { padding: 20px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 15px; }
+        .dash-avatar { width: 50px; height: 50px; background: #2874f0; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
+        
+        .dash-group-title { padding: 20px 20px 8px 20px; font-size: 13px; font-weight: 800; color: #878787; background: #fff; text-transform: uppercase; }
+        .dash-nav-item { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; color: #212121; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
+        .dash-nav-item:hover { background: #f9f9f9; color: #2874f0; }
+        .dash-nav-item.active { background: #f5faff; color: #2874f0; font-weight: 600; border-left: 4px solid #2874f0;}
+        .item-left { display: flex; align-items: center; gap: 15px; }
+        .item-left i { width: 22px; text-align: center; font-size: 18px; color: #2874f0; }
+        
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
-        .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
-        .dash-inner-content { padding: 20px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
+        .dash-mobile-header { display: none; background: #2874f0; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
+        
+        .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
         .dash-header-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
-        .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
+        
+        .logout-full-btn { width: 100%; background: #fff; color: #2874f0; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
+        .logout-full-btn:hover { background: #f5faff; }
 
         /* FOOTER */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; }
         .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
-        .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; position: relative; padding-bottom: 3px; }
+        .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px;}
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
-        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: 0.3s; text-decoration: none;}
-        .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px); }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; text-decoration: none;}
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
-        /* 🔥 FIX FOR MOBILE HEADER LAYOUT 🔥 */
+        /* 🔥 MOBILE BOTTOM NAVIGATION APP BAR 🔥 */
+        .bottom-nav { display: none; }
+
         @media (max-width: 768px) {
-            header { 
-                padding: 10px; 
-                gap: 8px; 
-                justify-content: flex-end; /* Align right side items */
-            }
+            body { padding-bottom: 70px; }
+            
+            /* HEADER ADJUSTMENTS FOR MOBILE */
+            header { padding: 10px; justify-content: space-between; gap: 10px; }
             .logo-box { order: 1; margin-right: auto; font-size: 16px; }
-            .menu-wrapper { display: block; order: 2; font-size: 11px; margin-right: 5px; } /* Brought back from display: none */
-            .notif-wrapper { order: 3; font-size: 18px; margin-right: 5px; }
-            .cart-btn { order: 4; padding: 6px 10px; font-size: 11px; }
-            .search-bar { order: 5; width: 100%; margin: 5px 0 0 0; flex: 1 1 100%; box-sizing: border-box; } /* Forces next row */
+            .notif-wrapper { order: 2; margin-right: 15px; font-size: 20px; }
+            .cart-btn { order: 3; padding: 6px 10px; font-size: 12px; }
+            .search-bar { order: 4; width: 100%; flex: 1 1 100%; margin: 5px 0 0 0; box-sizing: border-box; } 
+            .menu-wrapper { display: none; } 
+
+            /* SHOW BOTTOM NAV */
+            .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
+            .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
+            .bottom-nav-item i { font-size: 20px; }
+            .bottom-nav-item.active { color: #2874f0; }
 
             .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
@@ -143,18 +150,19 @@
             .slide-content h2 { font-size: 20px; margin-bottom: 5px; }
             .slide-content p { font-size: 12px; margin-bottom: 10px; }
             .slide-content button { padding: 8px 15px; font-size: 12px; }
+            
+            /* DASHBOARD MOBILE FIXES */
             .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
             .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
             .dash-mobile-header { display: flex; } 
             .dash-inner-content { margin: 10px; border-radius: 6px; }
-            .ai-chat-box { width: 90%; right: 5%; bottom: 10px; }
+            .ai-chat-box { width: 90%; right: 5%; bottom: 80px; } 
         }
     </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
@@ -167,7 +175,7 @@
         <span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
-            <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Profile</div>
+            <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-table-columns" style="color:#2874f0;"></i> Dashboard</div>
             <div id="logoutOpt" class="drop-item" style="display:none;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
         </div>
     </div>
@@ -189,7 +197,37 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
 </header>
 
-<!-- NOTIFICATIONS SIDEBAR -->
+<div class="bottom-nav">
+    <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </div>
+    <div class="bottom-nav-item" onclick="document.querySelector('.nav-icons').scrollIntoView({behavior:'smooth'});">
+        <i class="fa-solid fa-border-all"></i>
+        <span>Categories</span>
+    </div>
+    <div class="bottom-nav-item" onclick="openDashboard()">
+        <i class="fa-regular fa-user"></i>
+        <span>Account</span>
+    </div>
+    <div class="bottom-nav-item" onclick="document.getElementById('mobileMoreModal').style.display='flex'">
+        <i class="fa-solid fa-ellipsis"></i>
+        <span>More</span>
+    </div>
+</div>
+
+<div id="mobileMoreModal" class="modal" onclick="if(event.target==this) this.style.display='none'">
+    <div class="auth-content" style="margin: auto; margin-bottom: 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; animation: slideUpMobile 0.3s;">
+        <div class="auth-header" style="background:#1e293b; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; color:white; font-size:16px;">More Options</h3>
+            <i class="fa-solid fa-xmark" style="color:white; font-size:20px; cursor:pointer;" onclick="document.getElementById('mobileMoreModal').style.display='none'"></i>
+        </div>
+        <div class="dash-nav-item" onclick="toggleChat(); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> 24x7 Customer Care</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at ads@zippykart.co.in to grow your business.', 'fa-bullhorn', '#ff9800'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> Advertise</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Download App', 'The ZippyKart mobile app is launching soon on iOS and Android! Stay tuned for exclusive app-only drops.', 'fa-mobile-screen-button', '#4caf50'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-download" style="color:#4caf50;"></i> Download App</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i></div>
+    </div>
+</div>
+
 <div class="cart-sidebar" id="notifSidebar">
     <div class="cart-title-box">
         <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> Notifications</span>
@@ -198,7 +236,7 @@
     <div class="cart-items-wrapper">
         <div class="notif-card">
             <h4>🔥 Mega Summer Sale is Live!</h4>
-            <p>Get flat 50% OFF on all premium streetwear and sneakers. Offer valid till midnight.</p>
+            <p>Get flat 50% OFF on all premium streetwear and sneakers.</p>
             <span class="notif-time">2 hours ago</span>
         </div>
         <div class="notif-card" style="border-left-color: #2196f3;">
@@ -206,15 +244,9 @@
             <p>Your previous order 'Oversized Beige T-Shirt' has been delivered successfully.</p>
             <span class="notif-time">1 day ago</span>
         </div>
-        <div class="notif-card" style="border-left-color: #4caf50;">
-            <h4>✨ Zippy Coins Credited</h4>
-            <p>Congratulations! 150 Zippy Coins have been added to your wallet.</p>
-            <span class="notif-time">3 days ago</span>
-        </div>
     </div>
 </div>
 
-<!-- AI CHAT AGENT BOX -->
 <div class="ai-chat-box" id="aiChatBox">
     <div class="chat-header">
         <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
@@ -229,7 +261,6 @@
     </div>
 </div>
 
-<!-- GENERIC INFO MODAL (For Advertise & App Download) -->
 <div id="infoModal" class="modal">
     <div class="auth-content" style="max-width:450px;">
         <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
@@ -237,12 +268,11 @@
         <div class="auth-body" style="text-align:center; padding: 40px 20px;">
             <i id="infoModalIcon" class="fa-solid fa-info-circle" style="font-size:50px; margin-bottom:20px; color:#1e293b;"></i>
             <p id="infoModalText" style="font-size:15px; color:#475569; line-height:1.6;"></p>
-            <button class="auth-submit-btn" style="margin-top:25px;" onclick="document.getElementById('infoModal').style.display='none'">Got it!</button>
+            <button class="auth-submit-btn" style="margin-top:25px; background:#1e293b;" onclick="document.getElementById('infoModal').style.display='none'">Got it!</button>
         </div>
     </div>
 </div>
 
-<!-- NAV CATEGORIES -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
@@ -255,7 +285,6 @@
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
 </div>
 
-<!-- BANNER SLIDER -->
 <div class="banner-slider">
     <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
     <div class="slides" id="sliderTrack">
@@ -277,14 +306,12 @@
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
-<!-- DYNAMIC PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -318,7 +345,6 @@
     </div>
 </footer>
 
-<!-- AUTHENTICATION MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -335,41 +361,114 @@
     </div>
 </div>
 
-<!-- DASHBOARD MODAL -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
+        
         <div class="dash-sidebar">
-            <div class="dash-group-title">My Account</div>
-            <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Profile Info')"><i class="fa-solid fa-user"></i> Profile Info</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')"><i class="fa-solid fa-box-open"></i> My Orders</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Addresses')"><i class="fa-solid fa-location-dot"></i> Addresses</div>
-            <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> Logout</button>
+            <div class="dash-user-card">
+                <div class="dash-avatar" id="dashAvatarInitial">Z</div>
+                <div>
+                    <div style="font-size:12px; color:#878787; font-weight:600;">Hello,</div>
+                    <div style="font-size:16px; font-weight:800; color:#212121;" id="dashDisplayName">User</div>
+                </div>
+            </div>
+
+            <div class="dash-group-title">Account Settings</div>
+            <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Edit Profile')">
+                <div class="item-left"><i class="fa-solid fa-user"></i> Edit Profile</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')">
+                <div class="item-left"><i class="fa-solid fa-box-open"></i> My Orders</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Saved Addresses')">
+                <div class="item-left"><i class="fa-solid fa-location-dot"></i> Saved Addresses</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashCardsTab', this, 'Saved Cards')">
+                <div class="item-left"><i class="fa-solid fa-wallet"></i> Saved Cards</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashLangTab', this, 'Select Language')">
+                <div class="item-left"><i class="fa-solid fa-language"></i> Select Language</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashNotifTab', this, 'Notification Settings')">
+                <div class="item-left"><i class="fa-regular fa-bell"></i> Notification Settings</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title">My Activity</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashReviewsTab', this, 'My Reviews')">
+                <div class="item-left"><i class="fa-solid fa-pen-to-square"></i> Reviews</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashQATab', this, 'Questions & Answers')">
+                <div class="item-left"><i class="fa-solid fa-comments"></i> Questions & Answers</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title">Earn with ZippyKart</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashSellTab', this, 'Sell on ZippyKart')">
+                <div class="item-left"><i class="fa-solid fa-store"></i> Sell on ZippyKart</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title">Feedback & Information</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashTermsTab', this, 'Terms, Policies and Licenses')">
+                <div class="item-left"><i class="fa-solid fa-file-contract"></i> Terms & Policies</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashFAQTab', this, 'Browse FAQs')">
+                <div class="item-left"><i class="fa-solid fa-circle-question"></i> Browse FAQs</div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> Log Out</button>
         </div>
+
         <div class="dash-main">
             <div class="dash-mobile-header">
                 <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
-                <span id="dashHeaderDynamicTitle">Profile Info</span>
+                <span id="dashHeaderDynamicTitle">Edit Profile</span>
             </div>
+            
             <div class="dash-inner-content" id="dashProfileTab">
                 <h2 class="dash-header-title">Personal Information</h2>
                 <input type="text" class="auth-input" placeholder="Full Name" id="dashNameInput">
                 <input type="email" class="auth-input" placeholder="Email Address" id="dashEmailInput" readonly>
-                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px;">Save Info</button>
+                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px; background:#2874f0;">Save Info</button>
             </div>
+            
             <div class="dash-inner-content" id="dashOrdersTab" style="display:none;">
                 <h2 class="dash-header-title">My Orders</h2>
                 <div style="text-align: center; color: #888; padding: 40px 0;"><i class="fa-solid fa-box-open" style="font-size:40px; margin-bottom:10px;"></i><br>No recent orders found.</div>
             </div>
+            
             <div class="dash-inner-content" id="dashAddressTab" style="display:none;">
                 <h2 class="dash-header-title">Manage Addresses</h2>
-                <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
+                <button style="border:1px dashed #2874f0; color:#2874f0; background:#f5faff; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
+            </div>
+
+            <div class="dash-inner-content" id="dashCardsTab" style="display:none;">
+                <h2 class="dash-header-title">Saved Cards</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-wallet" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Saved Cards</h3><p style="color:#777;">Save your credit/debit cards during checkout for faster payments.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashLangTab" style="display:none;">
+                <h2 class="dash-header-title">Select Language</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-language" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Coming Soon</h3><p style="color:#777;">Hindi, Tamil, Telugu options are coming soon.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashNotifTab" style="display:none;">
+                <h2 class="dash-header-title">Notification Settings</h2><div style="text-align:center; padding:40px;"><i class="fa-regular fa-bell" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>All Notifications Active</h3><p style="color:#777;">You are receiving SMS, Email, and WhatsApp updates.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashReviewsTab" style="display:none;">
+                <h2 class="dash-header-title">My Reviews</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-pen-to-square" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Reviews Yet</h3><p style="color:#777;">You haven't reviewed any products yet.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashQATab" style="display:none;">
+                <h2 class="dash-header-title">Questions & Answers</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-comments" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>No Questions Asked</h3><p style="color:#777;">Ask questions on product pages to get answers from verified buyers.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashSellTab" style="display:none;">
+                <h2 class="dash-header-title">Sell on ZippyKart</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-store" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Become a Seller</h3><p style="color:#777;">Register as a seller and reach millions of customers.</p><button style="margin-top:15px; padding:10px 20px; background:#2874f0; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Start Selling</button></div>
+            </div>
+            <div class="dash-inner-content" id="dashTermsTab" style="display:none;">
+                <h2 class="dash-header-title">Terms & Policies</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-file-contract" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>ZippyKart Policies</h3><p style="color:#777;">Read our complete terms of service and privacy policy.</p></div>
+            </div>
+            <div class="dash-inner-content" id="dashFAQTab" style="display:none;">
+                <h2 class="dash-header-title">Browse FAQs</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-circle-question" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3>Help Center</h3><p style="color:#777;">Find answers to frequently asked questions about orders, returns, and more.</p></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- FIREBASE SCRIPTS & LOGIC -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -381,7 +480,6 @@
     window.allFetchedProducts = []; window.currentUser = null;
 
     // 🔥 NEW ANIMATED FEATURES LOGIC 🔥
-    
     function toggleNotifications() {
         const panel = document.getElementById('notifSidebar');
         panel.classList.toggle('active');
@@ -396,15 +494,11 @@
     function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
 
     function sendChatMessage() {
-        const input = document.getElementById('chatInput');
-        const text = input.value.trim();
+        const input = document.getElementById('chatInput'); const text = input.value.trim();
         if(!text) return;
-        
         const chatBody = document.getElementById('chatBody');
         chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`;
-        input.value = "";
-        chatBody.scrollTop = chatBody.scrollHeight;
-
+        input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
         setTimeout(() => {
             chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly. You can also track your orders from the Dashboard.</div>`;
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -415,8 +509,7 @@
         document.getElementById('infoModalTitle').innerText = title;
         document.getElementById('infoModalText').innerHTML = text;
         const icon = document.getElementById('infoModalIcon');
-        icon.className = `fa-solid ${iconClass}`;
-        icon.style.color = iconColor;
+        icon.className = `fa-solid ${iconClass}`; icon.style.color = iconColor;
         document.getElementById('infoModal').style.display = 'flex';
     }
 
@@ -457,6 +550,10 @@
             document.getElementById('authOpt').style.display = 'none';
             document.getElementById('profileOpt').style.display = 'flex';
             document.getElementById('logoutOpt').style.display = 'flex';
+            
+            // Set Dashboard Name/Initial
+            document.getElementById('dashDisplayName').innerText = user.displayName;
+            document.getElementById('dashAvatarInitial').innerText = user.displayName.charAt(0).toUpperCase();
         }
     });
 
@@ -468,9 +565,10 @@
     }
 
     function openAuthModal() { document.getElementById('loginDrop').style.display = 'none'; document.getElementById('authModal').style.display = 'flex'; }
+    
     function openDashboard() {
         document.getElementById('loginDrop').style.display = 'none'; 
-        if(!window.currentUser) { alert("Please login first!"); openAuthModal(); return; }
+        if(!window.currentUser) { openAuthModal(); return; }
         document.getElementById('dashNameInput').value = window.currentUser.displayName || ""; document.getElementById('dashEmailInput').value = window.currentUser.email || "";
         document.getElementById('dashboardModal').style.display = 'flex';
         if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'flex'; document.querySelector('.dash-main').style.display = 'none'; }
@@ -491,6 +589,7 @@
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
         if(e.target == document.getElementById('infoModal')) document.getElementById('infoModal').style.display = 'none';
+        if(e.target == document.getElementById('mobileMoreModal')) document.getElementById('mobileMoreModal').style.display = 'none';
     };
 
     // 4. SLIDER LOGIC
@@ -532,6 +631,10 @@
     }
 
     window.filterCategory = function(categoryName) {
+        // Active logic for bottom nav
+        document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
+        if(document.querySelector('.bottom-nav-item:nth-child(2)')) document.querySelector('.bottom-nav-item:nth-child(2)').classList.add('active');
+
         if(categoryName === 'All') { renderProducts(window.allFetchedProducts); } 
         else { const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()); renderProducts(filtered); }
         document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
