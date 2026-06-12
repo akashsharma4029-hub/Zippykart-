@@ -39,7 +39,7 @@
         .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; }
         .slide-btn.prev { left: 15px; } .slide-btn.next { right: 15px; }
         
-        /* 🔥 FLIPKART STYLE PRODUCT GRID 🔥 */
+        /* 🔥 PRODUCT GRID (FLIPKART STYLE) 🔥 */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%; min-height: 400px; scroll-margin-top: 80px; }
         .product-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: #fff; border-radius: 8px; padding-bottom: 10px; border: 1px solid #eee; transition: box-shadow 0.3s; }
         .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -58,7 +58,7 @@
         .cart-sidebar.active { right: 0; }
         .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold; font-size: 18px;}
         .cart-items-wrapper { flex: 1; overflow-y: auto; padding-right: 5px;}
-        .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; }
         
         .ai-chat-box { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 10002; transform: translateY(150%) scale(0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none;}
         .ai-chat-box.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
@@ -91,6 +91,7 @@
         /* 🔥 MEGA DASHBOARD (PINK THEME) 🔥 */
         .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 85vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
         .dash-sidebar { width: 340px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
+        .dash-sidebar::-webkit-scrollbar { width: 4px; } .dash-sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
         
         .dash-user-card { padding: 20px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 15px; }
         .dash-avatar { width: 50px; height: 50px; background: #ff3e6c; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
@@ -105,16 +106,16 @@
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
         .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
         
-        /* Dashboard Tabs */
         .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); min-height: 80%; display:none;}
         .slide-in-active { animation: slideInRight 0.4s ease forwards; display:block !important;}
         .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
         
         .order-card { border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s; display:flex; justify-content:space-between; align-items:center;}
-        .bank-card { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+        .bank-card { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); position:relative; overflow:hidden;}
         
         /* Language Options UI */
         .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
+        .lang-option:hover { border-color: #ff3e6c; }
         .lang-option.active { border-color:#ff3e6c; background:#fff0f3; box-shadow: 0 2px 8px rgba(255,62,108,0.15);}
         .lang-radio { width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center; transition:0.2s;}
         .lang-option.active .lang-radio { border-color:#ff3e6c; background:#ff3e6c; }
@@ -123,64 +124,25 @@
         .lang-text small { display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px; }
 
         .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
+        .logout-full-btn:hover { background: #fff0f3; }
 
-        <!-- 🔥 UPDATED FOOTER SECTION WITH ANIMATION & ACTIVE LINKS 🔥 -->
-<footer class="main-footer">
-    <div class="footer-content" id="footerContent">
-        <div class="footer-col">
-            <h3 class="translate" data-en="ZippyKart" data-hi="ज़िप्पीकार्ट">ZippyKart</h3>
-            <p class="translate" data-en="Premium destination for the latest trends and tech. Quality products to your doorstep." data-hi="नवीनतम रुझानों और तकनीक के लिए प्रीमियम गंतव्य।">Premium destination for the latest trends and tech. Quality products to your doorstep.</p>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
-            <a href="#" class="translate" data-en="Men's Fashion" data-hi="पुरुषों का फैशन">Men's Fashion</a><br>
-            <a href="#" class="translate" data-en="Gadgets & Tech" data-hi="गैजेट्स और टेक">Gadgets & Tech</a><br>
-            <a href="#" class="translate" data-en="AI Support" data-hi="AI सहायता">AI Support</a>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Policies" data-hi="नीतियां">Policies</h3>
-            <a href="#" class="translate" data-en="Privacy Policy" data-hi="गोपनीयता नीति">Privacy Policy</a><br>
-            <a href="#" class="translate" data-en="Terms of Service" data-hi="सेवा की शर्तें">Terms of Service</a><br>
-            <a href="#" class="translate" data-en="Return & Refund" data-hi="वापसी और धनवापसी">Return & Refund</a>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Get In Touch" data-hi="संपर्क करें">Get In Touch</h3>
-            <p class="translate" data-en="ZippyKart<br>Rajendra Place, New Delhi" data-hi="ज़िप्पीकार्ट<br>राजेंद्र प्लेस, नई दिल्ली">ZippyKart<br>Rajendra Place, New Delhi</p>
-            <div class="social-icons">
-                <!-- 🔥 ACTIVE SOCIAL LINKS 🔥 -->
-                <a href="https://instagram.com/zippykart" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://facebook.com/zippykart" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://youtube.com/zippykart" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom translate" data-en="&copy; 2026 ZippyKart. All Rights Reserved." data-hi="&copy; 2026 ज़िप्पीकार्ट. सभी अधिकार सुरक्षित।">
-        &copy; 2026 ZippyKart. All Rights Reserved.
-    </div>
-</footer>
+        /* 🔥 ANIMATED FOOTER 🔥 */
+        .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .footer-col.show-anim { opacity: 1; transform: translateY(0); }
+        .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; }
+        .footer-col p, .footer-col a { font-size: 13px; color: #bbb; text-decoration: none; margin-bottom: 12px; display:block; transition:0.3s;}
+        .footer-col a:hover { color: #ff3e6c; transform: translateX(5px); }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; text-decoration: none; transition:0.3s;}
+        .social-icons a:hover { background: #ff3e6c; transform: translateY(-5px); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
-<style>
-    /* Footer Animation CSS */
-    .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .footer-col.show-anim { opacity: 1; transform: translateY(0); }
-</style>
-
-<script>
-    // Footer Scroll Animation Trigger
-    window.addEventListener('scroll', () => {
-        const footer = document.getElementById('footerContent');
-        const footerPos = footer.getBoundingClientRect().top;
-        const screenPos = window.innerHeight / 1.3;
-        if(footerPos < screenPos) {
-            document.querySelectorAll('.footer-col').forEach((col, index) => {
-                setTimeout(() => { col.classList.add('show-anim'); }, index * 200);
-            });
-        }
-    });
-</script>
-
+        /* BOTTOM NAV */
         .bottom-nav { display: none; }
 
+        /* MOBILE FIXES */
         @media (max-width: 768px) {
             body { padding-bottom: 70px; }
             header { padding: 10px; justify-content: space-between; gap: 10px; }
@@ -248,7 +210,7 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span class="translate" data-en="Cart" data-hi="कार्ट">Cart</span></button>
 </header>
 
-<!-- MOBILE BOTTOM NAVIGATION APP BAR -->
+<!-- MOBILE BOTTOM NAVIGATION -->
 <div class="bottom-nav">
     <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-house"></i>
@@ -268,7 +230,7 @@
     </div>
 </div>
 
-<!-- MOBILE 'MORE' BOTTOM SHEET MODAL -->
+<!-- MOBILE 'MORE' MODAL -->
 <div id="mobileMoreModal" class="modal" onclick="if(event.target==this) this.style.display='none'">
     <div class="auth-content" style="margin: auto; margin-bottom: 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; animation: slideUpMobile 0.3s;">
         <div class="auth-header" style="background:#1e293b; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
@@ -281,7 +243,7 @@
     </div>
 </div>
 
-<!-- NOTIFICATIONS SIDEBAR -->
+<!-- NOTIFICATIONS -->
 <div class="cart-sidebar" id="notifSidebar">
     <div class="cart-title-box">
         <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> <span class="translate" data-en="Notifications" data-hi="सूचनाएं">Notifications</span></span>
@@ -299,7 +261,7 @@
     </div>
 </div>
 
-<!-- AI CHAT AGENT BOX -->
+<!-- AI CHAT AGENT -->
 <div class="ai-chat-box" id="aiChatBox">
     <div class="chat-header">
         <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
@@ -314,7 +276,7 @@
     </div>
 </div>
 
-<!-- 🔥 RESTORED GENERIC INFO MODAL (For Advertise & App Download) 🔥 -->
+<!-- INFO MODAL -->
 <div id="infoModal" class="modal">
     <div class="auth-content" style="max-width:450px;">
         <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
@@ -327,7 +289,7 @@
     </div>
 </div>
 
-<!-- NAV CATEGORIES -->
+<!-- CATEGORIES -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i><span class="translate" data-en="All" data-hi="सभी">All</span></div>
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i><span class="translate" data-en="Men" data-hi="पुरुष">Men</span></div>
@@ -340,7 +302,7 @@
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i><span class="translate" data-en="Tech" data-hi="इलेक्ट्रॉनिक्स">Tech</span></div>
 </div>
 
-<!-- BANNER SLIDER -->
+<!-- SLIDER -->
 <div class="banner-slider">
     <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
     <div class="slides" id="sliderTrack">
@@ -355,48 +317,14 @@
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
-<!-- DYNAMIC PRODUCT GRID -->
+<!-- PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> <span class="translate" data-en="Loading Products..." data-hi="उत्पाद लोड हो रहे हैं...">Loading Products...</span>
     </div>
 </div>
 
-<!-- 🔥 RESTORED ZIPPYKART FOOTER 🔥 -->
-<footer class="main-footer">
-    <div class="footer-content">
-        <div class="footer-col">
-            <h3 class="translate" data-en="ZippyKart" data-hi="ज़िप्पीकार्ट">ZippyKart</h3>
-            <p class="translate" data-en="Premium destination for the latest trends and tech. Quality products to your doorstep." data-hi="नवीनतम रुझानों और तकनीक के लिए प्रीमियम गंतव्य।">Premium destination for the latest trends and tech. Quality products to your doorstep.</p>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
-            <a href="#" class="translate" data-en="Men's Fashion" data-hi="पुरुषों का फैशन">Men's Fashion</a><br>
-            <a href="#" class="translate" data-en="Gadgets & Tech" data-hi="गैजेट्स और टेक">Gadgets & Tech</a><br>
-            <a href="#" class="translate" data-en="AI Support" data-hi="AI सहायता">AI Support</a>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Policies" data-hi="नीतियां">Policies</h3>
-            <a href="#" class="translate" data-en="Privacy Policy" data-hi="गोपनीयता नीति">Privacy Policy</a><br>
-            <a href="#" class="translate" data-en="Terms of Service" data-hi="सेवा की शर्तें">Terms of Service</a><br>
-            <a href="#" class="translate" data-en="Return & Refund" data-hi="वापसी और धनवापसी">Return & Refund</a>
-        </div>
-        <div class="footer-col">
-            <h3 class="translate" data-en="Get In Touch" data-hi="संपर्क करें">Get In Touch</h3>
-            <p class="translate" data-en="ZippyKart<br>Rajendra Place, New Delhi" data-hi="ज़िप्पीकार्ट<br>राजेंद्र प्लेस, नई दिल्ली">ZippyKart<br>Rajendra Place, New Delhi</p>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom translate" data-en="&copy; 2026 ZippyKart. All Rights Reserved." data-hi="&copy; 2026 ज़िप्पीकार्ट. सभी अधिकार सुरक्षित।">
-        &copy; 2026 ZippyKart. All Rights Reserved.
-    </div>
-</footer>
-
-<!-- AUTHENTICATION MODAL -->
+<!-- AUTH MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -413,7 +341,7 @@
     </div>
 </div>
 
-<!-- MEGA DASHBOARD MODAL -->
+<!-- 🔥 MEGA DASHBOARD (PINK) 🔥 -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
@@ -512,7 +440,7 @@
 
             <div class="dash-inner-content" id="dashCardsTab">
                 <h2 class="dash-header-title translate" data-en="Saved Cards" data-hi="सहेजे गए कार्ड">Saved Cards</h2>
-                <div class="bank-card">
+                <div class="bank-card" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px;">
                     <div style="display:flex; justify-content:space-between; margin-bottom: 25px;"><i class="fa-brands fa-cc-visa" style="font-size:28px;"></i> <span style="font-weight:800; font-style:italic;">HDFC BANK</span></div>
                     <div style="letter-spacing: 3px; font-size: 18px; margin-bottom: 20px; font-family:monospace;">**** **** **** 4321</div>
                     <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8; text-transform:uppercase;">
@@ -523,13 +451,13 @@
 
             <div class="dash-inner-content" id="dashLangTab">
                 <h2 class="dash-header-title translate" data-en="Select Language" data-hi="भाषा चुनें">Select Language</h2>
-                <div class="lang-option active" onclick="setLanguageUI('en', this)">
-                    <div class="lang-radio"></div>
-                    <div class="lang-text">English<small>English</small></div>
+                <div class="lang-option active" onclick="setLanguageUI('en', this)" style="display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer;">
+                    <div class="lang-radio" style="width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center;"></div>
+                    <div class="lang-text" style="flex:1; font-weight:700; font-size:16px;">English<small style="display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px;">English</small></div>
                 </div>
-                <div class="lang-option" onclick="setLanguageUI('hi', this)">
-                    <div class="lang-radio"></div>
-                    <div class="lang-text">हिंदी<small>Hindi</small></div>
+                <div class="lang-option" onclick="setLanguageUI('hi', this)" style="display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer;">
+                    <div class="lang-radio" style="width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center;"></div>
+                    <div class="lang-text" style="flex:1; font-weight:700; font-size:16px;">हिंदी<small style="display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px;">Hindi</small></div>
                 </div>
             </div>
 
@@ -568,20 +496,57 @@
     </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<!-- 🔥 ANIMATED FOOTER 🔥 -->
+<footer class="main-footer">
+    <div class="footer-content" id="footerContent">
+        <div class="footer-col">
+            <h3 class="translate" data-en="ZippyKart" data-hi="ज़िप्पीकार्ट">ZippyKart</h3>
+            <p class="translate" data-en="Premium destination for the latest trends and tech. Quality products to your doorstep." data-hi="नवीनतम रुझानों और तकनीक के लिए प्रीमियम गंतव्य। गुणवत्ता वाले उत्पाद आपके दरवाजे पर।">Premium destination for the latest trends and tech. Quality products to your doorstep.</p>
+        </div>
+        <div class="footer-col">
+            <h3 class="translate" data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
+            <a href="#" class="translate" data-en="Men's Fashion" data-hi="पुरुषों का फैशन">Men's Fashion</a>
+            <a href="#" class="translate" data-en="Gadgets & Tech" data-hi="गैजेट्स और टेक">Gadgets & Tech</a>
+            <a href="#" class="translate" data-en="AI Support" data-hi="AI सहायता">AI Support</a>
+        </div>
+        <div class="footer-col">
+            <h3 class="translate" data-en="Policies" data-hi="नीतियां">Policies</h3>
+            <a href="#" class="translate" data-en="Privacy Policy" data-hi="गोपनीयता नीति">Privacy Policy</a>
+            <a href="#" class="translate" data-en="Terms of Service" data-hi="सेवा की शर्तें">Terms of Service</a>
+            <a href="#" class="translate" data-en="Return & Refund" data-hi="वापसी और धनवापसी">Return & Refund</a>
+        </div>
+        <div class="footer-col">
+            <h3 class="translate" data-en="Get In Touch" data-hi="संपर्क करें">Get In Touch</h3>
+            <p class="translate" data-en="ZippyKart<br>Rajendra Place, New Delhi" data-hi="ज़िप्पीकार्ट<br>राजेंद्र प्लेस, नई दिल्ली">ZippyKart<br>Rajendra Place, New Delhi</p>
+            <div class="social-icons">
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom translate" data-en="&copy; 2026 ZippyKart. All Rights Reserved." data-hi="&copy; 2026 ज़िप्पीकार्ट. सभी अधिकार सुरक्षित।">
+        &copy; 2026 ZippyKart. All Rights Reserved.
+    </div>
+</footer>
+
 <script>
+    // FIREBASE INITIALIZATION
     const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1", storageBucket: "zippykart-production-157e1.firebasestorage.app", messagingSenderId: "803651431969", appId: "1:803651431969:web:7432f351ec9f5f0ec23d60" };
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
     window.allFetchedProducts = []; window.currentUser = null;
 
-    // 🔥 LANGUAGE TRANSLATION LOGIC 🔥
+    // LANGUAGE TRANSLATION LOGIC
     window.currentLanguage = 'en';
     function setLanguageUI(langCode, element) {
-        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.lang-option').forEach(el => {
+            el.classList.remove('active');
+            el.querySelector('.lang-radio').style.background = 'transparent';
+        });
         element.classList.add('active');
+        element.querySelector('.lang-radio').style.background = '#ff3e6c';
+        
         window.currentLanguage = langCode;
 
         document.querySelectorAll('.translate').forEach(el => {
@@ -601,6 +566,7 @@
         }
     }
 
+    // DASHBOARD TABS
     function switchDashTab(tabId, eventElem, fallbackTitle) {
         document.querySelectorAll('.dash-inner-content').forEach(tab => { tab.style.display = 'none'; tab.classList.remove('slide-in-active'); });
         document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
@@ -620,6 +586,7 @@
 
     function closeDashMainMobile() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
 
+    // NOTIFICATIONS & CHAT
     function toggleNotifications() {
         const panel = document.getElementById('notifSidebar'); panel.classList.toggle('active');
         if(panel.classList.contains('active')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
@@ -643,6 +610,7 @@
         document.getElementById('infoModal').style.display = 'flex';
     }
 
+    // AUTHENTICATION
     window.googleSignIn = function() {
         auth.signInWithPopup(googleProvider).then((result) => {
             window.currentUser = result.user;
@@ -727,6 +695,7 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
+    // FETCH PRODUCTS
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
@@ -765,6 +734,19 @@
         else { const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()); renderProducts(filtered); }
         document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
     }
+
+    // FOOTER SCROLL ANIMATION TRIGGER
+    window.addEventListener('scroll', () => {
+        const footer = document.getElementById('footerContent');
+        if(!footer) return;
+        const footerPos = footer.getBoundingClientRect().top;
+        const screenPos = window.innerHeight / 1.1;
+        if(footerPos < screenPos) {
+            document.querySelectorAll('.footer-col').forEach((col, index) => {
+                setTimeout(() => { col.classList.add('show-anim'); }, index * 150);
+            });
+        }
+    });
 
     window.onload = fetchAllProducts;
 </script>
