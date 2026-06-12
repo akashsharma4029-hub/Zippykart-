@@ -39,81 +39,24 @@
         .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; }
         .slide-btn.prev { left: 15px; } .slide-btn.next { right: 15px; }
         
-        /* 🔥 NEW FLIPKART STYLE PRODUCT GRID (NO BUTTONS) 🔥 */
+        /* 🔥 FLIPKART STYLE PRODUCT GRID 🔥 */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%; min-height: 400px; scroll-margin-top: 80px; }
-        
-        .product-card { 
-            display: flex; 
-            flex-direction: column; 
-            text-decoration: none; 
-            color: inherit; 
-            background: #fff;
-            border-radius: 8px;
-            padding-bottom: 10px;
-            border: 1px solid #eee;
-            transition: box-shadow 0.3s;
-        }
+        .product-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: #fff; border-radius: 8px; padding-bottom: 10px; border: 1px solid #eee; transition: box-shadow 0.3s; }
         .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
-        .image-wrapper { 
-            position: relative; 
-            width: 100%; 
-            aspect-ratio: 3/4; 
-            border-radius: 8px 8px 0 0; 
-            overflow: hidden; 
-            background: #f8fafc; 
-            margin-bottom: 8px; 
-        }
+        .image-wrapper { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 8px 8px 0 0; overflow: hidden; background: #f8fafc; margin-bottom: 8px; }
         .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .rating-badge-home { 
-            position: absolute; 
-            bottom: 8px; 
-            left: 8px; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 3px 6px; 
-            border-radius: 4px; 
-            font-size: 11px; 
-            font-weight: 700; 
-            color: #1e293b; 
-            display: flex; 
-            align-items: center; 
-            gap: 3px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.15); 
-        }
+        .rating-badge-home { position: absolute; bottom: 8px; left: 8px; background: rgba(255, 255, 255, 0.95); padding: 3px 6px; border-radius: 4px; font-size: 11px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
         .rating-badge-home i { color: #388e3c; font-size: 9px; }
-
-        .product-brand { 
-            font-size: 13px; 
-            font-weight: 600; 
-            color: #1e293b; 
-            display: -webkit-box;
-            -webkit-line-clamp: 2; 
-            -webkit-box-orient: vertical;  
-            overflow: hidden;
-            margin-bottom: 4px; 
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-        
+        .product-brand { font-size: 13px; font-weight: 600; color: #1e293b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; line-height: 1.3; padding: 0 10px; }
         .price-row-home { display: flex; align-items: center; gap: 6px; padding: 0 10px; }
         .mrp-price-home { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
         .current-price-home { font-size: 15px; font-weight: 800; color: #1e293b; }
-        
         .upi-offer-home { font-size: 11px; color: #2563eb; font-weight: 600; margin-top: 4px; padding: 0 10px; }
 
-        /* CART SIDEBAR CSS */
-        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: 0.3s ease; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
-        .cart-sidebar.active { right: 0; }
-        .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold;}
-        .cart-items-wrapper { flex: 1; overflow-y: auto; }
-        .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
-        .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
-
-        /* MODALS CSS (Auth, Dashboard) */
+        /* MODALS CSS */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
+        @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; align-items:center; justify-content:center;}
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
@@ -123,10 +66,11 @@
         .auth-body { padding: 20px; }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
         .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer;}
-        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; }
+        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
+        .google-btn:hover { background: #f8f9fa; border-color: #ccc;}
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
 
-        /* ADVANCED PRO DASHBOARD */
+        /* DASHBOARD */
         .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 80vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
         .dash-sidebar { width: 320px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
         .dash-group-title { padding: 20px 20px 8px 20px; font-size: 15px; font-weight: 800; color: #212121; background: #fff; border-bottom: 1px solid transparent; }
@@ -134,16 +78,13 @@
         .dash-nav-item:hover { background: #f9f9f9; color: #ff3e6c; }
         .dash-nav-item.active { background: #fff0f3; color: #ff3e6c; font-weight: 600; border-left: 4px solid #ff3e6c;}
         .dash-nav-item i { width: 22px; text-align: center; font-size: 18px; color:#ff3e6c;}
-        
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
         .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
-        
         .dash-inner-content { padding: 20px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
         .dash-header-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
-        
         .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
 
-        /* FOOTER CSS */
+        /* FOOTER */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; }
@@ -154,23 +95,13 @@
         .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px); }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
-        .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
-        .bottom-nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; flex: 1; position: relative; }
-        .bottom-nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }
-        .bottom-nav-item.active { color: #ff3e6c; }
-
         @media (max-width: 768px) {
-            body { padding-bottom: 65px; }
-            .bottom-nav { display: flex; }
-            .search-bar { order: 3; width: 100%; margin: 10px 0 0 0; }
-            .menu-wrapper { display: none; }
             .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
             .slide { padding-left: 20px; }
             .slide-content h2 { font-size: 20px; margin-bottom: 5px; }
             .slide-content p { font-size: 12px; margin-bottom: 10px; }
             .slide-content button { padding: 8px 15px; font-size: 12px; }
-            
             .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
             .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
@@ -183,7 +114,7 @@
 
 <!-- HEADER -->
 <header>
-    <div class="logo-box" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+    <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
         <span style="color: red;">Zippy</span>Kart
     </div>
@@ -202,13 +133,15 @@
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
         MORE ▾
         <div id="moreDrop" class="dropdown">
-            <div class="drop-item"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
-            <div class="drop-item"><i class="fa-solid fa-bullhorn"></i> Advertise</div>
-            <div class="drop-item"><i class="fa-solid fa-download"></i> Download App</div>
+            <!-- 🔥 Fixed Click Events for More Options -->
+            <div class="drop-item" onclick="alert('Redirecting to 24x7 Customer Care...')"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
+            <div class="drop-item" onclick="alert('Redirecting to Advertisement Portal...')"><i class="fa-solid fa-bullhorn"></i> Advertise</div>
+            <div class="drop-item" onclick="alert('Downloading ZippyKart App...')"><i class="fa-solid fa-download"></i> Download App</div>
         </div>
     </div>
     
-    <div class="notif-wrapper">
+    <!-- 🔥 Fixed Click Event for Bell Icon -->
+    <div class="notif-wrapper" onclick="alert('🔔 You have 3 new notifications for latest streetwear drops!')">
         <i class="fa-solid fa-bell"></i>
         <span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
     </div>
@@ -216,17 +149,17 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
 </header>
 
-<!-- NAV ICONS -->
+<!-- NAV CATEGORIES (WITH FILTER FUNCTION) -->
 <div class="nav-icons">
-    <div class="nav-cat"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
-    <div class="nav-cat"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
-    <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i>Women</div>
-    <div class="nav-cat"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i>Streetwear</div>
-    <div class="nav-cat"><i class="fa-solid fa-child" style="color: #2196f3;"></i>Kids</div>
-    <div class="nav-cat"><i class="fa-solid fa-robot" style="color: #4caf50;"></i>Toys</div>
-    <div class="nav-cat"><i class="fa-solid fa-clock" style="color: #ff9800;"></i>Watch</div>
-    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i>Cosmetic</div>
-    <div class="nav-cat"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
+    <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
+    <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
+    <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i>Women</div>
+    <div class="nav-cat" onclick="filterCategory('Streetwear')"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i>Streetwear</div>
+    <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child" style="color: #2196f3;"></i>Kids</div>
+    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color: #4caf50;"></i>Toys</div>
+    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color: #ff9800;"></i>Watch</div>
+    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i>Cosmetic</div>
+    <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
 </div>
 
 <!-- BANNER SLIDER -->
@@ -251,7 +184,7 @@
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
-<!-- 🔥 DYNAMIC PRODUCT GRID (FLIPKART STYLE - NO BUTTONS) 🔥 -->
+<!-- PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
@@ -292,17 +225,24 @@
     </div>
 </footer>
 
-<!-- AUTH MODAL -->
+<!-- AUTHENTICATION MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
-        <div class="auth-header"><h2 style="margin:0;">Login</h2></div>
+        <div class="auth-header"><h2 id="authModalTitle" style="margin:0;">Login</h2></div>
         <div class="auth-body">
             <input type="email" class="auth-input" placeholder="Email Address">
             <input type="password" class="auth-input" placeholder="Password">
-            <button class="auth-submit-btn">Login</button>
-            <button class="google-btn"><i class="fa-brands fa-google" style="color:#ea4335;"></i> Continue with Google</button>
-            <div class="auth-switch">Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span></div>
+            <!-- Normal Login Button Alert -->
+            <button id="authSubmitBtn" class="auth-submit-btn" onclick="alert('Please use Continue with Google for instant login!')">Login</button>
+            
+            <!-- 🔥 Active Google Sign In Button 🔥 -->
+            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335;"></i> Continue with Google</button>
+            
+            <!-- 🔥 Active Switch to Sign Up / Login 🔥 -->
+            <div class="auth-switch" id="authSwitchText" onclick="toggleAuthMode()">
+                Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>
+            </div>
         </div>
     </div>
 </div>
@@ -317,7 +257,7 @@
             <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Profile Info')"><i class="fa-solid fa-user"></i> Profile Info</div>
             <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')"><i class="fa-solid fa-box-open"></i> My Orders</div>
             <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Addresses')"><i class="fa-solid fa-location-dot"></i> Addresses</div>
-            <button class="logout-full-btn" onclick="alert('Logged out successfully!'); document.getElementById('dashboardModal').style.display='none';"><i class="fa-solid fa-power-off"></i> Logout</button>
+            <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> Logout</button>
         </div>
         
         <div class="dash-main">
@@ -340,14 +280,15 @@
             
             <div class="dash-inner-content" id="dashAddressTab" style="display:none;">
                 <h2 class="dash-header-title">Manage Addresses</h2>
-                <button style="border:1px dashed #2874f0; color:#2874f0; background:#f5faff; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
+                <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- FIREBASE SCRIPTS & RENDER LOGIC -->
+<!-- FIREBASE SCRIPTS & LOGIC -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> <!-- ADDED AUTH SCRIPT -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script>
     // 1. FIREBASE INITIALIZATION
@@ -361,15 +302,73 @@
     };
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.firestore();
+    const auth = firebase.auth();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-    // 2. DROPDOWN TOGGLE LOGIC
+    // Globals
+    window.allFetchedProducts = [];
+    window.currentUser = null;
+
+    // 2. AUTHENTICATION LOGIC
+    window.googleSignIn = function() {
+        auth.signInWithPopup(googleProvider).then((result) => {
+            window.currentUser = result.user;
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('navLoginText').innerText = window.currentUser.displayName.split(' ')[0];
+            document.getElementById('authOpt').style.display = 'none';
+            document.getElementById('profileOpt').style.display = 'flex';
+            document.getElementById('logoutOpt').style.display = 'flex';
+            alert("Welcome to ZippyKart, " + window.currentUser.displayName + "!");
+        }).catch((error) => {
+            alert("Error logging in: " + error.message);
+        });
+    }
+
+    window.handleLogout = function() {
+        auth.signOut().then(() => {
+            window.currentUser = null;
+            document.getElementById('navLoginText').innerText = "LOGIN";
+            document.getElementById('authOpt').style.display = 'flex';
+            document.getElementById('profileOpt').style.display = 'none';
+            document.getElementById('logoutOpt').style.display = 'none';
+            document.getElementById('dashboardModal').style.display = 'none';
+            alert("Logged out successfully.");
+        });
+    }
+
+    window.toggleAuthMode = function() {
+        const title = document.getElementById('authModalTitle');
+        const btn = document.getElementById('authSubmitBtn');
+        const switchTxt = document.getElementById('authSwitchText');
+        if(title.innerText === "Login") {
+            title.innerText = "Sign Up";
+            btn.innerText = "Register";
+            switchTxt.innerHTML = `Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span>`;
+        } else {
+            title.innerText = "Login";
+            btn.innerText = "Login";
+            switchTxt.innerHTML = `Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>`;
+        }
+    }
+
+    // Auth state observer
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            window.currentUser = user;
+            document.getElementById('navLoginText').innerText = user.displayName.split(' ')[0];
+            document.getElementById('authOpt').style.display = 'none';
+            document.getElementById('profileOpt').style.display = 'flex';
+            document.getElementById('logoutOpt').style.display = 'flex';
+        }
+    });
+
+    // 3. DROPDOWN & MODALS LOGIC
     function toggleDrop(id) {
         document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
         const drop = document.getElementById(id);
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    // 3. MODALS LOGIC
     function openAuthModal() {
         document.getElementById('loginDrop').style.display = 'none';
         document.getElementById('authModal').style.display = 'flex';
@@ -377,6 +376,11 @@
 
     function openDashboard() {
         document.getElementById('loginDrop').style.display = 'none'; 
+        if(!window.currentUser) { alert("Please login first!"); openAuthModal(); return; }
+        
+        document.getElementById('dashNameInput').value = window.currentUser.displayName || "";
+        document.getElementById('dashEmailInput').value = window.currentUser.email || "";
+        
         document.getElementById('dashboardModal').style.display = 'flex';
         if(window.innerWidth <= 768) {
             document.querySelector('.dash-sidebar').style.display = 'flex';
@@ -422,12 +426,12 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // 5. FETCH & DISPLAY PRODUCTS (FLIPKART STYLE)
-    async function fetchProducts() {
+    // 5. FETCH & FILTER PRODUCTS
+    async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
             const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
-            grid.innerHTML = '';
+            window.allFetchedProducts = [];
             
             if(snapshot.empty) {
                 grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products available.</div>`;
@@ -435,43 +439,67 @@
             }
 
             snapshot.forEach(doc => {
-                const p = doc.data();
-                const productId = doc.id;
-                
-                const title = p.title || "Premium Item";
-                const price = p.price || 0;
-                const mrp = p.mrp || price;
-                const img = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
-                
-                // Extra UI details for Premium feel
-                const upiPrice = price > 100 ? price - 50 : price;
-                const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
-
-                // 🔥 THE NEW CLEAN PRODUCT CARD 🔥
-                const cardHTML = `
-                    <a href="product.html?id=${productId}" class="product-card">
-                        <div class="image-wrapper">
-                            <img src="${img}" alt="${title}">
-                            <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <div class="product-brand">${title}</div>
-                        <div class="price-row-home">
-                            <span class="current-price-home">₹${price}</span>
-                            <span class="mrp-price-home">₹${mrp}</span>
-                        </div>
-                        <div class="upi-offer-home">₹${upiPrice} with UPI offer</div>
-                    </a>
-                `;
-                grid.innerHTML += cardHTML;
+                let p = doc.data();
+                p.id = doc.id;
+                window.allFetchedProducts.push(p);
             });
+            
+            renderProducts(window.allFetchedProducts);
+
         } catch (error) {
             console.error("Firebase Error:", error);
-            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error. Check console.</div>`;
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`;
         }
     }
 
+    function renderProducts(productArray) {
+        const grid = document.getElementById('mainProductGrid');
+        grid.innerHTML = '';
+
+        if(productArray.length === 0) {
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in this category!</div>`;
+            return;
+        }
+
+        productArray.forEach(p => {
+            const title = p.title || "Premium Item";
+            const price = p.price || 0;
+            const mrp = p.mrp || price;
+            const img = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
+            const upiPrice = price > 100 ? price - 50 : price;
+            const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+
+            const cardHTML = `
+                <a href="product.html?id=${p.id}" class="product-card">
+                    <div class="image-wrapper">
+                        <img src="${img}" alt="${title}">
+                        <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <div class="product-brand">${title}</div>
+                    <div class="price-row-home">
+                        <span class="current-price-home">₹${price}</span>
+                        <span class="mrp-price-home">₹${mrp}</span>
+                    </div>
+                    <div class="upi-offer-home">₹${upiPrice} with UPI offer</div>
+                </a>
+            `;
+            grid.innerHTML += cardHTML;
+        });
+    }
+
+    // Category Filter function linked to Nav Icons
+    window.filterCategory = function(categoryName) {
+        if(categoryName === 'All') {
+            renderProducts(window.allFetchedProducts);
+        } else {
+            const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase());
+            renderProducts(filtered);
+        }
+        document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
+    }
+
     // Run on load
-    window.onload = fetchProducts;
+    window.onload = fetchAllProducts;
 </script>
 
 </body>
