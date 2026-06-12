@@ -53,20 +53,49 @@
         .current-price-home { font-size: 15px; font-weight: 800; color: #1e293b; }
         .upi-offer-home { font-size: 11px; color: #2563eb; font-weight: 600; margin-top: 4px; padding: 0 10px; }
 
+        /* SIDEBARS (Notifications & Cart) */
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
+        .cart-sidebar.active { right: 0; }
+        .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold; font-size: 18px;}
+        .cart-items-wrapper { flex: 1; overflow-y: auto; padding-right: 5px;}
+        
+        /* NOTIFICATION CARDS */
+        .notif-card { background: #f4f6f8; border-left: 4px solid #ff3e6c; padding: 15px; border-radius: 6px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .notif-card h4 { margin: 0 0 5px 0; font-size: 14px; color: #1e293b; }
+        .notif-card p { margin: 0; font-size: 12px; color: #475569; line-height: 1.4; }
+        .notif-time { font-size: 10px; color: #94a3b8; margin-top: 8px; display: block; }
+
+        /* 🔥 AI CHATBOX CSS 🔥 */
+        .ai-chat-box { position: fixed; bottom: 20px; right: 20px; width: 320px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 10002; transform: translateY(150%) scale(0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none;}
+        .ai-chat-box.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+        .chat-header { background: linear-gradient(135deg, #1e293b, #334155); color: #fff; padding: 15px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .chat-body { padding: 15px; height: 320px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.4; position: relative; animation: popUpAnim 0.3s ease; }
+        .bot-msg { background: #fff; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;}
+        .user-msg { background: #ff3e6c; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 2px 8px rgba(255,62,108,0.2);}
+        .chat-footer { padding: 12px; display: flex; gap: 10px; border-top: 1px solid #e2e8f0; background:#fff; border-radius: 0 0 12px 12px;}
+        .chat-footer input { flex: 1; padding: 10px 15px; border: 1px solid #cbd5e1; border-radius: 20px; outline: none; font-size: 13px; background: #f1f5f9; transition: 0.2s;}
+        .chat-footer input:focus { border-color: #ff3e6c; background: #fff;}
+        .chat-footer button { background: #1e293b; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;}
+        .chat-footer button:hover { background: #ff3e6c; transform: scale(1.1);}
+
         /* MODALS CSS */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
         @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; align-items:center; justify-content:center;}
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; transition:0.2s;}
+        .close-btn:hover { color: #ff3e6c; transform: scale(1.2);}
         
-        .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
+        .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 12px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
         .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; font-weight:bold;}
-        .auth-body { padding: 20px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-        .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer;}
-        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
+        .auth-body { padding: 25px; }
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline:none; transition:0.2s;}
+        .auth-input:focus { border-color: #ff3e6c;}
+        .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition:0.3s;}
+        .auth-submit-btn:hover { background: #0f172a; }
+        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
         .google-btn:hover { background: #f8f9fa; border-color: #ccc;}
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
 
@@ -107,12 +136,12 @@
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
             .dash-mobile-header { display: flex; } 
             .dash-inner-content { margin: 10px; border-radius: 6px; }
+            .ai-chat-box { width: 90%; right: 5%; bottom: 10px; }
         }
     </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
@@ -133,15 +162,13 @@
     <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
         MORE ▾
         <div id="moreDrop" class="dropdown">
-            <!-- 🔥 Fixed Click Events for More Options -->
-            <div class="drop-item" onclick="alert('Redirecting to 24x7 Customer Care...')"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
-            <div class="drop-item" onclick="alert('Redirecting to Advertisement Portal...')"><i class="fa-solid fa-bullhorn"></i> Advertise</div>
-            <div class="drop-item" onclick="alert('Downloading ZippyKart App...')"><i class="fa-solid fa-download"></i> Download App</div>
+            <div class="drop-item" onclick="toggleChat(); toggleDrop('moreDrop');"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> 24x7 Customer Care</div>
+            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at <b>ads@zippykart.co.in</b> to grow your business.', 'fa-bullhorn', '#ff9800'); toggleDrop('moreDrop');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> Advertise</div>
+            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart mobile app is launching soon on iOS and Android! Stay tuned for exclusive app-only drops.', 'fa-mobile-screen-button', '#4caf50'); toggleDrop('moreDrop');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> Download App</div>
         </div>
     </div>
     
-    <!-- 🔥 Fixed Click Event for Bell Icon -->
-    <div class="notif-wrapper" onclick="alert('🔔 You have 3 new notifications for latest streetwear drops!')">
+    <div class="notif-wrapper" onclick="toggleNotifications()">
         <i class="fa-solid fa-bell"></i>
         <span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
     </div>
@@ -149,7 +176,56 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
 </header>
 
-<!-- NAV CATEGORIES (WITH FILTER FUNCTION) -->
+<div class="cart-sidebar" id="notifSidebar">
+    <div class="cart-title-box">
+        <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> Notifications</span>
+        <button class="close-btn" style="position:static; color:#1e293b;" onclick="toggleNotifications()">&times;</button>
+    </div>
+    <div class="cart-items-wrapper">
+        <div class="notif-card">
+            <h4>🔥 Mega Summer Sale is Live!</h4>
+            <p>Get flat 50% OFF on all premium streetwear and sneakers. Offer valid till midnight.</p>
+            <span class="notif-time">2 hours ago</span>
+        </div>
+        <div class="notif-card" style="border-left-color: #2196f3;">
+            <h4>📦 Order Delivered</h4>
+            <p>Your previous order 'Oversized Beige T-Shirt' has been delivered successfully.</p>
+            <span class="notif-time">1 day ago</span>
+        </div>
+        <div class="notif-card" style="border-left-color: #4caf50;">
+            <h4>✨ Zippy Coins Credited</h4>
+            <p>Congratulations! 150 Zippy Coins have been added to your wallet.</p>
+            <span class="notif-time">3 days ago</span>
+        </div>
+    </div>
+</div>
+
+<div class="ai-chat-box" id="aiChatBox">
+    <div class="chat-header">
+        <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
+        <i class="fa-solid fa-chevron-down" style="cursor:pointer;" onclick="toggleChat()"></i>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot-msg">Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type your message here..." onkeypress="handleChatEnter(event)">
+        <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="auth-content" style="max-width:450px;">
+        <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
+        <div class="auth-header" style="background:#1e293b;"><h2 id="infoModalTitle" style="margin:0;">Info</h2></div>
+        <div class="auth-body" style="text-align:center; padding: 40px 20px;">
+            <i id="infoModalIcon" class="fa-solid fa-info-circle" style="font-size:50px; margin-bottom:20px; color:#1e293b;"></i>
+            <p id="infoModalText" style="font-size:15px; color:#475569; line-height:1.6;"></p>
+            <button class="auth-submit-btn" style="margin-top:25px;" onclick="document.getElementById('infoModal').style.display='none'">Got it!</button>
+        </div>
+    </div>
+</div>
+
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
@@ -162,7 +238,6 @@
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
 </div>
 
-<!-- BANNER SLIDER -->
 <div class="banner-slider">
     <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
     <div class="slides" id="sliderTrack">
@@ -184,14 +259,12 @@
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
-<!-- PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -225,7 +298,6 @@
     </div>
 </footer>
 
-<!-- AUTHENTICATION MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -233,13 +305,8 @@
         <div class="auth-body">
             <input type="email" class="auth-input" placeholder="Email Address">
             <input type="password" class="auth-input" placeholder="Password">
-            <!-- Normal Login Button Alert -->
             <button id="authSubmitBtn" class="auth-submit-btn" onclick="alert('Please use Continue with Google for instant login!')">Login</button>
-            
-            <!-- 🔥 Active Google Sign In Button 🔥 -->
             <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335;"></i> Continue with Google</button>
-            
-            <!-- 🔥 Active Switch to Sign Up / Login 🔥 -->
             <div class="auth-switch" id="authSwitchText" onclick="toggleAuthMode()">
                 Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>
             </div>
@@ -247,11 +314,9 @@
     </div>
 </div>
 
-<!-- DASHBOARD MODAL -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
-        
         <div class="dash-sidebar">
             <div class="dash-group-title">My Account</div>
             <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Profile Info')"><i class="fa-solid fa-user"></i> Profile Info</div>
@@ -259,25 +324,21 @@
             <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Addresses')"><i class="fa-solid fa-location-dot"></i> Addresses</div>
             <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> Logout</button>
         </div>
-        
         <div class="dash-main">
             <div class="dash-mobile-header">
                 <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
                 <span id="dashHeaderDynamicTitle">Profile Info</span>
             </div>
-            
             <div class="dash-inner-content" id="dashProfileTab">
                 <h2 class="dash-header-title">Personal Information</h2>
                 <input type="text" class="auth-input" placeholder="Full Name" id="dashNameInput">
                 <input type="email" class="auth-input" placeholder="Email Address" id="dashEmailInput" readonly>
                 <button class="auth-submit-btn" style="width: auto; padding: 10px 30px;">Save Info</button>
             </div>
-            
             <div class="dash-inner-content" id="dashOrdersTab" style="display:none;">
                 <h2 class="dash-header-title">My Orders</h2>
                 <div style="text-align: center; color: #888; padding: 40px 0;"><i class="fa-solid fa-box-open" style="font-size:40px; margin-bottom:10px;"></i><br>No recent orders found.</div>
             </div>
-            
             <div class="dash-inner-content" id="dashAddressTab" style="display:none;">
                 <h2 class="dash-header-title">Manage Addresses</h2>
                 <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
@@ -286,28 +347,61 @@
     </div>
 </div>
 
-<!-- FIREBASE SCRIPTS & LOGIC -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> <!-- ADDED AUTH SCRIPT -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script>
     // 1. FIREBASE INITIALIZATION
-    const firebaseConfig = {
-        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-        authDomain: "zippykart-production-157e1.firebaseapp.com",
-        projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.firebasestorage.app",
-        messagingSenderId: "803651431969",
-        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
-    };
+    const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1", storageBucket: "zippykart-production-157e1.firebasestorage.app", messagingSenderId: "803651431969", appId: "1:803651431969:web:7432f351ec9f5f0ec23d60" };
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-    const db = firebase.firestore();
-    const auth = firebase.auth();
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
+    window.allFetchedProducts = []; window.currentUser = null;
 
-    // Globals
-    window.allFetchedProducts = [];
-    window.currentUser = null;
+    // 🔥 NEW ANIMATED FEATURES LOGIC 🔥
+    
+    // Notifications Sidebar
+    function toggleNotifications() {
+        const panel = document.getElementById('notifSidebar');
+        panel.classList.toggle('active');
+        if(panel.classList.contains('active')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+    }
+
+    // AI Chatbot Logic
+    function toggleChat() {
+        const chatBox = document.getElementById('aiChatBox');
+        chatBox.classList.toggle('active');
+    }
+
+    function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
+
+    function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if(!text) return;
+        
+        const chatBody = document.getElementById('chatBody');
+        // Add User Message
+        chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`;
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Simulate AI Thinking & Reply
+        setTimeout(() => {
+            chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly. You can also track your orders from the Dashboard.</div>`;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    }
+
+    // Generic Info Modal (Advertise, Download App)
+    function openInfoModal(title, text, iconClass, iconColor) {
+        document.getElementById('infoModalTitle').innerText = title;
+        document.getElementById('infoModalText').innerHTML = text;
+        const icon = document.getElementById('infoModalIcon');
+        icon.className = `fa-solid ${iconClass}`;
+        icon.style.color = iconColor;
+        document.getElementById('infoModal').style.display = 'flex';
+    }
+
 
     // 2. AUTHENTICATION LOGIC
     window.googleSignIn = function() {
@@ -318,10 +412,7 @@
             document.getElementById('authOpt').style.display = 'none';
             document.getElementById('profileOpt').style.display = 'flex';
             document.getElementById('logoutOpt').style.display = 'flex';
-            alert("Welcome to ZippyKart, " + window.currentUser.displayName + "!");
-        }).catch((error) => {
-            alert("Error logging in: " + error.message);
-        });
+        }).catch((error) => { alert("Error: " + error.message); });
     }
 
     window.handleLogout = function() {
@@ -332,26 +423,15 @@
             document.getElementById('profileOpt').style.display = 'none';
             document.getElementById('logoutOpt').style.display = 'none';
             document.getElementById('dashboardModal').style.display = 'none';
-            alert("Logged out successfully.");
         });
     }
 
     window.toggleAuthMode = function() {
-        const title = document.getElementById('authModalTitle');
-        const btn = document.getElementById('authSubmitBtn');
-        const switchTxt = document.getElementById('authSwitchText');
-        if(title.innerText === "Login") {
-            title.innerText = "Sign Up";
-            btn.innerText = "Register";
-            switchTxt.innerHTML = `Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span>`;
-        } else {
-            title.innerText = "Login";
-            btn.innerText = "Login";
-            switchTxt.innerHTML = `Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>`;
-        }
+        const title = document.getElementById('authModalTitle'); const btn = document.getElementById('authSubmitBtn'); const switchTxt = document.getElementById('authSwitchText');
+        if(title.innerText === "Login") { title.innerText = "Sign Up"; btn.innerText = "Register"; switchTxt.innerHTML = `Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span>`; } 
+        else { title.innerText = "Login"; btn.innerText = "Login"; switchTxt.innerHTML = `Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span>`; }
     }
 
-    // Auth state observer
     auth.onAuthStateChanged((user) => {
         if (user) {
             window.currentUser = user;
@@ -369,59 +449,37 @@
         drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    function openAuthModal() {
-        document.getElementById('loginDrop').style.display = 'none';
-        document.getElementById('authModal').style.display = 'flex';
-    }
-
+    function openAuthModal() { document.getElementById('loginDrop').style.display = 'none'; document.getElementById('authModal').style.display = 'flex'; }
     function openDashboard() {
         document.getElementById('loginDrop').style.display = 'none'; 
         if(!window.currentUser) { alert("Please login first!"); openAuthModal(); return; }
-        
-        document.getElementById('dashNameInput').value = window.currentUser.displayName || "";
-        document.getElementById('dashEmailInput').value = window.currentUser.email || "";
-        
+        document.getElementById('dashNameInput').value = window.currentUser.displayName || ""; document.getElementById('dashEmailInput').value = window.currentUser.email || "";
         document.getElementById('dashboardModal').style.display = 'flex';
-        if(window.innerWidth <= 768) {
-            document.querySelector('.dash-sidebar').style.display = 'flex';
-            document.querySelector('.dash-main').style.display = 'none';
-        }
+        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'flex'; document.querySelector('.dash-main').style.display = 'none'; }
     }
 
     function switchDashTab(tabId, eventElem, title) {
-        document.querySelectorAll('.dash-inner-content').forEach(tab => tab.style.display = 'none');
-        document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(tabId).style.display = 'block'; 
-        eventElem.classList.add('active');
-        if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
-        if(window.innerWidth <= 768) {
-            document.querySelector('.dash-sidebar').style.display = 'none';
-            document.querySelector('.dash-main').style.display = 'block';
-        }
+        document.querySelectorAll('.dash-inner-content').forEach(tab => tab.style.display = 'none'); document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).style.display = 'block'; eventElem.classList.add('active'); if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
+        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'none'; document.querySelector('.dash-main').style.display = 'block'; }
     }
 
-    function closeDashMainMobile() {
-        document.querySelector('.dash-main').style.display = 'none';
-        document.querySelector('.dash-sidebar').style.display = 'flex';
-    }
+    function closeDashMainMobile() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
 
-    // Close Modals on clicking outside
     window.onclick = function(e) { 
-        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.notif-wrapper')) {
+        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.notif-wrapper') && !e.target.closest('.ai-chat-box') && !e.target.closest('.cart-sidebar')) {
             document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
         }
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
+        if(e.target == document.getElementById('infoModal')) document.getElementById('infoModal').style.display = 'none';
     };
 
     // 4. SLIDER LOGIC
     let currentSlide = 0;
     function moveSlide(direction) {
-        const track = document.getElementById('sliderTrack');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        currentSlide += direction;
-        if(currentSlide < 0) currentSlide = totalSlides - 1;
-        if(currentSlide >= totalSlides) currentSlide = 0;
+        const track = document.getElementById('sliderTrack'); const totalSlides = document.querySelectorAll('.slide').length;
+        currentSlide += direction; if(currentSlide < 0) currentSlide = totalSlides - 1; if(currentSlide >= totalSlides) currentSlide = 0;
         track.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
     setInterval(() => moveSlide(1), 5000);
@@ -432,73 +490,35 @@
         try {
             const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
             window.allFetchedProducts = [];
-            
-            if(snapshot.empty) {
-                grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products available.</div>`;
-                return;
-            }
-
-            snapshot.forEach(doc => {
-                let p = doc.data();
-                p.id = doc.id;
-                window.allFetchedProducts.push(p);
-            });
-            
+            if(snapshot.empty) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products available.</div>`; return; }
+            snapshot.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); });
             renderProducts(window.allFetchedProducts);
-
-        } catch (error) {
-            console.error("Firebase Error:", error);
-            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`;
-        }
+        } catch (error) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`; }
     }
 
     function renderProducts(productArray) {
-        const grid = document.getElementById('mainProductGrid');
-        grid.innerHTML = '';
-
-        if(productArray.length === 0) {
-            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in this category!</div>`;
-            return;
-        }
-
+        const grid = document.getElementById('mainProductGrid'); grid.innerHTML = '';
+        if(productArray.length === 0) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in this category!</div>`; return; }
         productArray.forEach(p => {
-            const title = p.title || "Premium Item";
-            const price = p.price || 0;
-            const mrp = p.mrp || price;
+            const title = p.title || "Premium Item"; const price = p.price || 0; const mrp = p.mrp || price;
             const img = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
-            const upiPrice = price > 100 ? price - 50 : price;
-            const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
-
-            const cardHTML = `
+            const upiPrice = price > 100 ? price - 50 : price; const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+            grid.innerHTML += `
                 <a href="product.html?id=${p.id}" class="product-card">
-                    <div class="image-wrapper">
-                        <img src="${img}" alt="${title}">
-                        <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
-                    </div>
+                    <div class="image-wrapper"><img src="${img}" alt="${title}"><div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div></div>
                     <div class="product-brand">${title}</div>
-                    <div class="price-row-home">
-                        <span class="current-price-home">₹${price}</span>
-                        <span class="mrp-price-home">₹${mrp}</span>
-                    </div>
+                    <div class="price-row-home"><span class="current-price-home">₹${price}</span><span class="mrp-price-home">₹${mrp}</span></div>
                     <div class="upi-offer-home">₹${upiPrice} with UPI offer</div>
-                </a>
-            `;
-            grid.innerHTML += cardHTML;
+                </a>`;
         });
     }
 
-    // Category Filter function linked to Nav Icons
     window.filterCategory = function(categoryName) {
-        if(categoryName === 'All') {
-            renderProducts(window.allFetchedProducts);
-        } else {
-            const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase());
-            renderProducts(filtered);
-        }
+        if(categoryName === 'All') { renderProducts(window.allFetchedProducts); } 
+        else { const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()); renderProducts(filtered); }
         document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Run on load
     window.onload = fetchAllProducts;
 </script>
 
