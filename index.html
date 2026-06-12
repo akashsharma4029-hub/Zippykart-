@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; overflow-x: hidden; }
+        
+        /* HEADER CSS */
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; justify-content: space-between;}
         .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; cursor: pointer; }
         .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; min-width: 150px; margin: 0 15px; }
@@ -14,14 +16,17 @@
         .notif-wrapper { position: relative; cursor: pointer; font-size: 22px; color: #333; margin-right: 5px; transition: 0.2s; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 6px; overflow:hidden;}
         .dropdown div.drop-item { padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; display:flex; align-items:center; gap:10px;}
-        .dropdown div.drop-item:hover { background: #f5faff; color: #2874f0; }
+        .dropdown div.drop-item:hover { background: #f5faff; color: #ff3e6c; }
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        
+        .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; border: 2px solid #fff; font-weight: bold; }
+
+        /* NAV CATEGORIES */
         .nav-icons { display: flex; justify-content: center; gap: 30px; padding: 15px 5%; background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; }
-        .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; }
+        .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; font-weight: 600;}
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { display: block; font-size: 20px; margin-bottom: 5px; }
 
+        /* SLIDER CSS */
         .banner-slider { position: relative; width: 95%; max-width: 1200px; height: 350px; margin: 20px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .slides { display: flex; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .slide { min-width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: flex-start; padding-left: 60px; box-sizing: border-box; }
@@ -34,114 +39,116 @@
         .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; }
         .slide-btn.prev { left: 15px; } .slide-btn.next { right: 15px; }
         
+        /* 🔥 NEW FLIPKART STYLE PRODUCT GRID (NO BUTTONS) 🔥 */
         .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px 5%; min-height: 400px; scroll-margin-top: 80px; }
-        .product-card { background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 6px; text-align: center; transition: box-shadow 0.3s; }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; cursor: pointer; border-radius: 4px; }
-        .add-btn, .buy-btn { color: #fff; border: none; padding: 10px; width: 100%; margin-top: 5px; cursor: pointer; border-radius: 4px; font-weight: bold; }
-        .add-btn { background: #000; } .buy-btn { background: #ff3e6c; }
         
+        .product-card { 
+            display: flex; 
+            flex-direction: column; 
+            text-decoration: none; 
+            color: inherit; 
+            background: #fff;
+            border-radius: 8px;
+            padding-bottom: 10px;
+            border: 1px solid #eee;
+            transition: box-shadow 0.3s;
+        }
+        .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .image-wrapper { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 3/4; 
+            border-radius: 8px 8px 0 0; 
+            overflow: hidden; 
+            background: #f8fafc; 
+            margin-bottom: 8px; 
+        }
+        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .rating-badge-home { 
+            position: absolute; 
+            bottom: 8px; 
+            left: 8px; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 3px 6px; 
+            border-radius: 4px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: #1e293b; 
+            display: flex; 
+            align-items: center; 
+            gap: 3px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15); 
+        }
+        .rating-badge-home i { color: #388e3c; font-size: 9px; }
+
+        .product-brand { 
+            font-size: 13px; 
+            font-weight: 600; 
+            color: #1e293b; 
+            display: -webkit-box;
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+            margin-bottom: 4px; 
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+        
+        .price-row-home { display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+        .mrp-price-home { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
+        .current-price-home { font-size: 15px; font-weight: 800; color: #1e293b; }
+        
+        .upi-offer-home { font-size: 11px; color: #2563eb; font-weight: 600; margin-top: 4px; padding: 0 10px; }
+
+        /* CART SIDEBAR CSS */
         .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 10001; transition: 0.3s ease; padding: 20px; display: flex; flex-direction: column; box-sizing: border-box; }
         .cart-sidebar.active { right: 0; }
-        .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; }
+        .cart-title-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px; margin-bottom: 15px; font-weight:bold;}
         .cart-items-wrapper { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
-        .cart-item-details { flex: 1; text-align: left; }
-        .cart-item-title { font-size: 13px; font-weight: bold; }
-        .cart-item-price { font-size: 12px; color: #ff3e6c; font-weight: bold; margin-top: 2px; }
-        .remove-item-btn { border: none; background: none; color: #aaa; cursor: pointer; font-size: 16px; }
         .cart-footer { border-top: 2px solid #f5f5f5; padding-top: 15px; margin-bottom: 20px; }
         .total-box { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
-        
+
+        /* MODALS CSS (Auth, Dashboard) */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         @keyframes slideInRight { 0% { transform: translateX(50px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
         
-        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; }
+        .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow-y: auto; align-items:center; justify-content:center;}
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 26px; cursor: pointer; color: #aaa; z-index: 10; }
         
-        .large-modal { background: #fff; margin: 5% auto; padding: 20px; width: 950px; max-width: 95%; border-radius: 12px; position: relative; animation: popUpAnim 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; gap: 20px; align-items: flex-start; box-sizing: border-box; }
-        .modal-left { flex: 0.8; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 20px; }
-        .modal-main-img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
-        .thumb-gallery { display: flex; gap: 10px; justify-content: center; }
-        .thumb-gallery img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; }
-        .thumb-gallery img.active { opacity: 1; border-color: #ff3e6c; }
-        .modal-right { flex: 1.2; display: flex; flex-direction: column; text-align: left; max-height: 75vh; overflow-y: auto; padding-right: 5px; }
-        .brand-name { color: #777; font-weight: bold; font-size: 13px; margin-bottom: 5px; text-transform: uppercase; }
-        .modal-right h3 { margin: 0 0 8px 0; font-size: 20px; color: #222; }
-        .rating-badge { display: inline-flex; align-items: center; background: #388e3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 15px; }
-        .price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .modal-price-tag { color: #222; font-weight: 900; font-size: 24px; margin: 0; }
-        .mrp { color: #888; text-decoration: line-through; font-size: 14px; }
-        .discount { color: #388e3c; font-weight: bold; font-size: 14px; }
-        .offer-box { border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; margin-bottom: 15px; background: #fdfdfd; font-size: 13px; }
-        .selector-title { font-size: 13px; font-weight: bold; margin: 0 0 8px 0; color: #222; }
-        .color-opts { display: flex; gap: 10px; margin-bottom: 15px; }
-        .color-dot { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid #ddd; display: inline-block; padding: 2px; background-clip: content-box; }
-        .color-dot.active { border-color: #ff3e6c; }
-        .size-opts { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .size-btn-opt { padding: 8px 15px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 13px; }
-        .size-btn-opt.active { border-color: #ff3e6c; color: #ff3e6c; background: #fff0f3; }
-        .delivery-box { border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 13px;}
-        .trust-badges { display: flex; justify-content: space-around; background: #f9f9f9; border-radius: 8px; padding: 10px; margin-bottom: 20px; }
-        .badge { text-align: center; font-size: 10px; color: #555; font-weight: bold; }
-        .badge i { font-size: 20px; color: #1976d2; margin-bottom: 5px; display: block; }
-        .spec-title { font-size: 14px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; font-size: 12px; }
-        .spec-key { color: #777; display: block; } .spec-value { font-weight: bold; color: #222; }
-        .modal-action-row { display: flex; gap: 10px; margin-top: 10px; position: sticky; bottom: 0; background: #fff; padding-top: 10px; border-top: 1px solid #eee; }
-        .modal-action-row button { flex: 1; margin: 0; padding: 12px; font-size: 14px; }
-
-        .auth-content { background: #fff; margin: 10% auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
-        .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; }
+        .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 8px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; }
+        .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; font-weight:bold;}
         .auth-body { padding: 20px; }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
         .auth-submit-btn { background: #000; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer;}
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; }
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
-        .input-group { display: flex; gap: 10px; }
 
-        /* ADVANCED PRO DASHBOARD (FLIPKART CLONE) */
-        .dashboard-content { background: #f1f3f6; margin: 5% auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 80vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
+        /* ADVANCED PRO DASHBOARD */
+        .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 80vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
         .dash-sidebar { width: 320px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow-y: auto;}
         .dash-group-title { padding: 20px 20px 8px 20px; font-size: 15px; font-weight: 800; color: #212121; background: #fff; border-bottom: 1px solid transparent; }
         .dash-nav-item { padding: 16px 20px; display: flex; align-items: center; gap: 15px; color: #444; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; background: #fff;}
-        .dash-nav-item:hover { background: #f9f9f9; color: #2874f0; }
-        .dash-nav-item.active { background: #f5faff; color: #2874f0; font-weight: 600; border-left: 4px solid #2874f0;}
-        .dash-nav-item i { width: 22px; text-align: center; font-size: 18px; color:#2874f0;}
+        .dash-nav-item:hover { background: #f9f9f9; color: #ff3e6c; }
+        .dash-nav-item.active { background: #fff0f3; color: #ff3e6c; font-weight: 600; border-left: 4px solid #ff3e6c;}
+        .dash-nav-item i { width: 22px; text-align: center; font-size: 18px; color:#ff3e6c;}
         
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
-        .dash-mobile-header { display: none; background: #2874f0; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
-        .dash-mobile-header i { cursor: pointer; font-size: 20px; }
-
+        .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
+        
         .dash-inner-content { padding: 20px; background: #fff; margin: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 80%; animation: slideInRight 0.3s ease;}
         .dash-header-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #212121;}
         
-        .order-card { border: 1px solid #e0e0e0; padding: 15px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s;}
-        .order-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color:#d0d0d0;}
-        
-        .logout-full-btn { width: 100%; background: #fff; color: #2874f0; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
-        .logout-full-btn:hover { background: #f5faff; }
+        .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; border-top: 1px solid #e0e0e0; font-weight: 800; font-size: 16px; cursor: pointer; text-align: center; margin-top: 10px;}
 
-        .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e0e0e0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
-        .lang-option.active { border-color:#2874f0; background:#f5faff; box-shadow: 0 2px 5px rgba(40,116,240,0.1);}
-        .lang-radio { width:22px; height:22px; border-radius:50%; border:2px solid #ccc; margin-right:15px; display:flex; justify-content:center; align-items:center; }
-        .lang-option.active .lang-radio { border-color:#2874f0; background:#2874f0; }
-        .lang-option.active .lang-radio::after { content:''; width:8px; height:8px; border-radius:50%; background:#fff; }
-        .lang-text { flex:1; font-weight:bold; font-size:16px; color:#212121; }
-        .lang-text small { display:block; font-weight:normal; font-size:13px; color:#777; margin-top:2px; }
-        .lang-btn { background:#2874f0; color:#fff; width:100%; padding:14px; border:none; border-radius:4px; font-weight:bold; font-size:16px; cursor:pointer; margin-top:20px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
-
+        /* FOOTER CSS */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
-        .footer-col { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .footer-col.show-anim { opacity: 1; transform: translateY(0); }
         .footer-col h3 { font-size: 16px; margin-bottom: 20px; color: #ff3e6c; text-transform: uppercase; }
         .footer-col p { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
         .footer-col a { display: inline-block; width: fit-content; color: #bbb; text-decoration: none; font-size: 13px; margin-bottom: 12px; transition: 0.3s; position: relative; padding-bottom: 3px; }
-        .footer-col a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #ff3e6c; transition: width 0.3s ease; }
-        .footer-col a:hover { color: #ff3e6c; transform: translateX(5px); }
-        .footer-col a:hover::after { width: 100%; }
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { display: inline-flex; align-items: center; justify-content: center; font-size: 16px; width: 35px; height: 35px; background: #333; color: #fff; border-radius: 50%; transition: 0.3s; text-decoration: none;}
         .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px); }
@@ -151,45 +158,40 @@
         .bottom-nav-item { text-align: center; color: #555; font-size: 11px; cursor: pointer; flex: 1; position: relative; }
         .bottom-nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }
         .bottom-nav-item.active { color: #ff3e6c; }
-        .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: calc(50% - 20px); border: 2px solid #fff; font-weight: bold; }
 
         @media (max-width: 768px) {
             body { padding-bottom: 65px; }
             .bottom-nav { display: flex; }
             .search-bar { order: 3; width: 100%; margin: 10px 0 0 0; }
-            .menu-wrapper { display: none; } /* Login & More dropdowns hidden on mobile */
-            .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 2%; gap: 10px; }
+            .menu-wrapper { display: none; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
             .slide { padding-left: 20px; }
             .slide-content h2 { font-size: 20px; margin-bottom: 5px; }
             .slide-content p { font-size: 12px; margin-bottom: 10px; }
             .slide-content button { padding: 8px 15px; font-size: 12px; }
-            .slide-btn { width: 30px; height: 30px; font-size: 14px; }
-            .large-modal { flex-direction: column; padding: 15px; margin: 10px auto; max-height: 90vh; }
-            .modal-left { position: static; }
-            .modal-main-img { height: 300px; }
-            .modal-right { overflow-y: visible; max-height: none; }
-            .nav-icons { justify-content: flex-start; gap: 15px; } 
             
             .dashboard-content { flex-direction: column; height: 100vh; margin: 0; width: 100vw; border-radius: 0; animation: slideUpMobile 0.4s ease forwards; top:0; left:0; position: fixed;}
             .dash-sidebar { width: 100%; border-right: none; display: flex; padding-bottom: 20px;}
             .dash-main { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f3f6; z-index: 5; margin:0;}
             .dash-mobile-header { display: flex; } 
             .dash-inner-content { margin: 10px; border-radius: 6px; }
-            #dashDesktopCloseBtn { display: none; } 
         }
     </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-    <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
+    <div class="logo-box" onclick="window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
         <span style="color: red;">Zippy</span>Kart
     </div>
-    <input type="text" id="mainSearchBar" class="search-bar" oninput="handleSearch(this.value)" placeholder="Search products...">
     
-    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')"><span id="navLoginText">LOGIN</span> ▾
+    <input type="text" id="mainSearchBar" class="search-bar" placeholder="Search products...">
+    
+    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">
+        <span id="navLoginText">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Sign In / Register</div>
             <div id="profileOpt" class="drop-item" style="display:none;" onclick="openDashboard()"><i class="fa-solid fa-user-circle"></i> My Profile</div>
@@ -197,325 +199,66 @@
         </div>
     </div>
     
-    <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">MORE ▾
+    <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
+        MORE ▾
         <div id="moreDrop" class="dropdown">
-            <div class="drop-item" onclick="window.openZippyAI()"><i class="fa-solid fa-headset"></i> AI Chat Support</div>
+            <div class="drop-item"><i class="fa-solid fa-headset"></i> 24x7 Customer Care</div>
+            <div class="drop-item"><i class="fa-solid fa-bullhorn"></i> Advertise</div>
+            <div class="drop-item"><i class="fa-solid fa-download"></i> Download App</div>
         </div>
     </div>
     
-    <div style="display:flex; align-items:center; gap:15px; margin-left: auto;">
-        <div class="notif-wrapper" onclick="toggleDrop('notifDrop')">
-            <i class="fa-solid fa-bell"></i>
-            <span style="position:absolute; top:-6px; right:-8px; background:#ff3e6c; color:white; font-size:10px; padding:2px 5px; border-radius:50%; font-weight:bold; border: 2px solid #fff;">1</span>
-            
-            <div id="notifDrop" class="dropdown" style="width:280px; right:-10px; top:35px; text-align:left; cursor:default; border-radius:6px; overflow:hidden;">
-                <div style="padding:12px 15px; background:#f8f9fa; border-bottom:1px solid #eee; font-weight:bold; font-size:13px; display:flex; justify-content:space-between; align-items:center;">
-                    Notifications <span style="color:#2874f0; font-size:11px; cursor:pointer; font-weight:normal;">Mark read</span>
-                </div>
-                <div style="padding:30px 20px; text-align:center; color:#777; font-size:13px;">
-                    <i class="fa-solid fa-box-open" style="font-size:35px; margin-bottom:12px; color:#e0e0e0;"></i><br>
-                    Welcome to ZippyKart!<br>Fresh drops and orders will appear here.
-                </div>
-            </div>
-        </div>
-        
-        <button class="cart-btn" onclick="toggleCart(true)"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCount">0</span></button>
+    <div class="notif-wrapper">
+        <i class="fa-solid fa-bell"></i>
+        <span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
     </div>
+    
+    <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
 </header>
 
+<!-- NAV ICONS -->
 <div class="nav-icons">
-    <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color:#212121;"></i>All Products</div>
-    <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color:#ff5722;"></i>Men</div>
-    <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color:#e91e63;"></i>Women</div>
-    <div class="nav-cat" onclick="filterCategory('Sweatshirt')"><i class="fa-solid fa-user-ninja" style="color:#673ab7;"></i>Sweatshirt</div>
-    <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child-reaching" style="color:#2196f3;"></i>Kids</div>
-    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color:#4caf50;"></i>Toys</div>
-    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color:#ff9800;"></i>Watch</div>
-    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color:#9c27b0;"></i>Cosmetic</div>
-    <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color:#00bcd4;"></i>Electronics</div>
+    <div class="nav-cat"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
+    <div class="nav-cat"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
+    <div class="nav-cat"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i>Women</div>
+    <div class="nav-cat"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i>Streetwear</div>
+    <div class="nav-cat"><i class="fa-solid fa-child" style="color: #2196f3;"></i>Kids</div>
+    <div class="nav-cat"><i class="fa-solid fa-robot" style="color: #4caf50;"></i>Toys</div>
+    <div class="nav-cat"><i class="fa-solid fa-clock" style="color: #ff9800;"></i>Watch</div>
+    <div class="nav-cat"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i>Cosmetic</div>
+    <div class="nav-cat"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
 </div>
 
+<!-- BANNER SLIDER -->
 <div class="banner-slider">
-    <div class="slides" id="bannerSlides">
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200');">
+    <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
+    <div class="slides" id="sliderTrack">
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000');">
             <div class="slide-content">
                 <h2>Mega <span>Summer</span> Sale</h2>
-                <p>Upto 50% Off on top fashion brands.</p>
-                <button onclick="filterCategory('Men'); document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'});">Shop Men's Fashion</button>
+                <p>Upto 50% OFF on top fashion brands.</p>
+                <button>Shop Men's Fashion</button>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200');">
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000');">
             <div class="slide-content">
                 <h2>New <span>Tech</span> Arrivals</h2>
                 <p>Discover the latest gadgets and electronics.</p>
-                <button onclick="filterCategory('Electronics'); document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'});">Explore Electronics</button>
+                <button>Explore Electronics</button>
             </div>
         </div>
     </div>
-    <button class="slide-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="slide-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
-<div class="product-grid" id="productGrid"></div>
-
-<div id="productModal" class="modal">
-    <div class="large-modal">
-        <span class="close-btn" onclick="document.getElementById('productModal').style.display='none'">&times;</span>
-        <div class="modal-left">
-            <img id="modalMainImg" class="modal-main-img" src="">
-            <div class="thumb-gallery" id="modalThumbGallery"></div>
-        </div>
-        <div class="modal-right">
-            <div class="brand-name">ZippyKart Originals</div>
-            <h3 id="modalName">Product Title</h3>
-            <div style="display: flex; align-items: center;">
-                <div class="rating-badge">4.3 <i class="fa-solid fa-star"></i></div>
-                <span class="rating-text" style="margin-left: 10px; font-size:12px; color:#555;">1,245 Ratings & 120 Reviews</span>
-            </div>
-            <div class="price-row">
-                <p id="modalPrice" class="modal-price-tag">₹0</p>
-                <span id="modalMrp" class="mrp">₹0</span>
-                <span id="modalDiscount" class="discount">0% off</span>
-            </div>
-            <div class="offer-box">
-                <div class="offer-item"><i class="fa-solid fa-tag" style="color:#388e3c;"></i> <span><strong>Bank Offer:</strong> 5% Cashback on Flipkart Axis Bank Card</span></div>
-                <div class="offer-item" style="margin-top:5px;"><i class="fa-solid fa-tag" style="color:#388e3c;"></i> <span><strong>Partner Offer:</strong> Sign up for ZippyKart Pay Later and get ₹500 Gift Card</span></div>
-            </div>
-            <div class="selector-title">Select Color</div>
-            <div class="color-opts">
-                <span class="color-dot active opt-color" style="background-color: #222;" onclick="selectOption('opt-color', this)"></span>
-                <span class="color-dot opt-color" style="background-color: #c0392b;" onclick="selectOption('opt-color', this)"></span>
-                <span class="color-dot opt-color" style="background-color: #2980b9;" onclick="selectOption('opt-color', this)"></span>
-            </div>
-            <div class="selector-title">Select Size</div>
-            <div class="size-opts">
-                <button class="size-btn-opt opt-size active" onclick="selectOption('opt-size', this)">S</button>
-                <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">M</button>
-                <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">L</button>
-                <button class="size-btn-opt opt-size" onclick="selectOption('opt-size', this)">XL</button>
-            </div>
-            <div class="delivery-box">
-                <div class="del-row"><i class="fa-solid fa-location-dot" style="color:#2874f0;"></i> Delivery to: <strong>Rajendra Place, New Delhi</strong></div>
-                <div class="del-row" style="margin-top:8px;"><i class="fa-solid fa-truck-fast" style="color:#2874f0;"></i> Delivery by <strong>Tomorrow, 10 PM</strong></div>
-            </div>
-            <div class="trust-badges">
-                <div class="badge"><i class="fa-solid fa-cube"></i>100% Genuine<br>Product</div>
-                <div class="badge"><i class="fa-solid fa-arrow-rotate-left"></i>10 Days<br>Return Policy</div>
-                <div class="badge"><i class="fa-solid fa-money-bill-transfer"></i>Cash on<br>Delivery</div>
-            </div>
-            <div class="spec-title">Product Details</div>
-            <div class="spec-grid">
-                <div><span class="spec-key">Material</span><span class="spec-value">Premium Blend</span></div>
-                <div><span class="spec-key">Pattern</span><span class="spec-value">Solid / Printed</span></div>
-                <div><span class="spec-key">Fit Type</span><span class="spec-value">Regular Fit</span></div>
-                <div><span class="spec-key">Wash Care</span><span class="spec-value">Machine Wash</span></div>
-            </div>
-            <div class="modal-action-row">
-                <button class="add-btn" id="modalAddBtn"><i class="fa-solid fa-cart-plus"></i> Add</button>
-                <button class="buy-btn" id="modalBuyNowBtn"><i class="fa-solid fa-bolt"></i> Buy Now</button>
-            </div>
-        </div>
+<!-- 🔥 DYNAMIC PRODUCT GRID (FLIPKART STYLE - NO BUTTONS) 🔥 -->
+<div class="product-grid" id="mainProductGrid">
+    <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
+        <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
     </div>
 </div>
 
-<div id="authModal" class="modal">
-    <div class="auth-content">
-        <span class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</span>
-        <div class="auth-header"><h2 id="authTitle">Login</h2></div>
-        <div class="auth-body">
-            <div id="loginFields">
-                <input type="email" id="loginEmail" class="auth-input" placeholder="Email Address">
-                <input type="password" id="loginPassword" class="auth-input" placeholder="Password">
-            </div>
-            <div id="regFields" style="display: none;">
-                <div class="input-group">
-                    <input type="text" id="regFirstName" class="auth-input" placeholder="First Name">
-                    <input type="text" id="regLastName" class="auth-input" placeholder="Last Name">
-                </div>
-                <input type="tel" id="regMobile" class="auth-input" placeholder="Mobile Number" maxlength="10">
-                <input type="email" id="regEmail" class="auth-input" placeholder="Email Address">
-                <input type="password" id="regPassword" class="auth-input" placeholder="Create Password">
-                <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Confirm Password">
-            </div>
-            <button class="auth-submit-btn" id="authSubmit" onclick="processAuth()">Login</button>
-            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color: #DB4437; margin-right: 8px;"></i> Continue with Google</button>
-            <div class="auth-switch" onclick="toggleAuthMode()"><span id="authSwitchPrompt">Don't have an account?</span> <strong id="authSwitchAction" style="color:#ff3e6c;">Sign Up</strong></div>
-        </div>
-    </div>
-</div>
-
-<div id="dashboardModal" class="modal">
-    <div class="dashboard-content">
-        <span id="dashDesktopCloseBtn" class="close-btn" onclick="document.getElementById('dashboardModal').style.display='none'" style="z-index: 10; right: 15px; top: 10px; color: #fff; background: rgba(0,0,0,0.5); border-radius: 50%; width: 30px; height: 30px; text-align: center; line-height: 28px;">&times;</span>
-        
-        <div class="dash-sidebar">
-            <div style="padding: 15px 20px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #e0e0e0; display:flex; justify-content:space-between;">
-                My Account 
-                <span onclick="document.getElementById('dashboardModal').style.display='none'" style="color:#ff3e6c; cursor:pointer; font-size: 20px;">&times;</span>
-            </div>
-            
-            <div class="dash-group-title">Account Settings</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashZippyPlus', this, 'Zippy Premium')"><i class="fa-solid fa-star"></i> Zippy Premium <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item active" onclick="switchDashTab('dashOrders', this, 'My Orders')"><i class="fa-solid fa-box-open"></i> My Orders <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashProfile', this, 'Edit Profile')"><i class="fa-solid fa-user"></i> Edit Profile <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashCards', this, 'Saved Cards')"><i class="fa-solid fa-wallet"></i> Saved Credit / Debit Cards <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashAddress', this, 'Saved Addresses')"><i class="fa-solid fa-location-dot"></i> Saved Addresses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashLanguage', this, 'Select Language')"><i class="fa-solid fa-language"></i> Select Language <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashNotifSet', this, 'Notification Settings')"><i class="fa-solid fa-bell"></i> Notification Settings <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashPrivacy', this, 'Privacy Center')"><i class="fa-solid fa-shield-halved"></i> Privacy Center <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-
-            <div class="dash-group-title">My Activity</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashReviews', this, 'My Reviews')"><i class="fa-solid fa-pen-to-square"></i> Reviews <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashQA', this, 'Questions & Answers')"><i class="fa-solid fa-comments"></i> Questions & Answers <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-
-            <div class="dash-group-title">Offers & Rewards</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashRefer', this, 'Share to Earn')"><i class="fa-solid fa-share-nodes"></i> Share & Earn <span style="margin-left:auto; background:#22c55e; color:white; font-size:10px; padding:2px 6px; border-radius:10px; font-weight:bold;">NEW</span></div>
-
-            <div class="dash-group-title">Feedback & Information</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashTerms', this, 'Terms & Policies')"><i class="fa-solid fa-file-contract"></i> Terms, Policies and Licenses <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashFAQ', this, 'Browse FAQs')"><i class="fa-solid fa-circle-question"></i> Browse FAQs <i class="fa-solid fa-angle-right" style="margin-left:auto; color:#ccc;"></i></div>
-
-            <button class="logout-full-btn" onclick="handleLogout()">Log Out</button>
-            <div style="height: 30px;"></div>
-        </div>
-        
-        <div class="dash-main">
-            <div class="dash-mobile-header">
-                <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
-                <span id="dashHeaderDynamicTitle">My Orders</span>
-            </div>
-
-            <div class="dash-inner-content">
-                <div id="dashOrders" class="dash-tab-content" style="display:block;">
-                    <div class="dash-header-title">My Orders</div>
-                    <div id="ordersTabPayload">
-                        <p style="color:#777; font-size:14px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Fetching your orders...</p>
-                    </div>
-                </div>
-                
-                <div id="dashZippyPlus" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Zippy Premium</div>
-                    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color:white; padding:30px; border-radius:12px; position:relative; overflow:hidden;">
-                        <i class="fa-solid fa-star" style="position:absolute; right:20px; top:20px; font-size:40px; color: gold; opacity:0.3;"></i>
-                        <h2 style="margin:0 0 10px 0; color:gold;">Premium Member</h2>
-                        <p style="margin:0; font-size:14px; color:#cbd5e1;">Enjoy free shipping and early access to streetwear drops!</p>
-                    </div>
-                </div>
-
-                <div id="dashProfile" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Edit Profile</div>
-                    <div style="max-width: 400px;">
-                        <label style="font-size:12px; color:#777; font-weight:bold;">Full Name</label>
-                        <input type="text" id="dashNameInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
-                        
-                        <label style="font-size:12px; color:#777; font-weight:bold;">Email Address</label>
-                        <input type="text" id="dashEmailInput" class="auth-input" readonly style="background:#f5f5f5; margin-top:5px; color:#333; font-weight:bold;">
-                        
-                        <button class="buy-btn" style="background:#2874f0; width:auto; padding:10px 25px; margin-top:10px;">Update Details</button>
-                    </div>
-                </div>
-                
-                <div id="dashCards" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Saved Credit / Debit Cards</div>
-                    <div style="text-align:center; padding: 40px 20px; color:#777;">
-                        <i class="fa-solid fa-credit-card" style="font-size: 40px; color:#e0e0e0; margin-bottom:15px;"></i>
-                        <h4 style="margin:0; color:#333;">No Cards Saved</h4>
-                        <p style="font-size:13px; margin-top:5px;">You can save a card during the secure checkout process.</p>
-                    </div>
-                </div>
-
-                <div id="dashAddress" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Saved Addresses</div>
-                    <div style="border: 1px dashed #2874f0; background: #f5faff; padding: 20px; border-radius: 4px; text-align: left;">
-                        <label style="font-size:13px; color:#2874f0; font-weight:bold; display:block; margin-bottom:10px;"><i class="fa-solid fa-plus"></i> ADD A NEW ADDRESS</label>
-                        <textarea id="dashAddressInput" class="auth-input" placeholder="Enter your full home/office address..." rows="3" style="background:#fff; border-color:#dbeafe;"></textarea>
-                        <button class="buy-btn" onclick="saveAddress()" style="background:#2874f0; width:auto; padding:10px 25px;">Save Address</button>
-                    </div>
-                </div>
-
-                <div id="dashLanguage" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Choose Language</div>
-                    <div style="max-width: 500px;">
-                        <div class="lang-option" onclick="selectLangUi(this)">
-                            <div class="lang-radio"></div>
-                            <div class="lang-text">हिंदी <small>Hindi</small></div>
-                        </div>
-                        <div class="lang-option" onclick="selectLangUi(this)">
-                            <div class="lang-radio"></div>
-                            <div class="lang-text">தமிழ் <small>Tamil</small></div>
-                        </div>
-                        <div class="lang-option" onclick="selectLangUi(this)">
-                            <div class="lang-radio"></div>
-                            <div class="lang-text">తెలుగు <small>Telugu</small></div>
-                        </div>
-                        <div class="lang-option active" onclick="selectLangUi(this)">
-                            <div class="lang-radio"></div>
-                            <div class="lang-text">English <small>English</small></div>
-                        </div>
-                        <div class="lang-option" onclick="selectLangUi(this)">
-                            <div class="lang-radio"></div>
-                            <div class="lang-text">मराठी <small>Marathi</small></div>
-                        </div>
-                        <button class="lang-btn" onclick="alert('Language settings applied successfully!')">Continue</button>
-                    </div>
-                </div>
-                
-                <div id="dashRefer" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Share & Earn Rewards</div>
-                    <div style="text-align:center; padding: 20px;">
-                        <i class="fa-solid fa-gift" style="font-size: 60px; color:#ff3e6c; margin-bottom:15px;"></i>
-                        <h3 style="margin:0; color:#333; font-size:22px;">Invite Friends, Earn Wallet Cash!</h3>
-                        <p style="font-size:14px; color:#555; margin-top:10px;">Get <strong>₹100 Zippy Cash</strong> when your friend makes their first purchase using your link.</p>
-                        
-                        <div style="border: 2px dashed #ccc; padding: 15px; border-radius: 8px; font-size: 22px; font-weight: bold; color: #2874f0; margin: 25px 0; background: #fafafa; letter-spacing: 2px;">
-                            ZIPPY-AKASH-26
-                        </div>
-                        
-                        <button class="buy-btn" style="background:#25d366; width:100%; max-width:300px; padding:15px; font-size:16px; border-radius:6px;" onclick="alert('Link copied to clipboard! Open WhatsApp to paste and share.')"><i class="fa-brands fa-whatsapp"></i> Share on WhatsApp</button>
-                    </div>
-                </div>
-
-                <div id="dashNotifSet" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Notification Settings</div>
-                    <p style="font-size:14px; color:#444;"><i class="fa-solid fa-check" style="color:#22c55e;"></i> Email Alerts active<br><br><i class="fa-solid fa-check" style="color:#22c55e;"></i> Push Notifications active</p>
-                </div>
-                <div id="dashPrivacy" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Privacy Center</div>
-                    <p>Manage your data and privacy preferences securely.</p>
-                </div>
-                <div id="dashReviews" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">My Reviews</div>
-                    <p style="color:#777;">You haven't written any product reviews yet.</p>
-                </div>
-                <div id="dashQA" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Questions & Answers</div>
-                    <p style="color:#777;">No questions asked recently.</p>
-                </div>
-                <div id="dashTerms" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Terms, Policies & Licenses</div>
-                    <p>Please refer to our standard E-Commerce terms of service.</p>
-                </div>
-                <div id="dashFAQ" class="dash-tab-content" style="display:none;">
-                    <div class="dash-header-title">Browse FAQs</div>
-                    <p>How can we help you today? Contact AI Support for instant answers!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-title-box">
-        <h3 style="margin:0;"><i class="fa-solid fa-cart-shopping" style="color:#ff3e6c;"></i> Shopping Cart</h3>
-        <button onclick="toggleCart(false)" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
-    </div>
-    <div class="cart-items-wrapper" id="cartItemsContainer"></div>
-    <div class="cart-footer">
-        <div class="total-box"><span>Total Amount:</span><span id="cartTotalDisplay">₹0</span></div>
-        <button class="buy-btn" style="padding:12px; margin:0;" onclick="checkoutCart()">Secure Checkout</button>
-    </div>
-</div>
-
+<!-- FOOTER -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -524,14 +267,14 @@
         </div>
         <div class="footer-col">
             <h3>Quick Links</h3>
-            <a href="#" onclick="filterCategory('Men'); window.scrollTo(0,0);">Men's Fashion</a>
-            <a href="#" onclick="filterCategory('Electronics'); window.scrollTo(0,0);">Gadgets & Tech</a>
-            <a href="#" onclick="window.openZippyAI()">AI Support</a>
+            <a href="#">Men's Fashion</a><br>
+            <a href="#">Gadgets & Tech</a><br>
+            <a href="#">AI Support</a>
         </div>
         <div class="footer-col">
             <h3>Policies</h3>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a><br>
+            <a href="#">Terms of Service</a><br>
             <a href="#">Return & Refund</a>
         </div>
         <div class="footer-col">
@@ -544,382 +287,192 @@
             </div>
         </div>
     </div>
-    <div class="footer-bottom">&copy; 2026 ZippyKart. All Rights Reserved.</div>
+    <div class="footer-bottom">
+        &copy; 2026 ZippyKart. All Rights Reserved.
+    </div>
 </footer>
 
-<div id="zippyAiChat" style="display:none; position:fixed; bottom:20px; right:20px; width:320px; max-width:90%; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.15); z-index:10002; overflow:hidden; border: 1px solid #e2e8f0; font-family: 'Inter', sans-serif;">
-    <div style="background: linear-gradient(135deg, #ff3e6c 0%, #fb641b 100%); color:white; padding:15px; font-weight:700; display:flex; justify-content:space-between; align-items:center;">
-        <span style="display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-robot"></i> Neon AI Support</span>
-        <span style="cursor:pointer; font-size:22px; line-height:1;" onclick="document.getElementById('zippyAiChat').style.display='none'">&times;</span>
-    </div>
-    <div id="aiChatBody" style="height:300px; padding:15px; overflow-y:auto; background:#f8fafc; font-size:14px; color:#334155; scroll-behavior: smooth;">
-        <div style="margin-bottom:15px; text-align:left;">
-            <span style="background:#ffe4e6; color:#e02844; padding:10px 14px; border-radius:0 15px 15px 15px; display:inline-block; border:1px solid #fecdd3; line-height:1.4;">
-                <b>Neon AI:</b> Hi! Main ZippyKart ka smart assistant hoon. Aaj main aapki kya madad kar sakta hoon?
-            </span>
+<!-- AUTH MODAL -->
+<div id="authModal" class="modal">
+    <div class="auth-content">
+        <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
+        <div class="auth-header"><h2 style="margin:0;">Login</h2></div>
+        <div class="auth-body">
+            <input type="email" class="auth-input" placeholder="Email Address">
+            <input type="password" class="auth-input" placeholder="Password">
+            <button class="auth-submit-btn">Login</button>
+            <button class="google-btn"><i class="fa-brands fa-google" style="color:#ea4335;"></i> Continue with Google</button>
+            <div class="auth-switch">Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span></div>
         </div>
     </div>
-    <div style="display:flex; border-top:1px solid #e2e8f0; background:white; padding:5px;">
-        <input type="text" id="aiUserInput" placeholder="Type your query..." style="flex:1; border:none; padding:12px; outline:none; font-size:14px; background:transparent;" onkeypress="if(event.key === 'Enter') window.sendAiMessage()">
-        <button onclick="window.sendAiMessage()" style="background:none; color:#ff3e6c; border:none; padding:0 15px; cursor:pointer; font-size:18px;"><i class="fa-solid fa-paper-plane"></i></button>
+</div>
+
+<!-- DASHBOARD MODAL -->
+<div id="dashboardModal" class="modal">
+    <div class="dashboard-content">
+        <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
+        
+        <div class="dash-sidebar">
+            <div class="dash-group-title">My Account</div>
+            <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Profile Info')"><i class="fa-solid fa-user"></i> Profile Info</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')"><i class="fa-solid fa-box-open"></i> My Orders</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Addresses')"><i class="fa-solid fa-location-dot"></i> Addresses</div>
+            <button class="logout-full-btn" onclick="alert('Logged out successfully!'); document.getElementById('dashboardModal').style.display='none';"><i class="fa-solid fa-power-off"></i> Logout</button>
+        </div>
+        
+        <div class="dash-main">
+            <div class="dash-mobile-header">
+                <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
+                <span id="dashHeaderDynamicTitle">Profile Info</span>
+            </div>
+            
+            <div class="dash-inner-content" id="dashProfileTab">
+                <h2 class="dash-header-title">Personal Information</h2>
+                <input type="text" class="auth-input" placeholder="Full Name" id="dashNameInput">
+                <input type="email" class="auth-input" placeholder="Email Address" id="dashEmailInput" readonly>
+                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px;">Save Info</button>
+            </div>
+            
+            <div class="dash-inner-content" id="dashOrdersTab" style="display:none;">
+                <h2 class="dash-header-title">My Orders</h2>
+                <div style="text-align: center; color: #888; padding: 40px 0;"><i class="fa-solid fa-box-open" style="font-size:40px; margin-bottom:10px;"></i><br>No recent orders found.</div>
+            </div>
+            
+            <div class="dash-inner-content" id="dashAddressTab" style="display:none;">
+                <h2 class="dash-header-title">Manage Addresses</h2>
+                <button style="border:1px dashed #2874f0; color:#2874f0; background:#f5faff; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px;">+ ADD A NEW ADDRESS</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="bottom-nav">
-    <div class="bottom-nav-item active" onclick="filterCategory('All'); window.scrollTo({top: 0, behavior: 'smooth'}); setActiveNav(this)">
-        <i class="fa-solid fa-house"></i> Home
-    </div>
-    <div class="bottom-nav-item" onclick="document.getElementById('productGrid').scrollIntoView({behavior: 'smooth'}); setActiveNav(this)">
-        <i class="fa-solid fa-border-all"></i> Shop
-    </div>
-    <div class="bottom-nav-item" onclick="toggleCart(true)">
-        <i class="fa-solid fa-cart-shopping"></i> Cart
-        <span class="cart-badge-mobile" id="mobileCartCount">0</span>
-    </div>
-    <div class="bottom-nav-item" onclick="openDashboard(); setActiveNav(this)">
-        <i class="fa-solid fa-user"></i> Profile
-    </div>
-</div>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
+<!-- FIREBASE SCRIPTS & RENDER LOGIC -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+    // 1. FIREBASE INITIALIZATION
     const firebaseConfig = {
-      apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-      authDomain: "zippykart-production-157e1.firebaseapp.com",
-      projectId: "zippykart-production-157e1",
-      storageBucket: "zippykart-production-157e1.firebasestorage.app",
-      messagingSenderId: "803651431969",
-      appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+        authDomain: "zippykart-production-157e1.firebaseapp.com",
+        projectId: "zippykart-production-157e1",
+        storageBucket: "zippykart-production-157e1.firebasestorage.app",
+        messagingSenderId: "803651431969",
+        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
     };
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+    const db = firebase.firestore();
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const provider = new GoogleAuthProvider();
-    window.currentUser = null;
-
-    window.handleLogout = function() {
-        signOut(auth).then(() => {
-            alert("Aap successfully logout ho gaye hain!");
-            window.location.reload();
-        }).catch((error) => {
-            console.error("Logout Error:", error);
-        });
-    };
-
-    window.openZippyAI = function() {
-        document.getElementById('zippyAiChat').style.display = 'block';
-    };
-
-    window.sendAiMessage = function() {
-        const input = document.getElementById("aiUserInput");
-        const msg = input.value.trim();
-        if(!msg) return;
-        
-        const chatBody = document.getElementById("aiChatBody");
-        chatBody.innerHTML += `
-            <div style="margin-bottom:15px; text-align:right;">
-                <span style="background:#e2e8f0; color:#0f172a; padding:10px 14px; border-radius:15px 15px 0 15px; display:inline-block; line-height:1.4;">
-                    ${msg}
-                </span>
-            </div>`;
-        input.value = "";
-        chatBody.scrollTop = chatBody.scrollHeight;
-
-        setTimeout(() => {
-            let aiReply = "Aapka sawal mil gaya hai. Humari team ispar jaldi hi kaam karegi. Kya main aapki kisi aur cheez mein madad karoon?";
-            let lowerMsg = msg.toLowerCase();
-            if(lowerMsg.includes("order") || lowerMsg.includes("track")) { aiReply = "Apna order track karne ke liye apne Profile Dashboard mein 'My Orders' check karein."; } 
-            else if(lowerMsg.includes("return") || lowerMsg.includes("refund")) { aiReply = "Humari 10 Days no-questions-asked return policy hai. Refund aapke account mein 48 hours mein aa jayega."; } 
-            else if(lowerMsg.includes("delivery") || lowerMsg.includes("time")) { aiReply = "Humare saare orders fast delivery partners ke through 3-5 din mein deliver ho jate hain."; } 
-            else if(lowerMsg.includes("hi") || lowerMsg.includes("hello")) { aiReply = "Hello! Batayiye, aaj aap ZippyKart par kya dhoondh rahe hain?"; }
-
-            chatBody.innerHTML += `
-                <div style="margin-bottom:15px; text-align:left;">
-                    <span style="background:#ffe4e6; color:#e02844; padding:10px 14px; border-radius:0 15px 15px 15px; display:inline-block; border:1px solid #fecdd3; line-height:1.4;">
-                        <b>Neon AI:</b> ${aiReply}
-                    </span>
-                </div>`;
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }, 1000);
-    };
-
-    window.setActiveNav = function(elem) { document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active')); if(elem) elem.classList.add('active'); }
-
-    window.currentSlide = 0;
-    window.slideInterval = setInterval(() => { window.moveSlide(1) }, 5000);
-    window.moveSlide = function(step) {
-        const slides = document.getElementById('bannerSlides');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        window.currentSlide = (window.currentSlide + step + totalSlides) % totalSlides;
-        slides.style.transform = `translateX(-${window.currentSlide * 100}%)`;
-        clearInterval(window.slideInterval); window.slideInterval = setInterval(() => { window.moveSlide(1) }, 5000);
+    // 2. DROPDOWN TOGGLE LOGIC
+    function toggleDrop(id) {
+        document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; });
+        const drop = document.getElementById(id);
+        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
     }
 
-    const footerObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('show-anim'); }, index * 150); } });
-    });
-    document.addEventListener("DOMContentLoaded", () => { document.querySelectorAll('.footer-col').forEach(col => footerObserver.observe(col)); });
-
-    onAuthStateChanged(auth, async (user) => {
-        window.currentUser = user; 
-        if (user) {
-            let nameDisplay = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
-            document.getElementById('navLoginText').innerText = "Hi, " + nameDisplay;
-            
-            document.getElementById('authOpt').style.display = 'none'; 
-            document.getElementById('profileOpt').style.display = 'flex';
-            document.getElementById('logoutOpt').style.display = 'flex';
-
-            const userRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(userRef);
-            if (docSnap.exists()) {
-                let data = docSnap.data();
-                if(data.cart) { window.cartList = data.cart; updateCartUI(); }
-                if(data.address) { document.getElementById('dashAddressInput').value = data.address; }
-                if(data.orders) { renderOrdersUI(data.orders); } else { renderOrdersUI([]); }
-            } else {
-                await setDoc(userRef, { cart: [], orders: [], address: "" });
-                renderOrdersUI([]);
-            }
-        } else {
-            document.getElementById('navLoginText').innerText = "LOGIN";
-            document.getElementById('authOpt').style.display = 'flex'; 
-            document.getElementById('profileOpt').style.display = 'none';
-            document.getElementById('logoutOpt').style.display = 'none';
-            
-            window.cartList = []; updateCartUI();
-            document.getElementById('dashAddressInput').value = "";
-            renderOrdersUI([]);
-        }
-    });
-
-    window.syncCartToDb = async function() {
-        if (window.currentUser) {
-            const userRef = doc(db, "users", window.currentUser.uid);
-            await updateDoc(userRef, { cart: window.cartList });
-        }
-    };
-
-    window.cartList = [];
-    window.products = []; 
-
-    const productsRef = collection(db, "zippykart_products");
-    const q = query(productsRef, orderBy("timestamp", "desc"));
-    
-    onSnapshot(q, (snapshot) => {
-        window.products = [];
-        snapshot.forEach((docSnap) => {
-            let d = docSnap.data();
-            window.products.push({
-                id: docSnap.id,
-                n: d.title || 'Premium Product',
-                p: parseInt(d.price || 0),
-                mrp: parseInt(d.mrp || d.price || 0),
-                img: d.image || (d.all_images && d.all_images.length > 0 ? d.all_images[0] : 'https://via.placeholder.com/300'),
-                imgs: d.all_images && d.all_images.length > 0 ? d.all_images : [d.image || 'https://via.placeholder.com/300'],
-                cat: d.category || 'Men'
-            });
-        });
-        
-        let currentSearch = document.getElementById('mainSearchBar').value;
-        if(currentSearch) { window.handleSearch(currentSearch); } else { window.renderProducts(window.products); }
-    });
-
-        window.renderProducts = function(filteredList) {
-        const grid = document.getElementById('productGrid'); grid.innerHTML = '';
-        if(filteredList.length === 0) { grid.innerHTML = `<div class="empty-grid-msg" style="grid-column: 1/-1; text-align:center; padding:40px; color:#777;"><i class="fa-solid fa-box-open" style="font-size:30px; margin-bottom:10px;"></i><br>No products available yet. Add from Admin Panel!</div>`; return; }
-        filteredList.forEach(item => {
-            grid.innerHTML += `<div class="product-card">
-                <img src="${item.img}" onclick="window.location.href='product.html?id=${item.id}'">
-                <div style="font-weight:bold; font-size:13px; margin:8px 0 4px 0; cursor:pointer;" onclick="window.location.href='product.html?id=${item.id}'">${item.n}</div>
-                <div style="color:red; font-weight:bold; margin-bottom: 8px;">₹${item.p}</div>
-                <button class="add-btn" onclick="addToCartById('${item.id}')">Add to Cart</button>
-                <button class="buy-btn" onclick="addToCartById('${item.id}'); window.location.href='cart.html'">Buy Now</button>
-            </div>`;
-        });
-        }
-
-    window.handleSearch = function(query) { 
-        document.getElementById('mainSearchBar').value = query; 
-        window.renderProducts(window.products.filter(p => p.n.toLowerCase().includes(query.toLowerCase()))); 
-    }
-    
-    window.filterCategory = function(cat) { 
-        document.getElementById('mainSearchBar').value = ''; 
-        window.renderProducts(cat === 'All' ? window.products : window.products.filter(p => p.cat === cat)); 
-    }
-    
-    window.changeMainImg = function(src, elem) { document.getElementById('modalMainImg').src = src; document.querySelectorAll('.thumb-gallery img').forEach(img => img.classList.remove('active')); elem.classList.add('active'); }
-    window.selectOption = function(className, elem) { document.querySelectorAll('.' + className).forEach(el => el.classList.remove('active')); elem.classList.add('active'); }
-
-    window.openModal = function(id) {
-        const prod = window.products.find(p => p.id === id);
-        if(!prod) return;
-        document.getElementById('modalName').innerText = prod.n;
-        document.getElementById('modalPrice').innerText = "₹" + prod.p;
-        let mrp = prod.mrp > prod.p ? prod.mrp : Math.floor(prod.p * 1.45); 
-        document.getElementById('modalMrp').innerText = "₹" + mrp;
-        document.getElementById('modalDiscount').innerText = Math.floor(((mrp - prod.p) / mrp) * 100) + "% off";
-        document.getElementById('modalMainImg').src = prod.imgs[0];
-        
-        let thumbsHTML = '';
-        prod.imgs.forEach((imgUrl, index) => { let activeClass = index === 0 ? 'active' : ''; thumbsHTML += `<img src="${imgUrl}" class="${activeClass}" onclick="changeMainImg('${imgUrl}', this)">`; });
-        document.getElementById('modalThumbGallery').innerHTML = thumbsHTML;
-
-        document.getElementById('modalAddBtn').setAttribute('onclick', `addToCartById('${prod.id}'); document.getElementById('productModal').style.display='none';`);
-        document.getElementById('modalBuyNowBtn').setAttribute('onclick', `window.location.href='product.html?id=${prod.id}'`); 
-        document.getElementById('productModal').style.display = 'block';
-    }
-    
-    window.toggleCart = function(open) { const sidebar = document.getElementById('cartSidebar'); if (open) sidebar.classList.add('active'); else sidebar.classList.remove('active'); }
-    
-    window.addToCartById = function(id) { 
-        window.cartList.push(window.products.find(p => p.id === id)); 
-        updateCartUI(); window.toggleCart(true); window.syncCartToDb(); 
-        localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
-    }
-    window.removeFromCart = function(index) { 
-        window.cartList.splice(index, 1); 
-        updateCartUI(); window.syncCartToDb(); 
-        localStorage.setItem('zippy_mega_cart', JSON.stringify(window.cartList));
-    }
-    
-    function updateCartUI() {
-        document.getElementById('cartCount').innerText = window.cartList.length; document.getElementById('mobileCartCount').innerText = window.cartList.length;
-        const container = document.getElementById('cartItemsContainer'); container.innerHTML = ''; let total = 0;
-        window.cartList.forEach((item, idx) => { total += item.p; container.innerHTML += `<div class="cart-item"><img src="${item.img}"><div class="cart-item-details"><div class="cart-item-title">${item.n}</div><div class="cart-item-price">₹${item.p}</div></div><button class="remove-item-btn" onclick="removeFromCart(${idx})"><i class="fa-solid fa-trash-can"></i></button></div>`; });
-        document.getElementById('cartTotalDisplay').innerText = "₹" + total;
-    }
-    
-    window.checkoutCart = function() { 
-        if(!window.currentUser) { alert("Please Login to proceed to Checkout!"); return openAuthModal(); }
-        let total = window.cartList.reduce((sum, item) => sum + item.p, 0); 
-        if (total === 0) return alert("Your cart is empty!"); 
-        window.payNow(total); 
+    // 3. MODALS LOGIC
+    function openAuthModal() {
+        document.getElementById('loginDrop').style.display = 'none';
+        document.getElementById('authModal').style.display = 'flex';
     }
 
-    window.payNow = function(p) { alert("Redirecting to secure payment page..."); window.location.href = "cart.html"; };
-
-    window.renderOrdersUI = function(orders) {
-        const container = document.getElementById('ordersTabPayload');
-        if(!orders || orders.length === 0) { 
-            container.innerHTML = `
-                <div style="text-align:center; padding: 40px; color:#777;">
-                    <i class="fa-solid fa-box-open" style="font-size: 40px; color:#e0e0e0; margin-bottom:15px;"></i>
-                    <h4 style="margin:0; color:#333;">No orders yet</h4>
-                    <p style="font-size:13px; margin-top:5px;">Looks like you haven't made your first purchase.</p>
-                </div>`; 
-            return; 
-        }
-        let html = '';
-        orders.forEach(ord => {
-            let itemNames = ord.items.map(i => i.n).join(", ");
-            html += `
-                <div class="order-card">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                        <strong>Order #${ord.orderId}</strong>
-                        <span style="color:#2874f0; font-weight:bold; font-size:12px; background:#f5faff; padding:3px 8px; border-radius:4px;">${ord.status}</span>
-                    </div>
-                    <p style="margin:0; font-size:12px; color:#555;">Items: ${itemNames}</p>
-                    <p style="margin:8px 0 0 0; font-weight:bold; font-size:14px; color:#212121;">Total: ₹${ord.total} <span style="float:right; font-size:11px; font-weight:normal; color:#888;">${ord.date}</span></p>
-                </div>`;
-        });
-        container.innerHTML = html;
-    }
-    
-    window.saveAddress = async function() {
-        if(window.currentUser) {
-            let addr = document.getElementById('dashAddressInput').value;
-            if(!addr) return alert("Please enter an address first.");
-            const userRef = doc(db, "users", window.currentUser.uid);
-            await updateDoc(userRef, { address: addr });
-            alert("Address saved to Cloud successfully!");
-        }
-    }
-
-    window.toggleDrop = function(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
-    window.openAuthModal = function() { document.getElementById('authModal').style.display = 'block'; document.getElementById('loginDrop').style.display = 'none'; }
-    
-    window.isLoginMode = true;
-    window.toggleAuthMode = function() {
-        window.isLoginMode = !window.isLoginMode;
-        document.getElementById('authTitle').innerText = window.isLoginMode ? "Login" : "Create Account"; 
-        document.getElementById('authSubmit').innerText = window.isLoginMode ? "Login" : "Register";
-        document.getElementById('loginFields').style.display = window.isLoginMode ? "block" : "none"; 
-        document.getElementById('regFields').style.display = window.isLoginMode ? "none" : "block";
-        document.getElementById('authSwitchPrompt').innerText = window.isLoginMode ? "Don't have an account?" : "Already have an account?";
-        document.getElementById('authSwitchAction').innerText = window.isLoginMode ? "Sign Up" : "Login";
-    }
-
-    window.processAuth = function() {
-        if(window.isLoginMode) {
-            let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value;
-            if(!email || !pass) return alert("Please enter Email and Password!");
-            document.getElementById('authSubmit').innerText = "Logging in...";
-            signInWithEmailAndPassword(auth, email, pass).then(() => { alert("Login Successful!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Login"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Login"; });
-        } else {
-            let fName = document.getElementById('regFirstName').value, lName = document.getElementById('regLastName').value, mobile = document.getElementById('regMobile').value, email = document.getElementById('regEmail').value, pass = document.getElementById('regPassword').value, cpass = document.getElementById('regConfirmPassword').value;
-            if(!fName || !email || !pass || !mobile) return alert("Please fill required fields!"); if(pass !== cpass) return alert("Passwords do not match!");
-            document.getElementById('authSubmit').innerText = "Creating Account...";
-            createUserWithEmailAndPassword(auth, email, pass).then(() => { alert("Account Created Successfully!"); document.getElementById('authModal').style.display = 'none'; document.getElementById('authSubmit').innerText = "Register"; }).catch((error) => { alert(error.message); document.getElementById('authSubmit').innerText = "Register"; });
-        }
-    }
-    
-    window.googleSignIn = function() { signInWithPopup(auth, provider).then(() => { document.getElementById('authModal').style.display = 'none'; }).catch((error) => { alert(error.message); }); }
-
-    window.openDashboard = function() {
+    function openDashboard() {
         document.getElementById('loginDrop').style.display = 'none'; 
-        if (!window.currentUser) { alert("Please login first to view your dashboard!"); openAuthModal(); return; }
-        
-        document.getElementById('dashNameInput').value = window.currentUser.displayName || "";
-        document.getElementById('dashEmailInput').value = window.currentUser.email || "";
-        
         document.getElementById('dashboardModal').style.display = 'flex';
-        
         if(window.innerWidth <= 768) {
             document.querySelector('.dash-sidebar').style.display = 'flex';
             document.querySelector('.dash-main').style.display = 'none';
         }
     }
-    
-    window.switchDashTab = function(tabId, eventElem, title) {
-        document.querySelectorAll('.dash-tab-content').forEach(tab => tab.style.display = 'none');
+
+    function switchDashTab(tabId, eventElem, title) {
+        document.querySelectorAll('.dash-inner-content').forEach(tab => tab.style.display = 'none');
         document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
-        
         document.getElementById(tabId).style.display = 'block'; 
         eventElem.classList.add('active');
-        
         if (title) document.getElementById('dashHeaderDynamicTitle').innerText = title;
-        
         if(window.innerWidth <= 768) {
             document.querySelector('.dash-sidebar').style.display = 'none';
             document.querySelector('.dash-main').style.display = 'block';
         }
     }
-    
-    window.closeDashMainMobile = function() {
+
+    function closeDashMainMobile() {
         document.querySelector('.dash-main').style.display = 'none';
         document.querySelector('.dash-sidebar').style.display = 'flex';
     }
 
-    window.selectLangUi = function(elem) {
-        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
-        elem.classList.add('active');
-    }
-    
+    // Close Modals on clicking outside
     window.onclick = function(e) { 
-        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.notif-wrapper') && !e.target.closest('.auth-content')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
-        if(e.target == document.getElementById('productModal')) document.getElementById('productModal').style.display = 'none';
+        if(!e.target.closest('.menu-wrapper') && !e.target.closest('.notif-wrapper')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        }
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
     };
+
+    // 4. SLIDER LOGIC
+    let currentSlide = 0;
+    function moveSlide(direction) {
+        const track = document.getElementById('sliderTrack');
+        const totalSlides = document.querySelectorAll('.slide').length;
+        currentSlide += direction;
+        if(currentSlide < 0) currentSlide = totalSlides - 1;
+        if(currentSlide >= totalSlides) currentSlide = 0;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    setInterval(() => moveSlide(1), 5000);
+
+    // 5. FETCH & DISPLAY PRODUCTS (FLIPKART STYLE)
+    async function fetchProducts() {
+        const grid = document.getElementById('mainProductGrid');
+        try {
+            const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
+            grid.innerHTML = '';
+            
+            if(snapshot.empty) {
+                grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products available.</div>`;
+                return;
+            }
+
+            snapshot.forEach(doc => {
+                const p = doc.data();
+                const productId = doc.id;
+                
+                const title = p.title || "Premium Item";
+                const price = p.price || 0;
+                const mrp = p.mrp || price;
+                const img = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
+                
+                // Extra UI details for Premium feel
+                const upiPrice = price > 100 ? price - 50 : price;
+                const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+
+                // 🔥 THE NEW CLEAN PRODUCT CARD 🔥
+                const cardHTML = `
+                    <a href="product.html?id=${productId}" class="product-card">
+                        <div class="image-wrapper">
+                            <img src="${img}" alt="${title}">
+                            <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <div class="product-brand">${title}</div>
+                        <div class="price-row-home">
+                            <span class="current-price-home">₹${price}</span>
+                            <span class="mrp-price-home">₹${mrp}</span>
+                        </div>
+                        <div class="upi-offer-home">₹${upiPrice} with UPI offer</div>
+                    </a>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        } catch (error) {
+            console.error("Firebase Error:", error);
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error. Check console.</div>`;
+        }
+    }
+
+    // Run on load
+    window.onload = fetchProducts;
 </script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="db.js"></script>
+
 </body>
 </html>
