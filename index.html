@@ -124,7 +124,19 @@
         .social-icons a:hover { background: #ff3e6c; transform: translateY(-6px); }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 12px; color: #888; }
 
+        /* 🔥 FIX FOR MOBILE HEADER LAYOUT 🔥 */
         @media (max-width: 768px) {
+            header { 
+                padding: 10px; 
+                gap: 8px; 
+                justify-content: flex-end; /* Align right side items */
+            }
+            .logo-box { order: 1; margin-right: auto; font-size: 16px; }
+            .menu-wrapper { display: block; order: 2; font-size: 11px; margin-right: 5px; } /* Brought back from display: none */
+            .notif-wrapper { order: 3; font-size: 18px; margin-right: 5px; }
+            .cart-btn { order: 4; padding: 6px 10px; font-size: 11px; }
+            .search-bar { order: 5; width: 100%; margin: 5px 0 0 0; flex: 1 1 100%; box-sizing: border-box; } /* Forces next row */
+
             .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
             .slide { padding-left: 20px; }
@@ -142,6 +154,7 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
@@ -176,6 +189,7 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
 </header>
 
+<!-- NOTIFICATIONS SIDEBAR -->
 <div class="cart-sidebar" id="notifSidebar">
     <div class="cart-title-box">
         <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> Notifications</span>
@@ -200,6 +214,7 @@
     </div>
 </div>
 
+<!-- AI CHAT AGENT BOX -->
 <div class="ai-chat-box" id="aiChatBox">
     <div class="chat-header">
         <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
@@ -214,6 +229,7 @@
     </div>
 </div>
 
+<!-- GENERIC INFO MODAL (For Advertise & App Download) -->
 <div id="infoModal" class="modal">
     <div class="auth-content" style="max-width:450px;">
         <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
@@ -226,6 +242,7 @@
     </div>
 </div>
 
+<!-- NAV CATEGORIES -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i>All Products</div>
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i>Men</div>
@@ -238,6 +255,7 @@
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>Electronics</div>
 </div>
 
+<!-- BANNER SLIDER -->
 <div class="banner-slider">
     <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
     <div class="slides" id="sliderTrack">
@@ -259,12 +277,14 @@
     <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
 </div>
 
+<!-- DYNAMIC PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
     </div>
 </div>
 
+<!-- FOOTER -->
 <footer class="main-footer">
     <div class="footer-content">
         <div class="footer-col">
@@ -298,6 +318,7 @@
     </div>
 </footer>
 
+<!-- AUTHENTICATION MODAL -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -314,6 +335,7 @@
     </div>
 </div>
 
+<!-- DASHBOARD MODAL -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
@@ -347,6 +369,7 @@
     </div>
 </div>
 
+<!-- FIREBASE SCRIPTS & LOGIC -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -359,14 +382,12 @@
 
     // 🔥 NEW ANIMATED FEATURES LOGIC 🔥
     
-    // Notifications Sidebar
     function toggleNotifications() {
         const panel = document.getElementById('notifSidebar');
         panel.classList.toggle('active');
         if(panel.classList.contains('active')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
     }
 
-    // AI Chatbot Logic
     function toggleChat() {
         const chatBox = document.getElementById('aiChatBox');
         chatBox.classList.toggle('active');
@@ -380,19 +401,16 @@
         if(!text) return;
         
         const chatBody = document.getElementById('chatBody');
-        // Add User Message
         chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`;
         input.value = "";
         chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Simulate AI Thinking & Reply
         setTimeout(() => {
             chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly. You can also track your orders from the Dashboard.</div>`;
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 1000);
     }
 
-    // Generic Info Modal (Advertise, Download App)
     function openInfoModal(title, text, iconClass, iconColor) {
         document.getElementById('infoModalTitle').innerText = title;
         document.getElementById('infoModalText').innerHTML = text;
