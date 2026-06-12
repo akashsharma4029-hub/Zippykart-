@@ -106,7 +106,6 @@
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
         .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
         
-        /* Dashboard Tabs */
         .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); min-height: 80%; display:none;}
         .slide-in-active { animation: slideInRight 0.4s ease forwards; display:block !important;}
         .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
@@ -116,6 +115,7 @@
         
         /* Language Options UI */
         .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
+        .lang-option:hover { border-color: #ff3e6c; }
         .lang-option.active { border-color:#ff3e6c; background:#fff0f3; box-shadow: 0 2px 8px rgba(255,62,108,0.15);}
         .lang-radio { width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center; transition:0.2s;}
         .lang-option.active .lang-radio { border-color:#ff3e6c; background:#ff3e6c; }
@@ -124,6 +124,7 @@
         .lang-text small { display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px; }
 
         .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
+        .logout-full-btn:hover { background: #fff0f3; }
 
         /* 🔥 ANIMATED FOOTER 🔥 */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
@@ -340,7 +341,7 @@
     </div>
 </div>
 
-<!-- MEGA DASHBOARD -->
+<!-- 🔥 MEGA DASHBOARD (PINK) 🔥 -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
@@ -495,7 +496,7 @@
     </div>
 </div>
 
-<!-- 🔥 ANIMATED FOOTER WITH SOCIAL LINKS 🔥 -->
+<!-- 🔥 ANIMATED FOOTER 🔥 -->
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
@@ -694,25 +695,16 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // FETCH PRODUCTS (Wait until DOM loads)
-    function fetchAllProducts() {
+    // FETCH PRODUCTS
+    async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
-        db.collection("zippykart_products").orderBy("timestamp", "desc").get().then((snapshot) => {
+        try {
+            const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
             window.allFetchedProducts = [];
             if(snapshot.empty) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;"><span class="translate" data-en="No products available." data-hi="कोई उत्पाद उपलब्ध नहीं है।">No products available.</span></div>`; return; }
             snapshot.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); });
             renderProducts(window.allFetchedProducts);
-        }).catch((error) => {
-            // Check if fallback to normal get without ordering is needed
-            db.collection("zippykart_products").get().then((snap) => {
-                 window.allFetchedProducts = [];
-                 if(snap.empty) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products available.</div>`; return; }
-                 snap.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); });
-                 renderProducts(window.allFetchedProducts);
-            }).catch((err) => {
-                 grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`; 
-            });
-        });
+        } catch (error) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`; }
     }
 
     function renderProducts(productArray) {
@@ -756,7 +748,7 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', fetchAllProducts);
+    window.onload = fetchAllProducts;
 </script>
 
 </body>
