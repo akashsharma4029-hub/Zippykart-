@@ -106,6 +106,7 @@
         .dash-main { flex: 1; padding: 0; overflow-y: auto; background: #f1f3f6; position: relative;}
         .dash-mobile-header { display: none; background: #ff3e6c; color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 10;}
         
+        /* Dashboard Tabs */
         .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); min-height: 80%; display:none;}
         .slide-in-active { animation: slideInRight 0.4s ease forwards; display:block !important;}
         .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
@@ -115,7 +116,6 @@
         
         /* Language Options UI */
         .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
-        .lang-option:hover { border-color: #ff3e6c; }
         .lang-option.active { border-color:#ff3e6c; background:#fff0f3; box-shadow: 0 2px 8px rgba(255,62,108,0.15);}
         .lang-radio { width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center; transition:0.2s;}
         .lang-option.active .lang-radio { border-color:#ff3e6c; background:#ff3e6c; }
@@ -124,7 +124,6 @@
         .lang-text small { display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px; }
 
         .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
-        .logout-full-btn:hover { background: #fff0f3; }
 
         /* 🔥 ANIMATED FOOTER 🔥 */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
@@ -341,7 +340,7 @@
     </div>
 </div>
 
-<!-- 🔥 MEGA DASHBOARD (PINK) 🔥 -->
+<!-- MEGA DASHBOARD -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
@@ -496,7 +495,7 @@
     </div>
 </div>
 
-<!-- 🔥 ANIMATED FOOTER 🔥 -->
+<!-- 🔥 ANIMATED FOOTER WITH SOCIAL LINKS 🔥 -->
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
@@ -530,12 +529,25 @@
     </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script>
-    // FIREBASE INITIALIZATION
-    const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1", storageBucket: "zippykart-production-157e1.firebasestorage.app", messagingSenderId: "803651431969", appId: "1:803651431969:web:7432f351ec9f5f0ec23d60" };
+    // 1. FIREBASE INITIALIZATION
+    const firebaseConfig = { 
+        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", 
+        authDomain: "zippykart-production-157e1.firebaseapp.com", 
+        projectId: "zippykart-production-157e1", 
+        storageBucket: "zippykart-production-157e1.firebasestorage.app", 
+        messagingSenderId: "803651431969", 
+        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60" 
+    };
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-    const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
-    window.allFetchedProducts = []; window.currentUser = null;
+    const db = firebase.firestore();
+    const auth = firebase.auth(); 
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    window.allFetchedProducts = []; 
+    window.currentUser = null;
 
     // LANGUAGE TRANSLATION LOGIC
     window.currentLanguage = 'en';
@@ -644,7 +656,7 @@
         if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
             title.innerText = window.currentLanguage === 'hi' ? "साइन अप" : "Sign Up"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Register" data-hi="रजिस्टर">रजिस्टर</span>` : `<span class="translate" data-en="Register" data-hi="रजिस्टर">Register</span>`; 
-            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
+            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग सेन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
         } else { 
             title.innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Login" data-hi="लॉग इन करें">लॉग इन करें</span>` : `<span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span>`; 
@@ -695,35 +707,77 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // FETCH PRODUCTS
+    // 🔥 2. FETCH PRODUCTS (NEW OPTIMIZED LOGIC FOR BASE64 IMAGES) 🔥
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
+        
         try {
-            const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get();
+            const snapshot = await db.collection("zippykart_products").get();
+            
+            if(snapshot.empty) {
+                grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in database!</div>`;
+                return;
+            }
+            
             window.allFetchedProducts = [];
-            if(snapshot.empty) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;"><span class="translate" data-en="No products available." data-hi="कोई उत्पाद उपलब्ध नहीं है।">No products available.</span></div>`; return; }
-            snapshot.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); });
+            snapshot.forEach(doc => {
+                let p = doc.data();
+                p.id = doc.id;
+                window.allFetchedProducts.push(p);
+            });
+            
             renderProducts(window.allFetchedProducts);
-        } catch (error) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error fetching products.</div>`; }
+
+        } catch (error) {
+            console.error("Firebase Fetch Error:", error);
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error: Please check console for details.</div>`;
+        }
     }
 
     function renderProducts(productArray) {
-        const grid = document.getElementById('mainProductGrid'); grid.innerHTML = '';
-        if(productArray.length === 0) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in this category!</div>`; return; }
+        const grid = document.getElementById('mainProductGrid'); 
+        grid.innerHTML = '';
+        
+        if(productArray.length === 0) {
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products to display.</div>`;
+            return;
+        }
+
         productArray.forEach(p => {
-            const title = p.title || "Premium Item"; const price = p.price || 0; const mrp = p.mrp || price;
-            const img = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
-            const upiPrice = price > 100 ? price - 50 : price; const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+            const title = p.title || "Premium Item"; 
+            const price = p.price || 0; 
+            const mrp = p.mrp || price;
+            const upiPrice = price > 100 ? price - 50 : price; 
+            const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+            
+            // Base64 image logic fix
+            let imgSource = "https://via.placeholder.com/300";
+            if (p.all_images && Array.isArray(p.all_images) && p.all_images.length > 0) {
+                imgSource = p.all_images[0]; 
+            } else if (p.image) {
+                imgSource = p.image;
+            }
+
             grid.innerHTML += `
                 <a href="product.html?id=${p.id}" class="product-card">
-                    <div class="image-wrapper"><img src="${img}"><div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div></div>
+                    <div class="image-wrapper">
+                        <img src="${imgSource}" alt="${title}">
+                        <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
+                    </div>
                     <div class="product-brand">${title}</div>
-                    <div class="price-row-home"><span class="current-price-home">₹${price}</span><span class="mrp-price-home">₹${mrp}</span></div>
+                    <div class="price-row-home">
+                        <span class="current-price-home">₹${price}</span>
+                        <span class="mrp-price-home">₹${mrp}</span>
+                    </div>
                     <div class="upi-offer-home">₹${upiPrice} <span class="translate" data-en="with UPI offer" data-hi="UPI ऑफर के साथ">with UPI offer</span></div>
                 </a>`;
         });
-        
-        if(window.currentLanguage === 'hi') { setLanguageUI('hi', document.querySelector('.lang-option.active')); }
+
+        // Re-apply language translation to new elements
+        if(window.currentLanguage === 'hi') { 
+            const activeLangBtn = document.querySelector('.lang-option.active');
+            if(activeLangBtn) setLanguageUI('hi', activeLangBtn); 
+        }
     }
 
     window.filterCategory = function(categoryName) {
@@ -748,7 +802,8 @@
         }
     });
 
-    window.onload = fetchAllProducts;
+    // FIRE ON LOAD
+    document.addEventListener('DOMContentLoaded', fetchAllProducts);
 </script>
 
 </body>
