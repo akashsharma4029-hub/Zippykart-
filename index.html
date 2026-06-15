@@ -656,7 +656,7 @@
         if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
             title.innerText = window.currentLanguage === 'hi' ? "साइन अप" : "Sign Up"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Register" data-hi="रजिस्टर">रजिस्टर</span>` : `<span class="translate" data-en="Register" data-hi="रजिस्टर">Register</span>`; 
-            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग सेन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
+            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
         } else { 
             title.innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Login" data-hi="लॉग इन करें">लॉग इन करें</span>` : `<span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span>`; 
@@ -707,27 +707,22 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // 🔥 2. FETCH PRODUCTS (NEW OPTIMIZED LOGIC FOR BASE64 IMAGES) 🔥
+    // 🔥 FETCH PRODUCTS 🔥
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
-        
         try {
             const snapshot = await db.collection("zippykart_products").get();
-            
             if(snapshot.empty) {
                 grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found in database!</div>`;
                 return;
             }
-            
             window.allFetchedProducts = [];
             snapshot.forEach(doc => {
                 let p = doc.data();
                 p.id = doc.id;
                 window.allFetchedProducts.push(p);
             });
-            
             renderProducts(window.allFetchedProducts);
-
         } catch (error) {
             console.error("Firebase Fetch Error:", error);
             grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error: Please check console for details.</div>`;
@@ -744,13 +739,16 @@
         }
 
         productArray.forEach(p => {
+            // 🔥 FIX 1: GHOST PRODUCT KO HATANA 🔥
+            // Agar title aur price dono nahi hain, toh isko screen pe mat dikhao (skip kardo)
+            if (!p.title && !p.price) return; 
+
             const title = p.title || "Premium Item"; 
             const price = p.price || 0; 
             const mrp = p.mrp || price;
             const upiPrice = price > 100 ? price - 50 : price; 
             const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
             
-            // Base64 image logic fix
             let imgSource = "https://via.placeholder.com/300";
             if (p.all_images && Array.isArray(p.all_images) && p.all_images.length > 0) {
                 imgSource = p.all_images[0]; 
@@ -773,11 +771,13 @@
                 </a>`;
         });
 
-        // Re-apply language translation to new elements
         if(window.currentLanguage === 'hi') { 
             const activeLangBtn = document.querySelector('.lang-option.active');
             if(activeLangBtn) setLanguageUI('hi', activeLangBtn); 
         }
+
+        // Jab products load ho jayein, turant footer check karo
+        setTimeout(handleFooterAnim, 500);
     }
 
     window.filterCategory = function(categoryName) {
@@ -789,20 +789,21 @@
         document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // FOOTER SCROLL ANIMATION TRIGGER
-    window.addEventListener('scroll', () => {
+    // 🔥 FIX 2: FOOTER SCROLL ANIMATION IMPROVEMENT 🔥
+    function handleFooterAnim() {
         const footer = document.getElementById('footerContent');
         if(!footer) return;
         const footerPos = footer.getBoundingClientRect().top;
-        const screenPos = window.innerHeight / 1.1;
+        // Thoda extra margin diya hai taaki chhote page pe bhi animation chal jaye
+        const screenPos = window.innerHeight + 150; 
         if(footerPos < screenPos) {
             document.querySelectorAll('.footer-col').forEach((col, index) => {
                 setTimeout(() => { col.classList.add('show-anim'); }, index * 150);
             });
         }
-    });
-
-    // FIRE ON LOAD
+    }
+    
+    window.addEventListener('scroll', handleFooterAnim);
     document.addEventListener('DOMContentLoaded', fetchAllProducts);
 </script>
 
