@@ -25,6 +25,8 @@
         .nav-cat { text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; transition: 0.3s; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 5px;}
         .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
         .nav-cat i { font-size: 20px; }
+        .nav-cat.new-badge { position: relative; }
+        .nav-cat.new-badge::after { content: 'NEW'; position: absolute; top: -10px; right: 0; background: #ff3e6c; color: white; font-size: 8px; padding: 2px 4px; border-radius: 4px; font-weight: bold; animation: pulse 1.5s infinite; }
 
         /* SLIDER CSS */
         .banner-slider { position: relative; width: 95%; max-width: 1200px; height: 350px; margin: 20px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -38,20 +40,23 @@
         .slide-content button { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.3s; }
         .slide-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; }
         .slide-btn.prev { left: 15px; } .slide-btn.next { right: 15px; }
-
-        /* 🔥 RECHARGE SECTION (AMAZON STYLE) 🔥 */
-        .recharge-section { background: #fff; width: 95%; max-width: 1200px; margin: 20px auto; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); box-sizing: border-box; }
-        .section-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 20px; }
-        .zero-fee-badge { background: #e2fbe8; color: #10b981; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-        .recharge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center; }
-        .recharge-item { cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.2s; }
-        .recharge-item:hover { transform: translateY(-3px); }
-        .icon-box { width: 50px; height: 50px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #475569; transition: 0.2s; }
-        .recharge-item:hover .icon-box { background: #fff0f3; border-color: #ff3e6c; color: #ff3e6c; }
-        .recharge-item .item-text { font-size: 12px; font-weight: 600; color: #475569; }
         
+        /* 🔥 ZIPPY NEW (AMAZON STYLE) SUPER APP SECTION 🔥 */
+        #zippyNewSection { display: none; padding: 10px 5%; animation: popUpAnim 0.4s ease; }
+        .pay-module { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .pay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .pay-title { font-size: 18px; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+        .zero-fee { background: #e2fbe8; color: #10b981; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 800; border: 1px solid #a7f3d0; }
+        .see-more { font-size: 13px; font-weight: 600; color: #008296; cursor: pointer; }
+        .pay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 10px; text-align: center; }
+        .pay-item { cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: transform 0.2s; }
+        .pay-item:hover { transform: translateY(-3px); }
+        .pay-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #555; background: #f8fafc; border-radius: 50%; border: 1px solid #e2e8f0; transition: 0.3s; }
+        .pay-item:hover .pay-icon { border-color: #ff3e6c; color: #ff3e6c; background: #fff0f3; }
+        .pay-text { font-size: 12px; font-weight: 600; color: #475569; line-height: 1.2; }
+
         /* PRODUCT GRID */
-        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 10px 5% 20px; min-height: 400px; scroll-margin-top: 80px; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 10px 5% 20px; min-height: 400px; scroll-margin-top: 80px; transition: 0.3s;}
         .product-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: #fff; border-radius: 8px; padding-bottom: 10px; border: 1px solid #eee; transition: box-shadow 0.3s; }
         .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .image-wrapper { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 8px 8px 0 0; overflow: hidden; background: #f8fafc; margin-bottom: 8px; }
@@ -84,6 +89,7 @@
 
         /* MODALS & ANIMATIONS */
         @keyframes popUpAnim { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         @keyframes slideInRight { 0% { transform: translateX(30px); opacity: 0;} 100% { transform: translateX(0); opacity: 1;} }
         @keyframes slideUpMobile { 0% { transform: translateY(100%); opacity: 0;} 100% { transform: translateY(0); opacity: 1;} }
         
@@ -93,11 +99,20 @@
         .auth-content { background: #fff; margin: auto; width: 90%; max-width: 400px; border-radius: 12px; position: relative; overflow: hidden; box-sizing: border-box; animation: popUpAnim 0.4s; box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
         .auth-header { background: #ff3e6c; color: white; padding: 20px; text-align: center; font-weight:bold;}
         .auth-body { padding: 25px; }
-        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline:none;}
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline:none; box-sizing: border-box;}
         .auth-input:focus { border-color: #ff3e6c;}
         .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition:0.3s;}
         .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
+
+        /* VIEW PLANS MODAL CARDS */
+        .plan-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; position: relative; transition: 0.2s;}
+        .plan-card:hover { border-color: #008296; box-shadow: 0 4px 10px rgba(0,130,150,0.1);}
+        .plan-price { font-size: 24px; font-weight: 900; color: #1e293b; margin-bottom: 5px;}
+        .plan-details { font-size: 13px; color: #475569; display: flex; gap: 15px;}
+        .plan-select-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: #f1f5f9; color: #008296; border: 1px solid #cbd5e1; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer; transition: 0.2s;}
+        .plan-card:hover .plan-select-btn { background: #008296; color: white; border-color: #008296;}
+        .plan-tag { position: absolute; top: -10px; left: 15px; background: #e2fbe8; color: #10b981; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold; border: 1px solid #a7f3d0;}
 
         /* MEGA DASHBOARD */
         .dashboard-content { background: #f1f3f6; margin: auto; width: 95%; max-width: 1000px; border-radius: 12px; position: relative; box-sizing: border-box; display: flex; height: 85vh; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: popUpAnim 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);}
@@ -116,8 +131,6 @@
         .dash-inner-content { padding: 25px; background: #fff; margin: 15px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); min-height: 80%; display:none;}
         .slide-in-active { animation: slideInRight 0.4s ease forwards; display:block !important;}
         .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
-        .order-card { border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; background:#fff; transition: 0.3s; display:flex; justify-content:space-between; align-items:center;}
-        .bank-card { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); position:relative; overflow:hidden;}
         
         /* Language Options UI */
         .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
@@ -160,8 +173,9 @@
             .bottom-nav-item i { font-size: 20px; }
             .bottom-nav-item.active { color: #ff3e6c; }
 
-            .recharge-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
-            .recharge-item .item-text { font-size: 10px; }
+            .pay-grid { grid-template-columns: repeat(4, 1fr); gap: 15px 5px; }
+            .pay-text { font-size: 10px; }
+            .pay-icon { width: 40px; height: 40px; font-size: 18px; }
 
             .product-grid { grid-template-columns: repeat(2, 1fr); padding: 15px 3%; gap: 10px; }
             .banner-slider { height: 180px; border-radius: 8px; }
@@ -181,7 +195,6 @@
 </head>
 <body id="appBody">
 
-<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
@@ -216,7 +229,6 @@
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span class="translate" data-en="Cart" data-hi="कार्ट">Cart</span></button>
 </header>
 
-<!-- MOBILE BOTTOM NAVIGATION -->
 <div class="bottom-nav">
     <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-house"></i>
@@ -236,7 +248,6 @@
     </div>
 </div>
 
-<!-- MOBILE 'MORE' MODAL -->
 <div id="mobileMoreModal" class="modal" onclick="if(event.target==this) this.style.display='none'">
     <div class="auth-content" style="margin: auto; margin-bottom: 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; animation: slideUpMobile 0.3s;">
         <div class="auth-header" style="background:#1e293b; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
@@ -249,7 +260,6 @@
     </div>
 </div>
 
-<!-- NOTIFICATIONS -->
 <div class="cart-sidebar" id="notifSidebar">
     <div class="cart-title-box">
         <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> <span class="translate" data-en="Notifications" data-hi="सूचनाएं">Notifications</span></span>
@@ -267,7 +277,6 @@
     </div>
 </div>
 
-<!-- AI CHAT AGENT -->
 <div class="ai-chat-box" id="aiChatBox">
     <div class="chat-header">
         <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
@@ -282,7 +291,6 @@
     </div>
 </div>
 
-<!-- INFO MODAL -->
 <div id="infoModal" class="modal">
     <div class="auth-content" style="max-width:450px;">
         <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
@@ -295,81 +303,227 @@
     </div>
 </div>
 
-<!-- CATEGORIES -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i><span class="translate" data-en="All" data-hi="सभी">All</span></div>
+    
+    <div class="nav-cat new-badge" onclick="filterCategory('ZippyNew')">
+        <i class="fa-solid fa-bolt" style="color: #008296;"></i>
+        <span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span>
+    </div>
+
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i><span class="translate" data-en="Men" data-hi="पुरुष">Men</span></div>
     <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i><span class="translate" data-en="Women" data-hi="महिला">Women</span></div>
     <div class="nav-cat" onclick="filterCategory('Streetwear')"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i><span class="translate" data-en="Streetwear" data-hi="स्ट्रीटवियर">Streetwear</span></div>
     <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child" style="color: #2196f3;"></i><span class="translate" data-en="Kids" data-hi="बच्चे">Kids</span></div>
     <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color: #4caf50;"></i><span class="translate" data-en="Toys" data-hi="खिलौने">Toys</span></div>
     <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color: #ff9800;"></i><span class="translate" data-en="Watch" data-hi="घड़ियाँ">Watch</span></div>
-    <div class="nav-cat" onclick="filterCategory('Cosmetic')"><i class="fa-solid fa-wand-magic-sparkles" style="color: #9c27b0;"></i><span class="translate" data-en="Cosmetic" data-hi="सौंदर्य">Cosmetic</span></div>
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i><span class="translate" data-en="Tech" data-hi="इलेक्ट्रॉनिक्स">Tech</span></div>
 </div>
 
-<!-- SLIDER -->
-<div class="banner-slider">
-    <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
-    <div class="slides" id="sliderTrack">
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000');">
-            <div class="slide-content">
-                <h2><span class="translate" data-en="Mega" data-hi="मेगा">Mega</span> <span><span class="translate" data-en="Summer" data-hi="समर">Summer</span></span> <span class="translate" data-en="Sale" data-hi="सेल">Sale</span></h2>
-                <p class="translate" data-en="Upto 50% OFF on top fashion brands." data-hi="शीर्ष फैशन ब्रांडों पर 50% तक की छूट।">Upto 50% OFF on top fashion brands.</p>
-                <button class="translate" data-en="Shop Now" data-hi="अभी खरीदें">Shop Now</button>
+<div id="zippyNewSection">
+    
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title"><span class="translate" data-en="Recharge & Bills" data-hi="रिचार्ज और बिल">Recharge & Bills</span> <span class="zero-fee">ZERO FEE</span></div>
+            <div class="see-more translate" data-en="See less" data-hi="कम देखें">See less</div>
+        </div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="openRechargeModal()">
+                <div class="pay-icon"><i class="fa-solid fa-mobile-screen-button" style="color: #2196f3;"></i></div>
+                <div class="pay-text translate" data-en="Mobile Recharge" data-hi="मोबाइल रिचार्ज">Mobile Recharge</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-regular fa-lightbulb" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="Electricity" data-hi="बिजली">Electricity</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-fire-burner" style="color: #e91e63;"></i></div>
+                <div class="pay-text translate" data-en="LPG Gas Cylinder" data-hi="एलपीजी गैस">LPG Gas Cylinder</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-brands fa-google-play" style="color: #4caf50;"></i></div>
+                <div class="pay-text translate" data-en="Google Play Recharge" data-hi="गूगल प्ले रिचार्ज">Google Play Recharge</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-regular fa-credit-card" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Credit Card Payments" data-hi="क्रेडिट कार्ड">Credit Card Payments</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-mobile-retro" style="color: #00bcd4;"></i></div>
+                <div class="pay-text translate" data-en="Mobile Postpaid" data-hi="मोबाइल पोस्टपेड">Mobile Postpaid</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-satellite-dish" style="color: #8bc34a;"></i></div>
+                <div class="pay-text translate" data-en="DTH Recharge" data-hi="DTH रिचार्ज">DTH Recharge</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="pay-text translate" data-en="See All" data-hi="सभी देखें">See All</div>
             </div>
         </div>
     </div>
-    <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
-</div>
 
-<!-- 🔥 AMAZON STYLE RECHARGE & BILLS SECTION 🔥 -->
-<div class="recharge-section" id="rechargeSection">
-    <div class="section-title">
-        <span class="translate" data-en="Recharge & Bills" data-hi="रिचार्ज और बिल भुगतान">Recharge & Bills</span>
-        <span class="zero-fee-badge">ZERO FEE</span>
-    </div>
-    <div class="recharge-grid">
-        <div class="recharge-item" onclick="openRechargeModal('Mobile')">
-            <div class="icon-box"><i class="fa-solid fa-mobile-screen-button" style="color: #2196f3;"></i></div>
-            <div class="item-text translate" data-en="Mobile Recharge" data-hi="मोबाइल रिचार्ज">Mobile Recharge</div>
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title translate" data-en="Travel" data-hi="यात्रा">Travel</div>
+            <div class="see-more translate" data-en="See more" data-hi="अधिक देखें">See more</div>
         </div>
-        <div class="recharge-item" onclick="openRechargeModal('DTH')">
-            <div class="icon-box"><i class="fa-solid fa-satellite-dish" style="color: #ff9800;"></i></div>
-            <div class="item-text translate" data-en="DTH Recharge" data-hi="DTH रिचार्ज">DTH Recharge</div>
-        </div>
-        <div class="recharge-item" onclick="openRechargeModal('Electricity')">
-            <div class="icon-box"><i class="fa-regular fa-lightbulb" style="color: #4caf50;"></i></div>
-            <div class="item-text translate" data-en="Electricity" data-hi="बिजली बिल">Electricity</div>
-        </div>
-        <div class="recharge-item" onclick="openRechargeModal('Google Play')">
-            <div class="icon-box"><i class="fa-brands fa-google-play" style="color: #f44336;"></i></div>
-            <div class="item-text translate" data-en="Google Play" data-hi="गूगल प्ले">Google Play</div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-plane-departure" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Flights" data-hi="उड़ानें">Flights</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-train" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Trains" data-hi="ट्रेनें">Trains</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-building" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Hotels" data-hi="होटल">Hotels</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-bus" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Bus" data-hi="बस">Bus</div>
+            </div>
         </div>
     </div>
+
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title translate" data-en="Gift Cards & Vouchers" data-hi="गिफ्ट कार्ड और वाउचर">Gift Cards & Vouchers</div>
+            <div class="see-more translate" data-en="See more" data-hi="अधिक देखें">See more</div>
+        </div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-gift" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="Add a Gift Card" data-hi="गिफ्ट कार्ड जोड़ें">Add a Gift Card</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-gifts" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="All Gift Cards" data-hi="सभी गिफ्ट कार्ड">All Gift Cards</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-tags" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Brand Deals" data-hi="ब्रांड डील्स">Brand Deals</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title translate" data-en="Financial services" data-hi="वित्तीय सेवाएं">Financial services</div>
+            <div class="see-more translate" data-en="See less" data-hi="कम देखें">See less</div>
+        </div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-car-burst" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Car Insurance" data-hi="कार बीमा">Car Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-motorcycle" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Bike Insurance" data-hi="बाइक बीमा">Bike Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-heart-pulse" style="color: #e91e63;"></i></div>
+                <div class="pay-text translate" data-en="Health Insurance" data-hi="स्वास्थ्य बीमा">Health Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-shield-halved" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="Insurance Premium" data-hi="बीमा प्रीमियम">Insurance Premium</div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<!-- PRODUCT GRID -->
+<div id="sliderWrapper">
+    <div class="banner-slider">
+        <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
+        <div class="slides" id="sliderTrack">
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000');">
+                <div class="slide-content">
+                    <h2><span class="translate" data-en="Mega" data-hi="मेगा">Mega</span> <span><span class="translate" data-en="Summer" data-hi="समर">Summer</span></span> <span class="translate" data-en="Sale" data-hi="सेल">Sale</span></h2>
+                    <p class="translate" data-en="Upto 50% OFF on top fashion brands." data-hi="शीर्ष फैशन ब्रांडों पर 50% तक की छूट।">Upto 50% OFF on top fashion brands.</p>
+                    <button class="translate" data-en="Shop Now" data-hi="अभी खरीदें">Shop Now</button>
+                </div>
+            </div>
+        </div>
+        <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
+    </div>
+</div>
+
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
         <i class="fa-solid fa-spinner fa-spin"></i> <span class="translate" data-en="Loading Products..." data-hi="उत्पाद लोड हो रहे हैं...">Loading Products...</span>
     </div>
 </div>
 
-<!-- RECHARGE MODAL -->
+
 <div id="rechargeModal" class="modal">
     <div class="auth-content" style="max-width: 380px;">
-        <button class="close-btn" onclick="document.getElementById('rechargeModal').style.display='none'">&times;</button>
-        <div class="auth-header" style="background:#1e293b;"><h2 id="rechargeModalTitle" style="margin:0; font-size: 18px;">Mobile Recharge</h2></div>
-        <div class="auth-body">
-            <input type="text" id="rechargeNumber" class="auth-input translate-placeholder" data-en="Enter Number / ID" data-hi="नंबर / आईडी दर्ज करें" placeholder="Enter Number / ID">
-            <input type="number" id="rechargeAmount" class="auth-input translate-placeholder" data-en="Enter Amount (₹)" data-hi="राशि दर्ज करें (₹)" placeholder="Enter Amount (₹)">
-            <button class="auth-submit-btn" style="background:#ff3e6c;" onclick="processRecharge()"><span class="translate" data-en="Proceed to Pay" data-hi="भुगतान करें">Proceed to Pay</span></button>
+        <div class="auth-header" style="background:#f1f5f9; color:#1e293b; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0;">
+            <h2 style="margin:0; font-size: 18px;" class="translate" data-en="Mobile Recharge" data-hi="मोबाइल रिचार्ज">Mobile Recharge</h2>
+            <i class="fa-solid fa-xmark" style="font-size:20px; cursor:pointer;" onclick="document.getElementById('rechargeModal').style.display='none'"></i>
+        </div>
+        <div class="auth-body" style="padding-top:15px;">
+            <div style="background:#e2fbe8; border:1px solid #a7f3d0; color:#10b981; padding:10px; border-radius:6px; font-weight:bold; font-size:12px; margin-bottom:20px;" class="translate" data-en="Zero fee on mobile recharges" data-hi="मोबाइल रिचार्ज पर शून्य शुल्क">Zero fee on mobile recharges</div>
+            
+            <label style="font-size:12px; font-weight:bold; color:#64748b; margin-bottom:5px; display:block;" class="translate" data-en="Mobile Number" data-hi="मोबाइल नंबर">Mobile Number</label>
+            <input type="text" id="rechargeNumber" class="auth-input" placeholder="Enter 10-digit number" value="9315224775">
+            
+            <label style="font-size:12px; font-weight:bold; color:#64748b; margin-bottom:5px; display:block;" class="translate" data-en="Plan Amount" data-hi="प्लान राशि">Plan Amount</label>
+            <div style="position:relative; margin-bottom:25px;">
+                <input type="number" id="rechargeAmount" class="auth-input" placeholder="₹" style="margin-bottom:0;">
+                <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#008296; font-weight:800; font-size:13px; cursor:pointer;" onclick="openPlansModal()" class="translate" data-en="View plans" data-hi="प्लान देखें">View plans</span>
+            </div>
+            
+            <button class="auth-submit-btn" style="background:#fef08a; color:#854d0e; box-shadow:0 2px 5px rgba(0,0,0,0.1);" onclick="processRecharge()"><span class="translate" data-en="Pay now" data-hi="अभी भुगतान करें">Pay now</span></button>
         </div>
     </div>
 </div>
 
-<!-- AUTH MODAL -->
+<div id="plansModal" class="modal">
+    <div class="auth-content" style="max-width: 400px; height: 80vh; display: flex; flex-direction: column;">
+        <div class="auth-header" style="background:#f1f5f9; color:#1e293b; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0;">
+            <h2 style="margin:0; font-size: 16px;" class="translate" data-en="Select Recharge Amount" data-hi="रिचार्ज राशि चुनें">Select Recharge Amount</h2>
+            <i class="fa-solid fa-xmark" style="font-size:20px; cursor:pointer;" onclick="document.getElementById('plansModal').style.display='none'"></i>
+        </div>
+        <div class="auth-body" style="overflow-y: auto; flex:1; background:#f8fafc; padding:15px;">
+            <h4 style="margin-top:0; color:#475569;" class="translate" data-en="Popular on Zippy Pay" data-hi="ज़िप्पी पे पर लोकप्रिय">Popular on Zippy Pay</h4>
+            
+            <div class="plan-card">
+                <div class="plan-tag">VALIDITY PLAN</div>
+                <div class="plan-price">₹349</div>
+                <div class="plan-details"><span>2GB/Day</span><span>|</span><span>28 days</span></div>
+                <button class="plan-select-btn" onclick="selectPlan(349)" class="translate" data-en="Select" data-hi="चुनें">Select</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-tag">DATA PLAN</div>
+                <div class="plan-price">₹19</div>
+                <div class="plan-details"><span>1GB</span><span>|</span><span>1 day</span></div>
+                <button class="plan-select-btn" onclick="selectPlan(19)" class="translate" data-en="Select" data-hi="चुनें">Select</button>
+            </div>
+
+            <div class="plan-card">
+                <div class="plan-tag">OTT + TV</div>
+                <div class="plan-price">₹200</div>
+                <div class="plan-details"><span>30 GB</span><span>|</span><span>28 days</span></div>
+                <div style="margin-top:10px; font-size:11px; color:#64748b;">Mega OTT Pass - 15 Premium OTT apps + 1000 TV channels</div>
+                <button class="plan-select-btn" onclick="selectPlan(200)" class="translate" data-en="Select" data-hi="चुनें">Select</button>
+            </div>
+            
+            <div class="plan-card">
+                <div class="plan-tag">TRUE 5G UNLIMITED</div>
+                <div class="plan-price">₹749</div>
+                <div class="plan-details"><span>2GB/Day</span><span>|</span><span>90 days</span></div>
+                <button class="plan-select-btn" onclick="selectPlan(749)" class="translate" data-en="Select" data-hi="चुनें">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -386,7 +540,6 @@
     </div>
 </div>
 
-<!-- MEGA DASHBOARD -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
@@ -428,19 +581,6 @@
                 <div class="item-left"><i class="fa-solid fa-comments"></i> <span class="translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
             </div>
 
-            <div class="dash-group-title translate" data-en="Earn with ZippyKart" data-hi="ZippyKart के साथ कमाएं">Earn with ZippyKart</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashSellTab', this, 'Sell on ZippyKart')">
-                <div class="item-left"><i class="fa-solid fa-store"></i> <span class="translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
-            </div>
-
-            <div class="dash-group-title translate" data-en="Feedback & Information" data-hi="प्रतिक्रिया और जानकारी">Feedback & Information</div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashTermsTab', this, 'Terms & Policies')">
-                <div class="item-left"><i class="fa-solid fa-file-contract"></i> <span class="translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
-            </div>
-            <div class="dash-nav-item" onclick="switchDashTab('dashFAQTab', this, 'Browse FAQs')">
-                <div class="item-left"><i class="fa-solid fa-circle-question"></i> <span class="translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
-            </div>
-
             <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> <span class="translate" data-en="Log Out" data-hi="लॉग आउट">Log Out</span></button>
         </div>
 
@@ -476,11 +616,6 @@
             <div class="dash-inner-content" id="dashAddressTab">
                 <h2 class="dash-header-title translate" data-en="Manage Addresses" data-hi="पते प्रबंधित करें">Manage Addresses</h2>
                 <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px; margin-bottom:15px;"><span class="translate" data-en="+ ADD A NEW ADDRESS" data-hi="+ एक नया पता जोड़ें">+ ADD A NEW ADDRESS</span></button>
-                <div style="border:1px solid #e2e8f0; border-radius:8px; padding:15px; position:relative;">
-                    <span style="background:#f1f5f9; font-size:10px; padding:3px 6px; border-radius:4px; font-weight:bold; color:#64748b;">HOME</span>
-                    <div style="font-weight:800; margin-top:10px; margin-bottom:5px;" id="addressNameSpan">User</div>
-                    <div style="font-size:13px; color:#475569; line-height:1.5;">Rajendra Place, New Delhi<br>India - 110008</div>
-                </div>
             </div>
 
             <div class="dash-inner-content" id="dashCardsTab">
@@ -518,30 +653,10 @@
             <div class="dash-inner-content" id="dashQATab">
                 <h2 class="dash-header-title translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-comments" style="font-size:40px; color:#cbd5e1; margin-bottom:15px;"></i><h3 class="translate" data-en="No Questions Asked" data-hi="कोई प्रश्न नहीं पूछा गया">No Questions Asked</h3></div>
             </div>
-
-            <div class="dash-inner-content" id="dashSellTab">
-                <h2 class="dash-header-title translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</h2>
-                <div style="background:#fff0f3; border:1px solid #ffe4e6; padding:20px; border-radius:8px; text-align:center;">
-                    <i class="fa-solid fa-store" style="font-size:40px; color:#ff3e6c; margin-bottom:15px;"></i>
-                    <h3 style="color:#1e293b; margin-top:0;" class="translate" data-en="Start your e-commerce journey" data-hi="अपनी ई-कॉमर्स यात्रा शुरू करें">Start your e-commerce journey</h3>
-                    <button style="margin-top:15px; padding:12px 25px; background:#ff3e6c; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;"><span class="translate" data-en="Register as Seller" data-hi="विक्रेता के रूप में पंजीकरण करें">Register as Seller</span></button>
-                </div>
-            </div>
-
-            <div class="dash-inner-content" id="dashTermsTab">
-                <h2 class="dash-header-title translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</h2><div style="padding:10px; font-size:13px; color:#475569; line-height:1.6;" class="translate" data-en="By using ZippyKart, you agree to our standard Terms of Service and Privacy Policy. All transactions are securely processed." data-hi="ZippyKart का उपयोग करके, आप हमारी मानक सेवा की शर्तों और गोपनीयता नीति से सहमत हैं। सभी लेनदेन सुरक्षित रूप से संसाधित किए जाते हैं।">By using ZippyKart, you agree to our standard Terms of Service and Privacy Policy. All transactions are securely processed.</div>
-            </div>
-            
-            <div class="dash-inner-content" id="dashFAQTab">
-                <h2 class="dash-header-title translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</h2>
-                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;"><span class="translate" data-en="How to track my order?" data-hi="मैं अपना ऑर्डर कैसे ट्रैक करूं?">How to track my order?</span> <i class="fa-solid fa-chevron-down"></i></div>
-                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;"><span class="translate" data-en="What is the refund policy?" data-hi="धनवापसी नीति क्या है?">What is the refund policy?</span> <i class="fa-solid fa-chevron-down"></i></div>
-            </div>
         </div>
     </div>
 </div>
 
-<!-- 🔥 ANIMATED FOOTER WITH SOCIAL LINKS 🔥 -->
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
@@ -598,158 +713,57 @@
     // LANGUAGE TRANSLATION LOGIC
     window.currentLanguage = 'en';
     function setLanguageUI(langCode, element) {
-        document.querySelectorAll('.lang-option').forEach(el => {
-            el.classList.remove('active');
-            el.querySelector('.lang-radio').style.background = 'transparent';
-        });
-        element.classList.add('active');
-        element.querySelector('.lang-radio').style.background = '#ff3e6c';
-        
+        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('active'));
+        if(element) element.classList.add('active');
         window.currentLanguage = langCode;
 
         document.querySelectorAll('.translate').forEach(el => {
             const translation = el.getAttribute('data-' + langCode);
             if(translation) el.innerHTML = translation;
         });
-
         document.querySelectorAll('.translate-placeholder').forEach(el => {
             const translation = el.getAttribute('data-' + langCode);
             if(translation) el.placeholder = translation;
         });
-        
-        const activeNav = document.querySelector('.dash-nav-item.active');
-        if(activeNav) {
-            const titleSpan = activeNav.querySelector('.translate');
-            if(titleSpan) document.getElementById('dashHeaderDynamicTitle').innerText = titleSpan.getAttribute('data-' + langCode);
-        }
     }
 
-    // DASHBOARD TABS
-    function switchDashTab(tabId, eventElem, fallbackTitle) {
-        document.querySelectorAll('.dash-inner-content').forEach(tab => { tab.style.display = 'none'; tab.classList.remove('slide-in-active'); });
-        document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
-        
-        const targetTab = document.getElementById(tabId);
-        targetTab.style.display = 'block';
-        void targetTab.offsetWidth;
-        targetTab.classList.add('slide-in-active');
-        
-        eventElem.classList.add('active'); 
-        
-        const transSpan = eventElem.querySelector('.translate');
-        document.getElementById('dashHeaderDynamicTitle').innerText = transSpan ? transSpan.getAttribute('data-' + window.currentLanguage) : fallbackTitle;
-        
-        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'none'; document.querySelector('.dash-main').style.display = 'block'; }
-    }
-
-    function closeDashMainMobile() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
-
-    // NOTIFICATIONS & CHAT
+    // MODALS & NOTIFICATIONS
     function toggleNotifications() {
-        const panel = document.getElementById('notifSidebar'); panel.classList.toggle('active');
-        if(panel.classList.contains('active')) document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+        document.getElementById('notifSidebar').classList.toggle('active');
     }
-
     function toggleChat() { document.getElementById('aiChatBox').classList.toggle('active'); }
-    function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
     function sendChatMessage() {
         const input = document.getElementById('chatInput'); const text = input.value.trim(); if(!text) return;
         const chatBody = document.getElementById('chatBody');
         chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`; input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
         setTimeout(() => {
-            chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly.</div>`;
+            chatBody.innerHTML += `<div class="chat-msg bot-msg">Our executive will connect with you shortly regarding this.</div>`;
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 1000);
     }
-
     function openInfoModal(title, text, iconClass, iconColor) {
         document.getElementById('infoModalTitle').innerText = title; document.getElementById('infoModalText').innerHTML = text;
         const icon = document.getElementById('infoModalIcon'); icon.className = `fa-solid ${iconClass}`; icon.style.color = iconColor;
         document.getElementById('infoModal').style.display = 'flex';
     }
-
-    // AUTHENTICATION
-    window.googleSignIn = function() {
-        auth.signInWithPopup(googleProvider).then((result) => {
-            window.currentUser = result.user;
-            document.getElementById('authModal').style.display = 'none';
-            document.getElementById('navLoginText').innerText = window.currentUser.displayName.split(' ')[0];
-            document.getElementById('authOpt').style.display = 'none';
-            document.getElementById('profileOpt').style.display = 'flex';
-            document.getElementById('logoutOpt').style.display = 'flex';
-            
-            document.getElementById('dashDisplayName').innerText = window.currentUser.displayName;
-            document.getElementById('dashAvatarInitial').innerText = window.currentUser.displayName.charAt(0).toUpperCase();
-            document.getElementById('addressNameSpan').innerText = window.currentUser.displayName;
-            document.getElementById('cardHolderName').innerText = window.currentUser.displayName;
-            
-        }).catch((error) => { alert("Error: " + error.message); });
+    function showComingSoon() {
+        openInfoModal('Coming Soon', 'This service will be activated soon on ZippyKart. Stay tuned!', 'fa-clock', '#ff3e6c');
     }
 
-    window.handleLogout = function() {
-        auth.signOut().then(() => {
-            window.currentUser = null;
-            document.getElementById('navLoginText').innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "LOGIN";
-            document.getElementById('authOpt').style.display = 'flex';
-            document.getElementById('profileOpt').style.display = 'none';
-            document.getElementById('logoutOpt').style.display = 'none';
-            document.getElementById('dashboardModal').style.display = 'none';
-        });
-    }
-
-    window.toggleAuthMode = function() {
-        const title = document.getElementById('authModalTitle'); const btn = document.getElementById('authSubmitBtn'); const switchTxt = document.getElementById('authSwitchText');
-        if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
-            title.innerText = window.currentLanguage === 'hi' ? "साइन अप" : "Sign Up"; 
-            btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Register" data-hi="रजिस्टर">रजिस्टर</span>` : `<span class="translate" data-en="Register" data-hi="रजिस्टर">Register</span>`; 
-            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
-        } else { 
-            title.innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
-            btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Login" data-hi="लॉग इन करें">लॉग इन करें</span>` : `<span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span>`; 
-            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">खाता नहीं है? <span style="color:#ff3e6c; font-weight:bold;">साइन अप करें</span></span>` : `<span class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span></span>`; 
-        }
-    }
-
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            window.currentUser = user;
-            document.getElementById('navLoginText').innerText = user.displayName.split(' ')[0];
-            document.getElementById('authOpt').style.display = 'none';
-            document.getElementById('profileOpt').style.display = 'flex';
-            document.getElementById('logoutOpt').style.display = 'flex';
-            document.getElementById('dashDisplayName').innerText = user.displayName;
-            document.getElementById('dashAvatarInitial').innerText = user.displayName.charAt(0).toUpperCase();
-            document.getElementById('addressNameSpan').innerText = user.displayName;
-        }
-    });
-
-    function toggleDrop(id) { document.querySelectorAll('.dropdown').forEach(d => { if(d.id !== id) d.style.display = 'none'; }); const drop = document.getElementById(id); drop.style.display = drop.style.display === 'block' ? 'none' : 'block'; }
-    function openAuthModal() { document.getElementById('loginDrop').style.display = 'none'; document.getElementById('authModal').style.display = 'flex'; }
-    
-    function openDashboard() {
-        document.getElementById('loginDrop').style.display = 'none'; 
-        if(!window.currentUser) { openAuthModal(); return; }
-        document.getElementById('dashNameInput').value = window.currentUser.displayName || ""; document.getElementById('dashEmailInput').value = window.currentUser.email || "";
-        document.getElementById('dashboardModal').style.display = 'flex';
-        switchDashTab('dashProfileTab', document.querySelector('.dash-nav-item'), 'Edit Profile');
-        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'flex'; document.querySelector('.dash-main').style.display = 'none'; }
-    }
-
-    // 🔥 RECHARGE LOGIC 🔥
-    window.openRechargeModal = function(type) {
-        const titleSpan = document.getElementById('rechargeModalTitle');
-        titleSpan.innerText = window.currentLanguage === 'hi' ? type + " भुगतान" : type + " Payment";
-        
-        const numInput = document.getElementById('rechargeNumber');
-        if(type === 'Electricity') {
-            numInput.placeholder = window.currentLanguage === 'hi' ? "उपभोक्ता संख्या दर्ज करें" : "Enter Consumer Number";
-        } else {
-            numInput.placeholder = window.currentLanguage === 'hi' ? "नंबर / आईडी दर्ज करें" : "Enter Mobile / DTH Number";
-        }
+    // 🔥 ZIPPY NEW RECHARGE LOGIC 🔥
+    function openRechargeModal() {
         document.getElementById('rechargeModal').style.display = 'flex';
     }
-
-    window.processRecharge = function() {
+    function openPlansModal() {
+        document.getElementById('rechargeModal').style.display = 'none';
+        document.getElementById('plansModal').style.display = 'flex';
+    }
+    function selectPlan(amount) {
+        document.getElementById('rechargeAmount').value = amount;
+        document.getElementById('plansModal').style.display = 'none';
+        document.getElementById('rechargeModal').style.display = 'flex';
+    }
+    function processRecharge() {
         const num = document.getElementById('rechargeNumber').value;
         const amt = document.getElementById('rechargeAmount').value;
         if(!num || !amt) { 
@@ -758,8 +772,43 @@
         }
         alert(window.currentLanguage === 'hi' ? `₹${amt} के भुगतान के लिए आगे बढ़ रहे हैं...` : `Proceeding to checkout for ₹${amt}...`);
         document.getElementById('rechargeModal').style.display = 'none';
-        document.getElementById('rechargeNumber').value = '';
-        document.getElementById('rechargeAmount').value = '';
+    }
+
+    // AUTHENTICATION
+    window.googleSignIn = function() {
+        auth.signInWithPopup(googleProvider).then((result) => {
+            window.currentUser = result.user;
+            document.getElementById('authModal').style.display = 'none';
+            document.getElementById('navLoginText').innerText = window.currentUser.displayName.split(' ')[0];
+        }).catch((e) => { alert("Error: " + e.message); });
+    }
+
+    // 🔥 CATEGORY FILTER & ZIPPY NEW DISPLAY LOGIC 🔥
+    window.filterCategory = function(categoryName) {
+        // Reset Mobile Bottom Nav Active state
+        document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
+        if(document.querySelector('.bottom-nav-item:nth-child(2)')) document.querySelector('.bottom-nav-item:nth-child(2)').classList.add('active');
+
+        const productGrid = document.getElementById('mainProductGrid');
+        const slider = document.getElementById('sliderWrapper');
+        const zippyNew = document.getElementById('zippyNewSection');
+
+        if(categoryName === 'ZippyNew') {
+            // Hide everything else, show Zippy New Section
+            productGrid.style.display = 'none';
+            slider.style.display = 'none';
+            zippyNew.style.display = 'block';
+            window.scrollTo({top:0, behavior:'smooth'});
+        } else {
+            // Show normal layout
+            productGrid.style.display = 'grid';
+            slider.style.display = 'block';
+            zippyNew.style.display = 'none';
+
+            if(categoryName === 'All') { renderProducts(window.allFetchedProducts); } 
+            else { const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()); renderProducts(filtered); }
+            productGrid.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
     window.onclick = function(e) { 
@@ -771,6 +820,7 @@
         if(e.target == document.getElementById('infoModal')) document.getElementById('infoModal').style.display = 'none';
         if(e.target == document.getElementById('mobileMoreModal')) document.getElementById('mobileMoreModal').style.display = 'none';
         if(e.target == document.getElementById('rechargeModal')) document.getElementById('rechargeModal').style.display = 'none';
+        if(e.target == document.getElementById('plansModal')) document.getElementById('plansModal').style.display = 'none';
     };
 
     let currentSlide = 0;
@@ -781,7 +831,7 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // 🔥 FETCH PRODUCTS 🔥
+    // FETCH PRODUCTS
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
@@ -792,86 +842,47 @@
             }
             window.allFetchedProducts = [];
             snapshot.forEach(doc => {
-                let p = doc.data();
-                p.id = doc.id;
-                window.allFetchedProducts.push(p);
+                let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p);
             });
             renderProducts(window.allFetchedProducts);
         } catch (error) {
             console.error("Firebase Fetch Error:", error);
-            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error: Please check console for details.</div>`;
+            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error: Check console.</div>`;
         }
     }
 
     function renderProducts(productArray) {
         const grid = document.getElementById('mainProductGrid'); 
         grid.innerHTML = '';
-        
-        if(productArray.length === 0) {
-            grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products to display.</div>`;
-            return;
-        }
+        if(productArray.length === 0) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px;">No products to display.</div>`; return; }
 
         productArray.forEach(p => {
             if (!p.title && !p.price) return; 
-
-            const title = p.title || "Premium Item"; 
-            const price = p.price || 0; 
-            const mrp = p.mrp || price;
-            const upiPrice = price > 100 ? price - 50 : price; 
+            const title = p.title || "Premium Item"; const price = p.price || 0; const mrp = p.mrp || price; const upiPrice = price > 100 ? price - 50 : price; 
             const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
-            
-            let imgSource = "https://via.placeholder.com/300";
-            if (p.all_images && Array.isArray(p.all_images) && p.all_images.length > 0) {
-                imgSource = p.all_images[0]; 
-            } else if (p.image) {
-                imgSource = p.image;
-            }
+            let imgSource = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
 
             grid.innerHTML += `
                 <a href="product.html?id=${p.id}" class="product-card">
                     <div class="image-wrapper">
-                        <img src="${imgSource}" alt="${title}">
+                        <img src="${imgSource}">
                         <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
                     </div>
                     <div class="product-brand">${title}</div>
-                    <div class="price-row-home">
-                        <span class="current-price-home">₹${price}</span>
-                        <span class="mrp-price-home">₹${mrp}</span>
-                    </div>
+                    <div class="price-row-home"><span class="current-price-home">₹${price}</span><span class="mrp-price-home">₹${mrp}</span></div>
                     <div class="upi-offer-home">₹${upiPrice} <span class="translate" data-en="with UPI offer" data-hi="UPI ऑफर के साथ">with UPI offer</span></div>
                 </a>`;
         });
-
-        if(window.currentLanguage === 'hi') { 
-            const activeLangBtn = document.querySelector('.lang-option.active');
-            if(activeLangBtn) setLanguageUI('hi', activeLangBtn); 
-        }
-
+        if(window.currentLanguage === 'hi') { setLanguageUI('hi', document.querySelector('.lang-option.active')); }
         setTimeout(handleFooterAnim, 500);
     }
 
-    window.filterCategory = function(categoryName) {
-        document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
-        if(document.querySelector('.bottom-nav-item:nth-child(2)')) document.querySelector('.bottom-nav-item:nth-child(2)').classList.add('active');
-
-        if(categoryName === 'All') { renderProducts(window.allFetchedProducts); } 
-        else { const filtered = window.allFetchedProducts.filter(p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()); renderProducts(filtered); }
-        document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
-    }
-
     function handleFooterAnim() {
-        const footer = document.getElementById('footerContent');
-        if(!footer) return;
-        const footerPos = footer.getBoundingClientRect().top;
-        const screenPos = window.innerHeight + 150; 
-        if(footerPos < screenPos) {
-            document.querySelectorAll('.footer-col').forEach((col, index) => {
-                setTimeout(() => { col.classList.add('show-anim'); }, index * 150);
-            });
+        const footer = document.getElementById('footerContent'); if(!footer) return;
+        if(footer.getBoundingClientRect().top < window.innerHeight + 150) {
+            document.querySelectorAll('.footer-col').forEach((col, index) => { setTimeout(() => { col.classList.add('show-anim'); }, index * 150); });
         }
     }
-    
     window.addEventListener('scroll', handleFooterAnim);
     document.addEventListener('DOMContentLoaded', fetchAllProducts);
 </script>
