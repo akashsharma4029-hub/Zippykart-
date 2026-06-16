@@ -102,7 +102,7 @@
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline:none; box-sizing: border-box;}
         .auth-input:focus { border-color: #ff3e6c;}
         .auth-submit-btn { background: #1e293b; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition:0.3s;}
-        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s;}
+        .google-btn { background: #fff; color: #333; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; transition: 0.3s; display:flex; justify-content:center; align-items:center; gap:10px;}
         .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: #555; cursor: pointer; }
 
         /* 🔥 VIEW PLANS MODAL & TABS CSS 🔥 */
@@ -139,6 +139,15 @@
         .dash-header-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #1e293b;}
         
         .logout-full-btn { width: 100%; background: #fff; color: #ff3e6c; padding: 15px; border: none; font-weight: 800; font-size: 15px; cursor: pointer; text-align: center; border-top: 1px solid #e0e0e0; transition: 0.3s;}
+        
+        /* Language Options UI */
+        .lang-option { display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer; background:#fff; transition: 0.2s;}
+        .lang-option.active { border-color:#ff3e6c; background:#fff0f3; box-shadow: 0 2px 8px rgba(255,62,108,0.15);}
+        .lang-radio { width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center; transition:0.2s;}
+        .lang-option.active .lang-radio { border-color:#ff3e6c; background:#ff3e6c; }
+        .lang-option.active .lang-radio::after { content:''; width:8px; height:8px; border-radius:50%; background:#fff; }
+        .lang-text { flex:1; font-weight:700; font-size:16px; color:#1e293b; }
+        .lang-text small { display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px; }
 
         /* 🔥 ANIMATED FOOTER 🔥 */
         .main-footer { background-color: #1a1a1a; color: #fff; padding: 60px 5% 20px; margin-top: 40px; overflow: hidden; }
@@ -167,7 +176,7 @@
             .menu-wrapper { display: none; } 
 
             .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
-            .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
+           .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
             .bottom-nav-item i { font-size: 20px; }
             .bottom-nav-item.active { color: #ff3e6c; }
 
@@ -193,14 +202,17 @@
 </head>
 <body id="appBody">
 
+<!-- HEADER -->
 <header>
     <div class="logo-box" onclick="filterCategory('All'); window.scrollTo({top:0, behavior:'smooth'});">
         <i class="fa-solid fa-cart-shopping" style="color:red; margin-right:5px;"></i>
         <span style="color: red;" class="translate" data-en="Zippy" data-hi="ज़िप्पी">Zippy</span><span class="translate" data-en="Kart" data-hi="कार्ट">Kart</span>
     </div>
+    
     <input type="text" id="mainSearchBar" class="search-bar translate-placeholder" data-en="Search products..." data-hi="उत्पाद खोजें..." placeholder="Search products...">
     
-    <div class="menu-wrapper" onclick="toggleDrop('loginDrop', event)">
+    <!-- 🔥 LOGIN DROPDOWN 🔥 -->
+    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">
         <span id="navLoginText" class="translate" data-en="LOGIN" data-hi="लॉग इन">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> <span class="translate" data-en="Sign In / Register" data-hi="साइन इन / रजिस्टर">Sign In / Register</span></div>
@@ -209,41 +221,129 @@
         </div>
     </div>
     
-    <div class="menu-wrapper" onclick="toggleDrop('moreDrop', event)">
+    <!-- 🔥 MORE DROPDOWN 🔥 -->
+    <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
         <span class="translate" data-en="MORE" data-hi="अधिक">MORE</span> ▾
         <div id="moreDrop" class="dropdown">
-            <div class="drop-item" onclick="toggleChat()"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div>
-            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Reach our marketing team at ads@zippykart.co.in.', 'fa-bullhorn', '#ff9800');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div>
+            <div class="drop-item" onclick="toggleChat(); toggleDrop('moreDrop');"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div>
+            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at <b>ads@zippykart.co.in</b>.', 'fa-bullhorn', '#ff9800'); toggleDrop('moreDrop');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div>
+            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon on iOS and Android!', 'fa-mobile-screen-button', '#4caf50'); toggleDrop('moreDrop');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div>
         </div>
     </div>
     
     <div class="notif-wrapper" onclick="toggleNotifications()">
-        <i class="fa-solid fa-bell"></i><span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
+        <i class="fa-solid fa-bell"></i>
+        <span class="cart-badge-mobile" style="top: -5px; right: -8px;">3</span>
     </div>
+    
     <button class="cart-btn" onclick="window.location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span class="translate" data-en="Cart" data-hi="कार्ट">Cart</span></button>
 </header>
 
+<!-- MOBILE BOTTOM NAVIGATION -->
 <div class="bottom-nav">
-    <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});"><i class="fa-solid fa-house"></i><span class="translate" data-en="Home" data-hi="होम">Home</span></div>
-    <div class="bottom-nav-item" onclick="document.querySelector('.nav-icons').scrollIntoView({behavior:'smooth'});"><i class="fa-solid fa-border-all"></i><span class="translate" data-en="Categories" data-hi="श्रेणियाँ">Categories</span></div>
-    <div class="bottom-nav-item" onclick="openDashboard()"><i class="fa-regular fa-user"></i><span class="translate" data-en="Account" data-hi="खाता">Account</span></div>
-    <div class="bottom-nav-item" onclick="document.getElementById('mobileMoreModal').style.display='flex'"><i class="fa-solid fa-ellipsis"></i><span class="translate" data-en="More" data-hi="अधिक">More</span></div>
+    <div class="bottom-nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'});">
+        <i class="fa-solid fa-house"></i>
+        <span class="translate" data-en="Home" data-hi="होम">Home</span>
+    </div>
+    <div class="bottom-nav-item" onclick="document.querySelector('.nav-icons').scrollIntoView({behavior:'smooth'});">
+        <i class="fa-solid fa-border-all"></i>
+        <span class="translate" data-en="Categories" data-hi="श्रेणियाँ">Categories</span>
+    </div>
+    <div class="bottom-nav-item" onclick="openDashboard()">
+        <i class="fa-regular fa-user"></i>
+        <span class="translate" data-en="Account" data-hi="खाता">Account</span>
+    </div>
+    <div class="bottom-nav-item" onclick="document.getElementById('mobileMoreModal').style.display='flex'">
+        <i class="fa-solid fa-ellipsis"></i>
+        <span class="translate" data-en="More" data-hi="अधिक">More</span>
+    </div>
 </div>
 
+<!-- MOBILE 'MORE' MODAL -->
+<div id="mobileMoreModal" class="modal">
+    <div class="auth-content" style="margin: auto; margin-bottom: 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; animation: slideUpMobile 0.3s;">
+        <div class="auth-header" style="background:#1e293b; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; color:white; font-size:16px;" class="translate" data-en="More Options" data-hi="अधिक विकल्प">More Options</h3>
+            <i class="fa-solid fa-xmark" style="color:white; font-size:20px; cursor:pointer;" onclick="document.getElementById('mobileMoreModal').style.display='none'"></i>
+        </div>
+        <div class="dash-nav-item" onclick="toggleChat(); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at ads@zippykart.co.in.', 'fa-bullhorn', '#ff9800'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div></div>
+        <div class="dash-nav-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon!', 'fa-mobile-screen-button', '#4caf50'); document.getElementById('mobileMoreModal').style.display='none';"><div class="item-left"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div></div>
+    </div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="cart-sidebar" id="notifSidebar">
+    <div class="cart-title-box">
+        <span style="font-size: 18px; color: #1e293b;"><i class="fa-solid fa-bell" style="color:#ff3e6c;"></i> <span class="translate" data-en="Notifications" data-hi="सूचनाएं">Notifications</span></span>
+        <button class="close-btn" style="position:static; color:#1e293b;" onclick="toggleNotifications()">&times;</button>
+    </div>
+    <div class="cart-items-wrapper">
+        <div class="notif-card">
+            <h4 class="translate" data-en="🔥 Mega Summer Sale is Live!" data-hi="🔥 मेगा समर सेल लाइव है!">🔥 Mega Summer Sale is Live!</h4>
+            <p class="translate" data-en="Get flat 50% OFF on all premium streetwear and sneakers." data-hi="सभी प्रीमियम स्ट्रीटवियर और स्नीकर्स पर 50% की छूट पाएं।">Get flat 50% OFF on all premium streetwear and sneakers.</p>
+        </div>
+        <div class="notif-card" style="border-left-color: #2196f3;">
+            <h4 class="translate" data-en="📦 Order Delivered" data-hi="📦 ऑर्डर डिलीवर हो गया">📦 Order Delivered</h4>
+            <p class="translate" data-en="Your previous order has been delivered successfully." data-hi="आपका पिछला ऑर्डर सफलतापूर्वक डिलीवर हो गया है।">Your previous order has been delivered successfully.</p>
+        </div>
+    </div>
+</div>
+
+<!-- AI CHAT AGENT -->
+<div class="ai-chat-box" id="aiChatBox">
+    <div class="chat-header">
+        <div><i class="fa-solid fa-robot" style="margin-right:8px; font-size:18px;"></i> Zippy AI Agent</div>
+        <i class="fa-solid fa-chevron-down" style="cursor:pointer;" onclick="toggleChat()"></i>
+    </div>
+    <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot-msg translate" data-en="Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?" data-hi="नमस्ते! 👋 मैं ज़िप्पी हूँ, आपका निजी AI सहायक। मैं आज आपकी कैसे मदद कर सकता हूँ?">Hello! 👋 I am Zippy, your personal AI assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type here..." class="translate-placeholder" data-en="Type your message here..." data-hi="अपना संदेश यहाँ टाइप करें..." onkeypress="handleChatEnter(event)">
+        <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<!-- INFO MODAL -->
+<div id="infoModal" class="modal">
+    <div class="auth-content" style="max-width:450px;">
+        <button class="close-btn" onclick="document.getElementById('infoModal').style.display='none'">&times;</button>
+        <div class="auth-header" style="background:#1e293b;"><h2 id="infoModalTitle" style="margin:0;">Info</h2></div>
+        <div class="auth-body" style="text-align:center; padding: 40px 20px;">
+            <i id="infoModalIcon" class="fa-solid fa-info-circle" style="font-size:50px; margin-bottom:20px; color:#1e293b;"></i>
+            <p id="infoModalText" style="font-size:15px; color:#475569; line-height:1.6;"></p>
+            <button class="auth-submit-btn" style="margin-top:25px; background:#ff3e6c;" onclick="document.getElementById('infoModal').style.display='none'"><span class="translate" data-en="Got it!" data-hi="ठीक है!">Got it!</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- CATEGORIES -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')"><i class="fa-solid fa-border-all" style="color: #444;"></i><span class="translate" data-en="All" data-hi="सभी">All</span></div>
-    <div class="nav-cat new-badge" onclick="filterCategory('ZippyNew')"><i class="fa-solid fa-bolt" style="color: #008296;"></i><span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span></div>
+    
+    <!-- 🔥 ZIPPY NEW CATEGORY BUTTON 🔥 -->
+    <div class="nav-cat new-badge" onclick="filterCategory('ZippyNew')">
+        <i class="fa-solid fa-bolt" style="color: #008296;"></i>
+        <span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span>
+    </div>
+
     <div class="nav-cat" onclick="filterCategory('Men')"><i class="fa-solid fa-shirt" style="color: #ff5722;"></i><span class="translate" data-en="Men" data-hi="पुरुष">Men</span></div>
     <div class="nav-cat" onclick="filterCategory('Women')"><i class="fa-solid fa-person-dress" style="color: #e91e63;"></i><span class="translate" data-en="Women" data-hi="महिला">Women</span></div>
     <div class="nav-cat" onclick="filterCategory('Streetwear')"><i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i><span class="translate" data-en="Streetwear" data-hi="स्ट्रीटवियर">Streetwear</span></div>
     <div class="nav-cat" onclick="filterCategory('Kids')"><i class="fa-solid fa-child" style="color: #2196f3;"></i><span class="translate" data-en="Kids" data-hi="बच्चे">Kids</span></div>
+    <div class="nav-cat" onclick="filterCategory('Toys')"><i class="fa-solid fa-robot" style="color: #4caf50;"></i><span class="translate" data-en="Toys" data-hi="खिलौने">Toys</span></div>
+    <div class="nav-cat" onclick="filterCategory('Watch')"><i class="fa-solid fa-clock" style="color: #ff9800;"></i><span class="translate" data-en="Watch" data-hi="घड़ियाँ">Watch</span></div>
     <div class="nav-cat" onclick="filterCategory('Electronics')"><i class="fa-solid fa-headphones" style="color: #00bcd4;"></i><span class="translate" data-en="Tech" data-hi="इलेक्ट्रॉनिक्स">Tech</span></div>
 </div>
 
+<!-- 🔥 FULL ZIPPY NEW SECTION (ALL OPTIONS RESTORED) 🔥 -->
 <div id="zippyNewSection">
+    
+    <!-- Recharge & Bills -->
     <div class="pay-module">
         <div class="pay-header">
-            <div class="pay-title"><span class="translate" data-en="Recharge & Bills" data-hi="रिचार्ज और बिल">Recharge & Bills</span> <span class="zero-fee">ZERO FEE</span></div>
+            <div class="pay-title"><span class="translate" data-en="Recharge & Bills" data-hi="रिचार्ज और बिल भुगतान">Recharge & Bills</span> <span class="zero-fee">ZERO FEE</span></div>
             <div class="see-more translate" data-en="See less" data-hi="कम देखें">See less</div>
         </div>
         <div class="pay-grid">
@@ -253,31 +353,112 @@
             </div>
             <div class="pay-item" onclick="showComingSoon()">
                 <div class="pay-icon"><i class="fa-regular fa-lightbulb" style="color: #ff9800;"></i></div>
-                <div class="pay-text translate" data-en="Electricity" data-hi="बिजली">Electricity</div>
+                <div class="pay-text translate" data-en="Electricity" data-hi="बिजली बिल">Electricity</div>
             </div>
             <div class="pay-item" onclick="showComingSoon()">
                 <div class="pay-icon"><i class="fa-solid fa-fire-burner" style="color: #e91e63;"></i></div>
-                <div class="pay-text translate" data-en="LPG Gas" data-hi="एलपीजी गैस">LPG Gas</div>
+                <div class="pay-text translate" data-en="LPG Gas Cylinder" data-hi="एलपीजी गैस">LPG Gas Cylinder</div>
             </div>
             <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-brands fa-google-play" style="color: #4caf50;"></i></div>
+                <div class="pay-text translate" data-en="Google Play Recharge" data-hi="गूगल प्ले">Google Play Recharge</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-regular fa-credit-card" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Credit Card Payments" data-hi="क्रेडिट कार्ड भुगतान">Credit Card Payments</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-mobile-retro" style="color: #00bcd4;"></i></div>
+                <div class="pay-text translate" data-en="Mobile Postpaid" data-hi="मोबाइल पोस्टपेड">Mobile Postpaid</div>
+            </div>
+            <div class="pay-item" onclick="openRechargeModal()">
                 <div class="pay-icon"><i class="fa-solid fa-satellite-dish" style="color: #8bc34a;"></i></div>
-                <div class="pay-text translate" data-en="DTH" data-hi="DTH">DTH</div>
+                <div class="pay-text translate" data-en="DTH Recharge" data-hi="DTH रिचार्ज">DTH Recharge</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="pay-text translate" data-en="See All" data-hi="सभी देखें">See All</div>
             </div>
         </div>
     </div>
 
+    <!-- Travel -->
     <div class="pay-module">
         <div class="pay-header">
             <div class="pay-title translate" data-en="Travel" data-hi="यात्रा">Travel</div>
             <div class="see-more translate" data-en="See more" data-hi="अधिक देखें">See more</div>
         </div>
         <div class="pay-grid">
-            <div class="pay-item" onclick="showComingSoon()"><div class="pay-icon"><i class="fa-solid fa-plane-departure" style="color:#008296;"></i></div><div class="pay-text">Flights</div></div>
-            <div class="pay-item" onclick="showComingSoon()"><div class="pay-icon"><i class="fa-solid fa-train" style="color:#008296;"></i></div><div class="pay-text">Trains</div></div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-plane-departure" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Flights" data-hi="उड़ानें">Flights</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-train" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Trains" data-hi="ट्रेनें">Trains</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-building" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Hotels" data-hi="होटल">Hotels</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-bus" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Bus" data-hi="बस">Bus</div>
+            </div>
         </div>
     </div>
+
+    <!-- Gift Cards & Vouchers -->
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title translate" data-en="Gift Cards & Vouchers" data-hi="गिफ्ट कार्ड और वाउचर">Gift Cards & Vouchers</div>
+            <div class="see-more translate" data-en="See more" data-hi="अधिक देखें">See more</div>
+        </div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-gift" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="Add a Gift Card" data-hi="गिफ्ट कार्ड जोड़ें">Add a Gift Card</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-gifts" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="All Gift Cards" data-hi="सभी गिफ्ट कार्ड">All Gift Cards</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-tags" style="color: #008296;"></i></div>
+                <div class="pay-text translate" data-en="Brand Deals" data-hi="ब्रांड डील्स">Brand Deals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Services -->
+    <div class="pay-module">
+        <div class="pay-header">
+            <div class="pay-title translate" data-en="Financial services" data-hi="वित्तीय सेवाएं">Financial services</div>
+            <div class="see-more translate" data-en="See less" data-hi="कम देखें">See less</div>
+        </div>
+        <div class="pay-grid">
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-car-burst" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Car Insurance" data-hi="कार बीमा">Car Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-motorcycle" style="color: #3f51b5;"></i></div>
+                <div class="pay-text translate" data-en="Bike Insurance" data-hi="बाइक बीमा">Bike Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-heart-pulse" style="color: #e91e63;"></i></div>
+                <div class="pay-text translate" data-en="Health Insurance" data-hi="स्वास्थ्य बीमा">Health Insurance</div>
+            </div>
+            <div class="pay-item" onclick="showComingSoon()">
+                <div class="pay-icon"><i class="fa-solid fa-shield-halved" style="color: #ff9800;"></i></div>
+                <div class="pay-text translate" data-en="Insurance Premium" data-hi="बीमा प्रीमियम">Insurance Premium</div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
+<!-- SLIDER WRAPPER -->
 <div id="sliderWrapper">
     <div class="banner-slider">
         <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
@@ -294,12 +475,15 @@
     </div>
 </div>
 
+<!-- PRODUCT GRID -->
 <div class="product-grid" id="mainProductGrid">
     <div style="grid-column: span 4; text-align: center; padding: 40px; color: #888;">
-        <i class="fa-solid fa-spinner fa-spin"></i> Loading Products...
+        <i class="fa-solid fa-spinner fa-spin"></i> <span class="translate" data-en="Loading Products..." data-hi="उत्पाद लोड हो रहे हैं...">Loading Products...</span>
     </div>
 </div>
 
+
+<!-- 🔥 MOBILE RECHARGE MODAL WITH SMART SIM DETECT 🔥 -->
 <div id="rechargeModal" class="modal">
     <div class="auth-content" style="max-width: 380px;">
         <div class="auth-header" style="background:#f1f5f9; color:#1e293b; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0;">
@@ -312,6 +496,7 @@
             <label style="font-size:12px; font-weight:bold; color:#64748b; margin-bottom:5px; display:block;" class="translate" data-en="Mobile Number" data-hi="मोबाइल नंबर">Mobile Number</label>
             <input type="number" id="rechargeNumber" class="auth-input" placeholder="Enter 10-digit number">
             
+            <!-- SMART AUTO OPERATOR DETECT BOX -->
             <div id="operatorDisplay" style="display:none; align-items:center; gap:12px; margin-top:-5px; margin-bottom:15px; padding:10px 15px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.02);">
                 <div id="opLogoBox" style="width:35px; height:35px; border-radius:50%; background:#f8fafc; border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:12px;"></div>
                 <div>
@@ -332,6 +517,7 @@
     </div>
 </div>
 
+<!-- 🔥 VIEW PLANS MODAL WITH HORIZONTAL TABS 🔥 -->
 <div id="plansModal" class="modal">
     <div class="auth-content" style="max-width: 400px; height: 85vh; display: flex; flex-direction: column; background:#f8fafc;">
         <div class="auth-header" style="background:#fff; color:#1e293b; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding:15px 20px;">
@@ -339,6 +525,7 @@
             <i class="fa-solid fa-xmark" style="font-size:20px; cursor:pointer;" onclick="document.getElementById('plansModal').style.display='none'"></i>
         </div>
         
+        <!-- SCROLLABLE TABS -->
         <div style="background:#fff;">
             <div class="plan-tabs-container">
                 <div class="plan-tab active" onclick="filterPlans('Popular', this)" class="translate" data-en="Popular" data-hi="लोकप्रिय">Popular</div>
@@ -352,6 +539,7 @@
         </div>
 
         <div class="auth-body" style="overflow-y: auto; flex:1; padding:15px;">
+            <!-- PLAN CARDS (Categorized) -->
             <div class="plan-card" data-category="Popular,5G">
                 <div class="plan-tag">VALIDITY PLAN</div>
                 <div class="plan-price">₹349</div>
@@ -395,6 +583,8 @@
     </div>
 </div>
 
+
+<!-- 🔥 FIXED AUTH MODAL 🔥 -->
 <div id="authModal" class="modal">
     <div class="auth-content">
         <button class="close-btn" onclick="document.getElementById('authModal').style.display='none'">&times;</button>
@@ -403,7 +593,9 @@
             <input type="email" class="auth-input translate-placeholder" data-en="Email Address" data-hi="ईमेल पता" placeholder="Email Address">
             <input type="password" class="auth-input translate-placeholder" data-en="Password" data-hi="पासवर्ड" placeholder="Password">
             <button id="authSubmitBtn" class="auth-submit-btn" onclick="alert('Please use Continue with Google!')"><span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span></button>
-            <button class="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335;"></i> <span class="translate" data-en="Continue with Google" data-hi="Google के साथ जारी रखें">Continue with Google</span></button>
+            <button class="google-btn" onclick="googleSignIn()">
+                <i class="fa-brands fa-google" style="color:#ea4335;"></i> <span class="translate" data-en="Continue with Google" data-hi="Google के साथ जारी रखें">Continue with Google</span>
+            </button>
             <div class="auth-switch" onclick="toggleAuthMode()">
                 <span id="authSwitchText" class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">Don't have an account? Sign Up</span>
             </div>
@@ -411,44 +603,193 @@
     </div>
 </div>
 
+<!-- 🔥 FULL MEGA DASHBOARD 🔥 -->
 <div id="dashboardModal" class="modal">
     <div class="dashboard-content">
         <button class="close-btn" id="dashDesktopCloseBtn" onclick="document.getElementById('dashboardModal').style.display='none'">&times;</button>
+        
         <div class="dash-sidebar">
             <div class="dash-user-card">
                 <div class="dash-avatar" id="dashAvatarInitial">Z</div>
-                <div><div style="font-size:12px; color:#878787; font-weight:600;" class="translate" data-en="Hello," data-hi="नमस्ते,">Hello,</div><div style="font-size:16px; font-weight:800; color:#212121;" id="dashDisplayName">User</div></div>
+                <div>
+                    <div style="font-size:12px; color:#878787; font-weight:600;" class="translate" data-en="Hello," data-hi="नमस्ते,">Hello,</div>
+                    <div style="font-size:16px; font-weight:800; color:#212121;" id="dashDisplayName">User</div>
+                </div>
             </div>
+
+            <div class="dash-group-title translate" data-en="Account Settings" data-hi="खाता सेटिंग">Account Settings</div>
+            <div class="dash-nav-item active" onclick="switchDashTab('dashProfileTab', this, 'Edit Profile')">
+                <div class="item-left"><i class="fa-solid fa-user"></i> <span class="translate" data-en="Edit Profile" data-hi="प्रोफ़ाइल संपादित करें">Edit Profile</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashOrdersTab', this, 'My Orders')">
+                <div class="item-left"><i class="fa-solid fa-box-open"></i> <span class="translate" data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashAddressTab', this, 'Saved Addresses')">
+                <div class="item-left"><i class="fa-solid fa-location-dot"></i> <span class="translate" data-en="Saved Addresses" data-hi="सहेजे गए पते">Saved Addresses</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashCardsTab', this, 'Saved Cards')">
+                <div class="item-left"><i class="fa-solid fa-wallet"></i> <span class="translate" data-en="Saved Cards" data-hi="सहेजे गए कार्ड">Saved Cards</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashLangTab', this, 'Select Language')">
+                <div class="item-left"><i class="fa-solid fa-language"></i> <span class="translate" data-en="Select Language" data-hi="भाषा चुनें">Select Language</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashNotifTab', this, 'Notification Settings')">
+                <div class="item-left"><i class="fa-regular fa-bell"></i> <span class="translate" data-en="Notification Settings" data-hi="अधिसूचना सेटिंग">Notification Settings</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title translate" data-en="My Activity" data-hi="मेरी गतिविधि">My Activity</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashReviewsTab', this, 'My Reviews')">
+                <div class="item-left"><i class="fa-solid fa-pen-to-square"></i> <span class="translate" data-en="Reviews" data-hi="समीक्षाएं">Reviews</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashQATab', this, 'Questions & Answers')">
+                <div class="item-left"><i class="fa-solid fa-comments"></i> <span class="translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title translate" data-en="Earn with ZippyKart" data-hi="ZippyKart के साथ कमाएं">Earn with ZippyKart</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashSellTab', this, 'Sell on ZippyKart')">
+                <div class="item-left"><i class="fa-solid fa-store"></i> <span class="translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
+            <div class="dash-group-title translate" data-en="Feedback & Information" data-hi="प्रतिक्रिया और जानकारी">Feedback & Information</div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashTermsTab', this, 'Terms & Policies')">
+                <div class="item-left"><i class="fa-solid fa-file-contract"></i> <span class="translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+            <div class="dash-nav-item" onclick="switchDashTab('dashFAQTab', this, 'Browse FAQs')">
+                <div class="item-left"><i class="fa-solid fa-circle-question"></i> <span class="translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</span></div><i class="fa-solid fa-chevron-right" style="color:#ccc; font-size:12px;"></i>
+            </div>
+
             <button class="logout-full-btn" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i> <span class="translate" data-en="Log Out" data-hi="लॉग आउट">Log Out</span></button>
         </div>
+
         <div class="dash-main">
             <div class="dash-mobile-header">
                 <i class="fa-solid fa-arrow-left" onclick="closeDashMainMobile()"></i>
-                <span id="dashHeaderDynamicTitle">Dashboard</span>
+                <span id="dashHeaderDynamicTitle" class="translate" data-en="Edit Profile" data-hi="प्रोफ़ाइल संपादित करें">Edit Profile</span>
+            </div>
+            
+            <div class="dash-inner-content slide-in-active" id="dashProfileTab">
+                <h2 class="dash-header-title translate" data-en="Personal Information" data-hi="व्यक्तिगत जानकारी">Personal Information</h2>
+                <input type="text" class="auth-input translate-placeholder" data-en="Full Name" data-hi="पूरा नाम" placeholder="Full Name" id="dashNameInput">
+                <input type="email" class="auth-input translate-placeholder" data-en="Email Address" data-hi="ईमेल पता" placeholder="Email Address" id="dashEmailInput" readonly style="background:#f1f5f9; color:#94a3b8;">
+                <input type="number" class="auth-input translate-placeholder" data-en="Mobile Number" data-hi="मोबाइल नंबर" placeholder="Mobile Number">
+                <button class="auth-submit-btn" style="width: auto; padding: 10px 30px; background:#ff3e6c;"><span class="translate" data-en="Save Changes" data-hi="परिवर्तन सहेजें">Save Changes</span></button>
+            </div>
+            
+            <div class="dash-inner-content" id="dashOrdersTab">
+                <h2 class="dash-header-title translate" data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</h2>
+                <div class="order-card">
+                    <div>
+                        <div style="font-weight:800; font-size:14px; margin-bottom:5px;">Oversized Maroon T-Shirt</div>
+                        <div style="color:#64748b; margin-bottom:8px;">Size: L | Qty: 1</div>
+                        <div style="font-weight:800; font-size:16px;">₹499</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="background:#dcfce7; color:#16a34a; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:11px;" class="translate" data-en="Delivered" data-hi="वितरित">Delivered</span>
+                        <div style="margin-top:10px;"><i class="fa-solid fa-chevron-right" style="color:#ccc;"></i></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dash-inner-content" id="dashAddressTab">
+                <h2 class="dash-header-title translate" data-en="Manage Addresses" data-hi="पते प्रबंधित करें">Manage Addresses</h2>
+                <button style="border:1px dashed #ff3e6c; color:#ff3e6c; background:#fff0f3; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px; margin-bottom:15px;"><span class="translate" data-en="+ ADD A NEW ADDRESS" data-hi="+ एक नया पता जोड़ें">+ ADD A NEW ADDRESS</span></button>
+                <div style="border:1px solid #e2e8f0; border-radius:8px; padding:15px; position:relative;">
+                    <span style="background:#f1f5f9; font-size:10px; padding:3px 6px; border-radius:4px; font-weight:bold; color:#64748b;">HOME</span>
+                    <div style="font-weight:800; margin-top:10px; margin-bottom:5px;" id="addressNameSpan">User</div>
+                    <div style="font-size:13px; color:#475569; line-height:1.5;">Rajendra Place, New Delhi<br>India - 110008</div>
+                </div>
+            </div>
+
+            <div class="dash-inner-content" id="dashCardsTab">
+                <h2 class="dash-header-title translate" data-en="Saved Cards" data-hi="सहेजे गए कार्ड">Saved Cards</h2>
+                <div class="bank-card" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 20px; border-radius: 12px; margin-bottom: 15px; width: 100%; max-width: 320px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom: 25px;"><i class="fa-brands fa-cc-visa" style="font-size:28px;"></i> <span style="font-weight:800; font-style:italic;">HDFC BANK</span></div>
+                    <div style="letter-spacing: 3px; font-size: 18px; margin-bottom: 20px; font-family:monospace;">**** **** **** 4321</div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8; text-transform:uppercase;">
+                        <span id="cardHolderName">Akash Kumar</span><span>12/28</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-inner-content" id="dashLangTab">
+                <h2 class="dash-header-title translate" data-en="Select Language" data-hi="भाषा चुनें">Select Language</h2>
+                <div class="lang-option active" onclick="setLanguageUI('en', this)" style="display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer;">
+                    <div class="lang-radio" style="width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center;"></div>
+                    <div class="lang-text" style="flex:1; font-weight:700; font-size:16px;">English<small style="display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px;">English</small></div>
+                </div>
+                <div class="lang-option" onclick="setLanguageUI('hi', this)" style="display:flex; align-items:center; padding:15px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:12px; cursor:pointer;">
+                    <div class="lang-radio" style="width:20px; height:20px; border-radius:50%; border:2px solid #cbd5e1; margin-right:15px; display:flex; justify-content:center; align-items:center;"></div>
+                    <div class="lang-text" style="flex:1; font-weight:700; font-size:16px;">हिंदी<small style="display:block; font-weight:500; font-size:12px; color:#64748b; margin-top:2px;">Hindi</small></div>
+                </div>
+            </div>
+
+            <div class="dash-inner-content" id="dashNotifTab">
+                <h2 class="dash-header-title translate" data-en="Notification Settings" data-hi="अधिसूचना सेटिंग">Notification Settings</h2>
+                <div style="text-align:center; padding:40px;"><i class="fa-regular fa-bell" style="font-size:40px; color:#ccc; margin-bottom:15px;"></i><h3 class="translate" data-en="All Notifications Active" data-hi="सभी सूचनाएं सक्रिय हैं">All Notifications Active</h3></div>
+            </div>
+
+            <div class="dash-inner-content" id="dashReviewsTab">
+                <h2 class="dash-header-title translate" data-en="My Reviews" data-hi="मेरी समीक्षाएं">My Reviews</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-pen-to-square" style="font-size:40px; color:#cbd5e1; margin-bottom:15px;"></i><h3 class="translate" data-en="No Reviews Yet" data-hi="अभी तक कोई समीक्षा नहीं">No Reviews Yet</h3></div>
+            </div>
+            
+            <div class="dash-inner-content" id="dashQATab">
+                <h2 class="dash-header-title translate" data-en="Questions & Answers" data-hi="प्रश्न और उत्तर">Questions & Answers</h2><div style="text-align:center; padding:40px;"><i class="fa-solid fa-comments" style="font-size:40px; color:#cbd5e1; margin-bottom:15px;"></i><h3 class="translate" data-en="No Questions Asked" data-hi="कोई प्रश्न नहीं पूछा गया">No Questions Asked</h3></div>
+            </div>
+
+            <div class="dash-inner-content" id="dashSellTab">
+                <h2 class="dash-header-title translate" data-en="Sell on ZippyKart" data-hi="ZippyKart पर बेचें">Sell on ZippyKart</h2>
+                <div style="background:#fff0f3; border:1px solid #ffe4e6; padding:20px; border-radius:8px; text-align:center;">
+                    <i class="fa-solid fa-store" style="font-size:40px; color:#ff3e6c; margin-bottom:15px;"></i>
+                    <h3 style="color:#1e293b; margin-top:0;" class="translate" data-en="Start your e-commerce journey" data-hi="अपनी ई-कॉमर्स यात्रा शुरू करें">Start your e-commerce journey</h3>
+                    <button style="margin-top:15px; padding:12px 25px; background:#ff3e6c; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;"><span class="translate" data-en="Register as Seller" data-hi="विक्रेता के रूप में पंजीकरण करें">Register as Seller</span></button>
+                </div>
+            </div>
+
+            <div class="dash-inner-content" id="dashTermsTab">
+                <h2 class="dash-header-title translate" data-en="Terms & Policies" data-hi="नियम और नीतियां">Terms & Policies</h2><div style="padding:10px; font-size:13px; color:#475569; line-height:1.6;" class="translate" data-en="By using ZippyKart, you agree to our standard Terms of Service and Privacy Policy. All transactions are securely processed." data-hi="ZippyKart का उपयोग करके, आप हमारी मानक सेवा की शर्तों और गोपनीयता नीति से सहमत हैं। सभी लेनदेन सुरक्षित रूप से संसाधित किए जाते हैं।">By using ZippyKart, you agree to our standard Terms of Service and Privacy Policy. All transactions are securely processed.</div>
+            </div>
+            
+            <div class="dash-inner-content" id="dashFAQTab">
+                <h2 class="dash-header-title translate" data-en="Browse FAQs" data-hi="सामान्य प्रश्न">Browse FAQs</h2>
+                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;"><span class="translate" data-en="How to track my order?" data-hi="मैं अपना ऑर्डर कैसे ट्रैक करूं?">How to track my order?</span> <i class="fa-solid fa-chevron-down"></i></div>
+                <div style="border:1px solid #e2e8f0; border-radius:6px; padding:15px; margin-bottom:10px; font-weight:bold; font-size:14px; display:flex; justify-content:space-between;"><span class="translate" data-en="What is the refund policy?" data-hi="धनवापसी नीति क्या है?">What is the refund policy?</span> <i class="fa-solid fa-chevron-down"></i></div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- 🔥 ANIMATED FOOTER WITH SOCIAL LINKS 🔥 -->
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
             <h3 class="translate" data-en="ZippyKart" data-hi="ज़िप्पीकार्ट">ZippyKart</h3>
-            <p class="translate" data-en="Premium destination for the latest trends and tech." data-hi="नवीनतम रुझानों और तकनीक के लिए प्रीमियम गंतव्य।">Premium destination for the latest trends and tech.</p>
+            <p class="translate" data-en="Premium destination for the latest trends and tech. Quality products to your doorstep." data-hi="नवीनतम रुझानों और तकनीक के लिए प्रीमियम गंतव्य। गुणवत्ता वाले उत्पाद आपके दरवाजे पर।">Premium destination for the latest trends and tech. Quality products to your doorstep.</p>
         </div>
         <div class="footer-col">
             <h3 class="translate" data-en="Quick Links" data-hi="त्वरित लिंक">Quick Links</h3>
-            <a href="#">Men's Fashion</a><a href="#">Gadgets & Tech</a><a href="#">AI Support</a>
+            <a href="#" class="translate" data-en="Men's Fashion" data-hi="पुरुषों का फैशन">Men's Fashion</a>
+            <a href="#" class="translate" data-en="Gadgets & Tech" data-hi="गैजेट्स और टेक">Gadgets & Tech</a>
+            <a href="#" class="translate" data-en="AI Support" data-hi="AI सहायता">AI Support</a>
+        </div>
+        <div class="footer-col">
+            <h3 class="translate" data-en="Policies" data-hi="नीतियां">Policies</h3>
+            <a href="#" class="translate" data-en="Privacy Policy" data-hi="गोपनीयता नीति">Privacy Policy</a>
+            <a href="#" class="translate" data-en="Terms of Service" data-hi="सेवा की शर्तें">Terms of Service</a>
+            <a href="#" class="translate" data-en="Return & Refund" data-hi="वापसी और धनवापसी">Return & Refund</a>
         </div>
         <div class="footer-col">
             <h3 class="translate" data-en="Get In Touch" data-hi="संपर्क करें">Get In Touch</h3>
-            <p>ZippyKart<br>Rajendra Place, New Delhi</p>
+            <p class="translate" data-en="ZippyKart<br>Rajendra Place, New Delhi" data-hi="ज़िप्पीकार्ट<br>राजेंद्र प्लेस, नई दिल्ली">ZippyKart<br>Rajendra Place, New Delhi</p>
             <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
     </div>
-    <div class="footer-bottom">&copy; 2026 ZippyKart. All Rights Reserved.</div>
+    <div class="footer-bottom translate" data-en="&copy; 2026 ZippyKart. All Rights Reserved." data-hi="&copy; 2026 ज़िप्पीकार्ट. सभी अधिकार सुरक्षित।">
+        &copy; 2026 ZippyKart. All Rights Reserved.
+    </div>
 </footer>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -468,71 +809,91 @@
     const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
     window.allFetchedProducts = []; window.currentUser = null; window.currentLanguage = 'en';
 
+    // LANGUAGE TRANSLATION LOGIC
+    window.setLanguageUI = function(langCode, element) {
+        document.querySelectorAll('.lang-option').forEach(el => { el.classList.remove('active'); el.querySelector('.lang-radio').style.background = 'transparent'; });
+        if(element) { element.classList.add('active'); element.querySelector('.lang-radio').style.background = '#ff3e6c'; }
+        window.currentLanguage = langCode;
+        document.querySelectorAll('.translate').forEach(el => { const trans = el.getAttribute('data-' + langCode); if(trans) el.innerHTML = trans; });
+        document.querySelectorAll('.translate-placeholder').forEach(el => { const trans = el.getAttribute('data-' + langCode); if(trans) el.placeholder = trans; });
+        const activeNav = document.querySelector('.dash-nav-item.active');
+        if(activeNav) { const titleSpan = activeNav.querySelector('.translate'); if(titleSpan) document.getElementById('dashHeaderDynamicTitle').innerText = titleSpan.getAttribute('data-' + langCode); }
+    }
+
+    // DASHBOARD TABS
+    window.switchDashTab = function(tabId, eventElem, fallbackTitle) {
+        document.querySelectorAll('.dash-inner-content').forEach(tab => { tab.style.display = 'none'; tab.classList.remove('slide-in-active'); });
+        document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
+        const targetTab = document.getElementById(tabId); targetTab.style.display = 'block'; void targetTab.offsetWidth; targetTab.classList.add('slide-in-active'); eventElem.classList.add('active'); 
+        const transSpan = eventElem.querySelector('.translate'); document.getElementById('dashHeaderDynamicTitle').innerText = transSpan ? transSpan.getAttribute('data-' + window.currentLanguage) : fallbackTitle;
+        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'none'; document.querySelector('.dash-main').style.display = 'block'; }
+    }
+    window.closeDashMainMobile = function() { document.querySelector('.dash-main').style.display = 'none'; document.querySelector('.dash-sidebar').style.display = 'flex'; }
+
+    // NOTIFICATIONS & CHAT
+    window.toggleNotifications = function() { document.getElementById('notifSidebar').classList.toggle('active'); document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); }
+    window.toggleChat = function() { document.getElementById('aiChatBox').classList.toggle('active'); }
+    window.handleChatEnter = function(e) { if(e.key === 'Enter') sendChatMessage(); }
+    window.sendChatMessage = function() {
+        const input = document.getElementById('chatInput'); const text = input.value.trim(); if(!text) return;
+        const chatBody = document.getElementById('chatBody'); chatBody.innerHTML += `<div class="chat-msg user-msg">${text}</div>`; input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
+        setTimeout(() => { chatBody.innerHTML += `<div class="chat-msg bot-msg">Thank you for reaching out! Our executive will connect with you shortly.</div>`; chatBody.scrollTop = chatBody.scrollHeight; }, 1000);
+    }
+    window.openInfoModal = function(title, text, iconClass, iconColor) {
+        document.getElementById('infoModalTitle').innerText = title; document.getElementById('infoModalText').innerHTML = text;
+        const icon = document.getElementById('infoModalIcon'); icon.className = `fa-solid ${iconClass}`; icon.style.color = iconColor; document.getElementById('infoModal').style.display = 'flex';
+    }
+    window.showComingSoon = function() { openInfoModal('Coming Soon', 'This service will be activated soon on ZippyKart. Stay tuned!', 'fa-clock', '#ff3e6c'); }
+
     // 🔥 SMART SIM DETECTOR LOGIC 🔥
     document.getElementById('rechargeNumber').addEventListener('input', function(e) {
         let val = e.target.value.toString();
         let display = document.getElementById('operatorDisplay');
         let logoBox = document.getElementById('opLogoBox');
         let nameText = document.getElementById('opNameText');
-        
         if(val.length >= 2) {
             display.style.display = 'flex';
             if(val.startsWith('93') || val.startsWith('89') || val.startsWith('70') || val.startsWith('63')) {
-                logoBox.innerHTML = '<span style="color:#0f3cc9; font-size:14px;">Jio</span>'; 
-                nameText.innerText = 'Reliance Jio';
+                logoBox.innerHTML = '<span style="color:#0f3cc9; font-size:14px;">Jio</span>'; nameText.innerText = 'Reliance Jio';
             } else if(val.startsWith('98') || val.startsWith('99') || val.startsWith('96')) {
-                logoBox.innerHTML = '<span style="color:#ff0000; font-size:10px;">airtel</span>'; 
-                nameText.innerText = 'Airtel';
+                logoBox.innerHTML = '<span style="color:#ff0000; font-size:10px;">airtel</span>'; nameText.innerText = 'Airtel';
             } else if(val.startsWith('80') || val.startsWith('90')) {
-                logoBox.innerHTML = '<span style="color:#e91e63; font-size:16px;">V!</span>'; 
-                nameText.innerText = 'Vodafone Idea';
+                logoBox.innerHTML = '<span style="color:#e91e63; font-size:16px;">V!</span>'; nameText.innerText = 'Vodafone Idea';
             } else {
-                logoBox.innerHTML = '<i class="fa-solid fa-sim-card" style="color:#64748b;"></i>'; 
-                nameText.innerText = 'Network Provider';
+                logoBox.innerHTML = '<i class="fa-solid fa-sim-card" style="color:#64748b;"></i>'; nameText.innerText = 'Network Provider';
             }
-        } else {
-            display.style.display = 'none';
-        }
+        } else { display.style.display = 'none'; }
     });
 
     // 🔥 HORIZONTAL TABS FILTERING LOGIC 🔥
     window.filterPlans = function(category, element) {
-        document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
-        element.classList.add('active');
+        document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active')); element.classList.add('active');
         document.querySelectorAll('.plan-card').forEach(card => {
             let categoriesArray = card.getAttribute('data-category').split(',');
-            if (categoriesArray.includes(category)) { card.style.display = 'block'; } 
-            else { card.style.display = 'none'; }
+            if (categoriesArray.includes(category)) { card.style.display = 'block'; } else { card.style.display = 'none'; }
         });
     }
 
     // ZIPPY NEW RECHARGE MODALS
     window.openRechargeModal = function() { document.getElementById('rechargeModal').style.display = 'flex'; }
     window.openPlansModal = function() {
-        document.getElementById('rechargeModal').style.display = 'none';
-        document.getElementById('plansModal').style.display = 'flex';
+        document.getElementById('rechargeModal').style.display = 'none'; document.getElementById('plansModal').style.display = 'flex';
         filterPlans('Popular', document.querySelector('.plan-tab:first-child'));
     }
     window.selectPlan = function(amount) {
-        document.getElementById('rechargeAmount').value = amount;
-        document.getElementById('plansModal').style.display = 'none';
-        document.getElementById('rechargeModal').style.display = 'flex';
+        document.getElementById('rechargeAmount').value = amount; document.getElementById('plansModal').style.display = 'none'; document.getElementById('rechargeModal').style.display = 'flex';
     }
     window.processRecharge = function() {
-        const num = document.getElementById('rechargeNumber').value;
-        const amt = document.getElementById('rechargeAmount').value;
-        if(!num || !amt) { alert("Please fill all details!"); return; }
-        alert(`Proceeding to checkout for ₹${amt}...`);
-        document.getElementById('rechargeModal').style.display = 'none';
+        const num = document.getElementById('rechargeNumber').value; const amt = document.getElementById('rechargeAmount').value;
+        if(!num || !amt) { alert(window.currentLanguage === 'hi' ? "कृपया सभी विवरण भरें!" : "Please fill all details!"); return; }
+        alert(window.currentLanguage === 'hi' ? `₹${amt} के भुगतान के लिए आगे बढ़ रहे हैं...` : `Proceeding to checkout for ₹${amt}...`); document.getElementById('rechargeModal').style.display = 'none';
     }
 
     // CATEGORY FILTER & ZIPPY NEW DISPLAY
     window.filterCategory = function(categoryName) {
         document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
         if(document.querySelector('.bottom-nav-item:nth-child(2)')) document.querySelector('.bottom-nav-item:nth-child(2)').classList.add('active');
-
         const productGrid = document.getElementById('mainProductGrid'); const slider = document.getElementById('sliderWrapper'); const zippyNew = document.getElementById('zippyNewSection');
-
         if(categoryName === 'ZippyNew') {
             productGrid.style.display = 'none'; slider.style.display = 'none'; zippyNew.style.display = 'block'; window.scrollTo({top:0, behavior:'smooth'});
         } else {
@@ -544,24 +905,27 @@
     }
 
     // 🔥 FIXED DROPDOWNS & CLICK OUTSIDE 🔥
-    window.toggleDrop = function(id, event) { 
-        event.stopPropagation(); // Prevents the window.onclick from immediately closing it
-        const drop = document.getElementById(id); 
-        const isCurrentlyOpen = drop.style.display === 'block';
-        
-        // Close all dropdowns first
+    window.toggleDrop = function(id) { 
+        const drop = document.getElementById(id); const isCurrentlyOpen = drop.style.display === 'block';
         document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); 
-        
-        // Toggle the clicked one
-        if(!isCurrentlyOpen) {
-            drop.style.display = 'block';
-        }
+        if(!isCurrentlyOpen) { drop.style.display = 'block'; }
     }
 
+    // AUTHENTICATION
     window.openAuthModal = function() { document.getElementById('loginDrop').style.display = 'none'; document.getElementById('authModal').style.display = 'flex'; }
-    window.showComingSoon = function() { alert("This feature will be available shortly on ZippyKart!"); }
-    
-    // AUTH MODAL SWITCH
+    window.googleSignIn = function() {
+        auth.signInWithPopup(googleProvider).then((result) => {
+            window.currentUser = result.user; document.getElementById('authModal').style.display = 'none'; document.getElementById('navLoginText').innerText = window.currentUser.displayName.split(' ')[0];
+            document.getElementById('authOpt').style.display = 'none'; document.getElementById('profileOpt').style.display = 'flex'; document.getElementById('logoutOpt').style.display = 'flex';
+            document.getElementById('dashDisplayName').innerText = window.currentUser.displayName; document.getElementById('dashAvatarInitial').innerText = window.currentUser.displayName.charAt(0).toUpperCase(); document.getElementById('addressNameSpan').innerText = window.currentUser.displayName; document.getElementById('cardHolderName').innerText = window.currentUser.displayName;
+        }).catch((error) => { alert("Error: " + error.message); });
+    }
+    window.handleLogout = function() {
+        auth.signOut().then(() => {
+            window.currentUser = null; document.getElementById('navLoginText').innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "LOGIN";
+            document.getElementById('authOpt').style.display = 'flex'; document.getElementById('profileOpt').style.display = 'none'; document.getElementById('logoutOpt').style.display = 'none'; document.getElementById('dashboardModal').style.display = 'none';
+        });
+    }
     window.toggleAuthMode = function() {
         const title = document.getElementById('authModalTitle'); const btn = document.getElementById('authSubmitBtn'); const switchTxt = document.getElementById('authSwitchText');
         if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
@@ -574,17 +938,31 @@
             switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">खाता नहीं है? <span style="color:#ff3e6c; font-weight:bold;">साइन अप करें</span></span>` : `<span class="translate" data-en="Don't have an account? Sign Up" data-hi="खाता नहीं है? साइन अप करें">Don't have an account? <span style="color:#ff3e6c; font-weight:bold;">Sign Up</span></span>`; 
         }
     }
-    
-    window.onclick = function(e) { 
-        // Close dropdowns if clicked outside
-        if(!e.target.closest('.menu-wrapper')) {
-            document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none');
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            window.currentUser = user; document.getElementById('navLoginText').innerText = user.displayName.split(' ')[0];
+            document.getElementById('authOpt').style.display = 'none'; document.getElementById('profileOpt').style.display = 'flex'; document.getElementById('logoutOpt').style.display = 'flex';
+            document.getElementById('dashDisplayName').innerText = user.displayName; document.getElementById('dashAvatarInitial').innerText = user.displayName.charAt(0).toUpperCase(); document.getElementById('addressNameSpan').innerText = user.displayName;
         }
-        // Close Modals if clicked outside
+    });
+
+    window.openDashboard = function() {
+        document.getElementById('loginDrop').style.display = 'none'; 
+        if(!window.currentUser) { openAuthModal(); return; }
+        document.getElementById('dashNameInput').value = window.currentUser.displayName || ""; document.getElementById('dashEmailInput').value = window.currentUser.email || "";
+        document.getElementById('dashboardModal').style.display = 'flex'; switchDashTab('dashProfileTab', document.querySelector('.dash-nav-item'), 'Edit Profile');
+        if(window.innerWidth <= 768) { document.querySelector('.dash-sidebar').style.display = 'flex'; document.querySelector('.dash-main').style.display = 'none'; }
+    }
+
+    // GLOBAL CLICK HANDLER
+    window.onclick = function(e) { 
+        if(!e.target.closest('.menu-wrapper')) { document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); }
         if(e.target == document.getElementById('authModal')) document.getElementById('authModal').style.display = 'none';
         if(e.target == document.getElementById('rechargeModal')) document.getElementById('rechargeModal').style.display = 'none';
         if(e.target == document.getElementById('plansModal')) document.getElementById('plansModal').style.display = 'none';
         if(e.target == document.getElementById('dashboardModal')) document.getElementById('dashboardModal').style.display = 'none';
+        if(e.target == document.getElementById('infoModal')) document.getElementById('infoModal').style.display = 'none';
+        if(e.target == document.getElementById('mobileMoreModal')) document.getElementById('mobileMoreModal').style.display = 'none';
     };
 
     let currentSlide = 0;
@@ -595,15 +973,13 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // FETCH PRODUCTS (WITH COMPLETE HTML CARD)
+    // FETCH PRODUCTS
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
             const snapshot = await db.collection("zippykart_products").get();
             if(snapshot.empty) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; padding: 40px; font-weight:bold;">No products found!</div>`; return; }
-            window.allFetchedProducts = [];
-            snapshot.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); });
-            renderProducts(window.allFetchedProducts);
+            window.allFetchedProducts = []; snapshot.forEach(doc => { let p = doc.data(); p.id = doc.id; window.allFetchedProducts.push(p); }); renderProducts(window.allFetchedProducts);
         } catch (error) { grid.innerHTML = `<div style="grid-column: span 4; text-align: center; color: red;">Network Error</div>`; }
     }
 
@@ -613,27 +989,17 @@
         
         productArray.forEach(p => {
             if (!p.title && !p.price) return; 
-            const title = p.title || "Premium Item"; 
-            const price = p.price || 0; 
-            const mrp = p.mrp || price; 
-            const upiPrice = price > 100 ? price - 50 : price; 
-            const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
+            const title = p.title || "Premium Item"; const price = p.price || 0; const mrp = p.mrp || price; const upiPrice = price > 100 ? price - 50 : price; const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
             let imgSource = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
             
             grid.innerHTML += `
                 <a href="product.html?id=${p.id}" class="product-card">
-                    <div class="image-wrapper">
-                        <img src="${imgSource}" onerror="this.src='https://via.placeholder.com/300'">
-                        <div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div>
-                    </div>
-                    <div class="product-brand">${title}</div>
-                    <div class="price-row-home">
-                        <span class="current-price-home">₹${price}</span>
-                        <span class="mrp-price-home">₹${mrp}</span>
-                    </div>
+                    <div class="image-wrapper"><img src="${imgSource}" onerror="this.src='https://via.placeholder.com/300'"><div class="rating-badge-home">${randomRating} <i class="fa-solid fa-star"></i></div></div>
+                    <div class="product-brand">${title}</div><div class="price-row-home"><span class="current-price-home">₹${price}</span><span class="mrp-price-home">₹${mrp}</span></div>
                     <div class="upi-offer-home">₹${upiPrice} <span class="translate" data-en="with UPI offer" data-hi="UPI ऑफर के साथ">with UPI offer</span></div>
                 </a>`;
         });
+        if(window.currentLanguage === 'hi') { setLanguageUI('hi', document.querySelector('.lang-option.active')); }
         setTimeout(handleFooterAnim, 500);
     }
 
@@ -648,4 +1014,4 @@
 </script>
 
 </body>
-</html>
+</html> 
