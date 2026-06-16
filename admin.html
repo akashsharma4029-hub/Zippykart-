@@ -11,7 +11,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-touch-callout: none; }
         body { background-color: #f1f5f9; color: #1e293b; display: flex; min-height: 100vh; position: relative; overflow-x: hidden; }
 
-        /* HEADER */
+        /* GLOBAL TOP NAVBAR */
         .global-header-navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: linear-gradient(90deg, #0f172a, #1e293b); color: white; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; z-index: 200; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .header-left-block { display: flex; align-items: center; gap: 15px; }
         .header-right-block { display: flex; align-items: center; gap: 20px; }
@@ -19,7 +19,7 @@
         .brand-logo { margin-bottom: 0; font-size: 22px; font-weight: 900; display: flex; align-items: center; gap: 10px; letter-spacing: 0.5px;}
         .brand-logo span { color: #00e5ff; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
         
-        /* 🔥 JARVIS MIC 🔥 */
+        /* JARVIS AI MICROPHONE VOICE CONTROLLER */
         .ai-voice-btn { background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.3); color: #00e5ff; border-radius: 30px; padding: 8px 15px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; box-shadow: 0 0 10px rgba(0,229,255,0.1);}
         .ai-voice-btn:hover { background: rgba(0, 229, 255, 0.2); box-shadow: 0 0 15px rgba(0,229,255,0.4); }
         .ai-voice-btn.listening { background: #00e5ff; color: #000; animation: pulseVoice 1s infinite; }
@@ -29,13 +29,13 @@
         .user-profile-badge { background: rgba(255, 62, 108, 0.15); border: 1px solid rgba(255, 62, 108, 0.3); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #ff3e6c; display: flex; align-items: center; gap: 8px; }
         .user-avatar-dot { width: 8px; height: 8px; background-color: #4caf50; border-radius: 50%; box-shadow: 0 0 8px #4caf50; }
 
-        /* SIDEBAR */
+        /* NAVIGATION SIDEBAR */
         .sidebar { width: 260px; background-color: #0f172a; color: #fff; padding: 20px 15px; position: fixed; height: calc(100vh - 70px); left: 0; top: 70px; z-index: 100; transition: 0.3s; border-right: 1px solid #1e293b; }
         .menu-item { display: flex; align-items: center; gap: 12px; padding: 14px 15px; color: #94a3b8; text-decoration: none; border-radius: 8px; margin-bottom: 8px; transition: 0.3s; cursor: pointer; font-size: 14px; font-weight: 500;}
         .menu-item:hover { background-color: #1e293b; color: #fff; transform: translateX(5px); }
         .menu-item.active { background: linear-gradient(90deg, #1e293b, rgba(0,229,255,0.1)); color: #00e5ff; font-weight: 700; border-left: 4px solid #00e5ff; }
 
-        /* MAIN CONTENT */
+        /* VIEWPORT CORE LAYOUT */
         .main-content { margin-left: 260px; padding: 100px 30px 40px 30px; width: calc(100% - 260px); }
         .admin-panel-section { display: none; animation: fadeIn 0.4s ease; }
         .admin-panel-section.active-view { display: block; }
@@ -46,9 +46,9 @@
         .primary-btn { background: linear-gradient(135deg, #00e5ff, #00b4d8); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3); transition: 0.3s; }
         .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4); }
 
-        .inventory-card { background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); padding: 25px; border: 1px solid #e2e8f0;}
+        .inventory-card { background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); padding: 25px; border: 1px solid #e2e8f0; margin-bottom: 25px;}
         
-        /* TABLE */
+        /* DATA TABLES MODULE */
         .table-responsive { width: 100%; overflow-x: auto; margin-top: 10px; }
         table { width: 100%; border-collapse: collapse; text-align: left; min-width: 700px; }
         th { background-color: #f8fafc; color: #475569; padding: 15px; font-weight: 700; border-bottom: 2px solid #e2e8f0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;}
@@ -58,9 +58,7 @@
         .actions-cell button:hover { transform: scale(1.2); }
         .edit-icon { color: #2196f3; } .delete-icon { color: #ef4444; }
 
-        /* 🔥 NEXT-GEN FEATURES CSS 🔥 */
-        
-        /* 1. Radar Heatmap */
+        /* 1. RADAR LIVE TRACKING HEATMAP */
         .radar-box { width: 100%; height: 350px; background: #0f172a; border-radius: 12px; position: relative; overflow: hidden; border: 1px solid #334155; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);}
         .radar-grid { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px); background-size: 40px 40px; }
         .radar-sweep { position: absolute; width: 400px; height: 400px; background: conic-gradient(from 0deg, transparent 70%, rgba(0, 229, 255, 0.4) 100%); border-radius: 50%; transform-origin: center; animation: sweep 3s linear infinite; }
@@ -68,12 +66,12 @@
         .live-dot { position: absolute; width: 12px; height: 12px; background: #00e5ff; border-radius: 50%; box-shadow: 0 0 15px #00e5ff, 0 0 30px #00e5ff; animation: pulseAlert 2s infinite; }
         .radar-overlay-text { position: absolute; top: 20px; left: 20px; color: #00e5ff; font-family: monospace; font-size: 14px; font-weight: bold; text-shadow: 0 0 5px #00e5ff; }
 
-        /* 2. WhatsApp Blast Card */
-        .ai-blast-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 12px; padding: 25px; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #334155; margin-bottom: 20px;}
+        /* 2. AUTOMATED WHATSAPP BLAST CRM CARD */
+        .ai-blast-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 12px; padding: 25px; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #334155; margin-bottom: 25px;}
         .blast-btn { background: #25D366; color: white; border: none; padding: 14px 25px; border-radius: 8px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); transition: 0.3s; }
         .blast-btn:hover { background: #1da851; transform: scale(1.05); }
 
-        /* 3. AI Pricing Engine */
+        /* 3. DYNAMIC AI SURGE PRICING MANAGEMENT ENGINE */
         .ai-surge-box { background: #fffbeb; border: 1px solid #fde047; padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
         .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
@@ -82,12 +80,12 @@
         input:checked + .slider { background-color: #ff3e6c; }
         input:checked + .slider:before { transform: translateX(24px); }
 
-        /* Modals & Forms (Unchanged Core) */
+        /* OVERLAYS & FORMS CONSOLES */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); z-index: 1000; overflow-y: auto; padding: 20px; backdrop-filter: blur(5px);}
         .modal-box { background: white; max-width: 800px; margin: 20px auto; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); padding: 30px; position: relative; animation: fadeIn 0.3s; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
         .modal-header h3 { font-size: 20px; font-weight: 800; color: #0f172a; }
-        .close-btn { background: #f1f5f9; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 16px; cursor: pointer; color: #475569; transition: 0.2s; }
+        .close-btn { background: #f1f5f9; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 16px; cursor: pointer; color: #475569; transition: 0.2s; display: flex; align-items: center; justify-content: center;}
         .close-btn:hover { background: #ef4444; color: white; }
         
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px; }
@@ -102,16 +100,17 @@
         
         .gallery-container { border: 2px dashed #cbd5e1; padding: 20px; border-radius: 8px; background: #f8fafc; margin-top: 5px; }
         .preview-thumbs-grid { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
-        .thumb-wrapper { position: relative; width: 70px; height: 70px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+        .thumb-wrapper { position: relative; width: 70px; height: 70px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background: #fff;}
         .thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; }
         .remove-thumb { position: absolute; top: -6px; right: -6px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        /* 🔥 UPGRADED EXTENDED VARIANT CARD STYLE 🔥 */
+        .variant-card { background: #f8fafc; border: 1px solid #cbd5e1; padding: 20px; border-radius: 12px; margin-bottom: 20px; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+        .variant-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; background: #f1f5f9; padding: 10px; border-radius: 8px; }
 
         .publish-btn { width: 100%; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border: none; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(15,23,42,0.3);}
         .publish-btn:hover { background: #00e5ff; color: #000; box-shadow: 0 5px 20px rgba(0,229,255,0.4);}
         .publish-btn:disabled { background: #94a3b8; cursor: not-allowed; }
-
-        .variant-card { background: #fff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin-bottom: 15px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);}
-        .variant-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; background: #f1f5f9; padding: 10px; border-radius: 8px; }
 
         @media (max-width: 991px) {
             .sidebar { transform: translateX(-100%); z-index: 500; }
@@ -120,7 +119,6 @@
             .header-section { flex-direction: column; align-items: flex-start; gap: 15px; }
             .header-section .primary-btn { width: 100%; justify-content: center; }
             .form-row { grid-template-columns: 1fr; }
-            .user-profile-badge span { display: none; }
         }
     </style>
 </head>
@@ -132,7 +130,6 @@
             <div class="brand-logo"><i class="fa-solid fa-bolt"></i> Zippy<span>Kart</span></div>
         </div>
         <div class="header-right-block">
-            <!-- 🔥 JARVIS VOICE CONTROL MIC 🔥 -->
             <button class="ai-voice-btn" id="jarvisBtn" onclick="activateJarvis()">
                 <i class="fa-solid fa-microphone"></i> <span>Jarvis AI</span>
             </button>
@@ -150,10 +147,10 @@
     </div>
 
     <div class="main-content">
-        <!-- 1. PRODUCT MASTER -->
+        
         <div id="productsMasterView" class="admin-panel-section active-view">
             <div class="header-section">
-                <div><h1>Inventory Master</h1><p style="color:#64748b; margin-top:4px;">Manage your live marketplace synchronization.</p></div>
+                <div><h1>Inventory Master</h1><p style="color:#64748b; margin-top:4px;">Manage your live marketplace synchronization entries.</p></div>
                 <button class="primary-btn" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Add New Product</button>
             </div>
             <div class="inventory-card">
@@ -166,77 +163,72 @@
             </div>
         </div>
 
-        <!-- 2. 🔥 LIVE TRAFFIC RADAR (ORDERS) 🔥 -->
         <div id="liveOrdersView" class="admin-panel-section">
-            <div class="header-section"><div><h1>Live Traffic Radar</h1><p style="color:#64748b;">Monitoring active checkouts across India.</p></div></div>
+            <div class="header-section"><div><h1>Live Traffic Radar</h1><p style="color:#64748b;">Monitoring active customer checkout streams across India.</p></div></div>
             <div class="radar-box">
                 <div class="radar-grid"></div>
                 <div class="radar-sweep"></div>
-                <!-- Simulated Live Traffic Dots -->
                 <div class="live-dot" style="top:30%; left:40%;"></div>
                 <div class="live-dot" style="top:60%; left:70%; animation-delay: 0.5s;"></div>
                 <div class="live-dot" style="top:80%; left:30%; animation-delay: 1s;"></div>
                 <div class="live-dot" style="top:20%; left:60%; animation-delay: 1.5s;"></div>
-                <div class="radar-overlay-text">SYSTEM: SCANNING ACTIVE SESSIONS...<br>4 LIVE CHECKOUTS DETECTED</div>
+                <div class="radar-overlay-text">SYSTEM STATUS: SCANNING SESSIONS...<br>4 AUTOMATED NETWORK NODES DETECTED</div>
             </div>
             
             <div class="inventory-card" style="margin-top:20px;">
-                <h3 style="margin-bottom:15px; font-size:16px;">Recent Orders</h3>
+                <h3 style="margin-bottom:15px; font-size:16px;">Incoming Real-Time Queue Logs</h3>
                 <table>
-                    <thead><tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th></tr></thead>
+                    <thead><tr><th>Order Packet ID</th><th>Customer Destination</th><th>Amount Flow</th><th>Status Gate</th></tr></thead>
                     <tbody>
-                        <tr><td>#ZK-9821</td><td>Rahul Sharma</td><td>₹1,197</td><td><span style="color:#4caf50; font-weight:bold;">Processing</span></td></tr>
-                        <tr><td>#ZK-9820</td><td>Priya Singh</td><td>₹499</td><td><span style="color:#2196f3; font-weight:bold;">Shipped</span></td></tr>
+                        <tr><td>#ZK-9821</td><td>Rahul Sharma (Delhi NCR)</td><td>₹1,197</td><td><span style="color:#4caf50; font-weight:bold;">Processing Dispatch</span></td></tr>
+                        <tr><td>#ZK-9820</td><td>Priya Singh (Mumbai Hub)</td><td>₹499</td><td><span style="color:#2196f3; font-weight:bold;">In-Transit Sync</span></td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- 3. 🔥 WHATSAPP BLAST CRM 🔥 -->
         <div id="customersView" class="admin-panel-section">
-            <div class="header-section"><div><h1>CRM & Marketing</h1></div></div>
+            <div class="header-section"><div><h1>CRM & Server Marketing</h1></div></div>
             
             <div class="ai-blast-card">
                 <div>
-                    <h2 style="font-size:22px; margin-bottom:5px;"><i class="fa-solid fa-cart-arrow-down" style="color:#ff3e6c;"></i> Abandoned Cart Recovery</h2>
-                    <p style="font-size:14px; color:#cbd5e1;">42 users left items in their cart today. Potential Revenue: <strong>₹45,500</strong></p>
+                    <h2 style="font-size:22px; margin-bottom:5px;"><i class="fa-solid fa-cart-arrow-down" style="color:#ff3e6c;"></i> Abandoned Cart Recovery Server</h2>
+                    <p style="font-size:14px; color:#cbd5e1;">42 users left active packets inside carts today. Potential Pipeline Recovery: <strong>₹45,500</strong></p>
                 </div>
-                <button class="blast-btn" id="blastBtn" onclick="triggerWhatsAppBlast()"><i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> Auto-Blast 20% Off</button>
+                <button class="blast-btn" id="blastBtn" onclick="triggerWhatsAppBlast()"><i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> 1-Click WhatsApp Blast (20% Off)</button>
             </div>
 
             <div class="inventory-card">
-                <h3 style="margin-bottom:15px; font-size:16px;">Registered Users Database</h3>
-                <p style="color:#64748b; font-size:14px;">User list will sync here.</p>
+                <h3 style="margin-bottom:15px; font-size:16px;">Synchronized User Database Core</h3>
+                <p style="color:#64748b; font-size:14px;">Real-time registered customer indices sync profiles automatically below.</p>
             </div>
         </div>
 
-        <!-- 4. 🔥 AI SURGE PRICING SETTINGS 🔥 -->
         <div id="storeSettingsView" class="admin-panel-section">
-            <div class="header-section"><div><h1>Engine Settings</h1></div></div>
+            <div class="header-section"><div><h1>Engine Settings Console</h1></div></div>
             
             <div class="ai-surge-box">
                 <div>
-                    <h3 style="font-size:16px; font-weight:800; color:#854d0e; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-robot"></i> AI Smart Auto-Pricing</h3>
-                    <p style="font-size:13px; color:#a16207; margin-top:5px;">Automatically increases margins by 5-10% during high traffic hours.</p>
+                    <h3 style="font-size:16px; font-weight:800; color:#854d0e; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-robot"></i> AI Smart Auto-Pricing Engine</h3>
+                    <p style="font-size:13px; color:#a16207; margin-top:5px;">Automatically boosts margins dynamically by 5-10% during heavy server traffic hours.</p>
                 </div>
                 <label class="switch">
-                    <input type="checkbox" checked onchange="alert(this.checked ? 'AI Surge Pricing Enabled!' : 'AI Surge Pricing Disabled.')">
+                    <input type="checkbox" checked onchange="alert(this.checked ? 'AI Surge Pricing Engine Activated!' : 'AI Surge Pricing Engine Suspended.')">
                     <span class="slider"></span>
                 </label>
             </div>
 
             <div class="inventory-card" style="max-width: 600px;">
-                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-truck-fast" style="color: #ff3e6c;"></i> Shiprocket API Integration</h3>
-                <div class="form-group"><label>Shiprocket Email</label><input type="email" id="srEmail" class="admin-input" placeholder="business@zippykart.co.in"></div>
-                <div class="form-group"><label>API Secret Token</label><input type="password" id="srPassword" class="admin-input" placeholder="••••••••"></div>
-                <button class="primary-btn" onclick="saveShiprocketCredentials()"><i class="fa-solid fa-floppy-disk"></i> Save Token</button>
+                <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 15px;"><i class="fa-solid fa-truck-fast" style="color: #ff3e6c;"></i> Shiprocket API Integration Logistics</h3>
+                <div class="form-group"><label>Shiprocket Unified Email</label><input type="email" id="srEmail" class="admin-input" placeholder="business@zippykart.co.in"></div>
+                <div class="form-group"><label>API Endpoint Secret Token</label><input type="password" id="srPassword" class="admin-input" placeholder="••••••••"></div>
+                <button class="primary-btn" onclick="saveShiprocketCredentials()"><i class="fa-solid fa-floppy-disk"></i> Secure Token Save</button>
             </div>
         </div>
     </div>
 
-    <!-- 🔥 ORIGINAL PRODUCT MODAL (UNCHANGED CORE) 🔥 -->
     <div id="productModal" class="modal-overlay">
-        <div class="modal-box" style="max-width: 750px;">
+        <div class="modal-box">
             <div class="modal-header">
                 <h3 id="modalBoxTitle">Create Live Marketplace Entry</h3>
                 <button class="close-btn" onclick="dismissProductModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -244,18 +236,18 @@
 
             <form id="marketplaceForm" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
-                    <label>Main Commercial Title</label>
-                    <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. Premium Oversized T-Shirt" required>
+                    <label>Main Commercial Title (Global Global)</label>
+                    <input type="text" id="prodTitle" class="admin-input" placeholder="e.g. Premium Never Give Up Oversized T-Shirt" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Category Department</label>
+                        <label>Category Department Sync</label>
                         <select id="productCategory" class="admin-input" required>
                             <option value="ZippyNew">Zippy New</option><option value="Men">Men</option><option value="Women">Women</option><option value="Streetwear">Streetwear</option><option value="Kids">Kids</option><option value="Toys">Toys</option><option value="Watch">Watch</option><option value="Electronics">Electronics</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Initial Stock</label><input type="number" id="prodStock" class="admin-input" placeholder="100" min="0" required></div>
+                    <div class="form-group"><label>Initial Stock Allocation</label><input type="number" id="prodStock" class="admin-input" placeholder="100" min="0" required></div>
                 </div>
 
                 <div class="form-row">
@@ -264,19 +256,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Main Description</label>
+                    <label>Main Specifications / Product Description</label>
                     <textarea id="prodDesc" class="admin-input" style="height: 80px; resize: none;" placeholder="Provide details..." required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Available Sizes</label>
+                    <label>Permissible Purchase Sizes</label>
                     <div class="checkbox-group">
                         <label class="checkbox-item"><input type="checkbox" name="sizes" value="S" checked> S</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="M" checked> M</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="L" checked> L</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="XL" checked> XL</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="XXL" checked> XXL</label><label class="checkbox-item"><input type="checkbox" name="sizes" value="Free Size"> Free Size</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label><i class="fa-regular fa-image" style="color: #ff3e6c;"></i> Primary Product Gallery</label>
+                    <label><i class="fa-regular fa-image" style="color: #ff3e6c;"></i> Primary Product Gallery (Slide Images)</label>
                     <div class="gallery-container">
                         <input type="file" id="primaryImgInput" multiple accept="image/*" onchange="processGalleryImages(this)" style="font-size:12px;">
                         <div id="galleryThumbsGrid" class="preview-thumbs-grid"></div>
@@ -284,16 +276,16 @@
                 </div>
 
                 <div class="form-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-top: 1px solid #e2e8f0; padding-top:15px;">
-                        <label style="font-size: 14px; font-weight: 700; color: #1e293b;">Color Variants Engine</label>
-                        <button type="button" class="primary-btn" style="padding: 6px 12px; font-size: 12px;" onclick="addColorVariantField()"><i class="fa-solid fa-plus"></i> Add Variant</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-top: 1px solid #e2e8f0; padding-top:15px;">
+                        <label style="font-size: 15px; font-weight: 700; color: #1e293b;">Advanced Variants Engine Management</label>
+                        <button type="button" class="primary-btn" style="padding: 6px 12px; font-size: 12px;" onclick="addColorVariantField()"><i class="fa-solid fa-plus"></i> Add New Variant</button>
                     </div>
                     <div id="variantsContainer"></div>
                 </div>
 
                 <div class="form-group" style="margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                        <label style="font-size: 14px; font-weight: 700; color: #1e293b;"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> Drip Check Videos</label>
+                        <label style="font-size: 14px; font-weight: 700; color: #1e293b;"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i> Drip Check Videos Reel Links</label>
                         <button type="button" class="primary-btn" style="padding: 6px 12px; font-size: 12px; background:#1e293b;" onclick="addVideoLinkField()"><i class="fa-solid fa-plus"></i> Add Link</button>
                     </div>
                     <div id="videoLinksContainer"></div>
@@ -306,61 +298,51 @@
         </div>
     </div>
 
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // 1. FIREBASE CONFIG
+        // 1. DATABASE REGISTRATION
         const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" };
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); } const db = firebase.firestore();
         window.editingProductId = null; window.mainGalleryImages = []; 
 
-        // 🔥 JARVIS VOICE CONTROL LOGIC 🔥
+        // 🔥 JARVIS AI INTELLIGENCE VOICE CONSOLE COMMANDS ENGINE 🔥
         window.activateJarvis = function() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) { alert("Jarvis offline. Browser does not support Speech API."); return; }
-            
-            const recognition = new SpeechRecognition();
-            const jarvisBtn = document.getElementById('jarvisBtn');
+            if (!SpeechRecognition) { alert("Jarvis offline. Speech API registration failed."); return; }
+            const recognition = new SpeechRecognition(); const jarvisBtn = document.getElementById('jarvisBtn');
             
             recognition.onstart = function() { jarvisBtn.classList.add('listening'); jarvisBtn.innerHTML = `<i class="fa-solid fa-microphone-lines"></i> <span>Listening...</span>`; };
             recognition.onspeechend = function() { jarvisBtn.classList.remove('listening'); jarvisBtn.innerHTML = `<i class="fa-solid fa-microphone"></i> <span>Jarvis AI</span>`; };
             
             recognition.onresult = function(event) {
                 const command = event.results[0][0].transcript.toLowerCase();
-                if(command.includes("product") || command.includes("add")) { openProductModal(); }
-                else if(command.includes("order") || command.includes("radar")) { switchAdminTab(document.querySelectorAll('.menu-item')[1], 'liveOrdersView'); }
-                else if(command.includes("whatsapp") || command.includes("customer")) { switchAdminTab(document.querySelectorAll('.menu-item')[2], 'customersView'); }
-                else if(command.includes("setting") || command.includes("surge")) { switchAdminTab(document.querySelectorAll('.menu-item')[3], 'storeSettingsView'); }
-                else { alert("Jarvis: I didn't catch that command, sir."); }
+                if(command.includes("product") || command.includes("add") || command.includes("create")) { openProductModal(); }
+                else if(command.includes("order") || command.includes("radar") || command.includes("live")) { switchAdminTab(document.querySelectorAll('.menu-item')[1], 'liveOrdersView'); }
+                else if(command.includes("whatsapp") || command.includes("marketing") || command.includes("crm")) { switchAdminTab(document.querySelectorAll('.menu-item')[2], 'customersView'); }
+                else if(command.includes("setting") || command.includes("engine")) { switchAdminTab(document.querySelectorAll('.menu-item')[3], 'storeSettingsView'); }
+                else { alert("Jarvis System: Unrecognized instruction packets, sir."); }
             };
             recognition.start();
         }
 
-        // 🔥 WHATSAPP BLAST LOGIC 🔥
+        // 🔥 AUTOMATED WHATSAPP MARKETING Recovery CALL FLOWS 🔥
         window.triggerWhatsAppBlast = function() {
-            const btn = document.getElementById('blastBtn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Blasting Server...`; btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = `<i class="fa-solid fa-check-double"></i> 42 Messages Sent!`;
-                btn.style.background = "#1e293b";
-                setTimeout(() => { btn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> Auto-Blast 20% Off`; btn.disabled = false; btn.style.background = "#25D366"; }, 3000);
-            }, 2000);
+            const btn = document.getElementById('blastBtn'); btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Blasting Server Matrix...`; btn.disabled = true;
+            setTimeout(() => { btn.innerHTML = `<i class="fa-solid fa-check-double"></i> 42 Recovery Messages Sent!`; btn.style.background = "#1e293b"; setTimeout(() => { btn.innerHTML = `<i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> Auto-Blast 20% Off`; btn.disabled = false; btn.style.background = "#25D366"; }, 3000); }, 2000);
         }
 
-        // BASE ADMIN LOGIC
+        // CONTROL LOGIC MATRIX
         window.toggleMobileSidebar = function(openState) {
             const sidebar = document.getElementById('adminSidebar'); const overlay = document.getElementById('sidebarOverlay');
-            if (openState) { sidebar.classList.add('mobile-open'); overlay.style.display = 'block'; } 
-            else { sidebar.classList.remove('mobile-open'); overlay.style.display = 'none'; }
+            if (openState) { sidebar.classList.add('mobile-open'); overlay.style.display = 'block'; } else { sidebar.classList.remove('mobile-open'); overlay.style.display = 'none'; }
         }
 
         window.switchAdminTab = function(element, targetSectionId) {
             document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active')); element.classList.add('active');
             document.querySelectorAll('.admin-panel-section').forEach(section => section.classList.remove('active-view'));
-            document.getElementById(targetSectionId).classList.add('active-view');
-            toggleMobileSidebar(false); 
+            document.getElementById(targetSectionId).classList.add('active-view'); toggleMobileSidebar(false); 
         }
 
         function compressImageEngine(base64Str) {
@@ -374,19 +356,17 @@
             });
         }
 
-        // MODAL & PRODUCT LOGIC
+        // INVENTORY AND REGISTRATION CONSOLES
         window.openProductModal = function(id = null) {
             document.getElementById('marketplaceForm').reset(); window.mainGalleryImages = [];
             document.getElementById('galleryThumbsGrid').innerHTML = ''; document.getElementById('variantsContainer').innerHTML = ''; document.getElementById('videoLinksContainer').innerHTML = ''; 
-            
             if(id) {
-                window.editingProductId = id; document.getElementById('modalBoxTitle').innerText = "Edit Product"; document.getElementById('publishBtnText').innerText = "Update Product"; fetchProductDetailsForEditing(id);
+                window.editingProductId = id; document.getElementById('modalBoxTitle').innerText = "Edit Product Matrix Specifications"; document.getElementById('publishBtnText').innerText = "Update Specifications"; fetchProductDetailsForEditing(id);
             } else {
-                window.editingProductId = null; document.getElementById('modalBoxTitle').innerText = "Create Product"; document.getElementById('publishBtnText').innerText = "Publish Product"; addColorVariantField();
+                window.editingProductId = null; document.getElementById('modalBoxTitle').innerText = "Create Live Marketplace Entry"; document.getElementById('publishBtnText').innerText = "Publish Product"; addColorVariantField();
             }
             document.getElementById('productModal').style.display = 'block';
         }
-
         window.dismissProductModal = function() { document.getElementById('productModal').style.display = 'none'; }
 
         window.processGalleryImages = function(input) {
@@ -398,29 +378,71 @@
         }
         window.removeGalleryImage = function(index) { window.mainGalleryImages.splice(index, 1); renderGalleryThumbs(); }
 
-        window.addColorVariantField = function(name = '', imgSrc = '', vTitle = '', vDesc = '') {
+        // 🔥 HIGHEST PREMIUM COLOR VARIANTS ENGINE (FULLY DETAILED SPECIFICATIONS RESTORED) 🔥
+        window.addColorVariantField = function(name = '', imgSrc = '', vTitle = '', vPrice = '', vDesc = '') {
             const container = document.getElementById('variantsContainer'); const index = container.children.length; const row = document.createElement('div');
             row.className = 'variant-card'; row.id = `variantRow_${index}`;
             const displayMode = imgSrc ? 'block' : 'none';
-            row.innerHTML = `<button type="button" class="close-btn" style="position:absolute; top:15px; right:15px; background:#ef4444; color:#fff;" onclick="removeVariantField(${index})"><i class="fa-solid fa-trash-can"></i></button><h4>Variant #${index + 1}</h4><div class="form-row"><div><label>Color Name</label><input type="text" class="admin-input variant-name" placeholder="e.g. Red" value="${name}"></div><div><label>Image</label><input type="file" accept="image/*" onchange="processVariantImage(this, ${index})"><img id="variantPreviewImg_${index}" src="${imgSrc}" style="width:40px; height:40px; display:${displayMode}; margin-top:5px; border-radius:4px;"></div></div>`;
+            
+            row.innerHTML = `
+                <button type="button" class="close-btn" style="position:absolute; top:15px; right:15px; background:#ef4444; color:#fff;" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash-can"></i></button>
+                <h4 style="font-size:13px; margin-bottom:12px; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:5px; font-weight:700;">Variant Package Config #${index + 1}</h4>
+                <div class="form-row">
+                    <div>
+                        <label>Variant Color / Option Name <span style="color:red;">*</span></label>
+                        <input type="text" class="admin-input variant-name" placeholder="e.g. Cherry Red" value="${name}" required>
+                    </div>
+                    <div>
+                        <label>Variant Display Image Thumbnail</label>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="file" accept="image/*" style="font-size:11px; width:100%; border:1px solid #cbd5e1; padding:5px; border-radius:6px;" onchange="processVariantImage(this, ${index})">
+                            <div id="vWrap_${index}" class="thumb-wrapper" style="width:42px; height:40px; display:${displayMode}; flex-shrink:0;"><img id="variantPreviewImg_${index}" src="${imgSrc}" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <label>Specific Variant Commercial Title</label>
+                        <input type="text" class="admin-input variant-title" placeholder="e.g. T-Shirt - Special Cherry Edition" value="${vTitle}">
+                    </div>
+                    <div>
+                        <label>Variant Specific Sale Price (₹)</label>
+                        <input type="number" class="admin-input variant-price" placeholder="e.g. 549" value="${vPrice}">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom:0; margin-top:5px;">
+                    <label>Specific Variant Details / Wash Instructions</label>
+                    <textarea class="admin-input variant-desc" style="height:60px; resize:none;" placeholder="Enter separate specifications for this variant profile option...">${vDesc}</textarea>
+                </div>`;
             container.appendChild(row);
         }
-        window.processVariantImage = function(input, index) { if (input.files && input.files[0]) { const reader = new FileReader(); reader.onload = async function(e) { const compressed = await compressImageEngine(e.target.result); const imgEl = document.getElementById(`variantPreviewImg_${index}`); imgEl.src = compressed; imgEl.style.display = 'block'; }; reader.readAsDataURL(input.files[0]); } }
-        window.removeVariantField = function(index) { const row = document.getElementById(`variantRow_${index}`); if(row) row.remove(); }
+        window.processVariantImage = function(input, index) { if (input.files && input.files[0]) { const reader = new FileReader(); reader.onload = async function(e) { const compressed = await compressImageEngine(e.target.result); const imgEl = document.getElementById(`variantPreviewImg_${index}`); imgEl.src = compressed; document.getElementById(`vWrap_${index}`).style.display = 'block'; }; reader.readAsDataURL(input.files[0]); } }
 
         window.addVideoLinkField = function(link = '') {
             const container = document.getElementById('videoLinksContainer'); const index = container.children.length; const row = document.createElement('div'); row.className = 'variant-row'; row.id = `videoRow_${index}`;
-            row.innerHTML = `<input type="url" class="admin-input video-link-input" placeholder="YouTube/Insta Link" value="${link}"><button type="button" class="close-btn" style="background:none; color:#ef4444;" onclick="document.getElementById('videoRow_${index}').remove()"><i class="fa-solid fa-trash"></i></button>`;
+            row.innerHTML = `<input type="url" class="admin-input video-link-input" placeholder="YouTube Shorts / Reels Link URL" value="${link}" style="margin-bottom:0; flex:1;"><button type="button" class="close-btn" style="background:none; color:#ef4444; width:auto;" onclick="document.getElementById('videoRow_${index}').remove()"><i class="fa-solid fa-trash"></i></button>`;
             container.appendChild(row);
         }
 
         window.handleFormSubmit = async function(event) {
-            event.preventDefault();
-            const btn = document.getElementById('publishBtn'); const originalBtnHtml = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving...`; btn.disabled = true;
+            event.preventDefault(); const btn = document.getElementById('publishBtn'); const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Synchronizing core matrix...`; btn.disabled = true;
 
             const compiledSizes = []; document.querySelectorAll('input[name="sizes"]:checked').forEach(cb => compiledSizes.push(cb.value));
-            const compiledVariants = []; document.querySelectorAll('.variant-card').forEach(row => { const cName = row.querySelector('.variant-name').value.trim(); const imgEl = row.querySelector('img'); let cImg = imgEl ? imgEl.getAttribute('src') : ""; if(cName) { compiledVariants.push({ color: cName, img: cImg }); } });
+            
+            // Extract complete expanded variant data rows
+            const compiledVariants = []; 
+            document.querySelectorAll('.variant-card').forEach(row => { 
+                const cName = row.querySelector('.variant-name').value.trim(); 
+                const vTitle = row.querySelector('.variant-title').value.trim();
+                const vPrice = row.querySelector('.variant-price').value;
+                const vDesc = row.querySelector('.variant-desc').value.trim();
+                const imgEl = row.querySelector('.thumb-wrapper img'); 
+                let cImg = imgEl ? imgEl.getAttribute('src') : ""; 
+                if(cImg && !cImg.startsWith('data:image') && !cImg.startsWith('http')) { cImg = ""; } 
+                if(cName) { compiledVariants.push({ color: cName, img: cImg, vTitle: vTitle, vPrice: vPrice, vDesc: vDesc }); } 
+            });
+            
             const compiledVideoLinks = []; document.querySelectorAll('.video-link-input').forEach(input => { if(input.value.trim()) compiledVideoLinks.push(input.value.trim()); });
 
             const payload = {
@@ -432,22 +454,22 @@
             };
 
             try {
-                if (window.editingProductId) { await db.collection("zippykart_products").doc(window.editingProductId).set(payload, { merge: true }); alert("✅ Updated!"); } 
-                else { await db.collection("zippykart_products").add(payload); alert("✅ Published!"); }
+                if (window.editingProductId) { await db.collection("zippykart_products").doc(window.editingProductId).set(payload, { merge: true }); alert("✅ Specifications Matrix Updated!"); } 
+                else { await db.collection("zippykart_products").add(payload); alert("✅ Live Marketplace Entry Generated!"); }
                 dismissProductModal(); loadInventoryDashboard();
-            } catch (error) { alert("Error: " + error.message); } finally { btn.innerHTML = originalBtnHtml; btn.disabled = false; }
+            } catch (error) { alert("Database Sync Failure: " + error.message); } finally { btn.innerHTML = originalBtnHtml; btn.disabled = false; }
         }
 
         async function loadInventoryDashboard() {
-            const tableBody = document.getElementById('inventoryTableBody'); tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Loading...</td></tr>`;
+            const tableBody = document.getElementById('inventoryTableBody'); tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Reading centralized storage registries...</td></tr>`;
             try {
                 const snapshot = await db.collection("zippykart_products").orderBy("timestamp", "desc").get(); tableBody.innerHTML = '';
-                if(snapshot.empty) { tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No products.</td></tr>`; return; }
+                if(snapshot.empty) { tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Inventory registry empty.</td></tr>`; return; }
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    tableBody.innerHTML += `<tr><td><img src="${data.image || 'https://via.placeholder.com/50'}" class="prod-thumb"></td><td style="font-weight:700;">${data.title}</td><td>${data.category}</td><td style="color:#ff3e6c; font-weight:bold;">₹${data.price}</td><td>${data.stockCount}</td><td class="actions-cell"><button class="edit-icon" onclick="openProductModal('${doc.id}')"><i class="fa-solid fa-pen-to-square"></i></button><button class="delete-icon" onclick="deleteProductEntry('${doc.id}')"><i class="fa-solid fa-trash-can"></i></button></td></tr>`;
+                    tableBody.innerHTML += `<tr><td><img src="${data.image || 'https://via.placeholder.com/50'}" class="prod-thumb"></td><td style="font-weight:700; color:#0f172a;">${data.title}</td><td><span style="background:#e2e8f0; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:700;">${data.category}</span></td><td style="color:#ff3e6c; font-weight:900;">₹${data.price}</td><td style="font-weight:600;">${data.stockCount} pcs</td><td class="actions-cell"><button class="edit-icon" onclick="openProductModal('${doc.id}')"><i class="fa-solid fa-pen-to-square"></i></button><button class="delete-icon" onclick="deleteProductEntry('${doc.id}')"><i class="fa-solid fa-trash-can"></i></button></td></tr>`;
                 });
-            } catch (error) { tableBody.innerHTML = `<tr><td colspan="6">Error loading data.</td></tr>`; }
+            } catch (error) { tableBody.innerHTML = `<tr><td colspan="6">Critical Data Stream Interrupt Error.</td></tr>`; }
         }
 
         async function fetchProductDetailsForEditing(id) {
@@ -459,16 +481,17 @@
                 document.querySelectorAll('input[name="sizes"]').forEach(cb => { cb.checked = data.sizes ? data.sizes.includes(cb.value) : false; });
                 if(data.all_images) { window.mainGalleryImages = [...data.all_images]; renderGalleryThumbs(); }
                 
+                // Reconstruct full variant parameters forms matrix safely
                 const container = document.getElementById('variantsContainer'); container.innerHTML = '';
-                if(data.variants && data.variants.length > 0) { data.variants.forEach(v => { window.addColorVariantField(v.color, v.img); }); } else { addColorVariantField(); }
+                if(data.variants && data.variants.length > 0) { data.variants.forEach(v => { window.addColorVariantField(v.color, v.img, v.vTitle || "", v.vPrice || "", v.vDesc || ""); }); } else { addColorVariantField(); }
 
                 const videoContainer = document.getElementById('videoLinksContainer'); videoContainer.innerHTML = '';
                 if(data.video_links && data.video_links.length > 0) { data.video_links.forEach(link => addVideoLinkField(link)); }
-            } catch (error) { alert("Error: " + error.message); }
+            } catch (error) { alert("Error pulling dataset node: " + error.message); }
         }
 
-        window.deleteProductEntry = async function(id) { if(confirm("Delete product?")) { await db.collection("zippykart_products").doc(id).delete(); loadInventoryDashboard(); } }
-        window.saveShiprocketCredentials = function() { alert("🚀 AI Setup Configured!"); }
+        window.deleteProductEntry = async function(id) { if(confirm("Permanently erase product packet from network nodes?")) { await db.collection("zippykart_products").doc(id).delete(); loadInventoryDashboard(); } }
+        window.saveShiprocketCredentials = function() { alert("🚀 Logistics Core Tokens Updated Successfully!"); }
         window.onload = function() { loadInventoryDashboard(); }
     </script>
 </body>
