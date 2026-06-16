@@ -11,7 +11,14 @@
         /* HEADER CSS */
         header { background: #fff; padding: 10px 5%; display: flex; align-items: center; border-bottom: 1px solid #ddd; gap: 15px; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; justify-content: space-between;}
         .logo-box { font-weight: 900; font-size: 18px; color: #333; display: flex; align-items: center; cursor: pointer; }
-        .search-bar { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none; min-width: 150px; margin: 0 15px; }
+        
+        /* 🔥 SEARCH & VOICE CSS 🔥 */
+        .search-wrapper { flex: 1; position: relative; display: flex; align-items: center; min-width: 150px; margin: 0 15px; }
+        .search-bar { width: 100%; padding: 8px 35px 8px 15px; border: 1px solid #ddd; border-radius: 4px; outline: none; box-sizing: border-box; font-size:13px; }
+        .search-bar:focus { border-color: #ff3e6c; }
+        .voice-mic { position: absolute; right: 10px; color: #ff3e6c; font-size: 16px; cursor: pointer; transition: 0.2s; }
+        .voice-mic:hover { transform: scale(1.1); }
+        
         .menu-wrapper { position: relative; cursor: pointer; font-size: 13px; font-weight: bold; color: #333; }
         .notif-wrapper { position: relative; cursor: pointer; font-size: 22px; color: #333; margin-right: 5px; transition: 0.2s; }
         .dropdown { display: none; position: absolute; background: #fff; border: 1px solid #ddd; width: 180px; z-index: 9999; top: 30px; right: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 6px; overflow:hidden;}
@@ -172,11 +179,13 @@
             .logo-box { order: 1; margin-right: auto; font-size: 16px; }
             .notif-wrapper { order: 2; margin-right: 15px; font-size: 20px; }
             .cart-btn { order: 3; padding: 6px 10px; font-size: 12px; }
-            .search-bar { order: 4; width: 100%; flex: 1 1 100%; margin: 5px 0 0 0; box-sizing: border-box; } 
+            
+            .search-wrapper { order: 4; width: 100%; flex: 1 1 100%; margin: 5px 0 0 0; } 
+            
             .menu-wrapper { display: none; } 
 
             .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 10000; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
-           .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
+            .bottom-nav-item { text-align: center; color: #64748b; font-size: 11px; cursor: pointer; flex: 1; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;}
             .bottom-nav-item i { font-size: 20px; }
             .bottom-nav-item.active { color: #ff3e6c; }
 
@@ -209,10 +218,14 @@
         <span style="color: red;" class="translate" data-en="Zippy" data-hi="ज़िप्पी">Zippy</span><span class="translate" data-en="Kart" data-hi="कार्ट">Kart</span>
     </div>
     
-    <input type="text" id="mainSearchBar" class="search-bar translate-placeholder" data-en="Search products..." data-hi="उत्पाद खोजें..." placeholder="Search products...">
+    <!-- 🔥 SEARCH & VOICE BAR UPGRADED 🔥 -->
+    <div class="search-wrapper">
+        <input type="text" id="mainSearchBar" class="search-bar translate-placeholder" data-en="Search products..." data-hi="उत्पाद खोजें..." placeholder="Search products...">
+        <i class="fa-solid fa-microphone voice-mic" id="voiceSearchBtn" onclick="startVoiceSearch()" title="Click to speak"></i>
+    </div>
     
     <!-- 🔥 LOGIN DROPDOWN 🔥 -->
-    <div class="menu-wrapper" onclick="toggleDrop('loginDrop')">
+    <div class="menu-wrapper" onclick="toggleDrop('loginDrop', event)">
         <span id="navLoginText" class="translate" data-en="LOGIN" data-hi="लॉग इन">LOGIN</span> ▾
         <div id="loginDrop" class="dropdown">
             <div id="authOpt" class="drop-item" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> <span class="translate" data-en="Sign In / Register" data-hi="साइन इन / रजिस्टर">Sign In / Register</span></div>
@@ -222,12 +235,12 @@
     </div>
     
     <!-- 🔥 MORE DROPDOWN 🔥 -->
-    <div class="menu-wrapper" onclick="toggleDrop('moreDrop')">
+    <div class="menu-wrapper" onclick="toggleDrop('moreDrop', event)">
         <span class="translate" data-en="MORE" data-hi="अधिक">MORE</span> ▾
         <div id="moreDrop" class="dropdown">
-            <div class="drop-item" onclick="toggleChat(); toggleDrop('moreDrop');"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div>
-            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at <b>ads@zippykart.co.in</b>.', 'fa-bullhorn', '#ff9800'); toggleDrop('moreDrop');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div>
-            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon on iOS and Android!', 'fa-mobile-screen-button', '#4caf50'); toggleDrop('moreDrop');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div>
+            <div class="drop-item" onclick="toggleChat();"><i class="fa-solid fa-headset" style="color:#2196f3;"></i> <span class="translate" data-en="24x7 Customer Care" data-hi="24x7 ग्राहक सेवा">24x7 Customer Care</span></div>
+            <div class="drop-item" onclick="openInfoModal('Advertise with Us', 'Want to feature your brand on ZippyKart? Reach out to our marketing team at <b>ads@zippykart.co.in</b>.', 'fa-bullhorn', '#ff9800');"><i class="fa-solid fa-bullhorn" style="color:#ff9800;"></i> <span class="translate" data-en="Advertise" data-hi="विज्ञापन दें">Advertise</span></div>
+            <div class="drop-item" onclick="openInfoModal('Download App', 'The ZippyKart app is launching soon on iOS and Android!', 'fa-mobile-screen-button', '#4caf50');"><i class="fa-solid fa-download" style="color:#4caf50;"></i> <span class="translate" data-en="Download App" data-hi="ऐप डाउनलोड करें">Download App</span></div>
         </div>
     </div>
     
@@ -706,7 +719,7 @@
                     <div style="display:flex; justify-content:space-between; margin-bottom: 25px;"><i class="fa-brands fa-cc-visa" style="font-size:28px;"></i> <span style="font-weight:800; font-style:italic;">HDFC BANK</span></div>
                     <div style="letter-spacing: 3px; font-size: 18px; margin-bottom: 20px; font-family:monospace;">**** **** **** 4321</div>
                     <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8; text-transform:uppercase;">
-                        <span id="cardHolderName">Akash Kumar</span><span>12/28</span>
+                        <span id="cardHolderName">User</span><span>12/28</span>
                     </div>
                 </div>
             </div>
@@ -758,7 +771,7 @@
     </div>
 </div>
 
-<!-- 🔥 ANIMATED FOOTER WITH SOCIAL LINKS 🔥 -->
+<!-- 🔥 ANIMATED FOOTER 🔥 -->
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
@@ -808,6 +821,66 @@
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
     window.allFetchedProducts = []; window.currentUser = null; window.currentLanguage = 'en';
+
+    // 🔥 SEARCH & VOICE SEARCH LOGIC 🔥
+    window.searchProducts = function() {
+        let query = document.getElementById('mainSearchBar').value.toLowerCase();
+        if(query.trim() === "") { renderProducts(window.allFetchedProducts); return; }
+        let filtered = window.allFetchedProducts.filter(p => {
+            let title = (p.title || "").toLowerCase();
+            let cat = (p.category || "").toLowerCase();
+            return title.includes(query) || cat.includes(query);
+        });
+        renderProducts(filtered);
+        document.getElementById('mainProductGrid').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('mainSearchBar').addEventListener('keyup', searchProducts);
+
+    window.startVoiceSearch = function() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert(window.currentLanguage === 'hi' ? "आपका ब्राउज़र वॉइस सर्च सपोर्ट नहीं करता।" : "Your browser does not support Voice Search.");
+            return;
+        }
+        const recognition = new SpeechRecognition();
+        recognition.lang = window.currentLanguage === 'hi' ? 'hi-IN' : 'en-IN';
+        recognition.interimResults = false;
+        
+        const micBtn = document.getElementById('voiceSearchBtn');
+        const searchBar = document.getElementById('mainSearchBar');
+        
+        recognition.onstart = function() {
+            micBtn.classList.remove('fa-microphone');
+            micBtn.classList.add('fa-microphone-lines');
+            micBtn.classList.add('fa-beat'); 
+            searchBar.placeholder = window.currentLanguage === 'hi' ? "सुन रहा हूँ..." : "Listening...";
+        };
+        
+        recognition.onspeechend = function() {
+            micBtn.classList.remove('fa-beat');
+            micBtn.classList.add('fa-microphone');
+            micBtn.classList.remove('fa-microphone-lines');
+            window.setLanguageUI(window.currentLanguage, null); 
+        };
+        
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            searchBar.value = transcript;
+            searchProducts(); 
+        };
+        
+        recognition.onerror = function(event) {
+            console.error(event.error);
+            micBtn.classList.remove('fa-beat');
+            micBtn.classList.add('fa-microphone');
+            micBtn.classList.remove('fa-microphone-lines');
+            window.setLanguageUI(window.currentLanguage, null);
+            alert(window.currentLanguage === 'hi' ? "आवाज़ समझ नहीं आई, कृपया फिर से प्रयास करें।" : "Could not hear you, please try again.");
+        };
+        
+        recognition.start();
+    }
 
     // LANGUAGE TRANSLATION LOGIC
     window.setLanguageUI = function(langCode, element) {
@@ -905,7 +978,8 @@
     }
 
     // 🔥 FIXED DROPDOWNS & CLICK OUTSIDE 🔥
-    window.toggleDrop = function(id) { 
+    window.toggleDrop = function(id, event) { 
+        if(event) event.stopPropagation();
         const drop = document.getElementById(id); const isCurrentlyOpen = drop.style.display === 'block';
         document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); 
         if(!isCurrentlyOpen) { drop.style.display = 'block'; }
@@ -973,7 +1047,7 @@
     }
     setInterval(() => moveSlide(1), 5000);
 
-    // FETCH PRODUCTS
+    // FETCH PRODUCTS (WITH COMPLETE HTML CARD)
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
@@ -1014,4 +1088,4 @@
 </script>
 
 </body>
-</html> 
+</html>
