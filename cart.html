@@ -17,6 +17,10 @@
         .brand-logo span { color: #ff3e6c; }
         .keep-shopping { color: #2196f3; font-size: 13px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
 
+        /* FOMO TIMER */
+        .fomo-banner { background: #fff5f7; border: 1px solid #ffe4e6; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; color: #e11d48; margin-bottom: 15px; }
+        .fomo-banner i { animation: fa-spin 2s linear infinite; }
+
         /* Main Cart Grid */
         .cart-container { max-width: 1100px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; align-items: start; }
         
@@ -46,6 +50,25 @@
         /* Right Section: Price & Checkout Form */
         .checkout-section { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; position: sticky; top: 80px; }
         
+        /* 🔥 PROMO CODE BOX 🔥 */
+        .promo-container { display: flex; gap: 10px; margin-bottom: 15px; }
+        .promo-input { flex: 1; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px; font-size: 13px; outline: none; text-transform: uppercase;}
+        .promo-input:focus { border-color: #ff3e6c; }
+        .promo-btn { background: #1e293b; color: white; border: none; padding: 0 15px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; }
+        .promo-msg { font-size: 11px; font-weight: 600; margin-top: -8px; margin-bottom: 15px; display: none; }
+
+        /* 🔥 ZIPPY COINS TOGGLE 🔥 */
+        .coins-container { display: flex; justify-content: space-between; align-items: center; background: #fffbeb; border: 1px solid #fde047; padding: 12px 15px; border-radius: 6px; margin-bottom: 20px; }
+        .coins-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #854d0e; }
+        
+        /* Toggle Switch CSS */
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #eab308; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
         .price-details-box { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; }
         .price-title { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 15px; letter-spacing: 0.5px; }
         .price-row { display: flex; justify-content: space-between; font-size: 14px; color: #475569; margin-bottom: 12px; font-weight: 500; }
@@ -90,26 +113,63 @@
 
     <div class="cart-container">
         <div class="cart-items-section">
+            
+            <!-- 🔥 FOMO TIMER 🔥 -->
+            <div class="fomo-banner" id="fomoBanner">
+                <i class="fa-regular fa-clock"></i> 
+                Items in high demand! Complete your order in <span id="timerText">15:00</span> mins.
+            </div>
+
             <div class="section-header">
                 <h2>My Shopping Bag</h2>
                 <span class="item-count" id="headerItemCount">(0 items)</span>
             </div>
             
-            <div id="cartItemsList">
-                </div>
+            <div id="cartItemsList"></div>
         </div>
 
         <div class="checkout-section">
+            
+            <!-- 🔥 PROMO CODE SECTION 🔥 -->
+            <div class="promo-container">
+                <input type="text" id="promoInput" class="promo-input" placeholder="Enter Coupon Code (e.g. ZIPPY10)">
+                <button class="promo-btn" onclick="applyPromo()">APPLY</button>
+            </div>
+            <div id="promoMsg" class="promo-msg"></div>
+
+            <!-- 🔥 ZIPPY COINS SECTION 🔥 -->
+            <div class="coins-container">
+                <div class="coins-info">
+                    <i class="fa-solid fa-coins" style="font-size:18px;"></i>
+                    Use 50 ZippyCoins (Save ₹50)
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="coinToggle" onchange="toggleCoins()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
             <div class="price-details-box">
                 <div class="price-title">PRICE DETAILS</div>
                 <div class="price-row">
                     <span id="priceTotalItems">Price (0 items)</span>
                     <span id="priceRawTotal">₹0</span>
                 </div>
-                <div class="price-row discount">
-                    <span>Discount</span>
-                    <span>- ₹0</span>
+                <div class="price-row discount" id="mrpDiscountRow">
+                    <span>Product Discount</span>
+                    <span id="priceMrpDiscount">- ₹0</span>
                 </div>
+                
+                <!-- Hidden rows for new logic -->
+                <div class="price-row discount" id="promoDiscountRow" style="display:none;">
+                    <span>Coupon Discount</span>
+                    <span id="pricePromoDiscount">- ₹0</span>
+                </div>
+                <div class="price-row discount" id="coinDiscountRow" style="display:none;">
+                    <span>ZippyCoins Applied</span>
+                    <span>- ₹50</span>
+                </div>
+
                 <div class="price-row">
                     <span>Delivery Charges</span>
                     <span style="color:#388e3c; font-weight:700;">Free</span>
@@ -163,7 +223,6 @@
     </div>
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
@@ -175,31 +234,45 @@
             projectId: "zippykart-production-157e1",
             storageBucket: "zippykart-production-157e1.firebasestorage.app",
             messagingSenderId: "803651431969",
-            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60",
-            measurementId: "G-7ZJ0QTZE1C"
+            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
         };
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
 
-        // 2. CORE CART LOGIC
+        // 2. GLOBALS & STATE
         let cartItems = [];
         let selectedPaymentMethod = "COD";
+        let isPromoApplied = false;
+        let isCoinsApplied = false;
+        let baseTotalAmount = 0; // Total before extra discounts
 
+        // FOMO Timer Logic
+        function startFomoTimer() {
+            let time = 15 * 60; // 15 mins
+            const timerEl = document.getElementById('timerText');
+            const interval = setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                timerEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (time <= 0) clearInterval(interval);
+                time--;
+            }, 1000);
+        }
+
+        // Load Data
         function loadCartData() {
-            try {
-                cartItems = JSON.parse(localStorage.getItem('zippykart_user_cart')) || [];
-            } catch (e) {
-                cartItems = [];
-            }
+            try { cartItems = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; } 
+            catch (e) { cartItems = []; }
             renderCartUI();
+            startFomoTimer();
         }
 
         function renderCartUI() {
             const listContainer = document.getElementById('cartItemsList');
             const placeOrderBtn = document.getElementById('placeOrderBtn');
             listContainer.innerHTML = '';
+            baseTotalAmount = 0;
 
-            // Handle Empty Cart
             if (cartItems.length === 0) {
                 listContainer.innerHTML = `
                     <div class="empty-cart-msg">
@@ -207,25 +280,22 @@
                         <h3>Your bag is empty!</h3>
                         <p style="color:#64748b; font-size:14px; margin-bottom:20px;">Looks like you haven't added anything yet.</p>
                         <a href="index.html" style="background:#ff3e6c; color:white; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:600;">Start Shopping</a>
-                    </div>
-                `;
+                    </div>`;
                 placeOrderBtn.disabled = true;
-                updatePriceDetails(0, 0);
+                updatePriceDetails();
                 return;
             }
 
             placeOrderBtn.disabled = false;
-            let totalAmount = 0;
 
             cartItems.forEach((item, index) => {
                 const itemPrice = parseInt(item.price) || 0;
                 const itemQty = parseInt(item.quantity) || 1;
-                totalAmount += (itemPrice * itemQty);
+                baseTotalAmount += (itemPrice * itemQty);
 
                 const safeImg = item.img || "https://via.placeholder.com/90x110?text=No+Image";
                 const safeTitle = item.title || "ZippyKart Premium Item";
                 const safeSize = item.size || "Free Size";
-                const safeColor = item.color || "Standard";
 
                 listContainer.innerHTML += `
                     <div class="cart-card">
@@ -233,7 +303,7 @@
                         <div class="cart-item-info">
                             <div>
                                 <div class="item-title">${safeTitle}</div>
-                                <div class="item-meta">Size: ${safeSize} &nbsp;|&nbsp; Color: ${safeColor}</div>
+                                <div class="item-meta">Size: ${safeSize}</div>
                                 <div class="item-price">₹${itemPrice}</div>
                             </div>
                             <div class="item-actions">
@@ -245,35 +315,23 @@
                                 <button class="remove-btn" type="button" onclick="removeItem(${index})"><i class="fa-regular fa-trash-can"></i> Remove</button>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
 
-            updatePriceDetails(totalAmount, cartItems.length);
+            updatePriceDetails();
         }
 
-        function updateItemQty(index, change) {
-            let currentQty = parseInt(cartItems[index].quantity) || 1;
-            let newQty = currentQty + change;
-            
-            if (newQty >= 1 && newQty <= 10) {
-                cartItems[index].quantity = newQty;
-                saveCart();
-                renderCartUI();
-            }
+        // Modifying Qty & Removing
+        window.updateItemQty = function(index, change) {
+            let newQty = (parseInt(cartItems[index].quantity) || 1) + change;
+            if (newQty >= 1 && newQty <= 10) { cartItems[index].quantity = newQty; saveCart(); renderCartUI(); }
         }
+        window.removeItem = function(index) { cartItems.splice(index, 1); saveCart(); renderCartUI(); }
+        function saveCart() { localStorage.setItem('zippykart_user_cart', JSON.stringify(cartItems)); }
 
-        function removeItem(index) {
-            cartItems.splice(index, 1);
-            saveCart();
-            renderCartUI();
-        }
-
-        function saveCart() {
-            localStorage.setItem('zippykart_user_cart', JSON.stringify(cartItems));
-        }
-
-        function updatePriceDetails(total, count) {
+        // 🔥 DYNAMIC BILL CALCULATOR 🔥
+        function updatePriceDetails() {
+            const count = cartItems.length;
             document.getElementById('headerItemCount').innerText = `(${count} items)`;
             document.getElementById('priceTotalItems').innerText = `Price (${count} items)`;
             
@@ -284,30 +342,82 @@
                 return;
             }
 
-            const assumedMrp = Math.floor(total * 1.15); 
-            const discountAmt = assumedMrp - total;
-
-            document.getElementById('priceRawTotal').innerText = `₹${assumedMrp}`;
-            document.querySelector('.price-row.discount span:last-child').innerText = `- ₹${discountAmt}`;
-            document.getElementById('priceFinalTotal').innerText = `₹${total}`;
+            // 1. Base MRP Calculation (Assumed 15% generic markup)
+            const assumedMrp = Math.floor(baseTotalAmount * 1.15); 
+            const baseDiscount = assumedMrp - baseTotalAmount;
             
+            let finalPayable = baseTotalAmount;
+            let promoDiscountAmt = 0;
+            let coinDiscountAmt = 0;
+
+            // 2. Apply Promo Code Logic
+            if(isPromoApplied) {
+                promoDiscountAmt = Math.floor(baseTotalAmount * 0.10); // 10% off
+                finalPayable -= promoDiscountAmt;
+                document.getElementById('promoDiscountRow').style.display = 'flex';
+                document.getElementById('pricePromoDiscount').innerText = `- ₹${promoDiscountAmt}`;
+            } else { document.getElementById('promoDiscountRow').style.display = 'none'; }
+
+            // 3. Apply ZippyCoins Logic
+            if(isCoinsApplied) {
+                coinDiscountAmt = 50;
+                finalPayable -= coinDiscountAmt;
+                document.getElementById('coinDiscountRow').style.display = 'flex';
+            } else { document.getElementById('coinDiscountRow').style.display = 'none'; }
+
+            // 4. Prevent negative totals
+            if(finalPayable < 0) finalPayable = 0;
+
+            // Update DOM Elements
+            document.getElementById('priceRawTotal').innerText = `₹${assumedMrp}`;
+            document.getElementById('priceMrpDiscount').innerText = `- ₹${baseDiscount}`;
+            document.getElementById('priceFinalTotal').innerText = `₹${finalPayable}`;
+            
+            const totalSavings = baseDiscount + promoDiscountAmt + coinDiscountAmt;
             const savingsObj = document.getElementById('savingsMsg');
             savingsObj.style.display = 'block';
-            savingsObj.innerText = `You will save ₹${discountAmt} on this order`;
+            savingsObj.innerText = `Yay! You are saving ₹${totalSavings} on this order`;
         }
 
-        // 3. UI INTERACTIONS
+        // API for Toggles
+        window.applyPromo = function() {
+            const input = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msgBox = document.getElementById('promoMsg');
+            if(input === 'ZIPPY10') {
+                isPromoApplied = true;
+                msgBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> Code 'ZIPPY10' applied! 10% Extra Off.`;
+                msgBox.style.color = '#388e3c';
+                msgBox.style.display = 'block';
+                updatePriceDetails();
+            } else {
+                isPromoApplied = false;
+                msgBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Invalid Code. Try 'ZIPPY10'`;
+                msgBox.style.color = '#ef4444';
+                msgBox.style.display = 'block';
+                updatePriceDetails();
+            }
+        }
+
+        window.toggleCoins = function() {
+            const toggle = document.getElementById('coinToggle');
+            isCoinsApplied = toggle.checked;
+            updatePriceDetails();
+        }
+
         window.selectPayment = function(method, element) {
             selectedPaymentMethod = method;
-            document.querySelectorAll('.payment-option').forEach(opt => {
-                opt.classList.remove('active');
-                opt.querySelector('input').checked = false;
-            });
-            element.classList.add('active');
-            element.querySelector('input').checked = true;
+            document.querySelectorAll('.payment-option').forEach(opt => { opt.classList.remove('active'); opt.querySelector('input').checked = false; });
+            element.classList.add('active'); element.querySelector('input').checked = true;
         }
 
-        // 4. 🔥 FIREBASE + RAZORPAY CHECKOUT LOGIC 🔥
+        function getFinalCalculatedAmount() {
+            let final = baseTotalAmount;
+            if(isPromoApplied) final -= Math.floor(baseTotalAmount * 0.10);
+            if(isCoinsApplied) final -= 50;
+            return final > 0 ? final : 0;
+        }
+
+        // 🔥 FIREBASE + RAZORPAY CHECKOUT LOGIC 🔥
         document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             if(cartItems.length === 0) return;
@@ -324,73 +434,43 @@
                 address: document.getElementById('custAddress').value.trim()
             };
 
-            let finalAmount = 0;
-            cartItems.forEach(item => finalAmount += ((parseInt(item.price)||0) * (parseInt(item.quantity)||1)));
+            const finalAmount = getFinalCalculatedAmount();
 
             if (selectedPaymentMethod === "ONLINE") {
-                // RAZORPAY ONLINE PAYMENT MODULE
                 var options = {
-                    "key": "rzp_live_SuidRs4KmU9W6w", // ⚠️ Akash bhai, yahan apna asli Razorpay Key daal dena
-                    "amount": finalAmount * 100, // Amount in paise
+                    "key": "rzp_live_SuidRs4KmU9W6w", 
+                    "amount": finalAmount * 100, 
                     "currency": "INR",
                     "name": "ZippyKart",
                     "description": "Premium Order Checkout",
                     "theme": { "color": "#ff3e6c" },
-                    "prefill": {
-                        "name": customerData.name,
-                        "contact": customerData.phone
-                    },
+                    "prefill": { "name": customerData.name, "contact": customerData.phone },
                     "handler": async function (response) {
-                        // Jab payment SUCCESS ho jayega, tabhi order Firebase mein jayega
                         const orderPayload = {
-                            customer: customerData,
-                            items: cartItems,
-                            totalAmount: finalAmount,
-                            paymentMethod: "ONLINE (Razorpay)",
-                            paymentId: response.razorpay_payment_id,
-                            orderStatus: "Paid & Confirmed",
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                            customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
+                            paymentMethod: "ONLINE (Razorpay)", paymentId: response.razorpay_payment_id, orderStatus: "Paid & Confirmed", timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         };
                         await submitOrderToDatabase(orderPayload, btn);
                     },
-                    "modal": {
-                        "ondismiss": function(){
-                            // Agar customer pop-up cancel kar de
-                            btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
-                            btn.disabled = false;
-                        }
-                    }
+                    "modal": { "ondismiss": function(){ btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`; btn.disabled = false; } }
                 };
-                
                 var rzp1 = new Razorpay(options);
-                rzp1.on('payment.failed', function (response){
-                    alert("Payment Failed! Reason: " + response.error.description);
-                    btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
-                    btn.disabled = false;
-                });
+                rzp1.on('payment.failed', function (response){ alert("Payment Failed!"); btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`; btn.disabled = false; });
                 rzp1.open();
-
             } else {
-                // CASH ON DELIVERY MODULE
                 const orderPayload = {
-                    customer: customerData,
-                    items: cartItems,
-                    totalAmount: finalAmount,
-                    paymentMethod: "Cash on Delivery",
-                    orderStatus: "Pending COD",
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
+                    paymentMethod: "Cash on Delivery", orderStatus: "Pending COD", timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 };
                 await submitOrderToDatabase(orderPayload, btn);
             }
         });
 
-        // Backend Sync Function
         async function submitOrderToDatabase(orderPayload, btn) {
             try {
                 await db.collection("zippykart_orders").add(orderPayload);
                 localStorage.removeItem('zippykart_user_cart');
                 cartItems = [];
-                
                 alert("🎉 Order Placed Successfully! Your items will be dispatched soon.");
                 window.location.href = "index.html"; 
             } catch (error) {
@@ -401,9 +481,7 @@
             }
         }
 
-        // Initialize script
         window.onload = loadCartData;
-
     </script>
-</body>
+</body> 
 </html>
