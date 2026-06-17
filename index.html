@@ -893,6 +893,10 @@
     </div>
 </div>
 
+<button onclick="requestNotificationPermission()" id="notifyBtn" style="position: fixed; bottom: 90px; right: 20px; background: #ff3e6c; color: white; padding: 12px 20px; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; z-index: 9999; box-shadow: 0 4px 10px rgba(255, 62, 108, 0.4);">
+    🔔 Get Offer Alerts
+</button>
+
 <footer class="main-footer">
     <div class="footer-content" id="footerContent">
         <div class="footer-col">
@@ -929,6 +933,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+
 <script>
     // 1. FIREBASE INITIALIZATION
     const firebaseConfig = { 
@@ -943,10 +949,38 @@
     const db = firebase.firestore(); 
     const auth = firebase.auth(); 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
+    const messaging = firebase.messaging(); // FCM Initialization
     
     window.allFetchedProducts = []; 
     window.currentUser = null; 
     window.currentLanguage = 'en';
+
+    // 🔥 NOTIFICATION PERMISSION LOGIC 🔥
+    window.requestNotificationPermission = function() {
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted!');
+                
+                document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
+                document.getElementById('notifyBtn').style.background = "#4caf50";
+                
+                messaging.getToken({ vapidKey: 'BNPhGovu4Ps3xtriF-LQnrJZqOuJTis9rs59cWpcxcsSYtZidleK9D6RNa8mDRYP8MuzrtQskPYQ1bRhPG1i2y0' })
+                .then((currentToken) => {
+                    if (currentToken) {
+                        console.log('Push Token:', currentToken);
+                        alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");
+                    }
+                }).catch((err) => { console.log('Token error: ', err); });
+            } else {
+                alert("Aapne notifications block kar diye hain.");
+            }
+        });
+    }
+
+    messaging.onMessage((payload) => {
+        console.log('Foreground Message received. ', payload);
+        alert(`🔥 ZIPPYKART NEW DEAL: ${payload.notification.title}\n${payload.notification.body}`);
+    });
 
     // 🔥 ZIPPY COINS ANIMATION LOGIC 🔥
     window.animateCoins = function() {
@@ -1260,7 +1294,7 @@
         if(title.innerText === "Login" || title.innerText === "लॉग इन") { 
             title.innerText = window.currentLanguage === 'hi' ? "साइन अप" : "Sign Up"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Register" data-hi="रजिस्टर">रजिस्टर</span>` : `<span class="translate" data-en="Register" data-hi="रजिस्टर">Register</span>`; 
-            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
+            switchTxt.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग सेन">पहले से खाता है? <span style="color:#ff3e6c; font-weight:bold;">लॉग इन</span></span>` : `<span class="translate" data-en="Already have an account? Login" data-hi="पहले से खाता है? लॉग इन">Already have an account? <span style="color:#ff3e6c; font-weight:bold;">Login</span></span>`; 
         } else { 
             title.innerText = window.currentLanguage === 'hi' ? "लॉग इन" : "Login"; 
             btn.innerHTML = window.currentLanguage === 'hi' ? `<span class="translate" data-en="Login" data-hi="लॉग इन करें">लॉग इन करें</span>` : `<span class="translate" data-en="Login" data-hi="लॉग इन करें">Login</span>`; 
