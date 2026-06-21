@@ -968,7 +968,7 @@
                 .then((currentToken) => {
                     if (currentToken) {
                         console.log('Push Token:', currentToken);
-                        alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");
+                        prompt("🎉 Notifications ON! Ye raha aapka Token, isko copy kar lijiye:", currentToken);
                     }
                 }).catch((err) => { console.log('Token error: ', err); });
             } else {
