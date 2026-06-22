@@ -985,9 +985,11 @@
             } else {
                 alert("Aapne notifications block kar diye hain.");
             }
-        }).catch((err) => {
+                }).catch((err) => {
             alert('Token Error: ' + err.message);
         });
+    });
+    }
 
     messaging.onMessage((payload) => {
         console.log('Foreground Message received. ', payload);
