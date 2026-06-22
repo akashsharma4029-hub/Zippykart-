@@ -968,8 +968,7 @@
                 .then((currentToken) => {
                     if (currentToken) {
                         console.log('Push Token:', currentToken);
-                        prompt("🎉 Notifications ON! Ye raha aapka Token, isko copy kar lijiye:", currentToken);
-                    }
+                        alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");                   }
                 }).catch((err) => { alert('Token Error: ' + err.message); })
             } else {
                 alert("Aapne notifications block kar diye hain.");
