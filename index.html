@@ -961,8 +961,6 @@
             if (permission === 'granted') {
                 console.log('Notification permission granted!');
                 
-                document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
-                document.getElementById('notifyBtn').style.background = "#4caf50";
                 
                 messaging.getToken({ vapidKey: 'BNPHGovu4Ps8xtnfP-LQnrJZqQvJTfs9rs59qWpcsdsSYtZidle49DtRNa8mDRYP8MuzrYQakPYQ1tRMP31IZy0'})
         .then((currentToken) => {
