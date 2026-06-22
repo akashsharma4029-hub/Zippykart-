@@ -970,7 +970,7 @@
                         console.log('Push Token:', currentToken);
                         prompt("🎉 Notifications ON! Ye raha aapka Token, isko copy kar lijiye:", currentToken);
                     }
-                }).catch((err) => { console.log('Token error: ', err); });
+                }).catch((err) => { alert('Token Error: ' + err.message); })
             } else {
                 alert("Aapne notifications block kar diye hain.");
             }
