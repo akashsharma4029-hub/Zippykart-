@@ -955,7 +955,7 @@
     window.currentUser = null; 
     window.currentLanguage = 'en';
 
-    // 🔥 NOTIFICATION PERMISSION LOGIC 🔥
+        // 🔥 NOTIFICATION PERMISSION LOGIC (WITH ANIMATED BOX) 🔥
     window.requestNotificationPermission = function() {
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
@@ -966,7 +966,7 @@
                     if (currentToken) {
                         console.log('Push Token:', currentToken);
                         
-                        // Naya: Token ko Firestore Database me save karega
+                        // Token ko Firestore Database me save karega
                         firebase.firestore().collection("PushTokens").doc(currentToken).set({
                             token: currentToken,
                             createdAt: new Date()
@@ -974,16 +974,21 @@
                             console.log("Mubarak ho! Token Database me save ho gaya.");
                             document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
                             document.getElementById('notifyBtn').style.background = "#4caf50";
-                            alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");
+                            
+                            // 🔥 YAHAN BADLAAV KIYA HAI: Purane alert() ki jagah Naya Animated Box 🔥
+                            openInfoModal('Mubarak Ho!', '🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.', 'fa-bell', '#ff3e6c');
+                            
                         }).catch((error) => {
                             console.log("Database Save Error: ", error);
                         });
                         
                     } else {
-                        alert("Aapne notifications block kar diye hain.");
+                        // Agar block kiya toh uska animated box
+                        openInfoModal('Oops!', 'Aapne notifications block kar diye hain.', 'fa-triangle-exclamation', '#ff9800');
                     }
                 }).catch((err) => {
-                    alert('Token Error: ' + err.message);
+                    // Agar error aaya toh uska animated box
+                    openInfoModal('Error', 'Token Error: ' + err.message, 'fa-circle-xmark', '#f44336');
                 });
             } else {
                 console.log('Notification permission denied.');
