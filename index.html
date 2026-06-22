@@ -961,32 +961,34 @@
             if (permission === 'granted') {
                 console.log('Notification permission granted!');
                 
-                
                 messaging.getToken({ vapidKey: 'BNPHGovu4Ps8xtnfP-LQnrJZqQvJTfs9rs59qWpcsdsSYtZidle49DtRNa8mDRYP8MuzrYQakPYQ1tRMP31IZy0'})
-        .then((currentToken) => {
-            if (currentToken) {
-                console.log('Push Token:', currentToken);
-                
-                // Naya: Token ko Firestore Database me save karega
-                firebase.firestore().collection("PushTokens").doc(currentToken).set({
-                    token: currentToken,
-                    createdAt: new Date()
-                }).then(() => {
-                    console.log("Mubarak ho! Token Database me save ho gaya.");
-                    document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
-                    document.getElementById('notifyBtn').style.background = "#4caf50";
-                    alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");
-                }).catch((error) => {
-                    console.log("Database Save Error: ", error);
-                });
-                
-            } else {
-                alert("Aapne notifications block kar diye hain.");
-            }
+                .then((currentToken) => {
+                    if (currentToken) {
+                        console.log('Push Token:', currentToken);
+                        
+                        // Naya: Token ko Firestore Database me save karega
+                        firebase.firestore().collection("PushTokens").doc(currentToken).set({
+                            token: currentToken,
+                            createdAt: new Date()
+                        }).then(() => {
+                            console.log("Mubarak ho! Token Database me save ho gaya.");
+                            document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
+                            document.getElementById('notifyBtn').style.background = "#4caf50";
+                            alert("🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.");
+                        }).catch((error) => {
+                            console.log("Database Save Error: ", error);
+                        });
+                        
+                    } else {
+                        alert("Aapne notifications block kar diye hain.");
+                    }
                 }).catch((err) => {
-            alert('Token Error: ' + err.message);
+                    alert('Token Error: ' + err.message);
+                });
+            } else {
+                console.log('Notification permission denied.');
+            }
         });
-    });
     }
 
     messaging.onMessage((payload) => {
