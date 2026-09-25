@@ -226,7 +226,7 @@
                 </div>
 
                 <div class="phone-preview-container">
-                    <div class="phone-mockup">
+             <div class="phone-mockup">
                         <div class="push-alert-card">
                             <div class="push-header">
                                 <div class="push-logo">Z</div> ZippyKart • now
@@ -372,6 +372,36 @@
         const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1" };
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); } const db = firebase.firestore();
         window.editingProductId = null; window.mainGalleryImages = []; 
+
+        // 🔥 LIVE ORDER NOTIFICATION RADAR (TING-TONG) 🔥
+        const orderSound = new Audio('https://www.myinstants.com/media/sounds/ding-sound-effect_2.mp3');
+        if ("Notification" in window && Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+        
+        // isInitialLoad lock lagaya hai taaki page refresh hote hi purane orders par aawaz na aaye
+        let isInitialLoad = true;
+        db.collection("orders").onSnapshot((snapshot) => {
+            if(isInitialLoad) {
+                isInitialLoad = false;
+                return; 
+            }
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === "added") {
+                    let newOrder = change.doc.data();
+                    // Sound Play
+                    orderSound.play().catch(e => console.log("Sound ke liye screen par ek click zaruri hai."));
+                    
+                    // Push Pop-up
+                    if ("Notification" in window && Notification.permission === "granted") {
+                        new Notification("🎉 ZippyKart: Naya Order Aaya Hai!", {
+                            body: "Jaldi check karo, ek naya order receive hua hai! 💸",
+                            icon: "https://cdn-icons-png.flaticon.com/512/3500/3500833.png"
+                        });
+                    }
+                }
+            });
+        });
 
         // 🔥 PUSH NOTIFICATION LOGIC 🔥
         window.updatePushPreview = function() {
