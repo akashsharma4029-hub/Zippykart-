@@ -50,7 +50,6 @@
         .main-preview-box { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; position: relative; aspect-ratio: 3/4; max-height: 600px;}
         .main-preview-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; transition: opacity 0.3s ease, transform 0.3s ease; }
         
-        /* Thumbnails Container Added */
         .thumbnail-list { display: flex; gap: 10px; margin-top: 15px; overflow-x: auto; width: 100%; padding-bottom: 5px; justify-content: center;}
         .thumbnail-list::-webkit-scrollbar { height: 4px; }
         .thumbnail-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -62,7 +61,6 @@
         .circle-btn { width: 38px; height: 38px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.12); color: #64748b; cursor: pointer; border: none; }
         .dark-mode .circle-btn { background: #0f172a; color: #f1f5f9; }
 
-        /* AR Badge Added */
         .ar-badge { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(4px); transition: 0.3s; z-index: 10; border: 1px solid rgba(255,255,255,0.2); }
         .ar-badge:hover { background: #00e5ff; color: #000; transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
 
@@ -75,7 +73,6 @@
         .rating-count-text { font-size: 13px; color: #64748b; font-weight: 600;}
         .zippy-trust-badge { background: linear-gradient(135deg, #ff3e6c, #e0355f); color: white; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
 
-        /* FOMO Banner */
         .fomo-banner { background: #fff5f7; border: 1px solid #ffe4e6; padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 12px; font-weight: 600; color: #e11d48; }
         .fomo-dot { width: 8px; height: 8px; background: #e11d48; border-radius: 50%; animation: pulseAlert 1.5s infinite; }
         
@@ -84,7 +81,6 @@
         .original-mrp { font-size: 15px; color: #94a3b8; text-decoration: line-through; }
         .discount-pct { color: #388e3c; font-size: 15px; font-weight: 700; background: rgba(56, 142, 60, 0.1); padding: 2px 8px; border-radius: 4px; }
         
-        /* ZIPPY COINS Tag */
         .zippy-coin-tag { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #fef08a, #eab308); color: #713f12; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 800; box-shadow: 0 2px 5px rgba(234, 179, 8, 0.3); animation: pulseAlert 2s infinite; margin-left: 10px;}
 
         .available-offers { margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-top: 15px; }
@@ -105,7 +101,6 @@
         .size-btn.active { background: #1e293b; color: white; border-color: #1e293b; }
         .dark-mode .size-btn.active { background: #f1f5f9; color: #0f172a; border-color: #f1f5f9; }
         
-        /* OUT OF STOCK STYLE */
         .size-btn.out-of-stock { opacity: 0.5; cursor: not-allowed; border-color: #ef4444; background: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(239,68,68,0.1) 5px, rgba(239,68,68,0.1) 10px); }
         .size-btn.out-of-stock::after { content: ''; position: absolute; width: 100%; height: 2px; background: #ef4444; transform: rotate(45deg); }
 
@@ -121,7 +116,6 @@
         .delivery-status-msg { font-size: 13px; font-weight: 500; color: #475569; }
         .dark-mode .delivery-status-msg { color: #cbd5e1; }
 
-        /* WHATSAPP OPT-IN */
         .wa-optin { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 25px; padding: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; }
         .wa-optin input[type="checkbox"] { accent-color: #25D366; width: 16px; height: 16px; cursor: pointer; }
 
@@ -202,7 +196,7 @@
         .live-toast.show { bottom: 20px; }
         .toast-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
         .toast-text { font-size: 12px; font-weight: 600; line-height: 1.4; color: #1e293b; }
-        .dark-mode .toast-text { color: #1e293b; } /* Keep text dark in toast for readability */
+        .dark-mode .toast-text { color: #1e293b; }
         .toast-time { font-size: 10px; color: #94a3b8; font-weight: 500; }
 
         .similar-products-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px; }
@@ -578,12 +572,33 @@
         window.closeFitModal = function() { document.getElementById('fitPredictorModal').style.display = 'none'; }
         window.calculateFit = function() { const h = document.getElementById('userHeight').value; const w = document.getElementById('userWeight').value; if(!h || !w) return; let size = "M"; if (h > 178 || w > 75) size = "XL"; else if (h > 170 || w > 65) size = "L"; else if (h < 160) size = "S"; document.getElementById('predictedSizeText').innerText = size; document.getElementById('fitResult').style.display = 'block'; }
 
-        // 3. LOAD PRODUCT DATA
+        // 3. LOAD PRODUCT DATA 🔥 SMART ERROR HANDLER 🔥
         async function loadProductPageDetails() {
-            if(!productId) { window.location.href="index.html"; return; }
+            // ERROR 1: URL me ID nahi hai
+            if(!productId) { 
+                document.getElementById('loader').innerHTML = `
+                <div style="text-align:center; color:#ef4444; padding:20px;">
+                    <i class="fa-solid fa-link-slash fa-3x" style="margin-bottom:15px;"></i><br>
+                    <b>Product ID Missing!</b><br><br>
+                    <span style="font-size:13px; color:#475569;">Aapne direct product.html open kar liya hai. <br>Isko check karne ke liye URL ke aage apne kisi product ki ID lagaiye.<br> (Example: <b>?id=123456</b>)</span>
+                </div>`;
+                return; 
+            }
+
             try {
                 const doc = await db.collection("zippykart_products").doc(productId).get();
-                if(!doc.exists) { window.location.href="index.html"; return; }
+                
+                // ERROR 2: Product Database me nahi mila
+                if(!doc.exists) { 
+                    document.getElementById('loader').innerHTML = `
+                    <div style="text-align:center; color:#ef4444; padding:20px;">
+                        <i class="fa-solid fa-box-open fa-3x" style="margin-bottom:15px;"></i><br>
+                        <b>Product Not Found!</b><br><br>
+                        <span style="font-size:13px; color:#475569;">Ye product database mein nahi mila. Shayad ID galat hai ya product Admin Panel se delete ho chuka hai.</span>
+                    </div>`;
+                    return; 
+                }
+
                 const data = doc.data(); window.globalProductData = data;
 
                 document.getElementById('productBreadcrumb').innerText = "STREETWEAR COLLECTION / " + (data.category || "MEN").toUpperCase();
@@ -636,7 +651,18 @@
                 loadReviews();
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('productContent').style.display = 'grid';
-            } catch (e) { console.error("Error loading product: ", e); document.getElementById('loader').innerHTML = `<div style="color:red; font-weight:bold;">Network Error.</div>`; }
+
+            // ERROR 3: Network ya Firebase Rule Permission Error
+            } catch (e) { 
+                console.error("Error loading product: ", e); 
+                document.getElementById('loader').innerHTML = `
+                <div style="text-align:center; color:#ef4444; padding:20px;">
+                    <i class="fa-solid fa-triangle-exclamation fa-3x" style="margin-bottom:15px;"></i><br>
+                    <b>Database Error!</b><br><br>
+                    <span style="font-size:13px; color:#475569;">${e.message}</span><br><br>
+                    <span style="font-size:12px;">Apne Firebase Security Rules check kijiye. Public 'read' allow hona chahiye.</span>
+                </div>`; 
+            }
         }
 
         // 🔥 Image Thumbnail Click Logic 🔥
@@ -719,19 +745,7 @@
             let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; 
             let existing = cart.find(i => i.id === packet.id && i.size === packet.size);
             if(existing) { existing.quantity += packet.quantity; } else { cart.push(packet); }
-            localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
-            
-            const btn = document.querySelector('.btn-add-to-cart'); const originalText = btn.innerHTML; 
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added'; btn.style.backgroundColor = '#4caf50'; 
-            setTimeout(() => { btn.innerHTML = originalText; btn.style.backgroundColor = '#ff9800'; }, 1500); 
-        }
-        
-        window.triggerBuyNowDirectAction = function() { 
-            const packet = getCartPacket(); if(!packet) return; 
-            let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; 
-            let existing = cart.find(i => i.id === packet.id && i.size === packet.size);
-            if(existing) { existing.quantity += packet.quantity; } else { cart.push(packet); }
-            localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
+        localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
             window.location.href = "cart.html"; 
         }
 
