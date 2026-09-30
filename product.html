@@ -745,7 +745,19 @@
             let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; 
             let existing = cart.find(i => i.id === packet.id && i.size === packet.size);
             if(existing) { existing.quantity += packet.quantity; } else { cart.push(packet); }
-        localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
+            localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
+            
+            const btn = document.querySelector('.btn-add-to-cart'); const originalText = btn.innerHTML; 
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added'; btn.style.backgroundColor = '#4caf50'; 
+            setTimeout(() => { btn.innerHTML = originalText; btn.style.backgroundColor = '#ff9800'; }, 1500); 
+        }
+        
+        window.triggerBuyNowDirectAction = function() { 
+            const packet = getCartPacket(); if(!packet) return; 
+            let cart = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; 
+            let existing = cart.find(i => i.id === packet.id && i.size === packet.size);
+            if(existing) { existing.quantity += packet.quantity; } else { cart.push(packet); }
+            localStorage.setItem('zippykart_user_cart', JSON.stringify(cart)); 
             window.location.href = "cart.html"; 
         }
 
