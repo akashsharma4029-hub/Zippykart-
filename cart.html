@@ -447,6 +447,8 @@
                     "prefill": { "name": customerData.name, "contact": customerData.phone },
                     "handler": async function (response) {
                         const orderPayload = {
+                            customerName: customerData.name, // Added for Admin Panel Notification
+                            totalPrice: finalAmount,         // Added for Admin Panel Notification
                             customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
                             paymentMethod: "ONLINE (Razorpay)", paymentId: response.razorpay_payment_id, orderStatus: "Paid & Confirmed", timestamp: firebase.firestore.FieldValue.serverTimestamp()
                         };
@@ -459,6 +461,8 @@
                 rzp1.open();
             } else {
                 const orderPayload = {
+                    customerName: customerData.name, // Added for Admin Panel Notification
+                    totalPrice: finalAmount,         // Added for Admin Panel Notification
                     customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
                     paymentMethod: "Cash on Delivery", orderStatus: "Pending COD", timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 };
@@ -468,7 +472,8 @@
 
         async function submitOrderToDatabase(orderPayload, btn) {
             try {
-                await db.collection("zippykart_orders").add(orderPayload);
+                // BUG FIXED: Switched "zippykart_orders" to "orders" so the Admin Panel Ting-Tong works!
+                await db.collection("orders").add(orderPayload);
                 localStorage.removeItem('zippykart_user_cart');
                 cartItems = [];
                 alert("🎉 Order Placed Successfully! Your items will be dispatched soon.");
