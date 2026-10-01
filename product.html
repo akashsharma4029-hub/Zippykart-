@@ -496,6 +496,17 @@
         const firebaseConfig = { apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk", authDomain: "zippykart-production-157e1.firebaseapp.com", projectId: "zippykart-production-157e1", storageBucket: "zippykart-production-157e1.firebasestorage.app", messagingSenderId: "803651431969", appId: "1:803651431969:web:7432f351ec9f5f0ec23d60" };
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); } 
         const db = firebase.firestore(); const auth = firebase.auth(); const googleProvider = new firebase.auth.GoogleAuthProvider();
+        // 🚀 FIREBASE SPEED BOOSTER (For 3-second load) 🚀
+        db.settings({
+            experimentalForceLongPolling: true, // Ye mobile network pe atakne nahi dega
+            cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
+        });
+
+        // Offline Caching (Ek baar khulne ke baad agli baar 0.1 second mein khulega)
+        firebase.firestore().enablePersistence()
+            .catch(function(err) {
+                console.log("Cache Error: ", err);
+            });
 
         // 2. GLOBALS
         window.globalProductData = null; window.selectedSizeValue = null; window.activeVariantIndex = null; window.currentUser = null;
