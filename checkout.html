@@ -2,229 +2,489 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - ZippyKart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZippyKart - Secure Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f1f3f6; color: #212121; }
-        .navbar { background: #fff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 24px; font-weight: 800; color: #e02844; text-decoration: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #f4f6f9; color: #1e293b; padding-bottom: 40px; }
+
+        /* Navbar Layout */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top:0; z-index: 1000; }
+        .brand-logo { font-size: 22px; font-weight: 700; color: #1e293b; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .brand-logo span { color: #ff3e6c; }
+        .keep-shopping { color: #2196f3; font-size: 13px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+
+        /* FOMO TIMER */
+        .fomo-banner { background: #fff5f7; border: 1px solid #ffe4e6; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; color: #e11d48; margin-bottom: 15px; }
+        .fomo-banner i { animation: fa-spin 2s linear infinite; }
+
+        /* Main Cart Grid */
+        .cart-container { max-width: 1100px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; align-items: start; }
         
-        .checkout-container { max-width: 1000px; margin: 30px auto; display: flex; gap: 20px; padding: 0 20px; }
+        /* Left Section: Cart Items */
+        .cart-items-section { display: flex; flex-direction: column; gap: 15px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .section-header h2 { font-size: 18px; font-weight: 700; color: #1e293b; }
+        .item-count { font-size: 13px; color: #64748b; font-weight: 500; }
+
+        .cart-card { background: white; border-radius: 8px; padding: 15px; display: flex; gap: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; position: relative; }
+        .cart-item-img { width: 90px; height: 110px; object-fit: cover; border-radius: 6px; border: 1px solid #f1f5f9; }
+        .cart-item-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 5px; line-height: 1.3; padding-right: 20px; }
+        .item-meta { font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 500; }
+        .item-price { font-size: 18px; font-weight: 700; color: #1e293b; }
         
-        /* Left: Address Form */
-        .address-section { width: 65%; background: #fff; padding: 25px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #2874f0; }
-        .form-group { display: flex; gap: 15px; margin-bottom: 15px; }
-        .input-box { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 4px; outline: none; font-size: 14px; }
-        .input-box:focus { border-color: #2874f0; }
+        .item-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .qty-control { display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden; }
+        .qty-btn { background: #f8fafc; border: none; width: 28px; height: 28px; font-size: 14px; font-weight: bold; cursor: pointer; color: #475569; }
+        .qty-val { border: none; border-left: 1px solid #cbd5e1; border-right: 1px solid #cbd5e1; width: 35px; height: 28px; text-align: center; font-size: 13px; font-weight: 600; pointer-events: none; background: white; }
+        .remove-btn { color: #ef4444; background: none; border: none; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+
+        .empty-cart-msg { background: white; padding: 50px 20px; text-align: center; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .empty-cart-msg i { font-size: 40px; color: #cbd5e1; margin-bottom: 15px; }
+        .empty-cart-msg h3 { font-size: 18px; color: #1e293b; margin-bottom: 10px; }
+
+        /* Right Section: Price & Checkout Form */
+        .checkout-section { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; position: sticky; top: 80px; }
         
-        /* Payment Options */
-        .pay-option { border: 1px solid #e0e0e0; padding: 15px; border-radius: 4px; background: #f9f9f9; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
-        .pay-option:hover { border-color: #2874f0; }
-        .pay-option input { margin-right: 10px; cursor: pointer; }
+        /* PROMO CODE BOX */
+        .promo-container { display: flex; gap: 10px; margin-bottom: 15px; }
+        .promo-input { flex: 1; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px; font-size: 13px; outline: none; text-transform: uppercase;}
+        .promo-input:focus { border-color: #ff3e6c; }
+        .promo-btn { background: #1e293b; color: white; border: none; padding: 0 15px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; }
+        .promo-msg { font-size: 11px; font-weight: 600; margin-top: -8px; margin-bottom: 15px; display: none; }
+
+        /* ZIPPY COINS TOGGLE */
+        .coins-container { display: flex; justify-content: space-between; align-items: center; background: #fffbeb; border: 1px solid #fde047; padding: 12px 15px; border-radius: 6px; margin-bottom: 20px; }
+        .coins-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #854d0e; }
         
-        /* Right: Order Summary */
-        .summary-section { width: 35%; background: #fff; padding: 25px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); height: fit-content; }
-        .item-details { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .item-details img { width: 60px; height: 80px; object-fit: cover; border-radius: 4px; }
-        .item-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
-        .item-info p { font-size: 13px; color: #878787; }
-        
-        .price-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
-        .total-row { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; border-top: 1px dashed #e0e0e0; padding-top: 15px; margin-top: 10px; }
-        
-        .place-order-btn { width: 100%; background: #fb641b; color: #fff; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: 0.2s; }
-        .place-order-btn:hover { background: #f05a10; }
-        
-        @media (max-width: 800px) {
-            .checkout-container { flex-direction: column-reverse; }
-            .address-section, .summary-section { width: 100%; }
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #eab308; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        .price-details-box { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; }
+        .price-title { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .price-row { display: flex; justify-content: space-between; font-size: 14px; color: #475569; margin-bottom: 12px; font-weight: 500; }
+        .price-row.discount { color: #388e3c; }
+        .price-row.total { font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 15px; border-top: 1px dashed #cbd5e1; padding-top: 15px; }
+        .savings-msg { font-size: 12px; color: #388e3c; font-weight: 600; margin-top: 5px; }
+
+        .delivery-form h3 { font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 15px; letter-spacing: 0.5px; }
+        .form-group { margin-bottom: 12px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; background: #f8fafc; transition: border 0.3s; }
+        .form-input:focus { border-color: #ff3e6c; background: white; }
+
+        .payment-methods { margin-top: 20px; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; }
+        .payment-option { padding: 12px 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer; }
+        .payment-option:last-child { border-bottom: none; }
+        .payment-option input[type="radio"] { accent-color: #ff3e6c; width: 16px; height: 16px; cursor: pointer; }
+        .payment-option label { font-size: 13px; font-weight: 600; color: #1e293b; cursor: pointer; flex: 1; }
+        .payment-option.active { background: #fff5f7; }
+        .payment-option.active label { color: #ff3e6c; }
+
+        .place-order-btn { width: 100%; background: #ff5722; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 15px; font-weight: 700; margin-top: 20px; cursor: pointer; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.2); transition: all 0.2s; }
+        .place-order-btn:hover { background: #e64a19; transform: translateY(-2px); }
+        .place-order-btn:disabled { background: #cbd5e1; cursor: not-allowed; box-shadow: none; transform: none; }
+
+        .trust-footer { display: flex; justify-content: center; gap: 20px; margin-top: 20px; color: #64748b; font-size: 12px; font-weight: 500; }
+        .trust-footer span { display: flex; align-items: center; gap: 5px; }
+
+        @media (max-width: 768px) {
+            .cart-container { grid-template-columns: 1fr; padding: 0 15px; margin-top: 20px; }
+            .checkout-section { position: relative; top: 0; }
+            .form-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="navbar"><a href="index.html" class="logo">ZippyKart</a></div>
-
-<div class="checkout-container">
-    <div class="address-section">
-        <div class="section-title">1. Delivery Address</div>
-        <div class="form-group">
-            <input type="text" id="custName" class="input-box" placeholder="Full Name (Required)">
-            <input type="number" id="custPhone" class="input-box" placeholder="Phone Number (Required)">
-        </div>
-        <div class="form-group">
-            <input type="number" id="custPincode" class="input-box" placeholder="Pincode (Required)">
-            <input type="text" id="custCity" class="input-box" placeholder="City / District">
-        </div>
-        <textarea id="custAddress" class="input-box" rows="3" placeholder="Full Address (House No, Building, Street, Area)"></textarea>
-        
-        <div class="section-title" style="margin-top: 30px;">2. Payment Method</div>
-        
-        <label class="pay-option" style="display: block;">
-            <input type="radio" name="payMethod" id="payOnline" value="online" checked> 
-            <strong>Online Payment (UPI, Cards, NetBanking)</strong>
-            <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" style="height: 15px; float: right;">
-            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 25px;">Pay securely via Razorpay. Fast & Safe.</p>
-        </label>
-
-        <label class="pay-option" style="display: block;">
-            <input type="radio" name="payMethod" id="payCod" value="cod"> 
-            <strong>Cash on Delivery (COD)</strong>
-            <p style="font-size: 13px; color: #878787; margin-top: 5px; margin-left: 25px;">Pay at your doorstep when receiving the order.</p>
-        </label>
+    <div class="navbar">
+        <a href="index.html" class="brand-logo"><i class="fa-solid fa-bolt" style="color: #ff3e6c;"></i> Zippy<span>Kart</span></a>
+        <a href="index.html" class="keep-shopping"><i class="fa-solid fa-arrow-left"></i> Keep Shopping</a>
     </div>
 
-    <div class="summary-section">
-        <div class="section-title" style="color: #212121;">Order Summary</div>
-        
-        <div class="item-details">
-            <img src="" id="chkImg">
-            <div class="item-info">
-                <h4 id="chkTitle">Loading...</h4>
-                <p>Size: <span id="chkSize"></span> | Qty: <span id="chkQty"></span></p>
-                <p style="color: #212121; font-weight: 600; margin-top: 5px;">₹<span id="chkItemPrice"></span></p>
+    <div class="cart-container">
+        <div class="cart-items-section">
+            <div class="fomo-banner" id="fomoBanner">
+                <i class="fa-regular fa-clock"></i> 
+                Items in high demand! Complete your order in <span id="timerText">15:00</span> mins.
+            </div>
+
+            <div class="section-header">
+                <h2>My Shopping Bag</h2>
+                <span class="item-count" id="headerItemCount">(0 items)</span>
+            </div>
+            
+            <div id="cartItemsList"></div>
+        </div>
+
+        <div class="checkout-section">
+            <div class="promo-container">
+                <input type="text" id="promoInput" class="promo-input" placeholder="Enter Coupon Code (e.g. ZIPPY10)">
+                <button class="promo-btn" onclick="applyPromo()">APPLY</button>
+            </div>
+            <div id="promoMsg" class="promo-msg"></div>
+
+            <div class="coins-container">
+                <div class="coins-info">
+                    <i class="fa-solid fa-coins" style="font-size:18px;"></i>
+                    Use 50 ZippyCoins (Save ₹50)
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="coinToggle" onchange="toggleCoins()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="price-details-box">
+                <div class="price-title">PRICE DETAILS</div>
+                <div class="price-row">
+                    <span id="priceTotalItems">Price (0 items)</span>
+                    <span id="priceRawTotal">₹0</span>
+                </div>
+                <div class="price-row discount" id="mrpDiscountRow">
+                    <span>Product Discount</span>
+                    <span id="priceMrpDiscount">- ₹0</span>
+                </div>
+                
+                <div class="price-row discount" id="promoDiscountRow" style="display:none;">
+                    <span>Coupon Discount</span>
+                    <span id="pricePromoDiscount">- ₹0</span>
+                </div>
+                <div class="price-row discount" id="coinDiscountRow" style="display:none;">
+                    <span>ZippyCoins Applied</span>
+                    <span>- ₹50</span>
+                </div>
+
+                <div class="price-row">
+                    <span>Delivery Charges</span>
+                    <span style="color:#388e3c; font-weight:700;">Free</span>
+                </div>
+                <div class="price-row total">
+                    <span>Total Amount</span>
+                    <span id="priceFinalTotal">₹0</span>
+                </div>
+                <div class="savings-msg" id="savingsMsg">You will save ₹0 on this order</div>
+            </div>
+
+            <div class="delivery-form">
+                <h3>DELIVERY DETAILS</h3>
+                <!-- 🔥 novalidate lagaya hai taaki hamara apna custom strict error aaye 🔥 -->
+                <form id="checkoutForm" novalidate>
+                    <div class="form-group">
+                        <input type="text" id="custName" class="form-input" placeholder="Full Name (Required)">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="custPhone" class="form-input" placeholder="Mobile Number (Required)">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="custCity" class="form-input" placeholder="City / District">
+                        <input type="number" id="custPin" class="form-input" placeholder="Pincode">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="custAddress" class="form-input" style="height: 60px; resize:none;" placeholder="Full Delivery Address (House No, Street, Landmark)"></textarea>
+                    </div>
+
+                    <div class="payment-methods">
+                        <div class="payment-option active" onclick="selectPayment('COD', this)">
+                            <input type="radio" name="paymentType" value="COD" checked>
+                            <label>Cash on Delivery (COD)</label>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('ONLINE', this)">
+                            <input type="radio" name="paymentType" value="ONLINE">
+                            <label>Pay Online (UPI / Card / Razorpay)</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="placeOrderBtn" class="place-order-btn">
+                        PLACE ORDER <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="trust-footer">
+                    <span><i class="fa-solid fa-shield-halved"></i> Safe & Secure</span>
+                    <span><i class="fa-solid fa-arrow-rotate-left"></i> Easy Returns</span>
+                </div>
             </div>
         </div>
-
-        <div class="price-row">
-            <span>Price (<span id="summaryQty">1</span> item)</span>
-            <span>₹<span id="summaryPrice">0</span></span>
-        </div>
-        <div class="price-row">
-            <span>Delivery Charges</span>
-            <span style="color: #388e3c;">FREE</span>
-        </div>
-        
-        <div class="total-row">
-            <span>Amount Payable</span>
-            <span>₹<span id="summaryTotal">0</span></span>
-        </div>
-
-        <button class="place-order-btn" id="btnPlaceOrder" onclick="processOrder()">PLACE ORDER</button>
     </div>
-</div>
 
-<script>
-    // Firebase Setup
-    const firebaseConfig = {
-        apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
-        authDomain: "zippykart-production-157e1.firebaseapp.com",
-        projectId: "zippykart-production-157e1",
-        storageBucket: "zippykart-production-157e1.appspot.com",
-        messagingSenderId: "803651431969",
-        appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
-    };
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-    // 1. Data load from LocalStorage
-    let orderData = JSON.parse(localStorage.getItem('zippy_checkout_data'));
-    let totalAmount = 0;
-    
-    if(!orderData) {
-        alert("No product selected. Going back!");
-        window.location.href = 'index.html';
-    } else {
-        document.getElementById('chkImg').src = orderData.image;
-        document.getElementById('chkTitle').innerText = orderData.title;
-        document.getElementById('chkSize').innerText = orderData.size;
-        document.getElementById('chkQty').innerText = orderData.quantity;
-        document.getElementById('chkItemPrice').innerText = orderData.price;
-        document.getElementById('summaryQty').innerText = orderData.quantity;
-        
-        totalAmount = parseInt(orderData.price) * parseInt(orderData.quantity);
-        document.getElementById('summaryPrice').innerText = totalAmount;
-        document.getElementById('summaryTotal').innerText = totalAmount;
-    }
+    <script>
+        // 1. FIREBASE CONFIGURATION
+        const firebaseConfig = {
+            apiKey: "AIzaSyCTPYITHNUzAWLdMXx9zraOJxyEp4mnXpk",
+            authDomain: "zippykart-production-157e1.firebaseapp.com",
+            projectId: "zippykart-production-157e1",
+            storageBucket: "zippykart-production-157e1.firebasestorage.app",
+            messagingSenderId: "803651431969",
+            appId: "1:803651431969:web:7432f351ec9f5f0ec23d60"
+        };
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.firestore();
 
-    // 2. Process Order (Razorpay or COD)
-    window.processOrder = function() {
-        const name = document.getElementById('custName').value;
-        const phone = document.getElementById('custPhone').value;
-        const pincode = document.getElementById('custPincode').value;
-        const city = document.getElementById('custCity').value;
-        const address = document.getElementById('custAddress').value;
+        // 2. GLOBALS & STATE
+        let cartItems = [];
+        let selectedPaymentMethod = "COD";
+        let isPromoApplied = false;
+        let isCoinsApplied = false;
+        let baseTotalAmount = 0; 
 
-        if(!name || !phone || !pincode || !address) {
-            alert("Please fill all the required address details!");
-            return;
+        // FOMO Timer Logic
+        function startFomoTimer() {
+            let time = 15 * 60; 
+            const timerEl = document.getElementById('timerText');
+            const interval = setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                timerEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (time <= 0) clearInterval(interval);
+                time--;
+            }, 1000);
         }
 
-        let isOnline = document.getElementById('payOnline').checked;
+        // Load Data
+        function loadCartData() {
+            try { cartItems = JSON.parse(localStorage.getItem('zippykart_user_cart')) || []; } 
+            catch (e) { cartItems = []; }
+            renderCartUI();
+            startFomoTimer();
+        }
 
-        if (isOnline) {
-            // ----- RAZORPAY ONLINE PAYMENT LOGIC -----
-            var options = {
-                "key": "rzp_live_SuidRs4KmU9W6w", // 🔥 YAHAN APNI RAZORPAY KEY DAALIYE 🔥
-                "amount": totalAmount * 100, // Paise mein (₹1 = 100 paise)
-                "currency": "INR",
-                "name": "ZippyKart",
-                "description": "Order Payment for " + orderData.title,
-                "image": "https://cdn-icons-png.flaticon.com/512/3144/3144456.png", // Aapka Logo
-                "handler": function (response) {
-                    // Payment Successful hone ke baad database me save hoga
-                    saveOrderToFirebase("Online Payment (Razorpay)", response.razorpay_payment_id, name, phone, pincode, city, address);
-                },
-                "prefill": {
-                    "name": name,
-                    "contact": phone
-                },
-                "theme": {
-                    "color": "#e02844"
-                }
-            };
-            var rzp = new Razorpay(options);
-            rzp.on('payment.failed', function (response){
-                alert("Payment Failed! Reason: " + response.error.description);
+        function renderCartUI() {
+            const listContainer = document.getElementById('cartItemsList');
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            listContainer.innerHTML = '';
+            baseTotalAmount = 0;
+
+            if (cartItems.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-cart-msg">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <h3>Your bag is empty!</h3>
+                        <p style="color:#64748b; font-size:14px; margin-bottom:20px;">Looks like you haven't added anything yet.</p>
+                        <a href="index.html" style="background:#ff3e6c; color:white; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:600;">Start Shopping</a>
+                    </div>`;
+                placeOrderBtn.disabled = true;
+                updatePriceDetails();
+                return;
+            }
+
+            placeOrderBtn.disabled = false;
+
+            cartItems.forEach((item, index) => {
+                const itemPrice = parseInt(item.price) || 0;
+                const itemQty = parseInt(item.quantity) || 1;
+                baseTotalAmount += (itemPrice * itemQty);
+
+                const safeImg = item.img || "https://via.placeholder.com/90x110?text=No+Image";
+                const safeTitle = item.title || "ZippyKart Premium Item";
+                const safeSize = item.size || "Free Size";
+
+                listContainer.innerHTML += `
+                    <div class="cart-card">
+                        <img src="${safeImg}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div>
+                                <div class="item-title">${safeTitle}</div>
+                                <div class="item-meta">Size: ${safeSize}</div>
+                                <div class="item-price">₹${itemPrice}</div>
+                            </div>
+                            <div class="item-actions">
+                                <div class="qty-control">
+                                    <button class="qty-btn" type="button" onclick="updateItemQty(${index}, -1)">-</button>
+                                    <input type="text" class="qty-val" value="${itemQty}" readonly>
+                                    <button class="qty-btn" type="button" onclick="updateItemQty(${index}, 1)">+</button>
+                                </div>
+                                <button class="remove-btn" type="button" onclick="removeItem(${index})"><i class="fa-regular fa-trash-can"></i> Remove</button>
+                            </div>
+                        </div>
+                    </div>`;
             });
-            rzp.open();
-        } else {
-            // ----- CASH ON DELIVERY LOGIC -----
-            saveOrderToFirebase("Cash on Delivery (COD)", "N/A", name, phone, pincode, city, address);
+
+            updatePriceDetails();
         }
-    }
 
-    // 3. Save to Firebase Database
-    function saveOrderToFirebase(paymentMethod, transactionId, name, phone, pincode, city, address) {
-        document.getElementById('btnPlaceOrder').innerText = "Processing...";
-        document.getElementById('btnPlaceOrder').disabled = true;
+        // Modifying Qty & Removing
+        window.updateItemQty = function(index, change) {
+            let newQty = (parseInt(cartItems[index].quantity) || 1) + change;
+            if (newQty >= 1 && newQty <= 10) { cartItems[index].quantity = newQty; saveCart(); renderCartUI(); }
+        }
+        window.removeItem = function(index) { cartItems.splice(index, 1); saveCart(); renderCartUI(); }
+        function saveCart() { localStorage.setItem('zippykart_user_cart', JSON.stringify(cartItems)); }
 
-        db.collection("zippykart_orders").add({
-            productId: orderData.productId,
-            productTitle: orderData.title,
-            size: orderData.size,
-            quantity: orderData.quantity,
-            totalAmount: totalAmount,
-            paymentMethod: paymentMethod,
-            transactionId: transactionId,
-            status: "Order Confirmed",
-            customerInfo: {
-                name: name,
-                phone: phone,
-                pincode: pincode,
-                city: city,
-                address: address
-            },
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
-            alert("🎉 Awesome! Order Successfully Placed.");
-            localStorage.removeItem('zippy_checkout_data'); 
-            window.location.href = 'index.html'; 
-        }).catch((error) => {
-            alert("Error placing order: " + error.message);
-            document.getElementById('btnPlaceOrder').innerText = "PLACE ORDER";
-            document.getElementById('btnPlaceOrder').disabled = false;
+        // DYNAMIC BILL CALCULATOR
+        function updatePriceDetails() {
+            const count = cartItems.length;
+            document.getElementById('headerItemCount').innerText = `(${count} items)`;
+            document.getElementById('priceTotalItems').innerText = `Price (${count} items)`;
+            
+            if(count === 0) {
+                document.getElementById('priceRawTotal').innerText = `₹0`;
+                document.getElementById('priceFinalTotal').innerText = `₹0`;
+                document.getElementById('savingsMsg').style.display = 'none';
+                return;
+            }
+
+            const assumedMrp = Math.floor(baseTotalAmount * 1.15); 
+            const baseDiscount = assumedMrp - baseTotalAmount;
+            
+            let finalPayable = baseTotalAmount;
+            let promoDiscountAmt = 0;
+            let coinDiscountAmt = 0;
+
+            if(isPromoApplied) {
+                promoDiscountAmt = Math.floor(baseTotalAmount * 0.10); 
+                finalPayable -= promoDiscountAmt;
+                document.getElementById('promoDiscountRow').style.display = 'flex';
+                document.getElementById('pricePromoDiscount').innerText = `- ₹${promoDiscountAmt}`;
+            } else { document.getElementById('promoDiscountRow').style.display = 'none'; }
+
+            if(isCoinsApplied) {
+                coinDiscountAmt = 50;
+                finalPayable -= coinDiscountAmt;
+                document.getElementById('coinDiscountRow').style.display = 'flex';
+            } else { document.getElementById('coinDiscountRow').style.display = 'none'; }
+
+            if(finalPayable < 0) finalPayable = 0;
+
+            document.getElementById('priceRawTotal').innerText = `₹${assumedMrp}`;
+            document.getElementById('priceMrpDiscount').innerText = `- ₹${baseDiscount}`;
+            document.getElementById('priceFinalTotal').innerText = `₹${finalPayable}`;
+            
+            const totalSavings = baseDiscount + promoDiscountAmt + coinDiscountAmt;
+            const savingsObj = document.getElementById('savingsMsg');
+            savingsObj.style.display = 'block';
+            savingsObj.innerText = `Yay! You are saving ₹${totalSavings} on this order`;
+        }
+
+        window.applyPromo = function() {
+            const input = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msgBox = document.getElementById('promoMsg');
+            if(input === 'ZIPPY10') {
+                isPromoApplied = true;
+                msgBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> Code 'ZIPPY10' applied! 10% Extra Off.`;
+                msgBox.style.color = '#388e3c';
+                msgBox.style.display = 'block';
+                updatePriceDetails();
+            } else {
+                isPromoApplied = false;
+                msgBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Invalid Code. Try 'ZIPPY10'`;
+                msgBox.style.color = '#ef4444';
+                msgBox.style.display = 'block';
+                updatePriceDetails();
+            }
+        }
+
+        window.toggleCoins = function() {
+            const toggle = document.getElementById('coinToggle');
+            isCoinsApplied = toggle.checked;
+            updatePriceDetails();
+        }
+
+        window.selectPayment = function(method, element) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-option').forEach(opt => { opt.classList.remove('active'); opt.querySelector('input').checked = false; });
+            element.classList.add('active'); element.querySelector('input').checked = true;
+        }
+
+        function getFinalCalculatedAmount() {
+            let final = baseTotalAmount;
+            if(isPromoApplied) final -= Math.floor(baseTotalAmount * 0.10);
+            if(isCoinsApplied) final -= 50;
+            return final > 0 ? final : 0;
+        }
+
+        // 🔥 FIREBASE + RAZORPAY CHECKOUT LOGIC + STRICT ADDRESS VALIDATION 🔥
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if(cartItems.length === 0) return;
+
+            const customerData = {
+                name: document.getElementById('custName').value.trim(),
+                phone: document.getElementById('custPhone').value.trim(),
+                city: document.getElementById('custCity').value.trim(),
+                pincode: document.getElementById('custPin').value.trim(),
+                address: document.getElementById('custAddress').value.trim()
+            };
+
+            // 🔥 STRICT ADDRESS VALIDATION - KHALI HONE PAR ALERT AAYEGA 🔥
+            if(!customerData.name || !customerData.phone || !customerData.city || !customerData.pincode || !customerData.address) {
+                alert("⚠️ Kripya Order place karne se pehle apna Poora Naam, Mobile Number aur Delivery Address bharein!");
+                return; // Ye code ko yahin rok dega, aage order place nahi hoga
+            }
+
+            if(customerData.phone.length < 10) {
+                alert("⚠️ Kripya sahi 10-digit ka Mobile Number daalein!");
+                return;
+            }
+
+            const btn = document.getElementById('placeOrderBtn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+            btn.disabled = true;
+
+            const finalAmount = getFinalCalculatedAmount();
+
+            if (selectedPaymentMethod === "ONLINE") {
+                var options = {
+                    "key": "rzp_live_SuidRs4KmU9W6w", 
+                    "amount": finalAmount * 100, 
+                    "currency": "INR",
+                    "name": "ZippyKart",
+                    "description": "Premium Order Checkout",
+                    "theme": { "color": "#ff3e6c" },
+                    "prefill": { "name": customerData.name, "contact": customerData.phone },
+                    "handler": async function (response) {
+                        const orderPayload = {
+                            customerName: customerData.name, 
+                            totalPrice: finalAmount,         
+                            customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
+                            paymentMethod: "ONLINE (Razorpay)", paymentId: response.razorpay_payment_id, orderStatus: "Paid & Confirmed", timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        };
+                        await submitOrderToDatabase(orderPayload, btn);
+                    },
+                    "modal": { "ondismiss": function(){ btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`; btn.disabled = false; } }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response){ alert("Payment Failed!"); btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`; btn.disabled = false; });
+                rzp1.open();
+            } else {
+                const orderPayload = {
+                    customerName: customerData.name, 
+                    totalPrice: finalAmount,         
+                    customer: customerData, items: cartItems, totalAmount: finalAmount, discounts: { promoUsed: isPromoApplied, coinsUsed: isCoinsApplied },
+                    paymentMethod: "Cash on Delivery", orderStatus: "Pending COD", timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                await submitOrderToDatabase(orderPayload, btn);
+            }
         });
-    }
-</script>
-</body>
+
+        async function submitOrderToDatabase(orderPayload, btn) {
+            try {
+                await db.collection("orders").add(orderPayload);
+                localStorage.removeItem('zippykart_user_cart');
+                cartItems = [];
+                alert("🎉 Order Placed Successfully! Your items will be dispatched soon.");
+                window.location.href = "index.html"; 
+            } catch (error) {
+                console.error("Order Sync Error:", error);
+                alert("Order processing failed due to network connection. Please try again.");
+                btn.innerHTML = `PLACE ORDER <i class="fa-solid fa-arrow-right"></i>`;
+                btn.disabled = false;
+            }
+        }
+
+        window.onload = loadCartData;
+    </script>
+</body> 
 </html>
