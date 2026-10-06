@@ -45,7 +45,7 @@
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; border: 2px solid #fff; font-weight: bold; }
 
-        /* NAV CATEGORIES */
+        /* NAV CATEGORIES WITH IMAGES */
         .nav-icons { 
             display: flex; justify-content: center; gap: 30px; padding: 15px 5%; 
             background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; 
@@ -54,8 +54,24 @@
             text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; 
             transition: 0.3s; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 5px;
         }
-        .nav-cat:hover { transform: scale(1.1); color: #ff3e6c; }
-        .nav-cat i { font-size: 20px; }
+        .nav-cat:hover { transform: scale(1.05); color: #ff3e6c; }
+        
+        .cat-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .nav-cat:hover .cat-logo {
+            border-color: #ff3e6c;
+            box-shadow: 0 4px 10px rgba(255, 62, 108, 0.2);
+        }
+
         .nav-cat.new-badge { position: relative; }
         .nav-cat.new-badge::after { 
             content: 'NEW'; position: absolute; top: -10px; right: 0; background: #ff3e6c; 
@@ -393,37 +409,45 @@
     </div>
 </div>
 
-<!-- ✨ UPDATED CATEGORIES FOR JEWELLERY ✨ -->
+<!-- ✨ UPDATED CATEGORIES FOR JEWELLERY WITH REAL LOGOS ✨ -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')">
-        <i class="fa-solid fa-border-all" style="color: #444;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/776/776511.png" alt="All" class="cat-logo">
         <span class="translate" data-en="All" data-hi="सभी">All</span>
     </div>
     
     <div class="nav-cat new-badge" onclick="filterCategory('ZippyNew')">
-        <i class="fa-solid fa-bolt" style="color: #008296;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/1162/1162283.png" alt="Zippy New" class="cat-logo">
         <span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span>
     </div>
 
-    <!-- Nayi Jewellery Categories -->
+    <!-- Kundan Logo -->
     <div class="nav-cat" onclick="filterCategory('Kundan')">
-        <i class="fa-solid fa-gem" style="color: #d4af37;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/2873/2873099.png" alt="Kundan" class="cat-logo">
         <span class="translate" data-en="Kundan" data-hi="कुंदन">Kundan</span>
     </div>
+
+    <!-- Oxidised Logo -->
     <div class="nav-cat" onclick="filterCategory('Oxidised')">
-        <i class="fa-solid fa-ring" style="color: #71717a;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/8210/8210740.png" alt="Oxidised" class="cat-logo">
         <span class="translate" data-en="Oxidised" data-hi="ऑक्सीडाइज्ड">Oxidised</span>
     </div>
+
+    <!-- Earrings Logo -->
     <div class="nav-cat" onclick="filterCategory('Earrings')">
-        <i class="fa-solid fa-spa" style="color: #e91e63;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/3263/3263402.png" alt="Earrings" class="cat-logo">
         <span class="translate" data-en="Earrings" data-hi="झुमके">Earrings</span>
     </div>
+
+    <!-- Mangalsutra Logo -->
     <div class="nav-cat" onclick="filterCategory('Mangalsutra')">
-        <i class="fa-solid fa-link" style="color: #ff9800;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/5766/5766346.png" alt="Mangalsutra" class="cat-logo">
         <span class="translate" data-en="Mangalsutra" data-hi="मंगलसूत्र">Mangalsutra</span>
     </div>
+
+    <!-- Rings Logo -->
     <div class="nav-cat" onclick="filterCategory('Rings')">
-        <i class="fa-regular fa-gem" style="color: #00bcd4;"></i>
+        <img src="https://cdn-icons-png.flaticon.com/512/882/882103.png" alt="Rings" class="cat-logo">
         <span class="translate" data-en="Rings" data-hi="अंगूठियां">Rings</span>
     </div>
 </div>
