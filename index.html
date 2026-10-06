@@ -45,36 +45,39 @@
         .cart-btn { background: #ff3e6c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .cart-badge-mobile { background: #ff3e6c; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; border: 2px solid #fff; font-weight: bold; }
 
-        /* NAV CATEGORIES WITH IMAGES */
+        /* PREMIUM LINE-ART CATEGORIES CSS */
         .nav-icons { 
             display: flex; justify-content: center; gap: 30px; padding: 15px 5%; 
             background: white; border-bottom: 1px solid #eee; overflow-x: auto; white-space: nowrap; 
+            -ms-overflow-style: none; scrollbar-width: none;
         }
-        .nav-cat { 
-            text-align: center; cursor: pointer; min-width: 60px; font-size: 11px; 
-            transition: 0.3s; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 5px;
-        }
-        .nav-cat:hover { transform: scale(1.05); color: #ff3e6c; }
+        .nav-icons::-webkit-scrollbar { display: none; }
         
-        .cat-logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .nav-cat { 
+            text-align: center; cursor: pointer; min-width: 65px; font-size: 11px; 
+            transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: #475569;
+        }
+        
+        .cat-svg-box {
+            width: 50px; height: 50px; background: #f8fafc; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #e2e8f0; transition: 0.3s;
+        }
+        
+        .cat-svg {
+            width: 28px; height: 28px; stroke: #1e293b; fill: none;
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
             transition: 0.3s;
         }
-        .nav-cat:hover .cat-logo {
-            border-color: #ff3e6c;
-            box-shadow: 0 4px 10px rgba(255, 62, 108, 0.2);
-        }
+
+        .nav-cat:hover .cat-svg-box { border-color: #ff3e6c; background: #fff0f3; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255,62,108,0.15);}
+        .nav-cat:hover .cat-svg { stroke: #ff3e6c; }
+        .nav-cat:hover { color: #ff3e6c; }
 
         .nav-cat.new-badge { position: relative; }
         .nav-cat.new-badge::after { 
-            content: 'NEW'; position: absolute; top: -10px; right: 0; background: #ff3e6c; 
+            content: 'NEW'; position: absolute; top: -5px; right: 0; background: #ff3e6c; 
             color: white; font-size: 8px; padding: 2px 4px; border-radius: 4px; font-weight: bold; animation: pulse 1.5s infinite; 
         }
 
@@ -409,45 +412,85 @@
     </div>
 </div>
 
-<!-- ✨ UPDATED CATEGORIES FOR JEWELLERY WITH REAL LOGOS ✨ -->
+<!-- ✨ REAL JEWELLERY LINE-ART CATEGORIES ✨ -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')">
-        <img src="https://cdn-icons-png.flaticon.com/512/776/776511.png" alt="All" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" />
+            </svg>
+        </div>
         <span class="translate" data-en="All" data-hi="सभी">All</span>
     </div>
     
     <div class="nav-cat new-badge" onclick="filterCategory('ZippyNew')">
-        <img src="https://cdn-icons-png.flaticon.com/512/1162/1162283.png" alt="Zippy New" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
         <span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span>
     </div>
 
-    <!-- Kundan Logo -->
+    <!-- Kundan (Heavy Necklace) -->
     <div class="nav-cat" onclick="filterCategory('Kundan')">
-        <img src="https://cdn-icons-png.flaticon.com/512/2873/2873099.png" alt="Kundan" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <path d="M4 5c0 8 16 8 16 0" />
+                <path d="M7 10l1 3" /><path d="M12 11.5v3" /><path d="M17 10l-1 3" />
+                <circle cx="8" cy="14" r="1" /><circle cx="12" cy="15.5" r="1" /><circle cx="16" cy="14" r="1" />
+            </svg>
+        </div>
         <span class="translate" data-en="Kundan" data-hi="कुंदन">Kundan</span>
     </div>
 
-    <!-- Oxidised Logo -->
+    <!-- Oxidised (Tribal Bangle/Choker) -->
     <div class="nav-cat" onclick="filterCategory('Oxidised')">
-        <img src="https://cdn-icons-png.flaticon.com/512/8210/8210740.png" alt="Oxidised" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <ellipse cx="12" cy="11" rx="9" ry="4" />
+                <ellipse cx="12" cy="15" rx="9" ry="4" />
+                <path d="M3 11v4" /><path d="M21 11v4" />
+                <path d="M7 14v-4" /><path d="M12 15v-4" /><path d="M17 14v-4" />
+            </svg>
+        </div>
         <span class="translate" data-en="Oxidised" data-hi="ऑक्सीडाइज्ड">Oxidised</span>
     </div>
 
-    <!-- Earrings Logo -->
+    <!-- Earrings (Jhumka) -->
     <div class="nav-cat" onclick="filterCategory('Earrings')">
-        <img src="https://cdn-icons-png.flaticon.com/512/3263/3263402.png" alt="Earrings" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <circle cx="12" cy="5" r="1.5" />
+                <path d="M12 6.5v2.5" />
+                <path d="M7 15c0-4 10-4 10 0H7z" />
+                <path d="M8 15v2" /><path d="M12 15v3" /><path d="M16 15v2" />
+                <circle cx="8" cy="18" r="0.5" /><circle cx="12" cy="19" r="0.5" /><circle cx="16" cy="18" r="0.5" />
+            </svg>
+        </div>
         <span class="translate" data-en="Earrings" data-hi="झुमके">Earrings</span>
     </div>
 
-    <!-- Mangalsutra Logo -->
+    <!-- Mangalsutra (Chain with Double Pendant) -->
     <div class="nav-cat" onclick="filterCategory('Mangalsutra')">
-        <img src="https://cdn-icons-png.flaticon.com/512/5766/5766346.png" alt="Mangalsutra" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <path d="M4 4c0 10 16 10 16 0" stroke-dasharray="2 3" />
+                <circle cx="10" cy="13" r="1.5" /><circle cx="14" cy="13" r="1.5" />
+                <path d="M10 14.5v2" /><path d="M14 14.5v2" />
+            </svg>
+        </div>
         <span class="translate" data-en="Mangalsutra" data-hi="मंगलसूत्र">Mangalsutra</span>
     </div>
 
-    <!-- Rings Logo -->
+    <!-- Rings (Diamond Ring) -->
     <div class="nav-cat" onclick="filterCategory('Rings')">
-        <img src="https://cdn-icons-png.flaticon.com/512/882/882103.png" alt="Rings" class="cat-logo">
+        <div class="cat-svg-box">
+            <svg viewBox="0 0 24 24" class="cat-svg">
+                <circle cx="12" cy="14" r="5" />
+                <path d="M9 9l3-4 3 4H9z" />
+                <path d="M9 9l3 2 3-2" />
+            </svg>
+        </div>
         <span class="translate" data-en="Rings" data-hi="अंगूठियां">Rings</span>
     </div>
 </div>
