@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZippyKart - Premium E-Commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper CSS for Slider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         body { font-family: sans-serif; margin: 0; background: #f8f9fa; overflow-x: hidden; }
         
@@ -60,14 +62,17 @@
             color: white; font-size: 8px; padding: 2px 4px; border-radius: 4px; font-weight: bold; animation: pulse 1.5s infinite; 
         }
 
-        /* SLIDER CSS */
+        /* PREMIUM SLIDER CSS */
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
         .banner-slider { 
             position: relative; width: 95%; max-width: 1200px; height: 350px; margin: 20px auto; 
             border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
         }
-        .slides { display: flex; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .slide { 
-            min-width: 100%; height: 100%; background-size: cover; background-position: center; 
+            width: 100%; height: 100%; background-size: cover; background-position: center; 
             position: relative; display: flex; align-items: center; justify-content: flex-start; padding-left: 60px; box-sizing: border-box; 
         }
         .slide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.1)); }
@@ -76,12 +81,6 @@
         .slide-content h2 span { color: #ff3e6c; }
         .slide-content p { font-size: 15px; margin-bottom: 25px; line-height: 1.5; color: #eee; }
         .slide-content button { background: #ff3e6c; color: white; border: none; padding: 12px 25px; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-        
-        .slide-btn { 
-            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.3); 
-            color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; 
-        }
-        .slide-btn.prev { left: 15px; } .slide-btn.next { right: 15px; }
         
         /* ZIPPY NEW SUPER APP SECTION */
         #zippyNewSection { display: none; padding: 10px 5%; animation: popUpAnim 0.4s ease; }
@@ -394,6 +393,7 @@
     </div>
 </div>
 
+<!-- ✨ UPDATED CATEGORIES FOR JEWELLERY ✨ -->
 <div class="nav-icons">
     <div class="nav-cat" onclick="filterCategory('All')">
         <i class="fa-solid fa-border-all" style="color: #444;"></i>
@@ -405,33 +405,26 @@
         <span class="translate" data-en="Zippy New" data-hi="ज़िप्पी न्यू">Zippy New</span>
     </div>
 
-    <div class="nav-cat" onclick="filterCategory('Men')">
-        <i class="fa-solid fa-shirt" style="color: #ff5722;"></i>
-        <span class="translate" data-en="Men" data-hi="पुरुष">Men</span>
+    <!-- Nayi Jewellery Categories -->
+    <div class="nav-cat" onclick="filterCategory('Kundan')">
+        <i class="fa-solid fa-gem" style="color: #d4af37;"></i>
+        <span class="translate" data-en="Kundan" data-hi="कुंदन">Kundan</span>
     </div>
-    <div class="nav-cat" onclick="filterCategory('Women')">
-        <i class="fa-solid fa-person-dress" style="color: #e91e63;"></i>
-        <span class="translate" data-en="Women" data-hi="महिला">Women</span>
+    <div class="nav-cat" onclick="filterCategory('Oxidised')">
+        <i class="fa-solid fa-ring" style="color: #71717a;"></i>
+        <span class="translate" data-en="Oxidised" data-hi="ऑक्सीडाइज्ड">Oxidised</span>
     </div>
-    <div class="nav-cat" onclick="filterCategory('Streetwear')">
-        <i class="fa-solid fa-user-ninja" style="color: #673ab7;"></i>
-        <span class="translate" data-en="Streetwear" data-hi="स्ट्रीटवियर">Streetwear</span>
+    <div class="nav-cat" onclick="filterCategory('Earrings')">
+        <i class="fa-solid fa-spa" style="color: #e91e63;"></i>
+        <span class="translate" data-en="Earrings" data-hi="झुमके">Earrings</span>
     </div>
-    <div class="nav-cat" onclick="filterCategory('Kids')">
-        <i class="fa-solid fa-child" style="color: #2196f3;"></i>
-        <span class="translate" data-en="Kids" data-hi="बच्चे">Kids</span>
+    <div class="nav-cat" onclick="filterCategory('Mangalsutra')">
+        <i class="fa-solid fa-link" style="color: #ff9800;"></i>
+        <span class="translate" data-en="Mangalsutra" data-hi="मंगलसूत्र">Mangalsutra</span>
     </div>
-    <div class="nav-cat" onclick="filterCategory('Toys')">
-        <i class="fa-solid fa-robot" style="color: #4caf50;"></i>
-        <span class="translate" data-en="Toys" data-hi="खिलौने">Toys</span>
-    </div>
-    <div class="nav-cat" onclick="filterCategory('Watch')">
-        <i class="fa-solid fa-clock" style="color: #ff9800;"></i>
-        <span class="translate" data-en="Watch" data-hi="घड़ियाँ">Watch</span>
-    </div>
-    <div class="nav-cat" onclick="filterCategory('Electronics')">
-        <i class="fa-solid fa-headphones" style="color: #00bcd4;"></i>
-        <span class="translate" data-en="Tech" data-hi="इलेक्ट्रॉनिक्स">Tech</span>
+    <div class="nav-cat" onclick="filterCategory('Rings')">
+        <i class="fa-regular fa-gem" style="color: #00bcd4;"></i>
+        <span class="translate" data-en="Rings" data-hi="अंगूठियां">Rings</span>
     </div>
 </div>
 
@@ -551,19 +544,36 @@
 
 </div>
 
+<!-- ✨ UPDATED FLIPKART/AMAZON STYLE SWIPER SLIDER ✨ -->
 <div id="sliderWrapper">
-    <div class="banner-slider">
-        <button class="slide-btn prev" onclick="moveSlide(-1)">❮</button>
-        <div class="slides" id="sliderTrack">
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1000');">
-                <div class="slide-content">
-                    <h2><span class="translate" data-en="Mega" data-hi="मेगा">Mega</span> <span><span class="translate" data-en="Summer" data-hi="समर">Summer</span></span> <span class="translate" data-en="Sale" data-hi="सेल">Sale</span></h2>
-                    <p class="translate" data-en="Upto 50% OFF on top fashion brands." data-hi="शीर्ष फैशन ब्रांडों पर 50% तक की छूट।">Upto 50% OFF on top fashion brands.</p>
-                    <button class="translate" data-en="Shop Now" data-hi="अभी खरीदें">Shop Now</button>
+    <div class="banner-slider swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Banner 1: Kundan Collection -->
+            <div class="swiper-slide">
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1599643478514-4a572a1ef2b8?auto=format&fit=crop&q=80&w=1200');">
+                    <div class="slide-content">
+                        <h2><span class="translate" data-en="Royal" data-hi="रॉयल">Royal</span> <span><span class="translate" data-en="Kundan" data-hi="कुंदन">Kundan</span></span></h2>
+                        <p class="translate" data-en="Flat 50% OFF on Festive Collection." data-hi="फेस्टिव कलेक्शन पर 50% की छूट।">Flat 50% OFF on Festive Collection.</p>
+                        <button class="translate" data-en="Shop Now" data-hi="अभी खरीदें">Shop Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner 2: Oxidised Collection -->
+            <div class="swiper-slide">
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=1200');">
+                    <div class="slide-content">
+                        <h2><span class="translate" data-en="Trendy" data-hi="ट्रेंडी">Trendy</span> <span><span class="translate" data-en="Oxidised" data-hi="ऑक्सीडाइज्ड">Oxidised</span></span></h2>
+                        <p class="translate" data-en="Starting at just ₹199." data-hi="मात्र ₹199 से शुरू।">Starting at just ₹199.</p>
+                        <button class="translate" data-en="Explore Deals" data-hi="डील्स देखें">Explore Deals</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <button class="slide-btn next" onclick="moveSlide(1)">❯</button>
+        <!-- Swiper Navigation Buttons -->
+        <div class="swiper-button-next" style="color: #fff; text-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>
+        <div class="swiper-button-prev" style="color: #fff; text-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>
+        <!-- Swiper Pagination Dots -->
+        <div class="swiper-pagination"></div>
     </div>
 </div>
 
@@ -841,7 +851,7 @@
                     <div style="display:flex; justify-content:space-between; margin-bottom: 25px;"><i class="fa-brands fa-cc-visa" style="font-size:28px;"></i> <span style="font-weight:800; font-style:italic;">HDFC BANK</span></div>
                     <div style="letter-spacing: 3px; font-size: 18px; margin-bottom: 20px; font-family:monospace;">**** **** **** 4321</div>
                     <div style="display:flex; justify-content:space-between; font-size:12px; color:#94a3b8; text-transform:uppercase;">
-                        <span id="cardHolderName">Akash Kumar</span><span>12/28</span>
+                        <span id="cardHolderName">User</span><span>12/28</span>
                     </div>
                 </div>
             </div>
@@ -935,6 +945,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
 
+<!-- Swiper JS Script -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
     // 1. FIREBASE INITIALIZATION
     const firebaseConfig = { 
@@ -955,7 +968,23 @@
     window.currentUser = null; 
     window.currentLanguage = 'en';
 
-        // 🔥 NOTIFICATION PERMISSION LOGIC (WITH ANIMATED BOX) 🔥
+    // ✨ SWIPER INITIALIZATION ✨
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+
     window.requestNotificationPermission = function() {
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
@@ -966,7 +995,6 @@
                     if (currentToken) {
                         console.log('Push Token:', currentToken);
                         
-                        // Token ko Firestore Database me save karega
                         firebase.firestore().collection("PushTokens").doc(currentToken).set({
                             token: currentToken,
                             createdAt: new Date()
@@ -975,7 +1003,6 @@
                             document.getElementById('notifyBtn').innerHTML = "✅ Alerts On";
                             document.getElementById('notifyBtn').style.background = "#4caf50";
                             
-                            // 🔥 YAHAN BADLAAV KIYA HAI: Purane alert() ki jagah Naya Animated Box 🔥
                             openInfoModal('Mubarak Ho!', '🎉 Notifications ON! Ab aapko ZippyKart ke dhamakedar offers milenge.', 'fa-bell', '#ff3e6c');
                             
                         }).catch((error) => {
@@ -983,11 +1010,9 @@
                         });
                         
                     } else {
-                        // Agar block kiya toh uska animated box
                         openInfoModal('Oops!', 'Aapne notifications block kar diye hain.', 'fa-triangle-exclamation', '#ff9800');
                     }
                 }).catch((err) => {
-                    // Agar error aaya toh uska animated box
                     openInfoModal('Error', 'Token Error: ' + err.message, 'fa-circle-xmark', '#f44336');
                 });
             } else {
@@ -1001,23 +1026,20 @@
         alert(`🔥 ZIPPYKART NEW DEAL: ${payload.notification.title}\n${payload.notification.body}`);
     });
 
-    // 🔥 ZIPPY COINS ANIMATION LOGIC 🔥
     window.animateCoins = function() {
         let el = document.getElementById('coinBalanceAnim'); if(!el) return;
-        let count = 0; let target = 850; // ZippyCoins Balance
+        let count = 0; let target = 850; 
         let intv = setInterval(() => { count += 25; if(count >= target){ count = target; clearInterval(intv); } el.innerText = count; }, 30);
     }
 
-    // 🔥 3D AR VIEWER LOGIC 🔥
     window.openARModal = function(event, title, imgSrc) {
         event.preventDefault(); 
-        event.stopPropagation(); // Stop link redirect
+        event.stopPropagation(); 
         document.getElementById('arProductTitle').innerText = title;
         document.getElementById('arProductImage').src = imgSrc;
         document.getElementById('arModal').style.display = 'flex';
     }
 
-    // SEARCH & VOICE SEARCH LOGIC
     window.searchProducts = function() {
         let query = document.getElementById('mainSearchBar').value.toLowerCase();
         if(query.trim() === "") { renderProducts(window.allFetchedProducts); return; }
@@ -1070,7 +1092,6 @@
         recognition.start();
     }
 
-    // LANGUAGE TRANSLATION LOGIC
     window.setLanguageUI = function(langCode, element) {
         document.querySelectorAll('.lang-option').forEach(el => { 
             el.classList.remove('active'); 
@@ -1098,7 +1119,6 @@
         }
     }
 
-    // DASHBOARD TABS
     window.switchDashTab = function(tabId, eventElem, fallbackTitle) {
         document.querySelectorAll('.dash-inner-content').forEach(tab => { tab.style.display = 'none'; tab.classList.remove('slide-in-active'); });
         document.querySelectorAll('.dash-nav-item').forEach(btn => btn.classList.remove('active'));
@@ -1123,7 +1143,6 @@
         document.querySelector('.dash-sidebar').style.display = 'flex'; 
     }
 
-    // NOTIFICATIONS & CHAT
     window.toggleNotifications = function() { 
         document.getElementById('notifSidebar').classList.toggle('active'); 
         document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); 
@@ -1159,7 +1178,6 @@
         openInfoModal('Coming Soon', 'This service will be activated soon on ZippyKart. Stay tuned!', 'fa-clock', '#ff3e6c'); 
     }
 
-    // SMART SIM DETECTOR LOGIC
     document.getElementById('rechargeNumber').addEventListener('input', function(e) {
         let val = e.target.value.toString(); 
         let display = document.getElementById('operatorDisplay'); 
@@ -1189,7 +1207,6 @@
         }
     });
 
-    // HORIZONTAL TABS FILTERING LOGIC
     window.filterPlans = function(category, element) {
         document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active')); 
         element.classList.add('active');
@@ -1204,7 +1221,6 @@
         });
     }
 
-    // ZIPPY NEW RECHARGE MODALS
     window.openRechargeModal = function() { 
         document.getElementById('rechargeModal').style.display = 'flex'; 
     }
@@ -1232,7 +1248,6 @@
         document.getElementById('rechargeModal').style.display = 'none';
     }
 
-    // CATEGORY FILTER & ZIPPY NEW DISPLAY
     window.filterCategory = function(categoryName) {
         document.querySelectorAll('.bottom-nav-item').forEach(el => el.classList.remove('active'));
         if(document.querySelector('.bottom-nav-item:nth-child(2)')) {
@@ -1263,7 +1278,6 @@
         }
     }
 
-    // FIXED DROPDOWNS
     window.toggleDrop = function(id, event) { 
         if(event) event.stopPropagation();
         const drop = document.getElementById(id); 
@@ -1273,7 +1287,6 @@
         if(!isCurrentlyOpen) { drop.style.display = 'block'; }
     }
 
-    // AUTHENTICATION
     window.openAuthModal = function() { 
         document.getElementById('loginDrop').style.display = 'none'; 
         document.getElementById('authModal').style.display = 'flex'; 
@@ -1343,7 +1356,7 @@
         document.getElementById('dashboardModal').style.display = 'flex'; 
         switchDashTab('dashProfileTab', document.querySelector('.dash-nav-item'), 'Edit Profile');
         
-        animateCoins(); // Trigger ZippyCoins Animation!
+        animateCoins(); 
         
         if(window.innerWidth <= 768) { 
             document.querySelector('.dash-sidebar').style.display = 'flex'; 
@@ -1351,7 +1364,6 @@
         }
     }
 
-    // GLOBAL CLICK HANDLER
     window.onclick = function(e) { 
         if(!e.target.closest('.menu-wrapper')) { 
             document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); 
@@ -1362,18 +1374,6 @@
         });
     };
 
-    let currentSlide = 0;
-    function moveSlide(direction) {
-        const track = document.getElementById('sliderTrack'); 
-        const totalSlides = document.querySelectorAll('.slide').length;
-        currentSlide += direction; 
-        if(currentSlide < 0) currentSlide = totalSlides - 1; 
-        if(currentSlide >= totalSlides) currentSlide = 0;
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-    setInterval(() => moveSlide(1), 5000);
-
-    // FETCH PRODUCTS (WITH AR 3D BADGE & FULL DETAILS)
     async function fetchAllProducts() {
         const grid = document.getElementById('mainProductGrid');
         try {
@@ -1412,7 +1412,6 @@
             const randomRating = (Math.random() * (4.8 - 4.0) + 4.0).toFixed(1);
             let imgSource = (p.all_images && p.all_images.length > 0) ? p.all_images[0] : (p.image || "https://via.placeholder.com/300");
             
-            // 🔥 AR BADGE HTML 🔥
             let arBtnHTML = `
                 <div class="ar-badge" onclick="openARModal(event, '${title.replace(/'/g, "\\'")}', '${imgSource}')">
                     <i class="fa-brands fa-unity"></i> 3D View
